@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>NKI Nettstudier — Homepage (lo-fi prototype)</title>
+  <link rel="stylesheet" href="wireframe.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0">
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     HEADER — fixed/sticky
+════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+
+    <!-- 2.1 Logo -->
+    <a href="#" class="header-logo">
+      <img
+        src="logos/NKI_Logo_Black_L.svg"
+        alt="NKI Nettstudier">
+    </a>
+
+    <!-- 2.2 Primary navigation -->
+    <nav class="primary-nav" aria-label="Primary">
+      <ul class="nav-list">
+
+        <!-- Tab 1: High School -->
+        <li class="nav-item has-dropdown" id="tab-hs">
+          <button class="nav-tab" aria-expanded="false">High School <span class="chevron">▾</span></button>
+          <div class="dropdown">
+            <ul class="dropdown-list">
+              <!-- Subject packages › -->
+              <li class="dropdown-item has-mega">
+                <span class="item-label">Subject packages</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <ul>
+                    <li>Medicine package Norway</li>
+                    <li>Medicine package abroad</li>
+                    <li>Bodywork without a trade certificate</li>
+                    <li>Body with certificate</li>
+                    <li>The Engineering Package</li>
+                    <li>Preparatory course for engineering education</li>
+                    <li>General study skills</li>
+                  </ul>
+                </div>
+              </li>
+              <!-- Science › -->
+              <li class="dropdown-item has-mega">
+                <span class="item-label">Science</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <div class="mega-label">Most popular</div>
+                  <ul>
+                    <li>Medicine package Norway</li>
+                    <li>Medicine package abroad</li>
+                    <li>Engineering package</li>
+                    <li>Mathematics R1</li>
+                    <li>Mathematics R2</li>
+                    <li>Biology 1</li>
+                    <li>Biology 2</li>
+                    <li>Chemistry 1</li>
+                    <li>Chemistry 2</li>
+                    <li>Physics 1</li>
+                    <li>Mathematics S1</li>
+                    <li>Mathematics S2</li>
+                    <li>Geosciences 1</li>
+                    <li>Mathematics 1T</li>
+                  </ul>
+                  <a href="#" class="mega-see-all">See all →</a>
+                </div>
+              </li>
+              <!-- Academic competence › -->
+              <li class="dropdown-item has-mega">
+                <span class="item-label">Academic competence</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <ul>
+                    <li>Generell studiekompetanse (23/5-regelen)</li>
+                    <li>Påbygg Vg3</li>
+                    <li>Påbygg Vg4</li>
+                  </ul>
+                </div>
+              </li>
+              <!-- Vocational subjects › -->
+              <li class="dropdown-item has-mega">
+                <span class="item-label">Vocational Subjects for High School</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <ul>
+                    <li>Health and upbringing subjects Vg1</li>
+                    <li>Health worker subject Vg2</li>
+                    <li>Ambulance subject Vg2</li>
+                    <li>Child and youth work subject Vg2</li>
+                    <li>Health Service Subject Vg2</li>
+                    <li>Health Secretary Vg3</li>
+                    <li>Dental secretary Vg3</li>
+                    <li>Electrical and computer technology Vg1</li>
+                    <li>Electrical energy and ecom Vg2</li>
+                  </ul>
+                </div>
+              </li>
+              <!-- Single subject — plain link -->
+              <li class="dropdown-item">
+                <a href="#" class="item-label">Single Subject</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Tab 2: Subject areas -->
+        <li class="nav-item has-dropdown" id="tab-sa">
+          <button class="nav-tab" aria-expanded="false">Subject areas <span class="chevron">▾</span></button>
+          <div class="dropdown">
+            <ul class="dropdown-list">
+              <li class="dropdown-item has-mega">
+                <span class="item-label">Economy and sustainability</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <div class="mega-label">Most popular</div>
+                  <ul>
+                    <li>Accounting consultant – 60 credits</li>
+                    <li>Payroll and human resources employee – 30 credits</li>
+                    <li>Accounting employee – 30 credits</li>
+                    <li>Sustainability consultant – sustainable operations – 60 credits</li>
+                    <li>Circular economy and climate accounting – 30 credits</li>
+                    <li>Salary - Tripletex – 9 points</li>
+                    <li>Introduction to financial management – online course</li>
+                    <li>Circular economy – online course</li>
+                    <li>Environmental reporting – 15 credits</li>
+                  </ul>
+                  <a href="#" class="mega-see-all">See all →</a>
+                </div>
+              </li>
+              <li class="dropdown-item has-mega">
+                <span class="item-label">HR and Management</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <div class="mega-label">Most popular</div>
+                  <ul>
+                    <li>HR consultant – 60 credits</li>
+                    <li>Practical management – 30 credits</li>
+                    <li>Project manager – 30 credits</li>
+                    <li>Management and financial management – 30 credits</li>
+                    <li>Practical HR management – course</li>
+                    <li>The digital workplace – course</li>
+                    <li>Relationship management – 5 credits</li>
+                    <li>Human Resources Management – 10 credits</li>
+                  </ul>
+                  <a href="#" class="mega-see-all">See all →</a>
+                </div>
+              </li>
+              <li class="dropdown-item has-mega">
+                <span class="item-label">Law and administration</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <div class="mega-label">Most popular</div>
+                  <ul>
+                    <li>Office worker – course</li>
+                    <li>Legal secretary – 60 credits</li>
+                    <li>Caseworker – 30 credits</li>
+                    <li>Case management in the health and care sector – course</li>
+                    <li>Legal office assistant – 30 credits</li>
+                    <li>Microsoft Office 365 basic – 5 points</li>
+                    <li>Business Law – 10 credits</li>
+                    <li>Labor law – course</li>
+                  </ul>
+                  <a href="#" class="mega-see-all">See all →</a>
+                </div>
+              </li>
+              <li class="dropdown-item has-mega">
+                <span class="item-label">Construction and logistics</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <div class="mega-label">Most popular</div>
+                  <ul>
+                    <li>Logistics Vocational School – 30 credits</li>
+                    <li>Operations technician – construction and property – 30 credits</li>
+                    <li>Technical draftsman – construction – course</li>
+                    <li>Revit Architecture – course</li>
+                    <li>Technical installations – 10 credits</li>
+                    <li>Preparatory course Bachelor of Engineering – course</li>
+                    <li>ArchiCad drawing course – course</li>
+                    <li>Technology and digital competence – 5 credits</li>
+                    <li>License for passenger and freight transport – course</li>
+                  </ul>
+                  <a href="#" class="mega-see-all">See all →</a>
+                </div>
+              </li>
+              <li class="dropdown-item has-mega">
+                <span class="item-label">Interior and design</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <ul>
+                    <li>Interior designer</li>
+                    <li>Home Stylist</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="dropdown-item has-mega">
+                <span class="item-label">Health and lifestyle</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <div class="mega-label">Most popular</div>
+                  <ul>
+                    <li>Medical Secretary</li>
+                    <li>Dental assistant</li>
+                    <li>Health and upbringing subjects</li>
+                    <li>Nursing assistant</li>
+                    <li>Ambulance profession</li>
+                    <li>Case management in the health and care sector</li>
+                    <li>Healthcare profession</li>
+                    <li>Exercise as medicine</li>
+                    <li>Health Secretary</li>
+                    <li>Stress and stress management</li>
+                    <li>Nutrition and sustainable diet</li>
+                  </ul>
+                  <a href="#" class="mega-see-all">See all →</a>
+                </div>
+              </li>
+              <li class="dropdown-item has-mega">
+                <span class="item-label">Marketing and sales</span>
+                <span class="mega-arrow">›</span>
+                <div class="mega-panel">
+                  <div class="mega-label">Most popular</div>
+                  <ul>
+                    <li>Introduction to digital marketing – course</li>
+                    <li>Consultative sales – course</li>
+                    <li>Social Media and Content Marketing – course</li>
+                    <li>Google tools – course</li>
+                    <li>Introduction to Marketing – course</li>
+                  </ul>
+                  <a href="#" class="mega-see-all">See all →</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Tab 3: Vocational school -->
+        <li class="nav-item has-dropdown" id="tab-vs">
+          <button class="nav-tab" aria-expanded="false">Vocational school <span class="chevron">▾</span></button>
+          <div class="dropdown">
+            <div class="dropdown-section-label">Most popular</div>
+            <ul class="dropdown-list">
+              <li class="dropdown-item"><a href="#">Accounting clerk</a></li>
+              <li class="dropdown-item"><a href="#">Accounting consultant</a></li>
+              <li class="dropdown-item"><a href="#">Management and financial management</a></li>
+              <li class="dropdown-item"><a href="#">HR consultant</a></li>
+              <li class="dropdown-item"><a href="#">Caseworker</a></li>
+              <li class="dropdown-item"><a href="#">Logistics Vocational School – Logistics Supervisor</a></li>
+              <li class="dropdown-item"><a href="#">Operations technician – construction and real estate</a></li>
+              <li class="dropdown-item"><a href="#">Project manager</a></li>
+              <li class="dropdown-item see-all"><a href="#">See all →</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Tab 4: Courses -->
+        <li class="nav-item has-dropdown" id="tab-co">
+          <button class="nav-tab" aria-expanded="false">Courses <span class="chevron">▾</span></button>
+          <div class="dropdown">
+            <div class="dropdown-section-label">Most popular</div>
+            <ul class="dropdown-list">
+              <li class="dropdown-item"><a href="#">Medical Secretary</a></li>
+              <li class="dropdown-item"><a href="#">Interior designer</a></li>
+              <li class="dropdown-item"><a href="#">Office worker</a></li>
+              <li class="dropdown-item"><a href="#">Permit for passenger and freight transport</a></li>
+              <li class="dropdown-item"><a href="#">Practical HR management</a></li>
+              <li class="dropdown-item"><a href="#">Digital marketing</a></li>
+              <li class="dropdown-item"><a href="#">Technical draftsman – construction</a></li>
+              <li class="dropdown-item see-all"><a href="#">See all →</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Tab 5: Single subject -->
+        <li class="nav-item has-dropdown" id="tab-ss">
+          <button class="nav-tab" aria-expanded="false">Single subject <span class="chevron">▾</span></button>
+          <div class="dropdown">
+            <div class="dropdown-section-label">Most popular</div>
+            <ul class="dropdown-list">
+              <li class="dropdown-item"><a href="#">Basic accounting</a></li>
+              <li class="dropdown-item"><a href="#">Project management</a></li>
+              <li class="dropdown-item"><a href="#">Organization and management</a></li>
+              <li class="dropdown-item"><a href="#">Administrative law</a></li>
+              <li class="dropdown-item"><a href="#">Economy</a></li>
+              <li class="dropdown-item"><a href="#">Introduction to holistic logistics</a></li>
+              <li class="dropdown-item"><a href="#">Digital leadership and self-management</a></li>
+              <li class="dropdown-item see-all"><a href="#">See all →</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Tab 6–7: Plain links -->
+        <li class="nav-item"><a href="#" class="nav-tab plain">Lånekassen</a></li>
+        <li class="nav-item"><a href="#" class="nav-tab plain">For business</a></li>
+
+      </ul>
+    </nav>
+
+    <!-- 2.3 Search bar -->
+    <div class="header-search">
+      <div class="search-wrap">
+        <span class="search-icon-left" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/>
+            <line x1="9.5" y1="9.5" x2="12.5" y2="12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <input
+          type="text"
+          id="headerSearch"
+          class="search-input"
+          placeholder="Search..."
+          autocomplete="off"
+          aria-autocomplete="list">
+        <button class="search-clear" id="searchClear" aria-label="Clear search">&#x2715;</button>
+      </div>
+
+      <!-- Autocomplete dropdown -->
+      <div class="search-dropdown" id="searchDropdown" role="listbox">
+
+        <!-- Default panel: shown when input is empty -->
+        <div id="searchDefaultPanel">
+
+          <!-- Section 1: Recent searches -->
+          <div class="search-section">
+            <div class="search-section-label">Recent searches</div>
+            <ul class="recent-list">
+              <li role="option"><span class="recent-q">Office worker</span><span class="recent-scope">in Vocational School</span></li>
+              <li role="option"><span class="recent-q">Medical Secretary</span><span class="recent-scope">in Health &amp; lifestyle</span></li>
+              <li role="option"><span class="recent-q">Mathematics R1</span><span class="recent-scope">in High School</span></li>
+            </ul>
+          </div>
+
+          <!-- Section 2: Trending pills -->
+          <div class="search-section">
+            <div class="search-section-label">Tendencies in NKI</div>
+            <div class="trend-pills">
+              <span class="pill">Medical Secretary</span>
+              <span class="pill">Interior Designer</span>
+              <span class="pill">HR Consultant</span>
+              <span class="pill">Mathematics R1</span>
+              <span class="pill">Accounting Consultant</span>
+              <span class="pill">Office Worker</span>
+              <span class="pill">Project Manager</span>
+              <span class="pill">Digital Marketing</span>
+            </div>
+          </div>
+
+          <!-- Section 3: Popular course cards (3-col grid) -->
+          <div class="search-section">
+            <div class="search-section-label">Start with the most popular</div>
+            <div class="search-course-grid">
+              <div class="s-card" role="option">
+                <div class="s-card-img">
+                  <span class="s-badge">Best seller</span>
+                </div>
+                <div class="s-card-name">General Study Competence (23/5 Rule)</div>
+                <div class="s-card-price">Kr 8 490</div>
+                <div class="s-card-meta">Academic competence · 1-year course · Lånekassen available</div>
+              </div>
+              <div class="s-card" role="option">
+                <div class="s-card-img">
+                  <span class="s-badge">Best seller</span>
+                </div>
+                <div class="s-card-name">Medical Secretary</div>
+                <div class="s-card-price">Kr 12 900</div>
+                <div class="s-card-meta">Health · 18-month course · Beginner · Lånekassen available</div>
+              </div>
+              <div class="s-card" role="option">
+                <div class="s-card-img"></div>
+                <div class="s-card-name">Interior Designer</div>
+                <div class="s-card-price">Kr 19 900</div>
+                <div class="s-card-meta">Design · 2-year course · Certificate</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /searchDefaultPanel -->
+
+        <!-- Live results panel: shown when user is typing -->
+        <div id="searchResultsPanel" class="search-section" hidden>
+          <div class="search-section-label" id="searchResultsLabel">Matching courses</div>
+          <div class="search-course-grid" id="searchResultsGrid"></div>
+        </div>
+
+        <!-- Empty state: shown when query matches nothing -->
+        <div id="searchEmptyState" class="search-empty" hidden>
+          No courses found for "<span id="searchEmptyQuery"></span>"
+        </div>
+
+      </div><!-- /search-dropdown -->
+    </div>
+
+    <!-- 2.4 Header right -->
+    <div class="header-right">
+      <button class="btn-login" id="loginBtn">Log in</button>
+      <button class="btn-consult" id="consultBtnHeader">Free consultation</button>
+      <button class="btn-cart" id="cartBtn" aria-label="Cart">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 1h2.5l1.7 8.5h9.3l1.5-5.5H5"/>
+          <circle cx="7.5" cy="15" r="1"/>
+          <circle cx="14" cy="15" r="1"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════════════════
+     CART DRAWER
+════════════════════════════════════════════ -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="drawer-header">
+    <span class="drawer-title">Your cart</span>
+    <button class="drawer-close" id="drawerClose" aria-label="Close cart">×</button>
+  </div>
+  <div class="drawer-body">Your cart is empty.</div>
+</aside>
+
+
+<!-- ════════════════════════════════════════════
+     LOGIN MODAL
+════════════════════════════════════════════ -->
+<div class="modal-overlay" id="loginModal" role="dialog" aria-modal="true" aria-label="Log in">
+  <div class="modal">
+    <button class="modal-close" data-closes="loginModal" aria-label="Close">×</button>
+    <h2 class="modal-title">Log in</h2>
+    <div class="login-links">
+      <div class="login-row">
+        <p class="login-desc">Login to vocational school, courses and upper secondary school for you with student email</p>
+        <a href="#" class="login-cta">Log in ›</a>
+      </div>
+      <div class="login-row">
+        <p class="login-desc">Login to the exam platform</p>
+        <a href="#" class="login-cta">Log in Wiseflow ›</a>
+      </div>
+      <div class="login-row">
+        <p class="login-desc">How do I log in to Canvas?</p>
+        <a href="#" class="login-cta">Get help logging in ›</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     GET FREE CONSULTATION MODAL
+════════════════════════════════════════════ -->
+<div class="modal-overlay" id="consultModal" role="dialog" aria-modal="true" aria-label="Free consultation">
+  <div class="modal">
+    <button class="modal-close" data-closes="consultModal" aria-label="Close">×</button>
+    <h2 class="consult-heading">Get free consultation</h2>
+    <p class="consult-sub">If you have any questions about our studies or admission requirements – we are happy to help you!</p>
+    <p class="consult-tel">Call 67 58 88 00</p>
+    <p class="consult-hours">09–16 (Mon–Fri)</p>
+
+    <form onsubmit="return false">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="m-name">Name</label>
+          <input class="form-input" id="m-name" type="text" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="m-email">Email</label>
+          <input class="form-input" id="m-email" type="email" placeholder="email@example.com">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="m-phone">Phone number</label>
+          <input class="form-input" id="m-phone" type="tel" placeholder="+47 000 00 000">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="m-topic">Topic</label>
+          <select class="form-select" id="m-topic">
+            <option value="">Select a topic</option>
+            <option>Course information</option>
+            <option>Admission requirements</option>
+            <option>Financing / Lånekassen</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="m-msg">Message</label>
+        <textarea class="form-textarea" id="m-msg" placeholder="Write your question here..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Preferred contact method</label>
+        <div class="contact-pref-group">
+          <label><input type="radio" name="m-pref" value="phone"> Phone</label>
+          <label><input type="radio" name="m-pref" value="email"> Email</label>
+        </div>
+      </div>
+      <button type="submit" class="btn-submit">Send</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════ -->
+<main>
+
+  <!-- ── 3. HERO ─────────────────────────── -->
+  <section aria-label="Hero">
+    <div class="hero">
+      <div class="hero-content">
+        <h1 class="hero-headline">100% digital education<br>built for real life</h1>
+        <p class="hero-sub">NKI delivers fully digital, flexible learning that helps you complete education and reskill on your own terms — no classrooms, no fixed schedules, just structured progress anywhere, anytime.</p>
+
+        <!-- Factoids -->
+        <div class="hero-factoids">
+          <div class="factoid">
+            <div class="factoid-num">50+</div>
+            <div class="factoid-lbl">years of trusted<br>Norwegian education</div>
+          </div>
+          <div class="factoid">
+            <div class="factoid-num">200+</div>
+            <div class="factoid-lbl">courses across<br>every level</div>
+          </div>
+          <div class="factoid">
+            <div class="factoid-num">33 400+</div>
+            <div class="factoid-lbl">students completed their<br>education last year</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Configurator: content-width box straddling gray/white boundary -->
+    <div class="hero-config-zone">
+      <div class="hero-configurator">
+        <div class="config-inner">
+          <div class="config-group">
+            <label class="config-lbl" for="cfg-level">I am exploring</label>
+            <select class="config-select" id="cfg-level">
+              <option value="">Choose your educational level</option>
+              <option>High School</option>
+              <option>Courses</option>
+              <option>Vocational School</option>
+              <option>Single Subjects</option>
+            </select>
+          </div>
+          <div class="config-divider"></div>
+          <div class="config-group">
+            <label class="config-lbl" for="cfg-area">I want to study</label>
+            <select class="config-select" id="cfg-area">
+              <option value="">Choose subject area</option>
+              <option>Economy and sustainability</option>
+              <option>HR and Management</option>
+              <option>Law and administration</option>
+              <option>Construction and logistics</option>
+              <option>Interior and design</option>
+              <option>Health and lifestyle</option>
+              <option>Marketing and sales</option>
+            </select>
+          </div>
+          <button class="btn-find">Find my course</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mentioned in — white background -->
+    <div class="mentioned-in">
+      <p class="mentioned-in-lbl">Mentioned in</p>
+      <div class="mentioned-in-logos">
+        <img src="mentioned-in-logos/standard_compressed_Aftenposten-removebg-preview.png" alt="Aftenposten">
+        <img src="mentioned-in-logos/unnamed-removebg-preview.png" alt="DIGI">
+        <img src="mentioned-in-logos/logo.svg" alt="">
+        <img src="mentioned-in-logos/logo_2.svg" alt="">
+        <img src="mentioned-in-logos/logo-text.svg" alt="">
+        <img src="mentioned-in-logos/logo-ec--en.svg" alt="">
+        <img src="mentioned-in-logos/small-positive.svg" alt="">
+        <img src="mentioned-in-logos/fun-logo.svg" alt="">
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 4. POPULAR COURSES ──────────────── -->
+  <section class="wf-section" aria-labelledby="popular-hd">
+    <div class="container">
+      <div class="section-hd">
+        <h2 class="section-title" id="popular-hd">Popular courses</h2>
+        <div class="nav-arrows">
+          <button class="nav-arrow" aria-label="Previous">&#8592;</button>
+          <button class="nav-arrow" aria-label="Next">&#8594;</button>
+        </div>
+      </div>
+      <div class="courses-grid">
+
+        <!-- Card 1: General Study Competence -->
+        <div class="course-card">
+          <div class="cc-img">
+            <span class="badge-bs">Best seller</span>
+          </div>
+          <div class="cc-body">
+            <div class="cc-name">General Study Competence (23/5 Rule)</div>
+            <div class="cc-rating">
+              <span class="star">★</span>
+              <span class="score">4.9</span>
+            </div>
+            <div class="cc-pills">
+              <span class="pill-sm">Best seller</span>
+              <span class="pill-sm">Lånekassen available</span>
+              <span class="pill-sm">1-year course</span>
+              <span class="pill-sm">Beginner</span>
+              <span class="pill-sm">14 lessons</span>
+              <span class="pill-sm">Books needed</span>
+            </div>
+            <div class="cc-footer">
+              <div>
+                <div class="cc-price">Kr 8 490</div>
+                <div class="cc-price-meta">
+                  <span class="cc-orig-price">Kr 9 900</span>
+                  <span class="cc-disc-badge">-15%</span>
+                </div>
+              </div>
+              <button class="cc-cart-btn" aria-label="Add to cart">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.61L23 6H6"/></svg>
+                <span class="cc-cart-plus">+</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Medical Secretary -->
+        <div class="course-card">
+          <div class="cc-img">
+            <span class="badge-bs">10h of offline practice</span>
+          </div>
+          <div class="cc-body">
+            <div class="cc-name">Medical Secretary</div>
+            <div class="cc-rating">
+              <span class="star">★</span>
+              <span class="score">4.8</span>
+            </div>
+            <div class="cc-pills">
+              <span class="pill-sm">Best results</span>
+              <span class="pill-sm">Lånekassen available</span>
+              <span class="pill-sm">18 months</span>
+              <span class="pill-sm">Certificate</span>
+              <span class="pill-sm">22 lessons</span>
+              <span class="pill-sm">Books needed</span>
+            </div>
+            <div class="cc-footer">
+              <div>
+                <div class="cc-price">Kr 12 900</div>
+                <div class="cc-price-meta">
+                  <span class="cc-orig-price">Kr 14 900</span>
+                  <span class="cc-disc-badge">-13%</span>
+                </div>
+              </div>
+              <button class="cc-cart-btn" aria-label="Add to cart">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.61L23 6H6"/></svg>
+                <span class="cc-cart-plus">+</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Office employee -->
+        <div class="course-card">
+          <div class="cc-img"></div>
+          <div class="cc-body">
+            <div class="cc-name">Office employee</div>
+            <div class="cc-rating">
+              <span class="star">★</span>
+              <span class="score">4.7</span>
+            </div>
+            <div class="cc-pills">
+              <span class="pill-sm">Lånekassen available</span>
+              <span class="pill-sm">3 months</span>
+              <span class="pill-sm">No books needed</span>
+              <span class="pill-sm">8 lessons</span>
+            </div>
+            <div class="cc-footer">
+              <div>
+                <div class="cc-price">Kr 5 490</div>
+                <div class="cc-price-meta">
+                  <span class="cc-orig-price">Kr 5 990</span>
+                  <span class="cc-disc-badge">-8%</span>
+                </div>
+              </div>
+              <button class="cc-cart-btn" aria-label="Add to cart">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.61L23 6H6"/></svg>
+                <span class="cc-cart-plus">+</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Interior Designer -->
+        <div class="course-card">
+          <div class="cc-img"></div>
+          <div class="cc-body">
+            <div class="cc-name">Interior Designer</div>
+            <div class="cc-rating">
+              <span class="star">★</span>
+              <span class="score">4.9</span>
+            </div>
+            <div class="cc-pills">
+              <span class="pill-sm">Best seller</span>
+              <span class="pill-sm">280 total hours</span>
+              <span class="pill-sm">Certificate</span>
+              <span class="pill-sm">2-year course</span>
+              <span class="pill-sm">28 lessons</span>
+              <span class="pill-sm">Books needed</span>
+            </div>
+            <div class="cc-footer">
+              <div>
+                <div class="cc-price">Kr 19 900</div>
+                <div class="cc-price-meta">
+                  <span class="cc-orig-price">Kr 23 900</span>
+                  <span class="cc-disc-badge">-17%</span>
+                </div>
+              </div>
+              <button class="cc-cart-btn" aria-label="Add to cart">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.61L23 6H6"/></svg>
+                <span class="cc-cart-plus">+</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 5. HOW IT WORKS ── -->
+  <section class="wf-section" aria-labelledby="hiw-hd">
+    <div class="container">
+      <div class="section-hd is-centered">
+        <h2 class="section-title" id="hiw-hd">How it works</h2>
+      </div>
+      <div class="hiw-grid">
+
+        <div class="hiw-card">
+          <div class="hiw-num">01</div>
+          <div class="hiw-title">Study at your own pace</div>
+          <p class="hiw-desc">You decide when and where you study. NKI's online programs adapt to your schedule — not the other way around — so you can fit coursework around work, family, and everyday life.</p>
+        </div>
+
+        <div class="hiw-card">
+          <div class="hiw-num">02</div>
+          <div class="hiw-title">Work through your digital classroom</div>
+          <p class="hiw-desc">Everything you need lives in one digital classroom: course materials and assignments, with the flexibility to submit work and book exams whenever you're ready.</p>
+        </div>
+
+        <div class="hiw-card">
+          <div class="hiw-num">03</div>
+          <div class="hiw-title">Get support along the way</div>
+          <p class="hiw-desc">You're never studying alone. Message your teacher or study advisor directly, get a personal study advisor from day one, and connect with fellow students working through the same material.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 6. PEDAGOGICAL APPROACH ── -->
+  <section class="wf-section bg-gray" aria-labelledby="aktiv-hd">
+    <div class="container">
+
+      <div class="section-hd is-centered">
+        <h2 class="section-title" id="aktiv-hd">Our pedagogical approach</h2>
+      </div>
+
+      <!-- Tab row -->
+      <div class="aktiv-tabs" role="tablist" aria-label="Pedagogical principles">
+
+        <button class="aktiv-tab is-active" role="tab" data-tab="0" aria-selected="true">
+          <span class="material-symbols-outlined aktiv-tab-icon">touch_app</span>
+          Active learning
+        </button>
+
+        <button class="aktiv-tab" role="tab" data-tab="1" aria-selected="false">
+          <span class="material-symbols-outlined aktiv-tab-icon">smart_toy</span>
+          AI as a learning partner
+        </button>
+
+        <button class="aktiv-tab" role="tab" data-tab="2" aria-selected="false">
+          <span class="material-symbols-outlined aktiv-tab-icon">trending_up</span>
+          Clear progression
+        </button>
+
+        <button class="aktiv-tab" role="tab" data-tab="3" aria-selected="false">
+          <span class="material-symbols-outlined aktiv-tab-icon">accessibility</span>
+          Inclusive
+        </button>
+
+        <button class="aktiv-tab" role="tab" data-tab="4" aria-selected="false">
+          <span class="material-symbols-outlined aktiv-tab-icon">grid_view</span>
+          Variety
+        </button>
+
+      </div>
+
+      <!-- Panel: full-width image with white card overflowing bottom-left -->
+      <div class="aktiv-panel">
+        <div class="aktiv-panel-img">
+          <span class="material-symbols-outlined aktiv-img-icon">image</span>
+        </div>
+        <div class="aktiv-panel-card">
+          <h3 class="aktiv-panel-title" id="aktiv-panel-title">Active learning</h3>
+          <p class="aktiv-panel-desc" id="aktiv-panel-desc">The course participant takes an active role through action, reflection, and applying knowledge.</p>
+          <button class="aktiv-panel-btn">Learn more →</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ── 6. TESTIMONIALS ────────────────── -->
+  <section class="wf-section" aria-labelledby="testi-hd">
+    <div class="container">
+      <div class="section-hd">
+        <h2 class="section-title" id="testi-hd">What our students say</h2>
+      </div>
+
+      <div class="testi-cols">
+
+        <!-- Column 1 -->
+        <div class="testi-col">
+          <div class="t-card featured">
+            <div class="featured-bg"></div>
+            <div class="featured-gradient"></div>
+            <div class="featured-foot">
+              <div class="featured-lbl">Student story</div>
+              <div class="featured-ttl">How I passed my medical entrance exam — fully online with NKI</div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div class="t-hd">
+              <div class="t-avatar"></div>
+              <div class="t-meta">
+                <div class="t-name">Emilie Haugen</div>
+                <div class="t-role">Student, Medical Secretary</div>
+              </div>
+            </div>
+            <div class="t-qmark">"</div>
+            <p class="t-text">I was juggling a part-time job and two kids. NKI let me study whenever I had an hour free. I finished in 14 months and got the grade I needed.</p>
+          </div>
+          <div class="t-card">
+            <div class="t-hd">
+              <div class="t-avatar"></div>
+              <div class="t-meta">
+                <div class="t-name">Anders Brevik</div>
+                <div class="t-role">Student, Mathematics R1</div>
+              </div>
+            </div>
+            <div class="t-qmark">"</div>
+            <p class="t-text">The video explanations and practice quizzes made it click for me in a way that classroom teaching never did. Went from a 2 to a 5.</p>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="testi-col">
+          <div class="t-card">
+            <div class="t-hd">
+              <div class="t-avatar"></div>
+              <div class="t-meta">
+                <div class="t-name">Kari Lindstrom</div>
+                <div class="t-role">Student, HR Consultant</div>
+              </div>
+            </div>
+            <div class="t-qmark">"</div>
+            <p class="t-text">My employer funded the course through Lånekassen and I could study without taking a leave of absence. The structure made it manageable alongside full-time work.</p>
+          </div>
+          <div class="t-card">
+            <div class="t-hd">
+              <div class="t-avatar"></div>
+              <div class="t-meta">
+                <div class="t-name">Jonas Myhre</div>
+                <div class="t-role">Student, Accounting Consultant</div>
+              </div>
+            </div>
+            <div class="t-qmark">"</div>
+            <p class="t-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. The feedback system flagged my mistakes before they became habits. I passed the national exam on first attempt.</p>
+          </div>
+          <div class="t-card">
+            <div class="t-hd">
+              <div class="t-avatar"></div>
+              <div class="t-meta">
+                <div class="t-name">Ingrid Solberg</div>
+                <div class="t-role">Student, Interior Designer</div>
+              </div>
+            </div>
+            <div class="t-qmark">"</div>
+            <p class="t-text">I had tried another online school but dropped out. NKI's progress bar and module structure kept me on track. Finished the two-year programme in 20 months.</p>
+          </div>
+          <div class="t-card">
+            <div class="t-hd">
+              <div class="t-avatar"></div>
+              <div class="t-meta">
+                <div class="t-name">Morten Dahl</div>
+                <div class="t-role">Student, Project Manager</div>
+              </div>
+            </div>
+            <div class="t-qmark">"</div>
+            <p class="t-text">The course content was current and practical. My manager noticed the difference within weeks of me starting the programme.</p>
+          </div>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="testi-col">
+          <div class="t-card">
+            <div class="t-hd">
+              <div class="t-avatar"></div>
+              <div class="t-meta">
+                <div class="t-name">Lena Bakke</div>
+                <div class="t-role">Student, Legal Secretary</div>
+              </div>
+            </div>
+            <div class="t-qmark">"</div>
+            <p class="t-text">Customer support answered all my questions before I enrolled. I felt confident about the process from day one.</p>
+          </div>
+          <div class="t-card featured">
+            <div class="featured-bg"></div>
+            <div class="featured-gradient"></div>
+            <div class="featured-foot">
+              <div class="featured-lbl">Student story</div>
+              <div class="featured-ttl">From office assistant to legal secretary — a career shift in 18 months</div>
+            </div>
+          </div>
+          <div class="t-card">
+            <div class="t-hd">
+              <div class="t-avatar"></div>
+              <div class="t-meta">
+                <div class="t-name">Trond Eriksen</div>
+                <div class="t-role">Student, Logistics Vocational School</div>
+              </div>
+            </div>
+            <div class="t-qmark">"</div>
+            <p class="t-text">I was skeptical about online learning but the interactive games and audio modules made it actually enjoyable. Highly recommend for anyone who learns differently.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 7. NEWS ────────────────────────── -->
+  <section class="wf-section bg-gray" aria-labelledby="news-hd">
+    <div class="container">
+      <div class="section-hd is-centered">
+        <h2 class="section-title" id="news-hd">News</h2>
+      </div>
+      <div class="news-grid">
+
+        <div class="news-card">
+          <div class="news-img"></div>
+          <div class="news-ttl">NKI launches new AI-assisted feedback modules across all vocational programmes</div>
+          <div class="news-date">12 June 2025</div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-img"></div>
+          <div class="news-ttl">Record enrolment: 4 200 new students started in the August intake</div>
+          <div class="news-date">5 September 2025</div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-img"></div>
+          <div class="news-ttl">NKI partners with three Norwegian municipalities for employee upskilling programmes</div>
+          <div class="news-date">21 October 2025</div>
+        </div>
+
+      </div>
+      <div class="news-see-all-wrap">
+        <a href="#" class="btn-see-all">See all news</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 8. FREE CONSULTATION FORM (inline) ── -->
+  <section class="wf-section" aria-labelledby="consult-hd">
+    <div class="container">
+      <div class="consult-inline">
+
+        <div>
+          <h2 class="section-title" id="consult-hd">Get free advice</h2>
+          <p class="consult-sub">If you have any questions about our studies or admission requirements – we are happy to help you!</p>
+          <p class="consult-tel">For free study advice, call 67 58 88 00</p>
+          <p class="consult-hours">09–16 (Mon–Fri)</p>
+        </div>
+
+        <form onsubmit="return false">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="c-name">Name</label>
+              <input class="form-input" id="c-name" type="text" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-email">Email</label>
+              <input class="form-input" id="c-email" type="email" placeholder="email@example.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="c-phone">Phone number</label>
+              <input class="form-input" id="c-phone" type="tel" placeholder="+47 000 00 000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-topic">Topic</label>
+              <select class="form-select" id="c-topic">
+                <option value="">Select a topic</option>
+                <option>Course information</option>
+                <option>Admission requirements</option>
+                <option>Financing / Lånekassen</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="c-msg">Message</label>
+            <textarea class="form-textarea" id="c-msg" placeholder="Write your question here..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Preferred contact method</label>
+            <div class="contact-pref-group">
+              <label><input type="radio" name="c-pref" value="phone"> Phone</label>
+              <label><input type="radio" name="c-pref" value="email"> Email</label>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit">Send</button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <!-- Footer top bar -->
+    <div class="footer-nl-bar">
+      <img src="logos/NKI_Logo_White_L.svg" class="footer-logo" alt="NKI">
+      <div class="footer-nl-right">
+        <span class="footer-nl-lbl">Subscribe to the newsletter</span>
+        <div class="footer-nl-wrap">
+          <input class="footer-nl-input" type="email" placeholder="Your email address">
+          <button class="btn-nl">Subscribe</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer columns -->
+    <div class="footer-cols">
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <div class="footer-col-ttl">Contact</div>
+        <p class="footer-contact-item"><strong>Tel:</strong> 67 58 88 00</p>
+        <p class="footer-contact-item"><strong>Email:</strong> veelding@nki.no</p>
+        <p class="footer-contact-item"><strong>Opening hours:</strong> Mon–Fri 9am–4pm</p>
+        <p class="footer-contact-item" style="margin-top:8px"><a href="#" style="color:var(--gray-300);font-weight:500">Contact us →</a></p>
+      </div>
+
+      <!-- About -->
+      <div class="footer-col">
+        <div class="footer-col-ttl">About</div>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Our employees</a></li>
+        </ul>
+      </div>
+
+      <!-- Useful information — part 1 -->
+      <div class="footer-col">
+        <div class="footer-col-ttl">Useful information</div>
+        <ul>
+          <li><a href="#">Try online studies today</a></li>
+          <li><a href="#">All study offers</a></li>
+          <li><a href="#">Financing options</a></li>
+          <li><a href="#">Loan Fund</a></li>
+          <li><a href="#">Exam</a></li>
+          <li><a href="#">Admission requirements</a></li>
+        </ul>
+      </div>
+
+      <!-- Useful information — part 2 -->
+      <div class="footer-col">
+        <div class="footer-col-ttl" style="visibility:hidden">-</div>
+        <ul>
+          <li><a href="#">Grade calculator</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">NAV</a></li>
+          <li><a href="#">For businesses</a></li>
+          <li><a href="#">For students</a></li>
+          <li><a href="#">Login to Canvas</a></li>
+        </ul>
+      </div>
+
+      <!-- New at NKI Online Studies -->
+      <div class="footer-col">
+        <div class="footer-col-ttl">New at NKI Online Studies</div>
+        <ul>
+          <li><a href="#">Exam</a></li>
+          <li><a href="#">Frequently asked questions</a></li>
+          <li><a href="#">Study regulations</a></li>
+          <li><a href="#">Educational quality</a></li>
+          <li><a href="#">Ethical guidelines</a></li>
+          <li><a href="#">Speak up</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      © 2025 NKI Nettstudier. All rights reserved.
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Nav tab click → toggle dropdown ── */
+  const navItems = Array.from(document.querySelectorAll('.nav-item.has-dropdown'));
+
+  navItems.forEach(function (item) {
+    var btn = item.querySelector('.nav-tab');
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = item.classList.contains('is-open');
+      closeAllDropdowns();
+      if (!isOpen) {
+        item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  function closeAllDropdowns() {
+    navItems.forEach(function (i) {
+      i.classList.remove('is-open');
+      var b = i.querySelector('.nav-tab');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  /* ── Close nav + search on outside click ── */
+  document.addEventListener('click', function () {
+    closeAllDropdowns();
+    searchDropdown.classList.remove('is-open');
+  });
+
+  /* Stop clicks inside a dropdown from closing it */
+  document.querySelectorAll('.dropdown').forEach(function (d) {
+    d.addEventListener('click', function (e) { e.stopPropagation(); });
+  });
+
+  /* ── Search autocomplete ── */
+  var searchInput        = document.getElementById('headerSearch');
+  var searchDropdown     = document.getElementById('searchDropdown');
+  var searchClear        = document.getElementById('searchClear');
+  var searchDefaultPanel = document.getElementById('searchDefaultPanel');
+  var searchResultsPanel = document.getElementById('searchResultsPanel');
+  var searchResultsGrid  = document.getElementById('searchResultsGrid');
+  var searchResultsLabel = document.getElementById('searchResultsLabel');
+  var searchEmptyState   = document.getElementById('searchEmptyState');
+  var searchEmptyQuery   = document.getElementById('searchEmptyQuery');
+
+  var COURSES = [
+    // High School — Science
+    { name: 'Medicine package Norway',              price: 'Kr 7 490',  badge: null,          meta: 'Science · High School · Package' },
+    { name: 'Medicine package abroad',              price: 'Kr 7 490',  badge: null,          meta: 'Science · High School · Package' },
+    { name: 'Engineering package',                  price: 'Kr 6 490',  badge: null,          meta: 'Science · High School · Package' },
+    { name: 'Mathematics R1',                       price: 'Kr 3 490',  badge: 'Best seller', meta: 'Science · High School · Single subject' },
+    { name: 'Mathematics R2',                       price: 'Kr 3 490',  badge: null,          meta: 'Science · High School · Single subject' },
+    { name: 'Biology 1',                            price: 'Kr 2 990',  badge: null,          meta: 'Science · High School · Single subject' },
+    { name: 'Biology 2',                            price: 'Kr 2 990',  badge: null,          meta: 'Science · High School · Single subject' },
+    { name: 'Chemistry 1',                          price: 'Kr 2 990',  badge: null,          meta: 'Science · High School · Single subject' },
+    { name: 'Chemistry 2',                          price: 'Kr 2 990',  badge: null,          meta: 'Science · High School · Single subject' },
+    { name: 'Physics 1',                            price: 'Kr 2 990',  badge: null,          meta: 'Science · High School · Single subject' },
+    { name: 'Mathematics S1',                       price: 'Kr 3 490',  badge: null,          meta: 'Science · High School · Single subject' },
+    { name: 'Mathematics S2',                       price: 'Kr 3 490',  badge: null,          meta: 'Science · High School · Single subject' },
+    { name: 'Geosciences 1',                        price: 'Kr 2 990',  badge: null,          meta: 'Science · High School · Single subject' },
+    { name: 'Mathematics 1T',                       price: 'Kr 3 490',  badge: null,          meta: 'Science · High School · Single subject' },
+    // High School — Academic competence
+    { name: 'General Study Competence (23/5 Rule)', price: 'Kr 8 490',  badge: 'Best seller', meta: 'Academic competence · 1-year course · Lånekassen available' },
+    { name: 'Påbygg Vg3',                           price: 'Kr 5 490',  badge: null,          meta: 'Academic competence · High School' },
+    { name: 'Påbygg Vg4',                           price: 'Kr 5 490',  badge: null,          meta: 'Academic competence · High School' },
+    // High School — Vocational subjects
+    { name: 'Health and upbringing subjects Vg1',   price: 'Kr 4 990',  badge: null,          meta: 'Vocational · High School' },
+    { name: 'Health worker subject Vg2',             price: 'Kr 4 990',  badge: null,          meta: 'Vocational · High School' },
+    { name: 'Ambulance subject Vg2',                 price: 'Kr 4 990',  badge: null,          meta: 'Vocational · High School' },
+    { name: 'Child and youth work subject Vg2',      price: 'Kr 4 990',  badge: null,          meta: 'Vocational · High School' },
+    { name: 'Health Service Subject Vg2',            price: 'Kr 4 990',  badge: null,          meta: 'Vocational · High School' },
+    { name: 'Health Secretary Vg3',                  price: 'Kr 5 490',  badge: null,          meta: 'Vocational · High School' },
+    { name: 'Dental secretary Vg3',                  price: 'Kr 5 490',  badge: null,          meta: 'Vocational · High School' },
+    { name: 'Electrical and computer technology Vg1',price: 'Kr 4 990',  badge: null,          meta: 'Vocational · High School' },
+    { name: 'Electrical energy and ecom Vg2',        price: 'Kr 4 990',  badge: null,          meta: 'Vocational · High School' },
+    // Economy and sustainability
+    { name: 'Accounting consultant',                 price: 'Kr 14 900', badge: 'Best seller', meta: 'Economy · Vocational School · 60 credits' },
+    { name: 'Payroll and human resources employee',  price: 'Kr 8 490',  badge: null,          meta: 'Economy · Vocational School · 30 credits' },
+    { name: 'Accounting employee',                   price: 'Kr 8 490',  badge: null,          meta: 'Economy · Vocational School · 30 credits' },
+    { name: 'Accounting clerk',                      price: 'Kr 8 490',  badge: null,          meta: 'Economy · Vocational School' },
+    { name: 'Sustainability consultant',             price: 'Kr 14 900', badge: null,          meta: 'Economy · Vocational School · 60 credits' },
+    { name: 'Circular economy and climate accounting',price: 'Kr 4 990', badge: null,          meta: 'Economy · Course · 30 credits' },
+    { name: 'Salary - Tripletex',                    price: 'Kr 1 990',  badge: null,          meta: 'Economy · Course · 9 credits' },
+    { name: 'Introduction to financial management',  price: 'Kr 2 990',  badge: null,          meta: 'Economy · Online course' },
+    { name: 'Circular economy',                      price: 'Kr 2 490',  badge: null,          meta: 'Economy · Online course' },
+    { name: 'Environmental reporting',               price: 'Kr 3 490',  badge: null,          meta: 'Economy · 15 credits' },
+    { name: 'Basic accounting',                      price: 'Kr 2 490',  badge: null,          meta: 'Economy · Single subject' },
+    { name: 'Economy',                               price: 'Kr 2 490',  badge: null,          meta: 'Economy · Single subject' },
+    // HR and Management
+    { name: 'HR consultant',                         price: 'Kr 14 900', badge: 'Best seller', meta: 'HR & Management · Vocational School · 60 credits' },
+    { name: 'Practical management',                  price: 'Kr 8 490',  badge: null,          meta: 'HR & Management · Vocational School · 30 credits' },
+    { name: 'Project manager',                       price: 'Kr 8 490',  badge: null,          meta: 'HR & Management · Vocational School · 30 credits' },
+    { name: 'Management and financial management',   price: 'Kr 8 490',  badge: null,          meta: 'HR & Management · Vocational School · 30 credits' },
+    { name: 'Practical HR management',               price: 'Kr 3 490',  badge: null,          meta: 'HR & Management · Course' },
+    { name: 'The digital workplace',                 price: 'Kr 2 990',  badge: null,          meta: 'HR & Management · Course' },
+    { name: 'Relationship management',               price: 'Kr 2 490',  badge: null,          meta: 'HR & Management · 5 credits' },
+    { name: 'Human Resources Management',            price: 'Kr 2 990',  badge: null,          meta: 'HR & Management · 10 credits' },
+    { name: 'Project management',                    price: 'Kr 2 490',  badge: null,          meta: 'HR & Management · Single subject' },
+    { name: 'Organization and management',           price: 'Kr 2 490',  badge: null,          meta: 'HR & Management · Single subject' },
+    { name: 'Digital leadership and self-management',price: 'Kr 2 490',  badge: null,          meta: 'HR & Management · Single subject' },
+    // Law and administration
+    { name: 'Office worker',                         price: 'Kr 5 490',  badge: 'Best seller', meta: 'Law & Administration · Course' },
+    { name: 'Legal secretary',                       price: 'Kr 14 900', badge: null,          meta: 'Law & Administration · Vocational School · 60 credits' },
+    { name: 'Caseworker',                            price: 'Kr 8 490',  badge: null,          meta: 'Law & Administration · Vocational School · 30 credits' },
+    { name: 'Case management in the health and care sector', price: 'Kr 3 490', badge: null,  meta: 'Law & Administration · Course' },
+    { name: 'Legal office assistant',                price: 'Kr 8 490',  badge: null,          meta: 'Law & Administration · Vocational School · 30 credits' },
+    { name: 'Microsoft Office 365 basic',            price: 'Kr 1 990',  badge: null,          meta: 'Law & Administration · Course · 5 credits' },
+    { name: 'Business Law',                          price: 'Kr 2 490',  badge: null,          meta: 'Law & Administration · 10 credits' },
+    { name: 'Labor law',                             price: 'Kr 2 990',  badge: null,          meta: 'Law & Administration · Course' },
+    { name: 'Administrative law',                    price: 'Kr 2 490',  badge: null,          meta: 'Law & Administration · Single subject' },
+    // Construction and logistics
+    { name: 'Logistics Vocational School',           price: 'Kr 8 490',  badge: null,          meta: 'Construction & Logistics · Vocational School · 30 credits' },
+    { name: 'Logistics Vocational School – Logistics Supervisor', price: 'Kr 8 490', badge: null, meta: 'Construction & Logistics · Vocational School' },
+    { name: 'Operations technician – construction and property',  price: 'Kr 8 490', badge: null, meta: 'Construction & Logistics · Vocational School · 30 credits' },
+    { name: 'Operations technician – construction and real estate', price: 'Kr 8 490', badge: null, meta: 'Construction & Logistics · Vocational School' },
+    { name: 'Technical draftsman – construction',    price: 'Kr 3 990',  badge: null,          meta: 'Construction & Logistics · Course' },
+    { name: 'Revit Architecture',                    price: 'Kr 2 990',  badge: null,          meta: 'Construction & Logistics · Course' },
+    { name: 'Technical installations',               price: 'Kr 2 490',  badge: null,          meta: 'Construction & Logistics · 10 credits' },
+    { name: 'Preparatory course Bachelor of Engineering', price: 'Kr 4 990', badge: null,     meta: 'Construction & Logistics · Course' },
+    { name: 'ArchiCad drawing course',               price: 'Kr 2 990',  badge: null,          meta: 'Construction & Logistics · Course' },
+    { name: 'Technology and digital competence',     price: 'Kr 1 990',  badge: null,          meta: 'Construction & Logistics · 5 credits' },
+    { name: 'License for passenger and freight transport', price: 'Kr 2 490', badge: null,    meta: 'Construction & Logistics · Course' },
+    { name: 'Permit for passenger and freight transport',  price: 'Kr 2 490', badge: null,    meta: 'Construction & Logistics · Course' },
+    { name: 'Introduction to holistic logistics',    price: 'Kr 2 490',  badge: null,          meta: 'Construction & Logistics · Single subject' },
+    // Interior and design
+    { name: 'Interior designer',                     price: 'Kr 19 900', badge: 'Best seller', meta: 'Interior & Design · Vocational School · 2-year course' },
+    { name: 'Home Stylist',                          price: 'Kr 8 490',  badge: null,          meta: 'Interior & Design · Course' },
+    // Health and lifestyle
+    { name: 'Medical Secretary',                     price: 'Kr 12 900', badge: 'Best seller', meta: 'Health & Lifestyle · Vocational School · 18-month course · Lånekassen available' },
+    { name: 'Dental assistant',                      price: 'Kr 12 900', badge: null,          meta: 'Health & Lifestyle · Vocational School' },
+    { name: 'Health and upbringing subjects',        price: 'Kr 4 990',  badge: null,          meta: 'Health & Lifestyle · High School' },
+    { name: 'Nursing assistant',                     price: 'Kr 3 490',  badge: null,          meta: 'Health & Lifestyle · Course' },
+    { name: 'Ambulance profession',                  price: 'Kr 3 490',  badge: null,          meta: 'Health & Lifestyle · Course' },
+    { name: 'Healthcare profession',                 price: 'Kr 4 490',  badge: null,          meta: 'Health & Lifestyle · Course' },
+    { name: 'Exercise as medicine',                  price: 'Kr 2 990',  badge: null,          meta: 'Health & Lifestyle · Course' },
+    { name: 'Health Secretary',                      price: 'Kr 5 490',  badge: null,          meta: 'Health & Lifestyle · High School' },
+    { name: 'Stress and stress management',          price: 'Kr 1 990',  badge: null,          meta: 'Health & Lifestyle · Course' },
+    { name: 'Nutrition and sustainable diet',        price: 'Kr 2 490',  badge: null,          meta: 'Health & Lifestyle · Course' },
+    // Marketing and sales
+    { name: 'Introduction to digital marketing',     price: 'Kr 2 990',  badge: null,          meta: 'Marketing & Sales · Course' },
+    { name: 'Digital marketing',                     price: 'Kr 2 990',  badge: null,          meta: 'Marketing & Sales · Course' },
+    { name: 'Consultative sales',                    price: 'Kr 2 990',  badge: null,          meta: 'Marketing & Sales · Course' },
+    { name: 'Social Media and Content Marketing',    price: 'Kr 2 490',  badge: null,          meta: 'Marketing & Sales · Course' },
+    { name: 'Google tools',                          price: 'Kr 1 990',  badge: null,          meta: 'Marketing & Sales · Course' },
+    { name: 'Introduction to Marketing',             price: 'Kr 2 490',  badge: null,          meta: 'Marketing & Sales · Course' },
+  ];
+
+  function updateClearBtn() {
+    searchClear.classList.toggle('is-visible', searchInput.value.length > 0);
+  }
+
+  function renderCard(course) {
+    var badge = course.badge
+      ? '<span class="s-badge">' + course.badge + '</span>'
+      : '';
+    return '<div class="s-card" role="option">'
+      + '<div class="s-card-img">' + badge + '</div>'
+      + '<div class="s-card-name">' + course.name + '</div>'
+      + '<div class="s-card-price">' + course.price + '</div>'
+      + '<div class="s-card-meta">' + course.meta + '</div>'
+      + '</div>';
+  }
+
+  function updateSearch(query) {
+    var q = query.trim().toLowerCase();
+
+    if (q === '') {
+      searchDefaultPanel.hidden = false;
+      searchResultsPanel.hidden = true;
+      searchEmptyState.hidden   = true;
+      return;
+    }
+
+    var matches = COURSES.filter(function (c) {
+      return c.name.toLowerCase().indexOf(q) !== -1;
+    });
+    var shown = matches.slice(0, 9);
+
+    searchDefaultPanel.hidden = true;
+
+    if (shown.length === 0) {
+      searchResultsPanel.hidden = true;
+      searchEmptyState.hidden   = false;
+      searchEmptyQuery.textContent = query.trim();
+    } else {
+      searchResultsPanel.hidden = false;
+      searchEmptyState.hidden   = true;
+      var count = matches.length;
+      searchResultsLabel.textContent = count + ' course' + (count === 1 ? '' : 's') + ' found';
+      searchResultsGrid.innerHTML = shown.map(renderCard).join('');
+    }
+  }
+
+  searchInput.addEventListener('focus', function (e) {
+    e.stopPropagation();
+    closeAllDropdowns();
+    searchDropdown.classList.add('is-open');
+  });
+
+  searchInput.addEventListener('input', function () {
+    updateClearBtn();
+    updateSearch(searchInput.value);
+  });
+
+  searchClear.addEventListener('click', function (e) {
+    e.stopPropagation();
+    searchInput.value = '';
+    updateClearBtn();
+    updateSearch('');
+    searchInput.focus();
+  });
+
+  searchInput.addEventListener('click', function (e) { e.stopPropagation(); });
+  searchDropdown.addEventListener('click', function (e) { e.stopPropagation(); });
+
+  /* ── Cart drawer ── */
+  var cartBtn       = document.getElementById('cartBtn');
+  var cartDrawer    = document.getElementById('cartDrawer');
+  var drawerOverlay = document.getElementById('drawerOverlay');
+  var drawerClose   = document.getElementById('drawerClose');
+
+  function openDrawer() {
+    cartDrawer.classList.add('is-open');
+    drawerOverlay.classList.add('is-open');
+  }
+
+  function closeDrawer() {
+    cartDrawer.classList.remove('is-open');
+    drawerOverlay.classList.remove('is-open');
+  }
+
+  cartBtn.addEventListener('click', function (e) { e.stopPropagation(); openDrawer(); });
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', closeDrawer);
+
+  /* ── Login modal ── */
+  var loginBtn   = document.getElementById('loginBtn');
+  var loginModal = document.getElementById('loginModal');
+
+  loginBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    loginModal.classList.add('is-open');
+  });
+
+  /* ── Consultation modal (header button) ── */
+  var consultBtnHeader = document.getElementById('consultBtnHeader');
+  var consultModal     = document.getElementById('consultModal');
+
+  consultBtnHeader.addEventListener('click', function (e) {
+    e.stopPropagation();
+    consultModal.classList.add('is-open');
+  });
+
+  /* ── Close any modal via [data-closes] button ── */
+  document.querySelectorAll('.modal-close').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = btn.getAttribute('data-closes');
+      var el = document.getElementById(targetId);
+      if (el) el.classList.remove('is-open');
+    });
+  });
+
+  /* ── Close any modal by clicking its backdrop ── */
+  document.querySelectorAll('.modal-overlay').forEach(function (overlay) {
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) overlay.classList.remove('is-open');
+    });
+    overlay.querySelector('.modal').addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+  });
+
+  /* ── Pedagogical approach tabs ── */
+  var aktivTabContent = [
+    {
+      title: 'Active learning',
+      desc:  'The course participant takes an active role through action, reflection, and applying knowledge.'
+    },
+    {
+      title: 'AI as a learning partner',
+      desc:  'Artificial intelligence is used to provide fast, relevant, and personalized feedback that supports learning, corrects along the way, and helps the learner progress.'
+    },
+    {
+      title: 'Clear progression',
+      desc:  'A clear structure and direction help the participant understand where they are in the learning journey and what comes next.'
+    },
+    {
+      title: 'Inclusive',
+      desc:  'The learning experience is accessible and inclusive for everyone – with strong accessibility (UX), clear structure, and plain language.'
+    },
+    {
+      title: 'Variety',
+      desc:  'Variety is used strategically to engage and strengthen learning – not to distract.'
+    },
+  ];
+
+  var aktivTabs      = document.querySelectorAll('.aktiv-tab');
+  var aktivPanelTtl  = document.getElementById('aktiv-panel-title');
+  var aktivPanelDesc = document.getElementById('aktiv-panel-desc');
+
+  aktivTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var idx = parseInt(tab.getAttribute('data-tab'), 10);
+      aktivTabs.forEach(function (t) {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('is-active');
+      tab.setAttribute('aria-selected', 'true');
+      aktivPanelTtl.textContent  = aktivTabContent[idx].title;
+      aktivPanelDesc.textContent = aktivTabContent[idx].desc;
+    });
+  });
+
+  /* ── Keyboard: Escape closes everything ── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closeAllDropdowns();
+      searchDropdown.classList.remove('is-open');
+      closeDrawer();
+      document.querySelectorAll('.modal-overlay').forEach(function (m) {
+        m.classList.remove('is-open');
+      });
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
