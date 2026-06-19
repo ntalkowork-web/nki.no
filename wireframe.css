@@ -927,14 +927,14 @@ main { margin-top: var(--header-h); }
   width: auto;
   flex-shrink: 0;
   filter: grayscale(100%) brightness(0);
-  opacity: .4;
+  opacity: .65;
   object-fit: contain;
 }
 
 /* DIGI PNG has ~30% vertical whitespace — scale proportionally with other logos (80/24 × 1.67vw) */
 .mentioned-in-logos img[alt="DIGI"] {
   height: clamp(47px, 5.57vw, 80px);
-  filter: grayscale(100%) opacity(.4);
+  filter: grayscale(100%) opacity(.65);
 }
 
 /* ── SECTION COMMON ───────────────────────── */
