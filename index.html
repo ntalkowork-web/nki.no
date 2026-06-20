@@ -1429,7 +1429,7 @@
     },
     {
       title: 'Variety',
-      desc:  'Variety is used strategically to engage and strengthen learning – not to distract.'
+      desc:  'Variety is used strategically to engage and strengthen learning –<br>not to distract.'
     },
   ];
 
@@ -1446,8 +1446,8 @@
       });
       tab.classList.add('is-active');
       tab.setAttribute('aria-selected', 'true');
-      aktivPanelTtl.textContent  = aktivTabContent[idx].title;
-      aktivPanelDesc.textContent = aktivTabContent[idx].desc;
+      aktivPanelTtl.textContent = aktivTabContent[idx].title;
+      aktivPanelDesc.innerHTML  = aktivTabContent[idx].desc;
     });
   });
 
