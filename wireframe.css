@@ -833,6 +833,14 @@ main { margin-top: var(--header-h); }
   flex: 1;
 }
 
+.config-heading {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--white);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .config-lbl {
   font-size: 24px;
   font-weight: 600;
@@ -923,7 +931,7 @@ main { margin-top: var(--header-h); }
 
 .mentioned-in-logos img,
 .mentioned-in-logos .logo-placeholder {
-  height: 14px;
+  height: 15px;
   width: auto;
   flex-shrink: 0;
   filter: grayscale(100%) brightness(0);
@@ -933,7 +941,7 @@ main { margin-top: var(--header-h); }
 
 /* DIGI PNG has ~30% vertical whitespace — scale proportionally with other logos */
 .mentioned-in-logos img[alt="DIGI"] {
-  height: 44px;
+  height: 48px;
   filter: grayscale(100%) opacity(.65);
 }
 
