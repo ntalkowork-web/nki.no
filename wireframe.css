@@ -923,7 +923,7 @@ main { margin-top: var(--header-h); }
 
 .mentioned-in-logos img,
 .mentioned-in-logos .logo-placeholder {
-  height: 10px;
+  height: 11px;
   width: auto;
   flex-shrink: 0;
   filter: grayscale(100%) brightness(0);
@@ -933,7 +933,7 @@ main { margin-top: var(--header-h); }
 
 /* DIGI PNG has ~30% vertical whitespace — scale proportionally with other logos */
 .mentioned-in-logos img[alt="DIGI"] {
-  height: 34px;
+  height: 37px;
   filter: grayscale(100%) opacity(.65);
 }
 
@@ -1245,7 +1245,6 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   bottom: 0;   /* card bottom at end of padding-bottom space = extends below image */
   left: 0;     /* flush with content area left edge — within page margins */
   width: 560px;
-  height: 300px;
   background: var(--white);
   border-radius: var(--r-md);
   padding: 32px;
