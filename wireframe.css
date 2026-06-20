@@ -1298,6 +1298,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   transition: background .15s, color .15s;
   align-self: flex-start;
   flex-shrink: 0;
+  margin-top: auto;
 }
 
 .aktiv-panel-btn:hover {
