@@ -784,13 +784,15 @@ main { margin-top: var(--header-h); }
 .hero-factoids {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  max-width: 860px;
+  gap: var(--gutter);
   margin: 0 auto;
 }
 
 .factoid {
-  padding: 16px 32px;
+  padding: 24px;
   text-align: center;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
 }
 
 .factoid-num {
