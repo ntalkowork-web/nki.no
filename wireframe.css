@@ -760,7 +760,7 @@ main { margin-top: var(--header-h); }
 
 .hero-content {
   text-align: center;
-  padding: 0 var(--margin) 56px;
+  padding: 0 var(--margin) 96px;
 }
 
 .hero-headline {
@@ -782,17 +782,15 @@ main { margin-top: var(--header-h); }
 }
 
 .hero-factoids {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  max-width: 680px;
   margin: 0 auto;
 }
 
 .factoid {
-  padding: 24px;
+  padding: 0;
   text-align: center;
-  border: 1px solid var(--gray-300);
-  border-radius: 8px;
 }
 
 .factoid-num {
