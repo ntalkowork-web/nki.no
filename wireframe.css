@@ -1131,9 +1131,13 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   height: 8px;
   border-radius: 50%;
   background: var(--gray-300);
+  cursor: pointer;
+  transition: background .2s;
 }
 
 .dot.is-active { background: var(--gray-900); }
+
+.courses-viewport { overflow: hidden; }
 
 /* ── HOW IT WORKS ─────────────────────────── */
 
