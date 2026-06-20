@@ -1275,7 +1275,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   font-size: 14px;
   color: var(--gray-600);
   line-height: 1.65;
-  margin-bottom: 32px;
+  margin-bottom: 0;
   /* clamp to prevent overflow if text is long */
   display: -webkit-box;
   -webkit-line-clamp: 4;
@@ -1298,6 +1298,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   transition: background .15s, color .15s;
   align-self: flex-start;
   flex-shrink: 0;
+  margin-top: auto;
 }
 
 .aktiv-panel-btn:hover {
