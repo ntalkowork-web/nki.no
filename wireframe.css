@@ -774,7 +774,7 @@ main { margin-top: var(--header-h); }
 }
 
 .hero-sub {
-  font-size: 17px;
+  font-size: 16px;
   color: var(--gray-600);
   max-width: 680px;
   margin: 0 auto 48px;
@@ -923,7 +923,7 @@ main { margin-top: var(--header-h); }
 
 .mentioned-in-logos img,
 .mentioned-in-logos .logo-placeholder {
-  height: clamp(14px, 1.67vw, 24px);
+  height: 8px;
   width: auto;
   flex-shrink: 0;
   filter: grayscale(100%) brightness(0);
@@ -931,9 +931,9 @@ main { margin-top: var(--header-h); }
   object-fit: contain;
 }
 
-/* DIGI PNG has ~30% vertical whitespace — scale proportionally with other logos (80/24 × 1.67vw) */
+/* DIGI PNG has ~30% vertical whitespace — scale proportionally with other logos */
 .mentioned-in-logos img[alt="DIGI"] {
-  height: clamp(47px, 5.57vw, 80px);
+  height: 27px;
   filter: grayscale(100%) opacity(.65);
 }
 
@@ -1248,7 +1248,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   height: 300px;
   background: var(--white);
   border-radius: var(--r-md);
-  padding: 32px 32px 28px;
+  padding: 32px;
   box-shadow: var(--sh-md);
   display: flex;
   flex-direction: column;
@@ -1259,7 +1259,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   font-weight: 700;
   color: var(--gray-900);
   line-height: 1.25;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   flex-shrink: 0;
 }
 
@@ -1267,7 +1267,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   font-size: 14px;
   color: var(--gray-600);
   line-height: 1.65;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   flex: 1;
   /* clamp to prevent overflow if text is long */
   display: -webkit-box;
