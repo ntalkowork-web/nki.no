@@ -674,6 +674,11 @@ select { font-family: inherit; }
   display: block;
 }
 
+.nki-pay-pill--logo img[alt="Visa"],
+.nki-pay-pill--logo img[alt="Mastercard"] { max-height: 10px; }
+
+.nki-pay-pill--logo img[alt="Lanekassen"] { max-height: 20px; }
+
 .nki-pay-pill--text {
   display: inline-flex;
   align-items: center;
