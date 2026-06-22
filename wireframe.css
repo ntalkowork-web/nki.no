@@ -2310,7 +2310,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 
 /* ── COMPARE PAGE ── */
 
-.cp-wrap { padding-top: 32px; padding-bottom: 72px; }
+.cp-wrap { padding: 32px var(--margin) 72px; }
 .cp-breadcrumb { font-size: 13px; color: var(--gray-500); margin-bottom: 28px; }
 .cp-bc-link { color: var(--gray-500); cursor: pointer; }
 .cp-bc-link:hover { color: var(--gray-900); text-decoration: underline; }

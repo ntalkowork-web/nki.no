@@ -2084,7 +2084,7 @@
     var page = document.getElementById('page-compare');
     var courses = courseIds.map(spCourseById).filter(Boolean);
     if (courses.length === 0) {
-      page.innerHTML = '<div class="container cp-wrap"><p style="color:var(--gray-500)">No courses selected.</p></div>';
+      page.innerHTML = '<div class="cp-wrap"><p style="color:var(--gray-500)">No courses selected.</p></div>';
       return;
     }
     var ATTRS = [
@@ -2105,7 +2105,7 @@
         rows + '</div>';
     }).join('');
 
-    page.innerHTML = '<div class="container cp-wrap">' +
+    page.innerHTML = '<div class="cp-wrap">' +
       '<div class="cp-breadcrumb"><a class="cp-bc-link" id="cpBcHome">Home</a><span class="cp-bc-sep"> &gt; </span>' +
       '<a class="cp-bc-link" id="cpBcSearch">Search</a><span class="cp-bc-sep"> &gt; </span>' +
       '<span class="cp-bc-current">Compare courses</span></div>' +
