@@ -494,6 +494,8 @@
 <!-- ════════════════════════════════════════════
      MAIN
 ════════════════════════════════════════════ -->
+<div id="page-home">
+
 <main>
 
   <!-- ── 3. HERO ─────────────────────────── -->
@@ -993,6 +995,11 @@
 
   </div>
 </footer>
+
+</div><!-- /page-home -->
+
+<div id="page-search" hidden></div>
+<div id="page-compare" hidden></div>
 
 
 <!-- ════════════════════════════════════════════
@@ -1669,6 +1676,489 @@
       });
     }
   });
+
+  /* ── SEARCH + COMPARE PAGES ── */
+
+  var SEARCH_COURSES = [
+    { id: 'pabygg',        name: 'Påbygg – Studieforberedende VG3',    area: 'Science',                    level: 'High School',    months: 12, price: 14900, rating: 4.8, reviews: 312, badge: 'Best seller', lanekassen: true  },
+    { id: 'mat-1t',        name: 'Matematikk 1T',                                 area: 'Science',                    level: 'Single Subject', months: 12, price: 4900,  rating: 4.6, reviews: 198, badge: null,          lanekassen: true  },
+    { id: 'norsk-vg3',     name: 'Norsk – Skriftlig VG3',                    area: 'Science',                    level: 'Single Subject', months: 12, price: 5900,  rating: 4.5, reviews: 145, badge: null,          lanekassen: true  },
+    { id: 'med-sec',       name: 'Medical Secretary',                              area: 'Health and lifestyle',       level: 'Courses',        months: 18, price: 12900, rating: 4.9, reviews: 421, badge: 'Best seller', lanekassen: true  },
+    { id: 'helse-led',     name: 'Health Management',                              area: 'Health and lifestyle',       level: 'Courses',        months: 12, price: 9900,  rating: 4.4, reviews: 87,  badge: null,          lanekassen: false },
+    { id: 'regnskap',      name: 'Accounting and Finance',                         area: 'Economy and sustainability', level: 'Courses',        months: 6,  price: 7900,  rating: 4.7, reviews: 203, badge: 'Trending',   lanekassen: true  },
+    { id: 'baerekraft',    name: 'Sustainability and Green Business',               area: 'Economy and sustainability', level: 'Courses',        months: 3,  price: 3900,  rating: 4.3, reviews: 64,  badge: null,          lanekassen: false },
+    { id: 'hr-grunn',      name: 'HR Fundamentals',                                area: 'HR and Management',          level: 'Courses',        months: 6,  price: 6900,  rating: 4.6, reviews: 119, badge: null,          lanekassen: false },
+    { id: 'leder',         name: 'Leadership and Organisational Theory',            area: 'HR and Management',          level: 'Courses',        months: 12, price: 9400,  rating: 4.5, reviews: 88,  badge: null,          lanekassen: false },
+    { id: 'jus',           name: 'Introduction to Law',                            area: 'Law and administration',     level: 'Courses',        months: 6,  price: 5900,  rating: 4.7, reviews: 156, badge: 'Trending',   lanekassen: false },
+    { id: 'mkt-grunn',     name: 'Marketing Fundamentals',                         area: 'Marketing and sales',        level: 'Courses',        months: 3,  price: 3490,  rating: 4.4, reviews: 211, badge: null,          lanekassen: false },
+    { id: 'interior',      name: 'Interior Design — Foundation',              area: 'Interior and design',        level: 'Courses',        months: 18, price: 19900, rating: 4.8, reviews: 97,  badge: 'Best seller', lanekassen: true  }
+  ];
+
+  var SP_AREAS = [
+    { label: 'Health and lifestyle',       count: 18 },
+    { label: 'Economy and sustainability', count: 24 },
+    { label: 'HR and Management',          count: 12 },
+    { label: 'Interior and design',        count: 9  },
+    { label: 'Law and administration',     count: 15 },
+    { label: 'Marketing and sales',        count: 21 },
+    { label: 'Construction and logistics', count: 7  },
+    { label: 'Science',                    count: 11 }
+  ];
+
+  var SP_LEVELS = [
+    { label: 'High School',    count: 34 },
+    { label: 'Courses',        count: 58 },
+    { label: 'Single Subject', count: 25 }
+  ];
+
+  var SP_LENGTHS = [
+    { label: 'Less than 3 months', count: 19 },
+    { label: '3–6 months',    count: 31 },
+    { label: '1 year',             count: 42 },
+    { label: 'More than 1 year',   count: 25 }
+  ];
+
+  var spState = {
+    query: '', areas: [], levels: [], lengths: [],
+    priceMin: 990, priceMax: 49900,
+    lanekassen: false, sort: 'recommended',
+    compareIds: [], breadcrumb: 'All courses'
+  };
+
+  function fmtNum(n) {
+    var s = String(n), out = '';
+    for (var i = 0; i < s.length; i++) {
+      if (i > 0 && (s.length - i) % 3 === 0) out += ' ';
+      out += s[i];
+    }
+    return out;
+  }
+
+  function showPage(name, ctx) {
+    var pageHome    = document.getElementById('page-home');
+    var pageSearch  = document.getElementById('page-search');
+    var pageCompare = document.getElementById('page-compare');
+    pageHome.hidden    = (name !== 'home');
+    pageSearch.hidden  = (name !== 'search');
+    pageCompare.hidden = (name !== 'compare');
+
+    if (name === 'search') {
+      spState.query = ''; spState.areas = []; spState.levels = [];
+      spState.lengths = []; spState.priceMin = 990; spState.priceMax = 49900;
+      spState.lanekassen = false; spState.sort = 'recommended';
+      spState.compareIds = []; spState.breadcrumb = 'All courses';
+      if (ctx) {
+        if (ctx.category) {
+          spState.breadcrumb = ctx.category;
+          var levelMap = { 'High School': 'High School', 'Courses': 'Courses', 'Single Subjects': 'Single Subject', 'Single subject': 'Single Subject' };
+          if (levelMap[ctx.category]) spState.levels = [levelMap[ctx.category]];
+          else spState.areas = [ctx.category];
+        }
+        if (ctx.area && ctx.area !== '') { spState.areas = [ctx.area]; spState.breadcrumb = ctx.area; }
+        if (ctx.level && ctx.level !== '') {
+          var lv = ctx.level === 'Single Subjects' || ctx.level === 'Single Subject' ? 'Single Subject' : ctx.level;
+          spState.levels = [lv];
+          if (spState.breadcrumb === 'All courses') spState.breadcrumb = ctx.level;
+        }
+      }
+      renderSearchPage();
+      window.scrollTo(0, 0);
+    }
+    if (name === 'compare') { renderComparePage(ctx ? ctx.courseIds : []); window.scrollTo(0, 0); }
+    if (name === 'home') window.scrollTo(0, 0);
+  }
+
+  /* ── Search page build helpers ── */
+
+  function buildAccordion(id, title, bodyHTML) {
+    return '<div class="sp-accordion is-open" id="' + id + '">' +
+      '<div class="sp-acc-header"><span>' + title + '</span>' +
+      '<span class="sp-acc-chevron">expand_more</span></div>' +
+      '<div class="sp-acc-body">' + bodyHTML + '</div></div>';
+  }
+
+  function buildCheckRow(name, count, checked, cls) {
+    return '<div class="sp-filter-option">' +
+      '<label class="sp-filter-label"><input type="checkbox" class="' + cls + '" value="' + name + '"' + (checked ? ' checked' : '') + '> ' + name + '</label>' +
+      '<span class="sp-filter-count">' + count + '</span></div>';
+  }
+
+  function buildSidebarHTML() {
+    var cmpSection = '';
+    if (spState.compareIds.length > 0) {
+      var rows = spState.compareIds.map(function(id) {
+        var c = spCourseById(id); if (!c) return '';
+        return '<div class="sp-compare-row">' +
+          '<span class="sp-compare-name">' + c.name + '</span>' +
+          '<button class="sp-compare-remove" data-cmp-remove="' + id + '">×</button></div>';
+      }).join('');
+      cmpSection = '<div class="sp-compare-section"><div class="sp-compare-title">Compare courses</div>' +
+        '<div class="sp-compare-list">' + rows + '</div>' +
+        '<button class="sp-compare-cta" id="spCompareCta"' + (spState.compareIds.length < 2 ? ' disabled' : '') + '>Compare courses</button></div>';
+    }
+    var areaBody   = SP_AREAS.map(function(a)   { return buildCheckRow(a.label, a.count, spState.areas.indexOf(a.label)   !== -1, 'sp-cb-area');   }).join('');
+    var levelBody  = SP_LEVELS.map(function(a)  { return buildCheckRow(a.label, a.count, spState.levels.indexOf(a.label)  !== -1, 'sp-cb-level');  }).join('');
+    var lengthBody = SP_LENGTHS.map(function(a) { return buildCheckRow(a.label, a.count, spState.lengths.indexOf(a.label) !== -1, 'sp-cb-length'); }).join('');
+    var priceBody  =
+      '<div class="sp-price-range">' +
+        '<input type="range" class="sp-price-slider" id="spPriceMin" min="990" max="49900" step="100" value="' + spState.priceMin + '">' +
+        '<input type="range" class="sp-price-slider" id="spPriceMax" min="990" max="49900" step="100" value="' + spState.priceMax + '">' +
+        '<div class="sp-price-vals"><span id="spPriceMinVal">kr ' + fmtNum(spState.priceMin) + '</span><span id="spPriceMaxVal">kr ' + fmtNum(spState.priceMax) + '</span></div>' +
+      '</div>' +
+      '<div class="sp-filter-option" style="margin-top:8px">' +
+        '<label class="sp-filter-label"><input type="checkbox" id="spLanekassen"' + (spState.lanekassen ? ' checked' : '') + '> Lånekassen support</label>' +
+        '<span class="sp-filter-count">67</span></div>';
+    return cmpSection +
+      buildAccordion('acc-area', 'Subject area', areaBody) +
+      buildAccordion('acc-level', 'Educational level', levelBody) +
+      buildAccordion('acc-length', 'Course length', lengthBody) +
+      buildAccordion('acc-price', 'Price', priceBody);
+  }
+
+  function buildFilterPillsHTML() {
+    var pills = '';
+    spState.areas.forEach(function(a) {
+      pills += '<span class="sp-active-pill">' + a + '<button class="sp-pill-x" data-rm-area="' + a + '">×</button></span>';
+    });
+    spState.levels.forEach(function(l) {
+      pills += '<span class="sp-active-pill">' + l + '<button class="sp-pill-x" data-rm-level="' + l + '">×</button></span>';
+    });
+    spState.lengths.forEach(function(l) {
+      pills += '<span class="sp-active-pill">' + l + '<button class="sp-pill-x" data-rm-length="' + l + '">×</button></span>';
+    });
+    if (spState.lanekassen) pills += '<span class="sp-active-pill">Lånekassen<button class="sp-pill-x" data-rm-lk="1">×</button></span>';
+    var clearAll = pills ? '<button class="sp-clear-all" id="spClearAll">Clear all</button>' : '';
+    var sort = '<div class="sp-sort-wrap"><span class="sp-sort-label">Sorted by:</span>' +
+      '<select class="sp-sort-select" id="spSort">' +
+        '<option value="recommended"' + (spState.sort === 'recommended' ? ' selected' : '') + '>Recommended</option>' +
+        '<option value="newest"'      + (spState.sort === 'newest'      ? ' selected' : '') + '>Newest</option>' +
+        '<option value="trending"'    + (spState.sort === 'trending'    ? ' selected' : '') + '>Trending</option>' +
+      '</select></div>';
+    return pills + clearAll + sort;
+  }
+
+  function getFilteredResults() {
+    return SEARCH_COURSES.filter(function(c) {
+      if (spState.query && c.name.toLowerCase().indexOf(spState.query.toLowerCase()) === -1) return false;
+      if (spState.areas.length   && spState.areas.indexOf(c.area)   === -1) return false;
+      if (spState.levels.length  && spState.levels.indexOf(c.level) === -1) return false;
+      if (spState.lengths.length) {
+        var ok = false;
+        for (var k = 0; k < spState.lengths.length; k++) {
+          if (matchesLengthBucket(c.months, spState.lengths[k])) { ok = true; break; }
+        }
+        if (!ok) return false;
+      }
+      if (c.price < spState.priceMin || c.price > spState.priceMax) return false;
+      if (spState.lanekassen && !c.lanekassen) return false;
+      return true;
+    });
+  }
+
+  function matchesLengthBucket(months, bucket) {
+    if (bucket === 'Less than 3 months') return months < 3;
+    if (bucket === '3–6 months')    return months >= 3 && months <= 6;
+    if (bucket === '1 year')             return months === 12;
+    if (bucket === 'More than 1 year')   return months > 12;
+    return true;
+  }
+
+  function sortResults(results) {
+    var r = results.slice();
+    if (spState.sort === 'recommended') r.sort(function(a, b) { return b.reviews - a.reviews; });
+    if (spState.sort === 'newest')      r.sort(function(a, b) { return a.id < b.id ? -1 : 1; });
+    if (spState.sort === 'trending')    r.sort(function(a, b) { return b.rating - a.rating; });
+    return r;
+  }
+
+  function spCourseById(id) {
+    for (var k = 0; k < SEARCH_COURSES.length; k++) { if (SEARCH_COURSES[k].id === id) return SEARCH_COURSES[k]; }
+    return null;
+  }
+
+  function buildSearchCard(c) {
+    var badge = c.badge ? '<span class="badge-bs">' + c.badge + '</span>' : '';
+    var inCmp = spState.compareIds.indexOf(c.id) !== -1;
+    var cmpLbl = '<label class="cc-compare-label"><input type="checkbox" class="cc-compare-cb" data-course-id="' + c.id + '"' + (inCmp ? ' checked' : '') + '><span>Compare</span></label>';
+    return '<div class="course-card">' +
+      '<div class="cc-img">' + badge + cmpLbl + '</div>' +
+      '<div class="cc-body">' +
+        '<div class="cc-name">' + c.name + '</div>' +
+        '<div class="cc-rating"><span class="star">★</span><span class="score">' + c.rating + '</span><span style="font-size:11px;color:var(--gray-400);margin-left:3px">(' + c.reviews + ')</span></div>' +
+        '<div class="cc-pills"><span class="pill-sm">' + c.level + '</span><span class="pill-sm">' + c.months + ' months</span>' + (c.lanekassen ? '<span class="pill-sm">Lånekassen</span>' : '') + '</div>' +
+        '<div class="cc-footer"><div><div class="cc-price">Kr ' + fmtNum(c.price) + '</div></div>' +
+        '<button class="cc-cart-btn" data-sp-cart="' + c.id + '" aria-label="Add to cart">' + ccCartSvg + '<span class="cc-cart-plus">+</span></button>' +
+        '</div>' +
+      '</div></div>';
+  }
+
+  function buildResultsAreaHTML() {
+    var results = sortResults(getFilteredResults());
+    if (results.length === 0) {
+      return '<div class="sp-empty"><span class="sp-empty-icon">search_off</span>' +
+        '<div class="sp-empty-title">No courses found</div>' +
+        '<div class="sp-empty-sub">Try adjusting your filters</div></div>';
+    }
+    return '<div class="sp-results-count">' + results.length + ' course' + (results.length === 1 ? '' : 's') + ' found</div>' +
+      '<div class="sp-results-grid">' + results.map(buildSearchCard).join('') + '</div>';
+  }
+
+  function renderSearchPage() {
+    var page = document.getElementById('page-search');
+    page.innerHTML =
+      '<div class="sp-wrap"><div class="container">' +
+        '<div class="sp-search-bar-wrap">' +
+          '<span class="sp-search-icon material-symbols-outlined">search</span>' +
+          '<input type="text" class="sp-search-input" id="spSearchInput" placeholder="Search for a course, subject or topic…" value="' + spState.query + '">' +
+        '</div>' +
+        '<div class="sp-breadcrumb"><a class="sp-bc-home" id="spBcHome">Home</a><span class="sp-bc-sep"> &gt; </span><span class="sp-bc-current">' + spState.breadcrumb + '</span></div>' +
+        '<div class="sp-filter-row" id="spFilterRow">' + buildFilterPillsHTML() + '</div>' +
+        '<div class="sp-layout">' +
+          '<aside class="sp-sidebar" id="spSidebar">' + buildSidebarHTML() + '</aside>' +
+          '<div class="sp-results" id="spResultsArea">' + buildResultsAreaHTML() + '</div>' +
+        '</div>' +
+      '</div></div>';
+    bindSearchEvents();
+  }
+
+  function updateResultsArea() {
+    var area = document.getElementById('spResultsArea');
+    var filterRow = document.getElementById('spFilterRow');
+    if (filterRow) filterRow.innerHTML = buildFilterPillsHTML();
+    bindFilterPillEvents();
+    bindSortEvent();
+    if (area) { area.innerHTML = buildResultsAreaHTML(); bindResultCardEvents(); }
+  }
+
+  function rebuildSidebar() {
+    var sb = document.getElementById('spSidebar');
+    if (sb) { sb.innerHTML = buildSidebarHTML(); bindSidebarEvents(); }
+  }
+
+  /* ── Event binding ── */
+
+  function bindSearchEvents() {
+    var spInput = document.getElementById('spSearchInput');
+    if (spInput) spInput.addEventListener('input', function() { spState.query = spInput.value; updateResultsArea(); });
+
+    var bcHome = document.getElementById('spBcHome');
+    if (bcHome) bcHome.addEventListener('click', function() { showPage('home'); });
+
+    bindFilterPillEvents();
+    bindSortEvent();
+    bindSidebarEvents();
+    bindResultCardEvents();
+  }
+
+  function bindFilterPillEvents() {
+    var page = document.getElementById('page-search');
+    if (!page) return;
+
+    var clearAll = document.getElementById('spClearAll');
+    if (clearAll) clearAll.addEventListener('click', function() {
+      spState.areas = []; spState.levels = []; spState.lengths = [];
+      spState.lanekassen = false; spState.priceMin = 990; spState.priceMax = 49900;
+      renderSearchPage();
+    });
+
+    page.querySelectorAll('[data-rm-area]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var v = btn.getAttribute('data-rm-area');
+        spState.areas = spState.areas.filter(function(a) { return a !== v; });
+        renderSearchPage();
+      });
+    });
+    page.querySelectorAll('[data-rm-level]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var v = btn.getAttribute('data-rm-level');
+        spState.levels = spState.levels.filter(function(l) { return l !== v; });
+        renderSearchPage();
+      });
+    });
+    page.querySelectorAll('[data-rm-length]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var v = btn.getAttribute('data-rm-length');
+        spState.lengths = spState.lengths.filter(function(l) { return l !== v; });
+        renderSearchPage();
+      });
+    });
+    page.querySelectorAll('[data-rm-lk]').forEach(function(btn) {
+      btn.addEventListener('click', function() { spState.lanekassen = false; renderSearchPage(); });
+    });
+  }
+
+  function bindSortEvent() {
+    var sortSel = document.getElementById('spSort');
+    if (sortSel) sortSel.addEventListener('change', function() { spState.sort = sortSel.value; updateResultsArea(); });
+  }
+
+  function bindSidebarEvents() {
+    var page = document.getElementById('page-search'); if (!page) return;
+
+    page.querySelectorAll('.sp-acc-header').forEach(function(hdr) {
+      hdr.addEventListener('click', function() { hdr.parentElement.classList.toggle('is-open'); });
+    });
+
+    page.querySelectorAll('.sp-cb-area').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        if (cb.checked) { if (spState.areas.indexOf(cb.value) === -1) spState.areas.push(cb.value); }
+        else spState.areas = spState.areas.filter(function(a) { return a !== cb.value; });
+        renderSearchPage();
+      });
+    });
+    page.querySelectorAll('.sp-cb-level').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        if (cb.checked) { if (spState.levels.indexOf(cb.value) === -1) spState.levels.push(cb.value); }
+        else spState.levels = spState.levels.filter(function(l) { return l !== cb.value; });
+        renderSearchPage();
+      });
+    });
+    page.querySelectorAll('.sp-cb-length').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        if (cb.checked) { if (spState.lengths.indexOf(cb.value) === -1) spState.lengths.push(cb.value); }
+        else spState.lengths = spState.lengths.filter(function(l) { return l !== cb.value; });
+        renderSearchPage();
+      });
+    });
+
+    var pMin = document.getElementById('spPriceMin');
+    var pMax = document.getElementById('spPriceMax');
+    var pMinV = document.getElementById('spPriceMinVal');
+    var pMaxV = document.getElementById('spPriceMaxVal');
+    if (pMin) pMin.addEventListener('input', function() {
+      spState.priceMin = Math.min(parseInt(pMin.value), spState.priceMax - 100);
+      if (pMinV) pMinV.textContent = 'kr ' + fmtNum(spState.priceMin);
+      updateResultsArea();
+    });
+    if (pMax) pMax.addEventListener('input', function() {
+      spState.priceMax = Math.max(parseInt(pMax.value), spState.priceMin + 100);
+      if (pMaxV) pMaxV.textContent = 'kr ' + fmtNum(spState.priceMax);
+      updateResultsArea();
+    });
+
+    var lkCb = document.getElementById('spLanekassen');
+    if (lkCb) lkCb.addEventListener('change', function() { spState.lanekassen = lkCb.checked; renderSearchPage(); });
+
+    var cmpCta = document.getElementById('spCompareCta');
+    if (cmpCta) cmpCta.addEventListener('click', function() {
+      if (spState.compareIds.length >= 2) showPage('compare', { courseIds: spState.compareIds.slice() });
+    });
+
+    page.querySelectorAll('[data-cmp-remove]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var id = btn.getAttribute('data-cmp-remove');
+        spState.compareIds = spState.compareIds.filter(function(x) { return x !== id; });
+        var cb = page.querySelector('.cc-compare-cb[data-course-id="' + id + '"]');
+        if (cb) cb.checked = false;
+        rebuildSidebar();
+      });
+    });
+  }
+
+  function bindResultCardEvents() {
+    var page = document.getElementById('page-search'); if (!page) return;
+    page.querySelectorAll('.cc-compare-cb').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var id = cb.getAttribute('data-course-id');
+        if (cb.checked) {
+          if (spState.compareIds.length >= 3) { cb.checked = false; return; }
+          if (spState.compareIds.indexOf(id) === -1) spState.compareIds.push(id);
+        } else {
+          spState.compareIds = spState.compareIds.filter(function(x) { return x !== id; });
+        }
+        rebuildSidebar();
+      });
+    });
+    page.querySelectorAll('[data-sp-cart]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var c = spCourseById(btn.getAttribute('data-sp-cart'));
+        if (c) NKICart.add({ id: c.id, name: c.name, hours: c.months * 20, accessMonths: c.months, price: c.price, needsBooks: false });
+      });
+    });
+  }
+
+  /* ── Compare page ── */
+
+  function renderComparePage(courseIds) {
+    var page = document.getElementById('page-compare');
+    var courses = courseIds.map(spCourseById).filter(Boolean);
+    if (courses.length === 0) {
+      page.innerHTML = '<div class="container cp-wrap"><p style="color:var(--gray-500)">No courses selected.</p></div>';
+      return;
+    }
+    var ATTRS = [
+      { label: 'Price',              fn: function(c) { return 'Kr ' + fmtNum(c.price); } },
+      { label: 'Level',              fn: function(c) { return c.level; } },
+      { label: 'Subject area',       fn: function(c) { return c.area; } },
+      { label: 'Course length',      fn: function(c) { return c.months + ' months'; } },
+      { label: 'Lånekassen',    fn: function(c) { return c.lanekassen ? 'Yes' : 'No'; } },
+      { label: 'Rating',             fn: function(c) { return c.rating + ' / 5 (' + c.reviews + ' reviews)'; } }
+    ];
+    var cols = courses.map(function(c) {
+      var rows = ATTRS.map(function(attr, i) {
+        return '<div class="cp-row"><span class="cp-row-label">' + attr.label + '</span><span class="cp-row-val">' + attr.fn(c) + '</span></div>';
+      }).join('');
+      return '<div class="cp-col"><div class="cp-img"></div>' +
+        '<div class="cp-col-header"><div class="cp-col-name">' + c.name + '</div>' +
+        '<button class="cp-col-cta" data-cp-cart="' + c.id + '">Add to cart</button></div>' +
+        rows + '</div>';
+    }).join('');
+
+    page.innerHTML = '<div class="container cp-wrap">' +
+      '<div class="cp-breadcrumb"><a class="cp-bc-link" id="cpBcHome">Home</a><span class="cp-bc-sep"> &gt; </span>' +
+      '<a class="cp-bc-link" id="cpBcSearch">Search</a><span class="cp-bc-sep"> &gt; </span>' +
+      '<span class="cp-bc-current">Compare courses</span></div>' +
+      '<div class="cp-title">Compare courses</div>' +
+      '<div class="cp-grid ' + (courses.length === 2 ? 'cols-2' : 'cols-3') + '">' + cols + '</div>' +
+    '</div>';
+
+    var h = document.getElementById('cpBcHome');
+    if (h) h.addEventListener('click', function() { showPage('home'); });
+    var s = document.getElementById('cpBcSearch');
+    if (s) s.addEventListener('click', function() {
+      document.getElementById('page-compare').hidden = true;
+      document.getElementById('page-search').hidden = false;
+    });
+    page.querySelectorAll('[data-cp-cart]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var c = spCourseById(btn.getAttribute('data-cp-cart'));
+        if (c) NKICart.add({ id: c.id, name: c.name, hours: c.months * 20, accessMonths: c.months, price: c.price, needsBooks: false });
+      });
+    });
+  }
+
+  /* ── Navigation trigger bindings ── */
+
+  document.querySelectorAll('.mega-see-all').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault(); e.stopPropagation();
+      var category = 'All courses';
+      var di = link.closest('.dropdown-item.has-mega');
+      if (di) { var il = di.querySelector('.item-label'); if (il) category = il.textContent.trim(); }
+      closeAllDropdowns();
+      showPage('search', { category: category });
+    });
+  });
+
+  document.querySelectorAll('.cat-card').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var lbl = card.querySelector('.cat-label');
+      searchDropdown.classList.remove('is-open');
+      showPage('search', { area: lbl ? lbl.textContent.trim() : '' });
+    });
+  });
+
+  var btnFind = document.querySelector('.btn-find');
+  if (btnFind) {
+    btnFind.addEventListener('click', function() {
+      var level = document.getElementById('cfg-level').value;
+      var area  = document.getElementById('cfg-area').value;
+      showPage('search', { level: level, area: area });
+    });
+  }
+
 
 })();
 </script>
