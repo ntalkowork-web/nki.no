@@ -815,7 +815,28 @@ select { font-family: inherit; }
   display: flex;
   gap: 12px;
   align-items: flex-start;
+  position: relative;
 }
+
+.nki-lk-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--gray-400);
+  line-height: 1;
+  padding: 0;
+}
+
+.nki-lk-close:hover { color: var(--gray-700); }
 
 .nki-lk-body { flex: 1; min-width: 0; }
 

@@ -1275,6 +1275,7 @@
   function buildLanekassen() {
     return (
       '<div class="nki-lk">' +
+        '<button class="nki-lk-close" aria-label="Dismiss">\xd7</button>' +
         '<img src="payment-options-logos/lanekassen.jpg" alt="Lanekassen" class="nki-lk-logo">' +
         '<div class="nki-lk-body">' +
           '<div class="nki-lk-label">Student Loan Support</div>' +
@@ -1386,6 +1387,14 @@
         if (course) NKICart.add(course);
       });
     });
+
+    var lkClose = drawer.querySelector('.nki-lk-close');
+    if (lkClose) {
+      lkClose.addEventListener('click', function () {
+        var lk = drawer.querySelector('.nki-lk');
+        if (lk) lk.remove();
+      });
+    }
 
     updateCartBadge();
   }
