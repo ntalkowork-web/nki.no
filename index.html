@@ -1217,24 +1217,240 @@
   searchDropdown.addEventListener('click', function (e) { e.stopPropagation(); });
 
   /* ── Cart drawer ── */
-  var cartBtn       = document.getElementById('cartBtn');
-  var cartDrawer    = document.getElementById('cartDrawer');
-  var drawerOverlay = document.getElementById('drawerOverlay');
-  var drawerClose   = document.getElementById('drawerClose');
+  var DEMO_COURSE = {
+    id:           'pakke-pabygg',
+    name:         'Påbygg – Studieforberedende VG3',
+    hours:        560,
+    accessMonths: 12,
+    price:        14900,
+    needsBooks:   true
+  };
 
-  function openDrawer() {
-    cartDrawer.classList.add('is-open');
-    drawerOverlay.classList.add('is-open');
+  var CART_SUGGESTED = [
+    { id: 'matematikk-1t', name: 'Matematikk 1T',         hours: 224, accessMonths: 12, price: 4900, needsBooks: false },
+    { id: 'norsk-vg3',     name: 'Norsk – Skriftlig VG3',  hours: 280, accessMonths: 12, price: 5900, needsBooks: false },
+    { id: 'engelsk-vg3',   name: 'Engelsk VG2/VG3',        hours: 140, accessMonths: 12, price: 4400, needsBooks: false },
+    { id: 'naturfag-vg1',  name: 'Naturfag VG1',           hours: 225, accessMonths: 12, price: 4900, needsBooks: true  }
+  ];
+
+  var PAYMENT_LOGOS = [
+    { label: 'Visa',        src: 'payment-options-logos/visa.svg' },
+    { label: 'Mastercard',  src: 'payment-options-logos/mastercard.svg' },
+    { label: 'Lanekassen',  src: 'payment-options-logos/lanekassen.jpg' },
+    { label: 'Vipps',       src: 'payment-options-logos/vipps.svg' }
+  ];
+
+  var _cartItems = [];
+
+  function fmtPrice(n) {
+    var s = String(n);
+    var out = '';
+    for (var i = 0; i < s.length; i++) {
+      if (i > 0 && (s.length - i) % 3 === 0) out += ' ';
+      out += s[i];
+    }
+    return 'kr ' + out;
   }
 
-  function closeDrawer() {
-    cartDrawer.classList.remove('is-open');
-    drawerOverlay.classList.remove('is-open');
+  function cartTotal() {
+    return _cartItems.reduce(function (sum, item) { return sum + item.price; }, 0);
   }
 
-  cartBtn.addEventListener('click', function (e) { e.stopPropagation(); openDrawer(); });
-  drawerClose.addEventListener('click', closeDrawer);
-  drawerOverlay.addEventListener('click', closeDrawer);
+  function buildItemCard(item) {
+    var books = '<div class="nki-item-books">Excluding books</div>';
+    return (
+      '<div class="nki-item" data-item-id="' + item.id + '">' +
+        '<div class="nki-item-img"></div>' +
+        '<div class="nki-item-info">' +
+          '<div class="nki-item-name">' + item.name + '</div>' +
+          '<div class="nki-item-meta">' + item.hours + ' hours · ' + item.accessMonths + ' months access</div>' +
+          '<div class="nki-item-price">' + fmtPrice(item.price) + '</div>' +
+          books +
+        '</div>' +
+        '<button class="nki-item-remove" data-remove-id="' + item.id + '" aria-label="Remove course">delete</button>' +
+      '</div>'
+    );
+  }
+
+  function buildLanekassen() {
+    return (
+      '<div class="nki-lk">' +
+        '<img src="payment-options-logos/lanekassen.jpg" alt="Lanekassen" class="nki-lk-logo">' +
+        '<div class="nki-lk-body">' +
+          '<div class="nki-lk-label">Student Loan Support</div>' +
+          '<div class="nki-lk-row"><span class="nki-lk-key">Your estimated support:</span><span class="nki-lk-val">kr 11 244</span></div>' +
+          '<div class="nki-lk-row"><span class="nki-lk-key">Of which possible grant:</span><span class="nki-lk-val">kr 4 498</span></div>' +
+          '<div class="nki-lk-row"><span class="nki-lk-key">Study load:</span><span class="nki-lk-val">33 %</span></div>' +
+          '<div class="nki-lk-disc">The amount is an estimate. See terms and conditions at ' +
+          '<a href="https://lanekassen.no/nb-NO/stipend-og-lan/norge/videregaende-skole/videregaende-skole-med-studielan/" target="_blank" rel="noopener">Lånekassen</a>' +
+          '. Contact a study advisor for other questions.</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function buildSuggestedRows() {
+    return CART_SUGGESTED.map(function (c) {
+      return (
+        '<div class="nki-sugg-row">' +
+          '<div class="nki-sugg-img"></div>' +
+          '<div class="nki-sugg-info">' +
+            '<div class="nki-sugg-name">' + c.name + '</div>' +
+            '<div class="nki-sugg-meta">' + c.hours + ' hours · ' + c.accessMonths + ' months access</div>' +
+            '<div class="nki-sugg-price">' + fmtPrice(c.price) + '</div>' +
+          '</div>' +
+          '<button class="nki-sugg-add" data-sugg-id="' + c.id + '" aria-label="Add ' + c.name + '">' +
+            '<span class="nki-sugg-add-icon">shopping_cart</span>+' +
+          '</button>' +
+        '</div>'
+      );
+    }).join('');
+  }
+
+  function buildSuggested() {
+    return (
+      '<div class="nki-sugg">' +
+        '<div class="nki-sugg-title">You might also be interested in</div>' +
+        '<div class="nki-sugg-list">' + buildSuggestedRows() + '</div>' +
+      '</div>'
+    );
+  }
+
+  function buildEmptyState() {
+    return (
+      '<div class="nki-cart-empty">' +
+        '<span class="nki-cart-empty-icon">shopping_cart</span>' +
+        '<div class="nki-cart-empty-title">Your cart is empty</div>' +
+        '<div class="nki-cart-empty-sub">Add a course to get started</div>' +
+      '</div>'
+    );
+  }
+
+  function buildCartContent() {
+    return _cartItems.map(buildItemCard).join('') + buildLanekassen() + buildSuggested();
+  }
+
+  function buildCartFooter() {
+    var total = fmtPrice(cartTotal());
+    var logoPills = PAYMENT_LOGOS.map(function (p) {
+      return '<span class="nki-pay-pill nki-pay-pill--logo">' +
+        '<img src="' + p.src + '" alt="' + p.label + '" height="16" ' +
+        'data-label="' + p.label + '" ' +
+        'onerror="this.parentNode.textContent=this.dataset.label">' +
+        '</span>';
+    }).join('');
+    return (
+      '<footer class="nki-cart-footer">' +
+        '<div class="nki-cart-sep"></div>' +
+        '<button class="nki-cart-cta">' +
+          '<span class="nki-cta-label">Go to checkout</span>' +
+          '<span class="nki-cta-sep"></span>' +
+          '<span class="nki-cta-price">' + total + '</span>' +
+        '</button>' +
+        '<div class="nki-pay-pills">' + logoPills + '</div>' +
+      '</footer>'
+    );
+  }
+
+  function renderCart() {
+    var drawer = document.getElementById('cartDrawer');
+    if (!drawer) return;
+
+    drawer.innerHTML =
+      '<div class="drawer-header">' +
+        '<span class="drawer-title">Your cart</span>' +
+        '<button class="drawer-close" id="drawerClose" aria-label="Close cart">×</button>' +
+      '</div>' +
+      (_cartItems.length === 0
+        ? '<div class="nki-cart-body is-empty">' + buildEmptyState() + '</div>'
+        : '<div class="nki-cart-body"><div class="nki-cart-content">' + buildCartContent() + '</div>' + buildCartFooter() + '</div>'
+      );
+
+    drawer.querySelector('#drawerClose').addEventListener('click', function () { NKICart.close(); });
+
+    drawer.querySelectorAll('[data-remove-id]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-remove-id');
+        _cartItems = _cartItems.filter(function (i) { return i.id !== id; });
+        renderCart();
+      });
+    });
+
+    drawer.querySelectorAll('[data-sugg-id]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-sugg-id');
+        var course = null;
+        for (var k = 0; k < CART_SUGGESTED.length; k++) {
+          if (CART_SUGGESTED[k].id === id) { course = CART_SUGGESTED[k]; break; }
+        }
+        if (course) NKICart.add(course);
+      });
+    });
+
+    updateCartBadge();
+  }
+
+  function updateCartBadge() {
+    var badge = document.getElementById('cartBadge');
+    if (!badge) return;
+    var count = _cartItems.length;
+    badge.style.display = count === 0 ? 'none' : 'flex';
+    badge.textContent = String(count);
+  }
+
+  window.NKICart = {
+    open: function () {
+      var drawer  = document.getElementById('cartDrawer');
+      var overlay = document.getElementById('drawerOverlay');
+      if (drawer)  drawer.classList.add('is-open');
+      if (overlay) overlay.classList.add('is-open');
+    },
+    close: function () {
+      var drawer  = document.getElementById('cartDrawer');
+      var overlay = document.getElementById('drawerOverlay');
+      if (drawer)  drawer.classList.remove('is-open');
+      if (overlay) overlay.classList.remove('is-open');
+    },
+    add: function (course) {
+      var exists = _cartItems.some(function (i) { return i.id === course.id; });
+      if (!exists) {
+        _cartItems.push(course);
+        renderCart();
+      }
+      NKICart.open();
+    },
+    getItems: function () { return _cartItems.slice(); },
+    clear: function () {
+      _cartItems = [];
+      renderCart();
+    }
+  };
+
+  renderCart();
+
+  var cartBtn = document.getElementById('cartBtn');
+  cartBtn.style.position = 'relative';
+  var cartBadgeEl = document.createElement('span');
+  cartBadgeEl.className = 'cart-badge';
+  cartBadgeEl.id = 'cartBadge';
+  cartBadgeEl.style.display = 'none';
+  cartBtn.appendChild(cartBadgeEl);
+  cartBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    NKICart.open();
+  });
+
+  document.getElementById('drawerOverlay').addEventListener('click', NKICart.close);
+
+  document.addEventListener('click', function (e) {
+    var addEl = e.target.closest('[data-add-to-cart]');
+    if (addEl) {
+      try {
+        var addCourse = JSON.parse(addEl.getAttribute('data-add-to-cart'));
+        NKICart.add(addCourse);
+      } catch (err) {}
+    }
+  });
 
   /* ── Login modal ── */
   var loginBtn   = document.getElementById('loginBtn');
@@ -1362,8 +1578,44 @@
   var activeDot      = 0;
   var sliding        = false;
 
+  function parseHoursFromPills(pills) {
+    for (var k = 0; k < pills.length; k++) {
+      var m = pills[k].match(/(\d+)\s+(?:total\s+)?hours?/i);
+      if (m) return parseInt(m[1], 10);
+    }
+    return 0;
+  }
+
+  function parseMonthsFromPills(pills) {
+    for (var k = 0; k < pills.length; k++) {
+      var m = pills[k].match(/^(\d+)\s+months?/i);
+      if (m) return parseInt(m[1], 10);
+      var y = pills[k].match(/(\d+)-year/i);
+      if (y) return parseInt(y[1], 10) * 12;
+    }
+    return 12;
+  }
+
   function renderPage(idx) {
-    coursesGrid.innerHTML = coursePages[idx].map(buildCard).join('');
+    var cards = coursePages[idx];
+    coursesGrid.innerHTML = cards.map(buildCard).join('');
+    coursesGrid.querySelectorAll('.cc-cart-btn').forEach(function (btn, i) {
+      var c = cards[i];
+      var priceNum = parseInt(c.price.replace(/[^0-9]/g, ''), 10) || 0;
+      var slug = c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
+      var cartCourse = {
+        id: slug,
+        name: c.name,
+        hours: parseHoursFromPills(c.pills) || 224,
+        accessMonths: parseMonthsFromPills(c.pills),
+        price: priceNum,
+        needsBooks: c.pills.indexOf('Books needed') !== -1
+      };
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        NKICart.add(cartCourse);
+      });
+    });
   }
 
   function goToDot(idx, dir) {
@@ -1400,7 +1652,7 @@
     if (e.key === 'Escape') {
       closeAllDropdowns();
       searchDropdown.classList.remove('is-open');
-      closeDrawer();
+      NKICart.close();
       document.querySelectorAll('.modal-overlay').forEach(function (m) {
         m.classList.remove('is-open');
       });
