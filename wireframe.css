@@ -350,7 +350,7 @@ select { font-family: inherit; }
 
 .search-dropdown.is-open { display: block; }
 
-.search-section { padding: 8px 18px 12px; }
+.search-section { padding: 16px 18px; }
 
 .search-section + .search-section { border-top: 1px solid var(--gray-200); }
 
