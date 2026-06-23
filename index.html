@@ -330,12 +330,7 @@
 
     <!-- 2.4 Header right -->
     <div class="header-right">
-<button class="btn-login" id="loginBtn" aria-label="Log in">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="9" cy="6" r="3"/>
-          <path d="M2 16c0-3.3 3.1-6 7-6s7 2.7 7 6"/>
-        </svg>
-      </button>
+      <button class="btn-login" id="loginBtn">Log in</button>
       <button class="btn-cart" id="cartBtn" aria-label="Cart">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M1 1h2.5l1.7 8.5h9.3l1.5-5.5H5"/>
@@ -390,56 +385,7 @@
 <!-- ════════════════════════════════════════════
      GET FREE CONSULTATION MODAL
 ════════════════════════════════════════════ -->
-<div class="modal-overlay" id="consultModal" role="dialog" aria-modal="true" aria-label="Free consultation">
-  <div class="modal">
-    <button class="modal-close" data-closes="consultModal" aria-label="Close">×</button>
-    <h2 class="consult-heading">Get free consultation</h2>
-    <p class="consult-sub">If you have any questions about our studies or admission requirements – we are happy to help you!</p>
-    <p class="consult-tel">Call 67 58 88 00</p>
-    <p class="consult-hours">09–16 (Mon–Fri)</p>
 
-    <form onsubmit="return false">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label" for="m-name">Name</label>
-          <input class="form-input" id="m-name" type="text" placeholder="Your full name">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="m-email">Email</label>
-          <input class="form-input" id="m-email" type="email" placeholder="email@example.com">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label" for="m-phone">Phone number</label>
-          <input class="form-input" id="m-phone" type="tel" placeholder="+47 000 00 000">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="m-topic">Topic</label>
-          <select class="form-select" id="m-topic">
-            <option value="">Select a topic</option>
-            <option>Course information</option>
-            <option>Admission requirements</option>
-            <option>Financing / Lånekassen</option>
-            <option>Other</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="m-msg">Message</label>
-        <textarea class="form-textarea" id="m-msg" placeholder="Write your question here..."></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Preferred contact method</label>
-        <div class="contact-pref-group">
-          <label><input type="radio" name="m-pref" value="phone"> Phone</label>
-          <label><input type="radio" name="m-pref" value="email"> Email</label>
-        </div>
-      </div>
-      <button type="submit" class="btn-submit">Send</button>
-    </form>
-  </div>
-</div>
 
 
 <!-- ════════════════════════════════════════════
@@ -1432,14 +1378,6 @@
     loginModal.classList.add('is-open');
   });
 
-  /* ── Consultation modal (header button) ── */
-  var consultBtnHeader = document.getElementById('consultBtnHeader');
-  var consultModal     = document.getElementById('consultModal');
-
-  consultBtnHeader.addEventListener('click', function (e) {
-    e.stopPropagation();
-    consultModal.classList.add('is-open');
-  });
 
   /* ── Close any modal via [data-closes] button ── */
   document.querySelectorAll('.modal-close').forEach(function (btn) {
