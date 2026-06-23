@@ -858,6 +858,11 @@
 
 </div><!-- /page-home -->
 
+<div id="page-search" hidden></div>
+<div id="page-compare" hidden></div>
+<div id="page-course" hidden></div>
+
+<div id="cdp-sticky-cta" class="cdp-sticky-cta"></div>
 
 <!-- ════════════════════════════════════════════
      FOOTER
@@ -945,12 +950,6 @@
 
   </div>
 </footer>
-
-<div id="page-search" hidden></div>
-<div id="page-compare" hidden></div>
-<div id="page-course" hidden></div>
-
-<div id="cdp-sticky-cta" class="cdp-sticky-cta"></div>
 
 
 <!-- ════════════════════════════════════════════
@@ -2384,9 +2383,9 @@
       return '<li class="cdp-lesson-item"><span class="material-symbols-outlined cdp-lesson-icon">play_circle</span>' + l + '</li>';
     }).join('');
     return '<div class="cdp-struct-panel-name">' + s.tab + '</div>' +
-      '<div class="cdp-struct-panel-credits">' + s.credits + ' studiepoeng</div>' +
+      '<div class="cdp-struct-panel-credits">' + s.credits + ' credits</div>' +
       '<p class="cdp-struct-panel-desc">' + s.description + '</p>' +
-      '<div class="cdp-lessons-label">Leksjoner</div>' +
+      '<div class="cdp-lessons-label">Lessons</div>' +
       '<ul class="cdp-lessons-list">' + lessonsHTML + '</ul>';
   }
 
@@ -2409,14 +2408,14 @@
 
     /* meta row */
     var metaItems = [
-      { icon: 'schedule',      text: fmtNum(c.totalHours) + ' timer (ca. ' + c.hoursPerWeek + ' t/uke)' },
+      { icon: 'schedule',      text: fmtNum(c.totalHours) + ' hours (approx. ' + c.hoursPerWeek + ' hrs/week)' },
       { icon: 'stairs',        text: c.level },
-      { icon: 'key',           text: (c.accessMonths || 12) + ' måneder tilgang' },
-      { icon: 'rocket_launch', text: 'Start når du vil' }
+      { icon: 'key',           text: (c.accessMonths || 12) + ' months access' },
+      { icon: 'rocket_launch', text: 'Start anytime' }
     ];
-    if (c.credits)    metaItems.push({ icon: 'school',        text: c.credits + ' studiepoeng' });
-    if (c.lanekassen) metaItems.push({ icon: 'check_circle',  text: 'Lånekassestøtte' });
-    metaItems.push(   { icon: 'star',         text: c.rating + ' (' + fmtNum(c.reviewCount || 0) + ' vurderinger)' });
+    if (c.credits)    metaItems.push({ icon: 'school',        text: c.credits + ' credits' });
+    if (c.lanekassen) metaItems.push({ icon: 'check_circle',  text: 'Lånekassen support' });
+    metaItems.push(   { icon: 'star',         text: c.rating + ' (' + fmtNum(c.reviewCount || 0) + ' reviews)' });
 
     var metaHTML = metaItems.map(function(m) {
       return '<div class="cdp-meta-item"><span class="material-symbols-outlined cdp-meta-icon">' + m.icon + '</span>' + m.text + '</div>';
@@ -2428,7 +2427,7 @@
     }).join('');
 
     /* structure tabs */
-    var structLabel = c.type === 'Package' ? 'Pakkeinnhold' : 'Kursstruktur';
+    var structLabel = c.type === 'Package' ? 'Package contents' : 'Course structure';
     var structure   = c.structure || [];
     var structTabsHTML = structure.map(function(s, i) {
       return '<button class="cdp-struct-tab' + (i === 0 ? ' is-active' : '') + '" data-tab-idx="' + i + '">' +
@@ -2450,7 +2449,7 @@
     }).join('');
 
     /* payment pills */
-    var payPills = ['Faktura','Delbetaling (3 mnd)','Delbetaling (6 mnd)','Delbetaling (12 mnd)','Vipps','Visa','Mastercard','Lånekassen'];
+    var payPills = ['Invoice','Instalments (3 months)','Instalments (6 months)','Instalments (12 months)','Vipps','Visa','Mastercard','Lånekassen'];
     var payPillsHTML = payPills.map(function(p) { return '<span class="cdp-pay-pill">' + p + '</span>'; }).join('');
 
     /* reviews */
@@ -2498,13 +2497,13 @@
     }).join('');
 
     /* accordions */
-    var acc1 = buildCdpAccordion('cdp-acc-about', 'Om kurset',
+    var acc1 = buildCdpAccordion('cdp-acc-about', 'About this course',
       '<p class="cdp-acc-para">' + c.description + ' This course covers all the required subjects for upper secondary completion, taught through interactive digital modules designed for adult learners. Suitable for students returning to education, those changing careers, or anyone looking to expand their qualifications.</p>');
     var acc2 = buildCdpAccordion('cdp-acc-struct', structLabel, structBodyHTML);
-    var acc3 = buildCdpAccordion('cdp-acc-materials', 'Hva trenger du til dette kurset', '<ul class="cdp-materials-list">' + materialsHTML + '</ul>');
-    var acc4 = buildCdpAccordion('cdp-acc-exam', 'Eksamen', '<p class="cdp-acc-para">' + (c.exam || '') + '</p>');
-    var acc5 = buildCdpAccordion('cdp-acc-financing', 'Finansieringsmuligheter', '<p class="cdp-acc-para">' + (c.financing || '') + '</p><div class="cdp-pay-pills">' + payPillsHTML + '</div>');
-    var acc6 = buildCdpAccordion('cdp-acc-admission', 'Opptakskrav', '<p class="cdp-acc-para">' + (c.admission || '') + '</p>');
+    var acc3 = buildCdpAccordion('cdp-acc-materials', 'What you need for this course', '<ul class="cdp-materials-list">' + materialsHTML + '</ul>');
+    var acc4 = buildCdpAccordion('cdp-acc-exam', 'Exam', '<p class="cdp-acc-para">' + (c.exam || '') + '</p>');
+    var acc5 = buildCdpAccordion('cdp-acc-financing', 'Financing options', '<p class="cdp-acc-para">' + (c.financing || '') + '</p><div class="cdp-pay-pills">' + payPillsHTML + '</div>');
+    var acc6 = buildCdpAccordion('cdp-acc-admission', 'Admission requirements', '<p class="cdp-acc-para">' + (c.admission || '') + '</p>');
 
     page.innerHTML =
       '<div class="container">' +
@@ -2527,36 +2526,36 @@
                 '<span class="cdp-price-original">kr ' + fmtNum(c.originalPrice) + '</span>' +
                 '<span class="cdp-price-discount">' + c.discount + ' OFF</span>' +
               '</div>' +
-              '<div class="cdp-price-installment">eller fra kr ' + fmtNum(installment) + '/mnd med delbetaling</div>' +
+              '<div class="cdp-price-installment">or from kr ' + fmtNum(installment) + '/month with instalments</div>' +
             '</div>' +
             '<div class="cdp-ctas" id="cdp-hero-ctas">' +
-              '<button class="cdp-btn-demo"><span class="material-symbols-outlined cdp-btn-demo-icon">play_circle</span>Se demovideo</button>' +
-              '<button class="cdp-btn-cart" id="cdpAddToCart">Legg i handlekurv</button>' +
-              '<div class="cdp-learner-count"><span class="material-symbols-outlined cdp-learner-icon">group</span>' + fmtNum(c.enrolled || 0) + ' studenter</div>' +
+              '<button class="cdp-btn-demo"><span class="material-symbols-outlined cdp-btn-demo-icon">play_circle</span>Watch demo</button>' +
+              '<button class="cdp-btn-cart" id="cdpAddToCart">Add to cart</button>' +
+              '<div class="cdp-learner-count"><span class="material-symbols-outlined cdp-learner-icon">group</span>' + fmtNum(c.enrolled || 0) + ' students</div>' +
             '</div>' +
           '</div>' +
           '<div class="cdp-hero-right">' +
             '<div class="cdp-hero-box">' +
-              '<div class="cdp-box-heading">Hva du får med dette kurset</div>' +
+              '<div class="cdp-box-heading">What you get with this course</div>' +
               '<ul class="cdp-check-list">' + whatYouGetHTML + '</ul>' +
             '</div>' +
           '</div>' +
         '</div>' +
         '<div class="cdp-content">' + acc1 + acc2 + acc3 + acc4 + acc5 + acc6 + '</div>' +
       '</div>' +
-      '<div class="cdp-reviews container">' +
-        '<div class="cdp-section-heading">Hva studentene sier</div>' +
+      '<div class="cdp-reviews"><div class="container">' +
+        '<div class="cdp-section-heading">What students say</div>' +
         '<div class="cdp-reviews-grid">' + reviewsHTML + '</div>' +
-      '</div>' +
-      '<div class="cdp-faq container">' +
-        '<div class="cdp-faq-heading">Ofte stilte spørsmål</div>' +
+      '</div></div>' +
+      '<div class="cdp-faq"><div class="container">' +
+        '<div class="cdp-faq-heading">Frequently asked questions</div>' +
         '<div class="cdp-faq-list">' + faqHTML + '</div>' +
-      '</div>' +
+      '</div></div>' +
       (related.length > 0
-        ? '<div class="cdp-related container">' +
-            '<div class="cdp-related-heading">Relevante kurs</div>' +
+        ? '<div class="cdp-related"><div class="container">' +
+            '<div class="cdp-related-heading">Relevant courses</div>' +
             '<div class="courses-grid">' + relatedHTML + '</div>' +
-          '</div>'
+          '</div></div>'
         : '');
 
     /* update sticky CTA */
@@ -2569,7 +2568,7 @@
             '<span class="cdp-sticky-name">' + c.name + '</span>' +
             '<span class="cdp-sticky-price">kr ' + fmtNum(c.price) + '</span>' +
           '</div>' +
-          '<button class="cdp-sticky-btn" id="cdpStickyCart">Legg i handlekurv</button>' +
+          '<button class="cdp-sticky-btn" id="cdpStickyCart">Add to cart</button>' +
         '</div>';
     }
 
