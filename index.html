@@ -1673,6 +1673,15 @@
     compareIds: [], breadcrumb: 'All courses'
   };
 
+  function updateSliderFill() {
+    var fill = document.getElementById('spSliderFill'); if (!fill) return;
+    var RMIN = 990, RMAX = 49900;
+    var left  = (spState.priceMin - RMIN) / (RMAX - RMIN) * 100;
+    var right = (spState.priceMax - RMIN) / (RMAX - RMIN) * 100;
+    fill.style.left  = left + '%';
+    fill.style.width = (right - left) + '%';
+  }
+
   function fmtNum(n) {
     var s = String(n), out = '';
     for (var i = 0; i < s.length; i++) {
@@ -1754,7 +1763,8 @@
         '<span id="spPriceMinVal">kr ' + fmtNum(pMin) + '</span>' +
         '<span id="spPriceMaxVal">kr ' + fmtNum(pMax) + '</span>' +
       '</div>' +
-      '<div class="sp-price-range">' +
+      '<div class="sp-dual-slider">' +
+        '<div class="sp-slider-track"><div class="sp-slider-fill" id="spSliderFill"></div></div>' +
         '<input type="range" class="sp-price-slider" id="spPriceMin" min="990" max="49900" step="100" value="' + pMin + '">' +
         '<input type="range" class="sp-price-slider" id="spPriceMax" min="990" max="49900" step="100" value="' + pMax + '">' +
       '</div>' +
@@ -1990,14 +2000,17 @@
       spState.priceMin = Math.min(parseInt(pMin.value, 10), spState.priceMax - 100);
       pMin.value = String(spState.priceMin);
       if (pMinV) pMinV.textContent = 'kr ' + fmtNum(spState.priceMin);
+      updateSliderFill();
       updateResultsArea();
     });
     if (pMax) pMax.addEventListener('input', function() {
       spState.priceMax = Math.max(parseInt(pMax.value, 10), spState.priceMin + 100);
       pMax.value = String(spState.priceMax);
       if (pMaxV) pMaxV.textContent = 'kr ' + fmtNum(spState.priceMax);
+      updateSliderFill();
       updateResultsArea();
     });
+    updateSliderFill();
 
     var lkCb = document.getElementById('spLanekassen');
     if (lkCb) lkCb.addEventListener('change', function() { spState.lanekassen = lkCb.checked; renderSearchPage(); });
@@ -2069,14 +2082,13 @@
     }
     var allPackages = courses.every(function(c) { return c.type === 'Package'; });
     var ATTRS = [
-      { label: 'Price',              fn: function(c) { return 'kr ' + fmtNum(c.price); } },
       { label: 'Educational level',  fn: function(c) { return c.level; } },
       { label: 'Subject area',       fn: function(c) { return c.area; } },
       { label: 'Course length',      fn: function(c) { return c.months + ' months'; } },
       { label: 'Study type',         fn: function(c) { return c.type || 'Course'; } },
       { label: 'Certificate',        fn: function(c) { return c.certificate ? 'Yes' : 'No'; } },
       { label: 'Lånekassen support', fn: function(c) { return c.lanekassen ? 'Yes' : 'No'; } },
-      { label: 'Rating',             fn: function(c) { return c.rating + ' ★ (' + c.reviews + ' reviews)'; } }
+      { label: 'Rating',             fn: function(c) { return c.rating + ' ★'; } }
     ];
     if (allPackages) {
       ATTRS.push({ label: 'Subjects', fn: function(c) { return (c.subjects || []).map(function(s) { return '<li>' + s + '</li>'; }).join(''); }, isList: true });
@@ -2090,7 +2102,7 @@
       return '<div class="cp-col"><div class="cp-img"></div>' +
         '<div class="cp-col-name">' + c.name + '</div>' +
         rows +
-        '<div class="cp-col-footer"><button class="cp-col-cta" data-cp-cart="' + c.id + '">Add to cart</button></div></div>';
+        '<div class="cp-col-footer"><div class="cp-col-price">kr ' + fmtNum(c.price) + '</div><button class="cp-col-cta" data-cp-cart="' + c.id + '">Add to cart</button></div></div>';
     }).join('');
 
     page.innerHTML = '<div class="cp-wrap">' +

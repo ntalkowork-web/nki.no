@@ -2126,7 +2126,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 .sp-search-input:focus { border-color: var(--gray-600); }
 .sp-search-input::placeholder { color: var(--gray-400); }
 
-.sp-breadcrumb { font-size: 13px; color: var(--gray-500); margin-bottom: 16px; }
+.sp-breadcrumb { font-size: 13px; color: var(--gray-500); margin-bottom: 28px; }
 .sp-bc-home { color: var(--gray-500); cursor: pointer; }
 .sp-bc-home:hover { color: var(--gray-900); text-decoration: underline; }
 .sp-bc-sep { margin: 0 6px; }
@@ -2327,14 +2327,79 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   margin-bottom: 8px;
 }
 
-.sp-price-range { padding: 4px 0 0; }
+.sp-dual-slider {
+  position: relative;
+  height: 20px;
+  margin: 8px 0 4px;
+}
 
-.sp-price-slider {
+.sp-slider-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transform: translateY(-50%);
+  background: var(--gray-200);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.sp-slider-fill {
+  position: absolute;
+  height: 100%;
+  background: var(--gray-900);
+  border-radius: 2px;
+}
+
+input[type="range"].sp-price-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  accent-color: var(--gray-900);
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+input[type="range"].sp-price-slider::-webkit-slider-runnable-track {
+  background: transparent;
+  height: 4px;
+}
+
+input[type="range"].sp-price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: all;
+  width: 18px;
+  height: 18px;
+  background: var(--gray-900);
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  box-shadow: 0 1px 4px rgba(0,0,0,.25);
   cursor: pointer;
-  display: block;
-  margin-bottom: 4px;
+  margin-top: -7px;
+}
+
+input[type="range"].sp-price-slider::-moz-range-track {
+  background: transparent;
+  height: 4px;
+  border: none;
+}
+
+input[type="range"].sp-price-slider::-moz-range-thumb {
+  pointer-events: all;
+  width: 18px;
+  height: 18px;
+  background: var(--gray-900);
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  box-shadow: 0 1px 4px rgba(0,0,0,.25);
+  cursor: pointer;
 }
 
 .sp-price-presets {
@@ -2458,6 +2523,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 }
 
 .cp-col-footer { padding: 16px; border-top: 1px solid var(--gray-200); }
+.cp-col-price { font-size: 20px; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; }
 
 .cp-col-cta {
   width: 100%;
