@@ -459,7 +459,7 @@ select { font-family: inherit; }
 }
 
 .s-card-name { font-size: 12px; font-weight: 600; color: var(--gray-900); line-height: 1.35; margin-bottom: 3px; }
-.s-card-type-row { margin: 2px 0 4px; }
+.s-card-type-row { margin: 2px 0 8px; }
 .s-card-price { font-size: 13px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
 .s-card-meta { font-size: 11px; color: var(--gray-500); line-height: 1.4; }
 
