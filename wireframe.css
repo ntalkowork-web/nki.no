@@ -1695,7 +1695,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   align-items: center;
   gap: 7px;
   padding: 9px 18px;
-  border-radius: 100px;
+  border-radius: 8px;
   border: 1.5px solid var(--gray-300);
   background: transparent;
   color: var(--gray-600);
@@ -2145,7 +2145,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   align-items: center;
   gap: 6px;
   border: 1px solid var(--gray-300);
-  border-radius: 99px;
+  border-radius: 8px;
   padding: 4px 10px;
   font-size: 12px;
   font-weight: 500;
