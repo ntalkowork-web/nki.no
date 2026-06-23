@@ -856,6 +856,8 @@
 
 </main>
 
+</div><!-- /page-home -->
+
 
 <!-- ════════════════════════════════════════════
      FOOTER
@@ -944,10 +946,11 @@
   </div>
 </footer>
 
-</div><!-- /page-home -->
-
 <div id="page-search" hidden></div>
 <div id="page-compare" hidden></div>
+<div id="page-course" hidden></div>
+
+<div id="cdp-sticky-cta" class="cdp-sticky-cta"></div>
 
 
 <!-- ════════════════════════════════════════════
@@ -1581,6 +1584,12 @@
         NKICart.add(cartCourse);
       });
     });
+    coursesGrid.querySelectorAll('.course-card').forEach(function(card, i) {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest && e.target.closest('.cc-cart-btn')) return;
+        showPage('course', { courseName: cards[i].name });
+      });
+    });
   }
 
   function goToDot(idx, dir) {
@@ -1666,6 +1675,119 @@
     { label: 'More than 3 months', count: 95 }
   ];
 
+  /* ── COURSE DETAILS DATA ── */
+
+  var COURSE_DETAILS = {
+    'pabygg': {
+      id: 'pabygg',
+      eyebrow: 'PACKAGE',
+      name: 'Påbygg – Studieforberedende VG3',
+      description: 'Complete your upper secondary education and qualify for higher education. Flexible, fully digital, and self-paced — study on your own terms.',
+      hoursPerWeek: 10,
+      totalHours: 560,
+      level: 'All levels',
+      accessMonths: 12,
+      credits: 60,
+      lanekassen: true,
+      rating: 4.8,
+      reviewCount: 312,
+      enrolled: 9027,
+      price: 14900,
+      originalPrice: 18900,
+      discount: '21%',
+      type: 'Package',
+      certificate: true,
+      area: 'Subject packages for High School',
+      educationalLevel: 'High School',
+      whatYouGet: [
+        'Full upper secondary qualification (studiekompetanse)',
+        'Access to 4 core subjects with video, audio and quizzes',
+        'Teacher feedback on written assignments',
+        'Preparation for official Norwegian government exams',
+        'Career opportunities in higher education and professional roles',
+        'Flexible study pace — study full-time or part-time',
+        'Digital course materials — no physical textbooks required',
+        'Lånekassen-approved for student financing'
+      ],
+      structure: [
+        { tab: 'Norsk VG3',     credits: 5, description: 'Written and oral Norwegian at upper secondary level, covering literature, language history, and communication.', lessons: ['Language and communication','Norwegian literature overview','Written essay techniques','Oral presentation skills','Exam preparation'] },
+        { tab: 'Matematikk 1T', credits: 5, description: 'Mathematics for science-track students. Covers algebra, geometry, functions, and statistics.',                 lessons: ['Algebra and equations','Geometry and trigonometry','Functions and graphs','Statistics and probability','Exam techniques'] },
+        { tab: 'Engelsk VG2',   credits: 5, description: 'Advanced English focusing on written communication, literature analysis, and global topics.',                   lessons: ['Academic writing','Literature and text analysis','Global issues and debate','Vocabulary and grammar','Exam preparation'] },
+        { tab: 'Naturfag VG1',  credits: 5, description: 'Natural sciences covering biology, chemistry, and environmental studies.',                                      lessons: ['Cell biology basics','Chemistry and materials','Environmental science','Scientific method','Lab work and reporting'] }
+      ],
+      materials: [
+        'All course materials are included digitally — no physical textbooks required',
+        'You will need to download Microsoft Authenticator before your first login',
+        'Your Canvas LMS account will be created automatically — login details sent by email from NKI',
+        'A computer or tablet is recommended for the best learning experience',
+        'Stable internet connection required for video lessons'
+      ],
+      exam: 'All subjects are examined through official Norwegian government exams (Privatist). NKI prepares you fully for the exams but does not administer them. You register for exams independently through Privatistweb.',
+      financing: 'NKI is approved by Lånekassen — you may be eligible for student loans and grants. Payment options include: full payment by card or Vipps, invoice (Faktura), installment plans (3, 6, or 12 months), and government pay links. Contact a study advisor for personalised financing advice.',
+      admission: 'No formal entry requirements for most subjects. For the 23/5-regelen pathway you must be at least 23 years old and have 5 years of combined work and education experience. Contact us if you are unsure which pathway fits your situation.',
+      reviews: [
+        { name: 'Aase Marie L.', rating: 5, text: 'I studied at my own pace alongside work and passed all four exams. The support from NKI was excellent — I always got answers quickly.' },
+        { name: 'Johan T.',       rating: 5, text: 'The course materials are very well structured. Video lessons made it easy to understand the theory before the written exercises.' },
+        { name: 'Safire K.',      rating: 4, text: 'Good content and flexible access. Would appreciate more practice exams, but overall I am very satisfied and would recommend NKI.' }
+      ],
+      faq: [
+        { q: 'How long do I have access to the course?',  a: '12 months from the date of purchase. Extensions are available at a discounted rate if you need more time.' },
+        { q: 'Can I study on my phone or tablet?',        a: 'Yes — the Canvas LMS platform and all video content work on mobile and tablet. A computer is recommended for written assignments.' },
+        { q: 'Is Lånekassen support guaranteed?',         a: 'NKI is Lånekassen-approved, but individual eligibility depends on your situation. Visit lanekassen.no or contact a study advisor for guidance.' },
+        { q: 'What happens after I pay?',                  a: 'You will receive a confirmation email within minutes. Your Canvas account is created automatically — login details are sent by email, usually within a few hours.' },
+        { q: 'Can I get a refund?',                        a: 'You may cancel within 14 days of purchase as long as you have not started the course. Once course access begins, refunds are not available.' }
+      ]
+    }
+  };
+
+  var CURRENT_COURSE = null;
+  var _cdpObserver   = null;
+
+  function getCourseDetails(id) {
+    if (COURSE_DETAILS[id]) return COURSE_DETAILS[id];
+    var sc   = spCourseById(id);
+    var base = COURSE_DETAILS['pabygg'];
+    if (!sc) return base;
+    var fallback = {};
+    for (var k in base) { if (base.hasOwnProperty(k)) fallback[k] = base[k]; }
+    fallback.id             = sc.id;
+    fallback.name           = sc.name;
+    fallback.eyebrow        = sc.type === 'Package' ? 'PACKAGE' : 'COURSE';
+    fallback.price          = sc.price;
+    fallback.originalPrice  = Math.round(sc.price * 1.22);
+    fallback.discount       = '18%';
+    fallback.type           = sc.type;
+    fallback.area           = sc.area;
+    fallback.educationalLevel = sc.level;
+    fallback.lanekassen     = sc.lanekassen;
+    fallback.certificate    = sc.certificate;
+    fallback.rating         = sc.rating;
+    fallback.reviewCount    = sc.reviews;
+    fallback.accessMonths   = sc.months;
+    return fallback;
+  }
+
+  function findCourseByName(name) {
+    var lower = (name || '').toLowerCase();
+    for (var k = 0; k < SEARCH_COURSES.length; k++) {
+      if (SEARCH_COURSES[k].name.toLowerCase() === lower) return SEARCH_COURSES[k];
+    }
+    return null;
+  }
+
+  function addToCart(course) {
+    if (!course) return;
+    NKICart.add({
+      id:           course.id,
+      name:         course.name,
+      type:         course.type,
+      hours:        course.totalHours || (course.accessMonths || 6) * 20,
+      accessMonths: course.accessMonths || 12,
+      price:        course.price,
+      needsBooks:   false
+    });
+  }
+
   var spState = {
     query: '', areas: [], levels: [], lengths: [],
     priceMin: 990, priceMax: 49900,
@@ -1695,9 +1817,17 @@
     var pageHome    = document.getElementById('page-home');
     var pageSearch  = document.getElementById('page-search');
     var pageCompare = document.getElementById('page-compare');
+    var pageCourse  = document.getElementById('page-course');
     pageHome.hidden    = (name !== 'home');
     pageSearch.hidden  = (name !== 'search');
     pageCompare.hidden = (name !== 'compare');
+    if (pageCourse) pageCourse.hidden = (name !== 'course');
+
+    var stickyEl = document.getElementById('cdp-sticky-cta');
+    if (name !== 'course' && stickyEl) {
+      stickyEl.classList.remove('is-visible');
+      if (_cdpObserver) { _cdpObserver.disconnect(); _cdpObserver = null; }
+    }
 
     if (name === 'search') {
       spState.query = ''; spState.areas = []; spState.levels = [];
@@ -1723,6 +1853,14 @@
       window.scrollTo(0, 0);
     }
     if (name === 'compare') { renderComparePage(ctx ? ctx.courseIds : []); window.scrollTo(0, 0); }
+    if (name === 'course') {
+      var sc = null;
+      if (ctx && ctx.courseId)   sc = spCourseById(ctx.courseId);
+      if (!sc && ctx && ctx.courseName) sc = findCourseByName(ctx.courseName);
+      CURRENT_COURSE = getCourseDetails(sc ? sc.id : 'pabygg');
+      renderCoursePage();
+      window.scrollTo(0, 0);
+    }
     if (name === 'home') window.scrollTo(0, 0);
   }
 
@@ -2069,6 +2207,15 @@
         if (c) NKICart.add({ id: c.id, name: c.name, hours: c.months * 20, accessMonths: c.months, price: c.price, needsBooks: false });
       });
     });
+    page.querySelectorAll('.course-card').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        if ((e.target.closest && e.target.closest('.cc-cart-btn')) ||
+            (e.target.closest && e.target.closest('.cc-compare-label'))) return;
+        var cartBtn = card.querySelector('[data-sp-cart]');
+        var courseId = cartBtn ? cartBtn.getAttribute('data-sp-cart') : '';
+        if (courseId) showPage('course', { courseId: courseId });
+      });
+    });
   }
 
   /* ── Compare page ── */
@@ -2130,6 +2277,26 @@
   }
 
   /* ── Navigation trigger bindings ── */
+
+  /* Mega-panel course li → course page */
+  document.querySelectorAll('.mega-panel ul li').forEach(function(li) {
+    li.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeAllDropdowns();
+      showPage('course', { courseName: li.textContent.trim() });
+    });
+  });
+
+  /* Search dropdown s-card → course page */
+  searchDropdown.addEventListener('click', function(e) {
+    var card = e.target.closest && e.target.closest('.s-card');
+    if (!card) return;
+    var nameEl = card.querySelector('.s-card-name');
+    searchDropdown.classList.remove('is-open');
+    searchInput.value = '';
+    updateClearBtn();
+    showPage('course', { courseName: nameEl ? nameEl.textContent.trim() : '' });
+  });
 
   document.querySelectorAll('.mega-see-all').forEach(function(link) {
     link.addEventListener('click', function(e) {
@@ -2205,6 +2372,291 @@
     return '<div class="cfg-dd-item" data-val="' + a + '">' + a + '</div>';
   }).join('');
   bindCfgDropdown(cfgAreaDd, function(val) { _cfgArea = val; });
+
+  /* ── COURSE DETAILS PAGE ── */
+
+  function buildStructPanel(s) {
+    var lessonsHTML = (s.lessons || []).map(function(l) {
+      return '<li class="cdp-lesson-item"><span class="material-symbols-outlined cdp-lesson-icon">play_circle</span>' + l + '</li>';
+    }).join('');
+    return '<div class="cdp-struct-panel-name">' + s.tab + '</div>' +
+      '<div class="cdp-struct-panel-credits">' + s.credits + ' studiepoeng</div>' +
+      '<p class="cdp-struct-panel-desc">' + s.description + '</p>' +
+      '<div class="cdp-lessons-label">Leksjoner</div>' +
+      '<ul class="cdp-lessons-list">' + lessonsHTML + '</ul>';
+  }
+
+  function buildCdpAccordion(id, label, bodyHTML) {
+    return '<div class="cdp-accordion" id="' + id + '">' +
+      '<div class="cdp-acc-header">' +
+        '<span class="cdp-acc-label">' + label + '</span>' +
+        '<span class="material-symbols-outlined cdp-acc-chevron">expand_more</span>' +
+      '</div>' +
+      '<div class="cdp-acc-body">' + bodyHTML + '</div>' +
+    '</div>';
+  }
+
+  function renderCoursePage() {
+    var c    = CURRENT_COURSE;
+    var page = document.getElementById('page-course');
+    if (!c || !page) return;
+
+    var installment = Math.round(c.price / 12);
+
+    /* meta row */
+    var metaItems = [
+      { icon: 'schedule',      text: fmtNum(c.totalHours) + ' timer (ca. ' + c.hoursPerWeek + ' t/uke)' },
+      { icon: 'stairs',        text: c.level },
+      { icon: 'key',           text: (c.accessMonths || 12) + ' måneder tilgang' },
+      { icon: 'rocket_launch', text: 'Start når du vil' }
+    ];
+    if (c.credits)    metaItems.push({ icon: 'school',        text: c.credits + ' studiepoeng' });
+    if (c.lanekassen) metaItems.push({ icon: 'check_circle',  text: 'Lånekassestøtte' });
+    metaItems.push(   { icon: 'star',         text: c.rating + ' (' + fmtNum(c.reviewCount || 0) + ' vurderinger)' });
+
+    var metaHTML = metaItems.map(function(m) {
+      return '<div class="cdp-meta-item"><span class="material-symbols-outlined cdp-meta-icon">' + m.icon + '</span>' + m.text + '</div>';
+    }).join('');
+
+    /* what you get */
+    var whatYouGetHTML = (c.whatYouGet || []).map(function(item) {
+      return '<li class="cdp-check-item"><span class="material-symbols-outlined cdp-check-icon">check</span><span class="cdp-check-text">' + item + '</span></li>';
+    }).join('');
+
+    /* structure tabs */
+    var structLabel = c.type === 'Package' ? 'Pakkeinnhold' : 'Kursstruktur';
+    var structure   = c.structure || [];
+    var structTabsHTML = structure.map(function(s, i) {
+      return '<button class="cdp-struct-tab' + (i === 0 ? ' is-active' : '') + '" data-tab-idx="' + i + '">' +
+        '<div class="cdp-struct-tab-name">' + s.tab + '</div>' +
+        '<div class="cdp-struct-tab-credits">Credits ' + s.credits + '</div>' +
+      '</button>';
+    }).join('');
+
+    var structBodyHTML = structure.length > 0
+      ? '<div class="cdp-struct">' +
+          '<div class="cdp-struct-tabs">' + structTabsHTML + '</div>' +
+          '<div class="cdp-struct-panel" id="cdpStructPanel">' + buildStructPanel(structure[0]) + '</div>' +
+        '</div>'
+      : '<p class="cdp-acc-para">Course content details coming soon.</p>';
+
+    /* materials */
+    var materialsHTML = (c.materials || []).map(function(m) {
+      return '<li class="cdp-material-item"><span class="material-symbols-outlined cdp-material-icon">info</span>' + m + '</li>';
+    }).join('');
+
+    /* payment pills */
+    var payPills = ['Faktura','Delbetaling (3 mnd)','Delbetaling (6 mnd)','Delbetaling (12 mnd)','Vipps','Visa','Mastercard','Lånekassen'];
+    var payPillsHTML = payPills.map(function(p) { return '<span class="cdp-pay-pill">' + p + '</span>'; }).join('');
+
+    /* reviews */
+    var reviewsHTML = (c.reviews || []).map(function(r) {
+      var stars = '';
+      for (var i = 0; i < r.rating; i++) stars += '★';
+      return '<div class="t-card">' +
+        '<div class="t-hd">' +
+          '<div class="t-avatar"></div>' +
+          '<div class="t-meta"><div class="t-name">' + r.name + '</div><div class="t-role">' + stars + '</div></div>' +
+        '</div>' +
+        '<p class="t-text">' + r.text + '</p>' +
+      '</div>';
+    }).join('');
+
+    /* faq */
+    var faqHTML = (c.faq || []).map(function(item, i) {
+      return '<div class="cdp-faq-item">' +
+        '<div class="cdp-faq-question" data-faq-idx="' + i + '">' +
+          '<span>' + item.q + '</span>' +
+          '<span class="material-symbols-outlined cdp-faq-chevron">add</span>' +
+        '</div>' +
+        '<div class="cdp-faq-answer">' + item.a + '</div>' +
+      '</div>';
+    }).join('');
+
+    /* related courses */
+    var related = SEARCH_COURSES.filter(function(sc) {
+      return sc.id !== c.id && (sc.area === c.area || sc.level === c.educationalLevel);
+    }).slice(0, 4);
+
+    var relatedHTML = related.map(function(sc) {
+      var imgBadge = sc.badge ? '<div class="cc-badges"><span class="badge-bs">' + sc.badge + '</span></div>' : '';
+      var typePill = '<span class="pill-sm">' + (sc.type || 'Course') + '</span>';
+      return '<div class="course-card" data-cdp-related="' + sc.id + '">' +
+        '<div class="cc-img">' + imgBadge + '</div>' +
+        '<div class="cc-body">' +
+          '<div class="cc-name">' + sc.name + '</div>' +
+          '<div class="cc-rating"><span class="star">★</span><span class="score">' + sc.rating + '</span></div>' +
+          '<div class="cc-pills">' + typePill + '<span class="pill-sm">' + sc.level + '</span><span class="pill-sm">' + sc.months + ' months</span></div>' +
+          '<div class="cc-footer"><div><div class="cc-price">Kr ' + fmtNum(sc.price) + '</div></div>' +
+          '<button class="cc-cart-btn" data-cdp-cart="' + sc.id + '" aria-label="Add to cart">' + ccCartSvg + '<span class="cc-cart-plus">+</span></button>' +
+          '</div>' +
+        '</div></div>';
+    }).join('');
+
+    /* accordions */
+    var acc1 = buildCdpAccordion('cdp-acc-about', 'Om kurset',
+      '<p class="cdp-acc-para">' + c.description + ' This course covers all the required subjects for upper secondary completion, taught through interactive digital modules designed for adult learners. Suitable for students returning to education, those changing careers, or anyone looking to expand their qualifications.</p>');
+    var acc2 = buildCdpAccordion('cdp-acc-struct', structLabel, structBodyHTML);
+    var acc3 = buildCdpAccordion('cdp-acc-materials', 'Hva trenger du til dette kurset', '<ul class="cdp-materials-list">' + materialsHTML + '</ul>');
+    var acc4 = buildCdpAccordion('cdp-acc-exam', 'Eksamen', '<p class="cdp-acc-para">' + (c.exam || '') + '</p>');
+    var acc5 = buildCdpAccordion('cdp-acc-financing', 'Finansieringsmuligheter', '<p class="cdp-acc-para">' + (c.financing || '') + '</p><div class="cdp-pay-pills">' + payPillsHTML + '</div>');
+    var acc6 = buildCdpAccordion('cdp-acc-admission', 'Opptakskrav', '<p class="cdp-acc-para">' + (c.admission || '') + '</p>');
+
+    page.innerHTML =
+      '<div class="container">' +
+        '<div class="cdp-breadcrumb">' +
+          '<a class="cdp-bc-link" id="cdpBcHome">Home</a>' +
+          '<span class="cdp-bc-sep"> &gt; </span>' +
+          '<a class="cdp-bc-link" id="cdpBcArea">' + c.area + '</a>' +
+          '<span class="cdp-bc-sep"> &gt; </span>' +
+          '<span class="cdp-bc-current">' + c.name + '</span>' +
+        '</div>' +
+        '<div class="cdp-hero">' +
+          '<div class="cdp-hero-left">' +
+            '<div class="cdp-eyebrow">' + c.eyebrow + '</div>' +
+            '<h1 class="cdp-h1">' + c.name + '</h1>' +
+            '<p class="cdp-desc">' + c.description + '</p>' +
+            '<div class="cdp-meta">' + metaHTML + '</div>' +
+            '<div class="cdp-price-block">' +
+              '<div class="cdp-price-current">kr ' + fmtNum(c.price) + '</div>' +
+              '<div class="cdp-price-original-row">' +
+                '<span class="cdp-price-original">kr ' + fmtNum(c.originalPrice) + '</span>' +
+                '<span class="cdp-price-discount">' + c.discount + ' OFF</span>' +
+              '</div>' +
+              '<div class="cdp-price-installment">eller fra kr ' + fmtNum(installment) + '/mnd med delbetaling</div>' +
+            '</div>' +
+            '<div class="cdp-ctas" id="cdp-hero-ctas">' +
+              '<button class="cdp-btn-demo"><span class="material-symbols-outlined cdp-btn-demo-icon">play_circle</span>Se demovideo</button>' +
+              '<button class="cdp-btn-cart" id="cdpAddToCart">Legg i handlekurv</button>' +
+              '<div class="cdp-learner-count"><span class="material-symbols-outlined cdp-learner-icon">group</span>' + fmtNum(c.enrolled || 0) + ' studenter</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="cdp-hero-right">' +
+            '<div class="cdp-hero-box">' +
+              '<div class="cdp-box-heading">Hva du får med dette kurset</div>' +
+              '<ul class="cdp-check-list">' + whatYouGetHTML + '</ul>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cdp-content">' + acc1 + acc2 + acc3 + acc4 + acc5 + acc6 + '</div>' +
+      '</div>' +
+      '<div class="cdp-reviews container">' +
+        '<div class="cdp-section-heading">Hva studentene sier</div>' +
+        '<div class="cdp-reviews-grid">' + reviewsHTML + '</div>' +
+      '</div>' +
+      '<div class="cdp-faq container">' +
+        '<div class="cdp-faq-heading">Ofte stilte spørsmål</div>' +
+        '<div class="cdp-faq-list">' + faqHTML + '</div>' +
+      '</div>' +
+      (related.length > 0
+        ? '<div class="cdp-related container">' +
+            '<div class="cdp-related-heading">Relevante kurs</div>' +
+            '<div class="courses-grid">' + relatedHTML + '</div>' +
+          '</div>'
+        : '');
+
+    /* update sticky CTA */
+    var stickyEl = document.getElementById('cdp-sticky-cta');
+    if (stickyEl) {
+      stickyEl.innerHTML =
+        '<div class="cdp-sticky-inner">' +
+          '<div class="cdp-sticky-left">' +
+            '<div class="cdp-sticky-thumb"></div>' +
+            '<span class="cdp-sticky-name">' + c.name + '</span>' +
+            '<span class="cdp-sticky-price">kr ' + fmtNum(c.price) + '</span>' +
+          '</div>' +
+          '<button class="cdp-sticky-btn" id="cdpStickyCart">Legg i handlekurv</button>' +
+        '</div>';
+    }
+
+    bindCoursePageEvents(c);
+
+    /* IntersectionObserver for sticky CTA */
+    if (_cdpObserver) _cdpObserver.disconnect();
+    var ctasEl = document.getElementById('cdp-hero-ctas');
+    if (ctasEl && stickyEl && 'IntersectionObserver' in window) {
+      _cdpObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            stickyEl.classList.remove('is-visible');
+          } else {
+            stickyEl.classList.add('is-visible');
+          }
+        });
+      }, { threshold: 0 });
+      _cdpObserver.observe(ctasEl);
+    }
+  }
+
+  function bindCoursePageEvents(c) {
+    var page = document.getElementById('page-course');
+    if (!page) return;
+
+    /* breadcrumb */
+    var bcHome = document.getElementById('cdpBcHome');
+    if (bcHome) bcHome.addEventListener('click', function() { showPage('home'); });
+    var bcArea = document.getElementById('cdpBcArea');
+    if (bcArea) bcArea.addEventListener('click', function() { showPage('search', { area: c.area }); });
+
+    /* add to cart */
+    var cartBtn = document.getElementById('cdpAddToCart');
+    if (cartBtn) cartBtn.addEventListener('click', function() { addToCart(CURRENT_COURSE); });
+    var stickyCartBtn = document.getElementById('cdpStickyCart');
+    if (stickyCartBtn) stickyCartBtn.addEventListener('click', function() { addToCart(CURRENT_COURSE); });
+
+    /* content accordions */
+    page.querySelectorAll('.cdp-acc-header').forEach(function(hdr) {
+      hdr.addEventListener('click', function() { hdr.parentElement.classList.toggle('is-open'); });
+    });
+
+    /* structure tabs */
+    page.querySelectorAll('.cdp-struct-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var idx = parseInt(tab.getAttribute('data-tab-idx'), 10);
+        page.querySelectorAll('.cdp-struct-tab').forEach(function(t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        var panel = document.getElementById('cdpStructPanel');
+        if (panel && c.structure && c.structure[idx]) {
+          panel.innerHTML = buildStructPanel(c.structure[idx]);
+        }
+      });
+    });
+
+    /* FAQ */
+    page.querySelectorAll('.cdp-faq-question').forEach(function(q) {
+      q.addEventListener('click', function() {
+        var item   = q.parentElement;
+        var wasOpen = item.classList.contains('is-open');
+        page.querySelectorAll('.cdp-faq-item').forEach(function(fi) {
+          fi.classList.remove('is-open');
+          var ch = fi.querySelector('.cdp-faq-chevron');
+          if (ch) ch.textContent = 'add';
+        });
+        if (!wasOpen) {
+          item.classList.add('is-open');
+          var chevron = q.querySelector('.cdp-faq-chevron');
+          if (chevron) chevron.textContent = 'remove';
+        }
+      });
+    });
+
+    /* related course card clicks */
+    page.querySelectorAll('[data-cdp-related]').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest && e.target.closest('.cc-cart-btn')) return;
+        showPage('course', { courseId: card.getAttribute('data-cdp-related') });
+      });
+    });
+
+    /* related course cart buttons */
+    page.querySelectorAll('[data-cdp-cart]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var sc = spCourseById(btn.getAttribute('data-cdp-cart'));
+        if (sc) NKICart.add({ id: sc.id, name: sc.name, hours: sc.months * 20, accessMonths: sc.months, price: sc.price, needsBooks: false });
+      });
+    });
+  }
 
   document.addEventListener('click', closeCfgDropdowns);
 
