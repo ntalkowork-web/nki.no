@@ -476,16 +476,25 @@
         <div class="config-inner">
           <span class="config-heading">Find my course</span>
           <div class="config-group">
-            <select class="config-select" id="cfg-level">
-              <option value="">Choose educational level</option>
-              <option value="high-school">High School</option>
-              <option value="professional-courses">Professional Courses</option>
-            </select>
+            <div class="cfg-dropdown" id="cfg-level-dd">
+              <button class="cfg-dd-btn" type="button">
+                <span class="cfg-dd-label">Choose educational level</span>
+                <span class="cfg-dd-chevron">▾</span>
+              </button>
+              <div class="cfg-dd-menu">
+                <div class="cfg-dd-item" data-val="high-school">High School</div>
+                <div class="cfg-dd-item" data-val="professional-courses">Professional Courses</div>
+              </div>
+            </div>
           </div>
           <div class="config-group">
-            <select class="config-select" id="cfg-area">
-              <option value="">Choose subject area</option>
-            </select>
+            <div class="cfg-dropdown" id="cfg-area-dd">
+              <button class="cfg-dd-btn" type="button">
+                <span class="cfg-dd-label">Choose subject area</span>
+                <span class="cfg-dd-chevron">▾</span>
+              </button>
+              <div class="cfg-dd-menu" id="cfg-area-menu"></div>
+            </div>
           </div>
           <button class="btn-find">Search</button>
         </div>
@@ -2101,34 +2110,68 @@
     });
   }
 
-  /* ── Hero configurator: dynamic area dropdown ── */
-  var cfgLevel = document.getElementById('cfg-level');
-  var cfgArea  = document.getElementById('cfg-area');
-
+  /* ── Hero configurator: custom dropdowns ── */
   var CFG_AREAS_HS   = ['Subject packages for High School', 'Vocational Subjects for High School', 'Single Subjects for High School'];
   var CFG_AREAS_PROF = ['Economy and sustainability', 'HR and Management', 'Law and administration', 'Construction and logistics', 'Interior and design', 'Health and lifestyle', 'Marketing and sales'];
   var CFG_AREAS_ALL  = CFG_AREAS_PROF.concat(CFG_AREAS_HS);
 
-  if (cfgArea) {
-    cfgArea.innerHTML = '<option value="">Choose subject area</option>' +
-      CFG_AREAS_ALL.map(function(a) { return '<option value="' + a + '">' + a + '</option>'; }).join('');
+  var cfgLevelDd  = document.getElementById('cfg-level-dd');
+  var cfgAreaDd   = document.getElementById('cfg-area-dd');
+  var cfgAreaMenu = document.getElementById('cfg-area-menu');
+
+  var _cfgLevel = '';
+  var _cfgArea  = '';
+
+  function closeCfgDropdowns() {
+    [cfgLevelDd, cfgAreaDd].forEach(function(dd) { if (dd) dd.classList.remove('is-open'); });
   }
+
+  function bindCfgDropdown(dd, onPick) {
+    if (!dd) return;
+    dd.querySelector('.cfg-dd-btn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = dd.classList.contains('is-open');
+      closeCfgDropdowns();
+      if (!isOpen) dd.classList.add('is-open');
+    });
+    dd.querySelector('.cfg-dd-menu').addEventListener('click', function(e) { e.stopPropagation(); });
+    function bindItems() {
+      dd.querySelectorAll('.cfg-dd-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+          dd.querySelectorAll('.cfg-dd-item').forEach(function(i) { i.classList.remove('is-active'); });
+          item.classList.add('is-active');
+          dd.querySelector('.cfg-dd-label').textContent = item.textContent;
+          onPick(item.getAttribute('data-val'));
+          closeCfgDropdowns();
+        });
+      });
+    }
+    bindItems();
+    dd._rebindItems = bindItems;
+  }
+
+  bindCfgDropdown(cfgLevelDd, function(val) { _cfgLevel = val; });
+
+  cfgAreaMenu.innerHTML = CFG_AREAS_ALL.map(function(a) {
+    return '<div class="cfg-dd-item" data-val="' + a + '">' + a + '</div>';
+  }).join('');
+  bindCfgDropdown(cfgAreaDd, function(val) { _cfgArea = val; });
+
+  document.addEventListener('click', closeCfgDropdowns);
 
   var btnFind = document.querySelector('.btn-find');
   if (btnFind) {
     btnFind.addEventListener('click', function() {
-      var level = cfgLevel ? cfgLevel.value : '';
-      var area  = cfgArea  ? cfgArea.value  : '';
       var ctx   = {};
       var hsAreaMap = { 'Subject packages for High School': 'High School', 'Vocational Subjects for High School': 'High School', 'Single Subjects for High School': 'Single Subject' };
-      if (area && hsAreaMap[area]) {
-        ctx.level = hsAreaMap[area];
-      } else if (area) {
+      if (_cfgArea && hsAreaMap[_cfgArea]) {
+        ctx.level = hsAreaMap[_cfgArea];
+      } else if (_cfgArea) {
         ctx.level = 'Courses';
-        ctx.area = area;
-      } else if (level === 'high-school') {
+        ctx.area = _cfgArea;
+      } else if (_cfgLevel === 'high-school') {
         ctx.level = 'High School';
-      } else if (level === 'professional-courses') {
+      } else if (_cfgLevel === 'professional-courses') {
         ctx.level = 'Courses';
       }
       showPage('search', ctx);
