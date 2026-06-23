@@ -1807,6 +1807,7 @@
       if (ctx && ctx.courseId)   sc = spCourseById(ctx.courseId);
       if (!sc && ctx && ctx.courseName) sc = findCourseByName(ctx.courseName);
       CURRENT_COURSE = getCourseDetails(sc ? sc.id : 'pabygg');
+      if (ctx && ctx.courseName) CURRENT_COURSE = Object.assign({}, CURRENT_COURSE, { name: ctx.courseName });
       window.scrollTo(0, 0);
       renderCoursePage();
     }
