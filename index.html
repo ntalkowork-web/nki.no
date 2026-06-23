@@ -36,7 +36,7 @@
             <ul class="dropdown-list">
               <!-- High School Subject Packages › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">High School Subject Packages</span>
+                <span class="item-label">Subject packages for High School</span>
                 <span class="mega-arrow">›</span>
                 <div class="mega-panel">
                   <ul>
@@ -70,7 +70,7 @@
               </li>
               <!-- High School Single Subjects › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">High School Single Subjects</span>
+                <span class="item-label">Single Subjects for High School</span>
                 <span class="mega-arrow">›</span>
                 <div class="mega-panel">
                   <div class="mega-label">Most popular</div>
@@ -483,7 +483,7 @@
             </select>
           </div>
           <div class="config-group">
-            <select class="config-select" id="cfg-area" disabled>
+            <select class="config-select" id="cfg-area">
               <option value="">Choose subject area</option>
             </select>
           </div>
@@ -1690,7 +1690,7 @@
       if (ctx) {
         if (ctx.category) {
           spState.breadcrumb = ctx.category;
-          var levelMap = { 'High School': 'High School', 'high-school': 'High School', 'Courses': 'Courses', 'professional-courses': 'Courses', 'Single Subjects': 'Single Subject', 'Single subject': 'Single Subject', 'High School Subject Packages': 'High School', 'Vocational Subjects for High School': 'High School', 'High School Single Subjects': 'Single Subject' };
+          var levelMap = { 'High School': 'High School', 'high-school': 'High School', 'Courses': 'Courses', 'professional-courses': 'Courses', 'Single Subjects': 'Single Subject', 'Single subject': 'Single Subject', 'Subject packages for High School': 'High School', 'Vocational Subjects for High School': 'High School', 'Single Subjects for High School': 'Single Subject' };
           if (levelMap[ctx.category]) spState.levels = [levelMap[ctx.category]];
           else spState.areas = [ctx.category];
         }
@@ -2107,23 +2107,13 @@
   var cfgLevel = document.getElementById('cfg-level');
   var cfgArea  = document.getElementById('cfg-area');
 
-  var CFG_AREAS_HS   = ['High School Subject Packages', 'Vocational Subjects for High School', 'High School Single Subjects'];
+  var CFG_AREAS_HS   = ['Subject packages for High School', 'Vocational Subjects for High School', 'Single Subjects for High School'];
   var CFG_AREAS_PROF = ['Economy and sustainability', 'HR and Management', 'Law and administration', 'Construction and logistics', 'Interior and design', 'Health and lifestyle', 'Marketing and sales'];
-  var CFG_AREAS_HS_COMBINED = CFG_AREAS_PROF.concat(CFG_AREAS_HS);
+  var CFG_AREAS_ALL  = CFG_AREAS_PROF.concat(CFG_AREAS_HS);
 
-  function populateCfgArea(areas) {
-    cfgArea.innerHTML = '<option value="">Choose area</option>' +
-      areas.map(function(a) { return '<option value="' + a + '">' + a + '</option>'; }).join('');
-    cfgArea.disabled = false;
-  }
-
-  if (cfgLevel) {
-    cfgLevel.addEventListener('change', function() {
-      var v = cfgLevel.value;
-      if (v === 'high-school')          { populateCfgArea(CFG_AREAS_HS_COMBINED); }
-      else if (v === 'professional-courses') { populateCfgArea(CFG_AREAS_PROF); }
-      else { cfgArea.innerHTML = '<option value="">Choose subject area</option>'; cfgArea.disabled = true; }
-    });
+  if (cfgArea) {
+    cfgArea.innerHTML = '<option value="">Choose subject area</option>' +
+      CFG_AREAS_ALL.map(function(a) { return '<option value="' + a + '">' + a + '</option>'; }).join('');
   }
 
   var btnFind = document.querySelector('.btn-find');
@@ -2132,14 +2122,16 @@
       var level = cfgLevel ? cfgLevel.value : '';
       var area  = cfgArea  ? cfgArea.value  : '';
       var ctx   = {};
-      if (level === 'high-school') {
-        if (area === 'High School Single Subjects') { ctx.level = 'Single Subject'; }
-        else if (area === 'High School Subject Packages' || area === 'Vocational Subjects for High School') { ctx.level = 'High School'; }
-        else if (area) { ctx.level = 'Courses'; ctx.area = area; }
-        else { ctx.level = 'High School'; }
+      var hsAreaMap = { 'Subject packages for High School': 'High School', 'Vocational Subjects for High School': 'High School', 'Single Subjects for High School': 'Single Subject' };
+      if (area && hsAreaMap[area]) {
+        ctx.level = hsAreaMap[area];
+      } else if (area) {
+        ctx.level = 'Courses';
+        ctx.area = area;
+      } else if (level === 'high-school') {
+        ctx.level = 'High School';
       } else if (level === 'professional-courses') {
         ctx.level = 'Courses';
-        if (area) ctx.area = area;
       }
       showPage('search', ctx);
     });
