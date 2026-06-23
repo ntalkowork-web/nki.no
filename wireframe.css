@@ -2578,7 +2578,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 /* Sticky CTA bar */
 .cdp-sticky-cta {
   position: fixed;
-  top: var(--header-h);
+  top: 0;
   left: 0;
   right: 0;
   height: 64px;
@@ -2592,7 +2592,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   align-items: center;
 }
 
-.cdp-sticky-cta.is-visible { transform: translateY(0); }
+.cdp-sticky-cta.is-visible { transform: translateY(var(--header-h)); }
 
 .cdp-sticky-inner {
   display: flex;
