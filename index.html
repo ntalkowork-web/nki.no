@@ -16,7 +16,7 @@
   <div class="header-inner">
 
     <!-- 2.1 Logo -->
-    <a href="#" class="header-logo">
+    <a href="#" class="header-logo" id="headerLogo">
       <img
         src="logos/NKI_Logo_Black_L.svg"
         alt="NKI Nettstudier">
@@ -2149,6 +2149,14 @@
       showPage('search', { area: lbl ? lbl.textContent.trim() : '' });
     });
   });
+
+  var headerLogo = document.getElementById('headerLogo');
+  if (headerLogo) {
+    headerLogo.addEventListener('click', function(e) {
+      e.preventDefault();
+      showPage('home');
+    });
+  }
 
   var btnFind = document.querySelector('.btn-find');
   if (btnFind) {
