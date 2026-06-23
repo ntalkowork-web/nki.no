@@ -2571,7 +2571,8 @@
           if (entry.isIntersecting) {
             stickyEl.classList.remove('is-visible');
           } else {
-            stickyEl.classList.add('is-visible');
+            var inCart = NKICart.getItems().some(function(i) { return i.id === CURRENT_COURSE.id; });
+            if (!inCart) stickyEl.classList.add('is-visible');
           }
         });
       }, { threshold: 0 });
@@ -2591,9 +2592,15 @@
 
     /* add to cart */
     var cartBtn = document.getElementById('cdpAddToCart');
-    if (cartBtn) cartBtn.addEventListener('click', function() { addToCart(CURRENT_COURSE); });
+    if (cartBtn) cartBtn.addEventListener('click', function() {
+      addToCart(CURRENT_COURSE);
+      document.getElementById('cdp-sticky-cta').classList.remove('is-visible');
+    });
     var stickyCartBtn = document.getElementById('cdpStickyCart');
-    if (stickyCartBtn) stickyCartBtn.addEventListener('click', function() { addToCart(CURRENT_COURSE); });
+    if (stickyCartBtn) stickyCartBtn.addEventListener('click', function() {
+      addToCart(CURRENT_COURSE);
+      document.getElementById('cdp-sticky-cta').classList.remove('is-visible');
+    });
 
     /* content accordions */
     page.querySelectorAll('.cdp-acc-header').forEach(function(hdr) {
