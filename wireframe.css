@@ -479,16 +479,18 @@ select { font-family: inherit; }
 }
 
 .btn-login {
-  padding: 7px 13px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--white);
-  background: var(--gray-900);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gray-300);
   border-radius: var(--r-sm);
+  color: var(--gray-600);
   transition: background .15s;
 }
 
-.btn-login:hover { background: var(--gray-700); }
+.btn-login:hover { background: var(--gray-100); }
 
 .btn-consult {
   padding: 7px 13px;
@@ -513,7 +515,6 @@ select { font-family: inherit; }
   border-radius: var(--r-sm);
   color: var(--gray-600);
   transition: background .15s;
-  margin-left: 4px;
 }
 
 .btn-cart:hover { background: var(--gray-100); }
