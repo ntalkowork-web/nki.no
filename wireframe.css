@@ -1434,6 +1434,7 @@ main { margin-top: var(--header-h); }
 /* ── SECTION COMMON ───────────────────────── */
 
 section.wf-section { padding: 72px 0; }
+#page-home main > section:last-of-type { padding-bottom: 144px; }
 section.wf-section.bg-gray { background: var(--gray-50); }
 
 .section-hd {
@@ -2089,7 +2090,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   display: flex;
   align-items: center;
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
 }
 
 .sp-search-icon {
@@ -2585,7 +2586,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   background: var(--white);
   border-bottom: 1px solid var(--gray-200);
   box-shadow: var(--sh-sm);
-  z-index: 900;
+  z-index: 99;
   transform: translateY(-100%);
   transition: transform .25s ease;
   display: flex;
@@ -2614,6 +2615,12 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   background: var(--gray-200);
   border-radius: var(--r-md);
   flex-shrink: 0;
+}
+
+.cdp-sticky-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .cdp-sticky-name {
@@ -2686,14 +2693,16 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   color: var(--gray-600);
   line-height: 1.6;
   margin-bottom: 20px;
+  max-width: 600px;
 }
 
 .cdp-meta {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 6px 16px;
-  font-size: 14px;
+  gap: 0;
+  font-size: 13px;
   color: var(--gray-700);
   margin-bottom: 24px;
 }
@@ -2701,11 +2710,20 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .cdp-meta-item {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.cdp-meta-sep {
+  color: var(--gray-500);
+  font-size: 16px;
+  margin: 0 10px;
+  flex-shrink: 0;
+  line-height: 1;
 }
 
 .cdp-meta-icon {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--gray-500);
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
@@ -2756,8 +2774,15 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 }
 
 .cdp-price-installment {
-  font-size: 14px;
-  color: var(--gray-500);
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 400 !important;
+  font-family: var(--font);
+  color: var(--gray-600);
+  background: var(--gray-100);
+  border-radius: var(--r-sm);
+  padding: 8px 12px;
+  margin-top: 6px;
 }
 
 /* CTAs */
@@ -2907,7 +2932,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 }
 
 .cdp-acc-label {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--gray-900);
 }
@@ -2937,6 +2962,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   font-size: 14px;
   color: var(--gray-700);
   line-height: 1.7;
+  max-width: 536px;
 }
 
 /* Course structure vertical tabs */
@@ -3027,12 +3053,12 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 }
 
 /* Materials list */
-.cdp-materials-list { list-style: none; }
+.cdp-materials-list {
+  list-style: decimal;
+  padding-left: 20px;
+}
 
 .cdp-material-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
   margin-bottom: 10px;
   font-size: 14px;
   color: var(--gray-700);
@@ -3069,13 +3095,17 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 }
 
 /* Reviews section */
-.cdp-reviews { padding: 56px 0; }
+.cdp-reviews { padding: 72px 0; }
 
 .cdp-section-heading {
   font-size: 40px;
   font-weight: 700;
   color: var(--gray-900);
-  margin-bottom: 32px;
+}
+
+.cdp-reviews-viewport {
+  overflow: hidden;
+  margin-bottom: 24px;
 }
 
 .cdp-reviews-grid {
@@ -3085,7 +3115,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 }
 
 /* FAQ section */
-.cdp-faq { padding: 0 0 72px; }
+.cdp-faq { padding: 72px 0; }
 
 .cdp-faq-heading {
   font-size: 40px;
@@ -3139,7 +3169,11 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .cdp-faq-item.is-open .cdp-faq-answer { display: block; }
 
 /* Relevant courses section */
-.cdp-related { padding: 0 0 72px; }
+.cdp-related { padding: 72px 0; }
+
+/* 144px gap before footer — targets whichever CDP section is last */
+#page-course > .cdp-faq:last-child,
+#page-course > .cdp-related:last-child { padding-bottom: 144px; }
 
 .cdp-related-heading {
   font-size: 40px;
