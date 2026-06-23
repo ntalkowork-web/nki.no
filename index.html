@@ -50,9 +50,9 @@
                   </ul>
                 </div>
               </li>
-              <!-- Vocational Subjects for High School › -->
+              <!-- Vocational Studies for High School › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">Vocational Subjects for High School</span>
+                <span class="item-label">Vocational Studies for High School</span>
                 <span class="mega-arrow">›</span>
                 <div class="mega-panel">
                   <ul>
@@ -1627,42 +1627,43 @@
   /* ── SEARCH + COMPARE PAGES ── */
 
   var SEARCH_COURSES = [
-    { id: 'pabygg',        type: 'Package', name: 'Påbygg – Studieforberedende VG3',    area: 'Science',                    level: 'High School',    months: 6,  price: 14900, rating: 4.8, reviews: 312, badge: 'Best seller', lanekassen: true  },
-    { id: 'mat-1t',        name: 'Matematikk 1T',                                 area: 'Science',                    level: 'Single Subject', months: 6,  price: 4900,  rating: 4.6, reviews: 198, badge: null,          lanekassen: true  },
-    { id: 'norsk-vg3',     name: 'Norsk – Skriftlig VG3',                    area: 'Science',                    level: 'Single Subject', months: 6,  price: 5900,  rating: 4.5, reviews: 145, badge: null,          lanekassen: true  },
-    { id: 'med-sec',       name: 'Medical Secretary',                              area: 'Health and lifestyle',       level: 'Courses',        months: 6,  price: 12900, rating: 4.9, reviews: 421, badge: 'Best seller', lanekassen: true  },
-    { id: 'helse-led',     name: 'Health Management',                              area: 'Health and lifestyle',       level: 'Courses',        months: 6,  price: 9900,  rating: 4.4, reviews: 87,  badge: null,          lanekassen: false },
-    { id: 'regnskap',      name: 'Accounting and Finance',                         area: 'Economy and sustainability', level: 'Courses',        months: 6,  price: 7900,  rating: 4.7, reviews: 203, badge: 'Trending',   lanekassen: true  },
-    { id: 'baerekraft',    name: 'Sustainability and Green Business',               area: 'Economy and sustainability', level: 'Courses',        months: 3,  price: 3900,  rating: 4.3, reviews: 64,  badge: null,          lanekassen: false },
-    { id: 'hr-grunn',      name: 'HR Fundamentals',                                area: 'HR and Management',          level: 'Courses',        months: 6,  price: 6900,  rating: 4.6, reviews: 119, badge: null,          lanekassen: false },
-    { id: 'leder',         name: 'Leadership and Organisational Theory',            area: 'HR and Management',          level: 'Courses',        months: 6,  price: 9400,  rating: 4.5, reviews: 88,  badge: null,          lanekassen: false },
-    { id: 'jus',           name: 'Introduction to Law',                            area: 'Law and administration',     level: 'Courses',        months: 6,  price: 5900,  rating: 4.7, reviews: 156, badge: 'Trending',   lanekassen: false },
-    { id: 'mkt-grunn',     name: 'Marketing Fundamentals',                         area: 'Marketing and sales',        level: 'Courses',        months: 3,  price: 3490,  rating: 4.4, reviews: 211, badge: null,          lanekassen: false },
-    { id: 'interior',      name: 'Interior Design — Foundation',              area: 'Interior and design',        level: 'Courses',        months: 6,  price: 19900, rating: 4.8, reviews: 97,  badge: 'Best seller', lanekassen: true  }
+    { id: 'pabygg',        name: 'Påbygg – Studieforberedende VG3',    area: 'Subject packages for High School',  level: 'High School',          months: 6,  price: 14900, rating: 4.8, reviews: 312, badge: 'Best seller', lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Norsk VG3','Matematikk 1T','Engelsk','Naturfag'] },
+    { id: 'mat-1t',        name: 'Matematikk 1T',                       area: 'Single Subjects for High School',   level: 'High School',          months: 6,  price: 4900,  rating: 4.6, reviews: 198, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'norsk-vg3',     name: 'Norsk – Skriftlig VG3',               area: 'Single Subjects for High School',   level: 'High School',          months: 6,  price: 5900,  rating: 4.5, reviews: 145, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'med-sec',       name: 'Medical Secretary',                    area: 'Health and lifestyle',              level: 'Professional Courses', months: 6,  price: 12900, rating: 4.9, reviews: 421, badge: 'Best seller', lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Anatomy','Patient Administration','Medical Terminology','Office Administration'] },
+    { id: 'helse-ledelse', name: 'Health Management',                    area: 'Health and lifestyle',              level: 'Professional Courses', months: 6,  price: 9900,  rating: 4.4, reviews: 87,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'regnskap',      name: 'Accounting and Finance',               area: 'Economy and sustainability',        level: 'Professional Courses', months: 2,  price: 7900,  rating: 4.7, reviews: 203, badge: 'Trending',   lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'baerekraft',    name: 'Sustainability and Green Business',     area: 'Economy and sustainability',        level: 'Professional Courses', months: 1,  price: 3900,  rating: 4.3, reviews: 64,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'hr-grunnkurs',  name: 'HR Fundamentals',                      area: 'HR and Management',                 level: 'Professional Courses', months: 2,  price: 6900,  rating: 4.6, reviews: 119, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'leder',         name: 'Leadership and Organisational Theory', area: 'HR and Management',                 level: 'Professional Courses', months: 4,  price: 9400,  rating: 4.5, reviews: 88,  badge: null,          lanekassen: false, type: 'Package', certificate: true,  subjects: ['Organisational Behaviour','Leadership Theory','HR Strategy','Change Management'] },
+    { id: 'jus',           name: 'Introduction to Law',                  area: 'Law and administration',            level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.7, reviews: 156, badge: 'Trending',   lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'mkt-grunnkurs', name: 'Marketing Fundamentals',               area: 'Marketing and sales',               level: 'Professional Courses', months: 1,  price: 3490,  rating: 4.4, reviews: 211, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'interior',      name: 'Interior Design — Foundation',         area: 'Interior and design',               level: 'Professional Courses', months: 6,  price: 19900, rating: 4.8, reviews: 97,  badge: 'Best seller', lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Colour Theory','Space Planning','3D Visualisation','Furniture and Textiles'] },
   ];
 
   var SP_AREAS = [
-    { label: 'Health and lifestyle',       count: 18 },
-    { label: 'Economy and sustainability', count: 24 },
-    { label: 'HR and Management',          count: 12 },
-    { label: 'Interior and design',        count: 9  },
-    { label: 'Law and administration',     count: 15 },
-    { label: 'Marketing and sales',        count: 21 },
-    { label: 'Construction and logistics', count: 7  },
-    { label: 'Science',                    count: 11 }
+    { label: 'Health and lifestyle',               count: 18 },
+    { label: 'Economy and sustainability',         count: 24 },
+    { label: 'HR and Management',                  count: 12 },
+    { label: 'Interior and design',               count: 9  },
+    { label: 'Law and administration',            count: 15 },
+    { label: 'Marketing and sales',               count: 21 },
+    { label: 'Construction and logistics',        count: 7  },
+    { label: 'Science',                           count: 11 },
+    { label: 'Subject packages for High School',   count: 14 },
+    { label: 'Vocational Studies for High School', count: 22 },
+    { label: 'Single Subjects for High School',   count: 25 }
   ];
 
   var SP_LEVELS = [
-    { label: 'High School',    count: 34 },
-    { label: 'Courses',        count: 58 },
-    { label: 'Single Subject', count: 25 }
+    { label: 'High School',          count: 34 },
+    { label: 'Professional Courses', count: 58 }
   ];
 
   var SP_LENGTHS = [
-    { label: 'Less than 3 months', count: 19 },
-    { label: '3–6 months',    count: 31 },
-    { label: '1 year',             count: 42 },
-    { label: 'More than 1 year',   count: 25 }
+    { label: '1 month',            count: 8  },
+    { label: '2 months',           count: 14 },
+    { label: 'More than 3 months', count: 95 }
   ];
 
   var spState = {
@@ -1697,13 +1698,13 @@
       if (ctx) {
         if (ctx.category) {
           spState.breadcrumb = ctx.category;
-          var levelMap = { 'High School': 'High School', 'high-school': 'High School', 'Courses': 'Courses', 'professional-courses': 'Courses', 'Single Subjects': 'Single Subject', 'Single subject': 'Single Subject', 'Subject packages for High School': 'High School', 'Vocational Subjects for High School': 'High School', 'Single Subjects for High School': 'Single Subject' };
+          var levelMap = { 'High School': 'High School', 'high-school': 'High School', 'Courses': 'Professional Courses', 'professional-courses': 'Professional Courses', 'Professional Courses': 'Professional Courses' };
           if (levelMap[ctx.category]) spState.levels = [levelMap[ctx.category]];
           else spState.areas = [ctx.category];
         }
         if (ctx.area && ctx.area !== '') { spState.areas = [ctx.area]; spState.breadcrumb = ctx.area; }
         if (ctx.level && ctx.level !== '') {
-          var lvMap = { 'high-school': 'High School', 'professional-courses': 'Courses', 'High School': 'High School', 'Courses': 'Courses', 'Single Subjects': 'Single Subject', 'Single Subject': 'Single Subject' };
+          var lvMap = { 'high-school': 'High School', 'professional-courses': 'Professional Courses', 'High School': 'High School', 'Courses': 'Professional Courses', 'Professional Courses': 'Professional Courses' };
           var lv = lvMap[ctx.level] || ctx.level;
           spState.levels = [lv];
           if (spState.breadcrumb === 'All courses') spState.breadcrumb = ctx.level;
@@ -1744,21 +1745,30 @@
         '<div class="sp-compare-list">' + rows + '</div>' +
         '<button class="sp-compare-cta" id="spCompareCta"' + (spState.compareIds.length < 2 ? ' disabled' : '') + '>Compare courses</button></div>';
     }
-    var areaBody   = SP_AREAS.map(function(a)   { return buildCheckRow(a.label, a.count, spState.areas.indexOf(a.label)   !== -1, 'sp-cb-area');   }).join('');
     var levelBody  = SP_LEVELS.map(function(a)  { return buildCheckRow(a.label, a.count, spState.levels.indexOf(a.label)  !== -1, 'sp-cb-level');  }).join('');
+    var areaBody   = SP_AREAS.map(function(a)   { return buildCheckRow(a.label, a.count, spState.areas.indexOf(a.label)   !== -1, 'sp-cb-area');   }).join('');
     var lengthBody = SP_LENGTHS.map(function(a) { return buildCheckRow(a.label, a.count, spState.lengths.indexOf(a.label) !== -1, 'sp-cb-length'); }).join('');
-    var priceBody  =
-      '<div class="sp-price-range">' +
-        '<input type="range" class="sp-price-slider" id="spPriceMin" min="990" max="49900" step="100" value="' + spState.priceMin + '">' +
-        '<input type="range" class="sp-price-slider" id="spPriceMax" min="990" max="49900" step="100" value="' + spState.priceMax + '">' +
-        '<div class="sp-price-vals"><span id="spPriceMinVal">kr ' + fmtNum(spState.priceMin) + '</span><span id="spPriceMaxVal">kr ' + fmtNum(spState.priceMax) + '</span></div>' +
+    var pMin = spState.priceMin, pMax = spState.priceMax;
+    var priceBody =
+      '<div class="sp-price-display">' +
+        '<span id="spPriceMinVal">kr ' + fmtNum(pMin) + '</span>' +
+        '<span id="spPriceMaxVal">kr ' + fmtNum(pMax) + '</span>' +
       '</div>' +
-      '<div class="sp-filter-option" style="margin-top:8px">' +
+      '<div class="sp-price-range">' +
+        '<input type="range" class="sp-price-slider" id="spPriceMin" min="990" max="49900" step="100" value="' + pMin + '">' +
+        '<input type="range" class="sp-price-slider" id="spPriceMax" min="990" max="49900" step="100" value="' + pMax + '">' +
+      '</div>' +
+      '<div class="sp-price-presets">' +
+        '<button class="sp-price-preset' + (pMin <= 990 && pMax <= 5000 ? ' is-active' : '') + '" data-pmin="990" data-pmax="5000">Under 5 000 kr</button>' +
+        '<button class="sp-price-preset' + (pMin >= 5000 && pMax === 15000 ? ' is-active' : '') + '" data-pmin="5000" data-pmax="15000">5 000 – 15 000 kr</button>' +
+        '<button class="sp-price-preset' + (pMin >= 15000 ? ' is-active' : '') + '" data-pmin="15000" data-pmax="49900">Over 15 000 kr</button>' +
+      '</div>' +
+      '<div class="sp-filter-option" style="margin-top:12px">' +
         '<label class="sp-filter-label"><input type="checkbox" id="spLanekassen"' + (spState.lanekassen ? ' checked' : '') + '> Lånekassen support</label>' +
         '<span class="sp-filter-count">67</span></div>';
     return cmpSection +
-      buildAccordion('acc-area', 'Subject area', areaBody) +
       buildAccordion('acc-level', 'Educational level', levelBody) +
+      buildAccordion('acc-area', 'Subject area', areaBody) +
       buildAccordion('acc-length', 'Course length', lengthBody) +
       buildAccordion('acc-price', 'Price', priceBody);
   }
@@ -1804,10 +1814,9 @@
   }
 
   function matchesLengthBucket(months, bucket) {
-    if (bucket === 'Less than 3 months') return months < 3;
-    if (bucket === '3–6 months')    return months >= 3 && months <= 6;
-    if (bucket === '1 year')             return months === 12;
-    if (bucket === 'More than 1 year')   return months > 12;
+    if (bucket === '1 month')            return months === 1;
+    if (bucket === '2 months')           return months === 2;
+    if (bucket === 'More than 3 months') return months >= 3;
     return true;
   }
 
@@ -1844,9 +1853,12 @@
   function buildResultsAreaHTML() {
     var results = sortResults(getFilteredResults());
     if (results.length === 0) {
-      return '<div class="sp-empty"><span class="sp-empty-icon">search_off</span>' +
-        '<div class="sp-empty-title">No courses found</div>' +
-        '<div class="sp-empty-sub">Try adjusting your filters</div></div>';
+      return '<div class="sp-empty">' +
+        '<span class="sp-empty-icon">search_off</span>' +
+        '<div class="sp-empty-title">No courses match your filters</div>' +
+        '<div class="sp-empty-sub">Try adjusting or clearing your filters to see more results</div>' +
+        '<button class="sp-empty-btn" id="spEmptyClear">Clear all filters</button>' +
+      '</div>';
     }
     return '<div class="sp-results-count">' + results.length + ' course' + (results.length === 1 ? '' : 's') + ' found</div>' +
       '<div class="sp-results-grid">' + results.map(buildSearchCard).join('') + '</div>';
@@ -1856,11 +1868,11 @@
     var page = document.getElementById('page-search');
     page.innerHTML =
       '<div class="sp-wrap"><div class="container">' +
+        '<div class="sp-breadcrumb"><a class="sp-bc-home" id="spBcHome">Home</a><span class="sp-bc-sep"> &gt; </span><span class="sp-bc-current">' + spState.breadcrumb + '</span></div>' +
         '<div class="sp-search-bar-wrap">' +
           '<span class="sp-search-icon material-symbols-outlined">search</span>' +
           '<input type="text" class="sp-search-input" id="spSearchInput" placeholder="Search for a course, subject or topic…" value="' + spState.query + '">' +
         '</div>' +
-        '<div class="sp-breadcrumb"><a class="sp-bc-home" id="spBcHome">Home</a><span class="sp-bc-sep"> &gt; </span><span class="sp-bc-current">' + spState.breadcrumb + '</span></div>' +
         '<div class="sp-filter-row" id="spFilterRow">' + buildFilterPillsHTML() + '</div>' +
         '<div class="sp-layout">' +
           '<aside class="sp-sidebar" id="spSidebar">' + buildSidebarHTML() + '</aside>' +
@@ -2004,10 +2016,27 @@
         rebuildSidebar();
       });
     });
+
+    page.querySelectorAll('.sp-price-preset').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        spState.priceMin = parseInt(btn.getAttribute('data-pmin'), 10);
+        spState.priceMax = parseInt(btn.getAttribute('data-pmax'), 10);
+        rebuildSidebar();
+        updateResultsArea();
+      });
+    });
   }
 
   function bindResultCardEvents() {
     var page = document.getElementById('page-search'); if (!page) return;
+
+    var emptyClear = document.getElementById('spEmptyClear');
+    if (emptyClear) emptyClear.addEventListener('click', function() {
+      spState.areas = []; spState.levels = []; spState.lengths = [];
+      spState.lanekassen = false; spState.priceMin = 990; spState.priceMax = 49900;
+      renderSearchPage();
+    });
+
     page.querySelectorAll('.cc-compare-cb').forEach(function(cb) {
       cb.addEventListener('change', function() {
         var id = cb.getAttribute('data-course-id');
@@ -2038,22 +2067,30 @@
       page.innerHTML = '<div class="cp-wrap"><p style="color:var(--gray-500)">No courses selected.</p></div>';
       return;
     }
+    var allPackages = courses.every(function(c) { return c.type === 'Package'; });
     var ATTRS = [
-      { label: 'Price',              fn: function(c) { return 'Kr ' + fmtNum(c.price); } },
-      { label: 'Level',              fn: function(c) { return c.level; } },
+      { label: 'Price',              fn: function(c) { return 'kr ' + fmtNum(c.price); } },
+      { label: 'Educational level',  fn: function(c) { return c.level; } },
       { label: 'Subject area',       fn: function(c) { return c.area; } },
       { label: 'Course length',      fn: function(c) { return c.months + ' months'; } },
-      { label: 'Lånekassen',    fn: function(c) { return c.lanekassen ? 'Yes' : 'No'; } },
-      { label: 'Rating',             fn: function(c) { return c.rating + ' / 5 (' + c.reviews + ' reviews)'; } }
+      { label: 'Study type',         fn: function(c) { return c.type || 'Course'; } },
+      { label: 'Certificate',        fn: function(c) { return c.certificate ? 'Yes' : 'No'; } },
+      { label: 'Lånekassen support', fn: function(c) { return c.lanekassen ? 'Yes' : 'No'; } },
+      { label: 'Rating',             fn: function(c) { return c.rating + ' ★ (' + c.reviews + ' reviews)'; } }
     ];
+    if (allPackages) {
+      ATTRS.push({ label: 'Subjects', fn: function(c) { return (c.subjects || []).map(function(s) { return '<li>' + s + '</li>'; }).join(''); }, isList: true });
+    }
     var cols = courses.map(function(c) {
-      var rows = ATTRS.map(function(attr, i) {
-        return '<div class="cp-row"><span class="cp-row-label">' + attr.label + '</span><span class="cp-row-val">' + attr.fn(c) + '</span></div>';
+      var rows = ATTRS.map(function(attr) {
+        var val = attr.fn(c);
+        if (attr.isList) val = '<ul class="cp-subject-list">' + val + '</ul>';
+        return '<div class="cp-row"><div class="cp-row-label">' + attr.label + '</div><div class="cp-row-val">' + val + '</div></div>';
       }).join('');
       return '<div class="cp-col"><div class="cp-img"></div>' +
-        '<div class="cp-col-header"><div class="cp-col-name">' + c.name + '</div>' +
-        '<button class="cp-col-cta" data-cp-cart="' + c.id + '">Add to cart</button></div>' +
-        rows + '</div>';
+        '<div class="cp-col-name">' + c.name + '</div>' +
+        rows +
+        '<div class="cp-col-footer"><button class="cp-col-cta" data-cp-cart="' + c.id + '">Add to cart</button></div></div>';
     }).join('');
 
     page.innerHTML = '<div class="cp-wrap">' +
@@ -2111,7 +2148,7 @@
   }
 
   /* ── Hero configurator: custom dropdowns ── */
-  var CFG_AREAS_HS   = ['Subject packages for High School', 'Vocational Subjects for High School', 'Single Subjects for High School'];
+  var CFG_AREAS_HS   = ['Subject packages for High School', 'Vocational Studies for High School', 'Single Subjects for High School'];
   var CFG_AREAS_PROF = ['Economy and sustainability', 'HR and Management', 'Law and administration', 'Construction and logistics', 'Interior and design', 'Health and lifestyle', 'Marketing and sales'];
   var CFG_AREAS_ALL  = CFG_AREAS_PROF.concat(CFG_AREAS_HS);
 
@@ -2163,16 +2200,16 @@
   if (btnFind) {
     btnFind.addEventListener('click', function() {
       var ctx   = {};
-      var hsAreaMap = { 'Subject packages for High School': 'High School', 'Vocational Subjects for High School': 'High School', 'Single Subjects for High School': 'Single Subject' };
+      var hsAreaMap = { 'Subject packages for High School': 'High School', 'Vocational Studies for High School': 'High School', 'Single Subjects for High School': 'High School' };
       if (_cfgArea && hsAreaMap[_cfgArea]) {
         ctx.level = hsAreaMap[_cfgArea];
       } else if (_cfgArea) {
-        ctx.level = 'Courses';
+        ctx.level = 'Professional Courses';
         ctx.area = _cfgArea;
       } else if (_cfgLevel === 'high-school') {
         ctx.level = 'High School';
       } else if (_cfgLevel === 'professional-courses') {
-        ctx.level = 'Courses';
+        ctx.level = 'Professional Courses';
       }
       showPage('search', ctx);
     });
