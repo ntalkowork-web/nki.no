@@ -2413,7 +2413,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 .sp-price-preset {
   border: 1px solid var(--gray-300);
-  border-radius: 99px;
+  border-radius: 8px;
   padding: 4px 10px;
   font-size: 11px;
   color: var(--gray-600);
