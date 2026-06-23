@@ -34,9 +34,9 @@
           <button class="nav-tab" aria-expanded="false">High School <span class="chevron">▾</span></button>
           <div class="dropdown">
             <ul class="dropdown-list">
-              <!-- Subject packages › -->
+              <!-- High School Subject Packages › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">Subject packages</span>
+                <span class="item-label">High School Subject Packages</span>
                 <span class="mega-arrow">›</span>
                 <div class="mega-panel">
                   <ul>
@@ -68,9 +68,9 @@
                   </ul>
                 </div>
               </li>
-              <!-- Single Subjects › -->
+              <!-- High School Single Subjects › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">Single Subjects</span>
+                <span class="item-label">High School Single Subjects</span>
                 <span class="mega-arrow">›</span>
                 <div class="mega-panel">
                   <div class="mega-label">Most popular</div>
@@ -1690,7 +1690,7 @@
       if (ctx) {
         if (ctx.category) {
           spState.breadcrumb = ctx.category;
-          var levelMap = { 'High School': 'High School', 'high-school': 'High School', 'Courses': 'Courses', 'professional-courses': 'Courses', 'Single Subjects': 'Single Subject', 'Single subject': 'Single Subject' };
+          var levelMap = { 'High School': 'High School', 'high-school': 'High School', 'Courses': 'Courses', 'professional-courses': 'Courses', 'Single Subjects': 'Single Subject', 'Single subject': 'Single Subject', 'High School Subject Packages': 'High School', 'Vocational Subjects for High School': 'High School', 'High School Single Subjects': 'Single Subject' };
           if (levelMap[ctx.category]) spState.levels = [levelMap[ctx.category]];
           else spState.areas = [ctx.category];
         }
@@ -2107,8 +2107,9 @@
   var cfgLevel = document.getElementById('cfg-level');
   var cfgArea  = document.getElementById('cfg-area');
 
-  var CFG_AREAS_HS   = ['Subject packages', 'Vocational Subjects for High School', 'Single Subjects'];
+  var CFG_AREAS_HS   = ['High School Subject Packages', 'Vocational Subjects for High School', 'High School Single Subjects'];
   var CFG_AREAS_PROF = ['Economy and sustainability', 'HR and Management', 'Law and administration', 'Construction and logistics', 'Interior and design', 'Health and lifestyle', 'Marketing and sales'];
+  var CFG_AREAS_HS_COMBINED = CFG_AREAS_PROF.concat(CFG_AREAS_HS);
 
   function populateCfgArea(areas) {
     cfgArea.innerHTML = '<option value="">Choose area</option>' +
@@ -2119,7 +2120,7 @@
   if (cfgLevel) {
     cfgLevel.addEventListener('change', function() {
       var v = cfgLevel.value;
-      if (v === 'high-school')          { populateCfgArea(CFG_AREAS_HS); }
+      if (v === 'high-school')          { populateCfgArea(CFG_AREAS_HS_COMBINED); }
       else if (v === 'professional-courses') { populateCfgArea(CFG_AREAS_PROF); }
       else { cfgArea.innerHTML = '<option value="">Choose subject area</option>'; cfgArea.disabled = true; }
     });
@@ -2132,7 +2133,9 @@
       var area  = cfgArea  ? cfgArea.value  : '';
       var ctx   = {};
       if (level === 'high-school') {
-        if (area === 'Single Subjects') { ctx.level = 'Single Subject'; }
+        if (area === 'High School Single Subjects') { ctx.level = 'Single Subject'; }
+        else if (area === 'High School Subject Packages' || area === 'Vocational Subjects for High School') { ctx.level = 'High School'; }
+        else if (area) { ctx.level = 'Courses'; ctx.area = area; }
         else { ctx.level = 'High School'; }
       } else if (level === 'professional-courses') {
         ctx.level = 'Courses';
