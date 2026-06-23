@@ -1235,7 +1235,6 @@
   function buildLanekassen() {
     return (
       '<div class="nki-lk">' +
-        '<button class="nki-lk-close" aria-label="Dismiss">\xd7</button>' +
         '<img src="payment-options-logos/lanekassen.jpg" alt="Lanekassen" class="nki-lk-logo">' +
         '<div class="nki-lk-body">' +
           '<div class="nki-lk-label">Student Loan Support</div>' +
@@ -1888,7 +1887,8 @@
           '<span class="sp-compare-name">' + c.name + '</span>' +
           '<button class="sp-compare-remove" data-cmp-remove="' + id + '">×</button></div>';
       }).join('');
-      cmpSection = '<div class="sp-compare-section"><div class="sp-compare-title">Compare courses</div>' +
+      cmpSection = '<div class="sp-compare-section">' +
+        '<div class="sp-compare-title-row"><span class="sp-compare-title">Compare courses</span><span class="sp-compare-count">' + spState.compareIds.length + '/3 selected</span></div>' +
         '<div class="sp-compare-list">' + rows + '</div>' +
         '<button class="sp-compare-cta" id="spCompareCta"' + (spState.compareIds.length < 2 ? ' disabled' : '') + '>Compare courses</button></div>';
     }
@@ -1939,6 +1939,8 @@
         '<option value="recommended"' + (spState.sort === 'recommended' ? ' selected' : '') + '>Recommended</option>' +
         '<option value="newest"'      + (spState.sort === 'newest'      ? ' selected' : '') + '>Newest</option>' +
         '<option value="trending"'    + (spState.sort === 'trending'    ? ' selected' : '') + '>Trending</option>' +
+        '<option value="price-asc"'   + (spState.sort === 'price-asc'  ? ' selected' : '') + '>Price: low to high</option>' +
+        '<option value="price-desc"'  + (spState.sort === 'price-desc' ? ' selected' : '') + '>Price: high to low</option>' +
       '</select></div>';
     return pills + clearAll + sort;
   }
@@ -1973,6 +1975,8 @@
     if (spState.sort === 'recommended') r.sort(function(a, b) { return b.reviews - a.reviews; });
     if (spState.sort === 'newest')      r.sort(function(a, b) { return a.id < b.id ? -1 : 1; });
     if (spState.sort === 'trending')    r.sort(function(a, b) { return b.rating - a.rating; });
+    if (spState.sort === 'price-asc')   r.sort(function(a, b) { return a.price - b.price; });
+    if (spState.sort === 'price-desc')  r.sort(function(a, b) { return b.price - a.price; });
     return r;
   }
 

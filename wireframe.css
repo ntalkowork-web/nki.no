@@ -2206,7 +2206,9 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   margin-bottom: 16px;
 }
 
-.sp-compare-title { font-size: 14px; font-weight: 600; color: var(--gray-900); margin-bottom: 12px; }
+.sp-compare-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.sp-compare-title { font-size: 14px; font-weight: 600; color: var(--gray-900); }
+.sp-compare-count { font-size: 12px; font-weight: 600; color: var(--gray-500); }
 .sp-compare-list { margin-bottom: 12px; }
 
 .sp-compare-row {
