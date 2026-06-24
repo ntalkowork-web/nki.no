@@ -3081,7 +3081,7 @@
       summCards + lkHTML +
       '<div class="co-sum-sep"></div>' +
       (CHECKOUT_STATE.promoApplied ? '<div class="co-sum-row"><span>Discount (' + CHECKOUT_STATE.discountPct + '%)</span><span class="co-sum-disc">-' + coFmt(disc) + '</span></div>' : '') +
-      (CHECKOUT_STATE.paymentMethod === 'partial' ? '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--gray-400);font-size:11px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' : '') +
+      '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--gray-400);font-size:11px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' +
       '<div class="co-sum-row co-sum-total-row"><span>Total price</span><span>' + coFmt(total) + '</span></div>' +
       '<div class="co-sum-excl">Excluding books</div>' +
       '<div class="co-promo-wrap">' +
