@@ -3533,7 +3533,8 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .co-pay-title { font-size: 14px; font-weight: 600; color: var(--gray-900); }
 .co-pay-card.is-selected .co-pay-hd { padding-bottom: 0; }
 .co-pay-body { padding: 8px 16px 16px 44px; }
-.co-pay-desc { font-size: 13px; color: var(--gray-500); line-height: 1.5; padding-top: 0; margin-bottom: 12px; }
+.co-pay-desc { font-size: 13px; color: var(--gray-500); line-height: 1.5; padding-top: 0; margin-bottom: 16px; }
+.co-pay-sep { border: none; border-top: 1px solid var(--gray-200); margin: 0 0 16px; }
 .co-card-logos { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
 .co-card-logo {
   display: inline-flex;
