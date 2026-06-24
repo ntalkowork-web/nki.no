@@ -3428,6 +3428,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   border-left: 3px solid var(--gray-700);
 }
 .co-terms-row { padding-top: 4px; }
+.co-terms-row + .co-terms-row { margin-top: -8px; }
 .co-terms-lbl { font-size: 13px; color: var(--gray-700); display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }
 .co-terms-lbl a { color: var(--gray-900); }
 .co-cta-wrap { display: flex; flex-direction: column; gap: 8px; padding-top: 20px; }
