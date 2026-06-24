@@ -1761,7 +1761,8 @@
     step: 1, completed: [], promoApplied: false, discountPct: 0,
     installMonths: 3, docDelivery: 'now', docUploaded: false,
     paymentMethod: '', otherPayerType: 'private',
-    lastOrderItems: [], lastOrderTotal: 0, confNum: null
+    lastOrderItems: [], lastOrderTotal: 0, confNum: null,
+    isEditing: false, savedStep1: {}
   };
   var _cdpReviewPages   = [];
   var _cdpRevActiveDot  = 0;
@@ -2903,41 +2904,41 @@
   }
 
   function buildStep1HTML() {
+    var s = CHECKOUT_STATE.savedStep1;
     var ccs = [{flag:'🇳🇴',code:'+47'},{flag:'🇸🇪',code:'+46'},{flag:'🇩🇰',code:'+45'},{flag:'🇫🇮',code:'+358'},{flag:'🇩🇪',code:'+49'},{flag:'🇬🇧',code:'+44'},{flag:'🇺🇸',code:'+1'}];
-    var ccOpts = ccs.map(function(c,i){ return '<option' + (i===0?' selected':'') + ' value="' + c.code + '">' + c.flag + ' ' + c.code + '</option>'; }).join('');
+    var ccOpts = ccs.map(function(c){ return '<option' + (s.coCcSel === c.code ? ' selected' : (c.code==='+47'&&!s.coCcSel?' selected':'')) + ' value="' + c.code + '">' + c.flag + ' ' + c.code + '</option>'; }).join('');
+    var ctryOpts = [['NO','Norway'],['SE','Sweden'],['DK','Denmark'],['FI','Finland'],['DE','Germany'],['GB','United Kingdom'],['US','United States'],['XX','Other']];
+    var countrySelect = ctryOpts.map(function(o){ return '<option value="' + o[0] + '"' + ((s.coCountry||'NO')===o[0]?' selected':'') + '>' + o[1] + '</option>'; }).join('');
     return '<form class="co-form" id="coForm1" onsubmit="return false">' +
       '<div class="co-form-row">' +
-        '<div class="co-form-group"><label class="co-label" for="coFname">First name</label><input class="co-input co-req" id="coFname" type="text" placeholder="Enter your first name"></div>' +
-        '<div class="co-form-group"><label class="co-label" for="coLname">Surname</label><input class="co-input co-req" id="coLname" type="text" placeholder="Enter your surname"></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coFname">First name</label><input class="co-input co-req" id="coFname" type="text" placeholder="Enter your first name" value="' + (s.coFname||'') + '"></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coLname">Surname</label><input class="co-input co-req" id="coLname" type="text" placeholder="Enter your surname" value="' + (s.coLname||'') + '"></div>' +
       '</div>' +
       '<div class="co-form-group"><label class="co-label" for="coPhone">Phone number</label>' +
-        '<div class="co-phone-row"><select class="co-cc-sel" id="coCcSel">' + ccOpts + '</select><input class="co-input co-req co-phone-inp" id="coPhone" type="tel" placeholder="000 00 000"></div>' +
+        '<div class="co-phone-row"><select class="co-cc-sel" id="coCcSel">' + ccOpts + '</select><input class="co-input co-req co-phone-inp" id="coPhone" type="tel" placeholder="000 00 000" value="' + (s.coPhone||'') + '"></div>' +
       '</div>' +
       '<div class="co-form-group"><label class="co-label" for="coEmail">Email</label>' +
         '<div class="co-inp-icon-wrap">' +
           '<span class="material-symbols-outlined co-field-icon">mail</span>' +
-          '<input class="co-input co-req co-icon-inp" id="coEmail" type="email" placeholder="Enter your email">' +
+          '<input class="co-input co-req co-icon-inp" id="coEmail" type="email" placeholder="Enter your email" value="' + (s.coEmail||'') + '">' +
         '</div>' +
       '</div>' +
       '<div class="co-form-group"><label class="co-label" for="coSsn">Social security number</label>' +
-        '<input class="co-input co-req" id="coSsn" type="text" placeholder="ddmmyy-xxxxx">' +
+        '<input class="co-input co-req" id="coSsn" type="text" placeholder="ddmmyy-xxxxx" value="' + (s.coSsn||'') + '">' +
         buildCoSsnAcc() +
       '</div>' +
-      '<div class="co-form-group"><label class="co-label" for="coAddr">Street address</label><input class="co-input co-req" id="coAddr" type="text" placeholder="Enter your street address"></div>' +
-      '<div class="co-form-group"><label class="co-label" for="coAddr2">Address line 2</label><input class="co-input" id="coAddr2" type="text" placeholder="Apartment, suite, etc. (optional)"></div>' +
+      '<div class="co-form-group"><label class="co-label" for="coAddr">Street address</label><input class="co-input co-req" id="coAddr" type="text" placeholder="Enter your street address" value="' + (s.coAddr||'') + '"></div>' +
+      '<div class="co-form-group"><label class="co-label" for="coAddr2">Address line 2</label><input class="co-input" id="coAddr2" type="text" placeholder="Apartment, suite, etc. (optional)" value="' + (s.coAddr2||'') + '"></div>' +
       '<div class="co-form-row">' +
-        '<div class="co-form-group"><label class="co-label" for="coCity">City</label><input class="co-input co-req" id="coCity" type="text" placeholder="Enter your city"></div>' +
-        '<div class="co-form-group"><label class="co-label" for="coPostal">Postal code</label><input class="co-input co-req" id="coPostal" type="text" placeholder="0000"></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coCity">City</label><input class="co-input co-req" id="coCity" type="text" placeholder="Enter your city" value="' + (s.coCity||'') + '"></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coPostal">Postal code</label><input class="co-input co-req" id="coPostal" type="text" placeholder="0000" value="' + (s.coPostal||'') + '"></div>' +
       '</div>' +
       '<div class="co-form-group"><label class="co-label" for="coCountry">Country</label>' +
-        '<select class="co-select co-req" id="coCountry">' +
-          '<option value="NO" selected>Norway</option><option value="SE">Sweden</option><option value="DK">Denmark</option>' +
-          '<option value="FI">Finland</option><option value="DE">Germany</option><option value="GB">United Kingdom</option><option value="US">United States</option><option value="XX">Other</option>' +
-        '</select>' +
+        '<select class="co-select co-req" id="coCountry">' + countrySelect + '</select>' +
       '</div>' +
       '<div class="co-terms-row"><label class="co-terms-lbl"><input type="checkbox" id="coTerms"> By continuing, I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.</label></div>' +
       '<div class="co-cta-wrap">' +
-        '<button class="co-continue-btn" id="coContinue1" type="button" disabled>Continue</button>' +
+        '<button class="co-continue-btn" id="coContinue1" type="button" disabled>' + (CHECKOUT_STATE.isEditing ? 'Save' : 'Continue') + '</button>' +
         '<div class="co-cant" id="coCant1"><span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnk1">Complete your personal information first.</a></div>' +
       '</div>' +
     '</form>';
@@ -2965,7 +2966,7 @@
         '</div>' +
       '</div>' +
       '<div class="co-cta-wrap">' +
-        '<button class="co-continue-btn" id="coContinue2" type="button"' + (CHECKOUT_STATE.docDelivery==='now' && !CHECKOUT_STATE.docUploaded ? ' disabled' : '') + '>Continue</button>' +
+        '<button class="co-continue-btn" id="coContinue2" type="button"' + (CHECKOUT_STATE.docDelivery==='now' && !CHECKOUT_STATE.docUploaded ? ' disabled' : '') + '>' + (CHECKOUT_STATE.isEditing ? 'Save' : 'Continue') + '</button>' +
         '<div class="co-cant" id="coCant2"' + (CHECKOUT_STATE.docDelivery==='now' && !CHECKOUT_STATE.docUploaded ? '' : ' hidden') + '><span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnk2">Upload your documentation first.</a></div>' +
       '</div>' +
     '</div>';
@@ -2991,13 +2992,14 @@
     var isSel = CHECKOUT_STATE.paymentMethod === id;
     return '<div class="co-pay-card' + (isSel ? ' is-selected' : '') + '" data-pay-id="' + id + '">' +
       '<label class="co-pay-hd"><input type="radio" name="co-pay" value="' + id + '"' + (isSel ? ' checked' : '') + '><span class="co-pay-title">' + title + '</span></label>' +
-      (isSel ? '<div class="co-pay-body">' + expandedHTML + buildPayConfirm() + '</div>' : '') +
+      (isSel ? '<div class="co-pay-body">' + expandedHTML +
+        '<label class="co-terms-lbl co-regs-lbl"><input type="checkbox" id="coStudyRegs"> I have read and accepted the <a href="#">Study Regulations</a>.</label>' +
+        buildPayConfirm() + '</div>' : '') +
     '</div>';
   }
 
   function buildPayConfirm() {
     return '<div class="co-pay-confirm">' +
-      '<label class="co-terms-lbl co-regs-lbl"><input type="checkbox" id="coStudyRegs"> I have read and accepted the <a href="#">Study Regulations</a>.</label>' +
       '<button class="co-proceed-btn" id="coProceed" type="button" disabled>Proceed to payment</button>' +
       '<div class="co-cant" id="coCantProceed"><span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnkProceed">Please accept the Study Regulations first.</a></div>' +
     '</div>';
@@ -3031,8 +3033,10 @@
         '<div class="co-form-group"><label class="co-label" for="coOtherEmail">Email address</label><div class="co-inp-icon-wrap"><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div></div>';
     return '<p class="co-pay-desc">Provide contact information for another payer who will receive an email from NKI. The payer must confirm the order and provide invoice details.</p>' +
       '<div class="co-other-expand">' +
-        '<div class="co-other-hd">Who is the other payer?</div>' +
-        '<p class="co-other-sub">You cannot select yourself as the payer.</p>' +
+        '<div class="co-other-head-group">' +
+          '<div class="co-other-hd">Who is the other payer?</div>' +
+          '<p class="co-other-sub">You cannot select yourself as the payer.</p>' +
+        '</div>' +
         '<div class="co-payer-pills" id="coPayerPills">' + pills + '</div>' +
         '<div id="coPayerTypeBody">' + typeBody + '</div>' +
       '</div>';
@@ -3151,6 +3155,14 @@
       checkStep1();
 
       if (continueBtn) continueBtn.addEventListener('click', function() {
+        var sf = {};
+        ['coFname','coLname','coPhone','coEmail','coSsn','coAddr','coAddr2','coCity','coPostal'].forEach(function(id){
+          var el = document.getElementById(id); if (el) sf[id] = el.value;
+        });
+        var cc = document.getElementById('coCcSel'); if (cc) sf.coCcSel = cc.value;
+        var ctry = document.getElementById('coCountry'); if (ctry) sf.coCountry = ctry.value;
+        CHECKOUT_STATE.savedStep1 = sf;
+        CHECKOUT_STATE.isEditing = false;
         CHECKOUT_STATE.completed.push(1);
         CHECKOUT_STATE.step = 2;
         renderCheckoutPage();
@@ -3173,11 +3185,12 @@
       }
     }
 
-    /* ── Step 1 Edit button ── */
+    /* ── Edit button ── */
     document.querySelectorAll('[data-co-edit]').forEach(function(btn){
       btn.addEventListener('click', function(){
         var n = parseInt(btn.getAttribute('data-co-edit'));
         CHECKOUT_STATE.step = n;
+        CHECKOUT_STATE.isEditing = true;
         CHECKOUT_STATE.completed = CHECKOUT_STATE.completed.filter(function(s){ return s < n; });
         renderCheckoutPage();
       });
@@ -3238,6 +3251,7 @@
     if (cant2lnk) cant2lnk.addEventListener('click', function(e){ e.preventDefault(); if(uploadZone) uploadZone.scrollIntoView({behavior:'smooth'}); });
 
     if (cont2) cont2.addEventListener('click', function(){
+      CHECKOUT_STATE.isEditing = false;
       CHECKOUT_STATE.completed.push(2);
       CHECKOUT_STATE.step = 3;
       renderCheckoutPage();

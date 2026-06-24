@@ -3339,6 +3339,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 /* ── Forms ── */
 .co-form { display: flex; flex-direction: column; gap: 16px; padding-top: 20px; }
 .co-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+#coForm1 { display: flex; flex-direction: column; gap: 16px; }
 .co-form-group { display: flex; flex-direction: column; gap: 5px; }
 .co-label { font-size: 13px; font-weight: 500; color: var(--gray-700); }
 .co-input {
@@ -3495,7 +3496,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .co-fname { flex: 1; font-size: 13px; color: var(--gray-700); }
 .co-del-file { background: none; border: none; cursor: pointer; padding: 0; color: var(--gray-400); display: flex; align-items: center; }
 .co-del-file:hover { color: var(--gray-900); }
-.co-delivery-wrap { display: flex; flex-direction: column; gap: 10px; }
+.co-delivery-wrap { display: flex; flex-direction: column; gap: 16px; }
 .co-delivery-hd { font-size: 14px; font-weight: 600; color: var(--gray-900); }
 .co-delivery-pills { display: flex; flex-wrap: wrap; gap: 8px; }
 .co-deliv-pill {
@@ -3548,8 +3549,10 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 }
 .co-vipps-logo { font-size: 22px; font-weight: 900; color: #ff5b24; margin-bottom: 12px; letter-spacing: -0.5px; }
 .co-other-expand, .co-partial-expand { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+.co-other-head-group { display: flex; flex-direction: column; gap: 8px; }
 .co-other-hd { font-size: 14px; font-weight: 600; color: var(--gray-900); }
-.co-other-sub { font-size: 13px; color: var(--gray-500); }
+.co-other-sub { font-size: 13px; color: var(--gray-500); margin: 0; }
+#coPayerTypeBody { display: flex; flex-direction: column; gap: 16px; }
 .co-payer-pills { display: flex; flex-wrap: wrap; gap: 8px; }
 .co-payer-pill {
   padding: 7px 14px;
@@ -3585,8 +3588,8 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .co-inst-breakdown { display: flex; flex-direction: column; gap: 6px; padding: 12px; background: var(--gray-50); border-radius: 6px; }
 .co-inst-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--gray-600); }
 .co-inst-highlight { font-weight: 600; color: var(--gray-900); }
-.co-pay-confirm { border-top: 1px solid var(--gray-100); padding-top: 16px; display: flex; flex-direction: column; gap: 10px; }
-.co-regs-lbl { align-items: center; }
+.co-pay-confirm { display: flex; flex-direction: column; gap: 10px; }
+.co-regs-lbl { align-items: center; display: block; margin-top: 16px; margin-bottom: 16px; }
 .co-proceed-btn {
   height: 44px;
   width: 100%;
