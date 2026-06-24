@@ -3397,38 +3397,35 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   line-height: 1;
 }
 .co-icon-inp { padding-left: 36px; }
-.co-ssn-acc { margin-top: 4px; border: 1px solid var(--gray-200); border-radius: 6px; overflow: hidden; }
+.co-ssn-acc { margin-top: 6px; background: var(--gray-50); border-radius: 4px; }
 .co-ssn-acc-hd {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 6px;
   cursor: pointer;
-  padding: 10px 12px;
-  background: var(--gray-50);
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--gray-700);
+  user-select: none;
+}
+.co-ssn-acc-hd:hover .co-ssn-acc-label { color: var(--gray-900); }
+.co-ssn-acc-label { text-decoration: underline; }
+.co-ssn-acc-arrow {
+  font-size: 9px;
+  color: var(--gray-700);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.co-ssn-acc-arrow::before { content: '▶'; }
+.co-ssn-acc.is-open .co-ssn-acc-arrow::before { content: '▼'; }
+.co-ssn-acc-body {
   font-size: 12px;
   color: var(--gray-600);
-  user-select: none;
-  transition: background .15s;
+  line-height: 1.5;
+  margin: 0 10px 8px 10px;
+  padding: 6px 10px;
+  border-left: 3px solid var(--gray-700);
 }
-.co-ssn-acc-hd:hover { background: var(--gray-100); color: var(--gray-700); }
-.co-ssn-acc-arrow {
-  font-family: 'Material Symbols Outlined';
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  word-wrap: normal;
-  -webkit-font-feature-settings: 'liga';
-  font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
-  color: var(--gray-500);
-  flex-shrink: 0;
-  transition: transform .2s;
-}
-.co-ssn-acc.is-open .co-ssn-acc-arrow { transform: rotate(180deg); }
-.co-ssn-acc-body { font-size: 12px; color: var(--gray-600); line-height: 1.5; padding: 10px 12px; background: var(--gray-50); border-top: 1px solid var(--gray-200); }
 .co-terms-row { padding-top: 4px; }
 .co-terms-lbl { font-size: 13px; color: var(--gray-700); display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }
 .co-terms-lbl a { color: var(--gray-900); }
