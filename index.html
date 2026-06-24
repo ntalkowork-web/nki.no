@@ -1536,7 +1536,14 @@
   function renderDots() {
     var dotsEl = document.getElementById('carouselDots');
     if (!dotsEl) return;
-    dotsEl.innerHTML = getActivePages().map(function(_, i) {
+    var pages = getActivePages();
+    if (pages.length <= 1) {
+      dotsEl.hidden = true;
+      carouselDots = [];
+      return;
+    }
+    dotsEl.hidden = false;
+    dotsEl.innerHTML = pages.map(function(_, i) {
       return '<span class="dot' + (i === activeDot ? ' is-active' : '') + '"></span>';
     }).join('');
     carouselDots = Array.from(dotsEl.querySelectorAll('.dot'));
@@ -1615,8 +1622,15 @@
     }, 360);
   }
 
+  function updateArrows() {
+    var single = getActivePages().length <= 1;
+    popularPrev.disabled = single;
+    popularNext.disabled = single;
+  }
+
   renderDots();
   renderPage(0);
+  updateArrows();
   popularPrev.addEventListener('click', function () { goToDot(activeDot - 1, -1); });
   popularNext.addEventListener('click', function () { goToDot(activeDot + 1,  1); });
 
@@ -1630,6 +1644,7 @@
       tab.classList.add('is-active');
       renderDots();
       renderPage(0);
+      updateArrows();
     });
   });
 

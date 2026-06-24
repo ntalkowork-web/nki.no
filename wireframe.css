@@ -1456,6 +1456,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 }
 
 .nav-arrow:hover { background: var(--gray-100); border-color: var(--gray-400); }
+.nav-arrow:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
 
 /* ── COURSE CARDS ─────────────────────────── */
 
