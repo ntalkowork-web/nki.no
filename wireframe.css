@@ -3334,7 +3334,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   padding: 0;
 }
 .co-step-edit-btn:hover { color: var(--gray-900); }
-.co-step-body { padding: 0 24px 24px; border-top: 1px solid var(--gray-100); }
+.co-step-body { padding: 0 24px 24px; }
 
 /* ── Forms ── */
 .co-form { display: flex; flex-direction: column; gap: 16px; padding-top: 20px; }
@@ -3452,7 +3452,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .co-cant-lnk { color: var(--gray-700); text-decoration: underline; }
 
 /* ── Step 2: Documentation ── */
-.co-doc-wrap { display: flex; flex-direction: column; gap: 16px; padding-top: 20px; }
+.co-doc-wrap { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
 .co-doc-intro { font-size: 14px; color: var(--gray-600); line-height: 1.6; max-width: 600px; margin-left: 40px; }
 .co-upload-zone {
   position: relative;
