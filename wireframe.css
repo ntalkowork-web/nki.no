@@ -3453,7 +3453,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 /* ── Step 2: Documentation ── */
 .co-doc-wrap { display: flex; flex-direction: column; gap: 16px; padding-top: 20px; }
-.co-doc-intro { font-size: 14px; color: var(--gray-600); line-height: 1.6; max-width: 600px; }
+.co-doc-intro { font-size: 14px; color: var(--gray-600); line-height: 1.6; max-width: 600px; margin-left: 40px; }
 .co-upload-zone {
   position: relative;
   border: 2px dashed var(--gray-300);
