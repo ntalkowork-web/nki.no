@@ -2709,6 +2709,8 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   line-height: 1;
 }
 
+.cdp-meta-star { font-size: 13px; color: var(--gray-700); flex-shrink: 0; }
+
 .cdp-meta-icon {
   font-size: 14px;
   color: var(--gray-500);

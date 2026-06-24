@@ -2399,7 +2399,10 @@
 
     var metaHTML = metaItems.map(function(m, mi) {
       var sep = mi > 0 ? '<span class="cdp-meta-sep">·</span>' : '';
-      return sep + '<div class="cdp-meta-item"><span class="material-symbols-outlined cdp-meta-icon">' + m.icon + '</span>' + m.text + '</div>';
+      var iconHTML = m.icon === 'star'
+        ? '<span class="cdp-meta-star">★</span>'
+        : '<span class="material-symbols-outlined cdp-meta-icon">' + m.icon + '</span>';
+      return sep + '<div class="cdp-meta-item">' + iconHTML + m.text + '</div>';
     }).join('');
 
     /* what you get */
