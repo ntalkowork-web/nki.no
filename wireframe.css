@@ -3453,6 +3453,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .co-cant-lnk { color: var(--gray-700); text-decoration: underline; }
 
 /* ── Step 2: Documentation ── */
+.co-step[data-co-step="2"].is-open .co-step-hd { padding-bottom: 0; }
 .co-doc-wrap { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
 .co-doc-intro { font-size: 14px; color: var(--gray-600); line-height: 1.6; max-width: 600px; margin-left: 40px; }
 .co-upload-zone {
