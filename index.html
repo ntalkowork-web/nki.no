@@ -265,21 +265,6 @@
             </ul>
           </div>
 
-          <!-- Section 2: Trending pills -->
-          <div class="search-section">
-            <div class="search-section-label">Explore Professional Courses</div>
-            <div class="cat-grid">
-              <div class="cat-card"><div class="cat-thumb"></div><span class="cat-label">Health and lifestyle</span></div>
-              <div class="cat-card"><div class="cat-thumb"></div><span class="cat-label">Economy and sustainability</span></div>
-              <div class="cat-card"><div class="cat-thumb"></div><span class="cat-label">HR and Management</span></div>
-              <div class="cat-card"><div class="cat-thumb"></div><span class="cat-label">Interior and design</span></div>
-              <div class="cat-card"><div class="cat-thumb"></div><span class="cat-label">Law and administration</span></div>
-              <div class="cat-card"><div class="cat-thumb"></div><span class="cat-label">Marketing and sales</span></div>
-              <div class="cat-card"><div class="cat-thumb"></div><span class="cat-label">Construction and logistics</span></div>
-              <div class="cat-card"><div class="cat-thumb"></div><span class="cat-label">Science</span></div>
-            </div>
-          </div>
-
           <!-- Section 3: Popular course cards (3-col grid) -->
           <div class="search-section">
             <div class="search-section-label">Start with the most popular</div>
@@ -493,14 +478,14 @@
           <button class="nav-arrow" aria-label="Next">&#8594;</button>
         </div>
       </div>
+      <div class="pop-tabs" id="popTabs">
+        <button class="pop-tab is-active" data-pop-tab="hs">High School</button>
+        <button class="pop-tab" data-pop-tab="pro">Professional Courses</button>
+      </div>
       <div class="courses-viewport">
         <div class="courses-grid" id="coursesGrid"></div>
       </div>
-      <div class="carousel-dots">
-        <span class="dot is-active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
     </div>
   </section>
 
@@ -1183,6 +1168,13 @@
     return _cartItems.reduce(function (sum, item) { return sum + item.price; }, 0);
   }
 
+  function fmtMeta(item) {
+    var hpw = item.hours && item.accessMonths ? Math.round(item.hours / (item.accessMonths * 4.33)) : null;
+    var parts = [(item.type || 'Course'), item.accessMonths + ' months'];
+    if (hpw) parts.push(hpw + ' hrs/week');
+    return parts.join(' · ');
+  }
+
   function buildItemCard(item) {
     var books = '<div class="nki-item-books">Excluding books</div>';
     return (
@@ -1190,7 +1182,7 @@
         '<div class="nki-item-img"></div>' +
         '<div class="nki-item-info">' +
           '<div class="nki-item-name">' + item.name + '</div>' +
-          '<div class="nki-item-meta">' + (item.type || 'Course') + ' · ' + item.hours + ' hours · ' + item.accessMonths + ' months access</div>' +
+          '<div class="nki-item-meta">' + fmtMeta(item) + '</div>' +
           '<div class="nki-item-price">' + fmtPrice(item.price) + '</div>' +
           books +
         '</div>' +
@@ -1223,7 +1215,7 @@
           '<div class="nki-sugg-img"></div>' +
           '<div class="nki-sugg-info">' +
             '<div class="nki-sugg-name">' + c.name + '</div>' +
-            '<div class="nki-sugg-meta">' + (c.type || 'Course') + ' · ' + c.hours + ' hours · ' + c.accessMonths + ' months access</div>' +
+            '<div class="nki-sugg-meta">' + fmtMeta(c) + '</div>' +
             '<div class="nki-sugg-price">' + fmtPrice(c.price) + '</div>' +
           '</div>' +
           '<button class="nki-sugg-add" data-sugg-id="' + c.id + '" aria-label="Add ' + c.name + '">' +
@@ -1469,26 +1461,37 @@
   });
 
   /* ── Popular courses carousel ── */
-  var coursePages = [
-    [
-      { id: 'pabygg',       name: 'General Study Competence (23/5 Rule)', type: 'Package', badge: 'Best seller', rating: '4.9', pills: ['Lånekassen support', '6 months', 'Beginner', 'Books needed'],   price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-15%' },
-      { id: 'med-sec',      name: 'Medical Secretary',                    type: 'Course',  badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '6 months', 'All levels', 'Certificate'],        price: 'Kr 12 900', orig: 'Kr 14 900', disc: '-13%' },
-      { id: 'hr-grunnkurs', name: 'Office employee',                      type: 'Course',  badge: null,          rating: '4.7', pills: ['Lånekassen support', '3 months', 'All levels', 'No books needed'],     price: 'Kr 5 490',  orig: 'Kr 5 990',  disc: '-8%'  },
-      { id: 'interior',     name: 'Interior Designer',                    type: 'Course',  badge: null,          rating: '4.9', pills: ['280 total hours', '6 months', 'All levels', 'Certificate'],         price: 'Kr 19 900', orig: 'Kr 23 900', disc: '-17%' },
+  var coursePagesByTab = {
+    hs: [
+      [
+        { id: 'pabygg',     name: 'General Study Competence (23/5 Rule)', type: 'Package', badge: 'Best seller', rating: '4.9', pills: ['Lånekassen support', '6 months', 'Beginner', 'Books needed'],  price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-15%' },
+        { id: 'mat-1t',     name: 'Mathematics R1',                        type: 'Course',  badge: 'Best seller', rating: '4.9', pills: ['Single subject', '6 months', 'Books needed'],                  price: 'Kr 3 490',  orig: 'Kr 3 990',  disc: '-13%' },
+        { id: 'norsk-vg3',  name: 'Norsk – Skriftlig VG3',                 type: 'Course',  badge: null,          rating: '4.6', pills: ['Single subject', '6 months', 'Lånekassen support'],            price: 'Kr 5 900',  orig: 'Kr 6 490',  disc: '-9%'  },
+        { id: 'engelsk-vg3',name: 'Engelsk VG2/VG3',                       type: 'Course',  badge: null,          rating: '4.5', pills: ['Single subject', '6 months', 'Certificate'],                    price: 'Kr 4 400',  orig: 'Kr 4 900',  disc: '-10%' },
+      ]
     ],
-    [
-      { id: 'hr-grunnkurs', name: 'HR Consultant',            type: 'Course', badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '60 credits', 'Certificate', 'Books needed'], price: 'Kr 14 900', orig: 'Kr 17 900', disc: '-17%' },
-      { id: 'regnskap',     name: 'Accounting Consultant',    type: 'Course', badge: null,          rating: '4.7', pills: ['Lånekassen support', '60 credits', 'Vocational School'],            price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
-      { id: 'jus',          name: 'Legal Secretary',          type: 'Course', badge: null,          rating: '4.6', pills: ['Lånekassen support', '60 credits', 'Beginner', 'Books needed'],     price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
-      { id: 'leder',        name: 'Project Manager',          type: 'Course', badge: null,          rating: '4.7', pills: ['30 credits', 'All levels', 'Certificate'],                            price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-14%' },
-    ],
-    [
-      { id: 'mat-1t',       name: 'Mathematics R1',               type: 'Course', badge: 'Best seller', rating: '4.9', pills: ['High School', 'Single subject', 'Books needed'],          price: 'Kr 3 490', orig: 'Kr 3 990', disc: '-13%' },
-      { id: 'mkt-grunnkurs',name: 'Digital Marketing',            type: 'Course', badge: null,          rating: '4.6', pills: ['Online course', '3 months', 'Beginner'],                  price: 'Kr 2 990', orig: 'Kr 3 490', disc: '-14%' },
-      { id: 'interior',     name: 'Home Stylist',                 type: 'Course', badge: null,          rating: '4.7', pills: ['Course', 'All levels', 'Certificate', 'Books needed'],   price: 'Kr 8 490', orig: 'Kr 9 900', disc: '-14%' },
-      { id: 'baerekraft',   name: 'Logistics Vocational School',  type: 'Course', badge: null,          rating: '4.5', pills: ['30 credits', 'Vocational School', 'Lånekassen support'], price: 'Kr 8 490', orig: 'Kr 9 900', disc: '-14%' },
-    ],
-  ];
+    pro: [
+      [
+        { id: 'med-sec',      name: 'Medical Secretary',      type: 'Course',  badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '6 months', 'All levels', 'Certificate'],      price: 'Kr 12 900', orig: 'Kr 14 900', disc: '-13%' },
+        { id: 'hr-grunnkurs', name: 'Office employee',        type: 'Course',  badge: null,          rating: '4.7', pills: ['Lånekassen support', '3 months', 'All levels', 'No books needed'],  price: 'Kr 5 490',  orig: 'Kr 5 990',  disc: '-8%'  },
+        { id: 'interior',     name: 'Interior Designer',      type: 'Course',  badge: null,          rating: '4.9', pills: ['280 total hours', '6 months', 'All levels', 'Certificate'],         price: 'Kr 19 900', orig: 'Kr 23 900', disc: '-17%' },
+        { id: 'hr-grunnkurs', name: 'HR Consultant',          type: 'Course',  badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '60 credits', 'Certificate', 'Books needed'],  price: 'Kr 14 900', orig: 'Kr 17 900', disc: '-17%' },
+      ],
+      [
+        { id: 'regnskap',     name: 'Accounting Consultant',       type: 'Course', badge: null, rating: '4.7', pills: ['Lånekassen support', '60 credits', 'Vocational School'],            price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
+        { id: 'jus',          name: 'Legal Secretary',             type: 'Course', badge: null, rating: '4.6', pills: ['Lånekassen support', '60 credits', 'Beginner', 'Books needed'],     price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
+        { id: 'leder',        name: 'Project Manager',             type: 'Course', badge: null, rating: '4.7', pills: ['30 credits', 'All levels', 'Certificate'],                          price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-14%' },
+        { id: 'mkt-grunnkurs',name: 'Digital Marketing',          type: 'Course', badge: null, rating: '4.6', pills: ['Online course', '3 months', 'Beginner'],                            price: 'Kr 2 990',  orig: 'Kr 3 490',  disc: '-14%' },
+      ],
+      [
+        { id: 'interior',   name: 'Home Stylist',               type: 'Course', badge: null, rating: '4.7', pills: ['Course', 'All levels', 'Certificate', 'Books needed'],   price: 'Kr 8 490', orig: 'Kr 9 900',  disc: '-14%' },
+        { id: 'baerekraft', name: 'Logistics Vocational School', type: 'Course', badge: null, rating: '4.5', pills: ['30 credits', 'Vocational School', 'Lånekassen support'], price: 'Kr 8 490', orig: 'Kr 9 900',  disc: '-14%' },
+        { id: 'regnskap',   name: 'Sustainability Consultant',   type: 'Course', badge: null, rating: '4.3', pills: ['60 credits', 'Certificate', 'Lånekassen support'],       price: 'Kr 14 900',orig: 'Kr 17 900', disc: '-17%' },
+        { id: 'hr-grunnkurs',name: 'HR Fundamentals',           type: 'Course', badge: null, rating: '4.6', pills: ['30 credits', 'All levels', 'Certificate'],               price: 'Kr 6 900', orig: 'Kr 7 900',  disc: '-13%' },
+      ]
+    ]
+  };
+  var activePopTab = 'hs';
 
   var ccCartSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.61L23 6H6"/></svg>';
 
@@ -1508,13 +1511,27 @@
       + '</div></div></div>';
   }
 
-  var carouselDots   = Array.from(document.querySelectorAll('.carousel-dots .dot'));
   var popularSection = document.getElementById('popular-hd').closest('.container');
   var popularPrev    = popularSection.querySelectorAll('.nav-arrow')[0];
   var popularNext    = popularSection.querySelectorAll('.nav-arrow')[1];
   var coursesGrid    = document.getElementById('coursesGrid');
+  var carouselDots   = [];
   var activeDot      = 0;
   var sliding        = false;
+
+  function getActivePages() { return coursePagesByTab[activePopTab]; }
+
+  function renderDots() {
+    var dotsEl = document.getElementById('carouselDots');
+    if (!dotsEl) return;
+    dotsEl.innerHTML = getActivePages().map(function(_, i) {
+      return '<span class="dot' + (i === activeDot ? ' is-active' : '') + '"></span>';
+    }).join('');
+    carouselDots = Array.from(dotsEl.querySelectorAll('.dot'));
+    carouselDots.forEach(function(dot, i) {
+      dot.addEventListener('click', function() { goToDot(i, i > activeDot ? 1 : -1); });
+    });
+  }
 
   function parseHoursFromPills(pills) {
     for (var k = 0; k < pills.length; k++) {
@@ -1533,17 +1550,20 @@
   }
 
   function renderPage(idx) {
-    var cards = coursePages[idx];
+    var cards = getActivePages()[idx];
     coursesGrid.innerHTML = cards.map(buildCard).join('');
     coursesGrid.querySelectorAll('.cc-cart-btn').forEach(function (btn, i) {
       var c = cards[i];
       var priceNum = parseInt(c.price.replace(/[^0-9]/g, ''), 10) || 0;
       var slug = c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
+      var accessMonths = parseMonthsFromPills(c.pills);
+      var hours = parseHoursFromPills(c.pills) || Math.round(accessMonths * 4.33 * 10);
       var cartCourse = {
         id: slug,
         name: c.name,
-        hours: parseHoursFromPills(c.pills) || 224,
-        accessMonths: parseMonthsFromPills(c.pills),
+        type: c.type || 'Course',
+        hours: hours,
+        accessMonths: accessMonths,
         price: priceNum,
         needsBooks: c.pills.indexOf('Books needed') !== -1
       };
@@ -1562,7 +1582,8 @@
 
   function goToDot(idx, dir) {
     if (sliding) return;
-    var next = (idx + coursePages.length) % coursePages.length;
+    var pages = getActivePages();
+    var next = (idx + pages.length) % pages.length;
     if (next === activeDot) return;
     sliding = true;
 
@@ -1582,11 +1603,22 @@
     }, 360);
   }
 
+  renderDots();
   renderPage(0);
   popularPrev.addEventListener('click', function () { goToDot(activeDot - 1, -1); });
   popularNext.addEventListener('click', function () { goToDot(activeDot + 1,  1); });
-  carouselDots.forEach(function (dot, i) {
-    dot.addEventListener('click', function () { goToDot(i, i > activeDot ? 1 : -1); });
+
+  document.querySelectorAll('.pop-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var t = tab.getAttribute('data-pop-tab');
+      if (t === activePopTab) return;
+      activePopTab = t;
+      activeDot = 0;
+      document.querySelectorAll('.pop-tab').forEach(function(tb) { tb.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+      renderDots();
+      renderPage(0);
+    });
   });
 
   /* ── Keyboard: Escape closes everything ── */
@@ -1719,7 +1751,7 @@
     step: 1, completed: [], promoApplied: false, discountPct: 0,
     installMonths: 3, docDelivery: 'now', docUploaded: false,
     paymentMethod: '', otherPayerType: 'private',
-    lastOrderItems: [], lastOrderTotal: 0
+    lastOrderItems: [], lastOrderTotal: 0, confNum: null
   };
   var _cdpReviewPages   = [];
   var _cdpRevActiveDot  = 0;
@@ -2850,7 +2882,7 @@
 
   function buildCoSsnAcc() {
     return '<div class="co-ssn-acc" id="coSsnAcc">' +
-      '<div class="co-ssn-acc-hd" id="coSsnAccHd">' +
+      '<div class="co-ssn-acc-hd" id="coSsnAccHd" role="button" tabindex="0" aria-expanded="false">' +
         '<span>Why do we ask for this?</span>' +
         '<span class="co-ssn-acc-arrow" id="coSsnAccArrow">expand_more</span>' +
       '</div>' +
@@ -2998,9 +3030,7 @@
     var months = CHECKOUT_STATE.installMonths;
     var rates = {3:0.015, 6:0.03, 12:0.055};
     var instTotal = Math.round(total * (1 + rates[months]));
-    var firstPay  = Math.round(instTotal / months);
-    var remaining = instTotal - firstPay;
-    var monthly   = firstPay;
+    var monthly   = Math.round(instTotal / months);
     return '<p class="co-pay-desc">Divide your payment into smaller installments.</p>' +
       '<div class="co-partial-expand">' +
         '<div class="co-inst-pills" id="coInstPills">' +
@@ -3008,8 +3038,8 @@
         '</div>' +
         '<div class="co-inst-breakdown">' +
           '<div class="co-inst-row"><span>Amount financed</span><span>' + coFmt(total) + '</span></div>' +
-          '<div class="co-inst-row"><span>First payment</span><span>' + coFmt(firstPay) + '</span></div>' +
-          '<div class="co-inst-row"><span>Remaining payments</span><span>' + coFmt(remaining) + '</span></div>' +
+          '<div class="co-inst-row"><span>First payment</span><span>' + coFmt(monthly) + '</span></div>' +
+          '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + ' payments</span></div>' +
           '<div class="co-inst-row co-inst-highlight"><span>Monthly payment</span><span>' + coFmt(monthly) + ' / mo</span></div>' +
         '</div>' +
       '</div>';
@@ -3025,7 +3055,7 @@
         '<div class="co-sum-thumb"></div>' +
         '<div class="co-sum-info">' +
           '<div class="co-sum-name">' + item.name + '</div>' +
-          '<div class="co-sum-meta">' + item.accessMonths + ' months access</div>' +
+          '<div class="co-sum-meta">' + fmtMeta(item) + '</div>' +
         '</div>' +
       '</div>';
     }).join('');
@@ -3035,7 +3065,7 @@
       summCards + lkHTML +
       '<div class="co-sum-sep"></div>' +
       (CHECKOUT_STATE.promoApplied ? '<div class="co-sum-row"><span>Discount (' + CHECKOUT_STATE.discountPct + '%)</span><span class="co-sum-disc">-' + coFmt(disc) + '</span></div>' : '') +
-      '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--gray-400);font-size:11px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' +
+      (CHECKOUT_STATE.paymentMethod === 'partial' ? '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--gray-400);font-size:11px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' : '') +
       '<div class="co-sum-row co-sum-total-row"><span>Total price</span><span>' + coFmt(total) + '</span></div>' +
       '<div class="co-sum-excl">Excluding books</div>' +
       '<div class="co-promo-wrap">' +
@@ -3043,7 +3073,7 @@
           '<input class="co-promo-inp" id="coPromoInp" type="text" placeholder="Do you have a promotional code?" value="' + (CHECKOUT_STATE.promoApplied ? CHECKOUT_STATE.promoCode : '') + '">' +
           '<button class="co-promo-btn" id="coPromoBtn" type="button">Apply</button>' +
         '</div>' +
-        (CHECKOUT_STATE.promoApplied ? '<div class="co-promo-ok">Promo code applied — ' + CHECKOUT_STATE.discountPct + '% off!</div>' : '') +
+        (CHECKOUT_STATE.promoApplied ? '<div class="co-promo-ok"><span class="material-symbols-outlined" style="font-size:14px">check_circle</span>Promo code applied — ' + CHECKOUT_STATE.discountPct + '% off!</div>' : '') +
       '</div>' +
     '</div>' +
     '<div class="co-test-card">' +
@@ -3119,11 +3149,16 @@
       /* SSN accordion */
       var ssnHd = form1.querySelector('#coSsnAccHd');
       var ssnBd = form1.querySelector('#coSsnAccBody');
-      if (ssnHd && ssnBd) ssnHd.addEventListener('click', function(){
+      function toggleSsn() {
         ssnBd.hidden = !ssnBd.hidden;
         var acc = document.getElementById('coSsnAcc');
         if (acc) acc.classList.toggle('is-open', !ssnBd.hidden);
-      });
+        ssnHd.setAttribute('aria-expanded', String(!ssnBd.hidden));
+      }
+      if (ssnHd && ssnBd) {
+        ssnHd.addEventListener('click', toggleSsn);
+        ssnHd.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSsn(); } });
+      }
     }
 
     /* ── Step 1 Edit button ── */
@@ -3242,12 +3277,11 @@
         var months = CHECKOUT_STATE.installMonths;
         var instTotal = Math.round(total * (1 + rates[months]));
         var monthly   = Math.round(instTotal / months);
-        var remaining = instTotal - monthly;
         var bd = document.querySelector('.co-inst-breakdown');
         if (bd) bd.innerHTML =
           '<div class="co-inst-row"><span>Amount financed</span><span>' + coFmt(total) + '</span></div>' +
           '<div class="co-inst-row"><span>First payment</span><span>' + coFmt(monthly) + '</span></div>' +
-          '<div class="co-inst-row"><span>Remaining payments</span><span>' + coFmt(remaining) + '</span></div>' +
+          '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + ' payments</span></div>' +
           '<div class="co-inst-row co-inst-highlight"><span>Monthly payment</span><span>' + coFmt(monthly) + ' / mo</span></div>';
       });
     });
@@ -3266,32 +3300,46 @@
     if (cantProcLnk) cantProcLnk.addEventListener('click', function(e){ e.preventDefault(); if(studyRegs) studyRegs.scrollIntoView({behavior:'smooth'}); });
     if (proceedBtn) proceedBtn.addEventListener('click', function(){
       CHECKOUT_STATE.lastOrderItems = NKICart.getItems();
-      CHECKOUT_STATE.lastOrderTotal = CHECKOUT_STATE.lastOrderItems.reduce(function(s,i){ return s + i.price; }, 0);
+      var sub = CHECKOUT_STATE.lastOrderItems.reduce(function(s,i){ return s + i.price; }, 0);
+      var disc = CHECKOUT_STATE.promoApplied ? Math.round(sub * CHECKOUT_STATE.discountPct / 100) : 0;
+      CHECKOUT_STATE.lastOrderTotal = sub - disc;
       NKICart.clear();
       showPage('thankyou');
     });
 
     /* ── Promo code ── */
+    bindSidebarPromo();
+  }
+
+  function bindSidebarPromo() {
     var promoBtn = document.getElementById('coPromoBtn');
     var promoInp = document.getElementById('coPromoInp');
-    if (promoBtn && promoInp) {
-      promoBtn.addEventListener('click', function(){
-        var code = promoInp.value.trim().toUpperCase();
-        if (code === 'WELCOME10') {
-          CHECKOUT_STATE.promoApplied = true; CHECKOUT_STATE.discountPct = 10; CHECKOUT_STATE.promoCode = code;
-        } else if (code === 'STUDENT20') {
-          CHECKOUT_STATE.promoApplied = true; CHECKOUT_STATE.discountPct = 20; CHECKOUT_STATE.promoCode = code;
-        }
-        renderCheckoutPage();
-      });
-    }
+    if (!promoBtn || !promoInp) return;
+    promoBtn.addEventListener('click', function(){
+      var code = promoInp.value.trim().toUpperCase();
+      if (code === 'WELCOME10') {
+        CHECKOUT_STATE.promoApplied = true; CHECKOUT_STATE.discountPct = 10; CHECKOUT_STATE.promoCode = code;
+      } else if (code === 'STUDENT20') {
+        CHECKOUT_STATE.promoApplied = true; CHECKOUT_STATE.discountPct = 20; CHECKOUT_STATE.promoCode = code;
+      } else {
+        return;
+      }
+      var sidebar = document.querySelector('.co-sidebar-col');
+      if (sidebar) {
+        sidebar.innerHTML = buildCoSummary();
+        bindSidebarPromo();
+      }
+    });
   }
 
   /* ── Thank you page ── */
   function renderThankYouPage() {
     var page = document.getElementById('page-thankyou');
     if (!page) return;
-    var confNum = 'NKI-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 89999);
+    if (!CHECKOUT_STATE.confNum) {
+      CHECKOUT_STATE.confNum = 'NKI-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 89999);
+    }
+    var confNum = CHECKOUT_STATE.confNum;
     var orderItems = CHECKOUT_STATE.lastOrderItems;
     var orderTotal = CHECKOUT_STATE.lastOrderTotal;
     var orderCardHTML = orderItems.length > 0
@@ -3300,7 +3348,7 @@
             '<div class="nki-item-img" style="flex-shrink:0;width:56px;height:56px;border-radius:6px;background:var(--gray-200);"></div>' +
             '<div class="nki-item-info" style="flex:1;min-width:0;">' +
               '<div class="nki-item-name" style="font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.4;margin-bottom:2px;">' + item.name + '</div>' +
-              '<div class="nki-item-meta" style="font-size:12px;color:var(--gray-500);">' + (item.type || 'Course') + ' · ' + item.hours + ' hours · ' + item.accessMonths + ' months access</div>' +
+              '<div class="nki-item-meta" style="font-size:12px;color:var(--gray-500);">' + fmtMeta(item) + '</div>' +
               '<div class="nki-item-price" style="font-size:13px;font-weight:600;color:var(--gray-900);margin-top:4px;">' + fmtPrice(item.price) + '</div>' +
             '</div>' +
           '</div>';
