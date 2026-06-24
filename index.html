@@ -349,8 +349,8 @@
 ════════════════════════════════════════════ -->
 <header class="checkout-header" id="checkoutHeader" hidden>
   <div class="checkout-hdr-inner">
-    <a href="#" id="coLogoLink" style="display:flex">
-      <img src="logos/NKI_Logo_Black_L.svg" class="header-logo" alt="NKI">
+    <a href="#" id="coLogoLink" style="display:flex;align-items:center">
+      <img src="logos/NKI_Logo_Black_L.svg" alt="NKI" style="height:30px;width:auto;display:block">
     </a>
     <div class="co-secure">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="10" height="7" rx="1"/><path d="M4 6V4a3 3 0 0 1 6 0v2"/></svg>
@@ -1718,7 +1718,8 @@
   var CHECKOUT_STATE = {
     step: 1, completed: [], promoApplied: false, discountPct: 0,
     installMonths: 3, docDelivery: 'now', docUploaded: false,
-    paymentMethod: '', otherPayerType: 'private'
+    paymentMethod: '', otherPayerType: 'private',
+    lastOrderItems: [], lastOrderTotal: 0
   };
   var _cdpReviewPages   = [];
   var _cdpRevActiveDot  = 0;
@@ -2809,16 +2810,17 @@
       '<div class="si-wrap">' +
         '<div class="si-card">' +
           '<div class="si-section">' +
+            '<h2 class="si-heading">Guest Checkout</h2>' +
+            '<p style="font-size:13px;color:var(--gray-600);line-height:1.5;margin-bottom:16px;">Checkout as a guest. Plus, an account will automatically be created for you once you complete checkout.</p>' +
+            '<button class="si-guest" id="siGuestBtn">Continue as guest</button>' +
+          '</div>' +
+          '<div class="si-sep"><span>or</span></div>' +
+          '<div class="si-section">' +
             '<h2 class="si-heading">Sign in</h2>' +
             '<button class="si-msft" id="siMsftBtn">' +
               '<svg width="16" height="16" viewBox="0 0 21 21" fill="none"><rect x="0" y="0" width="10" height="10" fill="#F25022"/><rect x="11" y="0" width="10" height="10" fill="#7FBA00"/><rect x="0" y="11" width="10" height="10" fill="#00A4EF"/><rect x="11" y="11" width="10" height="10" fill="#FFB900"/></svg>' +
               'Sign in with Microsoft' +
             '</button>' +
-          '</div>' +
-          '<div class="si-sep"><span>or</span></div>' +
-          '<div class="si-section">' +
-            '<h2 class="si-heading">Continue as guest</h2>' +
-            '<button class="si-guest" id="siGuestBtn">Continue as guest</button>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -2848,10 +2850,10 @@
 
   function buildCoSsnAcc() {
     return '<div class="co-ssn-acc" id="coSsnAcc">' +
-      '<button class="co-ssn-acc-hd" type="button" id="coSsnAccHd">' +
-        '<span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">info</span>' +
-        ' Why do we ask for this?' +
-      '</button>' +
+      '<div class="co-ssn-acc-hd" id="coSsnAccHd">' +
+        '<span>Why do we ask for this?</span>' +
+        '<span class="co-ssn-acc-arrow" id="coSsnAccArrow">expand_more</span>' +
+      '</div>' +
       '<div class="co-ssn-acc-body" id="coSsnAccBody" hidden>' +
         'We ask for your social security number to prevent fraud and to process Lånekassen support and installment payments.' +
       '</div>' +
@@ -2859,8 +2861,8 @@
   }
 
   function buildStep1HTML() {
-    var ccs = ['Norway +47','Sweden +46','Denmark +45','Finland +358','Germany +49','UK +44','US +1'];
-    var ccOpts = ccs.map(function(c,i){ return '<option' + (i===0?' selected':'') + '>' + c + '</option>'; }).join('');
+    var ccs = [{flag:'🇳🇴',code:'+47'},{flag:'🇸🇪',code:'+46'},{flag:'🇩🇰',code:'+45'},{flag:'🇫🇮',code:'+358'},{flag:'🇩🇪',code:'+49'},{flag:'🇬🇧',code:'+44'},{flag:'🇺🇸',code:'+1'}];
+    var ccOpts = ccs.map(function(c,i){ return '<option' + (i===0?' selected':'') + ' value="' + c.code + '">' + c.flag + ' ' + c.code + '</option>'; }).join('');
     return '<form class="co-form" id="coForm1" onsubmit="return false">' +
       '<div class="co-form-row">' +
         '<div class="co-form-group"><label class="co-label" for="coFname">First name</label><input class="co-input co-req" id="coFname" type="text" placeholder="Enter your first name"></div>' +
@@ -3023,7 +3025,7 @@
         '<div class="co-sum-thumb"></div>' +
         '<div class="co-sum-info">' +
           '<div class="co-sum-name">' + item.name + '</div>' +
-          '<div class="co-sum-meta">' + (item.type || 'Course') + ' · ' + item.hours + 'h · ' + item.accessMonths + ' mo</div>' +
+          '<div class="co-sum-meta">' + item.accessMonths + ' months access</div>' +
         '</div>' +
       '</div>';
     }).join('');
@@ -3033,7 +3035,7 @@
       summCards + lkHTML +
       '<div class="co-sum-sep"></div>' +
       (CHECKOUT_STATE.promoApplied ? '<div class="co-sum-row"><span>Discount (' + CHECKOUT_STATE.discountPct + '%)</span><span class="co-sum-disc">-' + coFmt(disc) + '</span></div>' : '') +
-      '<div class="co-sum-row"><span>Subtotal</span><span>' + coFmt(sub) + '</span></div>' +
+      '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--gray-400);font-size:11px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' +
       '<div class="co-sum-row co-sum-total-row"><span>Total price</span><span>' + coFmt(total) + '</span></div>' +
       '<div class="co-sum-excl">Excluding books</div>' +
       '<div class="co-promo-wrap">' +
@@ -3117,7 +3119,11 @@
       /* SSN accordion */
       var ssnHd = form1.querySelector('#coSsnAccHd');
       var ssnBd = form1.querySelector('#coSsnAccBody');
-      if (ssnHd && ssnBd) ssnHd.addEventListener('click', function(){ ssnBd.hidden = !ssnBd.hidden; ssnHd.classList.toggle('is-open'); });
+      if (ssnHd && ssnBd) ssnHd.addEventListener('click', function(){
+        ssnBd.hidden = !ssnBd.hidden;
+        var acc = document.getElementById('coSsnAcc');
+        if (acc) acc.classList.toggle('is-open', !ssnBd.hidden);
+      });
     }
 
     /* ── Step 1 Edit button ── */
@@ -3259,6 +3265,8 @@
     }
     if (cantProcLnk) cantProcLnk.addEventListener('click', function(e){ e.preventDefault(); if(studyRegs) studyRegs.scrollIntoView({behavior:'smooth'}); });
     if (proceedBtn) proceedBtn.addEventListener('click', function(){
+      CHECKOUT_STATE.lastOrderItems = NKICart.getItems();
+      CHECKOUT_STATE.lastOrderTotal = CHECKOUT_STATE.lastOrderItems.reduce(function(s,i){ return s + i.price; }, 0);
       NKICart.clear();
       showPage('thankyou');
     });
@@ -3284,6 +3292,21 @@
     var page = document.getElementById('page-thankyou');
     if (!page) return;
     var confNum = 'NKI-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 89999);
+    var orderItems = CHECKOUT_STATE.lastOrderItems;
+    var orderTotal = CHECKOUT_STATE.lastOrderTotal;
+    var orderCardHTML = orderItems.length > 0
+      ? orderItems.map(function(item) {
+          return '<div class="nki-item" style="position:relative;display:flex;gap:12px;padding:0;border:none;box-shadow:none;margin-bottom:8px;">' +
+            '<div class="nki-item-img" style="flex-shrink:0;width:56px;height:56px;border-radius:6px;background:var(--gray-200);"></div>' +
+            '<div class="nki-item-info" style="flex:1;min-width:0;">' +
+              '<div class="nki-item-name" style="font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.4;margin-bottom:2px;">' + item.name + '</div>' +
+              '<div class="nki-item-meta" style="font-size:12px;color:var(--gray-500);">' + (item.type || 'Course') + ' · ' + item.hours + ' hours · ' + item.accessMonths + ' months access</div>' +
+              '<div class="nki-item-price" style="font-size:13px;font-weight:600;color:var(--gray-900);margin-top:4px;">' + fmtPrice(item.price) + '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('') +
+        '<div style="font-size:14px;font-weight:700;color:var(--gray-900);margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-200);">Total paid: ' + fmtPrice(orderTotal) + '</div>'
+      : '<div style="font-size:14px;color:var(--gray-500);">Order confirmed</div>';
     page.innerHTML =
       '<div class="ty-wrap">' +
         '<div class="ty-confetti" id="tyConfetti"></div>' +
@@ -3296,9 +3319,7 @@
           '<div class="ty-cards">' +
             '<div class="ty-card">' +
               '<div class="ty-card-hd">Your order</div>' +
-              '<div class="ty-order-placeholder"></div>' +
-              '<div class="ty-order-name">Course access granted</div>' +
-              '<div class="ty-order-price">Payment confirmed</div>' +
+              orderCardHTML +
             '</div>' +
             '<div class="ty-card">' +
               '<div class="ty-card-hd">What\'s next?</div>' +
@@ -3317,6 +3338,8 @@
               '<div class="ty-contact-hrs">Monday to Friday, 09:00–16:00</div>' +
             '</div>' +
           '</div>' +
+        '</div>' +
+        '<div class="ty-newsletter-wrap">' +
           '<div class="ty-newsletter">' +
             '<div class="ty-nl-hd">Stay up to date with new courses and offers</div>' +
             '<div class="ty-nl-row">' +
