@@ -3397,7 +3397,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   line-height: 1;
 }
 .co-icon-inp { padding-left: 36px; }
-.co-ssn-acc { margin-top: 6px; background: var(--gray-50); border-radius: 4px; }
+.co-ssn-acc { margin-top: 3px; background: var(--gray-50); border-radius: 4px; }
 .co-ssn-acc-hd {
   display: flex;
   align-items: center;
