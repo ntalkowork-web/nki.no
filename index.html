@@ -2928,7 +2928,6 @@
         buildCoSsnAcc() +
       '</div>' +
       '<div class="co-form-group"><label class="co-label" for="coAddr">Street address</label><input class="co-input co-req" id="coAddr" type="text" placeholder="Enter your street address" value="' + (s.coAddr||'') + '"></div>' +
-      '<div class="co-form-group"><label class="co-label" for="coAddr2">Address line 2</label><input class="co-input" id="coAddr2" type="text" placeholder="Apartment, suite, etc. (optional)" value="' + (s.coAddr2||'') + '"></div>' +
       '<div class="co-form-row">' +
         '<div class="co-form-group"><label class="co-label" for="coCity">City</label><input class="co-input co-req" id="coCity" type="text" placeholder="Enter your city" value="' + (s.coCity||'') + '"></div>' +
         '<div class="co-form-group"><label class="co-label" for="coPostal">Postal code</label><input class="co-input co-req" id="coPostal" type="text" placeholder="0000" value="' + (s.coPostal||'') + '"></div>' +
@@ -2936,6 +2935,7 @@
       '<div class="co-form-group"><label class="co-label" for="coCountry">Country</label>' +
         '<select class="co-select co-req" id="coCountry">' + countrySelect + '</select>' +
       '</div>' +
+      '<div class="co-terms-row"><label class="co-terms-lbl"><input type="checkbox" id="coContact"> I want customer support to contact me for guidance.</label></div>' +
       '<div class="co-terms-row"><label class="co-terms-lbl"><input type="checkbox" id="coTerms"> By continuing, I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.</label></div>' +
       '<div class="co-cta-wrap">' +
         '<button class="co-continue-btn" id="coContinue1" type="button" disabled>' + (CHECKOUT_STATE.isEditing ? 'Save' : 'Continue') + '</button>' +
@@ -3157,7 +3157,7 @@
 
       if (continueBtn) continueBtn.addEventListener('click', function() {
         var sf = {};
-        ['coFname','coLname','coPhone','coEmail','coSsn','coAddr','coAddr2','coCity','coPostal'].forEach(function(id){
+        ['coFname','coLname','coPhone','coEmail','coSsn','coAddr','coCity','coPostal'].forEach(function(id){
           var el = document.getElementById(id); if (el) sf[id] = el.value;
         });
         var cc = document.getElementById('coCcSel'); if (cc) sf.coCcSel = cc.value;
