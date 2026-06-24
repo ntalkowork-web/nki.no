@@ -274,25 +274,37 @@
                   <div class="s-badges"><span class="s-badge">Best seller</span></div>
                 </div>
                 <div class="s-card-name">General Study Competence (23/5 Rule)</div>
-                <div class="s-card-type-row"><span class="pill-sm">Package</span></div>
+                <div class="s-card-pills">
+                  <span class="pill-sm">Package</span>
+                  <span class="pill-sm">High School</span>
+                  <span class="pill-sm">6 months</span>
+                  <span class="pill-sm">Lånekassen support</span>
+                </div>
                 <div class="s-card-price">Kr 8 490</div>
-                <div class="s-card-meta">Subject packages for High School · 6 months · Lånekassen support</div>
               </div>
               <div class="s-card" role="option">
                 <div class="s-card-img">
                   <div class="s-badges"><span class="s-badge">Best seller</span></div>
                 </div>
                 <div class="s-card-name">Medical Secretary</div>
-                <div class="s-card-type-row"><span class="pill-sm">Course</span></div>
+                <div class="s-card-pills">
+                  <span class="pill-sm">Course</span>
+                  <span class="pill-sm">Health & Lifestyle</span>
+                  <span class="pill-sm">6 months</span>
+                  <span class="pill-sm">Lånekassen support</span>
+                </div>
                 <div class="s-card-price">Kr 12 900</div>
-                <div class="s-card-meta">Health and lifestyle · 6 months · Lånekassen support</div>
               </div>
               <div class="s-card" role="option">
                 <div class="s-card-img"></div>
                 <div class="s-card-name">Interior Designer</div>
-                <div class="s-card-type-row"><span class="pill-sm">Course</span></div>
+                <div class="s-card-pills">
+                  <span class="pill-sm">Course</span>
+                  <span class="pill-sm">Interior & Design</span>
+                  <span class="pill-sm">6 months</span>
+                  <span class="pill-sm">Certificate</span>
+                </div>
                 <div class="s-card-price">Kr 19 900</div>
-                <div class="s-card-meta">Interior and design · 6 months · Certificate</div>
               </div>
             </div>
           </div>
@@ -1066,12 +1078,13 @@
 
   function renderCard(course) {
     var imgBadge = course.badge ? '<div class="s-badges"><span class="s-badge">' + course.badge + '</span></div>' : '';
+    var metaParts = [(course.type || 'Course')].concat(course.meta ? course.meta.split(' · ') : []);
+    var pills = metaParts.map(function(p) { return '<span class="pill-sm">' + p + '</span>'; }).join('');
     return '<div class="s-card" role="option">'
       + '<div class="s-card-img">' + imgBadge + '</div>'
       + '<div class="s-card-name">' + course.name + '</div>'
-      + '<div class="s-card-type-row"><span class="pill-sm">' + (course.type || 'Course') + '</span></div>'
+      + '<div class="s-card-pills">' + pills + '</div>'
       + '<div class="s-card-price">' + course.price + '</div>'
-      + '<div class="s-card-meta">' + course.meta + '</div>'
       + '</div>';
   }
 
@@ -1169,10 +1182,7 @@
   }
 
   function fmtMeta(item) {
-    var hpw = item.hours && item.accessMonths ? Math.round(item.hours / (item.accessMonths * 4.33)) : null;
-    var parts = [(item.type || 'Course'), item.accessMonths + ' months'];
-    if (hpw) parts.push(hpw + ' hrs/week');
-    return parts.join(' · ');
+    return (item.type || 'Course') + ' · ' + item.accessMonths + ' months · ' + item.accessMonths + ' months access';
   }
 
   function buildItemCard(item) {
@@ -2903,9 +2913,11 @@
       '<div class="co-form-group"><label class="co-label" for="coPhone">Phone number</label>' +
         '<div class="co-phone-row"><select class="co-cc-sel" id="coCcSel">' + ccOpts + '</select><input class="co-input co-req co-phone-inp" id="coPhone" type="tel" placeholder="000 00 000"></div>' +
       '</div>' +
-      '<div class="co-form-group co-icon-wrap"><label class="co-label" for="coEmail">Email</label>' +
-        '<span class="material-symbols-outlined co-field-icon">mail</span>' +
-        '<input class="co-input co-req co-icon-inp" id="coEmail" type="email" placeholder="Enter your email">' +
+      '<div class="co-form-group"><label class="co-label" for="coEmail">Email</label>' +
+        '<div class="co-inp-icon-wrap">' +
+          '<span class="material-symbols-outlined co-field-icon">mail</span>' +
+          '<input class="co-input co-req co-icon-inp" id="coEmail" type="email" placeholder="Enter your email">' +
+        '</div>' +
       '</div>' +
       '<div class="co-form-group"><label class="co-label" for="coSsn">Social security number</label>' +
         '<input class="co-input co-req" id="coSsn" type="text" placeholder="ddmmyy-xxxxx">' +
@@ -3016,7 +3028,7 @@
         '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
         '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>'
       : '<div class="co-form-group"><label class="co-label" for="coOtherName">Name</label><input class="co-input" id="coOtherName" type="text" placeholder="Full name"></div>' +
-        '<div class="co-form-group co-icon-wrap"><label class="co-label" for="coOtherEmail">Email address</label><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div>';
+        '<div class="co-form-group"><label class="co-label" for="coOtherEmail">Email address</label><div class="co-inp-icon-wrap"><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div></div>';
     return '<p class="co-pay-desc">Provide contact information for another payer who will receive an email from NKI. The payer must confirm the order and provide invoice details.</p>' +
       '<div class="co-other-expand">' +
         '<div class="co-other-hd">Who is the other payer?</div>' +
@@ -3259,7 +3271,7 @@
               '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>';
           } else {
             body.innerHTML = '<div class="co-form-group"><label class="co-label" for="coOtherName">Name</label><input class="co-input" id="coOtherName" type="text" placeholder="Full name"></div>' +
-              '<div class="co-form-group co-icon-wrap"><label class="co-label" for="coOtherEmail">Email address</label><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div>';
+              '<div class="co-form-group"><label class="co-label" for="coOtherEmail">Email address</label><div class="co-inp-icon-wrap"><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div></div>';
           }
         }
       });

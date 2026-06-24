@@ -457,10 +457,9 @@ select { font-family: inherit; }
   letter-spacing: .04em;
 }
 
-.s-card-name { font-size: 12px; font-weight: 600; color: var(--gray-900); line-height: 1.35; margin-bottom: 3px; }
-.s-card-type-row { margin: 2px 0 8px; }
-.s-card-price { font-size: 13px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
-.s-card-meta { font-size: 11px; color: var(--gray-500); line-height: 1.4; }
+.s-card-name { font-size: 12px; font-weight: 600; color: var(--gray-900); line-height: 1.35; margin-bottom: 6px; }
+.s-card-pills { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.s-card-price { font-size: 13px; font-weight: 700; color: var(--gray-900); }
 
 .search-empty {
   padding: 28px 18px;
@@ -3385,7 +3384,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   width: 96px;
 }
 .co-phone-inp { flex: 1; }
-.co-icon-wrap { position: relative; }
+.co-inp-icon-wrap { position: relative; }
 .co-field-icon {
   position: absolute;
   left: 11px;
@@ -3432,7 +3431,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .co-terms-row { padding-top: 4px; }
 .co-terms-lbl { font-size: 13px; color: var(--gray-700); display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }
 .co-terms-lbl a { color: var(--gray-900); }
-.co-cta-wrap { display: flex; flex-direction: column; gap: 8px; padding-top: 4px; }
+.co-cta-wrap { display: flex; flex-direction: column; gap: 8px; padding-top: 20px; }
 .co-continue-btn {
   height: 44px;
   width: 100%;
@@ -3533,7 +3532,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .co-pay-hd input[type="radio"] { accent-color: var(--gray-900); cursor: pointer; flex-shrink: 0; }
 .co-pay-title { font-size: 14px; font-weight: 600; color: var(--gray-900); }
 .co-pay-card.is-selected .co-pay-hd { padding-bottom: 0; }
-.co-pay-body { padding: 8px 16px 16px; }
+.co-pay-body { padding: 8px 16px 16px 44px; }
 .co-pay-desc { font-size: 13px; color: var(--gray-500); line-height: 1.5; padding-top: 0; margin-bottom: 12px; }
 .co-card-logos { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
 .co-card-logo {
@@ -3613,17 +3612,17 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   border-radius: 10px;
   padding: 20px;
 }
-.co-sum-hd { font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 16px; }
+.co-sum-hd { font-size: 19px; font-weight: 700; color: var(--gray-900); margin-bottom: 16px; }
 .co-sum-item { display: flex; gap: 12px; margin-bottom: 12px; }
 .co-sum-thumb { width: 52px; height: 40px; background: var(--gray-200); border-radius: 6px; flex-shrink: 0; }
 .co-sum-info { flex: 1; min-width: 0; }
-.co-sum-name { font-size: 13px; font-weight: 600; color: var(--gray-900); margin-bottom: 2px; }
-.co-sum-meta { font-size: 11px; color: var(--gray-500); }
+.co-sum-name { font-size: 16px; font-weight: 600; color: var(--gray-900); margin-bottom: 2px; }
+.co-sum-meta { font-size: 14px; color: var(--gray-500); }
 .co-sum-sep { height: 1px; background: var(--gray-200); margin: 14px 0; }
-.co-sum-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--gray-600); margin-bottom: 6px; }
-.co-sum-total-row { font-weight: 700; font-size: 15px; color: var(--gray-900); margin-top: 4px; }
+.co-sum-row { display: flex; justify-content: space-between; font-size: 16px; color: var(--gray-600); margin-bottom: 6px; }
+.co-sum-total-row { font-weight: 700; font-size: 18px; color: var(--gray-900); margin-top: 4px; }
 .co-sum-disc { color: #1a7a4a; }
-.co-sum-excl { font-size: 11px; color: var(--gray-400); margin-bottom: 14px; }
+.co-sum-excl { font-size: 14px; color: var(--gray-400); margin-bottom: 14px; }
 .co-promo-wrap { display: flex; flex-direction: column; gap: 8px; }
 .co-promo-row { display: flex; gap: 8px; }
 .co-promo-inp {
@@ -3682,7 +3681,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   80%  { opacity: 1; }
   100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
-.ty-hero { text-align: center; padding: 72px 24px 40px; }
+.ty-hero { text-align: center; padding: 136px 24px 40px; }
 .ty-check-circle { margin-bottom: 20px; }
 .ty-check-ic { font-size: 64px; color: var(--gray-900); }
 .ty-headline { font-size: 36px; font-weight: 700; color: var(--gray-900); margin-bottom: 12px; }
