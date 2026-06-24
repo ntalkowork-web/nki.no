@@ -345,6 +345,21 @@
 
 
 <!-- ════════════════════════════════════════════
+     CHECKOUT HEADER
+════════════════════════════════════════════ -->
+<header class="checkout-header" id="checkoutHeader" hidden>
+  <div class="checkout-hdr-inner">
+    <a href="#" id="coLogoLink" style="display:flex">
+      <img src="logos/NKI_Logo_Black_L.svg" class="header-logo" alt="NKI">
+    </a>
+    <div class="co-secure">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="10" height="7" rx="1"/><path d="M4 6V4a3 3 0 0 1 6 0v2"/></svg>
+      Secure Checkout
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════
      CART DRAWER
 ════════════════════════════════════════════ -->
 <div class="drawer-overlay" id="drawerOverlay"></div>
@@ -811,6 +826,9 @@
 <div id="page-search" hidden></div>
 <div id="page-compare" hidden></div>
 <div id="page-course" hidden></div>
+<div id="page-signin" hidden></div>
+<div id="page-checkout" hidden></div>
+<div id="page-thankyou" hidden></div>
 
 <div id="cdp-sticky-cta" class="cdp-sticky-cta"></div>
 
@@ -1251,7 +1269,7 @@
     return (
       '<footer class="nki-cart-footer">' +
         '<div class="nki-cart-sep"></div>' +
-        '<button class="nki-cart-cta">' +
+        '<button class="nki-cart-cta" id="cartCheckoutBtn">' +
           '<span class="nki-cta-label">Go to checkout</span>' +
           '<span class="nki-cta-sep"></span>' +
           '<span class="nki-cta-price">' + total + '</span>' +
@@ -1303,6 +1321,16 @@
         if (lk) lk.remove();
       });
     }
+
+    var coBtn = drawer.querySelector('#cartCheckoutBtn');
+    if (coBtn) coBtn.addEventListener('click', function() {
+      NKICart.close();
+      CHECKOUT_STATE.step = 1; CHECKOUT_STATE.completed = [];
+      CHECKOUT_STATE.promoApplied = false; CHECKOUT_STATE.discountPct = 0;
+      CHECKOUT_STATE.paymentMethod = ''; CHECKOUT_STATE.docUploaded = false;
+      CHECKOUT_STATE.docDelivery = 'now'; CHECKOUT_STATE.installMonths = 3;
+      showPage('signin');
+    });
 
     updateCartBadge();
   }
@@ -1687,6 +1715,11 @@
 
   var CURRENT_COURSE    = null;
   var _cdpObserver      = null;
+  var CHECKOUT_STATE = {
+    step: 1, completed: [], promoApplied: false, discountPct: 0,
+    installMonths: 3, docDelivery: 'now', docUploaded: false,
+    paymentMethod: '', otherPayerType: 'private'
+  };
   var _cdpReviewPages   = [];
   var _cdpRevActiveDot  = 0;
   var _cdpRevSliding    = false;
@@ -1763,14 +1796,28 @@
   }
 
   function showPage(name, ctx) {
-    var pageHome    = document.getElementById('page-home');
-    var pageSearch  = document.getElementById('page-search');
-    var pageCompare = document.getElementById('page-compare');
-    var pageCourse  = document.getElementById('page-course');
-    pageHome.hidden    = (name !== 'home');
-    pageSearch.hidden  = (name !== 'search');
-    pageCompare.hidden = (name !== 'compare');
-    if (pageCourse) pageCourse.hidden = (name !== 'course');
+    var pageHome     = document.getElementById('page-home');
+    var pageSearch   = document.getElementById('page-search');
+    var pageCompare  = document.getElementById('page-compare');
+    var pageCourse   = document.getElementById('page-course');
+    var pageSignin   = document.getElementById('page-signin');
+    var pageCheckout = document.getElementById('page-checkout');
+    var pageThankyou = document.getElementById('page-thankyou');
+    pageHome.hidden     = (name !== 'home');
+    pageSearch.hidden   = (name !== 'search');
+    pageCompare.hidden  = (name !== 'compare');
+    if (pageCourse)   pageCourse.hidden   = (name !== 'course');
+    if (pageSignin)   pageSignin.hidden   = (name !== 'signin');
+    if (pageCheckout) pageCheckout.hidden = (name !== 'checkout');
+    if (pageThankyou) pageThankyou.hidden = (name !== 'thankyou');
+
+    var siteHdr     = document.querySelector('.site-header');
+    var coHdr       = document.getElementById('checkoutHeader');
+    var siteFooter  = document.querySelector('.site-footer');
+    var isCoPage    = (name === 'signin' || name === 'checkout');
+    if (siteHdr)    siteHdr.hidden    = isCoPage;
+    if (coHdr)      coHdr.hidden      = !isCoPage;
+    if (siteFooter) siteFooter.hidden = isCoPage;
 
     var stickyEl = document.getElementById('cdp-sticky-cta');
     if (name !== 'course' && stickyEl) {
@@ -1812,6 +1859,9 @@
       renderCoursePage();
     }
     if (name === 'home') window.scrollTo(0, 0);
+    if (name === 'signin')   { renderSignInPage();   window.scrollTo(0, 0); }
+    if (name === 'checkout') { renderCheckoutPage(); window.scrollTo(0, 0); }
+    if (name === 'thankyou') { renderThankYouPage(); window.scrollTo(0, 0); }
   }
 
   /* ── Search page build helpers ── */
@@ -2478,6 +2528,10 @@
     }).join('');
 
     /* accordions */
+    var acc0 = buildCdpAccordion('cdp-acc-foreign', 'Foreign applicants',
+      '<p class="cdp-acc-para">If you are applying from outside Norway, you must submit certified physical copies of your educational documentation by post. All documents must be officially translated into Norwegian or English by a certified translator.</p>' +
+      '<p class="cdp-acc-para">Please send your documents to: <strong>NKI, Pb. 111, 1371 Asker, Norway</strong>. Processing may take 2–4 weeks after documents are received. We recommend using registered mail or a trackable courier service.</p>' +
+      '<p class="cdp-acc-para">For questions about required documents, contact our admissions team at <a href="mailto:veelding@nki.no">veelding@nki.no</a>.</p>');
     var acc1 = buildCdpAccordion('cdp-acc-about', 'About this course',
       '<p class="cdp-acc-para">' + c.description + ' This course covers all the required subjects for upper secondary completion, taught through interactive digital modules designed for adult learners. Suitable for students returning to education, those changing careers, or anyone looking to expand their qualifications.</p>');
     var acc2 = buildCdpAccordion('cdp-acc-struct', structLabel, structBodyHTML);
@@ -2522,7 +2576,7 @@
             '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="cdp-content">' + acc1 + acc2 + acc3 + acc4 + acc5 + acc6 + '</div>' +
+        '<div class="cdp-content">' + acc0 + acc1 + acc2 + acc3 + acc4 + acc5 + acc6 + '</div>' +
       '</div>' +
       '<div class="cdp-reviews"><div class="container">' +
         '<div class="section-hd">' +
@@ -2738,6 +2792,564 @@
     });
   }
 
+
+  /* ══════════════════════════════════════════════
+     CHECKOUT FLOW
+  ══════════════════════════════════════════════ */
+
+  document.getElementById('coLogoLink').addEventListener('click', function(e) {
+    e.preventDefault(); showPage('home');
+  });
+
+  /* ── Sign-in page ── */
+  function renderSignInPage() {
+    var page = document.getElementById('page-signin');
+    if (!page) return;
+    page.innerHTML =
+      '<div class="si-wrap">' +
+        '<div class="si-card">' +
+          '<div class="si-section">' +
+            '<h2 class="si-heading">Sign in</h2>' +
+            '<button class="si-msft" id="siMsftBtn">' +
+              '<svg width="16" height="16" viewBox="0 0 21 21" fill="none"><rect x="0" y="0" width="10" height="10" fill="#F25022"/><rect x="11" y="0" width="10" height="10" fill="#7FBA00"/><rect x="0" y="11" width="10" height="10" fill="#00A4EF"/><rect x="11" y="11" width="10" height="10" fill="#FFB900"/></svg>' +
+              'Sign in with Microsoft' +
+            '</button>' +
+          '</div>' +
+          '<div class="si-sep"><span>or</span></div>' +
+          '<div class="si-section">' +
+            '<h2 class="si-heading">Continue as guest</h2>' +
+            '<button class="si-guest" id="siGuestBtn">Continue as guest</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    page.querySelector('#siMsftBtn').addEventListener('click', function() { showPage('checkout'); });
+    page.querySelector('#siGuestBtn').addEventListener('click', function() { showPage('checkout'); });
+  }
+
+  /* ── Checkout page helpers ── */
+  function coFmt(n) { return 'kr ' + fmtNum(n); }
+
+  function buildCoStep(num, title, bodyHTML) {
+    var isActive    = CHECKOUT_STATE.step === num;
+    var isCompleted = CHECKOUT_STATE.completed.indexOf(num) !== -1;
+    var isDisabled  = !isActive && !isCompleted && num > CHECKOUT_STATE.step;
+    var numEl = isCompleted
+      ? '<span class="co-step-badge is-done"><span class="material-symbols-outlined" style="font-size:14px">check</span></span>'
+      : '<span class="co-step-badge' + (isActive ? ' is-active' : '') + (isDisabled ? ' is-disabled' : '') + '">' + num + '</span>';
+    return '<div class="co-step' + (isActive ? ' is-open' : '') + (isDisabled ? ' is-disabled' : '') + '" data-co-step="' + num + '">' +
+      '<div class="co-step-hd">' +
+        numEl +
+        '<span class="co-step-title">' + title + '</span>' +
+        (isCompleted ? '<button class="co-step-edit-btn" data-co-edit="' + num + '">Edit</button>' : '') +
+      '</div>' +
+      (isActive ? '<div class="co-step-body">' + bodyHTML + '</div>' : '') +
+    '</div>';
+  }
+
+  function buildCoSsnAcc() {
+    return '<div class="co-ssn-acc" id="coSsnAcc">' +
+      '<button class="co-ssn-acc-hd" type="button" id="coSsnAccHd">' +
+        '<span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">info</span>' +
+        ' Why do we ask for this?' +
+      '</button>' +
+      '<div class="co-ssn-acc-body" id="coSsnAccBody" hidden>' +
+        'We ask for your social security number to prevent fraud and to process Lånekassen support and installment payments.' +
+      '</div>' +
+    '</div>';
+  }
+
+  function buildStep1HTML() {
+    var ccs = ['Norway +47','Sweden +46','Denmark +45','Finland +358','Germany +49','UK +44','US +1'];
+    var ccOpts = ccs.map(function(c,i){ return '<option' + (i===0?' selected':'') + '>' + c + '</option>'; }).join('');
+    return '<form class="co-form" id="coForm1" onsubmit="return false">' +
+      '<div class="co-form-row">' +
+        '<div class="co-form-group"><label class="co-label" for="coFname">First name</label><input class="co-input co-req" id="coFname" type="text" placeholder="Enter your first name"></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coLname">Surname</label><input class="co-input co-req" id="coLname" type="text" placeholder="Enter your surname"></div>' +
+      '</div>' +
+      '<div class="co-form-group"><label class="co-label" for="coPhone">Phone number</label>' +
+        '<div class="co-phone-row"><select class="co-cc-sel" id="coCcSel">' + ccOpts + '</select><input class="co-input co-req co-phone-inp" id="coPhone" type="tel" placeholder="000 00 000"></div>' +
+      '</div>' +
+      '<div class="co-form-group co-icon-wrap"><label class="co-label" for="coEmail">Email</label>' +
+        '<span class="material-symbols-outlined co-field-icon">mail</span>' +
+        '<input class="co-input co-req co-icon-inp" id="coEmail" type="email" placeholder="Enter your email">' +
+      '</div>' +
+      '<div class="co-form-group"><label class="co-label" for="coSsn">Social security number</label>' +
+        '<input class="co-input co-req" id="coSsn" type="text" placeholder="ddmmyy-xxxxx">' +
+        buildCoSsnAcc() +
+      '</div>' +
+      '<div class="co-form-group"><label class="co-label" for="coAddr">Street address</label><input class="co-input co-req" id="coAddr" type="text" placeholder="Enter your street address"></div>' +
+      '<div class="co-form-group"><label class="co-label" for="coAddr2">Address line 2</label><input class="co-input" id="coAddr2" type="text" placeholder="Apartment, suite, etc. (optional)"></div>' +
+      '<div class="co-form-row">' +
+        '<div class="co-form-group"><label class="co-label" for="coCity">City</label><input class="co-input co-req" id="coCity" type="text" placeholder="Enter your city"></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coPostal">Postal code</label><input class="co-input co-req" id="coPostal" type="text" placeholder="0000"></div>' +
+      '</div>' +
+      '<div class="co-form-group"><label class="co-label" for="coCountry">Country</label>' +
+        '<select class="co-select co-req" id="coCountry">' +
+          '<option value="NO" selected>Norway</option><option value="SE">Sweden</option><option value="DK">Denmark</option>' +
+          '<option value="FI">Finland</option><option value="DE">Germany</option><option value="GB">United Kingdom</option><option value="US">United States</option><option value="XX">Other</option>' +
+        '</select>' +
+      '</div>' +
+      '<div class="co-terms-row"><label class="co-terms-lbl"><input type="checkbox" id="coTerms"> By continuing, I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.</label></div>' +
+      '<div class="co-cta-wrap">' +
+        '<button class="co-continue-btn" id="coContinue1" type="button" disabled>Continue</button>' +
+        '<div class="co-cant" id="coCant1"><span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnk1">Complete your personal information first.</a></div>' +
+      '</div>' +
+    '</form>';
+  }
+
+  function buildStep2HTML() {
+    return '<div class="co-doc-wrap">' +
+      '<p class="co-doc-intro">To enrol in this course, we need to verify your educational background. Please upload certified copies of your relevant transcripts or diplomas. Accepted formats: PDF, JPG, PNG (max 10 MB).</p>' +
+      '<div class="co-upload-zone" id="coUploadZone">' +
+        '<input type="file" id="coFileInp" class="co-file-inp" accept=".pdf,.jpg,.jpeg,.png">' +
+        '<div class="co-upload-inner" id="coUploadInner">' +
+          '<span class="material-symbols-outlined co-upload-ic">upload_file</span>' +
+          '<p class="co-upload-txt">Drag and drop your file here, or</p>' +
+          '<button class="co-upload-btn" type="button" id="coUploadBtn">Upload</button>' +
+        '</div>' +
+      '</div>' +
+      '<div id="coUploadedSlot"></div>' +
+      '<div class="co-delivery-wrap">' +
+        '<div class="co-delivery-hd">How would you like to provide your documentation?</div>' +
+        '<div class="co-delivery-pills" id="coDeliveryPills">' +
+          buildDeliveryPill('now','Submit documentation now', CHECKOUT_STATE.docDelivery==='now') +
+          buildDeliveryPill('later','Upload later to my order', CHECKOUT_STATE.docDelivery==='later') +
+          buildDeliveryPill('post','Send by post', CHECKOUT_STATE.docDelivery==='post') +
+          buildDeliveryPill('email14','Send by email within 14 days', CHECKOUT_STATE.docDelivery==='email14') +
+        '</div>' +
+      '</div>' +
+      '<div class="co-cta-wrap">' +
+        '<button class="co-continue-btn" id="coContinue2" type="button"' + (CHECKOUT_STATE.docDelivery==='now' && !CHECKOUT_STATE.docUploaded ? ' disabled' : '') + '>Continue</button>' +
+        '<div class="co-cant" id="coCant2"' + (CHECKOUT_STATE.docDelivery==='now' && !CHECKOUT_STATE.docUploaded ? '' : ' hidden') + '><span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnk2">Upload your documentation first.</a></div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function buildDeliveryPill(val, label, active) {
+    return '<button class="co-deliv-pill' + (active ? ' is-active' : '') + '" type="button" data-delivery="' + val + '">' + label + '</button>';
+  }
+
+  function buildStep3HTML() {
+    var items = NKICart.getItems();
+    var total = items.reduce(function(s,i){ return s + i.price; }, 0);
+    return '<div class="co-payment-wrap">' +
+      buildPayCard('card','Pay by card', buildCardBody(total), false) +
+      buildPayCard('vipps','Vipps', buildVippsBody(), false) +
+      buildPayCard('invoice','Invoice', buildInvoiceBody(), false) +
+      buildPayCard('other','Other payer', buildOtherPayerBody(), true) +
+      buildPayCard('partial','Partial payment', buildPartialBody(total), true) +
+    '</div>';
+  }
+
+  function buildPayCard(id, title, expandedHTML, hasExpansion) {
+    var isSel = CHECKOUT_STATE.paymentMethod === id;
+    return '<div class="co-pay-card' + (isSel ? ' is-selected' : '') + '" data-pay-id="' + id + '">' +
+      '<label class="co-pay-hd"><input type="radio" name="co-pay" value="' + id + '"' + (isSel ? ' checked' : '') + '><span class="co-pay-title">' + title + '</span></label>' +
+      (isSel ? '<div class="co-pay-body">' + expandedHTML + buildPayConfirm() + '</div>' : '') +
+    '</div>';
+  }
+
+  function buildPayConfirm() {
+    return '<div class="co-pay-confirm">' +
+      '<label class="co-terms-lbl co-regs-lbl"><input type="checkbox" id="coStudyRegs"> I have read and accepted the <a href="#">Study Regulations</a>.</label>' +
+      '<button class="co-proceed-btn" id="coProceed" type="button" disabled>Proceed to payment</button>' +
+      '<div class="co-cant" id="coCantProceed"><span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnkProceed">Please accept the Study Regulations first.</a></div>' +
+    '</div>';
+  }
+
+  function buildCardBody() {
+    var logos = [
+      ['Visa','#1a1f71','V'],['Mastercard','#eb001b','MC'],['Diners','#004a97','DC'],['JCB','#003087','JCB'],['Maestro','#009cde','MA']
+    ];
+    return '<p class="co-pay-desc">You will be redirected to Nets to securely complete your payment.</p>' +
+      '<div class="co-card-logos">' + logos.map(function(l){ return '<span class="co-card-logo" style="background:' + l[1] + '">' + l[2] + '</span>'; }).join('') + '</div>';
+  }
+
+  function buildVippsBody() {
+    return '<p class="co-pay-desc">Pay easily using Vipps.</p>' +
+      '<div class="co-vipps-logo">vipps</div>';
+  }
+
+  function buildInvoiceBody() {
+    return '<p class="co-pay-desc">An invoice for the total amount will be sent by email. Please note that a credit check will be performed.</p>';
+  }
+
+  function buildOtherPayerBody() {
+    var types = [['private','Private person'],['assoc','Association or Federation'],['company','Company'],['nav','NAV']];
+    var pills = types.map(function(t){ return '<button class="co-payer-pill' + (CHECKOUT_STATE.otherPayerType===t[0]?' is-active':'') + '" type="button" data-payer-type="' + t[0] + '">' + t[1] + '</button>'; }).join('');
+    var typeBody = CHECKOUT_STATE.otherPayerType === 'nav'
+      ? '<div class="co-nav-banner">NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</div>' +
+        '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>'
+      : '<div class="co-form-group"><label class="co-label" for="coOtherName">Name</label><input class="co-input" id="coOtherName" type="text" placeholder="Full name"></div>' +
+        '<div class="co-form-group co-icon-wrap"><label class="co-label" for="coOtherEmail">Email address</label><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div>';
+    return '<p class="co-pay-desc">Provide contact information for another payer who will receive an email from NKI. The payer must confirm the order and provide invoice details.</p>' +
+      '<div class="co-other-expand">' +
+        '<div class="co-other-hd">Who is the other payer?</div>' +
+        '<p class="co-other-sub">You cannot select yourself as the payer.</p>' +
+        '<div class="co-payer-pills" id="coPayerPills">' + pills + '</div>' +
+        '<div id="coPayerTypeBody">' + typeBody + '</div>' +
+      '</div>';
+  }
+
+  function buildPartialBody(total) {
+    var months = CHECKOUT_STATE.installMonths;
+    var rates = {3:0.015, 6:0.03, 12:0.055};
+    var instTotal = Math.round(total * (1 + rates[months]));
+    var firstPay  = Math.round(instTotal / months);
+    var remaining = instTotal - firstPay;
+    var monthly   = firstPay;
+    return '<p class="co-pay-desc">Divide your payment into smaller installments.</p>' +
+      '<div class="co-partial-expand">' +
+        '<div class="co-inst-pills" id="coInstPills">' +
+          [3,6,12].map(function(m){ return '<button class="co-inst-pill' + (months===m?' is-active':'') + '" type="button" data-inst="' + m + '">' + m + ' months</button>'; }).join('') +
+        '</div>' +
+        '<div class="co-inst-breakdown">' +
+          '<div class="co-inst-row"><span>Amount financed</span><span>' + coFmt(total) + '</span></div>' +
+          '<div class="co-inst-row"><span>First payment</span><span>' + coFmt(firstPay) + '</span></div>' +
+          '<div class="co-inst-row"><span>Remaining payments</span><span>' + coFmt(remaining) + '</span></div>' +
+          '<div class="co-inst-row co-inst-highlight"><span>Monthly payment</span><span>' + coFmt(monthly) + ' / mo</span></div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function buildCoSummary() {
+    var items  = NKICart.getItems();
+    var sub    = items.reduce(function(s,i){ return s + i.price; }, 0);
+    var disc   = CHECKOUT_STATE.promoApplied ? Math.round(sub * CHECKOUT_STATE.discountPct / 100) : 0;
+    var total  = sub - disc;
+    var summCards = items.map(function(item) {
+      return '<div class="co-sum-item">' +
+        '<div class="co-sum-thumb"></div>' +
+        '<div class="co-sum-info">' +
+          '<div class="co-sum-name">' + item.name + '</div>' +
+          '<div class="co-sum-meta">' + (item.type || 'Course') + ' · ' + item.hours + 'h · ' + item.accessMonths + ' mo</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+    var lkHTML = items.some(function(i){ return i.lanekassen; }) ? buildLanekassen() : '';
+    return '<div class="co-sum-card" id="coSumCard">' +
+      '<div class="co-sum-hd">Summary</div>' +
+      summCards + lkHTML +
+      '<div class="co-sum-sep"></div>' +
+      (CHECKOUT_STATE.promoApplied ? '<div class="co-sum-row"><span>Discount (' + CHECKOUT_STATE.discountPct + '%)</span><span class="co-sum-disc">-' + coFmt(disc) + '</span></div>' : '') +
+      '<div class="co-sum-row"><span>Subtotal</span><span>' + coFmt(sub) + '</span></div>' +
+      '<div class="co-sum-row co-sum-total-row"><span>Total price</span><span>' + coFmt(total) + '</span></div>' +
+      '<div class="co-sum-excl">Excluding books</div>' +
+      '<div class="co-promo-wrap">' +
+        '<div class="co-promo-row">' +
+          '<input class="co-promo-inp" id="coPromoInp" type="text" placeholder="Do you have a promotional code?" value="' + (CHECKOUT_STATE.promoApplied ? CHECKOUT_STATE.promoCode : '') + '">' +
+          '<button class="co-promo-btn" id="coPromoBtn" type="button">Apply</button>' +
+        '</div>' +
+        (CHECKOUT_STATE.promoApplied ? '<div class="co-promo-ok">Promo code applied — ' + CHECKOUT_STATE.discountPct + '% off!</div>' : '') +
+      '</div>' +
+    '</div>' +
+    '<div class="co-test-card">' +
+      '<div class="co-test-inner">' +
+        '<div class="co-test-photo"></div>' +
+        '<div class="co-test-content">' +
+          '<p class="co-test-quote">"Studying with NKI has been life-changing. I completed my general study competence while working full-time, and the flexibility made all the difference."</p>' +
+          '<div class="co-test-author">— Maria, 28 &nbsp;·&nbsp; Medical Secretary</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderCheckoutPage() {
+    var page = document.getElementById('page-checkout');
+    if (!page) return;
+    var items = NKICart.getItems();
+    var total = items.reduce(function(s,i){ return s + i.price; }, 0);
+    page.innerHTML =
+      '<div class="co-page-wrap">' +
+        '<div class="co-layout">' +
+          '<div class="co-steps-col">' +
+            buildCoStep(1, 'Personal information', buildStep1HTML()) +
+            buildCoStep(2, 'Documentation', buildStep2HTML()) +
+            buildCoStep(3, 'Payment method', buildStep3HTML()) +
+          '</div>' +
+          '<div class="co-sidebar-col">' + buildCoSummary() + '</div>' +
+        '</div>' +
+      '</div>';
+    bindCheckoutEvents();
+  }
+
+  function bindCheckoutEvents() {
+    /* ── Step 1 form validation ── */
+    var form1 = document.getElementById('coForm1');
+    if (form1) {
+      var reqFields = Array.prototype.slice.call(form1.querySelectorAll('.co-req'));
+      var termsChk  = form1.querySelector('#coTerms');
+      var continueBtn = form1.querySelector('#coContinue1');
+      var cantEl    = form1.querySelector('#coCant1');
+      var cantLnk   = form1.querySelector('#coCantLnk1');
+
+      function checkStep1() {
+        var allFilled = reqFields.every(function(f) { return f.value.trim() !== '' || (f.tagName === 'SELECT' && f.value !== ''); });
+        var termsOk   = termsChk && termsChk.checked;
+        if (allFilled && termsOk) {
+          continueBtn.disabled = false;
+          cantEl.hidden = true;
+        } else {
+          continueBtn.disabled = true;
+          cantEl.hidden = false;
+          if (allFilled && !termsOk) {
+            cantEl.innerHTML = '<span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnk1">Please accept the Privacy Policy and Terms of Use first.</a>';
+            form1.querySelector('#coCantLnk1').addEventListener('click', function(e){ e.preventDefault(); termsChk.scrollIntoView({behavior:'smooth'}); });
+          } else {
+            cantEl.innerHTML = '<span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnk1">Complete your personal information first.</a>';
+            form1.querySelector('#coCantLnk1').addEventListener('click', function(e){ e.preventDefault(); form1.scrollIntoView({behavior:'smooth'}); });
+          }
+        }
+      }
+      reqFields.forEach(function(f){ f.addEventListener('input', checkStep1); f.addEventListener('change', checkStep1); });
+      if (termsChk) termsChk.addEventListener('change', checkStep1);
+      checkStep1();
+
+      if (continueBtn) continueBtn.addEventListener('click', function() {
+        CHECKOUT_STATE.completed.push(1);
+        CHECKOUT_STATE.step = 2;
+        renderCheckoutPage();
+        var s2 = document.querySelector('[data-co-step="2"]');
+        if (s2) s2.scrollIntoView({behavior:'smooth'});
+      });
+
+      /* SSN accordion */
+      var ssnHd = form1.querySelector('#coSsnAccHd');
+      var ssnBd = form1.querySelector('#coSsnAccBody');
+      if (ssnHd && ssnBd) ssnHd.addEventListener('click', function(){ ssnBd.hidden = !ssnBd.hidden; ssnHd.classList.toggle('is-open'); });
+    }
+
+    /* ── Step 1 Edit button ── */
+    document.querySelectorAll('[data-co-edit]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var n = parseInt(btn.getAttribute('data-co-edit'));
+        CHECKOUT_STATE.step = n;
+        CHECKOUT_STATE.completed = CHECKOUT_STATE.completed.filter(function(s){ return s < n; });
+        renderCheckoutPage();
+      });
+    });
+
+    /* ── Step 2 events ── */
+    var uploadZone = document.getElementById('coUploadZone');
+    var fileInp    = document.getElementById('coFileInp');
+    var uploadBtn  = document.getElementById('coUploadBtn');
+    var uploadedSlot = document.getElementById('coUploadedSlot');
+    var cont2      = document.getElementById('coContinue2');
+    var cant2      = document.getElementById('coCant2');
+    var cant2lnk   = document.getElementById('coCantLnk2');
+
+    function refreshStep2Btn() {
+      var blocked = CHECKOUT_STATE.docDelivery === 'now' && !CHECKOUT_STATE.docUploaded;
+      if (cont2) cont2.disabled = blocked;
+      if (cant2) cant2.hidden   = !blocked;
+    }
+
+    if (uploadBtn && fileInp) {
+      uploadBtn.addEventListener('click', function(){ fileInp.click(); });
+    }
+    if (uploadZone) {
+      uploadZone.addEventListener('dragover', function(e){ e.preventDefault(); uploadZone.classList.add('is-drag'); });
+      uploadZone.addEventListener('dragleave', function(){ uploadZone.classList.remove('is-drag'); });
+      uploadZone.addEventListener('drop', function(e){ e.preventDefault(); uploadZone.classList.remove('is-drag'); handleFile(e.dataTransfer.files[0]); });
+    }
+    if (fileInp) fileInp.addEventListener('change', function(){ handleFile(fileInp.files[0]); });
+
+    function handleFile(file) {
+      if (!file || !uploadedSlot) return;
+      CHECKOUT_STATE.docUploaded = true;
+      uploadedSlot.innerHTML = '<div class="co-uploaded-file">' +
+        '<span class="material-symbols-outlined" style="font-size:18px;color:var(--gray-500)">description</span>' +
+        '<span class="co-fname">' + file.name + '</span>' +
+        '<button class="co-del-file" type="button" id="coDelFile" aria-label="Remove file">' +
+          '<span class="material-symbols-outlined" style="font-size:16px">delete</span>' +
+        '</button>' +
+      '</div>';
+      document.getElementById('coDelFile').addEventListener('click', function(){
+        CHECKOUT_STATE.docUploaded = false;
+        uploadedSlot.innerHTML = '';
+        refreshStep2Btn();
+      });
+      refreshStep2Btn();
+    }
+
+    document.querySelectorAll('.co-deliv-pill').forEach(function(pill){
+      pill.addEventListener('click', function(){
+        CHECKOUT_STATE.docDelivery = pill.getAttribute('data-delivery');
+        document.querySelectorAll('.co-deliv-pill').forEach(function(p){ p.classList.remove('is-active'); });
+        pill.classList.add('is-active');
+        refreshStep2Btn();
+      });
+    });
+
+    if (cant2lnk) cant2lnk.addEventListener('click', function(e){ e.preventDefault(); if(uploadZone) uploadZone.scrollIntoView({behavior:'smooth'}); });
+
+    if (cont2) cont2.addEventListener('click', function(){
+      CHECKOUT_STATE.completed.push(2);
+      CHECKOUT_STATE.step = 3;
+      renderCheckoutPage();
+      var s3 = document.querySelector('[data-co-step="3"]');
+      if (s3) s3.scrollIntoView({behavior:'smooth'});
+    });
+
+    /* ── Step 3 payment selection ── */
+    document.querySelectorAll('.co-pay-card').forEach(function(card){
+      var radio = card.querySelector('input[type="radio"]');
+      var lbl   = card.querySelector('.co-pay-hd');
+      if (lbl) lbl.addEventListener('click', function(){
+        var id = card.getAttribute('data-pay-id');
+        CHECKOUT_STATE.paymentMethod = id;
+        renderCheckoutPage();
+        setTimeout(function(){ var c=document.querySelector('.co-pay-card.is-selected'); if(c) c.scrollIntoView({behavior:'smooth',block:'nearest'}); }, 50);
+      });
+    });
+
+    /* ── Payer type pills ── */
+    document.querySelectorAll('.co-payer-pill').forEach(function(pill){
+      pill.addEventListener('click', function(){
+        CHECKOUT_STATE.otherPayerType = pill.getAttribute('data-payer-type');
+        document.querySelectorAll('.co-payer-pill').forEach(function(p){ p.classList.remove('is-active'); });
+        pill.classList.add('is-active');
+        var body = document.getElementById('coPayerTypeBody');
+        if (body) {
+          if (CHECKOUT_STATE.otherPayerType === 'nav') {
+            body.innerHTML = '<div class="co-nav-banner">NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</div>' +
+              '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
+              '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>';
+          } else {
+            body.innerHTML = '<div class="co-form-group"><label class="co-label" for="coOtherName">Name</label><input class="co-input" id="coOtherName" type="text" placeholder="Full name"></div>' +
+              '<div class="co-form-group co-icon-wrap"><label class="co-label" for="coOtherEmail">Email address</label><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div>';
+          }
+        }
+      });
+    });
+
+    /* ── Installment pills ── */
+    document.querySelectorAll('.co-inst-pill').forEach(function(pill){
+      pill.addEventListener('click', function(){
+        CHECKOUT_STATE.installMonths = parseInt(pill.getAttribute('data-inst'));
+        document.querySelectorAll('.co-inst-pill').forEach(function(p){ p.classList.remove('is-active'); });
+        pill.classList.add('is-active');
+        var items = NKICart.getItems();
+        var total = items.reduce(function(s,i){ return s+i.price; },0);
+        var rates = {3:0.015,6:0.03,12:0.055};
+        var months = CHECKOUT_STATE.installMonths;
+        var instTotal = Math.round(total * (1 + rates[months]));
+        var monthly   = Math.round(instTotal / months);
+        var remaining = instTotal - monthly;
+        var bd = document.querySelector('.co-inst-breakdown');
+        if (bd) bd.innerHTML =
+          '<div class="co-inst-row"><span>Amount financed</span><span>' + coFmt(total) + '</span></div>' +
+          '<div class="co-inst-row"><span>First payment</span><span>' + coFmt(monthly) + '</span></div>' +
+          '<div class="co-inst-row"><span>Remaining payments</span><span>' + coFmt(remaining) + '</span></div>' +
+          '<div class="co-inst-row co-inst-highlight"><span>Monthly payment</span><span>' + coFmt(monthly) + ' / mo</span></div>';
+      });
+    });
+
+    /* ── Study regs checkbox → Proceed button ── */
+    var studyRegs = document.getElementById('coStudyRegs');
+    var proceedBtn = document.getElementById('coProceed');
+    var cantProc  = document.getElementById('coCantProceed');
+    var cantProcLnk = document.getElementById('coCantLnkProceed');
+    if (studyRegs && proceedBtn) {
+      studyRegs.addEventListener('change', function(){
+        proceedBtn.disabled = !studyRegs.checked;
+        if (cantProc) cantProc.hidden = studyRegs.checked;
+      });
+    }
+    if (cantProcLnk) cantProcLnk.addEventListener('click', function(e){ e.preventDefault(); if(studyRegs) studyRegs.scrollIntoView({behavior:'smooth'}); });
+    if (proceedBtn) proceedBtn.addEventListener('click', function(){
+      NKICart.clear();
+      showPage('thankyou');
+    });
+
+    /* ── Promo code ── */
+    var promoBtn = document.getElementById('coPromoBtn');
+    var promoInp = document.getElementById('coPromoInp');
+    if (promoBtn && promoInp) {
+      promoBtn.addEventListener('click', function(){
+        var code = promoInp.value.trim().toUpperCase();
+        if (code === 'WELCOME10') {
+          CHECKOUT_STATE.promoApplied = true; CHECKOUT_STATE.discountPct = 10; CHECKOUT_STATE.promoCode = code;
+        } else if (code === 'STUDENT20') {
+          CHECKOUT_STATE.promoApplied = true; CHECKOUT_STATE.discountPct = 20; CHECKOUT_STATE.promoCode = code;
+        }
+        renderCheckoutPage();
+      });
+    }
+  }
+
+  /* ── Thank you page ── */
+  function renderThankYouPage() {
+    var page = document.getElementById('page-thankyou');
+    if (!page) return;
+    var confNum = 'NKI-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 89999);
+    page.innerHTML =
+      '<div class="ty-wrap">' +
+        '<div class="ty-confetti" id="tyConfetti"></div>' +
+        '<div class="container">' +
+          '<div class="ty-hero">' +
+            '<div class="ty-check-circle"><span class="material-symbols-outlined ty-check-ic">check_circle</span></div>' +
+            '<h1 class="ty-headline">Thank you for your order!</h1>' +
+            '<div class="ty-conf-num">Confirmation number: <strong>' + confNum + '</strong></div>' +
+          '</div>' +
+          '<div class="ty-cards">' +
+            '<div class="ty-card">' +
+              '<div class="ty-card-hd">Your order</div>' +
+              '<div class="ty-order-placeholder"></div>' +
+              '<div class="ty-order-name">Course access granted</div>' +
+              '<div class="ty-order-price">Payment confirmed</div>' +
+            '</div>' +
+            '<div class="ty-card">' +
+              '<div class="ty-card-hd">What\'s next?</div>' +
+              '<p class="ty-card-txt">Within a few days you will receive confirmation of your registration, along with your username and password, via your email address.</p>' +
+              '<p class="ty-card-txt">To access your course:</p>' +
+              '<ul class="ty-steps-list">' +
+                '<li>Download <strong>Microsoft Authenticator</strong> on your phone</li>' +
+                '<li>Log in to <strong>Canvas</strong> — your learning platform</li>' +
+                '<li>Start your first module and set your own pace</li>' +
+              '</ul>' +
+            '</div>' +
+            '<div class="ty-card">' +
+              '<div class="ty-card-hd">Need help?</div>' +
+              '<p class="ty-card-txt">Need assistance? Email us at <a href="mailto:veelding@nki.no">veelding@nki.no</a> or call us at:</p>' +
+              '<div class="ty-contact-tel">67 58 88 00</div>' +
+              '<div class="ty-contact-hrs">Monday to Friday, 09:00–16:00</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="ty-newsletter">' +
+            '<div class="ty-nl-hd">Stay up to date with new courses and offers</div>' +
+            '<div class="ty-nl-row">' +
+              '<input class="ty-nl-inp" id="tyNlInp" type="email" placeholder="Your email address">' +
+              '<button class="ty-nl-btn" id="tyNlBtn">Subscribe</button>' +
+            '</div>' +
+            '<div class="ty-nl-success" id="tyNlSuccess" hidden>Thanks! You\'ve been subscribed.</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    launchConfetti();
+    document.getElementById('tyNlBtn').addEventListener('click', function(){
+      document.getElementById('tyNlSuccess').hidden = false;
+      document.getElementById('tyNlInp').disabled   = true;
+      document.getElementById('tyNlBtn').disabled   = true;
+    });
+  }
+
+  function launchConfetti() {
+    var el = document.getElementById('tyConfetti');
+    if (!el) return;
+    var colors = ['#f25022','#7fba00','#00a4ef','#ffb900','#a259ff','#ff6b35','#1db954'];
+    var html = '';
+    for (var i = 0; i < 80; i++) {
+      var c = colors[Math.floor(Math.random() * colors.length)];
+      var left = Math.random() * 100;
+      var delay = Math.random() * 2;
+      var dur   = 2.5 + Math.random() * 2;
+      var size  = 6 + Math.random() * 8;
+      html += '<div class="confetti-pc" style="left:' + left + '%;background:' + c + ';width:' + size + 'px;height:' + size + 'px;animation-delay:' + delay + 's;animation-duration:' + dur + 's;border-radius:' + (Math.random()>0.5?'50%':'2px') + '"></div>';
+    }
+    el.innerHTML = html;
+  }
 
 })();
 </script>
