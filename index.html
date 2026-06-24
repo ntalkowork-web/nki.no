@@ -2494,7 +2494,7 @@
         '</div>' +
         '<div class="cdp-hero">' +
           '<div class="cdp-hero-left">' +
-            '<div class="cdp-eyebrow">' + c.eyebrow + '</div>' +
+            '<div class="cdp-eyebrow">' + (c.area === 'Subject packages for High School' ? 'PACKAGE' : 'COURSE') + '</div>' +
             '<h1 class="cdp-h1">' + c.name + '</h1>' +
             '<p class="cdp-desc">' + c.description + '</p>' +
             '<div class="cdp-meta">' + metaHTML + '</div>' +
@@ -2543,7 +2543,32 @@
             '<div class="cdp-related-heading">Relevant courses</div>' +
             '<div class="courses-grid">' + relatedHTML + '</div>' +
           '</div></div>'
-        : '');
+        : '') +
+      '<div class="cdp-advice"><div class="container"><div class="consult-inline">' +
+        '<div>' +
+          '<h2 class="section-title">Get free advice</h2>' +
+          '<p class="consult-sub">If you have any questions about our studies or admission requirements – we are happy to help you!</p>' +
+          '<p class="consult-tel">For free study advice, call 67 58 88 00</p>' +
+          '<p class="consult-hours">09–16 (Mon–Fri)</p>' +
+        '</div>' +
+        '<form onsubmit="return false">' +
+          '<div class="form-row">' +
+            '<div class="form-group"><label class="form-label" for="cdp-c-name">Name</label><input class="form-input" id="cdp-c-name" type="text" placeholder="Your full name"></div>' +
+            '<div class="form-group"><label class="form-label" for="cdp-c-email">Email</label><input class="form-input" id="cdp-c-email" type="email" placeholder="email@example.com"></div>' +
+          '</div>' +
+          '<div class="form-row">' +
+            '<div class="form-group"><label class="form-label" for="cdp-c-phone">Phone number</label><input class="form-input" id="cdp-c-phone" type="tel" placeholder="+47 000 00 000"></div>' +
+            '<div class="form-group"><label class="form-label" for="cdp-c-topic">Topic</label>' +
+              '<select class="form-select" id="cdp-c-topic"><option value="">Select a topic</option><option>Course information</option><option>Admission requirements</option><option>Financing / Lånekassen</option><option>Other</option></select>' +
+            '</div>' +
+          '</div>' +
+          '<div class="form-group"><label class="form-label" for="cdp-c-msg">Message</label><textarea class="form-textarea" id="cdp-c-msg" placeholder="Write your question here..."></textarea></div>' +
+          '<div class="form-group"><label class="form-label">Preferred contact method</label>' +
+            '<div class="contact-pref-group"><label><input type="radio" name="cdp-c-pref" value="phone"> Phone</label><label><input type="radio" name="cdp-c-pref" value="email"> Email</label></div>' +
+          '</div>' +
+          '<button type="submit" class="btn-submit">Send</button>' +
+        '</form>' +
+      '</div></div></div>';
 
     /* update sticky CTA */
     var stickyEl = document.getElementById('cdp-sticky-cta');

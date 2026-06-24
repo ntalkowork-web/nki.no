@@ -3160,7 +3160,10 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 /* 144px gap before footer — targets whichever CDP section is last */
 #page-course > .cdp-faq:last-child,
-#page-course > .cdp-related:last-child { padding-bottom: 144px; }
+#page-course > .cdp-related:last-child,
+#page-course > .cdp-advice:last-child { padding-bottom: 144px; }
+
+.cdp-advice { padding: 72px 0; }
 
 .cdp-related-heading {
   font-size: 40px;
