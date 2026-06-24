@@ -1629,6 +1629,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 .courses-viewport { overflow: hidden; }
 
 /* ── POPULAR COURSES TABS ─────────────────── */
+section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 .pop-tabs { display: flex; gap: 4px; margin-top: 16px; margin-bottom: 24px; }
 .pop-tab {
   padding: 7px 16px;
