@@ -3537,7 +3537,6 @@
     return '<div class="co-sum-card" id="coSumCard">' +
       '<div class="co-sum-hd">Summary</div>' +
       summCards + lkHTML +
-      '<div class="co-sum-sep"></div>' +
       '<div class="co-promo-wrap">' +
         '<div class="co-promo-row">' +
           '<input class="co-promo-inp" id="coPromoInp" type="text" placeholder="Do you have a promotional code?" value="' + (CHECKOUT_STATE.promoApplied ? CHECKOUT_STATE.promoCode : '') + '">' +
@@ -3545,7 +3544,6 @@
         '</div>' +
         (CHECKOUT_STATE.promoApplied ? '<div class="co-promo-ok"><span class="material-symbols-outlined" style="font-size:14px">check_circle</span>Promo code applied — ' + CHECKOUT_STATE.discountPct + '% off!</div>' : '') +
       '</div>' +
-      '<div class="co-sum-sep"></div>' +
       (CHECKOUT_STATE.promoApplied ? '<div class="co-sum-row"><span>Discount (' + CHECKOUT_STATE.discountPct + '%)</span><span class="co-sum-disc">-' + coFmt(disc) + '</span></div>' : '') +
       (CHECKOUT_STATE.paymentMethod === 'partial' ? '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--gray-400);font-size:14px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' : '') +
       '<div class="co-sum-row co-sum-total-row"><span>Total price</span><span>' + coFmt(total) + '</span></div>' +
