@@ -1018,9 +1018,13 @@
     });
   });
 
-  /* Close mob menu on logo click */
+  /* Close mob menu on logo click and navigate home */
   var mobLogoLink = document.getElementById('mobLogoLink');
-  if (mobLogoLink) mobLogoLink.addEventListener('click', closeMobMenu);
+  if (mobLogoLink) mobLogoLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    closeMobMenu();
+    showPage('home');
+  });
 
   /* ── Nav tab click → toggle dropdown ── */
   const navItems = Array.from(document.querySelectorAll('.nav-item.has-dropdown'));
@@ -1998,6 +2002,7 @@
     var stickyEl = document.getElementById('cdp-sticky-cta');
     if (name !== 'course' && stickyEl) {
       stickyEl.classList.remove('is-visible');
+      document.body.classList.remove('cdp-cta-pinned');
       if (_cdpObserver) { _cdpObserver.disconnect(); _cdpObserver = null; }
     }
 
@@ -2635,8 +2640,8 @@
     }).join('');
 
     /* what you get */
-    var whatYouGetHTML = (c.whatYouGet || []).map(function(item) {
-      return '<li class="cdp-check-item"><span class="material-symbols-outlined cdp-check-icon">check</span><span class="cdp-check-text">' + item + '</span></li>';
+    var whatYouGetHTML = (c.whatYouGet || []).map(function(item, idx) {
+      return '<li class="cdp-check-item"><span class="cdp-num-circle">' + (idx + 1) + '</span><span class="cdp-check-text">' + item + '</span></li>';
     }).join('');
 
     /* structure tabs */
@@ -2667,8 +2672,8 @@
       '</div>';
 
     /* materials */
-    var materialsHTML = (c.materials || []).map(function(m) {
-      return '<li class="cdp-material-item">' + m + '</li>';
+    var materialsHTML = (c.materials || []).map(function(m, idx) {
+      return '<li class="cdp-check-item"><span class="cdp-num-circle">' + (idx + 1) + '</span><span class="cdp-check-text">' + m + '</span></li>';
     }).join('');
 
     /* payment pills */
@@ -2725,7 +2730,7 @@
       { id: 'cdp-sec-contents',  label: "What's in the course",
         html: structBodyHTML + '<p class="cdp-activities-label">Here are the activities in this course</p>' + mediaTypesHTML },
       { id: 'cdp-sec-materials', label: 'What you need for this course',
-        html: '<ol class="cdp-materials-list">' + materialsHTML + '</ol>' },
+        html: '<ul class="cdp-materials-list">' + materialsHTML + '</ul>' },
       { id: 'cdp-sec-exam',      label: 'Exam',
         html: '<p class="cdp-sec-para">' + (c.exam || '') + '</p>' },
       { id: 'cdp-sec-financing', label: 'Financing options',
@@ -2857,9 +2862,13 @@
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             stickyEl.classList.remove('is-visible');
+            document.body.classList.remove('cdp-cta-pinned');
           } else {
             var inCart = NKICart.getItems().some(function(i) { return i.id === CURRENT_COURSE.id; });
-            if (!inCart) stickyEl.classList.add('is-visible');
+            if (!inCart) {
+              stickyEl.classList.add('is-visible');
+              document.body.classList.add('cdp-cta-pinned');
+            }
           }
         });
       }, { threshold: 0 });
@@ -2882,11 +2891,13 @@
     if (cartBtn) cartBtn.addEventListener('click', function() {
       addToCart(CURRENT_COURSE);
       document.getElementById('cdp-sticky-cta').classList.remove('is-visible');
+      document.body.classList.remove('cdp-cta-pinned');
     });
     var stickyCartBtn = document.getElementById('cdpStickyCart');
     if (stickyCartBtn) stickyCartBtn.addEventListener('click', function() {
       addToCart(CURRENT_COURSE);
       document.getElementById('cdp-sticky-cta').classList.remove('is-visible');
+      document.body.classList.remove('cdp-cta-pinned');
     });
 
     /* TOC: show/hide based on infobar visibility */
