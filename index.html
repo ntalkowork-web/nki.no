@@ -1292,6 +1292,7 @@
           '<div class="nki-item-name">' + item.name + '</div>' +
           '<div class="nki-item-meta">' + fmtMeta(item) + '</div>' +
           '<div class="nki-item-price">' + fmtPrice(item.price) + '</div>' +
+          '<div class="nki-cart-install-hint" style="text-align:left;margin-top:3px;">or from kr ' + Math.round(item.price * 1.015 / 3) + '/month with instalments</div>' +
           books +
         '</div>' +
         '<button class="nki-item-remove" data-remove-id="' + item.id + '" aria-label="Remove course">delete</button>' +
@@ -1375,7 +1376,6 @@
           '<span class="nki-cta-sep"></span>' +
           '<span class="nki-cta-price">' + total + '</span>' +
         '</button>' +
-        '<div class="nki-cart-install-hint">or from kr ' + Math.round(cartTotal() * 1.015 / 3) + '/month with instalments</div>' +
         '<div class="nki-pay-pills">' + logoPills + '</div>' +
       '</footer>'
     );
@@ -3255,7 +3255,7 @@
         '</div>' +
         '<div class="co-inst-breakdown">' +
           '<div class="co-inst-row"><span>Amount financed</span><span>' + coFmt(total) + '</span></div>' +
-          '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + ' × ' + coFmt(monthly) + '</span></div>' +
+          '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + '</span></div>' +
           '<div class="co-inst-row co-inst-highlight"><span>Monthly payment</span><span>' + coFmt(monthly) + ' / mo</span></div>' +
         '</div>' +
       '</div>';
@@ -3507,7 +3507,7 @@
         if (bd) bd.innerHTML =
           '<div class="co-inst-row"><span>Amount financed</span><span>' + coFmt(total) + '</span></div>' +
           '<div class="co-inst-row"><span>First payment</span><span>' + coFmt(monthly) + '</span></div>' +
-          '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + ' payments</span></div>' +
+          '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + '</span></div>' +
           '<div class="co-inst-row co-inst-highlight"><span>Monthly payment</span><span>' + coFmt(monthly) + ' / mo</span></div>';
       });
     });

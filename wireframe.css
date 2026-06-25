@@ -247,6 +247,15 @@ select { font-family: inherit; }
   z-index: 201;
 }
 
+.dropdown-item.has-mega { position: relative; }
+.dropdown-item.has-mega::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 12px;
+  height: 100%;
+}
 .dropdown-item.has-mega:hover > .mega-panel { display: block; }
 
 .mega-label {
@@ -903,7 +912,7 @@ select { font-family: inherit; }
   font-size: 18px;
   font-weight: 600;
   color: var(--gray-700);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .nki-sugg-list { border-top: 1px solid var(--gray-100); }
@@ -1226,7 +1235,7 @@ main { margin-top: var(--header-h); }
   font-size: 16px;
   color: var(--gray-600);
   max-width: 680px;
-  margin: 0 auto 48px;
+  margin: 0 auto 24px;
   line-height: 1.65;
 }
 
@@ -1558,7 +1567,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 .cc-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 11px; }
 
 .pill-sm {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--gray-600);
   background: var(--gray-100);
   border-radius: var(--r-sm);
@@ -3313,7 +3322,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   margin-bottom: 32px;
 }
 
-.cdp-faq-list { max-width: 720px; margin: 0 auto; }
+.cdp-faq-list { max-width: none; margin: 0; }
 
 .cdp-faq-item { border-bottom: 1px solid var(--gray-200); }
 
@@ -4421,8 +4430,29 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   color: var(--gray-400);
 }
 
-/* ── Browse all / See all secondary button ── */
-.btn-browse-all, .btn-see-all {
+/* ── Browse all (primary, filled) ── */
+.btn-browse-all {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 28px;
+  background: var(--gray-900);
+  color: var(--white);
+  border: 1.5px solid var(--gray-900);
+  border-radius: var(--r-sm);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  font-family: var(--font);
+  text-decoration: none;
+  white-space: nowrap;
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+.btn-browse-all:hover { background: var(--gray-700); border-color: var(--gray-700); }
+
+/* ── See all (outline secondary) ── */
+.btn-see-all {
   display: inline-flex;
   align-items: center;
   padding: 10px 22px;
@@ -4438,13 +4468,13 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   text-decoration: none;
   white-space: nowrap;
 }
-.btn-browse-all:hover, .btn-see-all:hover { background: var(--gray-900); color: var(--white); }
-.btn-browse-all { margin-top: 24px; }
+.btn-see-all:hover { background: var(--gray-50); }
 
 /* ── Carousel footer (arrows below, counter between) ── */
 .pop-carousel-footer {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   margin-top: 24px;
 }
@@ -4466,7 +4496,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 /* ── Cart: suggested subtitle ── */
 .nki-sugg-subtitle {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--gray-500);
   margin-bottom: 12px;
   line-height: 1.4;
@@ -4474,11 +4504,11 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 /* ── CDP: activities label ── */
 .cdp-activities-label {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--gray-700);
   margin-top: 28px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 /* ── CDP hero: picture placeholder ── */
