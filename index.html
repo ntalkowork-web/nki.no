@@ -2640,7 +2640,7 @@
     }).join('');
 
     /* structure tabs */
-    var structLabel = c.type === 'Package' ? 'Package contents' : "What’s in the course";
+    var structLabel = c.type === 'Package' ? 'Package contents' : "What's in the course";
     var structure   = c.structure || [];
     var structTabsHTML = structure.map(function(s, i) {
       return '<button class="cdp-struct-tab' + (i === 0 ? ' is-active' : '') + '" data-tab-idx="' + i + '">' +
@@ -2718,12 +2718,12 @@
 
     /* long-read content sections */
     var CDP_SECTIONS = [
-      { id: ‘cdp-sec-wyg’,       label: "What you’ll get",
-        html: ‘<ul class="cdp-check-list">’ + whatYouGetHTML + ‘</ul>’ },
-      { id: ‘cdp-sec-about’,     label: ‘About the course’,
-        html: ‘<p class="cdp-sec-para">’ + c.description + ‘ This course covers all the required subjects for upper secondary completion, taught through interactive digital modules designed for adult learners. Suitable for students returning to education, those changing careers, or anyone looking to expand their qualifications.</p>’ },
-      { id: ‘cdp-sec-contents’,  label: "What’s in the course",
-        html: structBodyHTML + ‘<p class="cdp-activities-label">Here are the activities in this course</p>’ + mediaTypesHTML },
+      { id: 'cdp-sec-wyg',       label: "What you'll get",
+        html: '<ul class="cdp-check-list">' + whatYouGetHTML + '</ul>' },
+      { id: 'cdp-sec-about',     label: 'About the course',
+        html: '<p class="cdp-sec-para">' + c.description + ' This course covers all the required subjects for upper secondary completion, taught through interactive digital modules designed for adult learners. Suitable for students returning to education, those changing careers, or anyone looking to expand their qualifications.</p>' },
+      { id: 'cdp-sec-contents',  label: "What's in the course",
+        html: structBodyHTML + '<p class="cdp-activities-label">Here are the activities in this course</p>' + mediaTypesHTML },
       { id: 'cdp-sec-materials', label: 'What you need for this course',
         html: '<ol class="cdp-materials-list">' + materialsHTML + '</ol>' },
       { id: 'cdp-sec-exam',      label: 'Exam',
