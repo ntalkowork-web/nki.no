@@ -337,8 +337,77 @@
       </button>
     </div>
 
+    <!-- 2.5 Hamburger (mobile only) -->
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+    </button>
+
   </div>
 </header>
+
+<!-- ════════════════════════════════════════════
+     MOBILE FULLSCREEN MENU
+════════════════════════════════════════════ -->
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+  <div class="mob-menu-hd">
+    <a class="mob-menu-logo" href="#" id="mobLogoLink">
+      <img src="logos/NKI_Logo_Black_L.svg" alt="NKI Nettstudier">
+    </a>
+    <button class="mob-menu-close" id="mobMenuClose" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="3" y1="3" x2="17" y2="17"/><line x1="17" y1="3" x2="3" y2="17"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="mob-nav">
+    <ul class="mob-nav-list">
+      <li><a href="#" class="mob-nav-link" data-page="home">Home</a></li>
+
+      <!-- High School accordion -->
+      <li class="mob-acc">
+        <button class="mob-acc-trigger" aria-expanded="false">
+          High School
+          <svg class="mob-acc-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+        </button>
+        <div class="mob-acc-body">
+          <ul class="mob-acc-links">
+            <li><a href="#" class="mob-acc-link">Subject packages for High School</a></li>
+            <li><a href="#" class="mob-acc-link">Vocational Studies for High School</a></li>
+            <li><a href="#" class="mob-acc-link">Single Subjects for High School</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- Professional Courses accordion -->
+      <li class="mob-acc">
+        <button class="mob-acc-trigger" aria-expanded="false">
+          Professional Courses
+          <svg class="mob-acc-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+        </button>
+        <div class="mob-acc-body">
+          <ul class="mob-acc-links">
+            <li><a href="#" class="mob-acc-link">Economy and sustainability</a></li>
+            <li><a href="#" class="mob-acc-link">HR and Management</a></li>
+            <li><a href="#" class="mob-acc-link">Law and administration</a></li>
+            <li><a href="#" class="mob-acc-link">Construction and logistics</a></li>
+            <li><a href="#" class="mob-acc-link">Interior and design</a></li>
+            <li><a href="#" class="mob-acc-link">Health and lifestyle</a></li>
+            <li><a href="#" class="mob-acc-link">Marketing and sales</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <li><a href="#" class="mob-nav-link">Lånekassen</a></li>
+      <li><a href="#" class="mob-nav-link">For business</a></li>
+    </ul>
+  </nav>
+  <div class="mob-menu-footer">
+    <button class="btn-login mob-login-btn" id="mobLoginBtn">Log in</button>
+  </div>
+</div>
+<div class="mob-overlay" id="mobOverlay"></div>
 
 
 <!-- ════════════════════════════════════════════
@@ -925,6 +994,51 @@
 <script>
 (function () {
   'use strict';
+
+  /* ── Mobile menu ── */
+  var hamburgerBtn  = document.getElementById('hamburgerBtn');
+  var mobMenu       = document.getElementById('mobMenu');
+  var mobOverlay    = document.getElementById('mobOverlay');
+  var mobMenuClose  = document.getElementById('mobMenuClose');
+  var mobLoginBtn   = document.getElementById('mobLoginBtn');
+
+  function openMobMenu() {
+    mobMenu.classList.add('is-open');
+    mobOverlay.classList.add('is-open');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobMenu() {
+    mobMenu.classList.remove('is-open');
+    mobOverlay.classList.remove('is-open');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMobMenu);
+  if (mobMenuClose)  mobMenuClose.addEventListener('click', closeMobMenu);
+  if (mobOverlay)    mobOverlay.addEventListener('click', closeMobMenu);
+  if (mobLoginBtn)   mobLoginBtn.addEventListener('click', function() {
+    closeMobMenu();
+    document.getElementById('loginBtn').click();
+  });
+
+  /* Mobile accordions */
+  document.querySelectorAll('.mob-acc-trigger').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      var acc = trigger.closest('.mob-acc');
+      var isOpen = acc.classList.contains('is-open');
+      document.querySelectorAll('.mob-acc').forEach(function(a) { a.classList.remove('is-open'); a.querySelector('.mob-acc-trigger').setAttribute('aria-expanded','false'); });
+      if (!isOpen) {
+        acc.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* Close mob menu on logo click */
+  var mobLogoLink = document.getElementById('mobLogoLink');
+  if (mobLogoLink) mobLogoLink.addEventListener('click', closeMobMenu);
 
   /* ── Nav tab click → toggle dropdown ── */
   const navItems = Array.from(document.querySelectorAll('.nav-item.has-dropdown'));
