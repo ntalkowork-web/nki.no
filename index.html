@@ -3045,7 +3045,7 @@
         '<div class="si-card">' +
           '<div class="si-section">' +
             '<h2 class="si-heading">Guest Checkout</h2>' +
-            '<p style="font-size:13px;color:var(--gray-600);line-height:1.5;margin-bottom:16px;">Checkout as a guest. Plus, an account will automatically be created for you once you complete checkout.</p>' +
+            '<p style="font-size:14px;color:var(--gray-600);line-height:1.5;margin-bottom:16px;">Checkout as a guest. Plus, an account will automatically be created for you once you complete checkout.</p>' +
             '<button class="si-guest" id="siGuestBtn">Continue as guest</button>' +
           '</div>' +
           '<div class="si-sep"><span>or</span></div>' +
@@ -3281,7 +3281,7 @@
       summCards + lkHTML +
       '<div class="co-sum-sep"></div>' +
       (CHECKOUT_STATE.promoApplied ? '<div class="co-sum-row"><span>Discount (' + CHECKOUT_STATE.discountPct + '%)</span><span class="co-sum-disc">-' + coFmt(disc) + '</span></div>' : '') +
-      (CHECKOUT_STATE.paymentMethod === 'partial' ? '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--gray-400);font-size:11px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' : '') +
+      (CHECKOUT_STATE.paymentMethod === 'partial' ? '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--gray-400);font-size:14px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' : '') +
       '<div class="co-sum-row co-sum-total-row"><span>Total price</span><span>' + coFmt(total) + '</span></div>' +
       '<div class="co-sum-excl">Excluding books</div>' +
       '<div class="co-promo-wrap">' +
@@ -3573,9 +3573,9 @@
           return '<div class="nki-item" style="position:relative;display:flex;gap:12px;padding:0;border:none;box-shadow:none;margin-bottom:8px;">' +
             '<div class="nki-item-img" style="flex-shrink:0;width:56px;height:56px;border-radius:6px;background:var(--gray-200);"></div>' +
             '<div class="nki-item-info" style="flex:1;min-width:0;">' +
-              '<div class="nki-item-name" style="font-size:13px;font-weight:600;color:var(--gray-900);line-height:1.4;margin-bottom:2px;">' + item.name + '</div>' +
-              '<div class="nki-item-meta" style="font-size:12px;color:var(--gray-500);">' + fmtMeta(item) + '</div>' +
-              '<div class="nki-item-price" style="font-size:13px;font-weight:600;color:var(--gray-900);margin-top:4px;">' + fmtPrice(item.price) + '</div>' +
+              '<div class="nki-item-name" style="font-size:14px;font-weight:600;color:var(--gray-900);line-height:1.4;margin-bottom:2px;">' + item.name + '</div>' +
+              '<div class="nki-item-meta" style="font-size:14px;color:var(--gray-500);">' + fmtMeta(item) + '</div>' +
+              '<div class="nki-item-price" style="font-size:14px;font-weight:600;color:var(--gray-900);margin-top:4px;">' + fmtPrice(item.price) + '</div>' +
             '</div>' +
           '</div>';
         }).join('') +
