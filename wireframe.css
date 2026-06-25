@@ -2587,15 +2587,12 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
   background: var(--gray-50);
   border-bottom: 1px solid var(--gray-200);
   box-shadow: var(--sh-sm);
   z-index: 99;
   transform: translateY(-100%);
   transition: transform .25s ease;
-  display: flex;
-  align-items: center;
 }
 
 .cdp-sticky-cta.is-visible { transform: translateY(var(--header-h)); }
@@ -2604,7 +2601,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--margin);
+  padding: 16px var(--margin);
   width: 100%;
 }
 
@@ -2707,7 +2704,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   flex-wrap: nowrap;
   align-items: center;
   gap: 0;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--gray-700);
   margin-bottom: 24px;
 }
@@ -3007,8 +3004,9 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 /* Media types list in "What's in the course" */
 .cdp-media-types {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
   margin-top: 32px;
 }
 
