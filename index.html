@@ -2254,6 +2254,7 @@
       if (_cdpObserver) { _cdpObserver.disconnect(); _cdpObserver = null; }
     }
 
+    if (name === 'home') { window.scrollTo(0, 0); }
     if (name === 'search') {
       spState.query = ''; spState.areas = []; spState.levels = [];
       spState.lengths = []; spState.priceMin = 990; spState.priceMax = 49900;
