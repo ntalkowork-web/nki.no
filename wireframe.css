@@ -188,6 +188,16 @@ select { font-family: inherit; }
   overflow: visible;
 }
 
+/* transparent bridge that covers the gap between nav-tab and dropdown */
+.dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
 .nav-item.is-open > .dropdown { display: block; }
 .nav-item.has-dropdown:hover > .dropdown { display: block; }
 .nav-item.has-dropdown:hover > .nav-tab { background: var(--gray-100); color: var(--gray-900); }
@@ -247,13 +257,15 @@ select { font-family: inherit; }
   z-index: 201;
 }
 
-.dropdown-item.has-mega { position: relative; }
+/* has-mega is position:static so .mega-panel and ::after are relative to .dropdown,
+   which means mega-panel always aligns to the dropdown's top edge */
+.dropdown-item.has-mega { position: static; }
 .dropdown-item.has-mega::after {
   content: '';
   position: absolute;
   top: 0;
   left: 100%;
-  width: 12px;
+  width: 16px;
   height: 100%;
 }
 .dropdown-item.has-mega:hover > .mega-panel { display: block; }
@@ -469,7 +481,7 @@ select { font-family: inherit; }
   letter-spacing: .04em;
 }
 
-.s-card-name { font-size: 14px; font-weight: 600; color: var(--gray-900); line-height: 1.35; margin-bottom: 6px; }
+.s-card-name { font-size: 16px; font-weight: 600; color: var(--gray-900); line-height: 1.35; margin-bottom: 6px; }
 .s-card-pills { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
 .s-card-price { font-size: 14px; font-weight: 700; color: var(--gray-900); }
 
@@ -2896,7 +2908,13 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   margin-bottom: 16px;
 }
 
-.cdp-check-list { list-style: none; }
+.cdp-check-list {
+  list-style: none;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-md);
+  padding: 20px 24px;
+  background: var(--gray-50);
+}
 
 .cdp-check-item {
   display: flex;
@@ -3015,7 +3033,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 8px;
   margin-top: 32px;
 }
 
@@ -4447,7 +4465,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   font-family: var(--font);
   text-decoration: none;
   white-space: nowrap;
-  margin-top: 24px;
+  margin-top: 0;
   margin-bottom: 40px;
 }
 .btn-browse-all:hover { background: var(--gray-700); border-color: var(--gray-700); }
@@ -4490,9 +4508,13 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 /* ── Cart: instalment hint ── */
 .nki-cart-install-hint {
   font-size: 14px;
-  color: var(--gray-500);
-  text-align: center;
-  margin-top: 6px;
+  color: var(--gray-600);
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-sm);
+  display: inline-block;
 }
 
 /* ── Cart: suggested subtitle ── */
@@ -4505,7 +4527,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 /* ── CDP: activities label ── */
 .cdp-activities-label {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--gray-700);
   margin-top: 28px;
