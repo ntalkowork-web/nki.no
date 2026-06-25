@@ -554,6 +554,24 @@ select { font-family: inherit; }
 
 .drawer-close:hover { background: var(--gray-100); color: var(--gray-700); }
 
+.drawer-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: var(--gray-600);
+  border-radius: var(--r-sm);
+  flex-shrink: 0;
+}
+.drawer-back:hover { background: var(--gray-100); color: var(--gray-900); }
+
+/* Drawer sign-in panel */
+.drawer-si-wrap { padding: 24px; }
+.drawer-si-section { display: flex; flex-direction: column; gap: 12px; }
+.drawer-si-desc { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+.drawer-si-btn { width: 100%; }
+
 .drawer-body {
   flex: 1;
   display: flex;
@@ -3044,10 +3062,10 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 /* Content body — 2-col grid (content | TOC sidebar) */
 .cdp-body-grid {
   display: grid;
-  grid-template-columns: 1fr 480px;
+  grid-template-columns: 1fr 400px;
   gap: 48px;
   align-items: start;
-  padding: 48px 0 80px;
+  padding: 48px 0 0;
 }
 
 .cdp-toc-aside {
