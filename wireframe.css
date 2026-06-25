@@ -3989,7 +3989,7 @@ body.cdp-cta-pinned .cdp-toc {
 .co-sum-total-row { font-weight: 700; font-size: 18px; color: var(--gray-900); margin-top: 4px; }
 .co-sum-disc { color: #1a7a4a; }
 .co-sum-excl { font-size: 14px; color: var(--gray-400); margin-bottom: 14px; }
-.co-promo-wrap { display: flex; flex-direction: column; gap: 8px; }
+.co-promo-wrap { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
 .co-promo-row { display: flex; gap: 8px; }
 .co-promo-inp {
   flex: 1;
