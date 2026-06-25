@@ -36,7 +36,7 @@
             <ul class="dropdown-list">
               <!-- High School Subject Packages › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">Subject packages for High School</span>
+                <span class="item-label">Subject packages</span>
                 <span class="mega-arrow">›</span>
                 <div class="mega-panel">
                   <ul>
@@ -52,7 +52,7 @@
               </li>
               <!-- Vocational Studies for High School › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">Vocational Studies for High School</span>
+                <span class="item-label">Vocational studies</span>
                 <span class="mega-arrow">›</span>
                 <div class="mega-panel">
                   <ul>
@@ -70,7 +70,7 @@
               </li>
               <!-- High School Single Subjects › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">Single Subjects for High School</span>
+                <span class="item-label">Single Subjects</span>
                 <span class="mega-arrow">›</span>
                 <div class="mega-panel">
                   <div class="mega-label">Most popular</div>
@@ -243,7 +243,7 @@
           type="text"
           id="headerSearch"
           class="search-input"
-          placeholder="Search..."
+          placeholder="Search for a course, subject, topic..."
           autocomplete="off"
           aria-autocomplete="list">
         <button class="search-clear" id="searchClear" aria-label="Clear search">&#x2715;</button>
@@ -482,6 +482,7 @@
       <div class="hero-content">
         <h1 class="hero-headline">Learn anywhere, anytime</h1>
         <p class="hero-sub">NKI delivers fully digital, flexible learning that helps you complete education and reskill on your own terms — no classrooms, no fixed schedules, just structured progress.</p>
+        <button class="btn-browse-all" id="heroBrowseBtn">Browse all courses</button>
 
         <!-- Factoids -->
         <div class="hero-factoids">
@@ -497,37 +498,6 @@
             <div class="factoid-num">34k+</div>
             <div class="factoid-lbl">students completed their<br>education last year</div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Configurator: content-width box straddling gray/white boundary -->
-    <div class="hero-config-zone">
-      <div class="hero-configurator">
-        <div class="config-inner">
-          <span class="config-heading">Find my course</span>
-          <div class="config-group">
-            <div class="cfg-dropdown" id="cfg-level-dd">
-              <button class="cfg-dd-btn" type="button">
-                <span class="cfg-dd-label">Choose educational level</span>
-                <span class="cfg-dd-chevron">▾</span>
-              </button>
-              <div class="cfg-dd-menu">
-                <div class="cfg-dd-item" data-val="high-school">High School</div>
-                <div class="cfg-dd-item" data-val="professional-courses">Professional Courses</div>
-              </div>
-            </div>
-          </div>
-          <div class="config-group">
-            <div class="cfg-dropdown" id="cfg-area-dd">
-              <button class="cfg-dd-btn" type="button">
-                <span class="cfg-dd-label">Choose subject area</span>
-                <span class="cfg-dd-chevron">▾</span>
-              </button>
-              <div class="cfg-dd-menu" id="cfg-area-menu"></div>
-            </div>
-          </div>
-          <button class="btn-find">Search</button>
         </div>
       </div>
     </div>
@@ -549,26 +519,39 @@
   </section>
 
 
-  <!-- ── 4. POPULAR COURSES ──────────────── -->
-  <section class="wf-section" aria-labelledby="popular-hd">
+  <!-- ── 4a. TOP HIGH SCHOOL COURSES ──────── -->
+  <section class="wf-section" aria-labelledby="pop-hs-hd">
     <div class="container">
       <div class="section-hd">
-        <h2 class="section-title" id="popular-hd">Popular courses</h2>
-      </div>
-      <div class="pop-tabs-row">
-        <div class="pop-tabs" id="popTabs">
-          <button class="pop-tab is-active" data-pop-tab="hs">High School</button>
-          <button class="pop-tab" data-pop-tab="pro">Professional Courses</button>
-        </div>
-        <div class="nav-arrows">
-          <button class="nav-arrow" aria-label="Previous">&#8592;</button>
-          <button class="nav-arrow" aria-label="Next">&#8594;</button>
-        </div>
+        <h2 class="section-title" id="pop-hs-hd">Top High School Courses</h2>
+        <button class="btn-see-all" id="popHsSeeAll">See all</button>
       </div>
       <div class="courses-viewport">
-        <div class="courses-grid" id="coursesGrid"></div>
+        <div class="courses-grid" id="coursesGridHs"></div>
       </div>
-      <div class="carousel-dots" id="carouselDots"></div>
+      <div class="pop-carousel-footer">
+        <button class="nav-arrow" id="popHsPrev" aria-label="Previous">&#8592;</button>
+        <span class="pop-counter" id="popHsCounter">1 / 3</span>
+        <button class="nav-arrow" id="popHsNext" aria-label="Next">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4b. TOP PROFESSIONAL COURSES ────── -->
+  <section class="wf-section bg-gray" aria-labelledby="pop-pro-hd">
+    <div class="container">
+      <div class="section-hd">
+        <h2 class="section-title" id="pop-pro-hd">Top Professional Courses</h2>
+        <button class="btn-see-all" id="popProSeeAll">See all</button>
+      </div>
+      <div class="courses-viewport">
+        <div class="courses-grid" id="coursesGridPro"></div>
+      </div>
+      <div class="pop-carousel-footer">
+        <button class="nav-arrow" id="popProPrev" aria-label="Previous">&#8592;</button>
+        <span class="pop-counter" id="popProCounter">1 / 3</span>
+        <button class="nav-arrow" id="popProNext" aria-label="Next">&#8594;</button>
+      </div>
     </div>
   </section>
 
@@ -650,7 +633,6 @@
         <div class="aktiv-panel-card">
           <h3 class="aktiv-panel-title" id="aktiv-panel-title">Active learning</h3>
           <p class="aktiv-panel-desc" id="aktiv-panel-desc">The course participant takes an active role through action, reflection, and applying knowledge.</p>
-          <button class="aktiv-panel-btn">Learn more →</button>
         </div>
       </div>
 
@@ -1356,6 +1338,7 @@
     return (
       '<div class="nki-sugg">' +
         '<div class="nki-sugg-title">You might also be interested in</div>' +
+        '<div class="nki-sugg-subtitle">Add more courses to the cart and save up to 15%</div>' +
         '<div class="nki-sugg-list">' + buildSuggestedRows() + '</div>' +
       '</div>'
     );
@@ -1392,6 +1375,7 @@
           '<span class="nki-cta-sep"></span>' +
           '<span class="nki-cta-price">' + total + '</span>' +
         '</button>' +
+        '<div class="nki-cart-install-hint">or from kr ' + Math.round(cartTotal() * 1.015 / 3) + '/month with instalments</div>' +
         '<div class="nki-pay-pills">' + logoPills + '</div>' +
       '</footer>'
     );
@@ -1442,7 +1426,12 @@
 
     var coBtn = drawer.querySelector('#cartCheckoutBtn');
     if (coBtn) coBtn.addEventListener('click', function() {
-      renderCartSignin();
+      NKICart.close();
+      CHECKOUT_STATE.step = 1; CHECKOUT_STATE.completed = [];
+      CHECKOUT_STATE.promoApplied = false; CHECKOUT_STATE.discountPct = 0;
+      CHECKOUT_STATE.paymentMethod = ''; CHECKOUT_STATE.docUploaded = false;
+      CHECKOUT_STATE.docDelivery = 'now'; CHECKOUT_STATE.installMonths = 3;
+      showPage('checkout');
     });
 
     updateCartBadge();
@@ -1686,34 +1675,12 @@
       + '<div class="cc-img">' + imgBadge + '</div>'
       + '<div class="cc-body">'
       + '<div class="cc-name">' + c.name + '</div>'
-      + '<div class="cc-rating"><span class="star">★</span><span class="score">' + c.rating + '</span></div>'
+      + '<div class="cc-enrolled"><span class="material-symbols-outlined cc-enrolled-icon">person</span>' + (c.enrolled || Math.round(parseFloat(c.rating) * 1100)) + ' students enrolled</div>'
       + '<div class="cc-pills">' + pills + '</div>'
       + '<div class="cc-footer"><div><div class="cc-price">' + c.price + '</div>'
       + '<div class="cc-price-meta"><span class="cc-orig-price">' + c.orig + '</span><span class="cc-disc-badge">' + c.disc + '</span></div></div>'
       + '<button class="cc-cart-btn" aria-label="Add to cart">' + ccCartSvg + '<span class="cc-cart-plus">+</span></button>'
       + '</div></div></div>';
-  }
-
-  var popularSection = document.getElementById('popular-hd').closest('.container');
-  var popularPrev    = popularSection.querySelectorAll('.nav-arrow')[0];
-  var popularNext    = popularSection.querySelectorAll('.nav-arrow')[1];
-  var coursesGrid    = document.getElementById('coursesGrid');
-  var carouselDots   = [];
-  var activeDot      = 0;
-  var sliding        = false;
-
-  function getActivePages() { return coursePagesByTab[activePopTab]; }
-
-  function renderDots() {
-    var dotsEl = document.getElementById('carouselDots');
-    if (!dotsEl) return;
-    dotsEl.innerHTML = getActivePages().map(function(_, i) {
-      return '<span class="dot' + (i === activeDot ? ' is-active' : '') + '"></span>';
-    }).join('');
-    carouselDots = Array.from(dotsEl.querySelectorAll('.dot'));
-    carouselDots.forEach(function(dot, i) {
-      dot.addEventListener('click', function() { goToDot(i, i > activeDot ? 1 : -1); });
-    });
   }
 
   function parseHoursFromPills(pills) {
@@ -1732,30 +1699,17 @@
     return 6;
   }
 
-  function renderPage(idx) {
-    var cards = getActivePages()[idx];
-    coursesGrid.innerHTML = cards.map(buildCard).join('');
-    coursesGrid.querySelectorAll('.cc-cart-btn').forEach(function (btn, i) {
+  function bindCardsInGrid(grid, cards) {
+    grid.querySelectorAll('.cc-cart-btn').forEach(function(btn, i) {
       var c = cards[i];
       var priceNum = parseInt(c.price.replace(/[^0-9]/g, ''), 10) || 0;
       var slug = c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
       var accessMonths = parseMonthsFromPills(c.pills);
       var hours = parseHoursFromPills(c.pills) || Math.round(accessMonths * 4.33 * 10);
-      var cartCourse = {
-        id: slug,
-        name: c.name,
-        type: c.type || 'Course',
-        hours: hours,
-        accessMonths: accessMonths,
-        price: priceNum,
-        needsBooks: c.pills.indexOf('Books needed') !== -1
-      };
-      btn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        NKICart.add(cartCourse);
-      });
+      var cartCourse = { id: slug, name: c.name, type: c.type || 'Course', hours: hours, accessMonths: accessMonths, price: priceNum, needsBooks: c.pills.indexOf('Books needed') !== -1 };
+      btn.addEventListener('click', function(e) { e.stopPropagation(); NKICart.add(cartCourse); });
     });
-    coursesGrid.querySelectorAll('.course-card').forEach(function(card, i) {
+    grid.querySelectorAll('.course-card').forEach(function(card, i) {
       card.addEventListener('click', function(e) {
         if (e.target.closest && e.target.closest('.cc-cart-btn')) return;
         showPage('course', { courseId: cards[i].id, courseName: cards[i].name });
@@ -1763,46 +1717,51 @@
     });
   }
 
-  function goToDot(idx, dir) {
-    if (sliding) return;
-    var pages = getActivePages();
-    var next = (idx + pages.length) % pages.length;
-    if (next === activeDot) return;
-    sliding = true;
+  function initCarousel(tabKey, gridId, prevId, nextId, counterId, seeAllId) {
+    var pages  = coursePagesByTab[tabKey];
+    var grid   = document.getElementById(gridId);
+    var prev   = document.getElementById(prevId);
+    var next   = document.getElementById(nextId);
+    var ctr    = document.getElementById(counterId);
+    var seeAll = document.getElementById(seeAllId);
+    if (!grid || !prev || !next) return;
+    var cur = 0;
+    var sliding = false;
 
-    coursesGrid.style.transition = 'transform 0.35s ease';
-    coursesGrid.style.transform  = 'translateX(' + (dir > 0 ? '-100%' : '100%') + ')';
-
-    setTimeout(function () {
-      renderPage(next);
-      coursesGrid.style.transition = 'none';
-      coursesGrid.style.transform  = 'translateX(' + (dir > 0 ? '100%' : '-100%') + ')';
-      coursesGrid.offsetHeight;
-      coursesGrid.style.transition = 'transform 0.35s ease';
-      coursesGrid.style.transform  = 'translateX(0)';
-      activeDot = next;
-      carouselDots.forEach(function (d, i) { d.classList.toggle('is-active', i === activeDot); });
-      setTimeout(function () { sliding = false; }, 360);
-    }, 360);
+    function updateCounter() {
+      if (ctr) ctr.textContent = (cur + 1) + ' / ' + pages.length;
+    }
+    function renderCarouselPage(idx) {
+      grid.innerHTML = pages[idx].map(buildCard).join('');
+      bindCardsInGrid(grid, pages[idx]);
+      updateCounter();
+    }
+    function goTo(idx, dir) {
+      if (sliding) return;
+      var next2 = (idx + pages.length) % pages.length;
+      if (next2 === cur) return;
+      sliding = true;
+      grid.style.transition = 'transform 0.35s ease';
+      grid.style.transform = 'translateX(' + (dir > 0 ? '-100%' : '100%') + ')';
+      setTimeout(function() {
+        cur = next2;
+        renderCarouselPage(cur);
+        grid.style.transition = 'none';
+        grid.style.transform = 'translateX(' + (dir > 0 ? '100%' : '-100%') + ')';
+        grid.offsetHeight;
+        grid.style.transition = 'transform 0.35s ease';
+        grid.style.transform = 'translateX(0)';
+        setTimeout(function() { sliding = false; }, 360);
+      }, 360);
+    }
+    prev.addEventListener('click', function() { goTo(cur - 1, -1); });
+    next.addEventListener('click', function() { goTo(cur + 1,  1); });
+    if (seeAll) seeAll.addEventListener('click', function() { showPage('search'); });
+    renderCarouselPage(0);
   }
 
-  renderDots();
-  renderPage(0);
-  popularPrev.addEventListener('click', function () { goToDot(activeDot - 1, -1); });
-  popularNext.addEventListener('click', function () { goToDot(activeDot + 1,  1); });
-
-  document.querySelectorAll('.pop-tab').forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      var t = tab.getAttribute('data-pop-tab');
-      if (t === activePopTab) return;
-      activePopTab = t;
-      activeDot = 0;
-      document.querySelectorAll('.pop-tab').forEach(function(tb) { tb.classList.remove('is-active'); });
-      tab.classList.add('is-active');
-      renderDots();
-      renderPage(0);
-    });
-  });
+  initCarousel('hs',  'coursesGridHs',  'popHsPrev',  'popHsNext',  'popHsCounter',  'popHsSeeAll');
+  initCarousel('pro', 'coursesGridPro', 'popProPrev', 'popProNext', 'popProCounter', 'popProSeeAll');
 
   /* ── Keyboard: Escape closes everything ── */
   document.addEventListener('keydown', function (e) {
@@ -2212,7 +2171,7 @@
       '<div class="cc-img">' + imgBadge + cmpLbl + '</div>' +
       '<div class="cc-body">' +
         '<div class="cc-name">' + c.name + '</div>' +
-        '<div class="cc-rating"><span class="star">★</span><span class="score">' + c.rating + '</span><span style="font-size:11px;color:var(--gray-400);margin-left:3px">(' + c.reviews + ')</span></div>' +
+        '<div class="cc-enrolled"><span class="material-symbols-outlined cc-enrolled-icon">person</span>' + fmtNum(c.reviews * 5) + ' students enrolled</div>' +
         '<div class="cc-pills">' + typePill + '<span class="pill-sm">' + c.level + '</span><span class="pill-sm">' + c.months + ' months</span>' + (c.lanekassen ? '<span class="pill-sm">Lånekassen</span>' : '') + '</div>' +
         '<div class="cc-footer"><div><div class="cc-price">Kr ' + fmtNum(c.price) + '</div></div>' +
         '<button class="cc-cart-btn" data-sp-cart="' + c.id + '" aria-label="Add to cart">' + ccCartSvg + '<span class="cc-cart-plus">+</span></button>' +
@@ -2239,10 +2198,6 @@
     page.innerHTML =
       '<div class="sp-wrap"><div class="container">' +
         '<div class="sp-breadcrumb"><a class="sp-bc-home" id="spBcHome">Home</a><span class="sp-bc-sep"> &gt; </span><span class="sp-bc-current">' + spState.breadcrumb + '</span></div>' +
-        '<div class="sp-search-bar-wrap">' +
-          '<span class="sp-search-icon material-symbols-outlined">search</span>' +
-          '<input type="text" class="sp-search-input" id="spSearchInput" placeholder="Search for a course, subject or topic…" value="' + spState.query + '">' +
-        '</div>' +
         '<div class="sp-filter-row" id="spFilterRow">' + buildFilterPillsHTML() + '</div>' +
         '<div class="sp-layout">' +
           '<aside class="sp-sidebar" id="spSidebar">' + buildSidebarHTML() + '</aside>' +
@@ -2457,7 +2412,7 @@
       { label: 'Study type',         fn: function(c) { return c.type || 'Course'; } },
       { label: 'Certificate',        fn: function(c) { return c.certificate ? 'Yes' : 'No'; } },
       { label: 'Lånekassen support', fn: function(c) { return c.lanekassen ? 'Yes' : 'No'; } },
-      { label: 'Rating',             fn: function(c) { return c.rating + ' ★'; } }
+      { label: 'Students enrolled',   fn: function(c) { return fmtNum((c.reviews || 100) * 5); } }
     ];
     if (allPackages) {
       ATTRS.push({ label: 'Subjects', fn: function(c) { return (c.subjects || []).map(function(s) { return '<li>' + s + '</li>'; }).join(''); }, isList: true });
@@ -2558,6 +2513,9 @@
     });
   }
 
+  var heroBrowseBtn = document.getElementById('heroBrowseBtn');
+  if (heroBrowseBtn) heroBrowseBtn.addEventListener('click', function() { showPage('search'); });
+
   /* ── Hero configurator: custom dropdowns ── */
   var CFG_AREAS_HS   = ['Subject packages for High School', 'Vocational Studies for High School', 'Single Subjects for High School'];
   var CFG_AREAS_PROF = ['Economy and sustainability', 'HR and Management', 'Law and administration', 'Construction and logistics', 'Interior and design', 'Health and lifestyle', 'Marketing and sales'];
@@ -2650,7 +2608,7 @@
     var installment = Math.round(c.price / 12);
 
     /* rating-only inline meta (under description) */
-    var ratingHTML = '<div class="cdp-meta"><div class="cdp-meta-item"><span class="cdp-meta-star">★</span>' + c.rating + '</div></div>';
+    var ratingHTML = '';
 
     /* info bar — 7 items */
     var scRef = spCourseById(c.id) || {};
@@ -2746,7 +2704,7 @@
         '<div class="cc-img">' + imgBadge + '</div>' +
         '<div class="cc-body">' +
           '<div class="cc-name">' + sc.name + '</div>' +
-          '<div class="cc-rating"><span class="star">★</span><span class="score">' + sc.rating + '</span></div>' +
+          '<div class="cc-enrolled"><span class="material-symbols-outlined cc-enrolled-icon">person</span>' + fmtNum(sc.reviews * 5) + ' students enrolled</div>' +
           '<div class="cc-pills">' + typePill + '<span class="pill-sm">' + sc.level + '</span><span class="pill-sm">' + sc.months + ' months</span></div>' +
           '<div class="cc-footer"><div><div class="cc-price">Kr ' + fmtNum(sc.price) + '</div></div>' +
           '<button class="cc-cart-btn" data-cdp-cart="' + sc.id + '" aria-label="Add to cart">' + ccCartSvg + '<span class="cc-cart-plus">+</span></button>' +
@@ -2756,10 +2714,12 @@
 
     /* long-read content sections */
     var CDP_SECTIONS = [
-      { id: 'cdp-sec-about',     label: 'About the course',
-        html: '<p class="cdp-sec-para">' + c.description + ' This course covers all the required subjects for upper secondary completion, taught through interactive digital modules designed for adult learners. Suitable for students returning to education, those changing careers, or anyone looking to expand their qualifications.</p>' },
-      { id: 'cdp-sec-contents',  label: "What’s in the course",
-        html: structBodyHTML + mediaTypesHTML },
+      { id: ‘cdp-sec-wyg’,       label: "What you’ll get",
+        html: ‘<ul class="cdp-check-list">’ + whatYouGetHTML + ‘</ul>’ },
+      { id: ‘cdp-sec-about’,     label: ‘About the course’,
+        html: ‘<p class="cdp-sec-para">’ + c.description + ‘ This course covers all the required subjects for upper secondary completion, taught through interactive digital modules designed for adult learners. Suitable for students returning to education, those changing careers, or anyone looking to expand their qualifications.</p>’ },
+      { id: ‘cdp-sec-contents’,  label: "What’s in the course",
+        html: structBodyHTML + ‘<p class="cdp-activities-label">Here are the activities in this course</p>’ + mediaTypesHTML },
       { id: 'cdp-sec-materials', label: 'What you need for this course',
         html: '<ol class="cdp-materials-list">' + materialsHTML + '</ol>' },
       { id: 'cdp-sec-exam',      label: 'Exam',
@@ -2771,7 +2731,11 @@
       { id: 'cdp-sec-foreign',   label: 'Foreign applicants',
         html: '<p class="cdp-sec-para">If you are applying from outside Norway, you must submit certified physical copies of your educational documentation by post. All documents must be officially translated into Norwegian or English by a certified translator.</p>' +
               '<p class="cdp-sec-para">Please send your documents to: <strong>NKI, Pb. 111, 1371 Asker, Norway</strong>. Processing may take 2–4 weeks after documents are received. We recommend using registered mail or a trackable courier service.</p>' +
-              '<p class="cdp-sec-para">For questions about required documents, contact our admissions team at <a href="mailto:veelding@nki.no">veelding@nki.no</a>.</p>' }
+              '<p class="cdp-sec-para">For questions about required documents, contact our admissions team at <a href="mailto:veelding@nki.no">veelding@nki.no</a>.</p>' },
+      { id: 'cdp-sec-reviews',   label: 'Student reviews',
+        html: '<div class="cdp-reviews-viewport"><div class="cdp-reviews-grid" id="cdpReviewsGridInline">' + buildRevCards(_cdpReviewPages[0]) + '</div></div>' },
+      { id: 'cdp-sec-faq',       label: 'FAQ',
+        html: '<div class="cdp-faq-list">' + faqHTML + '</div>' }
     ];
     var contentHTML = CDP_SECTIONS.map(function(s) {
       return '<section class="cdp-section" id="' + s.id + '">' +
@@ -2815,10 +2779,7 @@
               '</div>' +
             '</div>' +
             '<div class="cdp-hero-right">' +
-              '<div class="cdp-hero-box">' +
-                '<div class="cdp-box-heading">What you get with this course</div>' +
-                '<ul class="cdp-check-list">' + whatYouGetHTML + '</ul>' +
-              '</div>' +
+              '<div class="cdp-hero-img"><span class="material-symbols-outlined cdp-hero-img-icon">image</span></div>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -2833,23 +2794,6 @@
             '<nav class="cdp-toc" id="cdpToc"><div class="cdp-toc-list">' + tocLinksHTML + '</div></nav>' +
           '</aside>' +
         '</div>' +
-      '</div></div>' +
-      '<div class="cdp-reviews"><div class="container">' +
-        '<div class="section-hd">' +
-          '<div class="cdp-section-heading">What students say</div>' +
-          '<div class="nav-arrows">' +
-            '<button class="nav-arrow" id="cdpRevPrev">&#8592;</button>' +
-            '<button class="nav-arrow" id="cdpRevNext">&#8594;</button>' +
-          '</div>' +
-        '</div>' +
-        '<div class="cdp-reviews-viewport">' +
-          '<div class="cdp-reviews-grid" id="cdpReviewsGrid">' + buildRevCards(_cdpReviewPages[0]) + '</div>' +
-        '</div>' +
-        '<div class="carousel-dots" id="cdpRevDots">' + revDotsHTML + '</div>' +
-      '</div></div>' +
-      '<div class="cdp-faq"><div class="container">' +
-        '<div class="cdp-faq-heading">Frequently asked questions</div>' +
-        '<div class="cdp-faq-list">' + faqHTML + '</div>' +
       '</div></div>' +
       (related.length > 0
         ? '<div class="cdp-related"><div class="container">' +
@@ -3291,15 +3235,23 @@
     var rates = {3:0.015, 6:0.03, 12:0.055};
     var instTotal = Math.round(total * (1 + rates[months]));
     var monthly   = Math.round(instTotal / months);
+    var firstPayDate = (function() {
+      var d = new Date(); d.setDate(d.getDate() + 30);
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    })();
     return '<p class="co-pay-desc">Divide your payment into smaller installments.</p>' +
       '<div class="co-partial-expand">' +
         '<div class="co-inst-pills" id="coInstPills">' +
           [3,6,12].map(function(m){ return '<button class="co-inst-pill' + (months===m?' is-active':'') + '" type="button" data-inst="' + m + '">' + m + ' months</button>'; }).join('') +
         '</div>' +
+        '<div class="co-inst-first-pay">' +
+          '<div class="co-inst-first-pay-label">First payment due</div>' +
+          '<div class="co-inst-first-pay-amount">' + coFmt(monthly) + '</div>' +
+          '<div class="co-inst-first-pay-date">Due on ' + firstPayDate + '</div>' +
+        '</div>' +
         '<div class="co-inst-breakdown">' +
           '<div class="co-inst-row"><span>Amount financed</span><span>' + coFmt(total) + '</span></div>' +
-          '<div class="co-inst-row"><span>First payment</span><span>' + coFmt(monthly) + '</span></div>' +
-          '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + ' payments</span></div>' +
+          '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + ' × ' + coFmt(monthly) + '</span></div>' +
           '<div class="co-inst-row co-inst-highlight"><span>Monthly payment</span><span>' + coFmt(monthly) + ' / mo</span></div>' +
         '</div>' +
       '</div>';
@@ -3641,7 +3593,7 @@
             '</div>' +
             '<div class="ty-card">' +
               '<div class="ty-card-hd">What\'s next?</div>' +
-              '<p class="ty-card-txt">Within a few days you will receive confirmation of your registration, along with your username and password, via your email address.</p>' +
+              '<p class="ty-card-txt"><strong class="ty-emph">Within a few days</strong> you will receive confirmation of your registration, along with your username and password, via your email address.</p>' +
               '<p class="ty-card-txt">To access your course:</p>' +
               '<ul class="ty-steps-list">' +
                 '<li>Download <strong>Microsoft Authenticator</strong> on your phone</li>' +

@@ -189,6 +189,9 @@ select { font-family: inherit; }
 }
 
 .nav-item.is-open > .dropdown { display: block; }
+.nav-item.has-dropdown:hover > .dropdown { display: block; }
+.nav-item.has-dropdown:hover > .nav-tab { background: var(--gray-100); color: var(--gray-900); }
+.nav-item.has-dropdown:hover .chevron { transform: rotate(180deg); }
 
 .dropdown-section-label {
   padding: 6px 16px 3px;
@@ -1832,28 +1835,7 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
   overflow: hidden;
 }
 
-.aktiv-panel-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 9px 20px;
-  border: 1.5px solid var(--gray-900);
-  border-radius: var(--r-sm);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--gray-900);
-  background: transparent;
-  cursor: pointer;
-  transition: background .15s, color .15s;
-  align-self: flex-start;
-  flex-shrink: 0;
-  margin-top: auto;
-}
-
-.aktiv-panel-btn:hover {
-  background: var(--gray-900);
-  color: var(--white);
-}
+.aktiv-panel-btn { display: none; }
 
 /* ── TESTIMONIALS ─────────────────────────── */
 
@@ -4047,7 +4029,8 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   display: flex;
   flex-direction: column;
 }
-.ty-card-hd { font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 14px; }
+.ty-card-hd { font-size: 21px; font-weight: 700; color: var(--gray-900); margin-bottom: 14px; }
+.ty-emph { color: var(--gray-900); font-weight: 700; }
 .ty-card-txt { font-size: 14px; color: var(--gray-600); line-height: 1.6; margin-bottom: 10px; }
 .ty-card-txt a { color: var(--gray-900); }
 .ty-steps-list { font-size: 13px; color: var(--gray-600); line-height: 1.7; list-style: none; padding-left: 0; margin-top: 4px; }
@@ -4417,4 +4400,130 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
   /* CES widget: smaller on mobile */
   .ces-widget { width: calc(100% - 32px); right: 16px; bottom: 16px; }
+}
+
+/* ── Enrolled count (replaces rating on cards) ── */
+.cc-enrolled {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-bottom: 9px;
+}
+.cc-enrolled-icon {
+  font-size: 14px;
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal; font-style: normal; line-height: 1;
+  letter-spacing: normal; text-transform: none; word-wrap: normal;
+  -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  color: var(--gray-400);
+}
+
+/* ── Browse all / See all secondary button ── */
+.btn-browse-all, .btn-see-all {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  border: 1.5px solid var(--gray-900);
+  border-radius: var(--r-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-900);
+  background: transparent;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  font-family: var(--font);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-browse-all:hover, .btn-see-all:hover { background: var(--gray-900); color: var(--white); }
+.btn-browse-all { margin-top: 24px; }
+
+/* ── Carousel footer (arrows below, counter between) ── */
+.pop-carousel-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.pop-counter {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-500);
+  min-width: 36px;
+  text-align: center;
+}
+
+/* ── Cart: instalment hint ── */
+.nki-cart-install-hint {
+  font-size: 11px;
+  color: var(--gray-500);
+  text-align: center;
+  margin-top: 6px;
+}
+
+/* ── Cart: suggested subtitle ── */
+.nki-sugg-subtitle {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+/* ── CDP: activities label ── */
+.cdp-activities-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+/* ── CDP hero: picture placeholder ── */
+.cdp-hero-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--gray-200);
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cdp-hero-img-icon {
+  font-size: 48px;
+  color: var(--gray-400);
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal; font-style: normal; line-height: 1;
+  letter-spacing: normal; text-transform: none; word-wrap: normal;
+  -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Payment installment highlight ── */
+.co-inst-first-pay {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+  margin-top: 12px;
+}
+.co-inst-first-pay-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 4px;
+}
+.co-inst-first-pay-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+.co-inst-first-pay-date {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-top: 2px;
 }
