@@ -1631,7 +1631,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 /* ── POPULAR COURSES TABS ─────────────────── */
 section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 .pop-tabs-row { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 16px; margin-bottom: 24px; }
-.pop-tabs { display: flex; gap: 16px; }
+.pop-tabs { display: flex; gap: 12px; }
 .pop-tab {
   padding: 7px 16px;
   font-size: 13px;
