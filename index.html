@@ -3110,7 +3110,7 @@
     var types = [['private','Private person'],['assoc','Association or Federation'],['company','Company'],['nav','NAV']];
     var pills = types.map(function(t){ return '<button class="co-payer-pill' + (CHECKOUT_STATE.otherPayerType===t[0]?' is-active':'') + '" type="button" data-payer-type="' + t[0] + '">' + t[1] + '</button>'; }).join('');
     var typeBody = CHECKOUT_STATE.otherPayerType === 'nav'
-      ? '<div class="co-nav-banner">NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</div>' +
+      ? '<div class="co-nav-banner"><span class="material-symbols-outlined co-nav-info-ic">info</span><span>NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</span></div>' +
         '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
         '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>'
       : '<div class="co-form-group"><label class="co-label" for="coOtherName">Name</label><input class="co-input" id="coOtherName" type="text" placeholder="Full name"></div>' +
@@ -3365,7 +3365,7 @@
         var body = document.getElementById('coPayerTypeBody');
         if (body) {
           if (CHECKOUT_STATE.otherPayerType === 'nav') {
-            body.innerHTML = '<div class="co-nav-banner">NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</div>' +
+            body.innerHTML = '<div class="co-nav-banner"><span class="material-symbols-outlined co-nav-info-ic">info</span><span>NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</span></div>' +
               '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
               '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>';
           } else {

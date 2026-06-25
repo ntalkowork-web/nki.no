@@ -3641,7 +3641,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .co-doc-intro { font-size: 14px; color: var(--gray-600); line-height: 1.6; max-width: 600px; margin-left: 40px; }
 .co-upload-zone {
   position: relative;
-  border: 2px dashed var(--gray-300);
+  border: 1px dashed var(--gray-300);
   border-radius: 8px;
   padding: 32px;
   text-align: center;
@@ -3704,7 +3704,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   transition: border-color .15s;
   background: #fff;
 }
-.co-pay-card.is-selected { border-color: var(--gray-900); border-width: 2px; }
+.co-pay-card.is-selected { border-color: var(--gray-900); border-width: 1px; }
 .co-pay-hd {
   display: flex;
   align-items: center;
@@ -3750,8 +3750,9 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   transition: border-color .15s, color .15s, background .15s;
 }
 .co-payer-pill.is-active { border-color: var(--gray-900); color: #fff; background: var(--gray-900); }
-.co-nav-banner { font-size: 13px; color: var(--gray-700); background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 6px; padding: 12px; line-height: 1.6; }
+.co-nav-banner { font-size: 13px; color: var(--gray-700); background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 6px; padding: 12px; line-height: 1.6; display: flex; align-items: flex-start; gap: 10px; }
 .co-nav-banner a { color: var(--gray-900); }
+.co-nav-info-ic { font-size: 18px; color: var(--gray-500); flex-shrink: 0; margin-top: 1px; font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; word-wrap: normal; -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; }
 .co-inst-pills { display: flex; gap: 8px; }
 .co-inst-pill {
   flex: 1;
@@ -3849,7 +3850,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .co-test-inner { display: flex; gap: 14px; }
 .co-test-photo { width: 44px; height: 44px; border-radius: 50%; background: var(--gray-300); flex-shrink: 0; }
 .co-test-content { flex: 1; }
-.co-test-quote { font-size: 13px; color: var(--gray-700); line-height: 1.6; margin-bottom: 8px; font-style: italic; }
+.co-test-quote { font-size: 13px; color: var(--gray-700); line-height: 1.6; margin-bottom: 8px; }
 .co-test-author { font-size: 12px; color: var(--gray-500); font-weight: 500; }
 
 /* ══════════════════════════════════════════════
@@ -3867,11 +3868,11 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   80%  { opacity: 1; }
   100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
-.ty-hero { text-align: center; padding: 136px 24px 40px; }
-.ty-check-circle { margin-bottom: 20px; }
+.ty-hero { text-align: center; padding: 136px 24px 24px; }
+.ty-check-circle { margin-bottom: 8px; }
 .ty-check-ic { font-size: 64px; color: var(--gray-900); }
-.ty-headline { font-size: 36px; font-weight: 700; color: var(--gray-900); margin-bottom: 12px; }
-.ty-conf-num { font-size: 14px; color: var(--gray-500); }
+.ty-headline { font-size: 36px; font-weight: 700; color: var(--gray-900); margin-bottom: 16px; }
+.ty-conf-num { font-size: 14px; color: var(--gray-500); margin-bottom: 24px; }
 .ty-cards {
   display: grid;
   grid-template-columns: repeat(3,1fr);
