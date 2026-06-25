@@ -462,7 +462,7 @@ select { font-family: inherit; }
 .s-badge {
   background: var(--gray-900);
   color: var(--white);
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 2px;
@@ -473,7 +473,7 @@ select { font-family: inherit; }
 .s-badge-type {
   background: var(--gray-600);
   color: var(--white);
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 2px;
@@ -3108,10 +3108,10 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   opacity: 1;
   pointer-events: auto;
 }
-/* when sticky CTA is pinned, drop TOC below it with 96px gap:
-   header(64) + cta-height(96) + gap(96) = 256px */
+/* when sticky CTA is pinned, drop TOC below it with 64px gap:
+   header(64) + cta-height(96) + gap(64) = 224px */
 body.cdp-cta-pinned .cdp-toc {
-  top: 256px;
+  top: 224px;
 }
 .cdp-toc-list {
   display: flex;
@@ -4547,7 +4547,7 @@ body.cdp-cta-pinned .cdp-toc {
   font-weight: 600;
   color: var(--gray-700);
   margin-top: 28px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 /* ── CDP hero: picture placeholder ── */
