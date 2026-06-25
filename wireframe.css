@@ -82,7 +82,7 @@ button,
 input:not([type="radio"]):not([type="checkbox"]):not([type="range"]),
 select,
 textarea {
-  border-radius: 12px !important;
+  border-radius: 8px !important;
 }
 
 body {
