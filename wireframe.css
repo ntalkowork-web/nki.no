@@ -461,7 +461,7 @@ select { font-family: inherit; }
 
 .s-badges {
   position: absolute;
-  top: 8px; left: 8px;
+  top: 16px; left: 16px;
   display: flex;
   gap: 4px;
 }
@@ -1534,7 +1534,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 
 .cc-badges {
   position: absolute;
-  top: 8px; left: 8px;
+  top: 16px; left: 16px;
   display: flex;
   gap: 4px;
 }
