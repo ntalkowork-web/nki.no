@@ -4154,7 +4154,7 @@ body.cdp-cta-pinned .cdp-toc {
   inset: 0;
   background: var(--white);
   z-index: 300;
-  overflow-y: auto;
+  overflow: hidden;
   opacity: 0;
   pointer-events: none;
   transform: translateY(-6px);
@@ -4268,6 +4268,142 @@ body.cdp-cta-pinned .cdp-toc {
   border-radius: var(--r-sm);
 }
 
+/* ── IKEA DRILL-DOWN PANELS ───────────────── */
+
+.mob-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  transform: translateX(100%);
+  transition: transform .28s ease;
+  overflow-y: auto;
+}
+.mob-panel.is-active { transform: translateX(0); }
+.mob-panel.is-exit { transform: translateX(-30%); }
+
+.mob-panel-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 64px;
+  border-bottom: 1px solid var(--gray-200);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.mob-panel-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.mob-back-btn,
+.mob-menu-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-700);
+  border-radius: var(--r-sm);
+  flex-shrink: 0;
+}
+.mob-back-btn:hover,
+.mob-menu-close-btn:hover { background: var(--gray-100); }
+
+.mob-root-list { list-style: none; }
+
+.mob-drill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gray-800);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--gray-100);
+  cursor: pointer;
+  text-align: left;
+}
+.mob-drill-btn:hover { background: var(--gray-50); }
+.mob-drill-btn svg { color: var(--gray-400); flex-shrink: 0; }
+
+.mob-panel-body { flex: 1; overflow-y: auto; }
+
+.mob-sub-acc { border-bottom: 1px solid var(--gray-100); }
+
+.mob-sub-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-800);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+.mob-sub-trigger:hover { background: var(--gray-50); }
+
+.mob-sub-chev {
+  flex-shrink: 0;
+  color: var(--gray-400);
+  transition: transform .2s;
+}
+.mob-sub-acc.is-open .mob-sub-chev { transform: rotate(180deg); }
+
+.mob-sub-body { background: var(--gray-50); padding: 4px 0 8px; }
+.mob-sub-body[hidden] { display: none; }
+
+.mob-sub-links { list-style: none; }
+
+.mob-sub-link {
+  display: block;
+  padding: 10px 24px 10px 36px;
+  font-size: 14px;
+  color: var(--gray-600);
+  border-bottom: 1px solid var(--gray-200);
+}
+.mob-sub-links li:last-child .mob-sub-link { border-bottom: none; }
+.mob-sub-link:hover { color: var(--gray-900); background: var(--gray-100); }
+
+.mob-sub-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--gray-400);
+  padding: 8px 36px 4px;
+}
+
+.mob-sub-see-all {
+  display: block;
+  padding: 10px 24px 10px 36px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
+  border-top: 1px solid var(--gray-200);
+  margin-top: 4px;
+}
+.mob-sub-see-all:hover { color: var(--gray-900); }
+
 /* ══════════════════════════════════════════════
    RESPONSIVE — 1024px (tablet / hamburger)
 ══════════════════════════════════════════════ */
@@ -4328,6 +4464,23 @@ body.cdp-cta-pinned .cdp-toc {
 
   /* Thank you cards */
   .ty-cards { grid-template-columns: 1fr; }
+
+  /* Search dropdown: match search field width */
+  .search-dropdown { width: 100%; }
+
+  /* Pedagogical tabs: scrollable beyond margins */
+  .aktiv-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    justify-content: flex-start;
+    margin-left: calc(-1 * var(--margin));
+    margin-right: calc(-1 * var(--margin));
+    padding-left: var(--margin);
+    padding-right: var(--margin);
+  }
+  .aktiv-tabs::-webkit-scrollbar { display: none; }
 }
 
 /* ══════════════════════════════════════════════
@@ -4385,8 +4538,135 @@ body.cdp-cta-pinned .cdp-toc {
   /* Search dropdown: 1 col cards */
   .search-course-grid { grid-template-columns: 1fr; }
 
-  /* Mentioned-in logos: wrap */
-  .mentioned-in-logos { flex-wrap: wrap; gap: 24px; justify-content: center; }
+  /* Mentioned-in: continuous marquee */
+  .mentioned-in-logos {
+    display: block;
+    overflow: hidden;
+    position: relative;
+  }
+  .mentioned-in-logos::before,
+  .mentioned-in-logos::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 48px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .mentioned-in-logos::before { left: 0; background: linear-gradient(to right, var(--white), transparent); }
+  .mentioned-in-logos::after  { right: 0; background: linear-gradient(to left, var(--white), transparent); }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 48px;
+    padding-right: 48px;
+    animation: marquee 22s linear infinite;
+    will-change: transform;
+    flex-shrink: 0;
+  }
+
+  /* Search "Start with most popular" cards: image left, content right */
+  .s-card {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 0 12px;
+    align-items: start;
+  }
+  .s-card-img {
+    grid-row: 1 / 5;
+    width: 72px;
+    aspect-ratio: 1;
+    margin-bottom: 0;
+  }
+  .s-card-name  { grid-column: 2; }
+  .s-card-pills { grid-column: 2; }
+  .s-card-price { grid-column: 2; }
+
+  /* Top Courses: horizontal scroll */
+  section[aria-labelledby="pop-hs-hd"]  > .container,
+  section[aria-labelledby="pop-pro-hd"] > .container {
+    display: flex;
+    flex-direction: column;
+  }
+  section[aria-labelledby="pop-hs-hd"]  .section-hd,
+  section[aria-labelledby="pop-pro-hd"] .section-hd { display: contents; }
+
+  section[aria-labelledby="pop-hs-hd"]  .section-title,
+  section[aria-labelledby="pop-pro-hd"] .section-title { order: 1; margin-bottom: 20px; }
+
+  section[aria-labelledby="pop-hs-hd"]  .courses-viewport,
+  section[aria-labelledby="pop-pro-hd"] .courses-viewport {
+    order: 2;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  section[aria-labelledby="pop-hs-hd"]  .courses-viewport::-webkit-scrollbar,
+  section[aria-labelledby="pop-pro-hd"] .courses-viewport::-webkit-scrollbar { display: none; }
+
+  section[aria-labelledby="pop-hs-hd"]  .courses-grid,
+  section[aria-labelledby="pop-pro-hd"] .courses-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-template-columns: none;
+    transform: none !important;
+  }
+  section[aria-labelledby="pop-hs-hd"]  .course-card,
+  section[aria-labelledby="pop-pro-hd"] .course-card {
+    flex-shrink: 0;
+    width: 72vw;
+    scroll-snap-align: start;
+  }
+  section[aria-labelledby="pop-hs-hd"]  .pop-carousel-footer,
+  section[aria-labelledby="pop-pro-hd"] .pop-carousel-footer { display: none; order: 3; }
+
+  section[aria-labelledby="pop-hs-hd"]  .btn-see-all,
+  section[aria-labelledby="pop-pro-hd"] .btn-see-all {
+    order: 4;
+    align-self: center;
+    margin-top: 20px;
+  }
+
+  /* How it works: horizontal slider */
+  .hiw-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    grid-template-columns: none;
+  }
+  .hiw-grid::-webkit-scrollbar { display: none; }
+  .hiw-card { flex-shrink: 0; width: 75vw; scroll-snap-align: start; }
+
+  /* Testimonials: horizontal scroll */
+  .testi-cols {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    align-items: stretch;
+  }
+  .testi-cols::-webkit-scrollbar { display: none; }
+  .testi-col { flex-shrink: 0; min-width: 82vw; scroll-snap-align: start; }
+
+  /* News: stack vertically */
+  .news-grid { grid-template-columns: 1fr; }
+
+  /* Get free advice: heading above form */
+  .consult-inline { grid-template-columns: 1fr; gap: 24px; }
+
+  /* Footer: 2-column */
+  .footer-cols { grid-template-columns: 1fr 1fr; gap: 24px; }
 
   /* Reviews */
   .cdp-reviews-grid { grid-template-columns: 1fr; }
@@ -4442,6 +4722,12 @@ body.cdp-cta-pinned .cdp-toc {
 
   /* CES widget: smaller on mobile */
   .ces-widget { width: calc(100% - 32px); right: 16px; bottom: 16px; }
+
+  /* Footer: newsletter bar stacks */
+  .footer-nl-bar { flex-direction: column; align-items: stretch; gap: 16px; }
+  .footer-nl-wrap { max-width: 100%; }
+  .footer-nl-right { margin-left: 0; }
+  .footer-cols { grid-template-columns: 1fr 1fr; }
 }
 
 /* ── Enrolled count (replaces rating on cards) ── */

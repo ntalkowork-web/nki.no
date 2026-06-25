@@ -351,61 +351,265 @@
      MOBILE FULLSCREEN MENU
 ════════════════════════════════════════════ -->
 <div class="mob-menu" id="mobMenu" aria-hidden="true">
-  <div class="mob-menu-hd">
-    <a class="mob-menu-logo" href="#" id="mobLogoLink">
-      <img src="logos/NKI_Logo_Black_L.svg" alt="NKI Nettstudier">
-    </a>
-    <button class="mob-menu-close" id="mobMenuClose" aria-label="Close menu">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-        <line x1="3" y1="3" x2="17" y2="17"/><line x1="17" y1="3" x2="3" y2="17"/>
-      </svg>
-    </button>
-  </div>
-  <nav class="mob-nav">
-    <ul class="mob-nav-list">
-      <li><a href="#" class="mob-nav-link" data-page="home">Home</a></li>
 
-      <!-- High School accordion -->
-      <li class="mob-acc">
-        <button class="mob-acc-trigger" aria-expanded="false">
-          High School
-          <svg class="mob-acc-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+  <!-- ── PANEL ROOT ───────────────────────── -->
+  <div class="mob-panel is-active" id="mobPanelRoot">
+    <div class="mob-menu-hd">
+      <a class="mob-menu-logo" href="#" id="mobLogoLink">
+        <img src="logos/NKI_Logo_Black_L.svg" alt="NKI Nettstudier">
+      </a>
+      <button class="mob-menu-close" id="mobMenuClose" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="3" y1="3" x2="17" y2="17"/><line x1="17" y1="3" x2="3" y2="17"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="mob-nav">
+      <ul class="mob-root-list">
+        <li>
+          <button class="mob-drill-btn" data-target="mobPanelHs">
+            <span>High School</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 4 10 8 6 12"/></svg>
+          </button>
+        </li>
+        <li>
+          <button class="mob-drill-btn" data-target="mobPanelPro">
+            <span>Professional Courses</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 4 10 8 6 12"/></svg>
+          </button>
+        </li>
+        <li><a href="#" class="mob-nav-link">Lånekassen</a></li>
+        <li><a href="#" class="mob-nav-link">For business</a></li>
+      </ul>
+    </nav>
+    <div class="mob-menu-footer">
+      <button class="btn-login mob-login-btn" id="mobLoginBtn">Log in</button>
+    </div>
+  </div>
+
+  <!-- ── PANEL HIGH SCHOOL ─────────────────── -->
+  <div class="mob-panel" id="mobPanelHs">
+    <div class="mob-panel-hd">
+      <button class="mob-back-btn" data-back="mobPanelRoot" aria-label="Back">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="12 4 6 10 12 16"/></svg>
+      </button>
+      <span class="mob-panel-title">High School</span>
+      <button class="mob-menu-close-btn" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="3" y1="3" x2="17" y2="17"/><line x1="17" y1="3" x2="3" y2="17"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mob-panel-body">
+
+      <div class="mob-sub-acc">
+        <button class="mob-sub-trigger" aria-expanded="false">Subject Packages
+          <svg class="mob-sub-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
         </button>
-        <div class="mob-acc-body">
-          <ul class="mob-acc-links">
-            <li><a href="#" class="mob-acc-link">Subject packages for High School</a></li>
-            <li><a href="#" class="mob-acc-link">Vocational Studies for High School</a></li>
-            <li><a href="#" class="mob-acc-link">Single Subjects for High School</a></li>
+        <div class="mob-sub-body" hidden>
+          <ul class="mob-sub-links">
+            <li><a href="#" class="mob-sub-link">Generell studiekompetanse (23/5-regelen)</a></li>
+            <li><a href="#" class="mob-sub-link">Påbygg Vg3</a></li>
+            <li><a href="#" class="mob-sub-link">Påbygg Vg4</a></li>
+            <li><a href="#" class="mob-sub-link">Medisinpakke Norge</a></li>
+            <li><a href="#" class="mob-sub-link">Medisinpakke utland</a></li>
+            <li><a href="#" class="mob-sub-link">Ingeniørpakken</a></li>
+            <li><a href="#" class="mob-sub-link">Forkurs til ingeniørutdanning</a></li>
           </ul>
         </div>
-      </li>
+      </div>
 
-      <!-- Professional Courses accordion -->
-      <li class="mob-acc">
-        <button class="mob-acc-trigger" aria-expanded="false">
-          Professional Courses
-          <svg class="mob-acc-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+      <div class="mob-sub-acc">
+        <button class="mob-sub-trigger" aria-expanded="false">Vocational Studies
+          <svg class="mob-sub-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
         </button>
-        <div class="mob-acc-body">
-          <ul class="mob-acc-links">
-            <li><a href="#" class="mob-acc-link">Economy and sustainability</a></li>
-            <li><a href="#" class="mob-acc-link">HR and Management</a></li>
-            <li><a href="#" class="mob-acc-link">Law and administration</a></li>
-            <li><a href="#" class="mob-acc-link">Construction and logistics</a></li>
-            <li><a href="#" class="mob-acc-link">Interior and design</a></li>
-            <li><a href="#" class="mob-acc-link">Health and lifestyle</a></li>
-            <li><a href="#" class="mob-acc-link">Marketing and sales</a></li>
+        <div class="mob-sub-body" hidden>
+          <ul class="mob-sub-links">
+            <li><a href="#" class="mob-sub-link">Health and upbringing subjects Vg1</a></li>
+            <li><a href="#" class="mob-sub-link">Health worker subject Vg2</a></li>
+            <li><a href="#" class="mob-sub-link">Ambulance subject Vg2</a></li>
+            <li><a href="#" class="mob-sub-link">Child and youth work subject Vg2</a></li>
+            <li><a href="#" class="mob-sub-link">Health Service Subject Vg2</a></li>
+            <li><a href="#" class="mob-sub-link">Health Secretary Vg3</a></li>
+            <li><a href="#" class="mob-sub-link">Dental secretary Vg3</a></li>
+            <li><a href="#" class="mob-sub-link">Electrical and computer technology Vg1</a></li>
+            <li><a href="#" class="mob-sub-link">Electrical energy and ecom Vg2</a></li>
           </ul>
         </div>
-      </li>
+      </div>
 
-      <li><a href="#" class="mob-nav-link">Lånekassen</a></li>
-      <li><a href="#" class="mob-nav-link">For business</a></li>
-    </ul>
-  </nav>
-  <div class="mob-menu-footer">
-    <button class="btn-login mob-login-btn" id="mobLoginBtn">Log in</button>
+      <div class="mob-sub-acc">
+        <button class="mob-sub-trigger" aria-expanded="false">Single Subjects
+          <svg class="mob-sub-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+        </button>
+        <div class="mob-sub-body" hidden>
+          <p class="mob-sub-label">Most popular</p>
+          <ul class="mob-sub-links">
+            <li><a href="#" class="mob-sub-link">Mathematics R1</a></li>
+            <li><a href="#" class="mob-sub-link">Mathematics R2</a></li>
+            <li><a href="#" class="mob-sub-link">Biology 1</a></li>
+            <li><a href="#" class="mob-sub-link">Biology 2</a></li>
+            <li><a href="#" class="mob-sub-link">Chemistry 1</a></li>
+            <li><a href="#" class="mob-sub-link">Chemistry 2</a></li>
+            <li><a href="#" class="mob-sub-link">Physics 1</a></li>
+            <li><a href="#" class="mob-sub-link">Mathematics S1</a></li>
+            <li><a href="#" class="mob-sub-link">Mathematics S2</a></li>
+            <li><a href="#" class="mob-sub-link">Geosciences 1</a></li>
+            <li><a href="#" class="mob-sub-link">Mathematics 1T</a></li>
+          </ul>
+          <a href="#" class="mob-sub-see-all">See all →</a>
+        </div>
+      </div>
+
+    </div>
   </div>
+
+  <!-- ── PANEL PROFESSIONAL COURSES ───────── -->
+  <div class="mob-panel" id="mobPanelPro">
+    <div class="mob-panel-hd">
+      <button class="mob-back-btn" data-back="mobPanelRoot" aria-label="Back">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="12 4 6 10 12 16"/></svg>
+      </button>
+      <span class="mob-panel-title">Professional Courses</span>
+      <button class="mob-menu-close-btn" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="3" y1="3" x2="17" y2="17"/><line x1="17" y1="3" x2="3" y2="17"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mob-panel-body">
+
+      <div class="mob-sub-acc">
+        <button class="mob-sub-trigger" aria-expanded="false">Economy and Sustainability
+          <svg class="mob-sub-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+        </button>
+        <div class="mob-sub-body" hidden>
+          <ul class="mob-sub-links">
+            <li><a href="#" class="mob-sub-link">Accounting consultant – 60 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Payroll and human resources employee – 30 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Accounting employee – 30 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Sustainability consultant – sustainable operations – 60 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Circular economy and climate accounting – 30 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Salary - Tripletex – 9 points</a></li>
+            <li><a href="#" class="mob-sub-link">Introduction to financial management – online course</a></li>
+            <li><a href="#" class="mob-sub-link">Circular economy – online course</a></li>
+            <li><a href="#" class="mob-sub-link">Environmental reporting – 15 credits</a></li>
+          </ul>
+          <a href="#" class="mob-sub-see-all">See all →</a>
+        </div>
+      </div>
+
+      <div class="mob-sub-acc">
+        <button class="mob-sub-trigger" aria-expanded="false">HR and Management
+          <svg class="mob-sub-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+        </button>
+        <div class="mob-sub-body" hidden>
+          <ul class="mob-sub-links">
+            <li><a href="#" class="mob-sub-link">HR consultant – 60 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Practical management – 30 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Project manager – 30 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Management and financial management – 30 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Practical HR management – course</a></li>
+            <li><a href="#" class="mob-sub-link">The digital workplace – course</a></li>
+            <li><a href="#" class="mob-sub-link">Relationship management – 5 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Human Resources Management – 10 credits</a></li>
+          </ul>
+          <a href="#" class="mob-sub-see-all">See all →</a>
+        </div>
+      </div>
+
+      <div class="mob-sub-acc">
+        <button class="mob-sub-trigger" aria-expanded="false">Law and Administration
+          <svg class="mob-sub-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+        </button>
+        <div class="mob-sub-body" hidden>
+          <ul class="mob-sub-links">
+            <li><a href="#" class="mob-sub-link">Office worker – course</a></li>
+            <li><a href="#" class="mob-sub-link">Legal secretary – 60 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Caseworker – 30 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Case management in the health and care sector – course</a></li>
+            <li><a href="#" class="mob-sub-link">Legal office assistant – 30 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Microsoft Office 365 basic – 5 points</a></li>
+            <li><a href="#" class="mob-sub-link">Business Law – 10 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Labor law – course</a></li>
+          </ul>
+          <a href="#" class="mob-sub-see-all">See all →</a>
+        </div>
+      </div>
+
+      <div class="mob-sub-acc">
+        <button class="mob-sub-trigger" aria-expanded="false">Construction and Logistics
+          <svg class="mob-sub-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+        </button>
+        <div class="mob-sub-body" hidden>
+          <ul class="mob-sub-links">
+            <li><a href="#" class="mob-sub-link">Logistics Vocational School – 30 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Operations technician – construction and property – 30 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Technical draftsman – construction – course</a></li>
+            <li><a href="#" class="mob-sub-link">Revit Architecture – course</a></li>
+            <li><a href="#" class="mob-sub-link">Technical installations – 10 credits</a></li>
+            <li><a href="#" class="mob-sub-link">Preparatory course Bachelor of Engineering – course</a></li>
+            <li><a href="#" class="mob-sub-link">ArchiCad drawing course – course</a></li>
+            <li><a href="#" class="mob-sub-link">Technology and digital competence – 5 credits</a></li>
+            <li><a href="#" class="mob-sub-link">License for passenger and freight transport – course</a></li>
+          </ul>
+          <a href="#" class="mob-sub-see-all">See all →</a>
+        </div>
+      </div>
+
+      <div class="mob-sub-acc">
+        <button class="mob-sub-trigger" aria-expanded="false">Interior and Design
+          <svg class="mob-sub-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+        </button>
+        <div class="mob-sub-body" hidden>
+          <ul class="mob-sub-links">
+            <li><a href="#" class="mob-sub-link">Interior designer</a></li>
+            <li><a href="#" class="mob-sub-link">Home Stylist</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mob-sub-acc">
+        <button class="mob-sub-trigger" aria-expanded="false">Health and Lifestyle
+          <svg class="mob-sub-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+        </button>
+        <div class="mob-sub-body" hidden>
+          <ul class="mob-sub-links">
+            <li><a href="#" class="mob-sub-link">Medical Secretary</a></li>
+            <li><a href="#" class="mob-sub-link">Dental assistant</a></li>
+            <li><a href="#" class="mob-sub-link">Health and upbringing subjects</a></li>
+            <li><a href="#" class="mob-sub-link">Nursing assistant</a></li>
+            <li><a href="#" class="mob-sub-link">Ambulance profession</a></li>
+            <li><a href="#" class="mob-sub-link">Case management in the health and care sector</a></li>
+            <li><a href="#" class="mob-sub-link">Healthcare profession</a></li>
+            <li><a href="#" class="mob-sub-link">Exercise as medicine</a></li>
+            <li><a href="#" class="mob-sub-link">Health Secretary</a></li>
+            <li><a href="#" class="mob-sub-link">Stress and stress management</a></li>
+            <li><a href="#" class="mob-sub-link">Nutrition and sustainable diet</a></li>
+          </ul>
+          <a href="#" class="mob-sub-see-all">See all →</a>
+        </div>
+      </div>
+
+      <div class="mob-sub-acc">
+        <button class="mob-sub-trigger" aria-expanded="false">Marketing and Sales
+          <svg class="mob-sub-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+        </button>
+        <div class="mob-sub-body" hidden>
+          <ul class="mob-sub-links">
+            <li><a href="#" class="mob-sub-link">Introduction to digital marketing – course</a></li>
+            <li><a href="#" class="mob-sub-link">Consultative sales – course</a></li>
+            <li><a href="#" class="mob-sub-link">Social Media and Content Marketing – course</a></li>
+            <li><a href="#" class="mob-sub-link">Google tools – course</a></li>
+            <li><a href="#" class="mob-sub-link">Introduction to Marketing – course</a></li>
+          </ul>
+          <a href="#" class="mob-sub-see-all">See all →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 <div class="mob-overlay" id="mobOverlay"></div>
 
@@ -978,11 +1182,11 @@
   'use strict';
 
   /* ── Mobile menu ── */
-  var hamburgerBtn  = document.getElementById('hamburgerBtn');
-  var mobMenu       = document.getElementById('mobMenu');
-  var mobOverlay    = document.getElementById('mobOverlay');
-  var mobMenuClose  = document.getElementById('mobMenuClose');
-  var mobLoginBtn   = document.getElementById('mobLoginBtn');
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var mobMenu      = document.getElementById('mobMenu');
+  var mobOverlay   = document.getElementById('mobOverlay');
+  var mobLoginBtn  = document.getElementById('mobLoginBtn');
+  var activePanel  = document.getElementById('mobPanelRoot');
 
   function openMobMenu() {
     mobMenu.classList.add('is-open');
@@ -990,32 +1194,76 @@
     hamburgerBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   }
+
   function closeMobMenu() {
     mobMenu.classList.remove('is-open');
     mobOverlay.classList.remove('is-open');
     hamburgerBtn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    setTimeout(function() {
+      mobMenu.querySelectorAll('.mob-panel').forEach(function(p) {
+        p.classList.remove('is-active', 'is-exit');
+      });
+      activePanel = document.getElementById('mobPanelRoot');
+      activePanel.classList.add('is-active');
+    }, 300);
+  }
+
+  function showPanel(targetId) {
+    var target = document.getElementById(targetId);
+    if (!target || !activePanel) return;
+    activePanel.classList.add('is-exit');
+    activePanel.classList.remove('is-active');
+    target.classList.add('is-active');
+    activePanel = target;
+  }
+
+  function goBack(parentId) {
+    var parent = document.getElementById(parentId);
+    if (!parent || !activePanel) return;
+    activePanel.classList.remove('is-active');
+    parent.classList.remove('is-exit');
+    parent.classList.add('is-active');
+    activePanel = parent;
   }
 
   if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMobMenu);
-  if (mobMenuClose)  mobMenuClose.addEventListener('click', closeMobMenu);
-  if (mobOverlay)    mobOverlay.addEventListener('click', closeMobMenu);
-  if (mobLoginBtn)   mobLoginBtn.addEventListener('click', function() {
-    closeMobMenu();
-    document.getElementById('loginBtn').click();
+  if (mobOverlay)   mobOverlay.addEventListener('click', closeMobMenu);
+
+  document.getElementById('mobMenuClose').addEventListener('click', closeMobMenu);
+  mobMenu.querySelectorAll('.mob-menu-close-btn').forEach(function(btn) {
+    btn.addEventListener('click', closeMobMenu);
   });
 
-  /* Mobile accordions */
-  document.querySelectorAll('.mob-acc-trigger').forEach(function(trigger) {
+  mobMenu.querySelectorAll('.mob-drill-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { showPanel(btn.dataset.target); });
+  });
+
+  mobMenu.querySelectorAll('.mob-back-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { goBack(btn.dataset.back); });
+  });
+
+  mobMenu.querySelectorAll('.mob-sub-trigger').forEach(function(trigger) {
     trigger.addEventListener('click', function() {
-      var acc = trigger.closest('.mob-acc');
+      var acc  = trigger.closest('.mob-sub-acc');
+      var body = acc.querySelector('.mob-sub-body');
       var isOpen = acc.classList.contains('is-open');
-      document.querySelectorAll('.mob-acc').forEach(function(a) { a.classList.remove('is-open'); a.querySelector('.mob-acc-trigger').setAttribute('aria-expanded','false'); });
+      mobMenu.querySelectorAll('.mob-sub-acc').forEach(function(a) {
+        a.classList.remove('is-open');
+        a.querySelector('.mob-sub-body').hidden = true;
+        a.querySelector('.mob-sub-trigger').setAttribute('aria-expanded', 'false');
+      });
       if (!isOpen) {
         acc.classList.add('is-open');
+        body.hidden = false;
         trigger.setAttribute('aria-expanded', 'true');
       }
     });
+  });
+
+  if (mobLoginBtn) mobLoginBtn.addEventListener('click', function() {
+    closeMobMenu();
+    document.getElementById('loginBtn').click();
   });
 
   /* Close mob menu on logo click and navigate home */
@@ -3693,6 +3941,20 @@
     }
     el.innerHTML = html;
   }
+
+  /* ── Mentioned-in marquee (mobile / tablet only) ── */
+  (function() {
+    if (window.innerWidth > 768) return;
+    var logos = document.querySelector('.mentioned-in-logos');
+    if (!logos) return;
+    var track = document.createElement('div');
+    track.className = 'marquee-track';
+    while (logos.firstChild) track.appendChild(logos.firstChild);
+    var clone = track.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    logos.appendChild(track);
+    logos.appendChild(clone);
+  })();
 
 })();
 </script>
