@@ -3106,10 +3106,10 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   opacity: 1;
   pointer-events: auto;
 }
-/* when sticky CTA is pinned, drop TOC below it with 64px gap:
-   header(64) + cta-height(96) + gap(64) = 224px */
+/* when sticky CTA is pinned, drop TOC below it with 48px gap:
+   header(64) + cta-height(96) + gap(48) = 208px */
 body.cdp-cta-pinned .cdp-toc {
-  top: 224px;
+  top: 208px;
 }
 .cdp-toc-list {
   display: flex;
