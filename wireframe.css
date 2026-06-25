@@ -2697,7 +2697,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   font-size: 16px;
   color: var(--gray-600);
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   max-width: 600px;
 }
 
@@ -2875,6 +2875,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 /* Right hero box */
 .cdp-hero-box {
+  background: var(--white);
   border: 1px solid var(--gray-200);
   border-radius: 8px;
   padding: 24px;
@@ -2923,7 +2924,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 /* Hero section dark background */
 .cdp-hero-section {
   background: var(--gray-100);
-  padding-bottom: 72px; /* extends dark bg 72px below hero; infobar pulls up 36px = bg cuts middle */
+  padding-bottom: 88px; /* extends dark bg 88px below hero content; infobar margin-top: -48px → bg cuts infobar at mid-point */
 }
 
 /* Info bar — white rectangle straddling hero/content boundary */
@@ -2934,8 +2935,8 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   border: 1px solid var(--gray-200);
   border-radius: var(--r-md);
   box-shadow: 0 4px 16px rgba(0,0,0,.08);
-  margin-top: -36px;
-  margin-bottom: 56px;
+  margin-top: -48px;
+  margin-bottom: 0;
   position: relative;
   z-index: 2;
 }
@@ -2982,7 +2983,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 /* Long-read content sections */
 .cdp-section {
-  padding: 56px 0;
+  padding: 40px 0;
   border-bottom: 1px solid var(--gray-100);
   scroll-margin-top: calc(var(--header-h) + 96px);
 }
@@ -3007,21 +3008,27 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .cdp-media-types {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   margin-top: 32px;
 }
 
 .cdp-media-item {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   font-size: 15px;
   font-weight: 500;
   color: var(--gray-700);
 }
 
+.cdp-media-dot {
+  color: var(--gray-400);
+  font-weight: 400;
+  line-height: 1;
+}
+
 .cdp-media-icon {
-  font-size: 20px;
+  font-size: 18px;
   color: var(--gray-500);
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
@@ -3036,16 +3043,30 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   flex-shrink: 0;
 }
 
-/* Table of contents — fixed right */
+/* Content body — 2-col grid (content | TOC sidebar) */
+.cdp-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 48px;
+  align-items: start;
+  padding: 48px 0 80px;
+}
+
+.cdp-toc-aside {
+  position: sticky;
+  top: calc(var(--header-h) + 80px + 72px);
+}
+
+/* Table of contents — sticky sidebar */
 .cdp-toc {
-  position: fixed;
-  top: calc(var(--header-h) + 72px);
-  right: 72px;
-  width: 192px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-md);
+  box-shadow: 0 4px 16px rgba(0,0,0,.07);
+  overflow: hidden;
   opacity: 0;
   pointer-events: none;
   transition: opacity .25s;
-  z-index: 50;
 }
 .cdp-toc.is-visible {
   opacity: 1;
@@ -3054,29 +3075,32 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .cdp-toc-list {
   display: flex;
   flex-direction: column;
-  border-left: 2px solid var(--gray-200);
+  padding: 8px 0;
 }
 .cdp-toc-link {
   display: block;
-  font-size: 12px;
+  font-size: 16px;
   color: var(--gray-500);
-  padding: 7px 14px;
+  padding: 10px 20px;
   cursor: pointer;
-  border-left: 2px solid transparent;
-  margin-left: -2px;
+  border-left: 3px solid transparent;
   line-height: 1.4;
-  transition: color .15s, border-color .15s;
+  transition: color .15s, border-color .15s, background .15s;
   user-select: none;
 }
-.cdp-toc-link:hover { color: var(--gray-700); }
+.cdp-toc-link:hover {
+  color: var(--gray-700);
+  background: var(--gray-50);
+}
 .cdp-toc-link.is-active {
   color: var(--gray-900);
   font-weight: 600;
   border-left-color: var(--gray-900);
+  background: var(--gray-50);
 }
 
 /* Content accordions */
-.cdp-content { padding-bottom: 72px; }
+.cdp-content { }
 
 .cdp-accordion {
   background: var(--gray-50);
@@ -3133,9 +3157,16 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   grid-template-columns: 220px 1fr;
   gap: 0;
   min-height: 280px;
+  align-items: stretch;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-md);
+  overflow: hidden;
 }
 
-.cdp-struct-tabs { border-right: 1px solid var(--gray-200); }
+.cdp-struct-tabs {
+  background: var(--gray-50);
+  border-right: 1px solid var(--gray-200);
+}
 
 .cdp-struct-tab {
   display: block;
@@ -3167,9 +3198,6 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 .cdp-struct-panel {
   background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-left: none;
-  border-radius: 0 var(--r-md) var(--r-md) 0;
   padding: 20px 24px;
 }
 

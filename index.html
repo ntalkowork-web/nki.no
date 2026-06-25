@@ -2538,11 +2538,11 @@
     /* media types in the course */
     var mediaTypesHTML =
       '<div class="cdp-media-types">' +
-        '<div class="cdp-media-item"><span class="material-symbols-outlined cdp-media-icon">play_circle</span>Videos</div>' +
-        '<div class="cdp-media-item"><span class="material-symbols-outlined cdp-media-icon">mic</span>Audios</div>' +
-        '<div class="cdp-media-item"><span class="material-symbols-outlined cdp-media-icon">quiz</span>Quizzes</div>' +
-        '<div class="cdp-media-item"><span class="material-symbols-outlined cdp-media-icon">extension</span>Games</div>' +
-        '<div class="cdp-media-item"><span class="material-symbols-outlined cdp-media-icon">article</span>Text</div>' +
+        '<div class="cdp-media-item"><span class="material-symbols-outlined cdp-media-icon">play_circle</span><span class="cdp-media-dot">·</span>Videos</div>' +
+        '<div class="cdp-media-item"><span class="material-symbols-outlined cdp-media-icon">mic</span><span class="cdp-media-dot">·</span>Audios</div>' +
+        '<div class="cdp-media-item"><span class="material-symbols-outlined cdp-media-icon">quiz</span><span class="cdp-media-dot">·</span>Quizzes</div>' +
+        '<div class="cdp-media-item"><span class="material-symbols-outlined cdp-media-icon">extension</span><span class="cdp-media-dot">·</span>Games</div>' +
+        '<div class="cdp-media-item"><span class="material-symbols-outlined cdp-media-icon">article</span><span class="cdp-media-dot">·</span>Text</div>' +
       '</div>';
 
     /* materials */
@@ -2626,7 +2626,6 @@
     }).join('');
 
     page.innerHTML =
-      '<div class="cdp-toc" id="cdpToc"><div class="cdp-toc-list">' + tocLinksHTML + '</div></div>' +
       '<div class="cdp-hero-section">' +
         '<div class="container">' +
           '<div class="cdp-breadcrumb">' +
@@ -2667,8 +2666,15 @@
       '</div>' +
       '<div class="container">' +
         '<div class="cdp-infobar" id="cdpInfobar">' + infoBarHTML + '</div>' +
-        '<div class="cdp-content">' + contentHTML + '</div>' +
       '</div>' +
+      '<div class="cdp-body"><div class="container">' +
+        '<div class="cdp-body-grid">' +
+          '<div class="cdp-content">' + contentHTML + '</div>' +
+          '<aside class="cdp-toc-aside">' +
+            '<nav class="cdp-toc" id="cdpToc"><div class="cdp-toc-list">' + tocLinksHTML + '</div></nav>' +
+          '</aside>' +
+        '</div>' +
+      '</div></div>' +
       '<div class="cdp-reviews"><div class="container">' +
         '<div class="section-hd">' +
           '<div class="cdp-section-heading">What students say</div>' +
