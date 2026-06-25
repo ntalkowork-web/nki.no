@@ -2990,7 +2990,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   font-size: 26px;
   font-weight: 700;
   color: var(--gray-900);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .cdp-sec-para {
