@@ -78,6 +78,13 @@
 
 html { scroll-behavior: smooth; }
 
+button,
+input:not([type="radio"]):not([type="checkbox"]):not([type="range"]),
+select,
+textarea {
+  border-radius: 12px !important;
+}
+
 body {
   font-family: var(--font);
   font-size: 14px;
@@ -1484,7 +1491,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 .nav-arrow {
   width: 36px; height: 36px;
   border: 1px solid var(--gray-300);
-  border-radius: 50%;
+  border-radius: 50% !important;
   display: flex;
   align-items: center;
   justify-content: center;
