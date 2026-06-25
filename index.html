@@ -1507,6 +1507,7 @@
 
   window.NKICart = {
     open: function () {
+      renderCart();
       var drawer  = document.getElementById('cartDrawer');
       var overlay = document.getElementById('drawerOverlay');
       if (drawer)  drawer.classList.add('is-open');
