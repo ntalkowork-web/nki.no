@@ -3952,8 +3952,11 @@
     while (logos.firstChild) track.appendChild(logos.firstChild);
     var clone = track.cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
-    logos.appendChild(track);
-    logos.appendChild(clone);
+    var inner = document.createElement('div');
+    inner.className = 'marquee-inner';
+    inner.appendChild(track);
+    inner.appendChild(clone);
+    logos.appendChild(inner);
   })();
 
 })();

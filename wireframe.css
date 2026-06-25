@@ -4540,16 +4540,16 @@ body.cdp-cta-pinned .cdp-toc {
 
   /* Mentioned-in: continuous marquee */
   .mentioned-in-logos {
-    display: block;
     overflow: hidden;
     position: relative;
+    display: block;
   }
   .mentioned-in-logos::before,
   .mentioned-in-logos::after {
     content: '';
     position: absolute;
     top: 0; bottom: 0;
-    width: 48px;
+    width: 56px;
     z-index: 1;
     pointer-events: none;
   }
@@ -4560,13 +4560,17 @@ body.cdp-cta-pinned .cdp-toc {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
   }
+  .marquee-inner {
+    display: flex;
+    width: max-content;
+    animation: marquee 24s linear infinite;
+    will-change: transform;
+  }
   .marquee-track {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 48px;
     padding-right: 48px;
-    animation: marquee 22s linear infinite;
-    will-change: transform;
     flex-shrink: 0;
   }
 
