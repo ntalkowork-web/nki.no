@@ -3065,10 +3065,10 @@
     var total = items.reduce(function(s,i){ return s + i.price; }, 0);
     return '<div class="co-payment-wrap">' +
       buildPayCard('card','Pay by card', buildCardBody(total), false) +
+      buildPayCard('partial','Partial payment', buildPartialBody(total), true) +
       buildPayCard('vipps','Vipps', buildVippsBody(), false) +
       buildPayCard('invoice','Invoice', buildInvoiceBody(), false) +
       buildPayCard('other','Other payer', buildOtherPayerBody(), true) +
-      buildPayCard('partial','Partial payment', buildPartialBody(total), true) +
     '</div>';
   }
 
