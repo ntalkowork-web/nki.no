@@ -2516,52 +2516,56 @@
   var heroBrowseBtn = document.getElementById('heroBrowseBtn');
   if (heroBrowseBtn) heroBrowseBtn.addEventListener('click', function() { showPage('search'); });
 
-  /* ── Hero configurator: custom dropdowns ── */
-  var CFG_AREAS_HS   = ['Subject packages for High School', 'Vocational Studies for High School', 'Single Subjects for High School'];
-  var CFG_AREAS_PROF = ['Economy and sustainability', 'HR and Management', 'Law and administration', 'Construction and logistics', 'Interior and design', 'Health and lifestyle', 'Marketing and sales'];
-  var CFG_AREAS_ALL  = CFG_AREAS_PROF.concat(CFG_AREAS_HS);
-
+  /* ── Hero configurator: custom dropdowns (only if configurator is present in HTML) ── */
   var cfgLevelDd  = document.getElementById('cfg-level-dd');
   var cfgAreaDd   = document.getElementById('cfg-area-dd');
   var cfgAreaMenu = document.getElementById('cfg-area-menu');
 
-  var _cfgLevel = '';
-  var _cfgArea  = '';
+  if (cfgLevelDd || cfgAreaDd || cfgAreaMenu) {
+    var CFG_AREAS_HS   = ['Subject packages for High School', 'Vocational Studies for High School', 'Single Subjects for High School'];
+    var CFG_AREAS_PROF = ['Economy and sustainability', 'HR and Management', 'Law and administration', 'Construction and logistics', 'Interior and design', 'Health and lifestyle', 'Marketing and sales'];
+    var CFG_AREAS_ALL  = CFG_AREAS_PROF.concat(CFG_AREAS_HS);
 
-  function closeCfgDropdowns() {
-    [cfgLevelDd, cfgAreaDd].forEach(function(dd) { if (dd) dd.classList.remove('is-open'); });
-  }
+    var _cfgLevel = '';
+    var _cfgArea  = '';
 
-  function bindCfgDropdown(dd, onPick) {
-    if (!dd) return;
-    dd.querySelector('.cfg-dd-btn').addEventListener('click', function(e) {
-      e.stopPropagation();
-      var isOpen = dd.classList.contains('is-open');
-      closeCfgDropdowns();
-      if (!isOpen) dd.classList.add('is-open');
-    });
-    dd.querySelector('.cfg-dd-menu').addEventListener('click', function(e) { e.stopPropagation(); });
-    function bindItems() {
-      dd.querySelectorAll('.cfg-dd-item').forEach(function(item) {
-        item.addEventListener('click', function() {
-          dd.querySelectorAll('.cfg-dd-item').forEach(function(i) { i.classList.remove('is-active'); });
-          item.classList.add('is-active');
-          dd.querySelector('.cfg-dd-label').textContent = item.textContent;
-          onPick(item.getAttribute('data-val'));
-          closeCfgDropdowns();
-        });
-      });
+    function closeCfgDropdowns() {
+      [cfgLevelDd, cfgAreaDd].forEach(function(dd) { if (dd) dd.classList.remove('is-open'); });
     }
-    bindItems();
-    dd._rebindItems = bindItems;
+
+    function bindCfgDropdown(dd, onPick) {
+      if (!dd) return;
+      dd.querySelector('.cfg-dd-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOpen = dd.classList.contains('is-open');
+        closeCfgDropdowns();
+        if (!isOpen) dd.classList.add('is-open');
+      });
+      dd.querySelector('.cfg-dd-menu').addEventListener('click', function(e) { e.stopPropagation(); });
+      function bindItems() {
+        dd.querySelectorAll('.cfg-dd-item').forEach(function(item) {
+          item.addEventListener('click', function() {
+            dd.querySelectorAll('.cfg-dd-item').forEach(function(i) { i.classList.remove('is-active'); });
+            item.classList.add('is-active');
+            dd.querySelector('.cfg-dd-label').textContent = item.textContent;
+            onPick(item.getAttribute('data-val'));
+            closeCfgDropdowns();
+          });
+        });
+      }
+      bindItems();
+      dd._rebindItems = bindItems;
+    }
+
+    bindCfgDropdown(cfgLevelDd, function(val) { _cfgLevel = val; });
+
+    if (cfgAreaMenu) {
+      cfgAreaMenu.innerHTML = CFG_AREAS_ALL.map(function(a) {
+        return '<div class="cfg-dd-item" data-val="' + a + '">' + a + '</div>';
+      }).join('');
+    }
+    bindCfgDropdown(cfgAreaDd, function(val) { _cfgArea = val; });
   }
-
-  bindCfgDropdown(cfgLevelDd, function(val) { _cfgLevel = val; });
-
-  cfgAreaMenu.innerHTML = CFG_AREAS_ALL.map(function(a) {
-    return '<div class="cfg-dd-item" data-val="' + a + '">' + a + '</div>';
-  }).join('');
-  bindCfgDropdown(cfgAreaDd, function(val) { _cfgArea = val; });
 
   /* ── COURSE DETAILS PAGE ── */
 
