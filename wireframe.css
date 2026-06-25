@@ -2990,7 +2990,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   font-size: 26px;
   font-weight: 700;
   color: var(--gray-900);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .cdp-sec-para {
@@ -3044,7 +3044,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 /* Content body — 2-col grid (content | TOC sidebar) */
 .cdp-body-grid {
   display: grid;
-  grid-template-columns: 1fr 260px;
+  grid-template-columns: 1fr 480px;
   gap: 48px;
   align-items: start;
   padding: 48px 0 80px;
