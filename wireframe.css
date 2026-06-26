@@ -4643,7 +4643,7 @@ body.cdp-cta-pinned .cdp-toc {
   .search-input { font-size: 14px; }
 
   /* Hero */
-  .hero-headline { font-size: 32px; }
+  .hero-headline { font-size: 36px; }
   .hero-sub { font-size: 14px; margin-bottom: 32px; }
   .hero-factoids { flex-wrap: wrap; gap: 20px; justify-content: center; }
   .factoid-num { font-size: 28px; }
@@ -4652,7 +4652,7 @@ body.cdp-cta-pinned .cdp-toc {
   .hero-configurator { margin: 0 var(--margin); }
 
   /* Section */
-  .section-title { font-size: 26px; }
+  .section-title { font-size: 30px; }
   section.wf-section { padding: 48px 0; }
 
   /* Course cards: 2 col */
@@ -4662,10 +4662,10 @@ body.cdp-cta-pinned .cdp-toc {
   .pop-tabs-row { flex-direction: column; align-items: flex-start; gap: 12px; }
 
   /* CDP */
-  .cdp-h1 { font-size: 26px; }
+  .cdp-h1 { font-size: 30px; }
   .cdp-desc { font-size: 15px; }
   .cdp-infobar-item { min-width: calc(33.33% - 12px); }
-  .cdp-section-title { font-size: 22px; }
+  .cdp-section-title { font-size: 24px; }
   .cdp-media-types { gap: 12px; }
 
   /* CDP struct */
@@ -4885,7 +4885,7 @@ body.cdp-cta-pinned .cdp-toc {
   /* Hero — left-align everything */
   .hero { padding-top: 40px; }
   .hero-content { padding-bottom: 48px; text-align: left; }
-  .hero-headline { font-size: 26px; letter-spacing: 0; margin: 0 0 16px; max-width: none; }
+  .hero-headline { font-size: 32px; letter-spacing: 0; margin: 0 0 16px; max-width: none; }
   .hero-sub { font-size: 14px; margin: 0 0 24px; max-width: none; }
   .hero-factoids { flex-direction: column; align-items: flex-start; gap: 24px; flex-wrap: nowrap; }
   .factoid { text-align: left; }
@@ -4894,11 +4894,11 @@ body.cdp-cta-pinned .cdp-toc {
 
   /* Configurator: more compact */
   .hero-configurator { padding: 20px; border-radius: var(--r-sm); }
-  .config-heading { font-size: 18px; }
+  .config-heading { font-size: 22px; }
   .config-lbl { font-size: 14px; }
 
   /* Sections */
-  .section-title { font-size: 22px; }
+  .section-title { font-size: 26px; }
   section.wf-section { padding: 40px 0; }
   .section-hd { flex-direction: column; align-items: flex-start; gap: 12px; }
 
@@ -4908,7 +4908,7 @@ body.cdp-cta-pinned .cdp-toc {
   /* CDP infobar: 2 per row */
   .cdp-infobar-item { min-width: calc(50% - 12px); }
   .cdp-hero { padding: 20px 0 32px; }
-  .cdp-h1 { font-size: 22px; }
+  .cdp-h1 { font-size: 26px; }
   .cdp-sticky-inner { padding: 10px var(--margin); }
   .cdp-sticky-thumb { width: 40px; height: 40px; }
   .cdp-sticky-name { font-size: 14px; max-width: 180px; }
