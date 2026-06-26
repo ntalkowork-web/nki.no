@@ -633,6 +633,33 @@
     <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Accounting consultant</div>
     <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Medical Secretary</div>
     <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Mathematics R1</div>
+    <div class="mob-search-popular">
+      <div class="mob-search-recent-title">Most popular</div>
+      <div class="mob-search-pop-card" data-course-name="Påbygg – Studieforberedende VG3">
+        <div class="mob-search-pop-img"></div>
+        <div class="mob-search-pop-info">
+          <div class="mob-search-pop-name">Påbygg – Studieforberedende VG3</div>
+          <div class="mob-search-pop-meta">Package · High School</div>
+        </div>
+        <div class="mob-search-pop-price">14 900 kr</div>
+      </div>
+      <div class="mob-search-pop-card" data-course-name="Medical Secretary">
+        <div class="mob-search-pop-img"></div>
+        <div class="mob-search-pop-info">
+          <div class="mob-search-pop-name">Medical Secretary</div>
+          <div class="mob-search-pop-meta">Package · Professional</div>
+        </div>
+        <div class="mob-search-pop-price">12 900 kr</div>
+      </div>
+      <div class="mob-search-pop-card" data-course-name="Interior Design — Foundation">
+        <div class="mob-search-pop-img"></div>
+        <div class="mob-search-pop-info">
+          <div class="mob-search-pop-name">Interior Design — Foundation</div>
+          <div class="mob-search-pop-meta">Package · Professional</div>
+        </div>
+        <div class="mob-search-pop-price">19 900 kr</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1335,6 +1362,14 @@
   }
 
   if (mobSearchBack) mobSearchBack.addEventListener('click', closeMobSearch);
+
+  /* Popular course cards in overlay → CDP */
+  document.querySelectorAll('.mob-search-pop-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      closeMobSearch();
+      showPage('course', { courseName: card.getAttribute('data-course-name') });
+    });
+  });
 
   if (mobSearchInp) {
     mobSearchInp.addEventListener('input', function() {
