@@ -3225,6 +3225,7 @@ body.cdp-cta-pinned .cdp-toc {
   border-bottom: 1px solid var(--gray-200);
   font-family: var(--font);
   transition: background .15s;
+  border-radius: 0 !important;
 }
 
 .cdp-struct-tab:hover:not(.is-active) { background: var(--gray-100); }
