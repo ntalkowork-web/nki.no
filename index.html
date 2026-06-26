@@ -794,7 +794,7 @@
       </div>
       <div class="pop-carousel-footer">
         <button class="nav-arrow" id="popHsPrev" aria-label="Previous">&#8592;</button>
-        <span class="pop-counter" id="popHsCounter">1 / 3</span>
+        <span class="pop-counter" id="popHsCounter">1 — 3</span>
         <button class="nav-arrow" id="popHsNext" aria-label="Next">&#8594;</button>
       </div>
     </div>
@@ -812,7 +812,7 @@
       </div>
       <div class="pop-carousel-footer">
         <button class="nav-arrow" id="popProPrev" aria-label="Previous">&#8592;</button>
-        <span class="pop-counter" id="popProCounter">1 / 3</span>
+        <span class="pop-counter" id="popProCounter">1 — 3</span>
         <button class="nav-arrow" id="popProNext" aria-label="Next">&#8594;</button>
       </div>
     </div>
@@ -825,7 +825,7 @@
       <div class="section-hd is-centered">
         <h2 class="section-title" id="hiw-hd">How it works</h2>
       </div>
-      <span class="mob-section-counter" id="hiwCounter">1 / 3</span>
+      <span class="mob-section-counter" id="hiwCounter">1 — 3</span>
       <div class="hiw-grid" id="hiwGrid">
 
         <div class="hiw-card">
@@ -910,7 +910,7 @@
       <div class="section-hd">
         <h2 class="section-title" id="testi-hd">What our students say</h2>
       </div>
-      <span class="mob-section-counter" id="testiCounter">1 / 8</span>
+      <span class="mob-section-counter" id="testiCounter">1 — 8</span>
 
       <div class="testi-cols" id="testiCols">
 
@@ -1479,7 +1479,7 @@
       var gap   = 16;
       var idx   = Math.round(grid.scrollLeft / (cardW + gap));
       var total = totalCards || grid.children.length;
-      counter.textContent = (idx + 1) + ' / ' + total;
+      counter.textContent = (idx + 1) + ' — ' + total;
     }, { passive: true });
   }
 
@@ -1497,7 +1497,7 @@
       if (!firstCard) return;
       var cardW = firstCard.offsetWidth;
       var idx   = Math.round(cols.scrollLeft / (cardW + 16));
-      counter.textContent = (idx + 1) + ' / ' + total;
+      counter.textContent = (idx + 1) + ' — ' + total;
     }, { passive: true });
   }
   initTestiCounter();
@@ -2221,7 +2221,7 @@
     var sliding = false;
 
     function updateCounter() {
-      if (ctr) ctr.textContent = (cur + 1) + ' / ' + pages.length;
+      if (ctr) ctr.textContent = (cur + 1) + ' — ' + pages.length;
     }
     function renderCarouselPage(idx) {
       grid.innerHTML = pages[idx].map(buildCard).join('');
@@ -2259,7 +2259,7 @@
         var cardW = firstCard.offsetWidth;
         var total = grid.querySelectorAll('.course-card').length;
         var idx = Math.round(viewport.scrollLeft / (cardW + 16));
-        if (ctr) ctr.textContent = (idx + 1) + ' / ' + total;
+        if (ctr) ctr.textContent = (idx + 1) + ' — ' + total;
       }, { passive: true });
     }
   }
@@ -2394,6 +2394,7 @@
   var CURRENT_COURSE    = null;
   var _cdpObserver      = null;
   var _spMobObserver    = null;
+  var _spMobScrollFn    = null;
   var CHECKOUT_STATE = {
     step: 1, completed: [], promoApplied: false, discountPct: 0,
     installMonths: 3, docDelivery: 'now', docUploaded: false,
@@ -2867,6 +2868,7 @@
   function initMobSearch() {
     if (window.innerWidth > 1024) return;
     if (_spMobObserver) { _spMobObserver.disconnect(); _spMobObserver = null; }
+    if (_spMobScrollFn) { window.removeEventListener('scroll', _spMobScrollFn); _spMobScrollFn = null; }
     var mobBar  = document.getElementById('spMobBar');
     var floatBtn = document.getElementById('spFloatBtn');
     if (mobBar && floatBtn) {
@@ -2877,6 +2879,20 @@
         });
       }, { threshold: 0 });
       _spMobObserver.observe(mobBar);
+
+      _spMobScrollFn = function() {
+        var btn   = document.getElementById('spFloatBtn');
+        var pager = document.getElementById('spPager');
+        if (!btn) return;
+        if (pager) {
+          var overlap = window.innerHeight - pager.getBoundingClientRect().top;
+          btn.style.bottom = (overlap > 0 ? overlap + 8 : 16) + 'px';
+        } else {
+          btn.style.bottom = '16px';
+        }
+      };
+      window.addEventListener('scroll', _spMobScrollFn, { passive: true });
+      _spMobScrollFn();
     }
     var clearBtn = mobBar && mobBar.querySelector('.sp-mob-clear-all');
     if (clearBtn) clearBtn.addEventListener('click', function() {
