@@ -1325,6 +1325,14 @@
     });
   });
 
+  mobMenu.querySelectorAll('.mob-sub-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      closeMobMenu();
+      showPage('course', { courseName: link.textContent.trim() });
+    });
+  });
+
   if (mobLoginBtn) mobLoginBtn.addEventListener('click', function() {
     closeMobMenu();
     document.getElementById('loginBtn').click();
