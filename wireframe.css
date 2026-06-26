@@ -2670,6 +2670,27 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 /* ── SEARCH PAGE — MOBILE COMPONENTS (base, shown at ≤1024px) ── */
 
+.sp-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px 0 8px;
+}
+.sp-pager-btn {
+  width: 40px; height: 40px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--r-sm);
+  background: var(--white);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gray-700);
+  transition: background .15s;
+}
+.sp-pager-btn:hover:not(:disabled) { background: var(--gray-100); }
+.sp-pager-btn:disabled { opacity: 0.35; cursor: default; }
+.sp-pager-info { font-size: 14px; color: var(--gray-600); min-width: 44px; text-align: center; }
+
 .sp-mob-bar {
   display: none;
   align-items: center;
@@ -5023,7 +5044,9 @@ body.cdp-cta-pinned .cdp-toc {
   /* Best seller badge: tighter position on mobile cards */
   .cc-badges { top: 8px; left: 8px; }
 
-  /* Pedagogical approach: fixed-height image, small overlay card (image bottom = card midpoint) */
+  /* Pedagogical approach: smaller tabs + fixed-height image */
+  .aktiv-tab { padding: 7px 12px; font-size: 13px; gap: 5px; }
+  .aktiv-tab-icon { font-size: 16px; }
   .aktiv-panel-img { width: 100%; margin-left: 0; aspect-ratio: unset; height: 320px; }
   .aktiv-panel { padding-bottom: 64px; }
   .aktiv-panel-card { width: 256px; min-height: unset; left: 16px; bottom: 0; padding: 16px; }

@@ -1330,6 +1330,14 @@
     });
   });
 
+  mobMenu.querySelectorAll('.mob-sub-see-all').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      closeMobMenu();
+      showPage('search');
+    });
+  });
+
   if (mobLoginBtn) mobLoginBtn.addEventListener('click', function() {
     closeMobMenu();
     document.getElementById('loginBtn').click();
@@ -2504,7 +2512,7 @@
       spState.query = ''; spState.areas = []; spState.levels = [];
       spState.lengths = []; spState.priceMin = 990; spState.priceMax = 49900;
       spState.lanekassen = false; spState.sort = 'recommended';
-      spState.compareIds = []; spState.breadcrumb = 'All courses';
+      spState.compareIds = []; spState.breadcrumb = 'All courses'; spState.page = 0;
       if (ctx) {
         if (ctx.category) {
           spState.breadcrumb = ctx.category;
@@ -2902,11 +2910,33 @@
         '<button class="sp-empty-btn" id="spEmptyClear">Clear all filters</button>' +
       '</div>';
     }
+    var displayResults = results;
+    var pagerHTML = '';
+    if (window.innerWidth <= 1024) {
+      var PAGE_SIZE = 6;
+      var totalPages = Math.ceil(results.length / PAGE_SIZE);
+      var curPage = Math.min(spState.page || 0, totalPages - 1);
+      spState.page = curPage;
+      displayResults = results.slice(curPage * PAGE_SIZE, (curPage + 1) * PAGE_SIZE);
+      if (totalPages > 1) {
+        pagerHTML = '<div class="sp-pager">' +
+          '<button class="sp-pager-btn" id="spPagerPrev"' + (curPage === 0 ? ' disabled' : '') + '>' +
+            '<span class="material-symbols-outlined" style="font-size:18px;line-height:1">arrow_back</span>' +
+          '</button>' +
+          '<span class="sp-pager-info">' + (curPage + 1) + ' / ' + totalPages + '</span>' +
+          '<button class="sp-pager-btn" id="spPagerNext"' + (curPage >= totalPages - 1 ? ' disabled' : '') + '>' +
+            '<span class="material-symbols-outlined" style="font-size:18px;line-height:1">arrow_forward</span>' +
+          '</button>' +
+        '</div>';
+      }
+    }
     return filterRow + mobBar +
-      '<div class="sp-results-grid">' + results.map(buildSearchCard).join('') + '</div>';
+      '<div class="sp-results-grid">' + displayResults.map(buildSearchCard).join('') + '</div>' +
+      pagerHTML;
   }
 
   function renderSearchPage() {
+    spState.page = 0;
     var page = document.getElementById('page-search');
     var isMob = window.innerWidth <= 1024;
     page.innerHTML =
@@ -3074,6 +3104,21 @@
 
   function bindResultCardEvents() {
     var page = document.getElementById('page-search'); if (!page) return;
+
+    var pagerPrev = document.getElementById('spPagerPrev');
+    var pagerNext = document.getElementById('spPagerNext');
+    if (pagerPrev) pagerPrev.addEventListener('click', function() {
+      spState.page = Math.max(0, (spState.page || 0) - 1);
+      updateResultsArea();
+      var area = document.getElementById('spResultsArea');
+      if (area) area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    if (pagerNext) pagerNext.addEventListener('click', function() {
+      spState.page = (spState.page || 0) + 1;
+      updateResultsArea();
+      var area = document.getElementById('spResultsArea');
+      if (area) area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 
     var emptyClear = document.getElementById('spEmptyClear');
     if (emptyClear) emptyClear.addEventListener('click', function() {
