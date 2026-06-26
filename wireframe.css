@@ -534,6 +534,17 @@ select { font-family: inherit; }
   transition: background .15s;
 }
 
+.cart-icon {
+  font-size: 20px;
+  line-height: 1;
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal; font-style: normal;
+  letter-spacing: normal; text-transform: none; word-wrap: normal;
+  -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
 .btn-cart:hover { background: var(--gray-100); }
 
 /* ── CART DRAWER ──────────────────────────── */
@@ -4541,6 +4552,8 @@ body.cdp-cta-pinned .cdp-toc {
   .primary-nav { display: none; }
   .header-right .btn-login { display: none; }
   .hamburger { display: flex; }
+  .btn-cart { border: none; width: 36px; height: 36px; }
+  .cart-icon { font-size: 22px; }
   .header-search { flex: 1; }
 
   /* Hero */
@@ -4899,7 +4912,7 @@ body.cdp-cta-pinned .cdp-toc {
   /* Header: compress */
   .header-inner { gap: 12px; }
   .header-logo img { height: 24px; }
-  .btn-cart { width: 32px; height: 32px; }
+  .btn-cart { color: var(--gray-900); }
 
   /* Hero — left-align everything */
   .hero { padding-top: 40px; }
