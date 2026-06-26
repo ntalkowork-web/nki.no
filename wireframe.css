@@ -1643,6 +1643,10 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   grid-template-columns: repeat(4, 1fr);
   gap: var(--gutter);
 }
+section[aria-labelledby="pop-hs-hd"]  .courses-grid,
+section[aria-labelledby="pop-pro-hd"] .courses-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
 
 .course-card {
   background: var(--white);
