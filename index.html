@@ -2617,7 +2617,7 @@
         '<option value="price-asc"'   + (spState.sort === 'price-asc'  ? ' selected' : '') + '>Price: low to high</option>' +
         '<option value="price-desc"'  + (spState.sort === 'price-desc' ? ' selected' : '') + '>Price: high to low</option>' +
       '</select></div>';
-    return pills + clearAll + sort;
+    return '<div class="sp-pills-wrap">' + pills + clearAll + '</div>' + sort;
   }
 
   function getFilteredResults() {

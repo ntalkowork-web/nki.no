@@ -2299,11 +2299,18 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 .sp-bc-current { color: var(--gray-900); }
 
 .sp-filter-row {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 8px;
   margin-bottom: 24px;
+  align-items: start;
+}
+
+.sp-pills-wrap {
+  display: flex;
   flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
 }
 
 .sp-active-pill {
@@ -2342,7 +2349,7 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
   white-space: nowrap;
 }
 
-.sp-sort-wrap { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.sp-sort-wrap { display: flex; align-items: center; gap: 8px; }
 .sp-sort-label { font-size: 14px; color: var(--gray-500); white-space: nowrap; }
 
 .sp-sort-select {
