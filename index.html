@@ -2686,6 +2686,35 @@
       '</div></div>';
   }
 
+  function buildPagerHTML(curPage, totalPages) {
+    if (totalPages <= 1) return '';
+    var pages = [];
+    if (totalPages <= 7) {
+      for (var i = 0; i < totalPages; i++) pages.push(i);
+    } else {
+      pages.push(0);
+      if (curPage > 2) pages.push('...');
+      var lo = Math.max(1, curPage - 1), hi = Math.min(totalPages - 2, curPage + 1);
+      for (var i = lo; i <= hi; i++) pages.push(i);
+      if (curPage < totalPages - 3) pages.push('...');
+      pages.push(totalPages - 1);
+    }
+    var html = '<div class="sp-pager"><div class="sp-pager-pill">';
+    html += '<button class="sp-pager-nav" id="spPagerPrev"' + (curPage === 0 ? ' disabled' : '') + '>' +
+      '<span class="material-symbols-outlined" style="font-size:16px;line-height:1">chevron_left</span></button>';
+    pages.forEach(function(p) {
+      if (p === '...') {
+        html += '<span class="sp-pager-ellipsis">…</span>';
+      } else {
+        html += '<button class="sp-pager-page' + (p === curPage ? ' is-active' : '') + '" data-page="' + p + '">' + (p + 1) + '</button>';
+      }
+    });
+    html += '<button class="sp-pager-nav" id="spPagerNext"' + (curPage >= totalPages - 1 ? ' disabled' : '') + '>' +
+      '<span class="material-symbols-outlined" style="font-size:16px;line-height:1">chevron_right</span></button>';
+    html += '</div></div>';
+    return html;
+  }
+
   function buildMobFilterBar() {
     var total = spState.areas.length + spState.levels.length + spState.lengths.length + (spState.lanekassen ? 1 : 0);
     var pillsHTML = total > 0
@@ -2918,17 +2947,7 @@
       var curPage = Math.min(spState.page || 0, totalPages - 1);
       spState.page = curPage;
       displayResults = results.slice(curPage * PAGE_SIZE, (curPage + 1) * PAGE_SIZE);
-      if (totalPages > 1) {
-        pagerHTML = '<div class="sp-pager">' +
-          '<button class="sp-pager-btn" id="spPagerPrev"' + (curPage === 0 ? ' disabled' : '') + '>' +
-            '<span class="material-symbols-outlined" style="font-size:18px;line-height:1">arrow_back</span>' +
-          '</button>' +
-          '<span class="sp-pager-info">' + (curPage + 1) + ' / ' + totalPages + '</span>' +
-          '<button class="sp-pager-btn" id="spPagerNext"' + (curPage >= totalPages - 1 ? ' disabled' : '') + '>' +
-            '<span class="material-symbols-outlined" style="font-size:18px;line-height:1">arrow_forward</span>' +
-          '</button>' +
-        '</div>';
-      }
+      pagerHTML = buildPagerHTML(curPage, totalPages);
     }
     return filterRow + mobBar +
       '<div class="sp-results-grid">' + displayResults.map(buildSearchCard).join('') + '</div>' +
@@ -3105,19 +3124,18 @@
   function bindResultCardEvents() {
     var page = document.getElementById('page-search'); if (!page) return;
 
+    function goToPage(p) {
+      spState.page = p;
+      updateResultsArea();
+      var area = document.getElementById('spResultsArea');
+      if (area) area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
     var pagerPrev = document.getElementById('spPagerPrev');
     var pagerNext = document.getElementById('spPagerNext');
-    if (pagerPrev) pagerPrev.addEventListener('click', function() {
-      spState.page = Math.max(0, (spState.page || 0) - 1);
-      updateResultsArea();
-      var area = document.getElementById('spResultsArea');
-      if (area) area.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    if (pagerNext) pagerNext.addEventListener('click', function() {
-      spState.page = (spState.page || 0) + 1;
-      updateResultsArea();
-      var area = document.getElementById('spResultsArea');
-      if (area) area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (pagerPrev) pagerPrev.addEventListener('click', function() { goToPage(Math.max(0, (spState.page || 0) - 1)); });
+    if (pagerNext) pagerNext.addEventListener('click', function() { goToPage((spState.page || 0) + 1); });
+    page.querySelectorAll('.sp-pager-page').forEach(function(btn) {
+      btn.addEventListener('click', function() { goToPage(parseInt(btn.getAttribute('data-page'), 10)); });
     });
 
     var emptyClear = document.getElementById('spEmptyClear');

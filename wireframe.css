@@ -2670,26 +2670,43 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 /* ── SEARCH PAGE — MOBILE COMPONENTS (base, shown at ≤1024px) ── */
 
-.sp-pager {
-  display: flex;
+.sp-pager { display: flex; justify-content: center; padding: 24px 0 8px; }
+
+.sp-pager-pill {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 24px 0 8px;
-}
-.sp-pager-btn {
-  width: 40px; height: 40px;
-  border: 1px solid var(--gray-300);
-  border-radius: var(--r-sm);
+  gap: 2px;
   background: var(--white);
+  border-radius: 100px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.10);
+  padding: 8px 12px;
+}
+
+.sp-pager-page,
+.sp-pager-nav {
+  width: 36px; height: 36px;
+  border: none; background: none;
+  border-radius: 50%;
+  font-size: 14px; font-family: var(--font);
+  color: var(--gray-600);
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  color: var(--gray-700);
   transition: background .15s;
+  flex-shrink: 0;
 }
-.sp-pager-btn:hover:not(:disabled) { background: var(--gray-100); }
-.sp-pager-btn:disabled { opacity: 0.35; cursor: default; }
-.sp-pager-info { font-size: 14px; color: var(--gray-600); min-width: 44px; text-align: center; }
+.sp-pager-page:hover:not(.is-active),
+.sp-pager-nav:hover:not(:disabled) { background: var(--gray-100); }
+.sp-pager-page.is-active {
+  background: var(--gray-900);
+  color: var(--white);
+  font-weight: 600;
+}
+.sp-pager-nav:disabled { opacity: 0.35; cursor: default; }
+.sp-pager-ellipsis {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--gray-400); letter-spacing: 1px;
+}
 
 .sp-mob-bar {
   display: none;
