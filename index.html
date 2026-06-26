@@ -627,12 +627,10 @@
     </div>
   </div>
   <div class="mob-search-body" id="mobSearchBody">
-    <div class="mob-search-recent-title">Popular searches</div>
-    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Påbygg – Studieforberedende VG3</div>
-    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>General Study Competence</div>
-    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Accounting consultant</div>
-    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Medical Secretary</div>
-    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Mathematics R1</div>
+    <div class="mob-search-recent-title">Recent searches</div>
+    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span><span class="recent-q">Office worker</span><span class="recent-scope">in HR and administration</span></div>
+    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span><span class="recent-q">Medical Secretary</span><span class="recent-scope">in Health and lifestyle</span></div>
+    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span><span class="recent-q">Mathematics R1</span><span class="recent-scope">in Single Subjects for High School</span></div>
     <div class="mob-search-popular">
       <div class="mob-search-recent-title">Most popular</div>
       <div class="mob-search-pop-card" data-course-name="Påbygg – Studieforberedende VG3">
@@ -1362,6 +1360,15 @@
   }
 
   if (mobSearchBack) mobSearchBack.addEventListener('click', closeMobSearch);
+
+  /* Recent search hints in overlay → search page */
+  document.querySelectorAll('.mob-search-hint').forEach(function(hint) {
+    hint.addEventListener('click', function() {
+      var qEl = hint.querySelector('.recent-q');
+      closeMobSearch();
+      showPage('course', { courseName: qEl ? qEl.textContent.trim() : '' });
+    });
+  });
 
   /* Popular course cards in overlay → CDP */
   document.querySelectorAll('.mob-search-pop-card').forEach(function(card) {

@@ -1553,14 +1553,12 @@ main { margin-top: var(--header-h); }
 .mob-search-hint {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   padding: 10px 0;
   border-bottom: 1px solid var(--gray-100);
-  color: var(--gray-600);
-  font-size: 14px;
   cursor: pointer;
 }
-.mob-search-hint:hover { color: var(--gray-900); }
+.mob-search-hint:hover .recent-q { text-decoration: underline; }
 .mob-search-hint-icon {
   font-family: 'Material Symbols Outlined';
   font-size: 18px; color: var(--gray-400); flex-shrink: 0;
