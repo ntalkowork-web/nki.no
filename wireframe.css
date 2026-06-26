@@ -2119,7 +2119,7 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 
 .footer-nl-lbl { font-size: 14px; font-weight: 600; color: var(--white); white-space: nowrap; }
 
-.footer-nl-wrap { display: flex; gap: 8px; flex: 1; max-width: 456px; }
+.footer-nl-wrap { display: flex; gap: 8px; flex: 1; max-width: 480px; }
 
 .footer-nl-input {
   flex: 1;
