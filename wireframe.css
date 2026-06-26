@@ -4555,6 +4555,7 @@ body.cdp-cta-pinned .cdp-toc {
   .btn-cart { border: none; width: 36px; height: 36px; }
   .cart-icon { font-size: 22px; }
   .header-search { flex: 1; }
+  .header-inner { gap: 16px; }
 
   /* Hero */
   .hero-headline { font-size: 40px; }
