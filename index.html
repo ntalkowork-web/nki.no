@@ -2385,6 +2385,7 @@
 
   var CURRENT_COURSE    = null;
   var _cdpObserver      = null;
+  var _spMobObserver    = null;
   var CHECKOUT_STATE = {
     step: 1, completed: [], promoApplied: false, discountPct: 0,
     installMonths: 3, docDelivery: 'now', docUploaded: false,
@@ -2677,11 +2678,222 @@
       '</div></div>';
   }
 
+  function buildMobFilterBar() {
+    var total = spState.areas.length + spState.levels.length + spState.lengths.length + (spState.lanekassen ? 1 : 0);
+    var pillsHTML = total > 0
+      ? '<span class="sp-active-pill">' + total + ' Applied<button class="sp-pill-x sp-mob-clear-all">×</button></span>'
+      : '';
+    var activeClass = total > 0 ? ' sp-mob-icon-btn--active' : '';
+    return '<div class="sp-mob-bar" id="spMobBar">' +
+      '<div class="sp-mob-pills-area">' + pillsHTML + '</div>' +
+      '<div class="sp-mob-icons">' +
+        '<button class="sp-mob-icon-btn' + activeClass + '" id="spMobFilterBtn" aria-label="Filters">' +
+          '<span class="material-symbols-outlined" style="font-size:20px;line-height:1">tune</span>' +
+        '</button>' +
+        '<button class="sp-mob-icon-btn" id="spMobSortBtn" aria-label="Sort">' +
+          '<span class="material-symbols-outlined" style="font-size:20px;line-height:1">sort</span>' +
+        '</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function buildMobFloatBtnHTML() {
+    return '<button class="sp-float-btn" id="spFloatBtn">' +
+      '<span class="sp-float-btn-icon">tune</span>Filters' +
+    '</button>';
+  }
+
+  function buildMobOverlayHTML() {
+    return '<div class="sp-mob-overlay" id="spMobOverlay">' +
+      '<div class="sp-mob-ov-hd">' +
+        '<span class="sp-mob-ov-title">Filters</span>' +
+        '<button class="sp-mob-ov-close" id="spMobOvClose" aria-label="Close">close</button>' +
+      '</div>' +
+      '<div class="sp-mob-ov-body" id="spMobOvBody"></div>' +
+      '<div class="sp-mob-ov-ft">' +
+        '<button class="sp-mob-show-btn" id="spMobShowBtn">Show ' + getFilteredResults().length + ' Results</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function buildMobSortDdHTML() {
+    var opts = [
+      { val: 'recommended', label: 'Recommended' },
+      { val: 'newest',      label: 'Newest' },
+      { val: 'trending',    label: 'Trending' },
+      { val: 'price-asc',   label: 'Price: low to high' },
+      { val: 'price-desc',  label: 'Price: high to low' }
+    ];
+    return '<div class="sp-mob-sort-dd" id="spMobSortDd">' +
+      opts.map(function(o) {
+        return '<div class="sp-mob-sort-opt' + (spState.sort === o.val ? ' is-sel' : '') + '" data-sort="' + o.val + '">' + o.label + '</div>';
+      }).join('') +
+    '</div>';
+  }
+
+  function openMobFilters() {
+    var overlay = document.getElementById('spMobOverlay');
+    if (!overlay) return;
+    var body = document.getElementById('spMobOvBody');
+    if (body) body.innerHTML = buildSidebarHTML();
+    updateMobShowBtn();
+    overlay.classList.add('is-open');
+    bindMobOverlayFilters();
+  }
+
+  function closeMobFilters() {
+    var overlay = document.getElementById('spMobOverlay');
+    if (overlay) overlay.classList.remove('is-open');
+  }
+
+  function updateMobShowBtn() {
+    var btn = document.getElementById('spMobShowBtn');
+    var n = getFilteredResults().length;
+    if (btn) btn.textContent = 'Show ' + n + ' Result' + (n === 1 ? '' : 's');
+  }
+
+  function bindMobOverlayFilters() {
+    var overlay = document.getElementById('spMobOverlay');
+    if (!overlay) return;
+
+    overlay.querySelectorAll('.sp-acc-header').forEach(function(hdr) {
+      hdr.addEventListener('click', function() { hdr.parentElement.classList.toggle('is-open'); });
+    });
+    overlay.querySelectorAll('.sp-cb-area').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        if (cb.checked) { if (spState.areas.indexOf(cb.value) === -1) spState.areas.push(cb.value); }
+        else spState.areas = spState.areas.filter(function(a) { return a !== cb.value; });
+        updateMobShowBtn();
+      });
+    });
+    overlay.querySelectorAll('.sp-cb-level').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        if (cb.checked) { if (spState.levels.indexOf(cb.value) === -1) spState.levels.push(cb.value); }
+        else spState.levels = spState.levels.filter(function(l) { return l !== cb.value; });
+        updateMobShowBtn();
+      });
+    });
+    overlay.querySelectorAll('.sp-cb-length').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        if (cb.checked) { if (spState.lengths.indexOf(cb.value) === -1) spState.lengths.push(cb.value); }
+        else spState.lengths = spState.lengths.filter(function(l) { return l !== cb.value; });
+        updateMobShowBtn();
+      });
+    });
+
+    var pMin = document.getElementById('spPriceMin');
+    var pMax = document.getElementById('spPriceMax');
+    var pMinV = document.getElementById('spPriceMinVal');
+    var pMaxV = document.getElementById('spPriceMaxVal');
+    var fill  = document.getElementById('spSliderFill');
+
+    function updateOvFill() {
+      if (!fill || !pMin || !pMax) return;
+      var range = 49900 - 990;
+      var lo = (spState.priceMin - 990) / range * 100;
+      var hi = (spState.priceMax - 990) / range * 100;
+      fill.style.left = lo + '%'; fill.style.right = (100 - hi) + '%';
+    }
+    if (pMin) pMin.addEventListener('input', function() {
+      spState.priceMin = Math.min(parseInt(pMin.value, 10), spState.priceMax - 100);
+      pMin.value = String(spState.priceMin);
+      if (pMinV) pMinV.textContent = 'kr ' + fmtNum(spState.priceMin);
+      updateOvFill(); updateMobShowBtn();
+    });
+    if (pMax) pMax.addEventListener('input', function() {
+      spState.priceMax = Math.max(parseInt(pMax.value, 10), spState.priceMin + 100);
+      pMax.value = String(spState.priceMax);
+      if (pMaxV) pMaxV.textContent = 'kr ' + fmtNum(spState.priceMax);
+      updateOvFill(); updateMobShowBtn();
+    });
+    updateOvFill();
+
+    var lkCb = document.getElementById('spLanekassen');
+    if (lkCb) lkCb.addEventListener('change', function() { spState.lanekassen = lkCb.checked; updateMobShowBtn(); });
+
+    overlay.querySelectorAll('.sp-price-preset').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        spState.priceMin = parseInt(btn.getAttribute('data-pmin'), 10);
+        spState.priceMax = parseInt(btn.getAttribute('data-pmax'), 10);
+        if (pMin) pMin.value = String(spState.priceMin);
+        if (pMax) pMax.value = String(spState.priceMax);
+        if (pMinV) pMinV.textContent = 'kr ' + fmtNum(spState.priceMin);
+        if (pMaxV) pMaxV.textContent = 'kr ' + fmtNum(spState.priceMax);
+        overlay.querySelectorAll('.sp-price-preset').forEach(function(b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        updateOvFill(); updateMobShowBtn();
+      });
+    });
+  }
+
+  function initMobSearch() {
+    if (window.innerWidth > 1024) return;
+    if (_spMobObserver) { _spMobObserver.disconnect(); _spMobObserver = null; }
+    var mobBar  = document.getElementById('spMobBar');
+    var floatBtn = document.getElementById('spFloatBtn');
+    if (mobBar && floatBtn) {
+      _spMobObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) floatBtn.classList.remove('is-visible');
+          else floatBtn.classList.add('is-visible');
+        });
+      }, { threshold: 0 });
+      _spMobObserver.observe(mobBar);
+    }
+    var clearBtn = mobBar && mobBar.querySelector('.sp-mob-clear-all');
+    if (clearBtn) clearBtn.addEventListener('click', function() {
+      spState.areas = []; spState.levels = []; spState.lengths = []; spState.lanekassen = false;
+      renderSearchPage();
+    });
+    var filterBtn = document.getElementById('spMobFilterBtn');
+    if (filterBtn) filterBtn.addEventListener('click', openMobFilters);
+    var sortBtn = document.getElementById('spMobSortBtn');
+    var sortDd  = document.getElementById('spMobSortDd');
+    if (sortBtn && sortDd) {
+      sortBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (sortDd.classList.contains('is-open')) {
+          sortDd.classList.remove('is-open');
+        } else {
+          var rect = sortBtn.getBoundingClientRect();
+          sortDd.style.top   = (rect.bottom + 8) + 'px';
+          sortDd.style.right = (window.innerWidth - rect.right) + 'px';
+          sortDd.classList.add('is-open');
+        }
+      });
+    }
+  }
+
+  function bindMobStaticEvents() {
+    if (window.innerWidth > 1024) return;
+    var floatBtn = document.getElementById('spFloatBtn');
+    if (floatBtn) floatBtn.addEventListener('click', openMobFilters);
+    var ovClose = document.getElementById('spMobOvClose');
+    if (ovClose) ovClose.addEventListener('click', function() { closeMobFilters(); renderSearchPage(); });
+    var showBtn = document.getElementById('spMobShowBtn');
+    if (showBtn) showBtn.addEventListener('click', function() { closeMobFilters(); renderSearchPage(); });
+    var sortDd = document.getElementById('spMobSortDd');
+    if (sortDd) sortDd.querySelectorAll('.sp-mob-sort-opt').forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        spState.sort = opt.getAttribute('data-sort');
+        sortDd.querySelectorAll('.sp-mob-sort-opt').forEach(function(o) { o.classList.remove('is-sel'); });
+        opt.classList.add('is-sel');
+        sortDd.classList.remove('is-open');
+        updateResultsArea();
+      });
+    });
+    document.addEventListener('click', function() {
+      var dd = document.getElementById('spMobSortDd');
+      if (dd) dd.classList.remove('is-open');
+    });
+  }
+
   function buildResultsAreaHTML() {
     var results = sortResults(getFilteredResults());
     var filterRow = '<div class="sp-filter-row" id="spFilterRow">' + buildFilterPillsHTML() + '</div>';
+    var mobBar = buildMobFilterBar();
     if (results.length === 0) {
-      return filterRow +
+      return filterRow + mobBar +
         '<div class="sp-empty">' +
         '<span class="sp-empty-icon">search_off</span>' +
         '<div class="sp-empty-title">No courses match your filters</div>' +
@@ -2689,20 +2901,24 @@
         '<button class="sp-empty-btn" id="spEmptyClear">Clear all filters</button>' +
       '</div>';
     }
-    return filterRow +
+    return filterRow + mobBar +
       '<div class="sp-results-grid">' + results.map(buildSearchCard).join('') + '</div>';
   }
 
   function renderSearchPage() {
     var page = document.getElementById('page-search');
+    var isMob = window.innerWidth <= 1024;
     page.innerHTML =
       '<div class="sp-wrap"><div class="container">' +
         '<div class="sp-breadcrumb"><a class="sp-bc-home" id="spBcHome">Home</a><span class="sp-bc-sep"> &gt; </span><span class="sp-bc-current">' + spState.breadcrumb + '</span></div>' +
         '<div class="sp-layout">' +
-          '<aside class="sp-sidebar" id="spSidebar">' + buildSidebarHTML() + '</aside>' +
+          '<aside class="sp-sidebar" id="spSidebar">' + (isMob ? '' : buildSidebarHTML()) + '</aside>' +
           '<div class="sp-results" id="spResultsArea">' + buildResultsAreaHTML() + '</div>' +
         '</div>' +
-      '</div></div>';
+      '</div></div>' +
+      buildMobFloatBtnHTML() +
+      buildMobOverlayHTML() +
+      buildMobSortDdHTML();
     bindSearchEvents();
   }
 
@@ -2711,6 +2927,7 @@
     if (area) { area.innerHTML = buildResultsAreaHTML(); bindResultCardEvents(); }
     bindFilterPillEvents();
     bindSortEvent();
+    initMobSearch();
   }
 
   function rebuildSidebar() {
@@ -2731,6 +2948,8 @@
     bindSortEvent();
     bindSidebarEvents();
     bindResultCardEvents();
+    initMobSearch();
+    bindMobStaticEvents();
   }
 
   function bindFilterPillEvents() {
