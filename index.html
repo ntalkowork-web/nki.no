@@ -2700,7 +2700,7 @@
       if (curPage < totalPages - 3) pages.push('...');
       pages.push(totalPages - 1);
     }
-    var html = '<div class="sp-pager"><div class="sp-pager-pill">';
+    var html = '<div class="sp-pager" id="spPager"><div class="sp-pager-pill">';
     html += '<button class="sp-pager-nav" id="spPagerPrev"' + (curPage === 0 ? ' disabled' : '') + '>' +
       '<span class="material-symbols-outlined" style="font-size:16px;line-height:1">chevron_left</span></button>';
     pages.forEach(function(p) {
@@ -2881,12 +2881,23 @@
       _spMobObserver.observe(mobBar);
 
       _spMobScrollFn = function() {
-        var btn   = document.getElementById('spFloatBtn');
-        var pager = document.getElementById('spPager');
+        var btn = document.getElementById('spFloatBtn');
         if (!btn) return;
-        if (pager) {
-          var overlap = window.innerHeight - pager.getBoundingClientRect().top;
-          btn.style.bottom = (overlap > 0 ? overlap + 8 : 16) + 'px';
+        var viewportH = window.innerHeight;
+        var btnH = btn.offsetHeight || 52;
+        var pagerEl = document.getElementById('spPager');
+        var anchor = pagerEl || (function() {
+          var cards = document.querySelectorAll('#spResultsArea .course-card');
+          return cards.length ? cards[cards.length - 1] : null;
+        })();
+        if (anchor) {
+          var rect = anchor.getBoundingClientRect();
+          if (rect.top < viewportH && rect.bottom <= viewportH) {
+            // Anchor fully in viewport — dock button just below it
+            btn.style.bottom = Math.max(4, viewportH - rect.bottom - btnH - 8) + 'px';
+          } else {
+            btn.style.bottom = '16px';
+          }
         } else {
           btn.style.bottom = '16px';
         }
