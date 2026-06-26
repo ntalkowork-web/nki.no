@@ -4715,11 +4715,7 @@ body.cdp-cta-pinned .cdp-toc {
   .sp-filter-row { display: none; }
   .sp-mob-bar { display: flex; }
   .sp-results-grid { grid-template-columns: 1fr; gap: 16px; }
-  .sp-results-grid .course-card { flex-direction: row; }
-  .sp-results-grid .cc-img { width: 110px; aspect-ratio: unset; flex-shrink: 0; }
-  .sp-results-grid .cc-body { min-width: 0; }
   .sp-results-grid .cc-compare-label { display: none; }
-  .sp-results-grid .cc-enrolled { display: none; }
 
   /* CDP hero: single col */
   .cdp-hero { grid-template-columns: 1fr; }
