@@ -1,7 +1,7 @@
 /* wireframe.css — NKI Lo-fi Prototype
    Shared across all pages. Pure grayscale, Apercu, no framework. */
 
-html, body { overflow-x: hidden; }
+html, body { overflow-x: clip; }
 
 @font-face {
   font-family: 'Apercu';
@@ -1533,7 +1533,7 @@ main { margin-top: var(--header-h); }
 .mob-search-field { flex: 1; position: relative; }
 .mob-search-field .search-icon-left {
   position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
-  color: var(--gray-400); pointer-events: none;
+  color: var(--gray-400); pointer-events: none; line-height: 0;
 }
 .mob-search-inp {
   width: 100%;
@@ -4844,6 +4844,7 @@ body.cdp-cta-pinned .cdp-toc {
 
   /* Mobile section counter: show below headline */
   .mob-section-counter { display: block; }
+  section[aria-labelledby="hiw-hd"] .section-hd { margin-bottom: 4px; }
 
   /* How it works: horizontal slider */
   .hiw-grid {
@@ -4887,9 +4888,9 @@ body.cdp-cta-pinned .cdp-toc {
   /* Pedagogical approach: fixed-height image, small overlay card (image bottom = card midpoint) */
   .aktiv-panel-img { width: 100%; margin-left: 0; aspect-ratio: unset; height: 320px; }
   .aktiv-panel { padding-bottom: 64px; }
-  .aktiv-panel-card { width: 256px; height: 128px; min-height: unset; left: 16px; bottom: 0; padding: 16px; }
+  .aktiv-panel-card { width: 256px; min-height: unset; left: 16px; bottom: 0; padding: 16px; }
   .aktiv-panel-title { font-size: 15px; margin-bottom: 6px; }
-  .aktiv-panel-desc { -webkit-line-clamp: 2; margin-bottom: 0; font-size: 13px; }
+  .aktiv-panel-desc { display: block; overflow: visible; -webkit-line-clamp: unset; margin-bottom: 0; font-size: 13px; }
 
   /* Get free advice: heading above form */
   .consult-inline { grid-template-columns: 1fr; gap: 24px; }

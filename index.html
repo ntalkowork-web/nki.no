@@ -2381,7 +2381,6 @@
 
   var CURRENT_COURSE    = null;
   var _cdpObserver      = null;
-  var _cdpTocScrollFn   = null;
   var CHECKOUT_STATE = {
     step: 1, completed: [], promoApplied: false, discountPct: 0,
     installMonths: 3, docDelivery: 'now', docUploaded: false,
@@ -2493,7 +2492,6 @@
       stickyEl.classList.remove('is-visible');
       document.body.classList.remove('cdp-cta-pinned');
       if (_cdpObserver) { _cdpObserver.disconnect(); _cdpObserver = null; }
-      if (_cdpTocScrollFn) { window.removeEventListener('scroll', _cdpTocScrollFn); _cdpTocScrollFn = null; }
     }
 
     if (name === 'home') { window.scrollTo(0, 0); }
@@ -3361,20 +3359,24 @@
     if (ctasEl && stickyEl && 'IntersectionObserver' in window) {
       _cdpObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
+          var toc = document.getElementById('cdpToc');
           if (entry.isIntersecting) {
             stickyEl.classList.remove('is-visible');
             document.body.classList.remove('cdp-cta-pinned');
+            if (toc) { toc.classList.remove('is-visible'); }
           } else {
             var inCart = NKICart.getItems().some(function(i) { return i.id === CURRENT_COURSE.id; });
             if (!inCart) {
               stickyEl.classList.add('is-visible');
               document.body.classList.add('cdp-cta-pinned');
             }
+            if (toc) { toc.classList.add('is-visible'); }
           }
         });
       }, { threshold: 0 });
       _cdpObserver.observe(ctasEl);
     }
+
   }
 
   function bindCoursePageEvents(c) {
@@ -3401,17 +3403,6 @@
       document.body.classList.remove('cdp-cta-pinned');
     });
 
-    /* TOC: show/hide based on infobar scroll position */
-    var tocEl   = document.getElementById('cdpToc');
-    var infobar = document.getElementById('cdpInfobar');
-    if (tocEl && infobar) {
-      if (_cdpTocScrollFn) window.removeEventListener('scroll', _cdpTocScrollFn);
-      _cdpTocScrollFn = function() {
-        tocEl.classList.toggle('is-visible', infobar.getBoundingClientRect().bottom < 0);
-      };
-      window.addEventListener('scroll', _cdpTocScrollFn, { passive: true });
-      _cdpTocScrollFn();
-    }
 
     /* TOC: scroll-spy — highlight section in viewport */
     var tocLinks = page.querySelectorAll('.cdp-toc-link');
