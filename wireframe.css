@@ -1291,7 +1291,7 @@ main { margin-top: var(--header-h); }
   letter-spacing: -.02em;
 }
 
-.factoid-lbl { font-size: 14px; color: var(--gray-500); line-height: 1.4; }
+.factoid-lbl { font-size: 14px; color: var(--gray-500); line-height: 1.4; max-width: 150px; }
 
 /* Configurator — content-width box straddling two background zones */
 .hero-config-zone {
@@ -4928,7 +4928,7 @@ body.cdp-cta-pinned .cdp-toc {
   .hero-factoids { flex-direction: column; align-items: flex-start; gap: 24px; flex-wrap: nowrap; }
   .factoid { text-align: left; }
   .factoid-num { font-size: 24px; }
-  .factoid-lbl { font-size: 14px; white-space: nowrap; }
+  .factoid-lbl { font-size: 14px; }
 
   /* Configurator: more compact */
   .hero-configurator { padding: 20px; border-radius: var(--r-sm); }
