@@ -4644,9 +4644,9 @@ body.cdp-cta-pinned .cdp-toc {
   .mob-sub-see-all { color: rgba(255,255,255,.7); border-top-color: rgba(255,255,255,.1); }
   .mob-sub-see-all:hover { color: var(--white); }
 
-  /* Courses: keep all 4 cards in one row at tablet */
+  /* Courses: 3-col at tablet */
   section[aria-labelledby="pop-hs-hd"]  .courses-grid,
-  section[aria-labelledby="pop-pro-hd"] .courses-grid { grid-template-columns: repeat(4, 1fr); }
+  section[aria-labelledby="pop-pro-hd"] .courses-grid { grid-template-columns: repeat(3, 1fr); }
 
   /* Pedagogical tabs: scrollable beyond margins */
   .aktiv-tabs {
@@ -5113,4 +5113,46 @@ body.cdp-cta-pinned .cdp-toc {
   height: 1px;
   background: var(--gray-200);
   margin: 10px 0;
+}
+
+/* First-payment amount + due date: single centered row */
+.co-inst-first-pay-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Mobile search: clear button */
+.mob-search-clear {
+  display: none;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-400);
+  font-size: 16px;
+  line-height: 1;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.mob-search-clear.is-visible { display: block; }
+.mob-search-clear:hover { color: var(--gray-700); }
+
+/* Mobile search: empty state */
+.mob-search-empty {
+  padding: 24px 0;
+  font-size: 14px;
+  color: var(--gray-500);
+  text-align: center;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE — 375px (small mobile)
+══════════════════════════════════════════════ */
+@media (max-width: 375px) {
+  .factoid-num { font-size: 28px; }
+  .factoid-lbl { white-space: normal; }
 }

@@ -620,6 +620,7 @@
         <span class="material-symbols-outlined" style="font-size:18px">search</span>
       </span>
       <input type="text" id="mobSearchInp" class="mob-search-inp" placeholder="Search…" autocomplete="off" aria-label="Search courses">
+      <button class="mob-search-clear" id="mobSearchClear" aria-label="Clear search">&#x2715;</button>
     </div>
   </div>
   <div class="mob-search-body" id="mobSearchBody">
@@ -1352,6 +1353,9 @@
     mobSearchOverlay.classList.remove('is-open');
     document.body.style.overflow = '';
     if (headerSearchInp) headerSearchInp.blur();
+    if (mobSearchInp) mobSearchInp.value = '';
+    if (mobSearchClearBtn) mobSearchClearBtn.classList.remove('is-visible');
+    if (mobSearchBody) { mobSearchBody.innerHTML = mobSearchDefaultHTML; bindMobSearchDefaults(); }
   }
 
   if (headerSearchInp) {
@@ -1365,29 +1369,79 @@
 
   if (mobSearchBack) mobSearchBack.addEventListener('click', closeMobSearch);
 
-  /* Recent search hints in overlay → search page */
-  document.querySelectorAll('.mob-search-hint').forEach(function(hint) {
-    hint.addEventListener('click', function() {
-      var qEl = hint.querySelector('.recent-q');
-      closeMobSearch();
-      showPage('course', { courseName: qEl ? qEl.textContent.trim() : '' });
-    });
-  });
+  /* Save default mob search body HTML for restoration */
+  var mobSearchBody        = document.getElementById('mobSearchBody');
+  var mobSearchClearBtn    = document.getElementById('mobSearchClear');
+  var mobSearchDefaultHTML = mobSearchBody ? mobSearchBody.innerHTML : '';
+  bindMobSearchDefaults();
 
-  /* Popular course cards in overlay → CDP */
-  document.querySelectorAll('.mob-search-pop-card').forEach(function(card) {
-    card.addEventListener('click', function() {
-      closeMobSearch();
-      showPage('course', { courseName: card.getAttribute('data-course-name') });
+  function bindMobSearchDefaults() {
+    if (!mobSearchBody) return;
+    mobSearchBody.querySelectorAll('.mob-search-hint').forEach(function(hint) {
+      hint.addEventListener('click', function() {
+        var qEl = hint.querySelector('.recent-q');
+        closeMobSearch();
+        showPage('course', { courseName: qEl ? qEl.textContent.trim() : '' });
+      });
     });
-  });
+    mobSearchBody.querySelectorAll('.mob-search-pop-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        closeMobSearch();
+        showPage('course', { courseName: card.getAttribute('data-course-name') });
+      });
+    });
+  }
+
+  function renderMobSearchResults(query) {
+    if (!mobSearchBody) return;
+    var q = query.trim().toLowerCase();
+    if (q === '') {
+      mobSearchBody.innerHTML = mobSearchDefaultHTML;
+      bindMobSearchDefaults();
+      return;
+    }
+    var matches = COURSES.filter(function(c) {
+      return c.name.toLowerCase().indexOf(q) !== -1;
+    });
+    var shown = matches.slice(0, 6);
+    if (shown.length === 0) {
+      mobSearchBody.innerHTML = '<div class="mob-search-empty">No courses found for "' + query.trim() + '"</div>';
+      return;
+    }
+    var label = matches.length + ' course' + (matches.length === 1 ? '' : 's') + ' found';
+    mobSearchBody.innerHTML = '<div class="mob-search-recent-title">' + label + '</div>' +
+      shown.map(function(c) {
+        return '<div class="mob-search-pop-card" data-course-name="' + c.name + '">' +
+          '<div class="mob-search-pop-img"></div>' +
+          '<div class="mob-search-pop-info">' +
+            '<div class="mob-search-pop-name">' + c.name + '</div>' +
+            '<div class="mob-search-pop-meta">' + c.meta + '</div>' +
+          '</div>' +
+          '<div class="mob-search-pop-price">' + c.price + '</div>' +
+        '</div>';
+      }).join('');
+    mobSearchBody.querySelectorAll('.mob-search-pop-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        closeMobSearch();
+        showPage('course', { courseName: card.getAttribute('data-course-name') });
+      });
+    });
+  }
+
+  if (mobSearchClearBtn) {
+    mobSearchClearBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (mobSearchInp) { mobSearchInp.value = ''; mobSearchInp.focus(); }
+      mobSearchClearBtn.classList.remove('is-visible');
+      renderMobSearchResults('');
+    });
+  }
 
   if (mobSearchInp) {
     mobSearchInp.addEventListener('input', function() {
-      if (headerSearchInp) {
-        headerSearchInp.value = mobSearchInp.value;
-        headerSearchInp.dispatchEvent(new Event('input'));
-      }
+      var val = mobSearchInp.value;
+      if (mobSearchClearBtn) mobSearchClearBtn.classList.toggle('is-visible', val.length > 0);
+      renderMobSearchResults(val);
     });
     mobSearchInp.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeMobSearch();
@@ -2327,6 +2381,7 @@
 
   var CURRENT_COURSE    = null;
   var _cdpObserver      = null;
+  var _cdpTocScrollFn   = null;
   var CHECKOUT_STATE = {
     step: 1, completed: [], promoApplied: false, discountPct: 0,
     installMonths: 3, docDelivery: 'now', docUploaded: false,
@@ -2438,6 +2493,7 @@
       stickyEl.classList.remove('is-visible');
       document.body.classList.remove('cdp-cta-pinned');
       if (_cdpObserver) { _cdpObserver.disconnect(); _cdpObserver = null; }
+      if (_cdpTocScrollFn) { window.removeEventListener('scroll', _cdpTocScrollFn); _cdpTocScrollFn = null; }
     }
 
     if (name === 'home') { window.scrollTo(0, 0); }
@@ -3345,16 +3401,16 @@
       document.body.classList.remove('cdp-cta-pinned');
     });
 
-    /* TOC: show/hide based on infobar visibility */
+    /* TOC: show/hide based on infobar scroll position */
     var tocEl   = document.getElementById('cdpToc');
     var infobar = document.getElementById('cdpInfobar');
-    if (tocEl && infobar && 'IntersectionObserver' in window) {
-      var tocVisObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          tocEl.classList.toggle('is-visible', !e.isIntersecting);
-        });
-      }, { threshold: 0 });
-      tocVisObs.observe(infobar);
+    if (tocEl && infobar) {
+      if (_cdpTocScrollFn) window.removeEventListener('scroll', _cdpTocScrollFn);
+      _cdpTocScrollFn = function() {
+        tocEl.classList.toggle('is-visible', infobar.getBoundingClientRect().bottom < 0);
+      };
+      window.addEventListener('scroll', _cdpTocScrollFn, { passive: true });
+      _cdpTocScrollFn();
     }
 
     /* TOC: scroll-spy — highlight section in viewport */
@@ -3706,8 +3762,10 @@
         '</div>' +
         '<div class="co-inst-breakdown">' +
           '<div class="co-inst-first-pay-label">First payment due</div>' +
-          '<div class="co-inst-first-pay-amount">' + coFmt(monthly) + '</div>' +
-          '<div class="co-inst-first-pay-date">Due on ' + firstPayDate + '</div>' +
+          '<div class="co-inst-first-pay-row">' +
+            '<div class="co-inst-first-pay-amount">' + coFmt(monthly) + '</div>' +
+            '<div class="co-inst-first-pay-date">Due on ' + firstPayDate + '</div>' +
+          '</div>' +
           '<div class="co-inst-inner-sep"></div>' +
           '<div class="co-inst-row"><span>Amount financed</span><span>' + coFmt(total) + '</span></div>' +
           '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + '</span></div>' +
