@@ -1,6 +1,8 @@
 /* wireframe.css — NKI Lo-fi Prototype
    Shared across all pages. Pure grayscale, Apercu, no framework. */
 
+html, body { overflow-x: hidden; }
+
 @font-face {
   font-family: 'Apercu';
   src: url('fonts/apercu-regular.ttf') format('truetype');
@@ -4572,6 +4574,48 @@ body.cdp-cta-pinned .cdp-toc {
   /* Search dropdown: match search field width */
   .search-dropdown { width: 100%; }
 
+  /* Mobile menu: dark/inverted */
+  .mob-menu,
+  .mob-panel { background: var(--gray-900); }
+  .mob-menu-hd,
+  .mob-panel-hd { border-bottom-color: rgba(255,255,255,.1); }
+  .mob-menu-logo img { filter: invert(1); }
+  .mob-menu-close,
+  .mob-back-btn,
+  .mob-menu-close-btn { color: var(--white); }
+  .mob-menu-close:hover,
+  .mob-back-btn:hover,
+  .mob-menu-close-btn:hover { background: rgba(255,255,255,.08); }
+  .mob-nav-link { color: var(--white); border-bottom-color: rgba(255,255,255,.1); }
+  .mob-nav-link:hover { background: rgba(255,255,255,.08); }
+  .mob-acc-trigger { color: var(--white); }
+  .mob-acc-trigger:hover { background: rgba(255,255,255,.08); }
+  .mob-acc-chev { color: rgba(255,255,255,.4); }
+  .mob-acc-body { background: rgba(255,255,255,.06); }
+  .mob-acc-link { color: rgba(255,255,255,.7); border-bottom-color: rgba(255,255,255,.1); }
+  .mob-acc-link:hover { color: var(--white); background: rgba(255,255,255,.08); }
+  .mob-menu-footer { border-top-color: rgba(255,255,255,.1); }
+  .mob-login-btn { color: var(--white); border-color: rgba(255,255,255,.4); }
+  .mob-login-btn:hover { background: rgba(255,255,255,.08); }
+  .mob-panel-title { color: var(--white); }
+  .mob-drill-btn { color: var(--white); border-bottom-color: rgba(255,255,255,.1); }
+  .mob-drill-btn:hover { background: rgba(255,255,255,.08); }
+  .mob-drill-btn svg { color: rgba(255,255,255,.4); }
+  .mob-sub-acc { border-bottom-color: rgba(255,255,255,.1); }
+  .mob-sub-trigger { color: var(--white); }
+  .mob-sub-trigger:hover { background: rgba(255,255,255,.08); }
+  .mob-sub-chev { color: rgba(255,255,255,.4); }
+  .mob-sub-body { background: rgba(255,255,255,.06); }
+  .mob-sub-link { color: rgba(255,255,255,.7); border-bottom-color: rgba(255,255,255,.1); }
+  .mob-sub-link:hover { color: var(--white); background: rgba(255,255,255,.08); }
+  .mob-sub-label { color: rgba(255,255,255,.35); }
+  .mob-sub-see-all { color: rgba(255,255,255,.7); border-top-color: rgba(255,255,255,.1); }
+  .mob-sub-see-all:hover { color: var(--white); }
+
+  /* Courses: keep all 4 cards in one row at tablet */
+  section[aria-labelledby="pop-hs-hd"]  .courses-grid,
+  section[aria-labelledby="pop-pro-hd"] .courses-grid { grid-template-columns: repeat(4, 1fr); }
+
   /* Pedagogical tabs: scrollable beyond margins */
   .aktiv-tabs {
     flex-wrap: nowrap;
@@ -4804,8 +4848,19 @@ body.cdp-cta-pinned .cdp-toc {
   /* News: stack vertically */
   .news-grid { grid-template-columns: 1fr; }
 
+  /* Best seller badge: tighter position on mobile cards */
+  .cc-badges { top: 8px; left: 8px; }
+
+  /* Pedagogical approach: fixed-height image, small overlay card */
+  .aktiv-panel-img { width: 100%; margin-left: 0; aspect-ratio: unset; height: 320px; }
+  .aktiv-panel { padding-bottom: 0; }
+  .aktiv-panel-card { width: 256px; height: 128px; min-height: unset; left: 16px; bottom: 0; padding: 16px; }
+  .aktiv-panel-title { font-size: 15px; margin-bottom: 6px; }
+  .aktiv-panel-desc { -webkit-line-clamp: 2; margin-bottom: 0; font-size: 13px; }
+
   /* Get free advice: heading above form */
   .consult-inline { grid-template-columns: 1fr; gap: 24px; }
+  section[aria-labelledby="consult-hd"] { padding-bottom: 40px; }
 
   /* Footer: 2-column */
   .footer-cols { grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -4832,7 +4887,7 @@ body.cdp-cta-pinned .cdp-toc {
   .hero-content { padding-bottom: 48px; text-align: left; }
   .hero-headline { font-size: 26px; letter-spacing: 0; margin: 0 0 16px; max-width: none; }
   .hero-sub { font-size: 14px; margin: 0 0 24px; max-width: none; }
-  .hero-factoids { justify-content: flex-start; margin: 0; gap: 16px; flex-wrap: wrap; }
+  .hero-factoids { flex-direction: column; align-items: flex-start; gap: 24px; flex-wrap: nowrap; }
   .factoid { text-align: left; }
   .factoid-num { font-size: 24px; }
   .factoid-lbl { font-size: 14px; }

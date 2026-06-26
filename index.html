@@ -2138,6 +2138,18 @@
     next.addEventListener('click', function() { goTo(cur + 1,  1); });
     if (seeAll) seeAll.addEventListener('click', function() { showPage('search'); });
     renderCarouselPage(0);
+
+    var viewport = grid.parentElement;
+    if (viewport) {
+      viewport.addEventListener('scroll', function() {
+        var firstCard = grid.querySelector('.course-card');
+        if (!firstCard) return;
+        var cardW = firstCard.offsetWidth;
+        var total = grid.querySelectorAll('.course-card').length;
+        var idx = Math.round(viewport.scrollLeft / (cardW + 16));
+        if (ctr) ctr.textContent = (idx + 1) + ' / ' + total;
+      }, { passive: true });
+    }
   }
 
   initCarousel('hs',  'coursesGridHs',  'popHsPrev',  'popHsNext',  'popHsCounter',  'popHsSeeAll');
