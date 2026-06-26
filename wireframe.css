@@ -2814,7 +2814,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   display: grid;
   grid-template-columns: 7fr 5fr;
   gap: var(--gutter);
-  align-items: start;
+  align-items: center;
   padding: 32px 0 48px;
 }
 
