@@ -613,6 +613,29 @@
 </div>
 <div class="mob-overlay" id="mobOverlay"></div>
 
+<!-- Mobile fullscreen search overlay -->
+<div class="mob-search-overlay" id="mobSearchOverlay" role="search">
+  <div class="mob-search-hd">
+    <button class="mob-search-back" id="mobSearchBack" aria-label="Close search">
+      <span class="material-symbols-outlined" style="font-size:22px">arrow_back</span>
+    </button>
+    <div class="mob-search-field">
+      <span class="search-icon-left">
+        <span class="material-symbols-outlined" style="font-size:18px">search</span>
+      </span>
+      <input type="text" id="mobSearchInp" class="mob-search-inp" placeholder="Search…" autocomplete="off" aria-label="Search courses">
+    </div>
+  </div>
+  <div class="mob-search-body" id="mobSearchBody">
+    <div class="mob-search-recent-title">Popular searches</div>
+    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Påbygg – Studieforberedende VG3</div>
+    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>General Study Competence</div>
+    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Accounting consultant</div>
+    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Medical Secretary</div>
+    <div class="mob-search-hint"><span class="mob-search-hint-icon">history</span>Mathematics R1</div>
+  </div>
+</div>
+
 
 <!-- ════════════════════════════════════════════
      CHECKOUT HEADER
@@ -710,14 +733,28 @@
     <div class="mentioned-in">
       <p class="mentioned-in-lbl">Mentioned in</p>
       <div class="mentioned-in-logos">
-        <img src="mentioned-in-logos/standard_compressed_Aftenposten-removebg-preview.png" alt="Aftenposten">
-        <img src="mentioned-in-logos/unnamed-removebg-preview.png" alt="DIGI">
-        <img src="mentioned-in-logos/logo.svg" alt="">
-        <img src="mentioned-in-logos/logo_2.svg" alt="">
-        <img src="mentioned-in-logos/logo-text.svg" alt="">
-        <img src="mentioned-in-logos/logo-ec--en.svg" alt="">
-        <img src="mentioned-in-logos/small-positive.svg" alt="">
-        <img src="mentioned-in-logos/fun-logo.svg" alt="">
+        <div class="marquee-inner">
+          <div class="marquee-track">
+            <img src="mentioned-in-logos/standard_compressed_Aftenposten-removebg-preview.png" alt="Aftenposten">
+            <img src="mentioned-in-logos/unnamed-removebg-preview.png" alt="DIGI">
+            <img src="mentioned-in-logos/logo.svg" alt="">
+            <img src="mentioned-in-logos/logo_2.svg" alt="">
+            <img src="mentioned-in-logos/logo-text.svg" alt="">
+            <img src="mentioned-in-logos/logo-ec--en.svg" alt="">
+            <img src="mentioned-in-logos/small-positive.svg" alt="">
+            <img src="mentioned-in-logos/fun-logo.svg" alt="">
+          </div>
+          <div class="marquee-track" aria-hidden="true">
+            <img src="mentioned-in-logos/standard_compressed_Aftenposten-removebg-preview.png" alt="">
+            <img src="mentioned-in-logos/unnamed-removebg-preview.png" alt="">
+            <img src="mentioned-in-logos/logo.svg" alt="">
+            <img src="mentioned-in-logos/logo_2.svg" alt="">
+            <img src="mentioned-in-logos/logo-text.svg" alt="">
+            <img src="mentioned-in-logos/logo-ec--en.svg" alt="">
+            <img src="mentioned-in-logos/small-positive.svg" alt="">
+            <img src="mentioned-in-logos/fun-logo.svg" alt="">
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -766,7 +803,8 @@
       <div class="section-hd is-centered">
         <h2 class="section-title" id="hiw-hd">How it works</h2>
       </div>
-      <div class="hiw-grid">
+      <span class="mob-section-counter" id="hiwCounter">1 / 3</span>
+      <div class="hiw-grid" id="hiwGrid">
 
         <div class="hiw-card">
           <div class="hiw-num">01</div>
@@ -850,8 +888,9 @@
       <div class="section-hd">
         <h2 class="section-title" id="testi-hd">What our students say</h2>
       </div>
+      <span class="mob-section-counter" id="testiCounter">1 / 8</span>
 
-      <div class="testi-cols">
+      <div class="testi-cols" id="testiCols">
 
         <!-- Column 1 -->
         <div class="testi-col">
@@ -1265,6 +1304,95 @@
     closeMobMenu();
     document.getElementById('loginBtn').click();
   });
+
+  /* ── Mobile fullscreen search overlay ── */
+  var mobSearchOverlay = document.getElementById('mobSearchOverlay');
+  var mobSearchBack    = document.getElementById('mobSearchBack');
+  var mobSearchInp     = document.getElementById('mobSearchInp');
+  var headerSearchInp  = document.getElementById('headerSearch');
+
+  function isMobile() { return window.innerWidth <= 768; }
+
+  function openMobSearch() {
+    mobSearchOverlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() { if (mobSearchInp) mobSearchInp.focus(); }, 60);
+  }
+
+  function closeMobSearch() {
+    mobSearchOverlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    if (headerSearchInp) headerSearchInp.blur();
+  }
+
+  if (headerSearchInp) {
+    headerSearchInp.addEventListener('focus', function() {
+      if (isMobile()) {
+        headerSearchInp.blur();
+        openMobSearch();
+      }
+    });
+  }
+
+  if (mobSearchBack) mobSearchBack.addEventListener('click', closeMobSearch);
+
+  if (mobSearchInp) {
+    mobSearchInp.addEventListener('input', function() {
+      if (headerSearchInp) {
+        headerSearchInp.value = mobSearchInp.value;
+        headerSearchInp.dispatchEvent(new Event('input'));
+      }
+    });
+    mobSearchInp.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeMobSearch();
+    });
+  }
+
+  /* Update search placeholder on mobile */
+  function updateSearchPlaceholder() {
+    if (!headerSearchInp) return;
+    headerSearchInp.placeholder = isMobile()
+      ? 'Search…'
+      : 'Search for a course, subject, topic...';
+  }
+  updateSearchPlaceholder();
+  window.addEventListener('resize', updateSearchPlaceholder);
+
+  /* ── Scroll-based progress counters ── */
+  function initScrollCounter(gridId, counterId, totalCards) {
+    var grid    = document.getElementById(gridId);
+    var counter = document.getElementById(counterId);
+    if (!grid || !counter) return;
+    grid.addEventListener('scroll', function() {
+      var cards = grid.querySelectorAll('[class]:not([class*="grid"])');
+      var firstCard = grid.querySelector('[class]');
+      if (!firstCard) return;
+      var cardW = firstCard.offsetWidth;
+      var gap   = 16;
+      var idx   = Math.round(grid.scrollLeft / (cardW + gap));
+      var total = totalCards || grid.children.length;
+      counter.textContent = (idx + 1) + ' / ' + total;
+    }, { passive: true });
+  }
+
+  initScrollCounter('hiwGrid', 'hiwCounter', 3);
+
+  function initTestiCounter() {
+    var cols    = document.getElementById('testiCols');
+    var counter = document.getElementById('testiCounter');
+    if (!cols || !counter) return;
+    var cards = cols.querySelectorAll('.t-card:not(.featured)');
+    var total = cards.length;
+    counter.textContent = '1 / ' + total;
+    cols.addEventListener('scroll', function() {
+      var firstCard = cols.querySelector('.t-card:not(.featured)');
+      if (!firstCard) return;
+      var cardW = firstCard.offsetWidth;
+      var idx   = Math.round(cols.scrollLeft / (cardW + 16));
+      counter.textContent = (idx + 1) + ' / ' + total;
+    }, { passive: true });
+  }
+  initTestiCounter();
 
   /* Close mob menu on logo click and navigate home */
   var mobLogoLink = document.getElementById('mobLogoLink');
