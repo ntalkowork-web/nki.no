@@ -891,7 +891,6 @@ select { font-family: inherit; }
   cursor: pointer;
   user-select: none;
 }
-.nki-lk-hd:hover { background: var(--gray-50); }
 
 .nki-lk-body { padding: 0 16px 16px 56px; }
 
