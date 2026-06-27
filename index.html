@@ -4035,8 +4035,37 @@
       '<div class="co-vipps-logo">vipps</div>';
   }
 
+  function buildHowItWorks(id, steps) {
+    var stepsHTML = steps.map(function(s, i) {
+      return '<div class="co-hiw-step">' +
+        '<div class="co-hiw-left">' +
+          '<div class="co-hiw-num">' + (i + 1) + '</div>' +
+          (i < steps.length - 1 ? '<div class="co-hiw-line"></div>' : '') +
+        '</div>' +
+        '<div class="co-hiw-content">' +
+          '<div class="co-hiw-step-title">' + s[0] + '</div>' +
+          '<p class="co-hiw-step-desc">' + s[1] + '</p>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+    return '<div class="co-hiw-acc" id="coHiw-' + id + '">' +
+      '<button class="co-hiw-hd" type="button" aria-expanded="false" id="coHiwHd-' + id + '">' +
+        'How it works?' +
+        '<span class="material-symbols-outlined co-hiw-chevron">expand_more</span>' +
+      '</button>' +
+      '<div class="co-hiw-body" id="coHiwBody-' + id + '" hidden>' +
+        '<div class="co-hiw-steps">' + stepsHTML + '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
   function buildInvoiceBody() {
-    return '<p class="co-pay-desc">An invoice for the total amount will be sent by email. Please note that a credit check will be performed.</p>';
+    return '<p class="co-pay-desc">An invoice for the total amount will be sent by email. Please note that a credit check will be performed.</p>' +
+      buildHowItWorks('invoice', [
+        ['Complete checkout', 'Your order is confirmed and course access is granted immediately.'],
+        ['Invoice sent by email', 'You\'ll receive an invoice by email within 1–2 business days.'],
+        ['Pay within 30 days', 'Settle the invoice by the due date to keep your course active.']
+      ]);
   }
 
   function buildOtherPayerBody() {
@@ -4049,6 +4078,11 @@
       : '<div class="co-form-group"><label class="co-label" for="coOtherName">Name</label><input class="co-input" id="coOtherName" type="text" placeholder="Full name"></div>' +
         '<div class="co-form-group"><label class="co-label" for="coOtherEmail">Email address</label><div class="co-inp-icon-wrap"><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div></div>';
     return '<p class="co-pay-desc">Provide contact information for another payer who will receive an email from NKI. The payer must confirm the order and provide invoice details.</p>' +
+      buildHowItWorks('other', [
+        ['Enter payer details', 'Provide the name and email of the person or organisation covering the cost.'],
+        ['Payer receives a request', 'NKI sends them a payment link and invoice directly by email.'],
+        ['Payer confirms and pays', 'Once payment is made, your course access is fully activated.']
+      ]) +
       '<hr class="co-pay-sep">' +
       '<div class="co-other-expand">' +
         '<div class="co-other-head-group">' +
@@ -4344,6 +4378,20 @@
           '<div class="co-inst-row"><span>Amount financed</span><span>' + coFmt(total) + '</span></div>' +
           '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + '</span></div>' +
           '<div class="co-inst-row co-inst-highlight"><span>Monthly payment</span><span>' + coFmt(monthly) + ' / mo</span></div>';
+      });
+    });
+
+    /* ── How it works accordions ── */
+    document.querySelectorAll('.co-hiw-hd').forEach(function(hd) {
+      hd.addEventListener('click', function() {
+        var bodyId = hd.id.replace('coHiwHd-', 'coHiwBody-');
+        var accId  = hd.id.replace('coHiwHd-', 'coHiw-');
+        var body   = document.getElementById(bodyId);
+        var acc    = document.getElementById(accId);
+        if (!body) return;
+        body.hidden = !body.hidden;
+        hd.setAttribute('aria-expanded', String(!body.hidden));
+        if (acc) acc.classList.toggle('is-open', !body.hidden);
       });
     });
 

@@ -4198,6 +4198,42 @@ body.cdp-cta-pinned .cdp-toc {
 .co-pay-card.is-selected .co-pay-hd { padding-bottom: 0; }
 .co-pay-body { padding: 8px 16px 16px 44px; }
 .co-pay-desc { font-size: 14px; color: var(--gray-500); line-height: 1.5; padding-top: 0; margin-bottom: 16px; }
+
+/* How it works accordion */
+.co-hiw-acc { margin-bottom: 16px; }
+.co-hiw-hd {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
+  cursor: pointer;
+  font-family: var(--font);
+}
+.co-hiw-chevron { font-size: 18px; color: var(--gray-500); transition: transform .2s; margin-left: 2px; }
+.co-hiw-acc.is-open .co-hiw-chevron { transform: rotate(180deg); }
+.co-hiw-body { padding-top: 16px; }
+.co-hiw-steps { display: flex; flex-direction: column; }
+.co-hiw-step { display: flex; gap: 12px; align-items: flex-start; }
+.co-hiw-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 24px; }
+.co-hiw-num {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--gray-900);
+  color: var(--white);
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.co-hiw-line { width: 1px; flex: 1; min-height: 16px; background: var(--gray-200); margin: 4px 0; }
+.co-hiw-content { padding-bottom: 16px; padding-top: 2px; }
+.co-hiw-step:last-child .co-hiw-content { padding-bottom: 0; }
+.co-hiw-step-title { font-size: 14px; font-weight: 600; color: var(--gray-900); margin-bottom: 2px; }
+.co-hiw-step-desc { font-size: 13px; color: var(--gray-500); line-height: 1.4; margin: 0; }
 .co-pay-sep { border: none; border-top: 1px solid var(--gray-200); margin: 0 0 16px; }
 .co-card-logos { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
 .co-card-logo {
