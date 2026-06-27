@@ -1790,10 +1790,13 @@
 
   function buildLanekassen() {
     return (
-      '<div class="nki-lk">' +
-        '<img src="payment-options-logos/lanekassen.jpg" alt="Lanekassen" class="nki-lk-logo">' +
-        '<div class="nki-lk-body">' +
+      '<div class="nki-lk" id="nkiLkAcc">' +
+        '<div class="nki-lk-hd" id="nkiLkHd" role="button" tabindex="0" aria-expanded="false">' +
+          '<img src="payment-options-logos/lanekassen.jpg" alt="Lanekassen" class="nki-lk-logo">' +
           '<div class="nki-lk-label">Student Loan Support</div>' +
+          '<span class="material-symbols-outlined nki-lk-chevron">expand_more</span>' +
+        '</div>' +
+        '<div class="nki-lk-body" id="nkiLkBody" hidden>' +
           '<div class="nki-lk-row"><span class="nki-lk-key">Your estimated support:</span><span class="nki-lk-val">kr 11 244</span></div>' +
           '<div class="nki-lk-row"><span class="nki-lk-key">Of which possible grant:</span><span class="nki-lk-val">kr 4 498</span></div>' +
           '<div class="nki-lk-row"><span class="nki-lk-key">Study load:</span><span class="nki-lk-val">33 %</span></div>' +
@@ -1904,11 +1907,18 @@
       });
     });
 
-    var lkClose = drawer.querySelector('.nki-lk-close');
-    if (lkClose) {
-      lkClose.addEventListener('click', function () {
-        var lk = drawer.querySelector('.nki-lk');
-        if (lk) lk.remove();
+    var lkHd   = drawer.querySelector('#nkiLkHd');
+    var lkBody = drawer.querySelector('#nkiLkBody');
+    if (lkHd && lkBody) {
+      function toggleLk() {
+        lkBody.hidden = !lkBody.hidden;
+        var acc = document.getElementById('nkiLkAcc');
+        if (acc) acc.classList.toggle('is-open', !lkBody.hidden);
+        lkHd.setAttribute('aria-expanded', String(!lkBody.hidden));
+      }
+      lkHd.addEventListener('click', toggleLk);
+      lkHd.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleLk(); }
       });
     }
 
