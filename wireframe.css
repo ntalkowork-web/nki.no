@@ -886,13 +886,13 @@ select { font-family: inherit; }
 .nki-lk-hd {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   padding: 12px 16px;
   cursor: pointer;
   user-select: none;
 }
 
-.nki-lk-body { padding: 0 16px 16px 56px; }
+.nki-lk-body { padding: 0 16px 16px 52px; }
 
 .nki-lk-label {
   flex: 1;
