@@ -4199,24 +4199,24 @@ body.cdp-cta-pinned .cdp-toc {
 .co-pay-body { padding: 8px 16px 16px 44px; }
 .co-pay-desc { font-size: 14px; color: var(--gray-500); line-height: 1.5; padding-top: 0; margin-bottom: 16px; }
 
-/* How it works accordion */
-.co-hiw-acc { margin-bottom: 16px; }
+/* How it works accordion — mirrors co-ssn-acc pattern */
+.co-hiw-acc { margin-top: 3px; margin-bottom: 16px; background: var(--gray-50); border-radius: 4px; }
 .co-hiw-hd {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--gray-700);
   cursor: pointer;
-  font-family: var(--font);
+  padding: 8px 10px;
+  font-size: 14px;
+  color: var(--gray-700);
+  user-select: none;
 }
-.co-hiw-chevron { font-size: 18px; color: var(--gray-500); transition: transform .2s; margin-left: 2px; }
-.co-hiw-acc.is-open .co-hiw-chevron { transform: rotate(180deg); }
-.co-hiw-body { padding-top: 16px; }
+.co-hiw-hd:hover .co-hiw-label { color: var(--gray-900); }
+.co-hiw-label { text-decoration: underline; }
+.co-hiw-arrow { font-size: 14px; color: var(--gray-700); flex-shrink: 0; line-height: 1; }
+.co-hiw-arrow::before { content: '▶'; }
+.co-hiw-acc.is-open .co-hiw-arrow::before { content: '▼'; }
+.co-hiw-body { margin: 0 10px 8px 10px; padding: 6px 10px; border-left: 3px solid var(--gray-700); }
 .co-hiw-steps { display: flex; flex-direction: column; }
 .co-hiw-step { display: flex; gap: 12px; align-items: flex-start; }
 .co-hiw-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 24px; }
@@ -4230,7 +4230,7 @@ body.cdp-cta-pinned .cdp-toc {
   flex-shrink: 0;
 }
 .co-hiw-line { width: 1px; flex: 1; min-height: 16px; background: var(--gray-200); margin: 4px 0; }
-.co-hiw-content { padding-bottom: 16px; padding-top: 2px; }
+.co-hiw-content { padding-bottom: 14px; padding-top: 2px; }
 .co-hiw-step:last-child .co-hiw-content { padding-bottom: 0; }
 .co-hiw-step-title { font-size: 14px; font-weight: 600; color: var(--gray-900); margin-bottom: 2px; }
 .co-hiw-step-desc { font-size: 13px; color: var(--gray-500); line-height: 1.4; margin: 0; }

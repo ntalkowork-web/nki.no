@@ -4049,10 +4049,10 @@
       '</div>';
     }).join('');
     return '<div class="co-hiw-acc" id="coHiw-' + id + '">' +
-      '<button class="co-hiw-hd" type="button" aria-expanded="false" id="coHiwHd-' + id + '">' +
-        'How it works?' +
-        '<span class="material-symbols-outlined co-hiw-chevron">expand_more</span>' +
-      '</button>' +
+      '<div class="co-hiw-hd" id="coHiwHd-' + id + '" role="button" tabindex="0" aria-expanded="false">' +
+        '<span class="co-hiw-arrow"></span>' +
+        '<span class="co-hiw-label">How it works?</span>' +
+      '</div>' +
       '<div class="co-hiw-body" id="coHiwBody-' + id + '" hidden>' +
         '<div class="co-hiw-steps">' + stepsHTML + '</div>' +
       '</div>' +
@@ -4383,7 +4383,7 @@
 
     /* ── How it works accordions ── */
     document.querySelectorAll('.co-hiw-hd').forEach(function(hd) {
-      hd.addEventListener('click', function() {
+      function toggleHiw() {
         var bodyId = hd.id.replace('coHiwHd-', 'coHiwBody-');
         var accId  = hd.id.replace('coHiwHd-', 'coHiw-');
         var body   = document.getElementById(bodyId);
@@ -4392,6 +4392,10 @@
         body.hidden = !body.hidden;
         hd.setAttribute('aria-expanded', String(!body.hidden));
         if (acc) acc.classList.toggle('is-open', !body.hidden);
+      }
+      hd.addEventListener('click', toggleHiw);
+      hd.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleHiw(); }
       });
     });
 
