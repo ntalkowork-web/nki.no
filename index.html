@@ -4329,10 +4329,19 @@
         var months = CHECKOUT_STATE.installMonths;
         var instTotal = Math.round(total * (1 + rates[months]));
         var monthly   = Math.round(instTotal / months);
+        var firstPayDate = (function() {
+          var d = new Date(); d.setDate(d.getDate() + 30);
+          return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+        })();
         var bd = document.querySelector('.co-inst-breakdown');
         if (bd) bd.innerHTML =
+          '<div class="co-inst-first-pay-label">First payment due</div>' +
+          '<div class="co-inst-first-pay-row">' +
+            '<div class="co-inst-first-pay-amount">' + coFmt(monthly) + '</div>' +
+            '<div class="co-inst-first-pay-date">Due on ' + firstPayDate + '</div>' +
+          '</div>' +
+          '<div class="co-inst-inner-sep"></div>' +
           '<div class="co-inst-row"><span>Amount financed</span><span>' + coFmt(total) + '</span></div>' +
-          '<div class="co-inst-row"><span>First payment</span><span>' + coFmt(monthly) + '</span></div>' +
           '<div class="co-inst-row"><span>Remaining payments</span><span>' + (months - 1) + '</span></div>' +
           '<div class="co-inst-row co-inst-highlight"><span>Monthly payment</span><span>' + coFmt(monthly) + ' / mo</span></div>';
       });
