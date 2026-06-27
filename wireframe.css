@@ -946,6 +946,7 @@ select { font-family: inherit; }
   padding: 16px 0;
   border-bottom: 1px solid var(--gray-100);
 }
+.nki-sugg-row:last-child { border-bottom: none; }
 
 .nki-sugg-img {
   width: 64px;
