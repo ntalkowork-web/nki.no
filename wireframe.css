@@ -4123,14 +4123,18 @@ body.cdp-cta-pinned .cdp-toc {
 .co-doc-intro { font-size: 14px; color: var(--gray-600); line-height: 1.6; max-width: 600px; margin-left: 40px; }
 .co-upload-zone {
   position: relative;
-  border: 1px dashed var(--gray-300);
+  border: none;
   border-radius: 8px;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%23d4d4d4' stroke-width='1' stroke-dasharray='6%2c4' stroke-linecap='square'/%3e%3c/svg%3e");
   padding: 32px;
   text-align: center;
-  transition: border-color .15s, background .15s;
+  transition: background .15s;
   cursor: pointer;
 }
-.co-upload-zone.is-drag { border-color: var(--gray-600); background: var(--gray-50); }
+.co-upload-zone.is-drag {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%23525252' stroke-width='1' stroke-dasharray='6%2c4' stroke-linecap='square'/%3e%3c/svg%3e");
+  background-color: var(--gray-50);
+}
 .co-file-inp { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
 .co-upload-inner { pointer-events: none; }
 .co-upload-ic { font-size: 32px; color: var(--gray-400); display: block; margin-bottom: 8px; }
