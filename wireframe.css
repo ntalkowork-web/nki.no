@@ -4087,7 +4087,7 @@ body.cdp-cta-pinned .cdp-toc {
   font-size: 14px;
   color: var(--gray-600);
   line-height: 1.5;
-  margin: 0 10px 8px 14px;
+  margin: 0 10px 8px 16px;
   padding: 6px 10px;
   border-left: 3px solid var(--gray-700);
 }
@@ -4216,7 +4216,7 @@ body.cdp-cta-pinned .cdp-toc {
 .co-hiw-arrow { font-size: 14px; color: var(--gray-700); flex-shrink: 0; line-height: 1; width: 14px; text-align: center; }
 .co-hiw-arrow::before { content: '▶'; }
 .co-hiw-acc.is-open .co-hiw-arrow::before { content: '▼'; }
-.co-hiw-body { margin: 0 10px 8px 14px; padding: 6px 10px; border-left: 3px solid var(--gray-700); }
+.co-hiw-body { margin: 0 10px 8px 16px; padding: 6px 10px; border-left: 3px solid var(--gray-700); }
 .co-hiw-steps { display: flex; flex-direction: column; }
 .co-hiw-step { display: flex; gap: 12px; align-items: flex-start; }
 .co-hiw-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 24px; }
