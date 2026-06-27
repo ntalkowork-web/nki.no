@@ -893,15 +893,13 @@ select { font-family: inherit; }
 }
 .nki-lk-hd:hover { background: var(--gray-50); }
 
-.nki-lk-body { padding: 0 16px 16px; }
+.nki-lk-body { padding: 0 16px 16px 56px; }
 
 .nki-lk-label {
   flex: 1;
   font-size: 14px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--gray-400);
+  color: var(--gray-900);
 }
 
 .nki-lk-chevron {
