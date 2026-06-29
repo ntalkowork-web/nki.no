@@ -5131,11 +5131,11 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-media-dot { display: none; }
 
   /* CDP content sections: 24px padding → 48px gap between adjacent sections */
-  .cdp-section { padding: 24px 0; scroll-margin-top: calc(var(--header-h) + 110px); }
+  .cdp-section { padding: 32px 0; scroll-margin-top: calc(var(--header-h) + 110px); }
 
-  /* CDP major section padding: 48px */
-  .cdp-related { padding: 24px 0; }
-  .cdp-advice { padding: 24px 0; }
+  /* CDP major section padding: 64px gap */
+  .cdp-related { padding: 32px 0; }
+  .cdp-advice { padding: 32px 0; }
   #page-course > .cdp-faq:last-child,
   #page-course > .cdp-related:last-child,
   #page-course > .cdp-advice:last-child { padding-bottom: 64px; }
