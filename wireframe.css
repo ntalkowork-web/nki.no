@@ -5541,7 +5541,7 @@ body.cdp-cta-pinned .cdp-toc {
   .ces-widget { width: calc(100% - 32px); right: 16px; bottom: 16px; }
 
   /* Free advice: send button fills content width */
-  .btn-submit { width: 100%; }
+  .btn-submit { width: 100%; justify-content: center; }
 
   /* Footer: newsletter bar stacks; logo left; label above input */
   .footer-nl-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
