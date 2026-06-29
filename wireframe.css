@@ -3226,8 +3226,8 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   border-top: none;
   border-right: none;
   border-bottom: none;
-  border-radius: 0;
-  -webkit-border-radius: 0;
+  border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
   -webkit-appearance: none;
   appearance: none;
   background: var(--white);
@@ -3976,11 +3976,24 @@ body.cdp-cta-pinned .cdp-toc {
 
 .cdp-advice { padding: 72px 0; }
 
+.cdp-related-hd {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 32px;
+}
 .cdp-related-heading {
   font-size: 40px;
   font-weight: 700;
   color: var(--gray-900);
-  margin-bottom: 32px;
+  margin-bottom: 0;
+}
+/* counter hidden on desktop, shown on ≤1024px via media query */
+.cdp-related-counter {
+  display: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-400);
 }
 
 /* ══════════════════════════════════════════════
@@ -5120,12 +5133,16 @@ body.cdp-cta-pinned .cdp-toc {
   /* CDP content sections: 24px padding → 48px gap between adjacent sections */
   .cdp-section { padding: 24px 0; scroll-margin-top: calc(var(--header-h) + 110px); }
 
-  /* CDP major section padding: 64px consistent */
-  .cdp-related { padding: 64px 0; }
-  .cdp-advice { padding: 64px 0; }
+  /* CDP major section padding: 48px */
+  .cdp-related { padding: 48px 0; }
+  .cdp-advice { padding: 48px 0; }
   #page-course > .cdp-faq:last-child,
   #page-course > .cdp-related:last-child,
   #page-course > .cdp-advice:last-child { padding-bottom: 64px; }
+
+  /* CDP related: show scroll counter, keep heading margin via parent */
+  .cdp-related-counter { display: block; }
+  .cdp-related-hd { margin-bottom: 20px; }
 
   /* CDP related courses: horizontal scroll within container (container padding = margins) */
   .cdp-related .courses-grid {
