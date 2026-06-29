@@ -4350,11 +4350,14 @@ body.cdp-cta-pinned .cdp-toc {
 .co-phone-row { display: flex; gap: 8px; }
 .co-cc-sel {
   height: 40px;
-  padding: 0 8px;
+  padding: 0 28px 0 8px;
   font-size: 14px;
   border: 1px solid var(--gray-300);
   border-radius: var(--r-sm);
-  background: #fff;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23737373' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 8px center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   font-family: inherit;
   cursor: pointer;
   flex-shrink: 0;
@@ -5303,7 +5306,6 @@ body.cdp-cta-pinned .cdp-toc {
   .co-step-hd { padding: 16px; }
   .co-step-body { padding: 0 16px 20px; }
   .co-input, .co-select, .co-cc-sel { height: 44px; }
-  .co-cc-sel { padding-right: 24px; }
   .co-step-title { font-size: 15px; }
   .co-sum-hd { font-size: 17px; }
   .co-sum-name { font-size: 15px; }
