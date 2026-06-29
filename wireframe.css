@@ -4021,6 +4021,25 @@ body.cdp-cta-pinned .cdp-toc {
   padding: 20px;
   z-index: 200;
 }
+.ces-dismiss-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--gray-400);
+  padding: 0;
+  transition: background .15s, color .15s;
+}
+.ces-dismiss-btn:hover { background: var(--gray-100); color: var(--gray-700); }
+.ces-dismiss-btn .material-symbols-outlined { font-size: 18px; }
 .ces-question {
   font-size: 14px;
   font-weight: 600;
@@ -5090,9 +5109,10 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-body-grid { grid-template-columns: 1fr; }
   .cdp-toc-aside { display: none; }
 
-  /* Checkout: single col */
-  .co-layout { grid-template-columns: 1fr; }
-  .co-sidebar-col { position: static; }
+  /* Checkout: single col, summary pinned above steps */
+  .co-layout { grid-template-columns: 1fr; gap: 16px; }
+  .co-sidebar-col { order: -1; position: static; }
+  .co-test-card { display: none; }
 
   /* Sticky CTA */
   .cdp-sticky-name { font-size: 15px; max-width: 260px; }
@@ -5178,8 +5198,9 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-related-heading { font-size: 26px; margin-bottom: 0; }
   .cdp-section-title { font-size: 22px; }
 
-  /* Thank you cards */
-  .ty-cards { grid-template-columns: 1fr; }
+  /* Thank you cards: vertical stack, 16px gap */
+  .ty-cards { grid-template-columns: 1fr; gap: 16px; padding-bottom: 24px; }
+  .ty-card-hd { font-size: 18px; margin-bottom: 12px; }
 
   /* Search dropdown: match search field width */
   .search-dropdown { width: 100%; }
@@ -5270,6 +5291,13 @@ body.cdp-cta-pinned .cdp-toc {
 
   /* Checkout form */
   .co-form-row { grid-template-columns: 1fr; }
+  .co-step-hd { padding: 16px; }
+  .co-step-body { padding: 0 16px 20px; }
+  .co-input, .co-select { height: 44px; }
+  .co-step-title { font-size: 15px; }
+  .co-sum-hd { font-size: 17px; }
+  .co-sum-name { font-size: 15px; }
+  .co-page-wrap { padding: 16px 0 48px; }
 
   /* Search dropdown: 1 col cards */
   .search-course-grid { grid-template-columns: 1fr; }
@@ -5552,8 +5580,18 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-sticky-btn { height: 36px; font-size: 14px; padding: 0 14px; }
 
   /* Checkout */
-  .co-page-wrap { padding: 20px 0 60px; }
+  .co-page-wrap { padding: 16px 0 56px; }
+  .co-layout { padding: 0 16px; }
+  .co-sum-card { padding: 16px; }
+  .co-step-hd { padding: 14px 16px; }
   .co-pay-body { padding-left: 16px; }
+
+  /* Thank you page: compact on small phones */
+  .ty-headline { font-size: 26px; }
+  .ty-hero { padding-top: 80px; padding-bottom: 16px; }
+  .ty-card-hd { font-size: 16px; }
+  .ty-card { padding: 16px; }
+  .ty-contact-tel { font-size: 16px; }
 
   /* CES widget: smaller on mobile */
   .ces-widget { width: calc(100% - 32px); right: 16px; bottom: 16px; }

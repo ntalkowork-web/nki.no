@@ -4227,7 +4227,7 @@
         '<select class="co-select co-req" id="coCountry">' + countrySelect + '</select>' +
       '</div>' +
       '<div class="co-terms-row"><label class="co-terms-lbl"><input type="checkbox" id="coContact"> I want customer support to contact me for guidance.</label></div>' +
-      '<div class="co-terms-row"><label class="co-terms-lbl"><input type="checkbox" id="coTerms"> By continuing, I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.</label></div>' +
+      '<div class="co-terms-row"><label class="co-terms-lbl"><input type="checkbox" id="coTerms"> <span>By continuing, I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.</span></label></div>' +
       '<div class="co-cta-wrap">' +
         '<button class="co-continue-btn" id="coContinue1" type="button" disabled>' + (CHECKOUT_STATE.isEditing ? 'Save' : 'Continue') + '</button>' +
         '<div class="co-cant" id="coCant1"><span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnk1">Complete your personal information first.</a></div>' +
@@ -4380,7 +4380,7 @@
     return '<p class="co-pay-desc">Divide your payment into smaller installments.</p>' +
       '<div class="co-partial-expand">' +
         '<div class="co-inst-pills" id="coInstPills">' +
-          [3,6,12].map(function(m){ return '<button class="co-inst-pill' + (months===m?' is-active':'') + '" type="button" data-inst="' + m + '">' + m + ' months</button>'; }).join('') +
+          [3,6,12].map(function(m){ return '<button class="co-inst-pill' + (months===m?' is-active':'') + '" type="button" data-inst="' + m + '">' + m + ' mo</button>'; }).join('') +
         '</div>' +
         '<div class="co-inst-breakdown">' +
           '<div class="co-inst-first-pay-label">First payment due</div>' +
@@ -4786,6 +4786,7 @@
         '</div>' +
       '</div>' +
       '<div class="ces-widget" id="cesWidget">' +
+        '<button class="ces-dismiss-btn" id="cesDismiss" aria-label="Close"><span class="material-symbols-outlined">close</span></button>' +
         '<p class="ces-question">How easy or difficult was it to complete your purchase?</p>' +
         '<div class="ces-scale">' +
           '<label class="ces-opt" data-val="1"><input type="radio" name="ces-score" value="1"><span class="ces-num">1</span></label>' +
@@ -4811,8 +4812,9 @@
     /* CES widget */
     var cesWidget  = document.getElementById('cesWidget');
     var cesOpts    = page.querySelectorAll('.ces-opt');
-    var cesSubmitBtn = document.getElementById('cesSubmit');
-    var cesCloseBtn  = document.getElementById('cesClose');
+    var cesSubmitBtn  = document.getElementById('cesSubmit');
+    var cesCloseBtn   = document.getElementById('cesClose');
+    var cesDismissBtn = document.getElementById('cesDismiss');
     cesOpts.forEach(function(opt) {
       opt.addEventListener('click', function() {
         cesOpts.forEach(function(o) { o.classList.remove('is-selected'); });
@@ -4823,9 +4825,8 @@
     if (cesSubmitBtn) cesSubmitBtn.addEventListener('click', function() {
       if (cesWidget) cesWidget.classList.add('is-submitted');
     });
-    if (cesCloseBtn) cesCloseBtn.addEventListener('click', function() {
-      if (cesWidget) cesWidget.hidden = true;
-    });
+    if (cesCloseBtn)   cesCloseBtn.addEventListener('click',   function() { if (cesWidget) cesWidget.hidden = true; });
+    if (cesDismissBtn) cesDismissBtn.addEventListener('click', function() { if (cesWidget) cesWidget.hidden = true; });
   }
 
   function launchConfetti() {
