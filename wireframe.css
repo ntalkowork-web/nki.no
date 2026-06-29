@@ -3171,9 +3171,11 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   top: var(--header-h);
   left: 0;
   right: 0;
+  border-radius: 0;
   background: var(--white);
   border-bottom: 1px solid var(--gray-200);
   box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  overflow: hidden;
   z-index: 97;
   transform: translateY(calc(-100% - 8px));
   transition: transform .25s ease;
@@ -5096,9 +5098,10 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-hero-left { padding-top: 24px; }
   .cdp-h1 { font-size: 28px; }
 
-  /* CDP hero section: add bottom gap so infobar is visually separate */
+  /* CDP hero section: bottom gap separates hero from infobar */
   .cdp-hero-section { padding-bottom: 16px; }
-  .cdp-infobar { margin-top: 0; border-radius: 0; border-left: none; border-right: none; box-shadow: none; border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); }
+  /* infobar: no top border (no line above first item), no side borders, no shadow */
+  .cdp-infobar { margin-top: 0; border-radius: 0; border-left: none; border-right: none; border-top: none; box-shadow: none; border-bottom: 1px solid var(--gray-200); }
 
   /* CDP CTAs: vertical stack */
   .cdp-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
@@ -5114,8 +5117,8 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-media-types { flex-direction: column; gap: 8px; }
   .cdp-media-dot { display: none; }
 
-  /* CDP content sections: 32px padding → 64px gap between adjacent sections */
-  .cdp-section { padding: 32px 0; scroll-margin-top: calc(var(--header-h) + 110px); }
+  /* CDP content sections: 24px padding → 48px gap between adjacent sections */
+  .cdp-section { padding: 24px 0; scroll-margin-top: calc(var(--header-h) + 110px); }
 
   /* CDP major section padding: 64px consistent */
   .cdp-related { padding: 64px 0; }
@@ -5124,7 +5127,7 @@ body.cdp-cta-pinned .cdp-toc {
   #page-course > .cdp-related:last-child,
   #page-course > .cdp-advice:last-child { padding-bottom: 64px; }
 
-  /* CDP related courses: horizontal scroll (like homepage carousels) */
+  /* CDP related courses: horizontal scroll within container (container padding = margins) */
   .cdp-related .courses-grid {
     display: flex;
     flex-wrap: nowrap;
@@ -5134,16 +5137,14 @@ body.cdp-cta-pinned .cdp-toc {
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     grid-template-columns: none;
-    margin-left: calc(-1 * var(--margin));
-    margin-right: calc(-1 * var(--margin));
-    padding-left: var(--margin);
-    padding-right: var(--margin);
     padding-bottom: 4px;
   }
   .cdp-related .courses-grid::-webkit-scrollbar { display: none; }
   .cdp-related .course-card { flex-shrink: 0; width: 72vw; scroll-snap-align: start; }
-  /* last card trailing space — padding-right ignored by some browsers on scroll containers */
-  .cdp-related .course-card:last-child { margin-right: var(--margin); }
+  .cdp-related .course-card:last-child { margin-right: 0; }
+
+  /* CDP reviews: 16px gap between cards */
+  .cdp-reviews-grid { gap: 16px; }
 
   /* CDP headings: tablet-friendly sizes */
   .cdp-related-heading { font-size: 26px; margin-bottom: 20px; }
@@ -5491,7 +5492,7 @@ body.cdp-cta-pinned .cdp-toc {
     border-radius: 0;
     border-left: none;
     border-right: none;
-    border-top: 1px solid var(--gray-200);
+    border-top: none;
     border-bottom: 1px solid var(--gray-200);
   }
   .cdp-infobar-sep { display: none; }
