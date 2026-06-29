@@ -1146,6 +1146,7 @@
 <div id="page-thankyou" hidden></div>
 
 <div id="cdp-sticky-cta" class="cdp-sticky-cta"></div>
+<div id="cdp-mob-toc" class="cdp-mob-toc"></div>
 
 <!-- ════════════════════════════════════════════
      FOOTER
@@ -2315,18 +2316,88 @@
   /* ── SEARCH + COMPARE PAGES ── */
 
   var SEARCH_COURSES = [
-    { id: 'pabygg',        name: 'Påbygg – Studieforberedende VG3',    area: 'Subject packages for High School',  level: 'High School',          months: 6,  price: 14900, rating: 4.8, reviews: 312, badge: 'Best seller', lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Norsk VG3','Matematikk 1T','Engelsk','Naturfag'] },
-    { id: 'mat-1t',        name: 'Matematikk 1T',                       area: 'Single Subjects for High School',   level: 'High School',          months: 6,  price: 4900,  rating: 4.6, reviews: 198, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
-    { id: 'norsk-vg3',     name: 'Norsk – Skriftlig VG3',               area: 'Single Subjects for High School',   level: 'High School',          months: 6,  price: 5900,  rating: 4.5, reviews: 145, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
-    { id: 'med-sec',       name: 'Medical Secretary',                    area: 'Health and lifestyle',              level: 'Professional Courses', months: 6,  price: 12900, rating: 4.9, reviews: 421, badge: 'Best seller', lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Anatomy','Patient Administration','Medical Terminology','Office Administration'] },
-    { id: 'helse-ledelse', name: 'Health Management',                    area: 'Health and lifestyle',              level: 'Professional Courses', months: 6,  price: 9900,  rating: 4.4, reviews: 87,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
-    { id: 'regnskap',      name: 'Accounting and Finance',               area: 'Economy and sustainability',        level: 'Professional Courses', months: 2,  price: 7900,  rating: 4.7, reviews: 203, badge: 'Trending',   lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
-    { id: 'baerekraft',    name: 'Sustainability and Green Business',     area: 'Economy and sustainability',        level: 'Professional Courses', months: 1,  price: 3900,  rating: 4.3, reviews: 64,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
-    { id: 'hr-grunnkurs',  name: 'HR Fundamentals',                      area: 'HR and Management',                 level: 'Professional Courses', months: 2,  price: 6900,  rating: 4.6, reviews: 119, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
-    { id: 'leder',         name: 'Leadership and Organisational Theory', area: 'HR and Management',                 level: 'Professional Courses', months: 4,  price: 9400,  rating: 4.5, reviews: 88,  badge: null,          lanekassen: false, type: 'Package', certificate: true,  subjects: ['Organisational Behaviour','Leadership Theory','HR Strategy','Change Management'] },
-    { id: 'jus',           name: 'Introduction to Law',                  area: 'Law and administration',            level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.7, reviews: 156, badge: 'Trending',   lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
-    { id: 'mkt-grunnkurs', name: 'Marketing Fundamentals',               area: 'Marketing and sales',               level: 'Professional Courses', months: 1,  price: 3490,  rating: 4.4, reviews: 211, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
-    { id: 'interior',      name: 'Interior Design — Foundation',         area: 'Interior and design',               level: 'Professional Courses', months: 6,  price: 19900, rating: 4.8, reviews: 97,  badge: 'Best seller', lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Colour Theory','Space Planning','3D Visualisation','Furniture and Textiles'] },
+    /* ── Subject packages for High School ── */
+    { id: 'pabygg',          name: 'Påbygg – Studieforberedende VG3',         area: 'Subject packages for High School',   level: 'High School',          months: 6,  price: 14900, rating: 4.8, reviews: 312, badge: 'Best seller', lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Norsk VG3','Matematikk 1T','Engelsk','Naturfag'] },
+    { id: 'medisin-norge',   name: 'Medisinpakke Norge',                       area: 'Subject packages for High School',   level: 'High School',          months: 8,  price: 18900, rating: 4.7, reviews: 184, badge: 'Best seller', lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Matematikk R1','Kjemi 1','Biologi 1','Fysikk 1'] },
+    { id: 'medisin-utland',  name: 'Medisinpakke utland',                      area: 'Subject packages for High School',   level: 'High School',          months: 10, price: 22900, rating: 4.6, reviews: 97,  badge: null,          lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Matematikk R1','Matematikk R2','Kjemi 1','Kjemi 2','Biologi 1','Biologi 2'] },
+    { id: 'ingeniorpakken',  name: 'Ingeniørpakken',                           area: 'Subject packages for High School',   level: 'High School',          months: 8,  price: 16900, rating: 4.5, reviews: 143, badge: 'Trending',   lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Matematikk R1','Matematikk R2','Fysikk 1','Naturfag'] },
+    { id: 'forkurs-ing',     name: 'Forkurs til ingeniørutdanning',            area: 'Subject packages for High School',   level: 'High School',          months: 6,  price: 12900, rating: 4.4, reviews: 76,  badge: null,          lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Matematikk R1','Fysikk 1','Naturfag'] },
+    { id: 'vg4-pabygg',      name: 'Påbygg til generell studiekompetanse VG4', area: 'Subject packages for High School',  level: 'High School',          months: 10, price: 19900, rating: 4.6, reviews: 112, badge: null,          lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Norsk VG3','Matematikk','Naturfag','Samfunnsfag'] },
+    /* ── Single subjects for High School ── */
+    { id: 'mat-1t',          name: 'Matematikk 1T',                            area: 'Single Subjects for High School',    level: 'High School',          months: 6,  price: 4900,  rating: 4.6, reviews: 198, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'mat-r1',          name: 'Matematikk R1',                            area: 'Single Subjects for High School',    level: 'High School',          months: 6,  price: 4900,  rating: 4.5, reviews: 167, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'mat-r2',          name: 'Matematikk R2',                            area: 'Single Subjects for High School',    level: 'High School',          months: 6,  price: 4900,  rating: 4.4, reviews: 88,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'mat-s1',          name: 'Matematikk S1',                            area: 'Single Subjects for High School',    level: 'High School',          months: 6,  price: 4900,  rating: 4.6, reviews: 142, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'mat-s2',          name: 'Matematikk S2',                            area: 'Single Subjects for High School',    level: 'High School',          months: 6,  price: 4900,  rating: 4.3, reviews: 79,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'norsk-vg3',       name: 'Norsk – Skriftlig VG3',                    area: 'Single Subjects for High School',    level: 'High School',          months: 6,  price: 5900,  rating: 4.5, reviews: 145, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'bio-1',           name: 'Biologi 1',                                area: 'Single Subjects for High School',    level: 'High School',          months: 5,  price: 4900,  rating: 4.6, reviews: 211, badge: 'Trending',   lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'bio-2',           name: 'Biologi 2',                                area: 'Single Subjects for High School',    level: 'High School',          months: 5,  price: 4900,  rating: 4.4, reviews: 93,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'kjemi-1',         name: 'Kjemi 1',                                  area: 'Single Subjects for High School',    level: 'High School',          months: 5,  price: 4900,  rating: 4.5, reviews: 128, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'kjemi-2',         name: 'Kjemi 2',                                  area: 'Single Subjects for High School',    level: 'High School',          months: 5,  price: 4900,  rating: 4.3, reviews: 61,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'fysikk-1',        name: 'Fysikk 1',                                 area: 'Single Subjects for High School',    level: 'High School',          months: 5,  price: 4900,  rating: 4.5, reviews: 104, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'engelsk-vg3',     name: 'Engelsk – Internasjonal engelsk VG3',      area: 'Single Subjects for High School',    level: 'High School',          months: 4,  price: 4500,  rating: 4.4, reviews: 172, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'samfunn',         name: 'Samfunnsfag VG1',                          area: 'Single Subjects for High School',    level: 'High School',          months: 4,  price: 3900,  rating: 4.3, reviews: 89,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'geografi',        name: 'Geografi VG1',                             area: 'Single Subjects for High School',    level: 'High School',          months: 4,  price: 3900,  rating: 4.2, reviews: 54,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'naturfag',        name: 'Naturfag VG1',                             area: 'Single Subjects for High School',    level: 'High School',          months: 4,  price: 3900,  rating: 4.4, reviews: 136, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'historie',        name: 'Historie VG2/VG3',                         area: 'Single Subjects for High School',    level: 'High School',          months: 4,  price: 3900,  rating: 4.3, reviews: 67,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    /* ── Vocational Studies for High School ── */
+    { id: 'helse-vg1',       name: 'Helse- og oppvekstfag VG1',               area: 'Vocational Studies for High School', level: 'High School',          months: 8,  price: 8900,  rating: 4.5, reviews: 134, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'helsearbeider',   name: 'Helsearbeiderfag VG2',                     area: 'Vocational Studies for High School', level: 'High School',          months: 8,  price: 9900,  rating: 4.6, reviews: 178, badge: 'Best seller', lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'ambulanse-vg2',   name: 'Ambulansefag VG2',                         area: 'Vocational Studies for High School', level: 'High School',          months: 8,  price: 9900,  rating: 4.4, reviews: 62,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'barne-unge',      name: 'Barne- og ungdomsarbeiderfag VG2',         area: 'Vocational Studies for High School', level: 'High School',          months: 8,  price: 8900,  rating: 4.3, reviews: 81,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'helsesekr-vg3',   name: 'Helsesekretær VG3',                        area: 'Vocational Studies for High School', level: 'High School',          months: 9,  price: 11900, rating: 4.7, reviews: 109, badge: 'Trending',   lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'tannsekr-vg3',    name: 'Tannhelsesekretær VG3',                    area: 'Vocational Studies for High School', level: 'High School',          months: 9,  price: 11900, rating: 4.5, reviews: 73,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'el-vg1',          name: 'Elektro og datateknologi VG1',             area: 'Vocational Studies for High School', level: 'High School',          months: 8,  price: 8900,  rating: 4.3, reviews: 58,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'el-vg2',          name: 'Elektroenergifag VG2',                     area: 'Vocational Studies for High School', level: 'High School',          months: 8,  price: 9900,  rating: 4.2, reviews: 44,  badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    /* ── Health and lifestyle ── */
+    { id: 'med-sec',         name: 'Medical Secretary',                         area: 'Health and lifestyle',               level: 'Professional Courses', months: 6,  price: 12900, rating: 4.9, reviews: 421, badge: 'Best seller', lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Anatomy','Patient Administration','Medical Terminology','Office Administration'] },
+    { id: 'helse-ledelse',   name: 'Health Management',                         area: 'Health and lifestyle',               level: 'Professional Courses', months: 6,  price: 9900,  rating: 4.4, reviews: 87,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'kosthold',        name: 'Nutrition and Dietetics',                   area: 'Health and lifestyle',               level: 'Professional Courses', months: 3,  price: 5900,  rating: 4.5, reviews: 134, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'psykologi-intro', name: 'Psychology – Introduction',                 area: 'Health and lifestyle',               level: 'Professional Courses', months: 2,  price: 4900,  rating: 4.6, reviews: 196, badge: 'Trending',   lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'eldrehelse',      name: 'Elderly Care and Welfare',                  area: 'Health and lifestyle',               level: 'Professional Courses', months: 4,  price: 7900,  rating: 4.4, reviews: 63,  badge: null,          lanekassen: false, type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'trening',         name: 'Exercise Science and Personal Training',    area: 'Health and lifestyle',               level: 'Professional Courses', months: 3,  price: 6900,  rating: 4.5, reviews: 108, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    /* ── Economy and sustainability ── */
+    { id: 'regnskap',        name: 'Accounting and Finance',                    area: 'Economy and sustainability',         level: 'Professional Courses', months: 2,  price: 7900,  rating: 4.7, reviews: 203, badge: 'Trending',   lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'baerekraft',      name: 'Sustainability and Green Business',         area: 'Economy and sustainability',         level: 'Professional Courses', months: 1,  price: 3900,  rating: 4.3, reviews: 64,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'bedriftsokonomi', name: 'Business Economics',                        area: 'Economy and sustainability',         level: 'Professional Courses', months: 3,  price: 7900,  rating: 4.6, reviews: 142, badge: null,          lanekassen: true,  type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'skatt',           name: 'Tax Law and Accounting',                    area: 'Economy and sustainability',         level: 'Professional Courses', months: 2,  price: 6900,  rating: 4.5, reviews: 88,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'personlig-finans',name: 'Personal Finance',                          area: 'Economy and sustainability',         level: 'Professional Courses', months: 1,  price: 2990,  rating: 4.4, reviews: 219, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'prosjektledelse', name: 'Project Management',                        area: 'Economy and sustainability',         level: 'Professional Courses', months: 3,  price: 7900,  rating: 4.7, reviews: 167, badge: 'Best seller', lanekassen: false, type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'miljoledelse',    name: 'Environmental Management',                  area: 'Economy and sustainability',         level: 'Professional Courses', months: 2,  price: 4900,  rating: 4.3, reviews: 47,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'revisjon',        name: 'Auditing Fundamentals',                     area: 'Economy and sustainability',         level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.5, reviews: 72,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    /* ── HR and Management ── */
+    { id: 'hr-grunnkurs',    name: 'HR Fundamentals',                           area: 'HR and Management',                  level: 'Professional Courses', months: 2,  price: 6900,  rating: 4.6, reviews: 119, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'leder',           name: 'Leadership and Organisational Theory',      area: 'HR and Management',                  level: 'Professional Courses', months: 4,  price: 9400,  rating: 4.5, reviews: 88,  badge: null,          lanekassen: false, type: 'Package', certificate: true,  subjects: ['Organisational Behaviour','Leadership Theory','HR Strategy','Change Management'] },
+    { id: 'rekruttering',    name: 'Recruitment and Selection',                 area: 'HR and Management',                  level: 'Professional Courses', months: 1,  price: 3900,  rating: 4.4, reviews: 74,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'arbeidsmiljo',    name: 'Work Environment and Safety (HMS)',         area: 'HR and Management',                  level: 'Professional Courses', months: 1,  price: 3490,  rating: 4.5, reviews: 96,  badge: 'Trending',   lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'org-psyk',        name: 'Organisational Psychology',                 area: 'HR and Management',                  level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.4, reviews: 51,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    /* ── Law and administration ── */
+    { id: 'jus',             name: 'Introduction to Law',                       area: 'Law and administration',             level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.7, reviews: 156, badge: 'Trending',   lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'arbeidsrett',     name: 'Employment Law',                            area: 'Law and administration',             level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.6, reviews: 112, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'kontraktsrett',   name: 'Contract Law',                              area: 'Law and administration',             level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.5, reviews: 68,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'personvern',      name: 'Data Privacy and GDPR',                     area: 'Law and administration',             level: 'Professional Courses', months: 1,  price: 3900,  rating: 4.4, reviews: 91,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'forvaltning',     name: 'Public Administration Law',                 area: 'Law and administration',             level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.3, reviews: 43,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    /* ── Marketing and sales ── */
+    { id: 'mkt-grunnkurs',   name: 'Marketing Fundamentals',                    area: 'Marketing and sales',                level: 'Professional Courses', months: 1,  price: 3490,  rating: 4.4, reviews: 211, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'digital-mkt',     name: 'Digital Marketing',                         area: 'Marketing and sales',                level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.7, reviews: 188, badge: 'Best seller', lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'sosiale-medier',  name: 'Social Media Marketing',                    area: 'Marketing and sales',                level: 'Professional Courses', months: 1,  price: 3490,  rating: 4.5, reviews: 143, badge: 'Trending',   lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'pr-komm',         name: 'PR and Communication',                      area: 'Marketing and sales',                level: 'Professional Courses', months: 2,  price: 4900,  rating: 4.4, reviews: 79,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'salg',            name: 'Sales Techniques and Customer Relations',   area: 'Marketing and sales',                level: 'Professional Courses', months: 1,  price: 3490,  rating: 4.5, reviews: 127, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'e-handel',        name: 'E-Commerce and Online Sales',               area: 'Marketing and sales',                level: 'Professional Courses', months: 2,  price: 4900,  rating: 4.6, reviews: 104, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    /* ── Interior and design ── */
+    { id: 'interior',        name: 'Interior Design — Foundation',              area: 'Interior and design',                level: 'Professional Courses', months: 6,  price: 19900, rating: 4.8, reviews: 97,  badge: 'Best seller', lanekassen: true,  type: 'Package', certificate: true,  subjects: ['Colour Theory','Space Planning','3D Visualisation','Furniture and Textiles'] },
+    { id: 'fargelaere',      name: 'Colour Theory and Application',             area: 'Interior and design',                level: 'Professional Courses', months: 2,  price: 4900,  rating: 4.5, reviews: 61,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'produktdesign',   name: 'Product Design Fundamentals',               area: 'Interior and design',                level: 'Professional Courses', months: 3,  price: 7900,  rating: 4.4, reviews: 44,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    /* ── Science and Technology ── */
+    { id: 'it-grunnkurs',    name: 'IT Fundamentals',                           area: 'Science',                            level: 'Professional Courses', months: 1,  price: 2990,  rating: 4.4, reviews: 234, badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'ai-arbeid',       name: 'AI at Work',                                area: 'Science',                            level: 'Professional Courses', months: 1,  price: 2990,  rating: 4.8, reviews: 311, badge: 'Best seller', lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'data-analyse',    name: 'Data Analysis and Visualisation',           area: 'Science',                            level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.6, reviews: 148, badge: 'Trending',   lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'cyber',           name: 'Cybersecurity Basics',                      area: 'Science',                            level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.5, reviews: 87,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    /* ── Construction and logistics ── */
+    { id: 'logistikk',       name: 'Logistics and Supply Chain Management',     area: 'Construction and logistics',         level: 'Professional Courses', months: 3,  price: 7900,  rating: 4.4, reviews: 59,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'byggtegning',     name: 'Construction Drawing and CAD',              area: 'Construction and logistics',         level: 'Professional Courses', months: 3,  price: 7900,  rating: 4.3, reviews: 42,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
+    { id: 'prosjekt-bygg',   name: 'Construction Project Management',           area: 'Construction and logistics',         level: 'Professional Courses', months: 4,  price: 9900,  rating: 4.5, reviews: 67,  badge: null,          lanekassen: false, type: 'Course',  certificate: true,  subjects: [] },
+    { id: 'innkjop',         name: 'Procurement and Purchasing',                area: 'Construction and logistics',         level: 'Professional Courses', months: 2,  price: 5900,  rating: 4.3, reviews: 38,  badge: null,          lanekassen: false, type: 'Course',  certificate: false, subjects: [] },
   ];
 
   var SP_AREAS = [
@@ -2344,14 +2415,14 @@
   ];
 
   var SP_LEVELS = [
-    { label: 'High School',          count: 34 },
-    { label: 'Professional Courses', count: 58 }
+    { label: 'High School',          count: 84 },
+    { label: 'Professional Courses', count: 138 }
   ];
 
   var SP_LENGTHS = [
-    { label: '1 month',            count: 8  },
-    { label: '2 months',           count: 14 },
-    { label: 'More than 3 months', count: 95 }
+    { label: '1 month',            count: 31  },
+    { label: '2 months',           count: 58 },
+    { label: 'More than 3 months', count: 133 }
   ];
 
   /* ── COURSE DETAILS DATA ── */
@@ -2492,6 +2563,8 @@
     compareIds: [], breadcrumb: 'All courses'
   };
 
+  function spPageSize() { return window.innerWidth <= 1024 ? 6 : 9; }
+
   function updateSliderFill() {
     var fill = document.getElementById('spSliderFill'); if (!fill) return;
     var RMIN = 990, RMAX = 49900;
@@ -2546,7 +2619,7 @@
       spState.query = ''; spState.areas = []; spState.levels = [];
       spState.lengths = []; spState.priceMin = 990; spState.priceMax = 49900;
       spState.lanekassen = false; spState.sort = 'recommended';
-      spState.compareIds = []; spState.breadcrumb = 'All courses'; spState.page = 0;
+      spState.compareIds = []; spState.breadcrumb = 'All courses'; spState.visibleCount = spPageSize();
       if (ctx) {
         if (ctx.category) {
           spState.breadcrumb = ctx.category;
@@ -2925,7 +2998,7 @@
         if (!btn) return;
         var viewportH = window.innerHeight;
         var btnH = btn.offsetHeight || 52;
-        var pagerEl = document.getElementById('spPager');
+        var pagerEl = document.querySelector('#spResultsArea .sp-load-footer');
         var anchor = pagerEl || (function() {
           var cards = document.querySelectorAll('#spResultsArea .course-card');
           return cards.length ? cards[cards.length - 1] : null;
@@ -3010,23 +3083,29 @@
         '<button class="sp-empty-btn" id="spEmptyClear">Clear all filters</button>' +
       '</div>';
     }
-    var displayResults = results;
-    var pagerHTML = '';
-    if (window.innerWidth <= 1024) {
-      var PAGE_SIZE = 6;
-      var totalPages = Math.ceil(results.length / PAGE_SIZE);
-      var curPage = Math.min(spState.page || 0, totalPages - 1);
-      spState.page = curPage;
-      displayResults = results.slice(curPage * PAGE_SIZE, (curPage + 1) * PAGE_SIZE);
-      pagerHTML = buildPagerHTML(curPage, totalPages);
-    }
+    var PAGE_SIZE = spPageSize();
+    var visibleCount = Math.min(spState.visibleCount || PAGE_SIZE, results.length);
+    var displayResults = results.slice(0, visibleCount);
+    var hasMore = visibleCount < results.length;
+    var footerHTML = '<div class="sp-load-footer">' +
+      '<div class="sp-showing-count">Showing <strong>' + visibleCount + '</strong> of <strong>' + results.length + '</strong> courses</div>' +
+      '<div class="sp-browse-later">' +
+        '<div class="sp-browse-later-title">Continue browsing later</div>' +
+        '<div class="sp-browse-later-sub">Get a link sent to your email so you can pick up right where you left off</div>' +
+        '<div class="sp-browse-later-form">' +
+          '<input type="email" class="sp-browse-later-input" placeholder="Your email address">' +
+          '<button class="sp-browse-later-btn">Send a link to continue later</button>' +
+        '</div>' +
+      '</div>' +
+      (hasMore ? '<button class="sp-load-more-btn" id="spLoadMore">Load more courses</button>' : '') +
+    '</div>';
     return filterRow + mobBar +
       '<div class="sp-results-grid">' + displayResults.map(buildSearchCard).join('') + '</div>' +
-      pagerHTML;
+      footerHTML;
   }
 
   function renderSearchPage() {
-    spState.page = 0;
+    spState.visibleCount = spPageSize();
     var page = document.getElementById('page-search');
     var isMob = window.innerWidth <= 1024;
     page.innerHTML =
@@ -3222,18 +3301,28 @@
   function bindResultCardEvents() {
     var page = document.getElementById('page-search'); if (!page) return;
 
-    function goToPage(p) {
-      spState.page = p;
+    var loadMoreBtn = document.getElementById('spLoadMore');
+    if (loadMoreBtn) loadMoreBtn.addEventListener('click', function() {
+      spState.visibleCount = (spState.visibleCount || spPageSize()) + spPageSize();
       updateResultsArea();
-      var area = document.getElementById('spResultsArea');
-      if (area) area.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    var pagerPrev = document.getElementById('spPagerPrev');
-    var pagerNext = document.getElementById('spPagerNext');
-    if (pagerPrev) pagerPrev.addEventListener('click', function() { goToPage(Math.max(0, (spState.page || 0) - 1)); });
-    if (pagerNext) pagerNext.addEventListener('click', function() { goToPage((spState.page || 0) + 1); });
-    page.querySelectorAll('.sp-pager-page').forEach(function(btn) {
-      btn.addEventListener('click', function() { goToPage(parseInt(btn.getAttribute('data-page'), 10)); });
+    });
+
+    var browseLaterBtn = page.querySelector('.sp-browse-later-btn');
+    if (browseLaterBtn) browseLaterBtn.addEventListener('click', function() {
+      var input = page.querySelector('.sp-browse-later-input');
+      var email = input ? input.value.trim() : '';
+      if (!email) { if (input) { input.focus(); input.style.borderColor = 'var(--gray-500)'; } return; }
+      var box = page.querySelector('.sp-browse-later');
+      if (box) {
+        box.innerHTML =
+          '<div class="sp-browse-later-success">' +
+            '<span class="material-symbols-outlined sp-browse-later-icon">check_circle</span>' +
+            '<div>' +
+              '<div class="sp-browse-later-success-title">Link sent!</div>' +
+              '<div class="sp-browse-later-success-sub">We\'ve sent a link to <strong>' + email + '</strong> — open it any time to continue browsing right where you left off.</div>' +
+            '</div>' +
+          '</div>';
+      }
     });
 
     var emptyClear = document.getElementById('spEmptyClear');
@@ -3785,19 +3874,35 @@
         '</div>';
     }
 
+    /* populate mobile TOC bar */
+    var mobTocEl = document.getElementById('cdp-mob-toc');
+    if (mobTocEl) {
+      var mobTocLinksHTML = CDP_SECTIONS.map(function(s, si) {
+        return '<span class="cdp-toc-link' + (si === 0 ? ' is-active' : '') + '" data-sec="' + s.id + '">' + s.label + '</span>';
+      }).join('');
+      mobTocEl.innerHTML =
+        '<div class="cdp-mob-toc-inner">' +
+          '<div class="cdp-mob-toc-scroll" id="cdpMobTocScroll">' + mobTocLinksHTML + '</div>' +
+          '<button class="cdp-mob-toc-top" id="cdpMobTocTop" aria-label="Go to top">↑</button>' +
+        '</div>';
+      mobTocEl.classList.remove('is-visible');
+    }
+
     bindCoursePageEvents(c);
 
-    /* IntersectionObserver for sticky CTA */
+    /* IntersectionObserver for sticky CTA + mobile TOC */
     if (_cdpObserver) _cdpObserver.disconnect();
     var ctasEl = document.getElementById('cdp-hero-ctas');
     if (ctasEl && stickyEl && 'IntersectionObserver' in window) {
       _cdpObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           var toc = document.getElementById('cdpToc');
+          var mobToc = document.getElementById('cdp-mob-toc');
           if (entry.isIntersecting) {
             stickyEl.classList.remove('is-visible');
             document.body.classList.remove('cdp-cta-pinned');
             if (toc) { toc.classList.remove('is-visible'); }
+            if (mobToc) { mobToc.classList.remove('is-visible'); }
           } else {
             var inCart = NKICart.getItems().some(function(i) { return i.id === CURRENT_COURSE.id; });
             if (!inCart) {
@@ -3805,6 +3910,7 @@
               document.body.classList.add('cdp-cta-pinned');
             }
             if (toc) { toc.classList.add('is-visible'); }
+            if (mobToc) { mobToc.classList.add('is-visible'); }
           }
         });
       }, { threshold: 0 });
@@ -3838,15 +3944,25 @@
     });
 
 
-    /* TOC: scroll-spy — highlight section in viewport */
+    /* TOC: scroll-spy — highlight section in both sidebar and mobile TOC */
     var tocLinks = page.querySelectorAll('.cdp-toc-link');
+    var mobTocLinks = Array.from(document.querySelectorAll('#cdp-mob-toc .cdp-toc-link'));
     var cdpSections = page.querySelectorAll('.cdp-section');
-    if (tocLinks.length && cdpSections.length && 'IntersectionObserver' in window) {
+    if (cdpSections.length && 'IntersectionObserver' in window) {
       var secObs = new IntersectionObserver(function(entries) {
         entries.forEach(function(e) {
           if (e.isIntersecting) {
+            var secId = e.target.id;
             tocLinks.forEach(function(l) {
-              l.classList.toggle('is-active', l.getAttribute('data-sec') === e.target.id);
+              l.classList.toggle('is-active', l.getAttribute('data-sec') === secId);
+            });
+            mobTocLinks.forEach(function(l) {
+              var isActive = l.getAttribute('data-sec') === secId;
+              l.classList.toggle('is-active', isActive);
+              if (isActive) {
+                var scroll = document.getElementById('cdpMobTocScroll');
+                if (scroll) l.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+              }
             });
           }
         });
@@ -3854,13 +3970,29 @@
       cdpSections.forEach(function(sec) { secObs.observe(sec); });
     }
 
-    /* TOC: click to scroll to section */
+    /* TOC: click to scroll to section (sidebar) */
     page.querySelectorAll('.cdp-toc-link').forEach(function(link) {
       link.addEventListener('click', function() {
         var sec = document.getElementById(link.getAttribute('data-sec'));
         if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
+
+    /* Mobile TOC: click to scroll to section */
+    mobTocLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        var sec = document.getElementById(link.getAttribute('data-sec'));
+        if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    /* Mobile TOC: Go to Top button */
+    var mobTocTop = document.getElementById('cdpMobTocTop');
+    if (mobTocTop) {
+      mobTocTop.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
     /* structure tabs */
     page.querySelectorAll('.cdp-struct-tab').forEach(function(tab) {
