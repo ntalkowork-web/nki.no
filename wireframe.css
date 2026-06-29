@@ -3979,7 +3979,7 @@ body.cdp-cta-pinned .cdp-toc {
 .cdp-related-hd {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   margin-bottom: 32px;
 }
 .cdp-related-heading {
@@ -5112,7 +5112,7 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-h1 { font-size: 28px; }
 
   /* CDP hero section: bottom gap separates hero from infobar */
-  .cdp-hero-section { padding-bottom: 16px; }
+  .cdp-hero-section { padding-bottom: 24px; }
   /* infobar: no top border (no line above first item), no side borders, no shadow */
   .cdp-infobar { margin-top: 0; border-radius: 0; border-left: none; border-right: none; border-top: none; box-shadow: none; border-bottom: 1px solid var(--gray-200); }
 
