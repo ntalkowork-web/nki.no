@@ -5134,8 +5134,8 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-section { padding: 24px 0; scroll-margin-top: calc(var(--header-h) + 110px); }
 
   /* CDP major section padding: 48px */
-  .cdp-related { padding: 48px 0; }
-  .cdp-advice { padding: 48px 0; }
+  .cdp-related { padding: 24px 0; }
+  .cdp-advice { padding: 24px 0; }
   #page-course > .cdp-faq:last-child,
   #page-course > .cdp-related:last-child,
   #page-course > .cdp-advice:last-child { padding-bottom: 64px; }
