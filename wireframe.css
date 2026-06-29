@@ -5244,6 +5244,13 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-infobar-item { min-width: calc(33.33% - 12px); }
   .cdp-media-types { gap: 12px; }
 
+  /* Infobar: :nth-child(n) matches all seps at the same specificity as the
+     ≤1024px nth-child(n+8) hide rule, winning by source order. Then suppress
+     only the orphan seps that shift to the end of each row when items wrap. */
+  .cdp-infobar-sep:nth-child(n) { display: block; }
+  .cdp-infobar-sep:nth-child(6),
+  .cdp-infobar-sep:nth-child(12) { display: none; }
+
   /* CDP reviews: reset the homepage testimonial carousel width so cards fill the 1-col grid */
   .cdp-reviews-grid .t-card { width: auto; flex-shrink: 1; scroll-snap-align: auto; }
 
@@ -5761,4 +5768,79 @@ body.cdp-cta-pinned .cdp-toc {
 @media (max-width: 375px) {
   .factoid-num { font-size: 28px; }
   .factoid-lbl { white-space: normal; }
+}
+
+/* ══════════════════════════════════════════════
+   CART — RESPONSIVE (≤1024px → fullscreen)
+══════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  /* Full-screen panel instead of a side drawer */
+  .cart-drawer {
+    width: 100%;
+    left: 0;
+  }
+
+  /* Overlay is behind the fullscreen cart — suppress it */
+  .drawer-overlay.is-open { display: none; }
+
+  /* Header: use the grid margin and reduce title size */
+  .drawer-header {
+    padding: 14px var(--margin);
+  }
+  .drawer-title {
+    font-size: 16px;
+  }
+
+  /* Scrollable body: align with grid margins */
+  .nki-cart-content {
+    padding: 20px var(--margin);
+  }
+  .nki-cart-footer {
+    padding: 0 var(--margin) 20px;
+  }
+  .nki-cart-sep {
+    margin: 0 calc(-1 * var(--margin)) 16px;
+  }
+
+  /* Item card */
+  .nki-item-img {
+    width: 64px;
+    height: 64px;
+  }
+  .nki-item-name        { font-size: 16px; }
+  .nki-item-meta        { font-size: 13px; }
+  .nki-item-price       { font-size: 14px; }
+  .nki-item-books       { font-size: 13px; }
+  .nki-cart-install-hint { font-size: 13px; }
+
+  /* Lånekassen accordion */
+  .nki-lk-key, .nki-lk-val, .nki-lk-disc { font-size: 13px; }
+
+  /* Suggested section */
+  .nki-sugg-title    { font-size: 16px; }
+  .nki-sugg-subtitle { font-size: 13px; }
+  .nki-sugg-name     { font-size: 13px; }
+  .nki-sugg-meta     { font-size: 12px; }
+  .nki-sugg-price    { font-size: 13px; }
+  .nki-sugg-img      { width: 56px; height: 56px; }
+  .nki-sugg-add      { font-size: 13px; padding: 4px 8px; }
+
+  /* Checkout CTA */
+  .nki-cart-cta       { height: 48px; font-size: 14px; gap: 12px; }
+  .nki-cta-sep        { height: 20px; }
+
+  /* Payment pills: tighten spacing */
+  .nki-pay-pills      { gap: 4px; padding: 0 0 2px; }
+  .nki-pay-pill--logo { width: 48px; height: 28px; }
+  .nki-pay-pill--text { height: 30px; font-size: 13px; }
+
+  /* Empty state */
+  .nki-cart-empty-title { font-size: 13px; }
+  .nki-cart-empty-sub   { font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  /* Compact item thumbnail at small mobile */
+  .nki-item-img  { width: 52px; height: 52px; }
+  .nki-sugg-img  { width: 48px; height: 48px; }
 }
