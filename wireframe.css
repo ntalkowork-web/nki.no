@@ -5515,27 +5515,9 @@ body.cdp-cta-pinned .cdp-toc {
   .cp-grid.cols-3 { grid-template-columns: repeat(3, calc(50vw - var(--margin) - 8px)); }
   .cp-img { display: none; }
 
-  /* Thank you cards: horizontal scroll carousel */
-  .ty-cards {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 16px;
-    margin-left: calc(-1 * var(--margin));
-    margin-right: calc(-1 * var(--margin));
-    padding-left: var(--margin);
-    padding-right: var(--margin);
-    padding-bottom: 24px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    align-items: stretch;
-    /* reset grid */
-    grid-template-columns: unset;
-  }
-  .ty-cards::-webkit-scrollbar { display: none; }
-  /* Each card: fills viewport minus gutters, leaving a var(--margin) peek of the next */
-  .ty-card { flex: 0 0 calc(100vw - var(--margin) * 2 - 16px); scroll-snap-align: start; }
+  /* Thank you cards: single column, hug content */
+  .ty-cards { grid-template-columns: 1fr; gap: 16px; }
+  .ty-card { min-height: 0; }
 }
 
 /* ══════════════════════════════════════════════

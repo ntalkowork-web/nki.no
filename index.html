@@ -4854,11 +4854,7 @@
 
   function equalizeTyCards() {
     var cards = Array.prototype.slice.call(document.querySelectorAll('.ty-card'));
-    if (!cards.length) return;
     cards.forEach(function(c) { c.style.minHeight = ''; });
-    if (window.innerWidth > 1024) return;
-    var maxH = cards.reduce(function(m, c) { return Math.max(m, c.offsetHeight); }, 0);
-    cards.forEach(function(c) { c.style.minHeight = maxH + 'px'; });
   }
   window.addEventListener('resize', equalizeTyCards);
 
