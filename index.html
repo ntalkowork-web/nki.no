@@ -2037,6 +2037,29 @@
 
   document.getElementById('drawerOverlay').addEventListener('click', NKICart.close);
 
+  /* ── Header compare badge ── */
+  function updateHdrCompareBadge() {
+    if (window.innerWidth > 1024) return;
+    var btn = document.getElementById('hdrCompareBtn');
+    var badge = document.getElementById('hdrCmpBadge');
+    if (!btn || !badge) return;
+    var count = (typeof spState !== 'undefined') ? spState.compareIds.length : 0;
+    if (count > 0) {
+      badge.textContent = count;
+      btn.style.display = 'flex';
+    } else {
+      btn.style.display = 'none';
+    }
+  }
+  var hdrCmpBtn = document.getElementById('hdrCompareBtn');
+  if (hdrCmpBtn) hdrCmpBtn.addEventListener('click', function() {
+    if (typeof spState !== 'undefined' && spState.compareIds.length >= 2) {
+      showPage('compare', { courseIds: spState.compareIds.slice() });
+    } else if (typeof spState !== 'undefined' && spState.compareIds.length === 1) {
+      showPage('search');
+    }
+  });
+
   document.addEventListener('click', function (e) {
     var addEl = e.target.closest('[data-add-to-cart]');
     if (addEl) {
@@ -2732,8 +2755,15 @@
       ? '<span class="sp-active-pill">' + total + ' Applied<button class="sp-pill-x sp-mob-clear-all">×</button></span>'
       : '';
     var activeClass = total > 0 ? ' sp-mob-icon-btn--active' : '';
+    var cmpBtn = spState.compareIds.length > 0
+      ? '<button class="sp-mob-cmp-btn" id="spMobCmpBtn"' + (spState.compareIds.length < 2 ? ' disabled' : '') + '>' +
+          'Compare courses' +
+          '<span class="sp-mob-cmp-badge">' + spState.compareIds.length + '</span>' +
+        '</button>'
+      : '';
     return '<div class="sp-mob-bar" id="spMobBar">' +
       '<div class="sp-mob-pills-area">' + pillsHTML + '</div>' +
+      cmpBtn +
       '<div class="sp-mob-icons">' +
         '<button class="sp-mob-icon-btn' + activeClass + '" id="spMobFilterBtn" aria-label="Filters">' +
           '<span class="material-symbols-outlined" style="font-size:20px;line-height:1">tune</span>' +
@@ -2920,6 +2950,10 @@
       spState.areas = []; spState.levels = []; spState.lengths = []; spState.lanekassen = false;
       renderSearchPage();
     });
+    var cmpBtn = document.getElementById('spMobCmpBtn');
+    if (cmpBtn) cmpBtn.addEventListener('click', function() {
+      if (spState.compareIds.length >= 2) showPage('compare', { courseIds: spState.compareIds.slice() });
+    });
     var filterBtn = document.getElementById('spMobFilterBtn');
     if (filterBtn) filterBtn.addEventListener('click', openMobFilters);
     var sortBtn = document.getElementById('spMobSortBtn');
@@ -3020,6 +3054,32 @@
   function rebuildSidebar() {
     var sb = document.getElementById('spSidebar');
     if (sb) { sb.innerHTML = buildSidebarHTML(); bindSidebarEvents(); }
+  }
+
+  function rebuildMobBar() {
+    var mb = document.getElementById('spMobBar');
+    if (!mb) return;
+    var icons = mb.querySelector('.sp-mob-icons');
+    if (!icons) return;
+    var existingCmp = document.getElementById('spMobCmpBtn');
+    if (spState.compareIds.length > 0) {
+      if (existingCmp) {
+        existingCmp.querySelector('.sp-mob-cmp-badge').textContent = spState.compareIds.length;
+        existingCmp.disabled = spState.compareIds.length < 2;
+      } else {
+        var btn = document.createElement('button');
+        btn.id = 'spMobCmpBtn';
+        btn.className = 'sp-mob-cmp-btn';
+        btn.disabled = spState.compareIds.length < 2;
+        btn.innerHTML = 'Compare courses<span class="sp-mob-cmp-badge">' + spState.compareIds.length + '</span>';
+        mb.insertBefore(btn, icons);
+        btn.addEventListener('click', function() {
+          if (spState.compareIds.length >= 2) showPage('compare', { courseIds: spState.compareIds.slice() });
+        });
+      }
+    } else {
+      if (existingCmp) existingCmp.remove();
+    }
   }
 
   /* ── Event binding ── */
@@ -3145,6 +3205,7 @@
         var cb = page.querySelector('.cc-compare-cb[data-course-id="' + id + '"]');
         if (cb) cb.checked = false;
         rebuildSidebar();
+        rebuildMobBar();
       });
     });
 
@@ -3192,6 +3253,7 @@
           spState.compareIds = spState.compareIds.filter(function(x) { return x !== id; });
         }
         rebuildSidebar();
+        rebuildMobBar();
       });
     });
     page.querySelectorAll('[data-sp-cart]').forEach(function(btn) {
@@ -3240,18 +3302,33 @@
         if (attr.isList) val = '<ul class="cp-subject-list">' + val + '</ul>';
         return '<div class="cp-row"><div class="cp-row-label">' + attr.label + '</div><div class="cp-row-val">' + val + '</div></div>';
       }).join('');
-      return '<div class="cp-col"><div class="cp-img"></div>' +
-        '<div class="cp-col-name">' + c.name + '</div>' +
+      return '<div class="cp-col">' +
+        '<div class="cp-col-head">' +
+          '<div class="cp-img"></div>' +
+          '<div class="cp-col-name">' + c.name + '</div>' +
+          '<div class="cp-col-actions">' +
+            '<button class="cp-col-cta" data-cp-cart="' + c.id + '">Add to cart</button>' +
+            '<button class="cp-col-view" data-cp-view="' + c.id + '">View course</button>' +
+          '</div>' +
+        '</div>' +
         rows +
-        '<div class="cp-col-footer"><div class="cp-col-price">kr ' + fmtNum(c.price) + '</div><button class="cp-col-cta" data-cp-cart="' + c.id + '">Add to cart</button></div></div>';
+        '<div class="cp-col-footer"><div class="cp-col-price">kr ' + fmtNum(c.price) + '</div></div></div>';
     }).join('');
 
     page.innerHTML = '<div class="cp-wrap">' +
       '<div class="cp-breadcrumb"><a class="cp-bc-link" id="cpBcHome">Home</a><span class="cp-bc-sep"> &gt; </span>' +
       '<a class="cp-bc-link" id="cpBcSearch">Search</a><span class="cp-bc-sep"> &gt; </span>' +
       '<span class="cp-bc-current">Compare courses</span></div>' +
-      '<div class="cp-title">Compare courses</div>' +
-      '<div class="cp-grid ' + (courses.length === 2 ? 'cols-2' : 'cols-3') + '">' + cols + '</div>' +
+      '<div class="cp-title-row">' +
+        '<div class="cp-title">Compare courses</div>' +
+        '<div class="cp-header-right">' +
+          '<span class="cp-count">' + courses.length + '/3 courses comparing</span>' +
+          '<button class="cp-clear-btn" id="cpClearBtn">Clear selection</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="cp-grid-scroll">' +
+        '<div class="cp-grid ' + (courses.length === 2 ? 'cols-2' : 'cols-3') + '">' + cols + '</div>' +
+      '</div>' +
     '</div>';
 
     var h = document.getElementById('cpBcHome');
@@ -3268,6 +3345,40 @@
         if (c) NKICart.add({ id: c.id, name: c.name, hours: c.months * 20, accessMonths: c.months, price: c.price, needsBooks: false });
       });
     });
+
+    page.querySelectorAll('[data-cp-view]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var c = spCourseById(btn.getAttribute('data-cp-view'));
+        if (c) showPage('course', { courseName: c.name });
+      });
+    });
+
+    var clearBtn = document.getElementById('cpClearBtn');
+    if (clearBtn) clearBtn.addEventListener('click', function() {
+      spState.compareIds = [];
+      updateHdrCompareBadge();
+      showPage('search');
+    });
+
+    setTimeout(function() {
+      var cols = Array.from(page.querySelectorAll('.cp-col'));
+      if (cols.length < 2) return;
+
+      // Equalize column heads with height (not minHeight) so flex:1 on name fills correctly
+      var heads = cols.map(function(c) { return c.querySelector('.cp-col-head'); });
+      heads.forEach(function(h) { if (h) h.style.height = ''; });
+      var maxHeadH = Math.max.apply(null, heads.map(function(h) { return h ? h.offsetHeight : 0; }));
+      heads.forEach(function(h) { if (h) h.style.height = maxHeadH + 'px'; });
+
+      // Equalize each attribute row by index across columns
+      var rowCount = cols[0].querySelectorAll('.cp-row').length;
+      for (var i = 0; i < rowCount; i++) {
+        var rowsAtIdx = cols.map(function(c) { return c.querySelectorAll('.cp-row')[i]; });
+        rowsAtIdx.forEach(function(r) { if (r) r.style.minHeight = ''; });
+        var maxRowH = Math.max.apply(null, rowsAtIdx.map(function(r) { return r ? r.offsetHeight : 0; }));
+        rowsAtIdx.forEach(function(r) { if (r) r.style.minHeight = maxRowH + 'px'; });
+      }
+    }, 0);
   }
 
   /* ── Navigation trigger bindings ── */
