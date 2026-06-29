@@ -5105,7 +5105,7 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-mob-toc { display: block; }
 
   /* CDP hero: image first, content area width, 256px height */
-  .cdp-hero { display: flex; flex-direction: column; gap: 0; padding: 0; }
+  .cdp-hero { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 0; }
   .cdp-hero-right { order: -1; }
   .cdp-hero-img { height: 256px; aspect-ratio: unset; width: 100%; border-radius: var(--r-md); }
   .cdp-hero-left { padding-top: 24px; }
