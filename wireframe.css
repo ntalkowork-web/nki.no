@@ -5176,7 +5176,7 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-advice { padding: 32px 0; }
   #page-course > .cdp-faq:last-child,
   #page-course > .cdp-related:last-child,
-  #page-course > .cdp-advice:last-child { padding-bottom: 64px; }
+  #page-course > .cdp-advice:last-child { padding-bottom: 40px; }
 
   /* CDP related: show scroll counter, keep heading margin via parent */
   .cdp-related-counter { display: block; }
@@ -5205,8 +5205,8 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-related-heading { font-size: 26px; margin-bottom: 0; }
   .cdp-section-title { font-size: 22px; }
 
-  /* Thank you cards: single col, 16px gap, JS equalises heights */
-  .ty-cards { grid-template-columns: 1fr; gap: 16px; padding-bottom: 24px; }
+  /* Thank you cards: tighten gap on tablet */
+  .ty-cards { gap: 16px; padding-bottom: 24px; }
   .ty-card-hd { font-size: 18px; margin-bottom: 12px; }
   /* Thank you hero: equal top/bottom spacing (48px each) */
   .ty-hero { padding-top: calc(var(--header-h) + 32px); padding-bottom: 24px; }
@@ -5513,6 +5513,28 @@ body.cdp-cta-pinned .cdp-toc {
   .cp-grid.cols-2 { grid-template-columns: repeat(2, 1fr); min-width: calc(100vw - 2 * var(--margin)); }
   .cp-grid.cols-3 { grid-template-columns: repeat(3, calc(50vw - var(--margin) - 8px)); }
   .cp-img { display: none; }
+
+  /* Thank you cards: horizontal scroll carousel */
+  .ty-cards {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 16px;
+    margin-left: calc(-1 * var(--margin));
+    margin-right: calc(-1 * var(--margin));
+    padding-left: var(--margin);
+    padding-right: var(--margin);
+    padding-bottom: 24px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    align-items: stretch;
+    /* reset grid */
+    grid-template-columns: unset;
+  }
+  .ty-cards::-webkit-scrollbar { display: none; }
+  /* Each card: fills viewport minus gutters, leaving a var(--margin) peek of the next */
+  .ty-card { flex: 0 0 calc(100vw - var(--margin) * 2 - 16px); scroll-snap-align: start; }
 }
 
 /* ══════════════════════════════════════════════
@@ -5596,8 +5618,7 @@ body.cdp-cta-pinned .cdp-toc {
   .co-step-hd { padding: 14px 16px; }
   .co-pay-body { padding-left: 16px; }
 
-  /* Thank you page: stack cards to 1 col on small phones */
-  .ty-cards { grid-template-columns: 1fr; }
+  /* Thank you page: small phones */
   .ty-headline { font-size: 26px; }
   .ty-hero { padding-top: calc(var(--header-h) + 32px); padding-bottom: 16px; }
   .ty-card-hd { font-size: 16px; }
