@@ -510,7 +510,10 @@ select { font-family: inherit; }
 }
 
 .btn-login {
-  padding: 7px 13px;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 13px;
   font-size: 14px;
   font-weight: 500;
   color: var(--gray-900);
@@ -518,6 +521,8 @@ select { font-family: inherit; }
   border: 1px solid var(--gray-900);
   border-radius: var(--r-sm);
   transition: background .15s;
+  cursor: pointer;
+  font-family: var(--font);
 }
 
 .btn-login:hover { background: var(--gray-100); }
@@ -1148,21 +1153,6 @@ select { font-family: inherit; }
   margin-top: 32px;
 }
 
-.btn-see-all {
-  display: inline-block;
-  padding: 11px 28px;
-  border: 1.5px solid var(--gray-300);
-  border-radius: var(--r-sm);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--gray-900);
-  text-decoration: none;
-  cursor: pointer;
-  background: transparent;
-}
-
-.btn-see-all:hover { background: var(--gray-50); }
-
 /* ── FORM ELEMENTS ────────────────────────── */
 
 .form-group { margin-bottom: 13px; }
@@ -1215,8 +1205,10 @@ select { font-family: inherit; }
 }
 
 .btn-submit {
-  display: inline-block;
-  padding: 10px 26px;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 26px;
   background: var(--gray-900);
   color: var(--white);
   font-size: 14px;
@@ -1396,7 +1388,10 @@ main { margin-top: var(--header-h); }
 .config-divider { width: 1px; height: 34px; background: var(--gray-700); flex-shrink: 0; }
 
 .btn-find {
-  padding: 11px 28px;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 28px;
   background: var(--white);
   color: var(--gray-900);
   font-size: 14px;
@@ -1412,8 +1407,10 @@ main { margin-top: var(--header-h); }
 .btn-find:hover { background: var(--gray-200); }
 
 .btn-section-cta {
-  display: inline-block;
-  padding: 11px 24px;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 24px;
   background: var(--gray-900);
   color: var(--white);
   font-size: 14px;
@@ -2165,7 +2162,10 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 .footer-nl-input:focus { border-color: var(--gray-400); }
 
 .btn-nl {
-  padding: 9px 18px;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 18px;
   background: var(--white);
   color: var(--gray-900);
   font-size: 14px;
@@ -2758,7 +2758,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 }
 .sp-browse-later-input:focus { border-color: var(--gray-500); }
 .sp-browse-later-btn {
-  height: 44px;
+  height: 48px;
   padding: 0 16px;
   box-sizing: border-box;
   background: var(--white);
@@ -2796,7 +2796,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   line-height: 1.5;
 }
 .sp-load-more-btn {
-  height: 44px;
+  height: 48px;
   padding: 0 36px;
   background: var(--gray-900);
   color: var(--white);
@@ -2941,8 +2941,8 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   width: 100%;
   background: var(--gray-900); color: var(--white);
   border: none; border-radius: var(--r-md);
-  padding: 14px;
-  font-size: 16px; font-weight: 600; font-family: var(--font);
+  height: 48px; padding: 0 14px;
+  font-size: 14px; font-weight: 600; font-family: var(--font);
   cursor: pointer;
 }
 .sp-mob-show-btn:hover { background: var(--gray-800); }
@@ -4378,7 +4378,7 @@ body.cdp-cta-pinned .cdp-toc {
 .co-terms-lbl a { color: var(--gray-900); }
 .co-cta-wrap { display: flex; flex-direction: column; gap: 8px; padding-top: 20px; }
 .co-continue-btn {
-  height: 44px;
+  height: 48px;
   width: 100%;
   padding: 0 24px;
   font-size: 14px;
@@ -4577,7 +4577,7 @@ body.cdp-cta-pinned .cdp-toc {
 .co-pay-confirm { display: flex; flex-direction: column; gap: 10px; }
 .co-regs-lbl { align-items: center; display: block; margin-top: 16px; margin-bottom: 16px; }
 .co-proceed-btn {
-  height: 44px;
+  height: 48px;
   width: 100%;
   padding: 0 24px;
   font-size: 14px;
@@ -5581,12 +5581,13 @@ body.cdp-cta-pinned .cdp-toc {
 .btn-browse-all {
   display: inline-flex;
   align-items: center;
-  padding: 12px 16px;
+  height: 48px;
+  padding: 0 16px;
   background: var(--gray-900);
   color: var(--white);
   border: 1.5px solid var(--gray-900);
   border-radius: var(--r-sm);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: background .15s, border-color .15s;
@@ -5602,7 +5603,8 @@ body.cdp-cta-pinned .cdp-toc {
 .btn-see-all {
   display: inline-flex;
   align-items: center;
-  padding: 10px 22px;
+  height: 48px;
+  padding: 0 22px;
   border: 1.5px solid var(--gray-900);
   border-radius: var(--r-sm);
   font-size: 14px;
