@@ -5427,7 +5427,8 @@ body.cdp-cta-pinned .cdp-toc {
 
   /* Mobile section counter: show below headline */
   .mob-section-counter { display: block; }
-  section[aria-labelledby="hiw-hd"] .section-hd { margin-bottom: 4px; }
+  section[aria-labelledby="hiw-hd"]   .section-hd { margin-bottom: 4px; }
+  section[aria-labelledby="testi-hd"] .section-hd { margin-bottom: 4px; }
 
   /* How it works: horizontal slider */
   .hiw-grid {

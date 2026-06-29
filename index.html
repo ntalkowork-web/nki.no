@@ -1492,7 +1492,7 @@
     if (!cols || !counter) return;
     var cards = cols.querySelectorAll('.t-card:not(.featured)');
     var total = cards.length;
-    counter.textContent = '1 / ' + total;
+    counter.textContent = '1 — ' + total;
     cols.addEventListener('scroll', function() {
       var firstCard = cols.querySelector('.t-card:not(.featured)');
       if (!firstCard) return;
