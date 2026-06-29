@@ -5302,7 +5302,7 @@ body.cdp-cta-pinned .cdp-toc {
   .co-form-row { grid-template-columns: 1fr; }
   .co-step-hd { padding: 16px; }
   .co-step-body { padding: 0 16px 20px; }
-  .co-input, .co-select { height: 44px; }
+  .co-input, .co-select, .co-cc-sel { height: 44px; }
   .co-step-title { font-size: 15px; }
   .co-sum-hd { font-size: 17px; }
   .co-sum-name { font-size: 15px; }

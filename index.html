@@ -2498,6 +2498,7 @@
   var CURRENT_COURSE    = null;
   var _cdpObserver        = null;
   var _cdpRelatedObserver = null;
+  var _cdpMobTocObserver  = null;
   var _spMobObserver    = null;
   var _spMobScrollFn    = null;
   var CHECKOUT_STATE = {
@@ -2616,6 +2617,7 @@
       document.body.classList.remove('cdp-cta-pinned');
       if (_cdpObserver) { _cdpObserver.disconnect(); _cdpObserver = null; }
       if (_cdpRelatedObserver) { _cdpRelatedObserver.disconnect(); _cdpRelatedObserver = null; }
+      if (_cdpMobTocObserver) { _cdpMobTocObserver.disconnect(); _cdpMobTocObserver = null; }
     }
 
     if (name === 'home') { window.scrollTo(0, 0); }
@@ -3907,12 +3909,10 @@
       _cdpObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           var toc = document.getElementById('cdpToc');
-          var mobToc = document.getElementById('cdp-mob-toc');
           if (entry.isIntersecting) {
             stickyEl.classList.remove('is-visible');
             document.body.classList.remove('cdp-cta-pinned');
             if (toc) { toc.classList.remove('is-visible'); }
-            if (mobToc) { mobToc.classList.remove('is-visible'); }
           } else {
             var inCart = NKICart.getItems().some(function(i) { return i.id === CURRENT_COURSE.id; });
             if (!inCart) {
@@ -3920,11 +3920,30 @@
               document.body.classList.add('cdp-cta-pinned');
             }
             if (toc) { toc.classList.add('is-visible'); }
-            if (mobToc) { mobToc.classList.add('is-visible'); }
           }
         });
       }, { threshold: 0 });
       _cdpObserver.observe(ctasEl);
+    }
+
+    /* Mobile TOC: show only once first body section (#cdp-sec-wyg) is reached */
+    if (_cdpMobTocObserver) _cdpMobTocObserver.disconnect();
+    var firstBodySection = document.getElementById('cdp-sec-wyg');
+    if (firstBodySection && 'IntersectionObserver' in window) {
+      _cdpMobTocObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          var mobToc = document.getElementById('cdp-mob-toc');
+          if (!mobToc) return;
+          if (entry.isIntersecting) {
+            mobToc.classList.add('is-visible');
+          } else if (entry.boundingClientRect.top > 0) {
+            /* section is still below viewport — user hasn't reached it yet */
+            mobToc.classList.remove('is-visible');
+          }
+          /* top <= 0 and not intersecting = user scrolled past it; keep TOC visible */
+        });
+      }, { threshold: 0 });
+      _cdpMobTocObserver.observe(firstBodySection);
     }
 
     /* Hide mob TOC when last FAQ question scrolls past the top; restore on scroll back */
@@ -3939,9 +3958,9 @@
             /* last FAQ question scrolled above viewport → hide TOC */
             mobToc.classList.remove('is-visible');
           } else if (entry.isIntersecting) {
-            /* last FAQ question back in view → restore TOC if hero CTA is gone */
-            var ctaEl = document.getElementById('cdp-hero-ctas');
-            if (ctaEl && ctaEl.getBoundingClientRect().bottom < 0) {
+            /* last FAQ question back in view → restore TOC if first body section has been passed */
+            var wyg = document.getElementById('cdp-sec-wyg');
+            if (wyg && wyg.getBoundingClientRect().top <= 0) {
               mobToc.classList.add('is-visible');
             }
           }
