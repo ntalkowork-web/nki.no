@@ -2496,7 +2496,8 @@
   };
 
   var CURRENT_COURSE    = null;
-  var _cdpObserver      = null;
+  var _cdpObserver        = null;
+  var _cdpRelatedObserver = null;
   var _spMobObserver    = null;
   var _spMobScrollFn    = null;
   var CHECKOUT_STATE = {
@@ -2612,6 +2613,7 @@
       stickyEl.classList.remove('is-visible');
       document.body.classList.remove('cdp-cta-pinned');
       if (_cdpObserver) { _cdpObserver.disconnect(); _cdpObserver = null; }
+      if (_cdpRelatedObserver) { _cdpRelatedObserver.disconnect(); _cdpRelatedObserver = null; }
     }
 
     if (name === 'home') { window.scrollTo(0, 0); }
@@ -3921,6 +3923,28 @@
         });
       }, { threshold: 0 });
       _cdpObserver.observe(ctasEl);
+    }
+
+    /* Hide mob TOC at Relevant courses; restore at FAQ and above */
+    if (_cdpRelatedObserver) _cdpRelatedObserver.disconnect();
+    var relatedEl = page.querySelector('.cdp-related');
+    if (relatedEl && 'IntersectionObserver' in window) {
+      _cdpRelatedObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          var mobToc = document.getElementById('cdp-mob-toc');
+          if (!mobToc) return;
+          if (entry.isIntersecting) {
+            mobToc.classList.remove('is-visible');
+          } else {
+            /* only restore if user has already scrolled past the hero CTA */
+            var ctaEl = document.getElementById('cdp-hero-ctas');
+            if (ctaEl && ctaEl.getBoundingClientRect().bottom < 0) {
+              mobToc.classList.add('is-visible');
+            }
+          }
+        });
+      }, { threshold: 0 });
+      _cdpRelatedObserver.observe(relatedEl);
     }
 
   }
