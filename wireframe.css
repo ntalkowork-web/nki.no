@@ -3225,6 +3225,9 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   border-right: none;
   border-bottom: none;
   border-radius: 0;
+  -webkit-border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
   background: var(--white);
   cursor: pointer;
   display: flex;
@@ -5086,25 +5089,22 @@ body.cdp-cta-pinned .cdp-toc {
   /* CDP mobile: show horizontal TOC bar */
   .cdp-mob-toc { display: block; }
 
-  /* CDP hero: image first, fills full width (bleeds to screen edges) */
-  .cdp-hero { display: flex; flex-direction: column; gap: 24px; padding: 0 0 36px; }
-  .cdp-hero-right {
-    order: -1;
-    margin-left: calc(-1 * var(--margin));
-    margin-right: calc(-1 * var(--margin));
-  }
-  .cdp-hero-img { aspect-ratio: 16/9; border-radius: 0; }
+  /* CDP hero: image first, content area width, 256px height */
+  .cdp-hero { display: flex; flex-direction: column; gap: 0; padding: 0 0 36px; }
+  .cdp-hero-right { order: -1; }
+  .cdp-hero-img { height: 256px; aspect-ratio: unset; width: 100%; border-radius: var(--r-md); }
   .cdp-hero-left { padding-top: 24px; }
   .cdp-h1 { font-size: 28px; }
 
-  /* CDP hero section: flat, no overlap — infobar flows below in normal document order */
-  .cdp-hero-section { padding-bottom: 0; }
+  /* CDP hero section: add bottom gap so infobar is visually separate */
+  .cdp-hero-section { padding-bottom: 16px; }
   .cdp-infobar { margin-top: 0; border-radius: 0; border-left: none; border-right: none; box-shadow: none; border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); }
 
   /* CDP CTAs: vertical stack */
   .cdp-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
   .cdp-btn-demo { justify-content: center; }
   .cdp-btn-cart { justify-content: center; }
+  .cdp-learner-count { justify-content: center; }
 
   /* CDP meta: vertical list */
   .cdp-meta { flex-direction: column; gap: 8px; }
@@ -5114,8 +5114,8 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-media-types { flex-direction: column; gap: 8px; }
   .cdp-media-dot { display: none; }
 
-  /* CDP content sections: compact 24px padding */
-  .cdp-section { padding: 24px 0; scroll-margin-top: calc(var(--header-h) + 110px); }
+  /* CDP content sections: 32px padding → 64px gap between adjacent sections */
+  .cdp-section { padding: 32px 0; scroll-margin-top: calc(var(--header-h) + 110px); }
 
   /* CDP major section padding: 64px consistent */
   .cdp-related { padding: 64px 0; }
@@ -5142,6 +5142,8 @@ body.cdp-cta-pinned .cdp-toc {
   }
   .cdp-related .courses-grid::-webkit-scrollbar { display: none; }
   .cdp-related .course-card { flex-shrink: 0; width: 72vw; scroll-snap-align: start; }
+  /* last card trailing space — padding-right ignored by some browsers on scroll containers */
+  .cdp-related .course-card:last-child { margin-right: var(--margin); }
 
   /* CDP headings: tablet-friendly sizes */
   .cdp-related-heading { font-size: 26px; margin-bottom: 20px; }
