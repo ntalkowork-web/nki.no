@@ -5105,7 +5105,7 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-mob-toc { display: block; }
 
   /* CDP hero: image first, content area width, 256px height */
-  .cdp-hero { display: flex; flex-direction: column; gap: 0; padding: 0 0 36px; }
+  .cdp-hero { display: flex; flex-direction: column; gap: 0; padding: 0; }
   .cdp-hero-right { order: -1; }
   .cdp-hero-img { height: 256px; aspect-ratio: unset; width: 100%; border-radius: var(--r-md); }
   .cdp-hero-left { padding-top: 24px; }
@@ -5496,7 +5496,7 @@ body.cdp-cta-pinned .cdp-toc {
   .courses-grid { grid-template-columns: 1fr; }
 
   /* CDP hero */
-  .cdp-hero { padding: 16px 0 24px; }
+  .cdp-hero { padding: 16px 0 0; }
   .cdp-h1 { font-size: 24px; }
   .cdp-price-current { font-size: 24px; }
   .cdp-related-heading { font-size: 22px; }
