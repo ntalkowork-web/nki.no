@@ -5114,7 +5114,7 @@ body.cdp-cta-pinned .cdp-toc {
   /* CDP hero section: bottom gap separates hero from infobar */
   .cdp-hero-section { padding-bottom: 24px; }
   /* infobar: no top border (no line above first item), no side borders, no shadow */
-  .cdp-infobar { margin-top: 0; border-radius: 0; border-left: none; border-right: none; border-top: none; box-shadow: none; border-bottom: 1px solid var(--gray-200); }
+  .cdp-infobar { margin-top: 24px; border-radius: 0; border-left: none; border-right: none; border-top: none; box-shadow: none; border-bottom: 1px solid var(--gray-200); }
 
   /* CDP CTAs: vertical stack */
   .cdp-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
