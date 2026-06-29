@@ -5558,6 +5558,7 @@ body.cdp-cta-pinned .cdp-toc {
 
   /* CDP hero */
   .cdp-hero { padding: 16px 0 0; }
+  .cdp-hero-img { height: 200px; }
   .cdp-h1 { font-size: 24px; }
   .cdp-price-current { font-size: 24px; }
   .cdp-related-heading { font-size: 22px; }
