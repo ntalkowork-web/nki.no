@@ -3925,21 +3925,19 @@
       _cdpObserver.observe(ctasEl);
     }
 
-    /* Hide mob TOC when FAQ ends (last faq item scrolls past); restore on scroll back up */
+    /* Hide mob TOC when last FAQ question scrolls past the top; restore on scroll back */
     if (_cdpRelatedObserver) _cdpRelatedObserver.disconnect();
-    var faqSection = page.querySelector('.cdp-faq');
-    var sentinelEl = faqSection
-      ? (faqSection.querySelector('.cdp-faq-item:last-child') || faqSection)
-      : page.querySelector('.cdp-related');
-    if (sentinelEl && 'IntersectionObserver' in window) {
+    var lastFaqQ = page.querySelector('.cdp-faq-item:last-child .cdp-faq-question');
+    if (lastFaqQ && 'IntersectionObserver' in window) {
       _cdpRelatedObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           var mobToc = document.getElementById('cdp-mob-toc');
           if (!mobToc) return;
-          var scrolledPast = !entry.isIntersecting && entry.boundingClientRect.top < 0;
-          if (scrolledPast) {
+          if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+            /* last FAQ question scrolled above viewport → hide TOC */
             mobToc.classList.remove('is-visible');
           } else if (entry.isIntersecting) {
+            /* last FAQ question back in view → restore TOC if hero CTA is gone */
             var ctaEl = document.getElementById('cdp-hero-ctas');
             if (ctaEl && ctaEl.getBoundingClientRect().bottom < 0) {
               mobToc.classList.add('is-visible');
@@ -3947,7 +3945,7 @@
           }
         });
       }, { threshold: 0 });
-      _cdpRelatedObserver.observe(sentinelEl);
+      _cdpRelatedObserver.observe(lastFaqQ);
     }
 
   }
