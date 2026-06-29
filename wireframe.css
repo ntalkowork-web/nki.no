@@ -5201,6 +5201,8 @@ body.cdp-cta-pinned .cdp-toc {
   /* Thank you cards: single col, 16px gap, JS equalises heights */
   .ty-cards { grid-template-columns: 1fr; gap: 16px; padding-bottom: 24px; }
   .ty-card-hd { font-size: 18px; margin-bottom: 12px; }
+  /* Thank you hero: equal top/bottom spacing (48px each) */
+  .ty-hero { padding-top: 48px; padding-bottom: 24px; }
 
   /* Search dropdown: match search field width */
   .search-dropdown { width: 100%; }
@@ -5590,7 +5592,7 @@ body.cdp-cta-pinned .cdp-toc {
   /* Thank you page: stack cards to 1 col on small phones */
   .ty-cards { grid-template-columns: 1fr; }
   .ty-headline { font-size: 26px; }
-  .ty-hero { padding-top: 80px; padding-bottom: 16px; }
+  .ty-hero { padding-top: 40px; padding-bottom: 16px; }
   .ty-card-hd { font-size: 16px; }
   .ty-card { padding: 16px; }
   .ty-contact-tel { font-size: 16px; }
