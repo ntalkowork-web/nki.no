@@ -5559,7 +5559,7 @@ body.cdp-cta-pinned .cdp-toc {
     border-top: none;
     border-bottom: 1px solid var(--gray-200);
   }
-  .cdp-infobar-sep { display: none; }
+  .cdp-infobar-sep:nth-child(n) { display: none; }
   .cdp-infobar-item {
     flex-direction: row;
     align-items: center;
