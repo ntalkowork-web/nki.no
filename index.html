@@ -4806,6 +4806,7 @@
         '</div>' +
       '</div>';
     launchConfetti();
+    equalizeTyCards();
     document.getElementById('tyNlBtn').addEventListener('click', function(){
       document.getElementById('tyNlSuccess').hidden = false;
       document.getElementById('tyNlInp').disabled   = true;
@@ -4830,6 +4831,16 @@
     if (cesCloseBtn)   cesCloseBtn.addEventListener('click',   function() { if (cesWidget) cesWidget.hidden = true; });
     if (cesDismissBtn) cesDismissBtn.addEventListener('click', function() { if (cesWidget) cesWidget.hidden = true; });
   }
+
+  function equalizeTyCards() {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.ty-card'));
+    if (!cards.length) return;
+    cards.forEach(function(c) { c.style.minHeight = ''; });
+    if (window.innerWidth > 1024) return;
+    var maxH = cards.reduce(function(m, c) { return Math.max(m, c.offsetHeight); }, 0);
+    cards.forEach(function(c) { c.style.minHeight = maxH + 'px'; });
+  }
+  window.addEventListener('resize', equalizeTyCards);
 
   function launchConfetti() {
     var el = document.getElementById('tyConfetti');
