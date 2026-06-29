@@ -2609,8 +2609,10 @@
     if (siteFooter) siteFooter.hidden = isCoPage;
 
     var stickyEl = document.getElementById('cdp-sticky-cta');
-    if (name !== 'course' && stickyEl) {
-      stickyEl.classList.remove('is-visible');
+    var mobTocEl = document.getElementById('cdp-mob-toc');
+    if (name !== 'course') {
+      if (stickyEl) { stickyEl.classList.remove('is-visible'); }
+      if (mobTocEl) { mobTocEl.classList.remove('is-visible'); }
       document.body.classList.remove('cdp-cta-pinned');
       if (_cdpObserver) { _cdpObserver.disconnect(); _cdpObserver = null; }
       if (_cdpRelatedObserver) { _cdpRelatedObserver.disconnect(); _cdpRelatedObserver = null; }
