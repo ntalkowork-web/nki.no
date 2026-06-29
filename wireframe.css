@@ -5164,7 +5164,7 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-reviews-grid { gap: 16px; }
 
   /* CDP headings: tablet-friendly sizes */
-  .cdp-related-heading { font-size: 26px; margin-bottom: 20px; }
+  .cdp-related-heading { font-size: 26px; margin-bottom: 0; }
   .cdp-section-title { font-size: 22px; }
 
   /* Thank you cards */
