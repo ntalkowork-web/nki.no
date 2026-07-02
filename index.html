@@ -1746,7 +1746,8 @@
     { label: 'Visa',        src: 'payment-options-logos/visa.svg' },
     { label: 'Mastercard',  src: 'payment-options-logos/mastercard.svg' },
     { label: 'Lanekassen',  src: 'payment-options-logos/lanekassen.jpg' },
-    { label: 'Vipps',       src: 'payment-options-logos/vipps.svg' }
+    { label: 'Vipps',       src: 'payment-options-logos/vipps.svg' },
+    { label: 'NAV',         src: 'payment-options-logos/nav.svg' }
   ];
 
   var _cartItems = [];
@@ -2165,24 +2166,24 @@
     ],
     pro: [
       [
-        { id: 'med-sec',      name: 'Medical Secretary',      type: 'Course',  badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '6 months', 'All levels', 'Certificate'],      price: 'Kr 12 900', orig: 'Kr 14 900', disc: '-13%' },
-        { id: 'hr-grunnkurs', name: 'Office employee',        type: 'Course',  badge: null,          rating: '4.7', pills: ['Lånekassen support', '3 months', 'All levels', 'No books needed'],  price: 'Kr 5 490',  orig: 'Kr 5 990',  disc: '-8%'  },
-        { id: 'interior',     name: 'Interior Designer',      type: 'Course',  badge: null,          rating: '4.9', pills: ['280 total hours', '6 months', 'All levels', 'Certificate'],         price: 'Kr 19 900', orig: 'Kr 23 900', disc: '-17%' },
+        { id: 'med-sec',      name: 'Medical Secretary',      type: 'Course',  badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '6 months', 'All levels', 'Certificate', 'NAV'],      price: 'Kr 12 900', orig: 'Kr 14 900', disc: '-13%' },
+        { id: 'hr-grunnkurs', name: 'Office employee',        type: 'Course',  badge: null,          rating: '4.7', pills: ['Lånekassen support', '3 months', 'All levels', 'No books needed', 'NAV'],  price: 'Kr 5 490',  orig: 'Kr 5 990',  disc: '-8%'  },
+        { id: 'interior',     name: 'Interior Designer',      type: 'Course',  badge: null,          rating: '4.9', pills: ['280 total hours', '6 months', 'All levels', 'Certificate', 'NAV'],         price: 'Kr 19 900', orig: 'Kr 23 900', disc: '-17%' },
       ],
       [
-        { id: 'hr-grunnkurs', name: 'HR Consultant',          type: 'Course',  badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '60 credits', 'Certificate', 'Books needed'],  price: 'Kr 14 900', orig: 'Kr 17 900', disc: '-17%' },
-        { id: 'regnskap',     name: 'Accounting Consultant',  type: 'Course',  badge: null,          rating: '4.7', pills: ['Lånekassen support', '60 credits', 'Vocational School'],            price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
-        { id: 'jus',          name: 'Legal Secretary',        type: 'Course',  badge: null,          rating: '4.6', pills: ['Lånekassen support', '60 credits', 'Beginner', 'Books needed'],     price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
+        { id: 'hr-grunnkurs', name: 'HR Consultant',          type: 'Course',  badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '60 credits', 'Certificate', 'Books needed', 'NAV'],  price: 'Kr 14 900', orig: 'Kr 17 900', disc: '-17%' },
+        { id: 'regnskap',     name: 'Accounting Consultant',  type: 'Course',  badge: null,          rating: '4.7', pills: ['Lånekassen support', '60 credits', 'Vocational School', 'NAV'],            price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
+        { id: 'jus',          name: 'Legal Secretary',        type: 'Course',  badge: null,          rating: '4.6', pills: ['Lånekassen support', '60 credits', 'Beginner', 'Books needed', 'NAV'],     price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
       ],
       [
-        { id: 'leder',        name: 'Project Manager',        type: 'Course',  badge: null,          rating: '4.7', pills: ['30 credits', 'All levels', 'Certificate'],                          price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-14%' },
-        { id: 'mkt-grunnkurs',name: 'Digital Marketing',     type: 'Course',  badge: null,          rating: '4.6', pills: ['Online course', '3 months', 'Beginner'],                            price: 'Kr 2 990',  orig: 'Kr 3 490',  disc: '-14%' },
-        { id: 'interior',     name: 'Home Stylist',           type: 'Course',  badge: null,          rating: '4.7', pills: ['Course', 'All levels', 'Certificate', 'Books needed'],              price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-14%' },
+        { id: 'leder',        name: 'Project Manager',        type: 'Course',  badge: null,          rating: '4.7', pills: ['30 credits', 'All levels', 'Certificate', 'NAV'],                          price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-14%' },
+        { id: 'mkt-grunnkurs',name: 'Digital Marketing',     type: 'Course',  badge: null,          rating: '4.6', pills: ['Online course', '3 months', 'Beginner', 'NAV'],                            price: 'Kr 2 990',  orig: 'Kr 3 490',  disc: '-14%' },
+        { id: 'interior',     name: 'Home Stylist',           type: 'Course',  badge: null,          rating: '4.7', pills: ['Course', 'All levels', 'Certificate', 'Books needed', 'NAV'],              price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-14%' },
       ],
       [
-        { id: 'baerekraft',   name: 'Logistics Vocational School', type: 'Course', badge: null, rating: '4.5', pills: ['30 credits', 'Vocational School', 'Lånekassen support'], price: 'Kr 8 490', orig: 'Kr 9 900',  disc: '-14%' },
-        { id: 'regnskap',     name: 'Sustainability Consultant',   type: 'Course', badge: null, rating: '4.3', pills: ['60 credits', 'Certificate', 'Lånekassen support'],       price: 'Kr 14 900',orig: 'Kr 17 900', disc: '-17%' },
-        { id: 'hr-grunnkurs', name: 'HR Fundamentals',             type: 'Course', badge: null, rating: '4.6', pills: ['30 credits', 'All levels', 'Certificate'],               price: 'Kr 6 900', orig: 'Kr 7 900',  disc: '-13%' },
+        { id: 'baerekraft',   name: 'Logistics Vocational School', type: 'Course', badge: null, rating: '4.5', pills: ['30 credits', 'Vocational School', 'Lånekassen support', 'NAV'], price: 'Kr 8 490', orig: 'Kr 9 900',  disc: '-14%' },
+        { id: 'regnskap',     name: 'Sustainability Consultant',   type: 'Course', badge: null, rating: '4.3', pills: ['60 credits', 'Certificate', 'Lånekassen support', 'NAV'],       price: 'Kr 14 900',orig: 'Kr 17 900', disc: '-17%' },
+        { id: 'hr-grunnkurs', name: 'HR Fundamentals',             type: 'Course', badge: null, rating: '4.6', pills: ['30 credits', 'All levels', 'Certificate', 'NAV'],               price: 'Kr 6 900', orig: 'Kr 7 900',  disc: '-13%' },
       ],
     ]
   };
@@ -4321,6 +4322,7 @@
       buildPayCard('partial','Partial payment', buildPartialBody(total), true) +
       buildPayCard('vipps','Vipps', buildVippsBody(), false) +
       buildPayCard('invoice','Invoice', buildInvoiceBody(), false) +
+      buildPayCard('nav','NAV', buildNavBody(), false) +
       buildPayCard('other','Other payer', buildOtherPayerBody(), true) +
     '</div>';
   }
@@ -4389,13 +4391,9 @@
   }
 
   function buildOtherPayerBody() {
-    var types = [['private','Private person'],['assoc','Association or Federation'],['company','Company'],['nav','NAV']];
+    var types = [['private','Private person'],['assoc','Association or Federation'],['company','Company']];
     var pills = types.map(function(t){ return '<button class="co-payer-pill' + (CHECKOUT_STATE.otherPayerType===t[0]?' is-active':'') + '" type="button" data-payer-type="' + t[0] + '">' + t[1] + '</button>'; }).join('');
-    var typeBody = CHECKOUT_STATE.otherPayerType === 'nav'
-      ? '<div class="co-nav-banner"><span class="material-symbols-outlined co-nav-info-ic">info</span><span>NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</span></div>' +
-        '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
-        '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>'
-      : '<div class="co-form-group"><label class="co-label" for="coOtherName">Name</label><input class="co-input" id="coOtherName" type="text" placeholder="Full name"></div>' +
+    var typeBody = '<div class="co-form-group"><label class="co-label" for="coOtherName">Name</label><input class="co-input" id="coOtherName" type="text" placeholder="Full name"></div>' +
         '<div class="co-form-group"><label class="co-label" for="coOtherEmail">Email address</label><div class="co-inp-icon-wrap"><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div></div>';
     return '<p class="co-pay-desc">Provide contact information for another payer who will receive an email from NKI. The payer must confirm the order and provide invoice details.</p>' +
       buildHowItWorks('other', [
@@ -4412,6 +4410,19 @@
         '<div class="co-payer-pills" id="coPayerPills">' + pills + '</div>' +
         '<div id="coPayerTypeBody">' + typeBody + '</div>' +
       '</div>';
+  }
+
+  function buildNavBody() {
+    return '<p class="co-pay-desc">NAV covers the cost of your course directly. Provide your local NAV office details so we can confirm the arrangement.</p>' +
+      buildHowItWorks('nav', [
+        ['Enter NAV details', 'Provide your NAV office and case handler so we can verify the arrangement.'],
+        ['NAV confirms payment', 'NAV sends payment confirmation by email or the official commitment form.'],
+        ['Course access granted', 'Once confirmed, your course access is fully activated.']
+      ]) +
+      '<hr class="co-pay-sep">' +
+      '<div class="co-nav-banner"><span class="material-symbols-outlined co-nav-info-ic">info</span><span>NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</span></div>' +
+      '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
+      '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>';
   }
 
   function buildPartialBody(total) {
@@ -4659,14 +4670,8 @@
         pill.classList.add('is-active');
         var body = document.getElementById('coPayerTypeBody');
         if (body) {
-          if (CHECKOUT_STATE.otherPayerType === 'nav') {
-            body.innerHTML = '<div class="co-nav-banner"><span class="material-symbols-outlined co-nav-info-ic">info</span><span>NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</span></div>' +
-              '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
-              '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>';
-          } else {
-            body.innerHTML = '<div class="co-form-group"><label class="co-label" for="coOtherName">Name</label><input class="co-input" id="coOtherName" type="text" placeholder="Full name"></div>' +
-              '<div class="co-form-group"><label class="co-label" for="coOtherEmail">Email address</label><div class="co-inp-icon-wrap"><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div></div>';
-          }
+          body.innerHTML = '<div class="co-form-group"><label class="co-label" for="coOtherName">Name</label><input class="co-input" id="coOtherName" type="text" placeholder="Full name"></div>' +
+            '<div class="co-form-group"><label class="co-label" for="coOtherEmail">Email address</label><div class="co-inp-icon-wrap"><span class="material-symbols-outlined co-field-icon">mail</span><input class="co-input co-icon-inp" id="coOtherEmail" type="email" placeholder="email@example.com"></div></div>';
         }
       });
     });
