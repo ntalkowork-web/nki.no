@@ -4572,7 +4572,7 @@ body.cdp-cta-pinned .cdp-toc {
   letter-spacing: 0.3px;
 }
 .co-vipps-logo { font-size: 22px; font-weight: 900; color: #ff5b24; margin-bottom: 12px; letter-spacing: -0.5px; }
-.co-other-expand, .co-partial-expand { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+.co-other-expand, .co-partial-expand, .co-nav-expand { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
 .co-other-head-group { display: flex; flex-direction: column; gap: 8px; }
 .co-other-hd { font-size: 14px; font-weight: 600; color: var(--gray-900); }
 .co-other-sub { font-size: 14px; color: var(--gray-500); margin: 0; }

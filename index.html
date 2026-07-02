@@ -4420,9 +4420,11 @@
         ['Course access granted', 'Once confirmed, your course access is fully activated.']
       ]) +
       '<hr class="co-pay-sep">' +
-      '<div class="co-nav-banner"><span class="material-symbols-outlined co-nav-info-ic">info</span><span>NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</span></div>' +
-      '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
-      '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>';
+      '<div class="co-nav-expand">' +
+        '<div class="co-nav-banner"><span class="material-symbols-outlined co-nav-info-ic">info</span><span>NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</span></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>' +
+      '</div>';
   }
 
   function buildPartialBody(total) {
