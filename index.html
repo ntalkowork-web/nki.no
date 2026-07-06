@@ -1140,6 +1140,7 @@
 <div id="page-course" hidden></div>
 <div id="page-signin" hidden></div>
 <div id="page-checkout" hidden></div>
+<div id="page-cart" hidden></div>
 <div id="page-thankyou" hidden></div>
 
 <div id="cdp-sticky-cta" class="cdp-sticky-cta"></div>
@@ -1866,6 +1867,7 @@
           '<span class="nki-cta-sep"></span>' +
           '<span class="nki-cta-price">' + total + '</span>' +
         '</button>' +
+        '<button class="nki-cart-cta-secondary" id="cartGoToCartBtn">Go to cart</button>' +
         '<div class="nki-pay-pills">' + logoPills + '</div>' +
       '</footer>'
     );
@@ -1931,7 +1933,123 @@
       showPage('checkout');
     });
 
+    var goCartBtn = drawer.querySelector('#cartGoToCartBtn');
+    if (goCartBtn) goCartBtn.addEventListener('click', function() {
+      NKICart.close();
+      showPage('cart');
+    });
+
     updateCartBadge();
+  }
+
+  /* ── Cart page (full page, linked from drawer "Go to cart" + checkout summary "Edit") ── */
+
+  function buildCartPageItem(item) {
+    return (
+      '<div class="nki-item cart-page-item" data-item-id="' + item.id + '">' +
+        '<div class="nki-item-img"></div>' +
+        '<div class="nki-item-info">' +
+          '<div class="nki-item-name">' + item.name + '</div>' +
+          '<div class="nki-item-meta">' + fmtMeta(item) + '</div>' +
+          '<div class="nki-item-price">' + fmtPrice(item.price) + '</div>' +
+          '<div class="nki-item-books">Excluding books</div>' +
+          '<div class="nki-cart-install-hint">or from kr ' + Math.round(item.price * 1.015 / 3) + '/month with instalments</div>' +
+        '</div>' +
+        '<button class="nki-item-remove" data-remove-id="' + item.id + '" aria-label="Remove course">delete</button>' +
+      '</div>'
+    );
+  }
+
+  function buildCartPageSummary() {
+    var items = NKICart.getItems();
+    var total = cartTotal();
+    var count = items.length;
+    return (
+      '<div class="co-sum-card cart-page-sum">' +
+        '<div class="co-sum-hd">Order summary</div>' +
+        '<div class="co-sum-row"><span>Subtotal (' + count + ' ' + (count === 1 ? 'item' : 'items') + ')</span><span>' + fmtPrice(total) + '</span></div>' +
+        '<div class="co-sum-sep"></div>' +
+        '<div class="co-sum-row co-sum-total-row"><span>Total</span><span>' + fmtPrice(total) + '</span></div>' +
+        '<div class="co-sum-excl">Excluding books</div>' +
+        '<button class="co-continue-btn" id="cartPageContinueBtn"' + (count === 0 ? ' disabled' : '') + '>Continue to checkout</button>' +
+      '</div>'
+    );
+  }
+
+  function buildCartUpsellCard(c) {
+    return (
+      '<div class="cart-upsell-card">' +
+        '<div class="cart-upsell-img"></div>' +
+        '<div class="cart-upsell-name">' + c.name + '</div>' +
+        '<div class="cart-upsell-meta">' + fmtMeta(c) + '</div>' +
+        '<div class="cart-upsell-price">' + fmtPrice(c.price) + '</div>' +
+        '<button class="cart-upsell-add" data-sugg-id="' + c.id + '" aria-label="Add ' + c.name + '">' +
+          '<span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">shopping_cart</span> Add' +
+        '</button>' +
+      '</div>'
+    );
+  }
+
+  function renderCartPage() {
+    var page = document.getElementById('page-cart');
+    if (!page) return;
+    var items = NKICart.getItems();
+    page.innerHTML =
+      '<div class="cart-page-wrap">' +
+        '<h1 class="cart-page-title">Shopping cart</h1>' +
+        (items.length === 0
+          ? '<div class="cart-page-empty-wrap">' + buildEmptyState() + '</div>'
+          : '<div class="cart-layout">' +
+              '<div class="cart-items-col">' + items.map(buildCartPageItem).join('') + '</div>' +
+              '<div class="cart-summary-col">' + buildCartPageSummary() + '</div>' +
+            '</div>'
+        ) +
+        '<section class="cart-upsell-section">' +
+          '<h2 class="section-title">You might also be interested in</h2>' +
+          '<p class="cart-upsell-subtitle">Add more courses to the cart and save up to 15%</p>' +
+          '<div class="cart-upsell-grid">' + CART_SUGGESTED.map(buildCartUpsellCard).join('') + '</div>' +
+        '</section>' +
+      '</div>';
+    bindCartPageEvents();
+  }
+
+  function bindCartPageEvents() {
+    var page = document.getElementById('page-cart');
+    if (!page) return;
+
+    page.querySelectorAll('[data-remove-id]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-remove-id');
+        _cartItems = _cartItems.filter(function (i) { return i.id !== id; });
+        renderCartPage();
+        updateCartBadge();
+      });
+    });
+
+    page.querySelectorAll('[data-sugg-id]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-sugg-id');
+        var course = null;
+        for (var k = 0; k < CART_SUGGESTED.length; k++) {
+          if (CART_SUGGESTED[k].id === id) { course = CART_SUGGESTED[k]; break; }
+        }
+        if (course) {
+          var exists = _cartItems.some(function (i) { return i.id === course.id; });
+          if (!exists) _cartItems.push(course);
+          renderCartPage();
+          updateCartBadge();
+        }
+      });
+    });
+
+    var contBtn = page.querySelector('#cartPageContinueBtn');
+    if (contBtn) contBtn.addEventListener('click', function () {
+      CHECKOUT_STATE.step = 1; CHECKOUT_STATE.completed = [];
+      CHECKOUT_STATE.promoApplied = false; CHECKOUT_STATE.discountPct = 0;
+      CHECKOUT_STATE.paymentMethod = ''; CHECKOUT_STATE.docUploaded = false;
+      CHECKOUT_STATE.docDelivery = 'now'; CHECKOUT_STATE.installMonths = 3;
+      showPage('checkout');
+    });
   }
 
   function renderCartSignin() {
@@ -2591,6 +2709,7 @@
     var pageSignin   = document.getElementById('page-signin');
     var pageCheckout = document.getElementById('page-checkout');
     var pageThankyou = document.getElementById('page-thankyou');
+    var pageCart     = document.getElementById('page-cart');
     pageHome.hidden     = (name !== 'home');
     pageSearch.hidden   = (name !== 'search');
     pageCompare.hidden  = (name !== 'compare');
@@ -2598,6 +2717,7 @@
     if (pageSignin)   pageSignin.hidden   = (name !== 'signin');
     if (pageCheckout) pageCheckout.hidden = (name !== 'checkout');
     if (pageThankyou) pageThankyou.hidden = (name !== 'thankyou');
+    if (pageCart)     pageCart.hidden     = (name !== 'cart');
 
     var siteHdr     = document.querySelector('.site-header');
     var coHdr       = document.getElementById('checkoutHeader');
@@ -2656,6 +2776,7 @@
     if (name === 'signin')   { renderSignInPage();   window.scrollTo(0, 0); }
     if (name === 'checkout') { renderCheckoutPage(); window.scrollTo(0, 0); }
     if (name === 'thankyou') { renderThankYouPage(); window.scrollTo(0, 0); }
+    if (name === 'cart')     { renderCartPage();     window.scrollTo(0, 0); }
   }
 
   /* ── Search page build helpers ── */
@@ -4471,7 +4592,7 @@
     }).join('');
     var lkHTML = items.some(function(i){ return i.lanekassen; }) ? buildLanekassen() : '';
     return '<div class="co-sum-card" id="coSumCard">' +
-      '<div class="co-sum-hd">Summary</div>' +
+      '<div class="co-sum-hd-row"><span class="co-sum-hd">Summary</span><button class="co-sum-edit-btn" id="coSumEditBtn" type="button">Edit</button></div>' +
       summCards + lkHTML +
       '<div class="co-promo-wrap">' +
         '<div class="co-promo-row">' +
@@ -4752,6 +4873,9 @@
   }
 
   function bindSidebarPromo() {
+    var editBtn = document.getElementById('coSumEditBtn');
+    if (editBtn) editBtn.addEventListener('click', function() { showPage('cart'); });
+
     var promoBtn = document.getElementById('coPromoBtn');
     var promoInp = document.getElementById('coPromoInp');
     if (!promoBtn || !promoInp) return;
