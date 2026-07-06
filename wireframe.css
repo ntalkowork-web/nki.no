@@ -4745,8 +4745,12 @@ body.cdp-cta-pinned .cdp-toc {
   padding: 24px;
   height: 100%;
 }
+.cart-items-col.is-single { display: flex; align-items: center; }
 .cart-page-item + .cart-page-item { padding-top: 16px; margin-top: 16px; border-top: 1px solid var(--gray-100); }
+.cart-page-item + .cart-page-item .nki-item-remove { top: 16px; }
 .cart-page-item .nki-item-img { width: 140px; height: 140px; }
+.cart-items-col.is-single .cart-page-item { width: 100%; }
+.cart-items-col.is-single .cart-page-item .nki-item-img { width: 220px; height: 220px; }
 .cart-summary-col { position: sticky; top: 80px; align-self: stretch; }
 .cart-summary-col .co-sum-card { height: 100%; }
 .cart-page-empty-wrap { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 64px 24px; }
@@ -4763,6 +4767,25 @@ body.cdp-cta-pinned .cdp-toc {
   .cart-page-title { margin-bottom: 16px; }
   .cart-items-col { padding: 16px; }
   .cart-page-item .nki-item-img { width: 100px; height: 100px; }
+  .cart-items-col.is-single .cart-page-item .nki-item-img { width: 160px; height: 160px; }
+
+  .cart-upsell-section .courses-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+    grid-template-columns: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .cart-upsell-section .courses-grid::-webkit-scrollbar { display: none; }
+  .cart-upsell-section .course-card {
+    flex-shrink: 0;
+    width: 72vw;
+    scroll-snap-align: start;
+  }
 }
 
 /* ══════════════════════════════════════════════

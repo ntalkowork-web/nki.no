@@ -2006,7 +2006,7 @@
         (items.length === 0
           ? '<div class="cart-page-empty-wrap">' + buildEmptyState() + '</div>'
           : '<div class="cart-layout">' +
-              '<div class="cart-items-col">' + items.map(buildCartPageItem).join('') + '</div>' +
+              '<div class="cart-items-col' + (items.length === 1 ? ' is-single' : '') + '">' + items.map(buildCartPageItem).join('') + '</div>' +
               '<div class="cart-summary-col">' + buildCartPageSummary() + '</div>' +
             '</div>'
         ) +
