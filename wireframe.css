@@ -4752,10 +4752,10 @@ body.cdp-cta-pinned .cdp-toc {
 .cart-page-empty-wrap { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 64px 24px; }
 
 .cart-upsell-section { margin-top: 48px; }
-.cart-upsell-subtitle { font-size: 15px; color: var(--gray-500); margin: -12px 0 20px; }
+.cart-upsell-subtitle { font-size: 15px; color: var(--gray-500); margin: 12px 0 20px; }
 .cart-upsell-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--gutter);
 }
 .cart-upsell-card {
@@ -4787,7 +4787,7 @@ body.cdp-cta-pinned .cdp-toc {
 @media (max-width: 1024px) {
   .cart-layout { grid-template-columns: 1fr; gap: 16px; }
   .cart-summary-col { order: -1; position: static; }
-  .cart-upsell-grid { grid-template-columns: repeat(3, 1fr); }
+  .cart-upsell-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .cart-page-wrap { padding-top: 24px; padding-bottom: 56px; }
@@ -4795,7 +4795,6 @@ body.cdp-cta-pinned .cdp-toc {
   .cart-items-col { padding: 16px; }
   .cart-page-item .nki-item-img { width: 100px; height: 100px; }
   .cart-upsell-grid { grid-template-columns: repeat(2, 1fr); }
-  .cart-upsell-subtitle { margin-top: -8px; }
 }
 @media (max-width: 480px) {
   .cart-upsell-grid { grid-template-columns: 1fr 1fr; }
