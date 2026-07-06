@@ -4728,7 +4728,8 @@ body.cdp-cta-pinned .cdp-toc {
 /* ══════════════════════════════════════════════
    CART PAGE
 ══════════════════════════════════════════════ */
-.cart-page-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+#page-cart { padding-top: var(--header-h); }
+.cart-page-wrap { padding: 40px var(--margin) 80px; }
 .cart-page-title { font-size: 28px; font-weight: 700; color: var(--gray-900); margin-bottom: 24px; }
 
 .cart-layout {
@@ -4786,7 +4787,7 @@ body.cdp-cta-pinned .cdp-toc {
   .cart-upsell-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 768px) {
-  .cart-page-wrap { padding: 24px 16px 56px; }
+  .cart-page-wrap { padding-top: 24px; padding-bottom: 56px; }
   .cart-page-title { font-size: 22px; margin-bottom: 16px; }
   .cart-items-col { padding: 16px; }
   .cart-upsell-grid { grid-template-columns: repeat(2, 1fr); }
