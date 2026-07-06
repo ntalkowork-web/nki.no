@@ -1977,15 +1977,21 @@
   }
 
   function buildCartUpsellCard(c) {
+    var pills =
+      '<span class="pill-sm">' + (c.type || 'Course') + '</span>' +
+      '<span class="pill-sm">' + c.accessMonths + ' months</span>' +
+      (c.needsBooks ? '<span class="pill-sm">Books needed</span>' : '');
     return (
-      '<div class="cart-upsell-card">' +
-        '<div class="cart-upsell-img"></div>' +
-        '<div class="cart-upsell-name">' + c.name + '</div>' +
-        '<div class="cart-upsell-meta">' + fmtMeta(c) + '</div>' +
-        '<div class="cart-upsell-price">' + fmtPrice(c.price) + '</div>' +
-        '<button class="cart-upsell-add" data-sugg-id="' + c.id + '" aria-label="Add ' + c.name + '">' +
-          '<span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">shopping_cart</span> Add' +
-        '</button>' +
+      '<div class="course-card" data-cart-sugg-id="' + c.id + '">' +
+        '<div class="cc-img"></div>' +
+        '<div class="cc-body">' +
+          '<div class="cc-name">' + c.name + '</div>' +
+          '<div class="cc-pills">' + pills + '</div>' +
+          '<div class="cc-footer">' +
+            '<div class="cc-price">' + fmtPrice(c.price) + '</div>' +
+            '<button class="cc-cart-btn" data-sugg-id="' + c.id + '" aria-label="Add ' + c.name + '">' + ccCartSvg + '<span class="cc-cart-plus">+</span></button>' +
+          '</div>' +
+        '</div>' +
       '</div>'
     );
   }
@@ -2007,7 +2013,7 @@
         '<section class="cart-upsell-section">' +
           '<h2 class="section-title">You might also be interested in</h2>' +
           '<p class="cart-upsell-subtitle">Add more courses to the cart and save up to 15%</p>' +
-          '<div class="cart-upsell-grid">' + CART_SUGGESTED.map(buildCartUpsellCard).join('') + '</div>' +
+          '<div class="courses-grid">' + CART_SUGGESTED.map(buildCartUpsellCard).join('') + '</div>' +
         '</section>' +
       '</div>';
     bindCartPageEvents();
@@ -2027,7 +2033,8 @@
     });
 
     page.querySelectorAll('[data-sugg-id]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
         var id = btn.getAttribute('data-sugg-id');
         var course = null;
         for (var k = 0; k < CART_SUGGESTED.length; k++) {
@@ -2039,6 +2046,18 @@
           renderCartPage();
           updateCartBadge();
         }
+      });
+    });
+
+    page.querySelectorAll('[data-cart-sugg-id]').forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (e.target.closest && e.target.closest('.cc-cart-btn')) return;
+        var id = card.getAttribute('data-cart-sugg-id');
+        var course = null;
+        for (var k = 0; k < CART_SUGGESTED.length; k++) {
+          if (CART_SUGGESTED[k].id === id) { course = CART_SUGGESTED[k]; break; }
+        }
+        showPage('course', { courseId: id, courseName: course ? course.name : '' });
       });
     });
 
