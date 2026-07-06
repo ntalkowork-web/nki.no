@@ -4736,22 +4736,23 @@ body.cdp-cta-pinned .cdp-toc {
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 32px;
-  align-items: stretch;
+  align-items: start;
 }
+.cart-layout.is-single { align-items: stretch; }
 .cart-items-col {
   background: #fff;
   border: 1px solid var(--gray-200);
   border-radius: 10px;
   padding: 24px;
-  height: 100%;
 }
-.cart-items-col.is-single { display: flex; align-items: center; }
+.cart-layout.is-single .cart-items-col { height: 100%; display: flex; align-items: center; }
 .cart-page-item + .cart-page-item { padding-top: 16px; margin-top: 16px; border-top: 1px solid var(--gray-100); }
 .cart-page-item + .cart-page-item .nki-item-remove { top: 16px; }
 .cart-page-item .nki-item-img { width: 220px; height: 220px; }
-.cart-items-col.is-single .cart-page-item { width: 100%; }
-.cart-summary-col { position: sticky; top: 80px; align-self: stretch; }
-.cart-summary-col .co-sum-card { height: 100%; }
+.cart-layout.is-single .cart-page-item { width: 100%; }
+.cart-summary-col { position: sticky; top: 80px; }
+.cart-layout.is-single .cart-summary-col { align-self: stretch; }
+.cart-layout.is-single .cart-summary-col .co-sum-card { height: 100%; }
 .cart-page-empty-wrap { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 64px 24px; }
 
 .cart-upsell-section { margin-top: 48px; }
