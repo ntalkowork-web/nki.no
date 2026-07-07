@@ -1364,7 +1364,8 @@ main { margin-top: var(--header-h); }
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.15;
-  margin-top: var(--spacing-24);
+  /* 8px hero-info gap + 4px = 12px between the circles row and the headline */
+  margin-top: var(--spacing-4);
 }
 
 .hero-sub {
