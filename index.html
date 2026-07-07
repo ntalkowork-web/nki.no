@@ -85,7 +85,7 @@
                     <li>Geosciences 1</li>
                     <li>Mathematics 1T</li>
                   </ul>
-                  <a href="#" class="mega-see-all">See all →</a>
+                  <a href="#" class="mega-see-all">See all</a>
                 </div>
               </li>
             </ul>
@@ -113,7 +113,7 @@
                     <li>Circular economy – online course</li>
                     <li>Environmental reporting – 15 credits</li>
                   </ul>
-                  <a href="#" class="mega-see-all">See all →</a>
+                  <a href="#" class="mega-see-all">See all</a>
                 </div>
               </li>
               <li class="dropdown-item has-mega">
@@ -131,7 +131,7 @@
                     <li>Relationship management – 5 credits</li>
                     <li>Human Resources Management – 10 credits</li>
                   </ul>
-                  <a href="#" class="mega-see-all">See all →</a>
+                  <a href="#" class="mega-see-all">See all</a>
                 </div>
               </li>
               <li class="dropdown-item has-mega">
@@ -149,7 +149,7 @@
                     <li>Business Law – 10 credits</li>
                     <li>Labor law – course</li>
                   </ul>
-                  <a href="#" class="mega-see-all">See all →</a>
+                  <a href="#" class="mega-see-all">See all</a>
                 </div>
               </li>
               <li class="dropdown-item has-mega">
@@ -168,7 +168,7 @@
                     <li>Technology and digital competence – 5 credits</li>
                     <li>License for passenger and freight transport – course</li>
                   </ul>
-                  <a href="#" class="mega-see-all">See all →</a>
+                  <a href="#" class="mega-see-all">See all</a>
                 </div>
               </li>
               <li class="dropdown-item has-mega">
@@ -199,7 +199,7 @@
                     <li>Stress and stress management</li>
                     <li>Nutrition and sustainable diet</li>
                   </ul>
-                  <a href="#" class="mega-see-all">See all →</a>
+                  <a href="#" class="mega-see-all">See all</a>
                 </div>
               </li>
               <li class="dropdown-item has-mega">
@@ -214,7 +214,7 @@
                     <li>Google tools – course</li>
                     <li>Introduction to Marketing – course</li>
                   </ul>
-                  <a href="#" class="mega-see-all">See all →</a>
+                  <a href="#" class="mega-see-all">See all</a>
                 </div>
               </li>
             </ul>
@@ -943,7 +943,18 @@
               <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-1.png" alt="">
               <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-2.png" alt="">
               <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-3.png" alt="">
-              <span class="hiw-accent-avatar hiw-accent-globe"><span class="material-symbols-outlined">public</span></span>
+              <span class="hiw-accent-avatar hiw-accent-globe">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs><clipPath id="hiwGlobeClip"><circle cx="12" cy="12" r="9"/></clipPath></defs>
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
+                  <g clip-path="url(#hiwGlobeClip)" stroke="currentColor" stroke-width="1.5">
+                    <line x1="8" y1="3" x2="8" y2="21"/>
+                    <line x1="16" y1="3" x2="16" y2="21"/>
+                    <line x1="3" y1="8" x2="21" y2="8"/>
+                    <line x1="3" y1="16" x2="21" y2="16"/>
+                  </g>
+                </svg>
+              </span>
             </div>
             <p class="hiw-accent-lbl">join the community of 600k+ online students</p>
           </div>
@@ -1400,6 +1411,14 @@
 <script>
 (function () {
   'use strict';
+
+  /* ── Header on-scroll state ── */
+  var siteHeader = document.querySelector('.site-header');
+  function updateHeaderScrollState() {
+    siteHeader.classList.toggle('is-scrolled', window.scrollY > 0);
+  }
+  updateHeaderScrollState();
+  window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
 
   /* ── Mobile menu ── */
   var hamburgerBtn = document.getElementById('hamburgerBtn');

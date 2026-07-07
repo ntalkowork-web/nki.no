@@ -208,7 +208,12 @@ select { font-family: inherit; }
   width: 100%;
   height: var(--header-h);
   background: var(--bg-surface-primary);
+  border-bottom: 1px solid transparent;
   z-index: 100;
+}
+
+.site-header.is-scrolled {
+  border-bottom-color: var(--border-default);
 }
 
 .header-inner {
@@ -302,6 +307,13 @@ select { font-family: inherit; }
   overflow: visible;
 }
 
+/* When a dropdown item opens an adjacent mega-panel, the two form one seamless
+   card: the dropdown only rounds/borders its left side, the mega-panel its right. */
+.nav-item:has(.has-mega) > .dropdown {
+  border-radius: var(--radius-16) 0 0 var(--radius-16);
+  border-right: none;
+}
+
 /* transparent bridge that covers the gap between nav-tab and dropdown */
 .dropdown::before {
   content: '';
@@ -311,6 +323,9 @@ select { font-family: inherit; }
   right: 0;
   height: 8px;
 }
+
+/* Professional Courses dropdown items have longer labels than the 228px default fits — hug content instead */
+#tab-sa > .dropdown { width: max-content; min-width: 228px; }
 
 .nav-item.is-open > .dropdown { display: block; }
 .nav-item.has-dropdown:hover > .dropdown { display: block; }
@@ -354,13 +369,12 @@ select { font-family: inherit; }
 .mega-panel {
   display: none;
   position: absolute;
-  left: calc(100% + 1px);
+  left: 100%;
   top: -1px;
   width: 343px;
   background: var(--bg-surface-primary);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-16);
-  box-shadow: var(--sh-md);
+  border-radius: 0 var(--radius-16) var(--radius-16) 0;
   padding: var(--spacing-8);
   z-index: 201;
 }
@@ -400,15 +414,18 @@ select { font-family: inherit; }
 
 .mega-panel ul li:hover { background: var(--dropdown-bg-hover); }
 
-.mega-see-all {
-  display: block;
-  padding: var(--spacing-8);
+.mega-panel .mega-see-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 100%;
+  margin-top: var(--spacing-8);
   font-size: var(--font-size-16);
   font-weight: 500;
   color: var(--text-primary);
-  border-top: 1px solid var(--border-default);
-  border-radius: var(--radius-8);
-  margin-top: 4px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-12);
 }
 
 .mega-see-all:hover { background: var(--dropdown-bg-hover); }
@@ -1209,7 +1226,7 @@ select { font-family: inherit; }
   margin-bottom: var(--spacing-24);
 }
 
-.consult-info .hero-avatar { width: 56px; height: 56px; }
+.consult-info .hero-avatar { width: 56px; height: 56px; border-color: var(--bg-surface-primary); }
 
 /* Inline consultation section — constrain subheading width */
 .consult-inline .consult-sub {
@@ -1865,8 +1882,14 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 .cc-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 .cc-scrim {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(27,28,26,.8), rgba(27,28,26,0) 55%);
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 65%;
+  background: linear-gradient(to top, rgba(27,28,26,.55) 0%, rgba(27,28,26,.4) 60%, rgba(27,28,26,0) 100%);
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
 }
 
 .cc-tag {
@@ -1968,7 +1991,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   background: var(--border-default);
   transition: width .2s, background .2s;
 }
-.pop-progress-dot.is-active { width: 48px; background: var(--bg-surface-inverse); }
+.pop-progress-dot.is-active { width: 20px; background: var(--bg-surface-inverse); }
 
 /* ── CAROUSEL DOTS ───────────────────────── */
 
@@ -2310,8 +2333,6 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 .t-link-arrow::before { content: 'arrow_outward'; }
 .t-course-link:hover .t-link-arrow::before { content: 'arrow_forward'; }
 
-.t-course-link:hover { text-decoration: underline; }
-
 /* ── NEWS ─────────────────────────────────── */
 
 .news-grid {
@@ -2405,7 +2426,7 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 }
 
 .footer-nl-input::placeholder { color: var(--text-placeholder); }
-.footer-nl-input:focus { box-shadow: 0 0 0 1px var(--border-focus) inset; }
+.footer-nl-input:focus { box-shadow: 0 0 0 1px var(--border-on-dark) inset; }
 
 .btn-nl {
   display: inline-flex;
