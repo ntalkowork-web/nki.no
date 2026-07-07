@@ -4754,6 +4754,7 @@ body.cdp-cta-pinned .cdp-toc {
 .cart-layout.is-single .cart-summary-col { align-self: stretch; }
 .cart-layout.is-single .cart-summary-col .co-sum-card { height: 100%; }
 .cart-page-empty-wrap { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 64px 24px; }
+.cart-page-pay-pills { margin-top: 16px; }
 
 .cart-upsell-section { margin-top: 48px; }
 .cart-upsell-subtitle { font-size: 15px; color: var(--gray-500); margin: 12px 0 20px; }

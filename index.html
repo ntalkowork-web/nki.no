@@ -1850,15 +1850,19 @@
     return _cartItems.map(buildItemCard).join('') + buildLanekassen() + buildSuggested();
   }
 
-  function buildCartFooter() {
-    var total = fmtPrice(cartTotal());
-    var logoPills = PAYMENT_LOGOS.map(function (p) {
+  function buildPaymentLogoPills() {
+    return PAYMENT_LOGOS.map(function (p) {
       return '<span class="nki-pay-pill nki-pay-pill--logo">' +
         '<img src="' + p.src + '" alt="' + p.label + '" height="16" ' +
         'data-label="' + p.label + '" ' +
         'onerror="this.parentNode.textContent=this.dataset.label">' +
         '</span>';
     }).join('');
+  }
+
+  function buildCartFooter() {
+    var total = fmtPrice(cartTotal());
+    var logoPills = buildPaymentLogoPills();
     return (
       '<footer class="nki-cart-footer">' +
         '<div class="nki-cart-sep"></div>' +
@@ -1972,6 +1976,7 @@
         '<div class="co-sum-row co-sum-total-row"><span>Total</span><span>' + fmtPrice(total) + '</span></div>' +
         '<div class="co-sum-excl">Excluding books</div>' +
         '<button class="co-continue-btn" id="cartPageContinueBtn"' + (count === 0 ? ' disabled' : '') + '>Continue to checkout</button>' +
+        '<div class="nki-pay-pills cart-page-pay-pills">' + buildPaymentLogoPills() + '</div>' +
       '</div>'
     );
   }
