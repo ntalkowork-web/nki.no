@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Videos">
+<mask id="mask0_0_76" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+<rect id="Bounding box" width="16" height="16" fill="var(--fill-0, #D9D9D9)"/>
+</mask>
+<g mask="url(#mask0_0_76)">
+<path id="videocam" d="M2.66667 13.3333C2.3 13.3333 1.98611 13.2028 1.725 12.9417C1.46389 12.6806 1.33333 12.3667 1.33333 12V4C1.33333 3.63333 1.46389 3.31944 1.725 3.05833C1.98611 2.79722 2.3 2.66667 2.66667 2.66667H10.6667C11.0333 2.66667 11.3472 2.79722 11.6083 3.05833C11.8694 3.31944 12 3.63333 12 4V7L14.6667 4.33333V11.6667L12 9V12C12 12.3667 11.8694 12.6806 11.6083 12.9417C11.3472 13.2028 11.0333 13.3333 10.6667 13.3333H2.66667ZM2.66667 12H10.6667V4H2.66667V12Z" fill="var(--fill-0, #1B1C1A)"/>
+</g>
+</g>
+</svg>

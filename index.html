@@ -15,6 +15,7 @@
 <header class="site-header">
   <div class="header-inner">
 
+    <div class="header-brand-nav">
     <!-- 2.1 Logo -->
     <a href="#" class="header-logo" id="headerLogo">
       <img
@@ -28,13 +29,13 @@
 
         <!-- Tab 1: High School -->
         <li class="nav-item has-dropdown" id="tab-hs">
-          <button class="nav-tab" aria-expanded="false">High School <span class="chevron">▾</span></button>
+          <button class="nav-tab" aria-expanded="false">High School <span class="material-symbols-outlined chevron">keyboard_arrow_down</span></button>
           <div class="dropdown">
             <ul class="dropdown-list">
               <!-- High School Subject Packages › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">Subject packages</span>
-                <span class="mega-arrow">›</span>
+                <span class="item-label"><span class="material-symbols-outlined item-icon">library_books</span>Subject packages</span>
+                <span class="material-symbols-outlined mega-arrow">chevron_right</span>
                 <div class="mega-panel">
                   <ul>
                     <li>Generell studiekompetanse (23/5-regelen)</li>
@@ -49,8 +50,8 @@
               </li>
               <!-- Vocational Studies for High School › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">Vocational studies</span>
-                <span class="mega-arrow">›</span>
+                <span class="item-label"><span class="material-symbols-outlined item-icon">engineering</span>Vocational studies</span>
+                <span class="material-symbols-outlined mega-arrow">chevron_right</span>
                 <div class="mega-panel">
                   <ul>
                     <li>Health and upbringing subjects Vg1</li>
@@ -67,8 +68,8 @@
               </li>
               <!-- High School Single Subjects › -->
               <li class="dropdown-item has-mega">
-                <span class="item-label">Single Subjects</span>
-                <span class="mega-arrow">›</span>
+                <span class="item-label"><span class="material-symbols-outlined item-icon">article</span>Single Subjects</span>
+                <span class="material-symbols-outlined mega-arrow">chevron_right</span>
                 <div class="mega-panel">
                   <div class="mega-label">Most popular</div>
                   <ul>
@@ -93,12 +94,12 @@
 
         <!-- Tab 2: Professional Courses -->
         <li class="nav-item has-dropdown" id="tab-sa">
-          <button class="nav-tab" aria-expanded="false">Professional Courses <span class="chevron">▾</span></button>
+          <button class="nav-tab" aria-expanded="false">Professional Courses <span class="material-symbols-outlined chevron">keyboard_arrow_down</span></button>
           <div class="dropdown">
             <ul class="dropdown-list">
               <li class="dropdown-item has-mega">
-                <span class="item-label">Economy and sustainability</span>
-                <span class="mega-arrow">›</span>
+                <span class="item-label"><span class="material-symbols-outlined item-icon">payments</span>Economy and sustainability</span>
+                <span class="material-symbols-outlined mega-arrow">chevron_right</span>
                 <div class="mega-panel">
                   <div class="mega-label">Most popular</div>
                   <ul>
@@ -116,8 +117,8 @@
                 </div>
               </li>
               <li class="dropdown-item has-mega">
-                <span class="item-label">HR and Management</span>
-                <span class="mega-arrow">›</span>
+                <span class="item-label"><span class="material-symbols-outlined item-icon">groups</span>HR and Management</span>
+                <span class="material-symbols-outlined mega-arrow">chevron_right</span>
                 <div class="mega-panel">
                   <div class="mega-label">Most popular</div>
                   <ul>
@@ -134,8 +135,8 @@
                 </div>
               </li>
               <li class="dropdown-item has-mega">
-                <span class="item-label">Law and administration</span>
-                <span class="mega-arrow">›</span>
+                <span class="item-label"><span class="material-symbols-outlined item-icon">gavel</span>Law and administration</span>
+                <span class="material-symbols-outlined mega-arrow">chevron_right</span>
                 <div class="mega-panel">
                   <div class="mega-label">Most popular</div>
                   <ul>
@@ -152,8 +153,8 @@
                 </div>
               </li>
               <li class="dropdown-item has-mega">
-                <span class="item-label">Construction and logistics</span>
-                <span class="mega-arrow">›</span>
+                <span class="item-label"><span class="material-symbols-outlined item-icon">construction</span>Construction and logistics</span>
+                <span class="material-symbols-outlined mega-arrow">chevron_right</span>
                 <div class="mega-panel">
                   <div class="mega-label">Most popular</div>
                   <ul>
@@ -171,8 +172,8 @@
                 </div>
               </li>
               <li class="dropdown-item has-mega">
-                <span class="item-label">Interior and design</span>
-                <span class="mega-arrow">›</span>
+                <span class="item-label"><span class="material-symbols-outlined item-icon">palette</span>Interior and design</span>
+                <span class="material-symbols-outlined mega-arrow">chevron_right</span>
                 <div class="mega-panel">
                   <ul>
                     <li>Interior designer</li>
@@ -181,8 +182,8 @@
                 </div>
               </li>
               <li class="dropdown-item has-mega">
-                <span class="item-label">Health and lifestyle</span>
-                <span class="mega-arrow">›</span>
+                <span class="item-label"><span class="material-symbols-outlined item-icon">health_and_safety</span>Health and lifestyle</span>
+                <span class="material-symbols-outlined mega-arrow">chevron_right</span>
                 <div class="mega-panel">
                   <div class="mega-label">Most popular</div>
                   <ul>
@@ -202,8 +203,8 @@
                 </div>
               </li>
               <li class="dropdown-item has-mega">
-                <span class="item-label">Marketing and sales</span>
-                <span class="mega-arrow">›</span>
+                <span class="item-label"><span class="material-symbols-outlined item-icon">campaign</span>Marketing and sales</span>
+                <span class="material-symbols-outlined mega-arrow">chevron_right</span>
                 <div class="mega-panel">
                   <div class="mega-label">Most popular</div>
                   <ul>
@@ -226,6 +227,7 @@
 
       </ul>
     </nav>
+    </div>
 
     <!-- 2.3 Search bar -->
     <div class="header-search">
@@ -253,54 +255,35 @@
         <div id="searchDefaultPanel">
 
           <!-- Section 1: Recent searches -->
-          <div class="search-section">
+          <div class="search-section search-section--recent">
             <div class="search-section-label">Recent searches</div>
             <ul class="recent-list">
-              <li role="option"><span class="recent-q">Office worker</span><span class="recent-scope">in Law and administration</span></li>
-              <li role="option"><span class="recent-q">Medical Secretary</span><span class="recent-scope">in Health and lifestyle</span></li>
-              <li role="option"><span class="recent-q">Mathematics R1</span><span class="recent-scope">in Single Subjects for High School</span></li>
+              <li role="option"><span class="material-symbols-outlined recent-icon">history</span><span class="recent-q">Office worker</span><span class="recent-scope">in Law &amp; Administration</span></li>
+              <li role="option"><span class="material-symbols-outlined recent-icon">history</span><span class="recent-q">Medical Secretary</span><span class="recent-scope">in Health &amp; Lifestyle</span></li>
+              <li role="option"><span class="material-symbols-outlined recent-icon">history</span><span class="recent-q">Mathematics R1</span><span class="recent-scope">in Single Subjects</span></li>
             </ul>
           </div>
 
-          <!-- Section 3: Popular course cards (3-col grid) -->
+          <!-- Section 2: Trending course cards -->
           <div class="search-section">
-            <div class="search-section-label">Start with the most popular</div>
+            <div class="search-section-label">Trending now</div>
             <div class="search-course-grid">
               <div class="s-card" role="option">
-                <div class="s-card-img">
-                  <div class="s-badges"><span class="s-badge">Best seller</span></div>
-                </div>
-                <div class="s-card-name">General Study Competence (23/5 Rule)</div>
-                <div class="s-card-pills">
-                  <span class="pill-sm">Package</span>
-                  <span class="pill-sm">High School</span>
-                  <span class="pill-sm">6 months</span>
-                  <span class="pill-sm">Lånekassen support</span>
-                </div>
+                <div class="s-card-img"><img src="images/design-system/courses/hs-01.jpg" alt=""></div>
+                <div class="s-card-name">General Study Competence</div>
+                <div class="s-card-meta"><span>Package</span><span class="s-card-dot"></span><span>6 months</span></div>
                 <div class="s-card-price">Kr 8 490</div>
               </div>
               <div class="s-card" role="option">
-                <div class="s-card-img">
-                  <div class="s-badges"><span class="s-badge">Best seller</span></div>
-                </div>
+                <div class="s-card-img"><img src="images/design-system/courses/pro-01.jpg" alt=""></div>
                 <div class="s-card-name">Medical Secretary</div>
-                <div class="s-card-pills">
-                  <span class="pill-sm">Course</span>
-                  <span class="pill-sm">Health & Lifestyle</span>
-                  <span class="pill-sm">6 months</span>
-                  <span class="pill-sm">Lånekassen support</span>
-                </div>
+                <div class="s-card-meta"><span>Course</span><span class="s-card-dot"></span><span>6 months</span></div>
                 <div class="s-card-price">Kr 12 900</div>
               </div>
               <div class="s-card" role="option">
-                <div class="s-card-img"></div>
+                <div class="s-card-img"><img src="images/design-system/courses/pro-02.jpg" alt=""></div>
                 <div class="s-card-name">Interior Designer</div>
-                <div class="s-card-pills">
-                  <span class="pill-sm">Course</span>
-                  <span class="pill-sm">Interior & Design</span>
-                  <span class="pill-sm">6 months</span>
-                  <span class="pill-sm">Certificate</span>
-                </div>
+                <div class="s-card-meta"><span>Course</span><span class="s-card-dot"></span><span>6 months</span></div>
                 <div class="s-card-price">Kr 19 900</div>
               </div>
             </div>
@@ -726,23 +709,109 @@
   <section aria-label="Hero">
     <div class="hero">
       <div class="hero-content">
-        <h1 class="hero-headline">Learn anywhere, anytime</h1>
-        <p class="hero-sub">NKI delivers fully digital, flexible learning that helps you complete education and reskill on your own terms — no classrooms, no fixed schedules, just structured progress.</p>
-        <button class="btn-browse-all" id="heroBrowseBtn">Browse all courses</button>
 
-        <!-- Factoids -->
-        <div class="hero-factoids">
-          <div class="factoid">
-            <div class="factoid-num">50+</div>
-            <div class="factoid-lbl">years of trusted Norwegian education</div>
+        <div class="hero-info">
+          <div class="hero-avatars-row">
+            <div class="hero-avatars">
+              <img class="hero-avatar" src="images/design-system/hero/avatar-1.png" alt="">
+              <img class="hero-avatar" src="images/design-system/hero/avatar-2.png" alt="">
+              <img class="hero-avatar" src="images/design-system/hero/avatar-3.png" alt="">
+            </div>
+            <p class="hero-avatars-lbl">34k+ active students last year</p>
           </div>
-          <div class="factoid">
-            <div class="factoid-num">200+</div>
-            <div class="factoid-lbl">courses across every level</div>
-          </div>
-          <div class="factoid">
-            <div class="factoid-num">34k+</div>
-            <div class="factoid-lbl">students completed their education last year</div>
+
+          <h1 class="hero-headline">Learn anywhere, anytime</h1>
+          <p class="hero-sub">NKI delivers fully digital, flexible learning that helps you complete education and reskill on your own terms.</p>
+          <button class="btn-browse-all" id="heroBrowseBtn">Browse all courses</button>
+        </div>
+
+        <!-- Category card scroller -->
+        <div class="hero-features-viewport">
+          <div class="hero-marquee-inner">
+            <div class="hero-marquee-track">
+              <div class="hero-cat-card h-sm">
+                <img src="images/design-system/hero/cat-01.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-01.svg')"></span>Subject packages</span>
+              </div>
+              <div class="hero-cat-card h-lg">
+                <img src="images/design-system/hero/cat-02.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-02.svg')"></span>Vocational studies</span>
+              </div>
+              <div class="hero-cat-card h-sm">
+                <img src="images/design-system/hero/cat-03.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-03.svg')"></span>Single subjects</span>
+              </div>
+              <div class="hero-cat-card h-lg">
+                <img src="images/design-system/hero/cat-04.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-04.svg')"></span>Economy &amp; Sustainability</span>
+              </div>
+              <div class="hero-cat-card h-sm">
+                <img src="images/design-system/hero/cat-05.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-05.svg')"></span>HR &amp; Management</span>
+              </div>
+              <div class="hero-cat-card h-lg">
+                <img src="images/design-system/hero/cat-06.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-06.svg')"></span>Law &amp; Administration</span>
+              </div>
+              <div class="hero-cat-card h-sm">
+                <img src="images/design-system/hero/cat-07.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-07.svg')"></span>Construction &amp; Logistics</span>
+              </div>
+              <div class="hero-cat-card h-lg">
+                <img src="images/design-system/hero/cat-08.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-08.svg')"></span>Interior &amp; Design</span>
+              </div>
+              <div class="hero-cat-card h-sm">
+                <img src="images/design-system/hero/cat-09.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-09.svg')"></span>Health &amp; Lifestyle</span>
+              </div>
+              <div class="hero-cat-card h-lg">
+                <img src="images/design-system/hero/cat-10.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-10.svg')"></span>Marketing &amp; Sales</span>
+              </div>
+            </div>
+            <div class="hero-marquee-track" aria-hidden="true">
+              <div class="hero-cat-card h-sm">
+                <img src="images/design-system/hero/cat-01.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-01.svg')"></span>Subject packages</span>
+              </div>
+              <div class="hero-cat-card h-lg">
+                <img src="images/design-system/hero/cat-02.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-02.svg')"></span>Vocational studies</span>
+              </div>
+              <div class="hero-cat-card h-sm">
+                <img src="images/design-system/hero/cat-03.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-03.svg')"></span>Single subjects</span>
+              </div>
+              <div class="hero-cat-card h-lg">
+                <img src="images/design-system/hero/cat-04.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-04.svg')"></span>Economy &amp; Sustainability</span>
+              </div>
+              <div class="hero-cat-card h-sm">
+                <img src="images/design-system/hero/cat-05.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-05.svg')"></span>HR &amp; Management</span>
+              </div>
+              <div class="hero-cat-card h-lg">
+                <img src="images/design-system/hero/cat-06.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-06.svg')"></span>Law &amp; Administration</span>
+              </div>
+              <div class="hero-cat-card h-sm">
+                <img src="images/design-system/hero/cat-07.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-07.svg')"></span>Construction &amp; Logistics</span>
+              </div>
+              <div class="hero-cat-card h-lg">
+                <img src="images/design-system/hero/cat-08.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-08.svg')"></span>Interior &amp; Design</span>
+              </div>
+              <div class="hero-cat-card h-sm">
+                <img src="images/design-system/hero/cat-09.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-09.svg')"></span>Health &amp; Lifestyle</span>
+              </div>
+              <div class="hero-cat-card h-lg">
+                <img src="images/design-system/hero/cat-10.jpg" alt="">
+                <span class="hero-cat-tag"><span class="hero-cat-tag-icon" style="--tag-icon:url('images/design-system/hero/tag-icon-10.svg')"></span>Marketing &amp; Sales</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -754,23 +823,21 @@
       <div class="mentioned-in-logos">
         <div class="marquee-inner">
           <div class="marquee-track">
-            <img src="mentioned-in-logos/standard_compressed_Aftenposten-removebg-preview.png" alt="Aftenposten">
-            <img src="mentioned-in-logos/unnamed-removebg-preview.png" alt="DIGI">
-            <img src="mentioned-in-logos/logo.svg" alt="">
             <img src="mentioned-in-logos/logo_2.svg" alt="">
-            <img src="mentioned-in-logos/logo-text.svg" alt="">
-            <img src="mentioned-in-logos/logo-ec--en.svg" alt="">
             <img src="mentioned-in-logos/small-positive.svg" alt="">
+            <img src="mentioned-in-logos/logo-ec--en.svg" alt="European Commission">
+            <img src="mentioned-in-logos/logo-text.svg" alt="">
+            <img src="mentioned-in-logos/logo.svg" alt="">
+            <img src="mentioned-in-logos/standard_compressed_Aftenposten-removebg-preview.png" alt="Aftenposten">
             <img src="mentioned-in-logos/fun-logo.svg" alt="">
           </div>
           <div class="marquee-track" aria-hidden="true">
-            <img src="mentioned-in-logos/standard_compressed_Aftenposten-removebg-preview.png" alt="">
-            <img src="mentioned-in-logos/unnamed-removebg-preview.png" alt="">
-            <img src="mentioned-in-logos/logo.svg" alt="">
             <img src="mentioned-in-logos/logo_2.svg" alt="">
-            <img src="mentioned-in-logos/logo-text.svg" alt="">
-            <img src="mentioned-in-logos/logo-ec--en.svg" alt="">
             <img src="mentioned-in-logos/small-positive.svg" alt="">
+            <img src="mentioned-in-logos/logo-ec--en.svg" alt="">
+            <img src="mentioned-in-logos/logo-text.svg" alt="">
+            <img src="mentioned-in-logos/logo.svg" alt="">
+            <img src="mentioned-in-logos/standard_compressed_Aftenposten-removebg-preview.png" alt="">
             <img src="mentioned-in-logos/fun-logo.svg" alt="">
           </div>
         </div>
@@ -782,35 +849,53 @@
   <!-- ── 4a. TOP HIGH SCHOOL COURSES ──────── -->
   <section class="wf-section" aria-labelledby="pop-hs-hd">
     <div class="container">
-      <div class="section-hd">
+      <div class="section-hd course-section-hd">
         <h2 class="section-title" id="pop-hs-hd">Top high school courses</h2>
-        <button class="btn-see-all" id="popHsSeeAll">See all</button>
+        <div class="course-pill-row">
+          <span class="course-pill is-active" data-cat="subject-packages"><span class="material-symbols-outlined pill-icon">library_books</span>Subject packages</span>
+          <span class="course-pill" data-cat="vocational-studies"><span class="material-symbols-outlined pill-icon">engineering</span>Vocational studies</span>
+          <span class="course-pill" data-cat="single-subjects"><span class="material-symbols-outlined pill-icon">article</span>Single subjects</span>
+        </div>
       </div>
       <div class="courses-viewport">
         <div class="courses-grid" id="coursesGridHs"></div>
       </div>
       <div class="pop-carousel-footer">
-        <button class="nav-arrow" id="popHsPrev" aria-label="Previous">&#8592;</button>
-        <span class="pop-counter" id="popHsCounter">1 — 3</span>
-        <button class="nav-arrow" id="popHsNext" aria-label="Next">&#8594;</button>
+        <div class="pop-carousel-nav">
+          <button class="nav-arrow" id="popHsPrev" aria-label="Previous"><span class="material-symbols-outlined">arrow_back</span></button>
+          <div class="pop-progress" id="popHsProgress"></div>
+          <button class="nav-arrow" id="popHsNext" aria-label="Next"><span class="material-symbols-outlined">arrow_forward</span></button>
+        </div>
+        <button class="btn-see-all" id="popHsSeeAll">See all</button>
       </div>
     </div>
   </section>
 
   <!-- ── 4b. TOP PROFESSIONAL COURSES ────── -->
-  <section class="wf-section bg-gray" aria-labelledby="pop-pro-hd">
+  <section class="wf-section" aria-labelledby="pop-pro-hd">
     <div class="container">
-      <div class="section-hd">
+      <div class="section-hd course-section-hd">
         <h2 class="section-title" id="pop-pro-hd">Top professional courses</h2>
-        <button class="btn-see-all" id="popProSeeAll">See all</button>
+        <div class="course-pill-row">
+          <span class="course-pill is-active" data-cat="economy-sustainability"><span class="material-symbols-outlined pill-icon">payments</span>Economy &amp; Sustainability</span>
+          <span class="course-pill" data-cat="hr-management"><span class="material-symbols-outlined pill-icon">groups</span>HR &amp; Management</span>
+          <span class="course-pill" data-cat="law-administration"><span class="material-symbols-outlined pill-icon">gavel</span>Law &amp; Administration</span>
+          <span class="course-pill" data-cat="construction-logistics"><span class="material-symbols-outlined pill-icon">construction</span>Construction &amp; Logistics</span>
+          <span class="course-pill" data-cat="interior-design"><span class="material-symbols-outlined pill-icon">palette</span>Interior &amp; Design</span>
+          <span class="course-pill" data-cat="health-lifestyle"><span class="material-symbols-outlined pill-icon">health_and_safety</span>Health &amp; Lifestyle</span>
+          <span class="course-pill" data-cat="marketing-sales"><span class="material-symbols-outlined pill-icon">campaign</span>Marketing &amp; Sales</span>
+        </div>
       </div>
       <div class="courses-viewport">
         <div class="courses-grid" id="coursesGridPro"></div>
       </div>
       <div class="pop-carousel-footer">
-        <button class="nav-arrow" id="popProPrev" aria-label="Previous">&#8592;</button>
-        <span class="pop-counter" id="popProCounter">1 — 3</span>
-        <button class="nav-arrow" id="popProNext" aria-label="Next">&#8594;</button>
+        <div class="pop-carousel-nav">
+          <button class="nav-arrow" id="popProPrev" aria-label="Previous"><span class="material-symbols-outlined">arrow_back</span></button>
+          <div class="pop-progress" id="popProProgress"></div>
+          <button class="nav-arrow" id="popProNext" aria-label="Next"><span class="material-symbols-outlined">arrow_forward</span></button>
+        </div>
+        <button class="btn-see-all" id="popProSeeAll">See all</button>
       </div>
     </div>
   </section>
@@ -819,28 +904,49 @@
   <!-- ── 5. HOW IT WORKS ── -->
   <section class="wf-section" aria-labelledby="hiw-hd">
     <div class="container">
-      <div class="section-hd is-centered">
-        <h2 class="section-title" id="hiw-hd">How it works</h2>
+      <div class="section-hd is-eyebrow">
+        <p class="section-eyebrow"><span class="section-eyebrow-dot"></span>How it works</p>
+        <h2 class="section-title" id="hiw-hd">Your schedule. Your pace</h2>
       </div>
-      <span class="mob-section-counter" id="hiwCounter">1 — 3</span>
+      <span class="mob-section-counter" id="hiwCounter">1 — 6</span>
       <div class="hiw-grid" id="hiwGrid">
 
         <div class="hiw-card">
-          <div class="hiw-num">01</div>
+          <div class="hiw-icon hiw-icon-orange"><span class="material-symbols-outlined">schedule</span></div>
           <div class="hiw-title">Study at your own pace</div>
           <p class="hiw-desc">You decide when and where you study. NKI's online programs adapt to your schedule — not the other way around — so you can fit coursework around work, family, and everyday life.</p>
         </div>
 
+        <div class="hiw-photo"><img src="images/design-system/how-it-works/photo-pace.jpg" alt=""></div>
+
         <div class="hiw-card">
-          <div class="hiw-num">02</div>
+          <div class="hiw-icon hiw-icon-purple"><span class="material-symbols-outlined">dashboard</span></div>
           <div class="hiw-title">Work through your digital classroom</div>
           <p class="hiw-desc">Everything you need lives in one digital classroom: course materials and assignments, with the flexibility to submit work and book exams whenever you're ready.</p>
         </div>
 
+        <div class="hiw-photo"><img src="images/design-system/how-it-works/photo-support.jpg" alt=""></div>
+
         <div class="hiw-card">
-          <div class="hiw-num">03</div>
+          <div class="hiw-icon hiw-icon-blue"><span class="material-symbols-outlined">support_agent</span></div>
           <div class="hiw-title">Get support along the way</div>
           <p class="hiw-desc">You're never studying alone. Message your teacher or study advisor directly, get a personal study advisor from day one, and connect with fellow students working through the same material.</p>
+        </div>
+
+        <div class="hiw-card hiw-card--accent">
+          <div class="hiw-accent-text">
+            <div class="hiw-title">100% online</div>
+            <p class="hiw-desc">study from anywhere in Norway.</p>
+          </div>
+          <div class="hiw-accent-row">
+            <div class="hiw-accent-avatars">
+              <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-1.png" alt="">
+              <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-2.png" alt="">
+              <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-3.png" alt="">
+              <span class="hiw-accent-avatar hiw-accent-globe"><span class="material-symbols-outlined">public</span></span>
+            </div>
+            <p class="hiw-accent-lbl">join the community of 600k+ online students</p>
+          </div>
         </div>
 
       </div>
@@ -851,52 +957,88 @@
   <!-- ── 6. PEDAGOGICAL APPROACH ── -->
   <section class="wf-section bg-gray" aria-labelledby="aktiv-hd">
     <div class="container">
+      <div class="aktiv-layout">
 
-      <div class="section-hd is-centered">
-        <h2 class="section-title" id="aktiv-hd">Our pedagogical approach</h2>
-      </div>
-
-      <!-- Tab row -->
-      <div class="aktiv-tabs" role="tablist" aria-label="Pedagogical principles">
-
-        <button class="aktiv-tab is-active" role="tab" data-tab="0" aria-selected="true">
-          <span class="material-symbols-outlined aktiv-tab-icon">touch_app</span>
-          Active learning
-        </button>
-
-        <button class="aktiv-tab" role="tab" data-tab="1" aria-selected="false">
-          <span class="material-symbols-outlined aktiv-tab-icon">smart_toy</span>
-          AI as a learning partner
-        </button>
-
-        <button class="aktiv-tab" role="tab" data-tab="2" aria-selected="false">
-          <span class="material-symbols-outlined aktiv-tab-icon">trending_up</span>
-          Clear progression
-        </button>
-
-        <button class="aktiv-tab" role="tab" data-tab="3" aria-selected="false">
-          <span class="material-symbols-outlined aktiv-tab-icon">accessibility</span>
-          Inclusive
-        </button>
-
-        <button class="aktiv-tab" role="tab" data-tab="4" aria-selected="false">
-          <span class="material-symbols-outlined aktiv-tab-icon">grid_view</span>
-          Variety
-        </button>
-
-      </div>
-
-      <!-- Panel: full-width image with white card overflowing bottom-left -->
-      <div class="aktiv-panel">
-        <div class="aktiv-panel-img">
-          <span class="material-symbols-outlined aktiv-img-icon">image</span>
+        <!-- Left: image with floating labeled pills -->
+        <div class="aktiv-img-wrap">
+          <img class="aktiv-img" src="images/design-system/pedagogical/background.jpg" alt="">
+          <div class="aktiv-bounding-box"></div>
+          <span class="aktiv-float-pill" style="top:176px; left:308px;"><span class="aktiv-float-icon aktiv-float-icon--orange"><img src="images/design-system/pedagogical/icon-games.svg" alt=""></span>Games</span>
+          <span class="aktiv-float-pill" style="top:304px; left:423px;"><span class="aktiv-float-icon aktiv-float-icon--purple"><img src="images/design-system/pedagogical/icon-quizzes.svg" alt=""></span>Quizzes</span>
+          <span class="aktiv-float-pill" style="top:352px; left:80px;"><span class="aktiv-float-icon aktiv-float-icon--blue"><img src="images/design-system/pedagogical/icon-videos.svg" alt=""></span>Videos</span>
+          <span class="aktiv-float-pill" style="top:452px; left:390px;"><span class="aktiv-float-icon aktiv-float-icon--green"><img src="images/design-system/pedagogical/icon-text.svg" alt=""></span>Text</span>
+          <span class="aktiv-float-pill" style="top:484px; left:104px;"><span class="aktiv-float-icon aktiv-float-icon--yellow"><img src="images/design-system/pedagogical/icon-audios.svg" alt=""></span>Audios</span>
         </div>
-        <div class="aktiv-panel-card">
-          <h3 class="aktiv-panel-title" id="aktiv-panel-title">Active learning</h3>
-          <p class="aktiv-panel-desc" id="aktiv-panel-desc">The course participant takes an active role through action, reflection, and applying knowledge.</p>
-        </div>
-      </div>
 
+        <!-- Right: heading + accordion -->
+        <div class="aktiv-content">
+          <h2 class="section-title" id="aktiv-hd">Our pedagogical approach</h2>
+
+          <div class="aktiv-accordion" id="aktivAccordion">
+            <div class="aktiv-item is-open" data-idx="0">
+              <button class="aktiv-item-hd" aria-expanded="true">
+                <span class="aktiv-item-num">01</span>
+                <span class="aktiv-item-title">Active learning</span>
+                <span class="material-symbols-outlined aktiv-item-chevron">remove</span>
+              </button>
+              <div class="aktiv-item-body">
+                <p class="aktiv-item-desc">The course participant takes an active role through action, reflection, and applying knowledge.</p>
+                <div class="aktiv-item-stats">
+                  <div class="aktiv-stat"><div class="aktiv-stat-num">50+</div><div class="aktiv-stat-lbl">years of trusted Norwegian education</div></div>
+                  <div class="aktiv-stat"><div class="aktiv-stat-num">200+</div><div class="aktiv-stat-lbl">courses across every level</div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="aktiv-item" data-idx="1">
+              <button class="aktiv-item-hd" aria-expanded="false">
+                <span class="aktiv-item-num">02</span>
+                <span class="aktiv-item-title">AI as a learning partner</span>
+                <span class="material-symbols-outlined aktiv-item-chevron">add</span>
+              </button>
+              <div class="aktiv-item-body">
+                <p class="aktiv-item-desc">Artificial intelligence is used to provide fast, relevant, and personalized feedback that supports learning, corrects along the way, and helps the learner progress.</p>
+              </div>
+            </div>
+
+            <div class="aktiv-item" data-idx="2">
+              <button class="aktiv-item-hd" aria-expanded="false">
+                <span class="aktiv-item-num">03</span>
+                <span class="aktiv-item-title">Clear progression</span>
+                <span class="material-symbols-outlined aktiv-item-chevron">add</span>
+              </button>
+              <div class="aktiv-item-body">
+                <p class="aktiv-item-desc">A clear structure and direction help the participant understand where they are in the learning journey and what comes next.</p>
+              </div>
+            </div>
+
+            <div class="aktiv-item" data-idx="3">
+              <button class="aktiv-item-hd" aria-expanded="false">
+                <span class="aktiv-item-num">04</span>
+                <span class="aktiv-item-title">Inclusive</span>
+                <span class="material-symbols-outlined aktiv-item-chevron">add</span>
+              </button>
+              <div class="aktiv-item-body">
+                <p class="aktiv-item-desc">The learning experience is accessible and inclusive for everyone – with strong accessibility (UX), clear structure, and plain language.</p>
+              </div>
+            </div>
+
+            <div class="aktiv-item" data-idx="4">
+              <button class="aktiv-item-hd" aria-expanded="false">
+                <span class="aktiv-item-num">05</span>
+                <span class="aktiv-item-title">Variety</span>
+                <span class="material-symbols-outlined aktiv-item-chevron">add</span>
+              </button>
+              <div class="aktiv-item-body">
+                <p class="aktiv-item-desc">Variety is used strategically to engage and strengthen learning – not to distract.</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-cta-green" id="aktivBrowseBtn">Browse all courses</button>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -904,7 +1046,8 @@
   <!-- ── 6. TESTIMONIALS ────────────────── -->
   <section class="wf-section" aria-labelledby="testi-hd">
     <div class="container">
-      <div class="section-hd">
+      <div class="section-hd is-eyebrow is-centered">
+        <p class="section-eyebrow"><span class="section-eyebrow-dot"></span>Testimonials</p>
         <h2 class="section-title" id="testi-hd">What our students say</h2>
       </div>
       <span class="mob-section-counter" id="testiCounter">1 — 8</span>
@@ -914,36 +1057,36 @@
         <!-- Column 1 -->
         <div class="testi-col">
           <div class="t-card featured">
-            <div class="featured-bg"></div>
+            <img class="featured-bg" src="images/design-system/testimonials/story-1.jpg" alt="">
             <div class="featured-gradient"></div>
             <div class="featured-foot">
-              <div class="featured-lbl">Student story</div>
-              <div class="featured-ttl">How I passed my medical entrance exam — fully online with NKI</div>
+              <div class="featured-ttl">June (38) studied at NKI Online Studies and got a permanent job as a pharmacy technician</div>
+              <a href="#" class="t-course-link t-course-link--light">Read full story <span class="material-symbols-outlined t-link-arrow"></span></a>
             </div>
           </div>
           <div class="t-card">
             <div class="t-hd">
-              <div class="t-avatar"></div>
+              <img class="t-avatar" src="images/design-system/testimonials/avatar-1.jpg" alt="">
               <div class="t-meta">
                 <div class="t-name">Emilie Haugen</div>
                 <div class="t-role">Student, Medical Secretary</div>
               </div>
+              <span class="t-qmark"><svg viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99514 16H0L9.6432 0H15.1335L9.99514 16ZM23.8616 16H13.8665L23.5097 0H29L23.8616 16Z" fill="currentColor"/></svg></span>
             </div>
-            <div class="t-qmark">"</div>
             <p class="t-text">I was juggling a part-time job and two kids. NKI let me study whenever I had an hour free. I finished in 14 months and got the grade I needed.</p>
-            <a href="#" class="t-course-link">View Medical Secretary course ›</a>
+            <a href="#" class="t-course-link">View Medical Secretary course <span class="material-symbols-outlined t-link-arrow"></span></a>
           </div>
           <div class="t-card">
             <div class="t-hd">
-              <div class="t-avatar"></div>
+              <img class="t-avatar" src="images/design-system/testimonials/avatar-2.jpg" alt="">
               <div class="t-meta">
                 <div class="t-name">Anders Brevik</div>
                 <div class="t-role">Student, Mathematics R1</div>
               </div>
+              <span class="t-qmark"><svg viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99514 16H0L9.6432 0H15.1335L9.99514 16ZM23.8616 16H13.8665L23.5097 0H29L23.8616 16Z" fill="currentColor"/></svg></span>
             </div>
-            <div class="t-qmark">"</div>
             <p class="t-text">The video explanations and practice quizzes made it click for me in a way that classroom teaching never did. Went from a 2 to a 5.</p>
-            <a href="#" class="t-course-link">View Mathematics R1 course ›</a>
+            <a href="#" class="t-course-link">View Mathematics R1 course <span class="material-symbols-outlined t-link-arrow"></span></a>
           </div>
         </div>
 
@@ -951,51 +1094,51 @@
         <div class="testi-col">
           <div class="t-card">
             <div class="t-hd">
-              <div class="t-avatar"></div>
+              <img class="t-avatar" src="images/design-system/testimonials/avatar-3.jpg" alt="">
               <div class="t-meta">
                 <div class="t-name">Kari Lindstrom</div>
                 <div class="t-role">Student, HR Consultant</div>
               </div>
+              <span class="t-qmark"><svg viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99514 16H0L9.6432 0H15.1335L9.99514 16ZM23.8616 16H13.8665L23.5097 0H29L23.8616 16Z" fill="currentColor"/></svg></span>
             </div>
-            <div class="t-qmark">"</div>
             <p class="t-text">My employer funded the course through Lånekassen and I could study without taking a leave of absence. The structure made it manageable alongside full-time work.</p>
-            <a href="#" class="t-course-link">View HR Consultant course ›</a>
+            <a href="#" class="t-course-link">View HR Consultant course <span class="material-symbols-outlined t-link-arrow"></span></a>
           </div>
           <div class="t-card">
             <div class="t-hd">
-              <div class="t-avatar"></div>
+              <img class="t-avatar" src="images/design-system/testimonials/avatar-4.jpg" alt="">
               <div class="t-meta">
                 <div class="t-name">Jonas Myhre</div>
                 <div class="t-role">Student, Accounting Consultant</div>
               </div>
+              <span class="t-qmark"><svg viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99514 16H0L9.6432 0H15.1335L9.99514 16ZM23.8616 16H13.8665L23.5097 0H29L23.8616 16Z" fill="currentColor"/></svg></span>
             </div>
-            <div class="t-qmark">"</div>
             <p class="t-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. The feedback system flagged my mistakes before they became habits. I passed the national exam on first attempt.</p>
-            <a href="#" class="t-course-link">View Accounting Consultant course ›</a>
+            <a href="#" class="t-course-link">View Accounting Consultant course <span class="material-symbols-outlined t-link-arrow"></span></a>
           </div>
           <div class="t-card">
             <div class="t-hd">
-              <div class="t-avatar"></div>
+              <img class="t-avatar" src="images/design-system/testimonials/avatar-5.jpg" alt="">
               <div class="t-meta">
                 <div class="t-name">Ingrid Solberg</div>
                 <div class="t-role">Student, Interior Designer</div>
               </div>
+              <span class="t-qmark"><svg viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99514 16H0L9.6432 0H15.1335L9.99514 16ZM23.8616 16H13.8665L23.5097 0H29L23.8616 16Z" fill="currentColor"/></svg></span>
             </div>
-            <div class="t-qmark">"</div>
             <p class="t-text">I had tried another online school but dropped out. NKI's progress bar and module structure kept me on track. Finished the two-year programme in 20 months.</p>
-            <a href="#" class="t-course-link">View Interior Designer course ›</a>
+            <a href="#" class="t-course-link">View Interior Designer course <span class="material-symbols-outlined t-link-arrow"></span></a>
           </div>
           <div class="t-card">
             <div class="t-hd">
-              <div class="t-avatar"></div>
+              <img class="t-avatar" src="images/design-system/testimonials/avatar-6.jpg" alt="">
               <div class="t-meta">
                 <div class="t-name">Morten Dahl</div>
                 <div class="t-role">Student, Project Manager</div>
               </div>
+              <span class="t-qmark"><svg viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99514 16H0L9.6432 0H15.1335L9.99514 16ZM23.8616 16H13.8665L23.5097 0H29L23.8616 16Z" fill="currentColor"/></svg></span>
             </div>
-            <div class="t-qmark">"</div>
             <p class="t-text">The course content was current and practical. My manager noticed the difference within weeks of me starting the programme.</p>
-            <a href="#" class="t-course-link">View Project Manager course ›</a>
+            <a href="#" class="t-course-link">View Project Manager course <span class="material-symbols-outlined t-link-arrow"></span></a>
           </div>
         </div>
 
@@ -1003,35 +1146,35 @@
         <div class="testi-col">
           <div class="t-card">
             <div class="t-hd">
-              <div class="t-avatar"></div>
+              <img class="t-avatar" src="images/design-system/testimonials/avatar-7.jpg" alt="">
               <div class="t-meta">
                 <div class="t-name">Lena Bakke</div>
                 <div class="t-role">Student, Legal Secretary</div>
               </div>
+              <span class="t-qmark"><svg viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99514 16H0L9.6432 0H15.1335L9.99514 16ZM23.8616 16H13.8665L23.5097 0H29L23.8616 16Z" fill="currentColor"/></svg></span>
             </div>
-            <div class="t-qmark">"</div>
             <p class="t-text">Customer support answered all my questions before I enrolled. I felt confident about the process from day one.</p>
-            <a href="#" class="t-course-link">View Legal Secretary course ›</a>
+            <a href="#" class="t-course-link">View Legal Secretary course <span class="material-symbols-outlined t-link-arrow"></span></a>
           </div>
           <div class="t-card featured">
-            <div class="featured-bg"></div>
+            <img class="featured-bg" src="images/design-system/testimonials/story-2.jpg" alt="">
             <div class="featured-gradient"></div>
             <div class="featured-foot">
-              <div class="featured-lbl">Student story</div>
-              <div class="featured-ttl">From office assistant to legal secretary — a career shift in 18 months</div>
+              <div class="featured-ttl">Interview with Marte Hovatn: Accounting employee</div>
+              <a href="#" class="t-course-link t-course-link--light">Read full story <span class="material-symbols-outlined t-link-arrow"></span></a>
             </div>
           </div>
           <div class="t-card">
             <div class="t-hd">
-              <div class="t-avatar"></div>
+              <img class="t-avatar" src="images/design-system/testimonials/avatar-8.jpg" alt="">
               <div class="t-meta">
                 <div class="t-name">Trond Eriksen</div>
                 <div class="t-role">Student, Logistics Vocational School</div>
               </div>
+              <span class="t-qmark"><svg viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99514 16H0L9.6432 0H15.1335L9.99514 16ZM23.8616 16H13.8665L23.5097 0H29L23.8616 16Z" fill="currentColor"/></svg></span>
             </div>
-            <div class="t-qmark">"</div>
             <p class="t-text">I was skeptical about online learning but the interactive games and audio modules made it actually enjoyable. Highly recommend for anyone who learns differently.</p>
-            <a href="#" class="t-course-link">View Logistics Vocational School course ›</a>
+            <a href="#" class="t-course-link">View Logistics course <span class="material-symbols-outlined t-link-arrow"></span></a>
           </div>
         </div>
 
@@ -1044,31 +1187,46 @@
   <section class="wf-section bg-gray" aria-labelledby="news-hd">
     <div class="container">
       <div class="section-hd is-centered">
-        <h2 class="section-title" id="news-hd">News</h2>
+        <h2 class="section-title" id="news-hd">Latest news</h2>
       </div>
       <div class="news-grid">
 
         <div class="news-card">
-          <div class="news-img"></div>
+          <div class="news-img"><img src="images/design-system/news/article-1.jpg" alt=""></div>
           <div class="news-ttl">NKI launches new AI-assisted feedback modules across all vocational programmes</div>
-          <div class="news-date">12 June 2025</div>
+          <div class="news-meta">
+            <span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">calendar_today</span>12 June 2026</span>
+            <span class="news-meta-dot"></span>
+            <span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">schedule</span>9 min read</span>
+            <span class="news-meta-dot"></span>
+            <span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">visibility</span>8.1k</span>
+          </div>
         </div>
 
         <div class="news-card">
-          <div class="news-img"></div>
+          <div class="news-img"><img src="images/design-system/news/article-2.jpg" alt=""></div>
           <div class="news-ttl">Record enrolment: 4 200 new students started in the August intake</div>
-          <div class="news-date">5 September 2025</div>
+          <div class="news-meta">
+            <span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">calendar_today</span>8 June 2026</span>
+            <span class="news-meta-dot"></span>
+            <span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">schedule</span>6 min read</span>
+            <span class="news-meta-dot"></span>
+            <span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">visibility</span>4.1k</span>
+          </div>
         </div>
 
         <div class="news-card">
-          <div class="news-img"></div>
+          <div class="news-img"><img src="images/design-system/news/article-3.jpg" alt=""></div>
           <div class="news-ttl">NKI partners with three Norwegian municipalities for employee upskilling programmes</div>
-          <div class="news-date">21 October 2025</div>
+          <div class="news-meta">
+            <span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">calendar_today</span>4 June 2025</span>
+            <span class="news-meta-dot"></span>
+            <span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">schedule</span>3 min read</span>
+            <span class="news-meta-dot"></span>
+            <span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">visibility</span>3.3k</span>
+          </div>
         </div>
 
-      </div>
-      <div class="news-see-all-wrap">
-        <a href="#" class="btn-see-all">See all news</a>
       </div>
     </div>
   </section>
@@ -1079,50 +1237,44 @@
     <div class="container">
       <div class="consult-inline">
 
-        <div>
-          <h2 class="section-title" id="consult-hd">Get free advice</h2>
+        <div class="consult-info">
+          <p class="section-eyebrow"><span class="section-eyebrow-dot"></span>Advice</p>
+          <h2 class="section-title" id="consult-hd">Get free consultation</h2>
           <p class="consult-sub">If you have any questions about our studies or admission requirements – we are happy to help you!</p>
-          <p class="consult-tel">For free study advice, call 67 58 88 00</p>
-          <p class="consult-hours">09–16 (Mon–Fri)</p>
+          <div class="hero-avatars">
+            <img class="hero-avatar" src="images/design-system/consultation/avatar-1.jpg" alt="">
+            <img class="hero-avatar" src="images/design-system/consultation/avatar-2-inner.jpg" alt="">
+            <img class="hero-avatar" src="images/design-system/consultation/avatar-3-inner.jpg" alt="">
+          </div>
         </div>
 
-        <form onsubmit="return false">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="c-name">Name</label>
-              <input class="form-input" id="c-name" type="text" placeholder="Your full name">
+        <form class="consult-form" onsubmit="return false">
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="c-name">Name</label>
+              <input class="cf-input" id="c-name" type="text" placeholder="Enter your name">
             </div>
-            <div class="form-group">
-              <label class="form-label" for="c-email">Email</label>
-              <input class="form-input" id="c-email" type="email" placeholder="email@example.com">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="c-phone">Phone number</label>
-              <input class="form-input" id="c-phone" type="tel" placeholder="+47 000 00 000">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="c-topic">Topic</label>
-              <select class="form-select" id="c-topic">
-                <option value="">Select a topic</option>
-                <option>Course information</option>
-                <option>Admission requirements</option>
-                <option>Financing / Lånekassen</option>
-                <option>Other</option>
-              </select>
+            <div class="cf-field">
+              <label class="cf-label" for="c-surname">Surname</label>
+              <input class="cf-input" id="c-surname" type="text" placeholder="Enter your surname">
             </div>
           </div>
-          <div class="form-group">
-            <label class="form-label" for="c-msg">Message</label>
-            <textarea class="form-textarea" id="c-msg" placeholder="Write your question here..."></textarea>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Preferred contact method</label>
-            <div class="contact-pref-group">
-              <label><input type="radio" name="c-pref" value="phone"> Phone</label>
-              <label><input type="radio" name="c-pref" value="email"> Email</label>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="c-email">Email</label>
+              <div class="cf-input-wrap">
+                <span class="material-symbols-outlined cf-input-icon">mail</span>
+                <input class="cf-input cf-input--icon" id="c-email" type="email" placeholder="Enter your email">
+              </div>
             </div>
+            <div class="cf-field">
+              <label class="cf-label" for="c-phone">Phone number</label>
+              <input class="cf-input" id="c-phone" type="tel" placeholder="+47">
+            </div>
+          </div>
+          <div class="cf-field">
+            <label class="cf-label" for="c-msg">Message</label>
+            <textarea class="cf-textarea" id="c-msg" placeholder="Enter your message"></textarea>
           </div>
           <button type="submit" class="btn-submit">Send</button>
         </form>
@@ -1152,82 +1304,90 @@
 <footer class="site-footer">
   <div class="footer-inner">
 
-    <!-- Footer top bar -->
-    <div class="footer-nl-bar">
-      <img src="logos/NKI_Logo_White_L.svg" class="footer-logo" alt="NKI">
-      <div class="footer-nl-right">
-        <span class="footer-nl-lbl">Subscribe to the newsletter</span>
-        <div class="footer-nl-wrap">
-          <input class="footer-nl-input" type="email" placeholder="Your email address">
-          <button class="btn-nl">Subscribe</button>
-        </div>
-      </div>
-    </div>
-
     <!-- Footer columns -->
     <div class="footer-cols">
-
-      <!-- Contact -->
-      <div class="footer-col">
-        <div class="footer-col-ttl">Contact</div>
-        <p class="footer-contact-item"><strong>Tel:</strong> 67 58 88 00</p>
-        <p class="footer-contact-item"><strong>Email:</strong> veelding@nki.no</p>
-        <p class="footer-contact-item"><strong>Opening hours:</strong> Mon–Fri 9am–4pm</p>
-        <p class="footer-contact-item" style="margin-top:8px"><a href="#" style="color:var(--gray-300);font-weight:500">Contact us →</a></p>
-      </div>
 
       <!-- About -->
       <div class="footer-col">
         <div class="footer-col-ttl">About</div>
         <ul>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Our employees</a></li>
-        </ul>
-      </div>
-
-      <!-- Useful information — part 1 -->
-      <div class="footer-col">
-        <div class="footer-col-ttl">Useful information</div>
-        <ul>
-          <li><a href="#">Try online studies today</a></li>
-          <li><a href="#">All study offers</a></li>
-          <li><a href="#">Financing options</a></li>
-          <li><a href="#">Loan Fund</a></li>
-          <li><a href="#">Exam</a></li>
-          <li><a href="#">Admission requirements</a></li>
-        </ul>
-      </div>
-
-      <!-- Useful information — part 2 -->
-      <div class="footer-col">
-        <div class="footer-col-ttl" style="visibility:hidden">-</div>
-        <ul>
-          <li><a href="#">Grade calculator</a></li>
-          <li><a href="#">FAQs</a></li>
-          <li><a href="#">NAV</a></li>
-          <li><a href="#">For businesses</a></li>
-          <li><a href="#">For students</a></li>
-          <li><a href="#">Login to Canvas</a></li>
-        </ul>
-      </div>
-
-      <!-- New at NKI Online Studies -->
-      <div class="footer-col">
-        <div class="footer-col-ttl">New at NKI Online Studies</div>
-        <ul>
-          <li><a href="#">Exam</a></li>
-          <li><a href="#">Frequently asked questions</a></li>
-          <li><a href="#">Study regulations</a></li>
+          <li><a href="#">About NKI</a></li>
+          <li><a href="#">Our team</a></li>
           <li><a href="#">Educational quality</a></li>
           <li><a href="#">Ethical guidelines</a></li>
           <li><a href="#">Speak up</a></li>
         </ul>
       </div>
 
+      <!-- Study information -->
+      <div class="footer-col">
+        <div class="footer-col-ttl">Study information</div>
+        <ul>
+          <li><a href="#">All study offers</a></li>
+          <li><a href="#">Try online studies today</a></li>
+          <li><a href="#">Admission requirements</a></li>
+          <li><a href="#">Exam</a></li>
+          <li><a href="#">Financing options</a></li>
+          <li><a href="#">Lånekassen</a></li>
+          <li><a href="#">Grade calculator</a></li>
+          <li><a href="#">New at NKI Online Studies</a></li>
+          <li><a href="#">For businesses</a></li>
+        </ul>
+      </div>
+
+      <!-- Student Resources -->
+      <div class="footer-col">
+        <div class="footer-col-ttl">Student Resources</div>
+        <ul>
+          <li><a href="#">Login to Canvas</a></li>
+          <li><a href="#">Frequently asked questions</a></li>
+          <li><a href="#">Study regulations</a></li>
+          <li><a href="#">Exam</a></li>
+          <li><a href="#">Financing options</a></li>
+          <li><a href="#">Lånekassen</a></li>
+          <li><a href="#">Grade calculator</a></li>
+          <li><a href="#">New at NKI Online Studies</a></li>
+          <li><a href="#">NAV</a></li>
+        </ul>
+      </div>
+
+      <!-- Contacts -->
+      <div class="footer-col">
+        <div class="footer-col-ttl">Contacts</div>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Tel: 67 58 88 00</a></li>
+          <li><a href="#">Email: veelding@nki.no</a></li>
+          <li><a href="#">Opening hours:<br>Mon–Fri, 9am–4pm</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-col footer-col--newsletter">
+        <div class="footer-col-ttl">Subscribe to our newsletter</div>
+        <div class="footer-nl-wrap">
+          <input class="footer-nl-input" type="email" placeholder="Enter your email">
+          <button class="btn-nl">Subscribe</button>
+        </div>
+      </div>
+
     </div>
 
-    <div class="footer-bottom">
-      © 2025 NKI Nettstudier. All rights reserved.
+    <!-- Wordmark + social + legal -->
+    <div class="footer-bottom-row">
+      <img src="images/design-system/footer/nki-wordmark-lime.svg" class="footer-wordmark" alt="NKI">
+      <div class="footer-bottom-right">
+        <div class="footer-social">
+          <a href="#" class="footer-social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.001 9C10.3436 9 9.00098 10.3431 9.00098 12C9.00098 13.6573 10.3441 15 12.001 15C13.6583 15 15.001 13.6569 15.001 12C15.001 10.3427 13.6579 9 12.001 9ZM12.001 7C14.7614 7 17.001 9.2371 17.001 12C17.001 14.7605 14.7639 17 12.001 17C9.24051 17 7.00098 14.7629 7.00098 12C7.00098 9.23953 9.23808 7 12.001 7ZM18.501 6.74915C18.501 7.43926 17.9402 7.99917 17.251 7.99917C16.5609 7.99917 16.001 7.4384 16.001 6.74915C16.001 6.0599 16.5617 5.5 17.251 5.5C17.9393 5.49913 18.501 6.0599 18.501 6.74915ZM12.001 4C9.5265 4 9.12318 4.00655 7.97227 4.0578C7.18815 4.09461 6.66253 4.20007 6.17416 4.38967C5.74016 4.55799 5.42709 4.75898 5.09352 5.09255C4.75867 5.4274 4.55804 5.73963 4.3904 6.17383C4.20036 6.66332 4.09493 7.18811 4.05878 7.97115C4.00703 9.0752 4.00098 9.46105 4.00098 12C4.00098 14.4745 4.00753 14.8778 4.05877 16.0286C4.0956 16.8124 4.2012 17.3388 4.39034 17.826C4.5591 18.2606 4.7605 18.5744 5.09246 18.9064C5.42863 19.2421 5.74179 19.4434 6.17187 19.6094C6.66619 19.8005 7.19148 19.9061 7.97212 19.9422C9.07618 19.9939 9.46203 20 12.001 20C14.4755 20 14.8788 19.9934 16.0296 19.9422C16.8117 19.9055 17.3385 19.7996 17.827 19.6106C18.2604 19.4423 18.5752 19.2402 18.9074 18.9085C19.2436 18.5718 19.4445 18.2594 19.6107 17.8283C19.8013 17.3358 19.9071 16.8098 19.9432 16.0289C19.9949 14.9248 20.001 14.5389 20.001 12C20.001 9.52552 19.9944 9.12221 19.9432 7.97137C19.9064 7.18906 19.8005 6.66149 19.6113 6.17318C19.4434 5.74038 19.2417 5.42635 18.9084 5.09255C18.573 4.75715 18.2616 4.55693 17.8271 4.38942C17.338 4.19954 16.8124 4.09396 16.0298 4.05781C14.9258 4.00605 14.5399 4 12.001 4ZM12.001 2C14.7176 2 15.0568 2.01 16.1235 2.06C17.1876 2.10917 17.9135 2.2775 18.551 2.525C19.2101 2.77917 19.7668 3.1225 20.3226 3.67833C20.8776 4.23417 21.221 4.7925 21.476 5.45C21.7226 6.08667 21.891 6.81333 21.941 7.8775C21.9885 8.94417 22.001 9.28333 22.001 12C22.001 14.7167 21.991 15.0558 21.941 16.1225C21.8918 17.1867 21.7226 17.9125 21.476 18.55C21.2218 19.2092 20.8776 19.7658 20.3226 20.3217C19.7668 20.8767 19.2076 21.22 18.551 21.475C17.9135 21.7217 17.1876 21.89 16.1235 21.94C15.0568 21.9875 14.7176 22 12.001 22C9.28431 22 8.94514 21.99 7.87848 21.94C6.81431 21.8908 6.08931 21.7217 5.45098 21.475C4.79264 21.2208 4.23514 20.8767 3.67931 20.3217C3.12348 19.7658 2.78098 19.2067 2.52598 18.55C2.27848 17.9125 2.11098 17.1867 2.06098 16.1225C2.01348 15.0558 2.00098 14.7167 2.00098 12C2.00098 9.28333 2.01098 8.94417 2.06098 7.8775C2.11014 6.8125 2.27848 6.0875 2.52598 5.45C2.78014 4.79167 3.12348 4.23417 3.67931 3.67833C4.23514 3.1225 4.79348 2.78 5.45098 2.525C6.08848 2.2775 6.81348 2.11 7.87848 2.06C8.94514 2.0125 9.28431 2 12.001 2Z" fill="currentColor"/></svg></a>
+          <a href="#" class="footer-social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47062 14 5.5 16 5.5H17.5V2.1401C17.1743 2.09685 15.943 2 14.6429 2C11.9284 2 10 3.65686 10 6.69971V9.5H7V13.5H10V22H14V13.5Z" fill="currentColor"/></svg></a>
+          <a href="#" class="footer-social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.94048 4.99993C6.94011 5.81424 6.44608 6.54702 5.69134 6.85273C4.9366 7.15845 4.07187 6.97605 3.5049 6.39155C2.93793 5.80704 2.78195 4.93715 3.1105 4.19207C3.43906 3.44699 4.18654 2.9755 5.00048 2.99993C6.08155 3.03238 6.94097 3.91837 6.94048 4.99993ZM7.00048 8.47993H3.00048V20.9999H7.00048V8.47993ZM13.3205 8.47993H9.34048V20.9999H13.2805V14.4299C13.2805 10.7699 18.0505 10.4299 18.0505 14.4299V20.9999H22.0005V13.0699C22.0005 6.89993 14.9405 7.12993 13.2805 10.1599L13.3205 8.47993Z" fill="currentColor"/></svg></a>
+        </div>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a><span class="footer-legal-dot"></span>
+          <a href="#">Cookie Statement</a><span class="footer-legal-dot"></span>
+          <a href="#">Transparency Act</a>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -1482,7 +1642,7 @@
     }, { passive: true });
   }
 
-  initScrollCounter('hiwGrid', 'hiwCounter', 3);
+  initScrollCounter('hiwGrid', 'hiwCounter', 6);
 
   function initTestiCounter() {
     var cols    = document.getElementById('testiCols');
@@ -1661,14 +1821,14 @@
     searchClear.classList.toggle('is-visible', searchInput.value.length > 0);
   }
 
-  function renderCard(course) {
-    var imgBadge = course.badge ? '<div class="s-badges"><span class="s-badge">' + course.badge + '</span></div>' : '';
-    var metaParts = [(course.type || 'Course')].concat(course.meta ? course.meta.split(' · ') : []);
-    var pills = metaParts.map(function(p) { return '<span class="pill-sm">' + p + '</span>'; }).join('');
+  function renderCard(course, idx) {
+    var category = course.meta ? course.meta.split(' · ')[0] : '';
+    var isHs = /High School|Single subject|Package/i.test(course.meta || '');
+    var img = 'images/design-system/courses/' + (isHs ? 'hs' : 'pro') + '-0' + ((idx % 4) + 1) + '.jpg';
     return '<div class="s-card" role="option">'
-      + '<div class="s-card-img">' + imgBadge + '</div>'
+      + '<div class="s-card-img"><img src="' + img + '" alt=""></div>'
       + '<div class="s-card-name">' + course.name + '</div>'
-      + '<div class="s-card-pills">' + pills + '</div>'
+      + '<div class="s-card-meta"><span>' + (course.type || 'Course') + '</span><span class="s-card-dot"></span><span>' + category + '</span></div>'
       + '<div class="s-card-price">' + course.price + '</div>'
       + '</div>';
   }
@@ -2241,111 +2401,118 @@
   });
 
   /* ── Pedagogical approach tabs ── */
-  var aktivTabContent = [
-    {
-      title: 'Active learning',
-      desc:  'The course participant takes an active role through action, reflection, and applying knowledge.'
-    },
-    {
-      title: 'AI as a learning partner',
-      desc:  'Artificial intelligence is used to provide fast, relevant, and personalized feedback that supports learning, corrects along the way, and helps the learner progress.'
-    },
-    {
-      title: 'Clear progression',
-      desc:  'A clear structure and direction help the participant understand where they are in the learning journey and what comes next.'
-    },
-    {
-      title: 'Inclusive',
-      desc:  'The learning experience is accessible and inclusive for everyone – with strong accessibility (UX), clear structure, and plain language.'
-    },
-    {
-      title: 'Variety',
-      desc:  'Variety is used strategically to engage and strengthen learning –<br>not to distract.'
-    },
-  ];
-
-  var aktivTabs      = document.querySelectorAll('.aktiv-tab');
-  var aktivPanelTtl  = document.getElementById('aktiv-panel-title');
-  var aktivPanelDesc = document.getElementById('aktiv-panel-desc');
-
-  aktivTabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      var idx = parseInt(tab.getAttribute('data-tab'), 10);
-      aktivTabs.forEach(function (t) {
-        t.classList.remove('is-active');
-        t.setAttribute('aria-selected', 'false');
+  var aktivItems = document.querySelectorAll('.aktiv-item');
+  aktivItems.forEach(function (item) {
+    var hd = item.querySelector('.aktiv-item-hd');
+    var chevron = item.querySelector('.aktiv-item-chevron');
+    hd.addEventListener('click', function () {
+      var wasOpen = item.classList.contains('is-open');
+      aktivItems.forEach(function (i) {
+        i.classList.remove('is-open');
+        i.querySelector('.aktiv-item-hd').setAttribute('aria-expanded', 'false');
+        i.querySelector('.aktiv-item-chevron').textContent = 'add';
       });
-      tab.classList.add('is-active');
-      tab.setAttribute('aria-selected', 'true');
-      aktivPanelTtl.textContent = aktivTabContent[idx].title;
-      aktivPanelDesc.innerHTML  = aktivTabContent[idx].desc;
+      if (!wasOpen) {
+        item.classList.add('is-open');
+        hd.setAttribute('aria-expanded', 'true');
+        chevron.textContent = 'remove';
+      }
     });
   });
 
+  var aktivBrowseBtn = document.getElementById('aktivBrowseBtn');
+  if (aktivBrowseBtn) aktivBrowseBtn.addEventListener('click', function () { showPage('search'); });
+
   /* ── Popular courses carousel ── */
   var coursePagesByTab = {
-    hs: [
-      [
-        { id: 'pabygg',     name: 'General Study Competence (23/5 Rule)', type: 'Package', badge: 'Best seller', rating: '4.9', pills: ['Lånekassen support', '6 months', 'Beginner', 'Books needed'],  price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-15%' },
+    hs: {
+      'subject-packages': [[
+        { id: 'pabygg',      name: 'General Study Competence (23/5 Rule)', type: 'Package', badge: 'Best seller', rating: '4.9', pills: ['Lånekassen support', '6 months', 'Beginner', 'Books needed'],  price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-15%' },
+        { id: 'vgs-pakke',   name: 'Vocational Study Competence Package',  type: 'Package', badge: 'Trending',    rating: '4.7', pills: ['Lånekassen support', '9 months', 'All levels', 'Books needed'], price: 'Kr 11 900', orig: 'Kr 13 900', disc: '-14%' },
+        { id: 'helse-pakke', name: 'Health & Social Studies Package',      type: 'Package', badge: null,          rating: '4.6', pills: ['Lånekassen support', '6 months', 'Beginner'],                   price: 'Kr 9 900',  orig: 'Kr 10 900', disc: '-9%'  },
+        { id: 'okonomi-pakke',name:'Business & Administration Package',    type: 'Package', badge: null,          rating: '4.8', pills: ['Lånekassen support', '6 months', 'Books needed'],               price: 'Kr 9 490',  orig: 'Kr 10 900', disc: '-13%' },
+      ]],
+      'vocational-studies': [[
+        { id: 'elektro',    name: 'Electrician Foundation Year',   type: 'Course', badge: 'Trending', rating: '4.7', pills: ['Vocational School', '6 months', 'Books needed'],         price: 'Kr 8 900', orig: 'Kr 9 900',  disc: '-10%' },
+        { id: 'helsefag',   name: 'Healthcare Worker (Helsefag)',  type: 'Course', badge: 'Best seller', rating: '4.8', pills: ['Vocational School', '6 months', 'Lånekassen support'], price: 'Kr 8 490', orig: 'Kr 9 490',  disc: '-11%' },
+        { id: 'barn-ungdom',name: 'Child and Youth Worker',        type: 'Course', badge: null,        rating: '4.6', pills: ['Vocational School', '6 months', 'Certificate'],          price: 'Kr 7 900', orig: 'Kr 8 900',  disc: '-11%' },
+        { id: 'salg-grunn', name: 'Sales Foundation Year',         type: 'Course', badge: null,        rating: '4.5', pills: ['Vocational School', '3 months', 'Beginner'],             price: 'Kr 5 900', orig: 'Kr 6 490',  disc: '-9%'  },
+      ]],
+      'single-subjects': [[
         { id: 'mat-1t',     name: 'Mathematics R1',                        type: 'Course',  badge: 'Best seller', rating: '4.9', pills: ['Single subject', '6 months', 'Books needed'],                  price: 'Kr 3 490',  orig: 'Kr 3 990',  disc: '-13%' },
-        { id: 'norsk-vg3',  name: 'Norsk – Skriftlig VG3',                 type: 'Course',  badge: null,          rating: '4.6', pills: ['Single subject', '6 months', 'Lånekassen support'],            price: 'Kr 5 900',  orig: 'Kr 6 490',  disc: '-9%'  },
-      ],
-      [
+        { id: 'norsk-vg3',  name: 'Norsk – Skriftlig VG3',                 type: 'Course',  badge: 'Trending',    rating: '4.6', pills: ['Single subject', '6 months', 'Lånekassen support'],            price: 'Kr 5 900',  orig: 'Kr 6 490',  disc: '-9%'  },
         { id: 'engelsk-vg3',name: 'Engelsk VG2/VG3',                       type: 'Course',  badge: null,          rating: '4.5', pills: ['Single subject', '6 months', 'Certificate'],                    price: 'Kr 4 400',  orig: 'Kr 4 900',  disc: '-10%' },
-        { id: 'mat-2p',     name: 'Mathematics 2P',                        type: 'Course',  badge: null,          rating: '4.7', pills: ['Single subject', '6 months', 'Books needed'],                  price: 'Kr 3 490',  orig: 'Kr 3 990',  disc: '-13%' },
         { id: 'naturfag',   name: 'Natural Science VG1',                   type: 'Course',  badge: null,          rating: '4.5', pills: ['Single subject', '6 months', 'Lånekassen support'],            price: 'Kr 4 900',  orig: 'Kr 5 490',  disc: '-11%' },
-      ],
-      [
-        { id: 'historie',   name: 'History VG2/VG3',                       type: 'Course',  badge: null,          rating: '4.6', pills: ['Single subject', '6 months', 'Certificate'],                    price: 'Kr 4 900',  orig: 'Kr 5 490',  disc: '-11%' },
-        { id: 'samfunn',    name: 'Social Studies VG1',                    type: 'Course',  badge: null,          rating: '4.4', pills: ['Single subject', '6 months', 'Lånekassen support'],            price: 'Kr 4 400',  orig: 'Kr 4 900',  disc: '-10%' },
-        { id: 'kjemi',      name: 'Chemistry 1',                           type: 'Course',  badge: null,          rating: '4.6', pills: ['Single subject', '6 months', 'Books needed'],                  price: 'Kr 5 900',  orig: 'Kr 6 490',  disc: '-9%'  },
-      ],
-      [
-        { id: 'fysikk',     name: 'Physics 1',                             type: 'Course',  badge: null,          rating: '4.5', pills: ['Single subject', '6 months', 'Books needed'],                  price: 'Kr 5 900',  orig: 'Kr 6 490',  disc: '-9%'  },
-        { id: 'geografi',   name: 'Geography VG1',                         type: 'Course',  badge: null,          rating: '4.3', pills: ['Single subject', '6 months', 'Lånekassen support'],            price: 'Kr 3 990',  orig: 'Kr 4 490',  disc: '-11%' },
-        { id: 'biologi',    name: 'Biology 1',                             type: 'Course',  badge: null,          rating: '4.7', pills: ['Single subject', '6 months', 'Books needed'],                  price: 'Kr 5 900',  orig: 'Kr 6 490',  disc: '-9%'  },
-      ],
-    ],
-    pro: [
-      [
-        { id: 'med-sec',      name: 'Medical Secretary',      type: 'Course',  badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '6 months', 'All levels', 'Certificate', 'NAV'],      price: 'Kr 12 900', orig: 'Kr 14 900', disc: '-13%' },
-        { id: 'hr-grunnkurs', name: 'Office employee',        type: 'Course',  badge: null,          rating: '4.7', pills: ['Lånekassen support', '3 months', 'All levels', 'No books needed', 'NAV'],  price: 'Kr 5 490',  orig: 'Kr 5 990',  disc: '-8%'  },
-        { id: 'interior',     name: 'Interior Designer',      type: 'Course',  badge: null,          rating: '4.9', pills: ['280 total hours', '6 months', 'All levels', 'Certificate', 'NAV'],         price: 'Kr 19 900', orig: 'Kr 23 900', disc: '-17%' },
-      ],
-      [
+      ]],
+    },
+    pro: {
+      'economy-sustainability': [[
+        { id: 'regnskap',     name: 'Accounting Consultant',          type: 'Course', badge: 'Best seller', rating: '4.7', pills: ['Lånekassen support', '60 credits', 'Vocational School', 'NAV'], price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
+        { id: 'baerekraft-le', name: 'Sustainable Business Management', type: 'Course', badge: 'Trending',    rating: '4.6', pills: ['30 credits', 'All levels', 'Certificate', 'NAV'],               price: 'Kr 8 900',  orig: 'Kr 9 900',  disc: '-10%' },
+        { id: 'okonomi-fin',   name: 'Economics and Finance',          type: 'Course', badge: null,          rating: '4.5', pills: ['30 credits', 'Beginner', 'NAV'],                                 price: 'Kr 7 900',  orig: 'Kr 8 900',  disc: '-11%' },
+        { id: 'gronn-logistikk',name:'Green Logistics',                type: 'Course', badge: null,          rating: '4.4', pills: ['30 credits', 'All levels', 'Certificate', 'NAV'],               price: 'Kr 8 490',  orig: 'Kr 9 490',  disc: '-11%' },
+      ]],
+      'hr-management': [[
         { id: 'hr-grunnkurs', name: 'HR Consultant',          type: 'Course',  badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '60 credits', 'Certificate', 'Books needed', 'NAV'],  price: 'Kr 14 900', orig: 'Kr 17 900', disc: '-17%' },
-        { id: 'regnskap',     name: 'Accounting Consultant',  type: 'Course',  badge: null,          rating: '4.7', pills: ['Lånekassen support', '60 credits', 'Vocational School', 'NAV'],            price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
-        { id: 'jus',          name: 'Legal Secretary',        type: 'Course',  badge: null,          rating: '4.6', pills: ['Lånekassen support', '60 credits', 'Beginner', 'Books needed', 'NAV'],     price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
-      ],
-      [
-        { id: 'leder',        name: 'Project Manager',        type: 'Course',  badge: null,          rating: '4.7', pills: ['30 credits', 'All levels', 'Certificate', 'NAV'],                          price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-14%' },
-        { id: 'mkt-grunnkurs',name: 'Digital Marketing',     type: 'Course',  badge: null,          rating: '4.6', pills: ['Online course', '3 months', 'Beginner', 'NAV'],                            price: 'Kr 2 990',  orig: 'Kr 3 490',  disc: '-14%' },
-        { id: 'interior',     name: 'Home Stylist',           type: 'Course',  badge: null,          rating: '4.7', pills: ['Course', 'All levels', 'Certificate', 'Books needed', 'NAV'],              price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-14%' },
-      ],
-      [
-        { id: 'baerekraft',   name: 'Logistics Vocational School', type: 'Course', badge: null, rating: '4.5', pills: ['30 credits', 'Vocational School', 'Lånekassen support', 'NAV'], price: 'Kr 8 490', orig: 'Kr 9 900',  disc: '-14%' },
-        { id: 'regnskap',     name: 'Sustainability Consultant',   type: 'Course', badge: null, rating: '4.3', pills: ['60 credits', 'Certificate', 'Lånekassen support', 'NAV'],       price: 'Kr 14 900',orig: 'Kr 17 900', disc: '-17%' },
-        { id: 'hr-grunnkurs', name: 'HR Fundamentals',             type: 'Course', badge: null, rating: '4.6', pills: ['30 credits', 'All levels', 'Certificate', 'NAV'],               price: 'Kr 6 900', orig: 'Kr 7 900',  disc: '-13%' },
-      ],
-    ]
+        { id: 'leder',        name: 'Project Manager',        type: 'Course',  badge: 'Trending',    rating: '4.7', pills: ['30 credits', 'All levels', 'Certificate', 'NAV'],                          price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-14%' },
+        { id: 'kontor-ans',   name: 'Office Employee',        type: 'Course',  badge: null,          rating: '4.7', pills: ['Lånekassen support', '3 months', 'All levels', 'NAV'],                     price: 'Kr 5 490',  orig: 'Kr 5 990',  disc: '-8%'  },
+        { id: 'hr-fund',      name: 'HR Fundamentals',        type: 'Course',  badge: null,          rating: '4.6', pills: ['30 credits', 'All levels', 'Certificate', 'NAV'],                          price: 'Kr 6 900',  orig: 'Kr 7 900',  disc: '-13%' },
+      ]],
+      'law-administration': [[
+        { id: 'jus',          name: 'Legal Secretary',        type: 'Course', badge: 'Best seller', rating: '4.6', pills: ['Lånekassen support', '60 credits', 'Beginner', 'Books needed', 'NAV'],  price: 'Kr 14 900', orig: 'Kr 16 900', disc: '-12%' },
+        { id: 'kontraktsrett', name: 'Contract Law Basics',    type: 'Course', badge: null,          rating: '4.5', pills: ['30 credits', 'Beginner', 'NAV'],                                          price: 'Kr 7 900',  orig: 'Kr 8 900',  disc: '-11%' },
+        { id: 'offentlig-adm', name: 'Public Administration',  type: 'Course', badge: null,          rating: '4.4', pills: ['30 credits', 'All levels', 'Certificate', 'NAV'],                        price: 'Kr 8 490',  orig: 'Kr 9 490',  disc: '-11%' },
+        { id: 'kontor-ans-2',  name: 'Office Employee',        type: 'Course', badge: null,          rating: '4.7', pills: ['Lånekassen support', '3 months', 'All levels', 'NAV'],                   price: 'Kr 5 490',  orig: 'Kr 5 990',  disc: '-8%'  },
+      ]],
+      'construction-logistics': [[
+        { id: 'baerekraft',   name: 'Logistics Vocational School', type: 'Course', badge: 'Trending', rating: '4.5', pills: ['30 credits', 'Vocational School', 'Lånekassen support', 'NAV'], price: 'Kr 8 490', orig: 'Kr 9 900',  disc: '-14%' },
+        { id: 'bygg-form',    name: 'Construction Foreman',        type: 'Course', badge: null,       rating: '4.6', pills: ['60 credits', 'Vocational School', 'Certificate', 'NAV'],       price: 'Kr 14 900',orig: 'Kr 16 900', disc: '-12%' },
+        { id: 'lager-adm',    name: 'Warehouse Management',        type: 'Course', badge: null,       rating: '4.4', pills: ['30 credits', 'All levels', 'NAV'],                              price: 'Kr 6 900', orig: 'Kr 7 900',  disc: '-13%' },
+        { id: 'forsyningskjede',name:'Supply Chain Basics',        type: 'Course', badge: null,       rating: '4.5', pills: ['30 credits', 'Beginner', 'NAV'],                                price: 'Kr 6 490', orig: 'Kr 7 290',  disc: '-11%' },
+      ]],
+      'interior-design': [[
+        { id: 'interior',     name: 'Interior Designer',      type: 'Course',  badge: 'Best seller', rating: '4.9', pills: ['280 total hours', '6 months', 'All levels', 'Certificate', 'NAV'],         price: 'Kr 19 900', orig: 'Kr 23 900', disc: '-17%' },
+        { id: 'interior-2',   name: 'Home Stylist',           type: 'Course',  badge: 'Trending',    rating: '4.7', pills: ['Course', 'All levels', 'Certificate', 'Books needed', 'NAV'],              price: 'Kr 8 490',  orig: 'Kr 9 900',  disc: '-14%' },
+        { id: 'tekstil-des',  name: 'Textile Design',         type: 'Course',  badge: null,          rating: '4.5', pills: ['30 credits', 'Beginner', 'NAV'],                                            price: 'Kr 6 900',  orig: 'Kr 7 900',  disc: '-13%' },
+        { id: 'mobel-des',    name: 'Furniture Design Basics', type: 'Course', badge: null,          rating: '4.4', pills: ['30 credits', 'All levels', 'NAV'],                                          price: 'Kr 6 490',  orig: 'Kr 7 290',  disc: '-11%' },
+      ]],
+      'health-lifestyle': [[
+        { id: 'med-sec',      name: 'Medical Secretary',      type: 'Course',  badge: 'Best seller', rating: '4.8', pills: ['Lånekassen support', '6 months', 'All levels', 'Certificate', 'NAV'],      price: 'Kr 12 900', orig: 'Kr 14 900', disc: '-13%' },
+        { id: 'stress',       name: 'Stress and Stress Management', type: 'Course', badge: 'Trending', rating: '4.6', pills: ['Course', 'Certificate', 'NAV'],                                          price: 'Kr 14 900', orig: 'Kr 18 900', disc: '-21%' },
+        { id: 'ernaering',    name: 'Nutrition Coach',        type: 'Course',  badge: null,          rating: '4.5', pills: ['30 credits', 'Beginner', 'NAV'],                                            price: 'Kr 7 900',  orig: 'Kr 8 900',  disc: '-11%' },
+        { id: 'pt-grunn',     name: 'Personal Trainer Foundations', type: 'Course', badge: null,     rating: '4.6', pills: ['30 credits', 'All levels', 'Certificate', 'NAV'],                          price: 'Kr 8 490',  orig: 'Kr 9 490',  disc: '-11%' },
+      ]],
+      'marketing-sales': [[
+        { id: 'mkt-grunnkurs',name: 'Digital Marketing',      type: 'Course',  badge: 'Trending',    rating: '4.6', pills: ['Online course', '3 months', 'Beginner', 'NAV'],                            price: 'Kr 2 990',  orig: 'Kr 3 490',  disc: '-14%' },
+        { id: 'sosiale-medier',name:'Social Media Marketing', type: 'Course',  badge: null,          rating: '4.5', pills: ['30 credits', 'Beginner', 'NAV'],                                            price: 'Kr 5 900',  orig: 'Kr 6 490',  disc: '-9%'  },
+        { id: 'salg-grunn-2',  name: 'Sales Foundation Year', type: 'Course',  badge: null,          rating: '4.5', pills: ['Vocational School', '3 months', 'Beginner'],                                price: 'Kr 5 900',  orig: 'Kr 6 490',  disc: '-9%'  },
+        { id: 'merkevare',     name: 'Brand Management Basics',type: 'Course', badge: null,          rating: '4.4', pills: ['30 credits', 'All levels', 'NAV'],                                          price: 'Kr 6 490',  orig: 'Kr 7 290',  disc: '-11%' },
+      ]],
+    }
   };
   var activePopTab = 'hs';
+  var activePopCategory = { hs: 'subject-packages', pro: 'economy-sustainability' };
 
-  var ccCartSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.61L23 6H6"/></svg>';
+  var ccCartSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.97-1.61L23 6H6"/></svg>';
 
-  function buildCard(c) {
-    var imgBadge = c.badge ? '<div class="cc-badges"><span class="badge-bs">' + c.badge + '</span></div>' : '';
-    var typePill = '<span class="pill-sm">' + (c.type || 'Course') + '</span>';
-    var pills = typePill + c.pills.map(function (p) { return '<span class="pill-sm">' + p + '</span>'; }).join('');
-    return '<div class="course-card">'
-      + '<div class="cc-img">' + imgBadge + '</div>'
-      + '<div class="cc-body">'
+  function buildCard(c, idx, section) {
+    var img = 'images/design-system/courses/' + (section || 'hs') + '-0' + ((idx % 4) + 1) + '.jpg';
+    var tag = c.badge ? '<div class="cc-tag">' + c.badge + '</div>' : '';
+    var tags = '<div class="cc-tags">' + c.pills.map(function(p) { return '<span class="cc-meta-pill">' + p + '</span>'; }).join('') + '</div>';
+    return '<div class="course-card course-card--photo">'
+      + '<img class="cc-photo" src="' + img + '" alt="">'
+      + '<div class="cc-scrim"></div>'
+      + tag
+      + '<div class="cc-details">'
+      + '<div class="cc-info">'
       + '<div class="cc-name">' + c.name + '</div>'
-      + '<div class="cc-enrolled"><span class="material-symbols-outlined cc-enrolled-icon">person</span>' + (c.enrolled || Math.round(parseFloat(c.rating) * 1100)) + ' students enrolled</div>'
-      + '<div class="cc-pills">' + pills + '</div>'
-      + '<div class="cc-footer"><div><div class="cc-price">' + c.price + '</div>'
+      + '<div class="cc-enrolled"><span class="material-symbols-outlined cc-enrolled-icon">group</span>' + (c.enrolled || Math.round(parseFloat(c.rating) * 1100)) + ' students enrolled</div>'
+      + tags
+      + '</div>'
+      + '<div class="cc-footer">'
+      + '<div class="cc-price-box"><div class="cc-price">' + c.price + '</div>'
       + '<div class="cc-price-meta"><span class="cc-orig-price">' + c.orig + '</span><span class="cc-disc-badge">' + c.disc + '</span></div></div>'
-      + '<button class="cc-cart-btn" aria-label="Add to cart">' + ccCartSvg + '<span class="cc-cart-plus">+</span></button>'
+      + '<button class="cc-cart-btn" aria-label="Add to cart"></button>'
       + '</div></div></div>';
   }
 
@@ -2383,24 +2550,31 @@
     });
   }
 
-  function initCarousel(tabKey, gridId, prevId, nextId, counterId, seeAllId) {
-    var pages  = coursePagesByTab[tabKey];
-    var grid   = document.getElementById(gridId);
-    var prev   = document.getElementById(prevId);
-    var next   = document.getElementById(nextId);
-    var ctr    = document.getElementById(counterId);
-    var seeAll = document.getElementById(seeAllId);
-    if (!grid || !prev || !next) return;
+  function initCarousel(tabKey, gridId, prevId, nextId, progressId, seeAllId, categoryKey) {
+    var pages    = coursePagesByTab[tabKey][categoryKey];
+    var grid     = document.getElementById(gridId);
+    var prev     = document.getElementById(prevId);
+    var next     = document.getElementById(nextId);
+    var progress = document.getElementById(progressId);
+    var seeAll   = document.getElementById(seeAllId);
+    if (!grid || !prev || !next) return null;
     var cur = 0;
     var sliding = false;
 
-    function updateCounter() {
-      if (ctr) ctr.textContent = (cur + 1) + ' — ' + pages.length;
+    function renderProgress() {
+      if (!progress) return;
+      progress.innerHTML = pages.map(function() { return '<span class="pop-progress-dot"></span>'; }).join('');
+    }
+    function updateProgress() {
+      if (!progress) return;
+      progress.querySelectorAll('.pop-progress-dot').forEach(function(dot, i) {
+        dot.classList.toggle('is-active', i === cur);
+      });
     }
     function renderCarouselPage(idx) {
-      grid.innerHTML = pages[idx].map(buildCard).join('');
+      grid.innerHTML = pages[idx].map(function(c, i) { return buildCard(c, i, tabKey); }).join('');
       bindCardsInGrid(grid, pages[idx]);
-      updateCounter();
+      updateProgress();
     }
     function goTo(idx, dir) {
       if (sliding) return;
@@ -2420,26 +2594,40 @@
         setTimeout(function() { sliding = false; }, 360);
       }, 360);
     }
+    function setCategory(newCategoryKey) {
+      pages = coursePagesByTab[tabKey][newCategoryKey];
+      cur = 0;
+      renderProgress();
+      renderCarouselPage(0);
+    }
     prev.addEventListener('click', function() { goTo(cur - 1, -1); });
     next.addEventListener('click', function() { goTo(cur + 1,  1); });
     if (seeAll) seeAll.addEventListener('click', function() { showPage('search'); });
+    renderProgress();
     renderCarouselPage(0);
-
-    var viewport = grid.parentElement;
-    if (viewport) {
-      viewport.addEventListener('scroll', function() {
-        var firstCard = grid.querySelector('.course-card');
-        if (!firstCard) return;
-        var cardW = firstCard.offsetWidth;
-        var total = grid.querySelectorAll('.course-card').length;
-        var idx = Math.round(viewport.scrollLeft / (cardW + 16));
-        if (ctr) ctr.textContent = (idx + 1) + ' — ' + total;
-      }, { passive: true });
-    }
+    return { setCategory: setCategory };
   }
 
-  initCarousel('hs',  'coursesGridHs',  'popHsPrev',  'popHsNext',  'popHsCounter',  'popHsSeeAll');
-  initCarousel('pro', 'coursesGridPro', 'popProPrev', 'popProNext', 'popProCounter', 'popProSeeAll');
+  var popCarouselHs  = initCarousel('hs',  'coursesGridHs',  'popHsPrev',  'popHsNext',  'popHsProgress',  'popHsSeeAll',  activePopCategory.hs);
+  var popCarouselPro = initCarousel('pro', 'coursesGridPro', 'popProPrev', 'popProNext', 'popProProgress', 'popProSeeAll', activePopCategory.pro);
+  var popCarousels = { hs: popCarouselHs, pro: popCarouselPro };
+
+  /* ── Course pill category switching ── */
+  document.querySelectorAll('.course-pill-row').forEach(function(row) {
+    var section = row.closest('section');
+    var tabKey = section && section.getAttribute('aria-labelledby') === 'pop-hs-hd' ? 'hs' : 'pro';
+    var pills = row.querySelectorAll('.course-pill');
+    pills.forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        if (pill.classList.contains('is-active')) return;
+        pills.forEach(function(p) { p.classList.remove('is-active'); });
+        pill.classList.add('is-active');
+        var catKey = pill.getAttribute('data-cat');
+        activePopCategory[tabKey] = catKey;
+        if (popCarousels[tabKey]) popCarousels[tabKey].setCategory(catKey);
+      });
+    });
+  });
 
   /* ── Keyboard: Escape closes everything ── */
   document.addEventListener('keydown', function (e) {
@@ -4012,27 +4200,28 @@
         '</div>' +
       '</div>' +
       '<div class="cdp-advice"><div class="container"><div class="consult-inline">' +
-        '<div>' +
-          '<h2 class="section-title">Get free advice</h2>' +
+        '<div class="consult-info">' +
+          '<p class="section-eyebrow"><span class="section-eyebrow-dot"></span>Advice</p>' +
+          '<h2 class="section-title">Get free consultation</h2>' +
           '<p class="consult-sub">If you have any questions about our studies or admission requirements – we are happy to help you!</p>' +
-          '<p class="consult-tel">For free study advice, call 67 58 88 00</p>' +
-          '<p class="consult-hours">09–16 (Mon–Fri)</p>' +
+          '<div class="hero-avatars">' +
+            '<img class="hero-avatar" src="images/design-system/consultation/avatar-1.jpg" alt="">' +
+            '<img class="hero-avatar" src="images/design-system/consultation/avatar-2-inner.jpg" alt="">' +
+            '<img class="hero-avatar" src="images/design-system/consultation/avatar-3-inner.jpg" alt="">' +
+          '</div>' +
         '</div>' +
-        '<form onsubmit="return false">' +
-          '<div class="form-row">' +
-            '<div class="form-group"><label class="form-label" for="cdp-c-name">Name</label><input class="form-input" id="cdp-c-name" type="text" placeholder="Your full name"></div>' +
-            '<div class="form-group"><label class="form-label" for="cdp-c-email">Email</label><input class="form-input" id="cdp-c-email" type="email" placeholder="email@example.com"></div>' +
+        '<form class="consult-form" onsubmit="return false">' +
+          '<div class="cf-row">' +
+            '<div class="cf-field"><label class="cf-label" for="cdp-c-name">Name</label><input class="cf-input" id="cdp-c-name" type="text" placeholder="Enter your name"></div>' +
+            '<div class="cf-field"><label class="cf-label" for="cdp-c-surname">Surname</label><input class="cf-input" id="cdp-c-surname" type="text" placeholder="Enter your surname"></div>' +
           '</div>' +
-          '<div class="form-row">' +
-            '<div class="form-group"><label class="form-label" for="cdp-c-phone">Phone number</label><input class="form-input" id="cdp-c-phone" type="tel" placeholder="+47 000 00 000"></div>' +
-            '<div class="form-group"><label class="form-label" for="cdp-c-topic">Topic</label>' +
-              '<select class="form-select" id="cdp-c-topic"><option value="">Select a topic</option><option>Course information</option><option>Admission requirements</option><option>Financing / Lånekassen</option><option>Other</option></select>' +
+          '<div class="cf-row">' +
+            '<div class="cf-field"><label class="cf-label" for="cdp-c-email">Email</label>' +
+              '<div class="cf-input-wrap"><span class="material-symbols-outlined cf-input-icon">mail</span><input class="cf-input cf-input--icon" id="cdp-c-email" type="email" placeholder="Enter your email"></div>' +
             '</div>' +
+            '<div class="cf-field"><label class="cf-label" for="cdp-c-phone">Phone number</label><input class="cf-input" id="cdp-c-phone" type="tel" placeholder="+47"></div>' +
           '</div>' +
-          '<div class="form-group"><label class="form-label" for="cdp-c-msg">Message</label><textarea class="form-textarea" id="cdp-c-msg" placeholder="Write your question here..."></textarea></div>' +
-          '<div class="form-group"><label class="form-label">Preferred contact method</label>' +
-            '<div class="contact-pref-group"><label><input type="radio" name="cdp-c-pref" value="phone"> Phone</label><label><input type="radio" name="cdp-c-pref" value="email"> Email</label></div>' +
-          '</div>' +
+          '<div class="cf-field"><label class="cf-label" for="cdp-c-msg">Message</label><textarea class="cf-textarea" id="cdp-c-msg" placeholder="Enter your message"></textarea></div>' +
           '<button type="submit" class="btn-submit">Send</button>' +
         '</form>' +
       '</div></div></div>';
