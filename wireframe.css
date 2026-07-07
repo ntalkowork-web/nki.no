@@ -300,7 +300,6 @@ select { font-family: inherit; }
   background: var(--bg-surface-primary);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-16);
-  box-shadow: var(--sh-md);
   width: 228px;
   z-index: 200;
   padding: var(--spacing-8);
@@ -421,6 +420,8 @@ select { font-family: inherit; }
   height: 48px;
   width: 100%;
   margin-top: var(--spacing-8);
+  /* 8px margin + 8px panel padding = 16px below the See all button */
+  margin-bottom: var(--spacing-8);
   font-size: var(--font-size-16);
   font-weight: 500;
   color: var(--text-primary);
@@ -428,7 +429,8 @@ select { font-family: inherit; }
   border-radius: var(--radius-12);
 }
 
-.mega-see-all:hover { background: var(--dropdown-bg-hover); }
+/* match Secondary Button hover: bg/subtle fill, no border */
+.mega-see-all:hover { background: var(--bg-subtle); border-color: transparent; }
 
 /* ── SEARCH BAR ───────────────────────────── */
 
@@ -1294,7 +1296,7 @@ select { font-family: inherit; }
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
-  color: var(--icon-default);
+  color: var(--text-placeholder);
   pointer-events: none;
 }
 .cf-input--icon { padding-left: 44px; }
@@ -1692,7 +1694,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
 
 .nav-arrow .material-symbols-outlined { font-size: 20px; }
 
-.nav-arrow:hover { background: var(--bg-subtle); border-color: var(--border-default); }
+.nav-arrow:hover { background: var(--bg-subtle); border-color: transparent; }
 .nav-arrow:disabled { color: var(--text-placeholder); cursor: default; }
 .nav-arrow:disabled:hover { background: var(--bg-surface-primary); }
 
@@ -1891,7 +1893,11 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   backdrop-filter: blur(30px);
   mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
   -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
+  transition: height .25s ease;
 }
+/* on hover the blurred scrim grows to cover almost the full card so the extra
+   meta pills + text stay readable — matches DS course card hover (node 159:2809) */
+.course-card--photo:hover .cc-scrim { height: 92%; }
 
 .cc-tag {
   position: absolute;
@@ -1969,7 +1975,7 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   background: transparent;
 }
 .course-card--photo .cc-cart-btn::before {
-  content: 'shopping_cart';
+  content: 'add_shopping_cart';
   font-family: 'Material Symbols Outlined';
   font-size: 24px;
   line-height: 1;
@@ -1979,7 +1985,6 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   border-color: transparent;
   color: var(--text-primary);
 }
-.course-card--photo .cc-cart-btn:hover::before { content: 'add_shopping_cart'; }
 
 /* ── Carousel pagination footer (arrows + progress pill + See all) ── */
 .pop-carousel-footer { display: flex; align-items: center; justify-content: space-between; margin-top: var(--spacing-24); }
@@ -2115,11 +2120,17 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
   justify-content: space-between;
 }
 .hiw-card--accent .hiw-desc { color: var(--text-primary); }
+/* 8px between the "100% online" heading and its subheading */
+.hiw-accent-text { display: flex; flex-direction: column; gap: var(--spacing-8); }
 
 .hiw-accent-row { display: flex; align-items: center; gap: var(--spacing-12); }
 .hiw-accent-avatars { display: flex; align-items: center; }
+/* cancel the last avatar's overlap pull so the row gap is a true 12px to the label */
+.hiw-accent-avatars > :last-child { margin-right: 0; }
 .hiw-accent-avatar {
   width: 40px; height: 40px;
+  flex-shrink: 0;
+  box-sizing: border-box;
   border-radius: 100px;
   border: 1px solid var(--bg-surface-primary);
   object-fit: cover;
@@ -2238,6 +2249,8 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 .aktiv-stat { flex: 1; }
 .aktiv-stat-num { font-size: var(--font-size-20); font-weight: 700; color: var(--text-primary); }
 .aktiv-stat-lbl { font-size: var(--font-size-14); color: var(--text-secondary-on-white); max-width: 160px; }
+/* "courses across every level" wraps onto two rows to match the left stat's two-line label */
+.aktiv-item-stats .aktiv-stat:nth-child(2) .aktiv-stat-lbl { max-width: 120px; }
 
 /* ── TESTIMONIALS ─────────────────────────── */
 
@@ -2469,7 +2482,11 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
   gap: var(--spacing-24);
 }
 
-.footer-wordmark { height: 230px; width: auto; flex-shrink: 1; min-width: 0; max-width: 45%; }
+/* NKI wordmark spans 6 of the 12 columns (96px margins, 24px gutters):
+   6 cols + 5 gutters = (100% - 11×24px)/12×6 + 5×24px = calc(50% - 12px) */
+/* the SVG is preserveAspectRatio="none" (viewBox 612×251), so pin the ratio
+   ourselves — otherwise height:auto lets it collapse/compress */
+.footer-wordmark { width: calc(50% - 12px); height: auto; aspect-ratio: 612 / 251; flex-shrink: 0; min-width: 0; }
 
 .footer-bottom-right {
   display: flex;
@@ -5983,7 +6000,19 @@ body.cdp-cta-pinned .cdp-toc {
   text-decoration: none;
   white-space: nowrap;
 }
-.btn-browse-all:hover { background: var(--action-primary-hover); color: var(--button-primary-text-on-green); }
+/* arrow_forward reveals on hover — matches DS Primary/Hover/On-green (node 96:20074) */
+.btn-browse-all::after {
+  content: 'arrow_forward';
+  font-family: 'Material Symbols Outlined';
+  font-size: 20px;
+  line-height: 1;
+  max-width: 0;
+  margin-left: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-width .2s ease, margin-left .2s ease, opacity .2s ease;
+}
+.btn-browse-all:hover::after { max-width: 24px; margin-left: var(--spacing-8); opacity: 1; }
 
 /* ── Primary CTA (green fill, used outside the hero) ── */
 .btn-cta-green {
@@ -6024,7 +6053,7 @@ body.cdp-cta-pinned .cdp-toc {
   text-decoration: none;
   white-space: nowrap;
 }
-.btn-see-all:hover { background: var(--bg-subtle); }
+.btn-see-all:hover { background: var(--bg-subtle); border-color: transparent; }
 
 
 /* ── Cart: instalment hint ── */
