@@ -1659,7 +1659,7 @@ main { margin-top: var(--header-h); }
 
 section.wf-section { padding: 72px 0; }
 #page-home main > section:last-of-type { padding-bottom: 144px; }
-section.wf-section.bg-gray { background: var(--gray-50); }
+section.wf-section.bg-gray { background: var(--bg-subtle); }
 
 .section-hd {
   display: flex;
@@ -2014,12 +2014,12 @@ section.wf-section.bg-gray { background: var(--gray-50); }
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--gray-300);
+  background: var(--decorative-graphic-muted);
   cursor: pointer;
   transition: background .2s;
 }
 
-.dot.is-active { background: var(--gray-900); }
+.dot.is-active { background: var(--bg-surface-inverse); }
 
 .courses-viewport { overflow: hidden; }
 
