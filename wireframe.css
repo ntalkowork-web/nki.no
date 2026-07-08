@@ -3543,35 +3543,37 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 /* Hero grid */
 .cdp-hero {
   display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--gutter);
+  grid-template-columns: 506fr 612fr; /* Figma: text 506, image 612 */
+  gap: 130px;
   align-items: center;
-  padding: 32px 0 48px;
+  padding: 24px 0 48px;
 }
 
+.cdp-hero-left { min-width: 0; }
+
 .cdp-eyebrow {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  color: var(--gray-500);
+  font-size: var(--font-size-14);
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: var(--text-secondary-on-white);
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: var(--spacing-8);
 }
 
 .cdp-h1 {
-  font-size: 36px;
+  font-size: var(--font-size-61);
   font-weight: 700;
-  color: var(--gray-900);
+  color: var(--text-primary);
   line-height: 1.15;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-16);
 }
 
 .cdp-desc {
-  font-size: 16px;
-  color: var(--gray-600);
-  line-height: 1.6;
-  margin-bottom: 16px;
-  max-width: 600px;
+  font-size: var(--font-size-16);
+  color: var(--text-secondary-on-white);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-24);
+  max-width: none;
 }
 
 .cdp-meta {
@@ -3622,9 +3624,9 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .cdp-price-block { margin-bottom: 24px; }
 
 .cdp-price-current {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--gray-900);
+  font-size: var(--font-size-25);
+  font-weight: 700;
+  color: var(--text-primary);
   line-height: 1.2;
   margin-bottom: 4px;
 }
@@ -3937,8 +3939,8 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 /* Content body — 2-col grid (content | TOC sidebar) */
 .cdp-body-grid {
   display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 48px;
+  grid-template-columns: 612fr 506fr; /* Figma: content 612, TOC 506 */
+  gap: 130px;
   align-items: start;
   padding: 48px 0 0;
 }
@@ -5489,7 +5491,7 @@ body.cdp-cta-pinned .cdp-toc {
   .sp-results-grid .cc-compare-label { display: flex; top: 16px; }
 
   /* CDP hero: single col */
-  .cdp-hero { grid-template-columns: 1fr; }
+  .cdp-hero { grid-template-columns: 1fr; gap: var(--spacing-24); }
   .cdp-h1 { font-size: 30px; }
 
   /* CDP infobar: 4 per row */
@@ -5498,7 +5500,7 @@ body.cdp-cta-pinned .cdp-toc {
   .cdp-infobar-sep:nth-child(n+8) { display: none; }
 
   /* CDP body: single col, hide TOC */
-  .cdp-body-grid { grid-template-columns: 1fr; }
+  .cdp-body-grid { grid-template-columns: 1fr; gap: 0; }
   .cdp-toc-aside { display: none; }
 
   /* Checkout: single col, summary pinned above steps */
