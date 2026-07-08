@@ -3972,15 +3972,28 @@
 
   /* ── COURSE DETAILS PAGE ── */
 
+  var CDP_ACTIVITIES = [
+    { icon: 'images/design-system/pedagogical/icon-videos.svg',  label: 'Videos' },
+    { icon: 'images/design-system/pedagogical/icon-audios.svg',  label: 'Audios' },
+    { icon: 'images/design-system/pedagogical/icon-quizzes.svg', label: 'Quizzes' },
+    { icon: 'images/design-system/pedagogical/icon-games.svg',   label: 'Games' },
+    { icon: 'images/design-system/pedagogical/icon-text.svg',    label: 'Text' }
+  ];
+
   function buildStructPanel(s) {
-    var lessonsHTML = (s.lessons || []).map(function(l) {
-      return '<li class="cdp-lesson-item"><span class="material-symbols-outlined cdp-lesson-icon">play_circle</span>' + l + '</li>';
+    var lessonsHTML = (s.lessons || []).map(function(l, li) {
+      return '<li class="cdp-lesson-item"><span class="cdp-num-circle">' + (li + 1) + '</span><span class="cdp-lesson-text">' + l + '</span></li>';
+    }).join('');
+    var activitiesHTML = CDP_ACTIVITIES.map(function(a) {
+      return '<li class="cdp-activity-item"><img class="cdp-activity-icon" src="' + a.icon + '" alt="">' + a.label + '</li>';
     }).join('');
     return '<div class="cdp-struct-panel-name">' + s.tab + '</div>' +
       '<div class="cdp-struct-panel-credits">' + s.credits + ' credits</div>' +
       '<p class="cdp-struct-panel-desc">' + s.description + '</p>' +
       '<div class="cdp-lessons-label">Lessons</div>' +
-      '<ul class="cdp-lessons-list">' + lessonsHTML + '</ul>';
+      '<ul class="cdp-lessons-list">' + lessonsHTML + '</ul>' +
+      '<div class="cdp-lessons-label cdp-activities-heading">Activities</div>' +
+      '<ul class="cdp-activities-list">' + activitiesHTML + '</ul>';
   }
 
   function buildRevCards(revs) {
@@ -4047,8 +4060,8 @@
     var structure   = c.structure || [];
     var structTabsHTML = structure.map(function(s, i) {
       return '<button class="cdp-struct-tab' + (i === 0 ? ' is-active' : '') + '" data-tab-idx="' + i + '">' +
-        '<div class="cdp-struct-tab-name">' + s.tab + '</div>' +
-        '<div class="cdp-struct-tab-credits">Credits ' + s.credits + '</div>' +
+        '<span class="cdp-struct-tab-num">' + (i + 1 < 10 ? '0' : '') + (i + 1) + '</span>' +
+        '<span class="cdp-struct-tab-name">' + s.tab + '</span>' +
       '</button>';
     }).join('');
 
@@ -4075,7 +4088,7 @@
     }).join('');
 
     /* payment pills */
-    var payPills = ['Invoice','Instalments (3 months)','Instalments (6 months)','Instalments (12 months)','Vipps','Visa','Mastercard','Lånekassen'];
+    var payPills = ['NAV','Invoice','Instalments','Vipps','Credit card','Lånekassen','Other payer'];
     var payPillsHTML = payPills.map(function(p) { return '<span class="cdp-pay-pill">' + p + '</span>'; }).join('');
 
     /* reviews — chunk into pages of 3 */
@@ -4090,10 +4103,11 @@
 
     /* faq */
     var faqHTML = (c.faq || []).map(function(item, i) {
-      return '<div class="cdp-faq-item">' +
+      var open = (i === 0);
+      return '<div class="cdp-faq-item' + (open ? ' is-open' : '') + '">' +
         '<div class="cdp-faq-question" data-faq-idx="' + i + '">' +
           '<span>' + item.q + '</span>' +
-          '<span class="material-symbols-outlined cdp-faq-chevron">add</span>' +
+          '<span class="material-symbols-outlined cdp-faq-chevron">' + (open ? 'remove' : 'add') + '</span>' +
         '</div>' +
         '<div class="cdp-faq-answer">' + item.a + '</div>' +
       '</div>';
@@ -4104,19 +4118,45 @@
       return sc.id !== c.id && (sc.area === c.area || sc.level === c.educationalLevel);
     }).slice(0, 4);
 
-    var relatedHTML = related.map(function(sc) {
-      var imgBadge = sc.badge ? '<div class="cc-badges"><span class="badge-bs">' + sc.badge + '</span></div>' : '';
-      var typePill = '<span class="pill-sm">' + (sc.type || 'Course') + '</span>';
-      return '<div class="course-card" data-cdp-related="' + sc.id + '">' +
-        '<div class="cc-img">' + imgBadge + '</div>' +
-        '<div class="cc-body">' +
-          '<div class="cc-name">' + sc.name + '</div>' +
-          '<div class="cc-enrolled"><span class="material-symbols-outlined cc-enrolled-icon">person</span>' + fmtNum(sc.reviews * 5) + ' students enrolled</div>' +
-          '<div class="cc-pills">' + typePill + '<span class="pill-sm">' + sc.level + '</span><span class="pill-sm">' + sc.months + ' months</span></div>' +
-          '<div class="cc-footer"><div><div class="cc-price">Kr ' + fmtNum(sc.price) + '</div></div>' +
-          '<button class="cc-cart-btn" data-cdp-cart="' + sc.id + '" aria-label="Add to cart">' + ccCartSvg + '<span class="cc-cart-plus">+</span></button>' +
+    var _relDiscs = [13, 18, 18, 21];
+    var relatedHTML = related.map(function(sc, ri) {
+      var section = (sc.level === 'High School') ? 'hs' : 'pro';
+      var img     = 'images/design-system/courses/' + section + '-0' + ((ri % 4) + 1) + '.jpg';
+      var badge   = sc.badge ? '<div class="cc-tag">' + sc.badge + '</div>' : '';
+      var disc    = _relDiscs[ri % 4];
+      var orig    = Math.round(sc.price / (1 - disc / 100));
+      return '<div class="course-card course-card--photo" data-cdp-related="' + sc.id + '">' +
+        '<img class="cc-photo" src="' + img + '" alt="">' +
+        '<div class="cc-scrim"></div>' +
+        badge +
+        '<div class="cc-details">' +
+          '<div class="cc-info">' +
+            '<div class="cc-name">' + sc.name + '</div>' +
+            '<div class="cc-enrolled"><span class="material-symbols-outlined cc-enrolled-icon">group</span>' + fmtNum(sc.reviews * 5) + ' students enrolled</div>' +
+          '</div>' +
+          '<div class="cc-footer">' +
+            '<div class="cc-price-box"><div class="cc-price">kr ' + fmtNum(sc.price) + '</div>' +
+            '<div class="cc-price-meta"><span class="cc-orig-price">kr ' + fmtNum(orig) + '</span><span class="cc-disc-badge">-' + disc + '%</span></div></div>' +
+            '<button class="cc-cart-btn" data-cdp-cart="' + sc.id + '" aria-label="Add to cart"></button>' +
           '</div>' +
         '</div></div>';
+    }).join('');
+
+    /* student reviews — full-width testimonials (matches Figma) */
+    var CDP_STUDENT_REVIEWS = [
+      { avatar: 'images/design-system/testimonials/avatar-1.jpg', name: 'Ingrid Haugen', role: 'Fullført Påbygg, nå sykepleierstudent', text: 'Jeg sammenlignet flere tilbydere før jeg bestemte meg. Det som overbeviste meg var at NKI viste akkurat hvilke fag jeg trengte for å få studiekompetanse — ingen gjetting.' },
+      { avatar: 'images/design-system/testimonials/avatar-5.jpg', name: 'Amina Said',   role: 'Helsesekretær-utdanning, karriereskifte', text: 'Jeg jobbet full tid mens jeg studerte til helsesekretær. NKIs Lånekassen-godkjenning gjorde at jeg turde å satse — jeg visste dette var en utdanning som telte.' },
+      { avatar: 'images/design-system/testimonials/avatar-4.jpg', name: 'Erik Fjeld',    role: 'Studiekompetanse via 23/5-regelen', text: 'Jeg var usikker på betalingsalternativene og ringte support. De tok seg god tid og forklarte alt uten at jeg følte meg dum. Det gjorde at jeg turde å fullføre kjøpet.' }
+    ];
+    var studentReviewsHTML = CDP_STUDENT_REVIEWS.map(function(r) {
+      return '<div class="t-card">' +
+        '<div class="t-hd">' +
+          '<img class="t-avatar" src="' + r.avatar + '" alt="">' +
+          '<div class="t-meta"><div class="t-name">' + r.name + '</div><div class="t-role">' + r.role + '</div></div>' +
+          '<span class="t-qmark"><svg viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99514 16H0L9.6432 0H15.1335L9.99514 16ZM23.8616 16H13.8665L23.5097 0H29L23.8616 16Z" fill="currentColor"/></svg></span>' +
+        '</div>' +
+        '<p class="t-text">' + r.text + '</p>' +
+      '</div>';
     }).join('');
 
     /* long-read content sections */
@@ -4126,11 +4166,9 @@
       { id: 'cdp-sec-about',     label: 'About the course',
         html: '<p class="cdp-sec-para">' + c.description + ' This course covers all the required subjects for upper secondary completion, taught through interactive digital modules designed for adult learners. Suitable for students returning to education, those changing careers, or anyone looking to expand their qualifications.</p>' },
       { id: 'cdp-sec-contents',  label: "What's in the course",
-        html: structBodyHTML + '<p class="cdp-activities-label">Here are the activities in this course</p>' + mediaTypesHTML },
+        html: structBodyHTML },
       { id: 'cdp-sec-materials', label: 'What you need for this course',
         html: '<ul class="cdp-materials-list">' + materialsHTML + '</ul>' },
-      { id: 'cdp-sec-exam',      label: 'Exam',
-        html: '<p class="cdp-sec-para">' + (c.exam || '') + '</p>' },
       { id: 'cdp-sec-financing', label: 'Financing options',
         html: '<p class="cdp-sec-para">' + (c.financing || '') + '</p><div class="cdp-pay-pills">' + payPillsHTML + '</div>' },
       { id: 'cdp-sec-admission', label: 'Admission requirements',
@@ -4139,8 +4177,6 @@
         html: '<p class="cdp-sec-para">If you are applying from outside Norway, you must submit certified physical copies of your educational documentation by post. All documents must be officially translated into Norwegian or English by a certified translator.</p>' +
               '<p class="cdp-sec-para">Please send your documents to: <strong>NKI, Pb. 111, 1371 Asker, Norway</strong>. Processing may take 2–4 weeks after documents are received. We recommend using registered mail or a trackable courier service.</p>' +
               '<p class="cdp-sec-para">For questions about required documents, contact our admissions team at <a href="mailto:veelding@nki.no">veelding@nki.no</a>.</p>' },
-      { id: 'cdp-sec-reviews',   label: 'Student reviews',
-        html: '<div class="cdp-reviews-viewport"><div class="cdp-reviews-grid" id="cdpReviewsGridInline">' + buildRevCards(_cdpReviewPages[0]) + '</div></div>' },
       { id: 'cdp-sec-faq',       label: 'FAQ',
         html: '<div class="cdp-faq-list">' + faqHTML + '</div>' }
     ];
@@ -4151,8 +4187,10 @@
       '</section>';
     }).join('');
 
+    function tocNum(si) { return (si + 1 < 10 ? '0' : '') + (si + 1); }
     var tocLinksHTML = CDP_SECTIONS.map(function(s, si) {
-      return '<span class="cdp-toc-link' + (si === 0 ? ' is-active' : '') + '" data-sec="' + s.id + '">' + s.label + '</span>';
+      return '<span class="cdp-toc-link' + (si === 0 ? ' is-active' : '') + '" data-sec="' + s.id + '">' +
+        '<span class="cdp-toc-num">' + tocNum(si) + '</span>' + s.label + '</span>';
     }).join('');
 
     page.innerHTML =
@@ -4186,7 +4224,7 @@
               '</div>' +
             '</div>' +
             '<div class="cdp-hero-right">' +
-              '<div class="cdp-hero-img"><span class="material-symbols-outlined cdp-hero-img-icon">image</span></div>' +
+              '<img class="cdp-hero-img" src="images/design-system/how-it-works/photo-support.jpg" alt="">' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -4202,15 +4240,6 @@
           '</aside>' +
         '</div>' +
       '</div></div>' +
-      (related.length > 0
-        ? '<div class="cdp-related"><div class="container">' +
-            '<div class="cdp-related-hd">' +
-              '<div class="cdp-related-heading">Relevant courses</div>' +
-              '<span class="cdp-related-counter" id="cdpRelatedCounter">1 — ' + related.length + '</span>' +
-            '</div>' +
-            '<div class="courses-grid" id="cdpRelatedGrid">' + relatedHTML + '</div>' +
-          '</div></div>'
-        : '') +
       '<div class="mentioned-in">' +
         '<p class="mentioned-in-lbl">Mentioned in</p>' +
         '<div class="mentioned-in-logos">' +
@@ -4238,6 +4267,19 @@
           '</div>' +
         '</div>' +
       '</div>' +
+      '<div class="cdp-reviews"><div class="container">' +
+        '<h2 class="cdp-reviews-title">Student reviews</h2>' +
+        '<div class="cdp-reviews-grid">' + studentReviewsHTML + '</div>' +
+      '</div></div>' +
+      (related.length > 0
+        ? '<div class="cdp-related"><div class="container">' +
+            '<div class="cdp-related-hd">' +
+              '<div class="cdp-related-heading">Relevant courses</div>' +
+              '<span class="cdp-related-counter" id="cdpRelatedCounter">1 — ' + related.length + '</span>' +
+            '</div>' +
+            '<div class="courses-grid" id="cdpRelatedGrid">' + relatedHTML + '</div>' +
+          '</div></div>'
+        : '') +
       '<div class="cdp-advice"><div class="container"><div class="consult-inline">' +
         '<div class="consult-info">' +
           '<p class="section-eyebrow"><span class="section-eyebrow-dot"></span>Advice</p>' +
@@ -4285,7 +4327,8 @@
     var mobTocEl = document.getElementById('cdp-mob-toc');
     if (mobTocEl) {
       var mobTocLinksHTML = CDP_SECTIONS.map(function(s, si) {
-        return '<span class="cdp-toc-link' + (si === 0 ? ' is-active' : '') + '" data-sec="' + s.id + '">' + s.label + '</span>';
+        return '<span class="cdp-toc-link' + (si === 0 ? ' is-active' : '') + '" data-sec="' + s.id + '">' +
+          '<span class="cdp-toc-num">' + tocNum(si) + '</span>' + s.label + '</span>';
       }).join('');
       mobTocEl.innerHTML =
         '<div class="cdp-mob-toc-inner">' +
