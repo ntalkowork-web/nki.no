@@ -2394,8 +2394,9 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
-  align-items: start;
+  align-items: center;
 }
+.consult-info .hero-avatar { object-position: center 22%; }
 
 /* ── FOOTER ───────────────────────────────── */
 
@@ -3379,14 +3380,15 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 #page-course { padding-top: var(--header-h); }
 
 /* Sticky CTA bar */
+/* Sticky CTA — DS component (bg-subtle, no border/shadow, green button) */
 .cdp-sticky-cta {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background: var(--gray-50);
-  border-bottom: 1px solid var(--gray-200);
-  box-shadow: var(--sh-sm);
+  background: var(--bg-subtle);
+  border-bottom: none;
+  box-shadow: none;
   z-index: 99;
   transform: translateY(-100%);
   transition: transform .25s ease;
@@ -3398,34 +3400,36 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px var(--margin);
+  padding: var(--spacing-16) var(--margin);
   width: 100%;
 }
 
 .cdp-sticky-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--spacing-12);
 }
 
 .cdp-sticky-thumb {
-  width: 64px;
-  height: 64px;
-  background: var(--gray-200);
-  border-radius: var(--r-md);
+  width: 96px;
+  height: 56px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-8);
+  object-fit: cover;
   flex-shrink: 0;
 }
 
 .cdp-sticky-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--spacing-8);
 }
 
 .cdp-sticky-name {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--gray-900);
+  font-size: var(--font-size-16);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
   max-width: 400px;
   white-space: nowrap;
   overflow: hidden;
@@ -3433,26 +3437,27 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 }
 
 .cdp-sticky-price {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--gray-900);
+  font-size: var(--font-size-14);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
 }
 
 .cdp-sticky-btn {
-  height: 40px;
-  padding: 0 20px;
-  background: var(--gray-900);
-  color: var(--white);
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: var(--r-sm);
+  height: 48px;
+  padding: var(--spacing-12) var(--spacing-16);
+  background: var(--action-primary-default);
+  color: var(--button-primary-text-on-green);
+  font-size: var(--font-size-16);
+  font-weight: 500;
+  border-radius: var(--radius-12);
   border: none;
   cursor: pointer;
   font-family: var(--font);
-  transition: background .15s;
+  transition: filter .15s;
 }
 
-.cdp-sticky-btn:hover { background: var(--gray-700); }
+.cdp-sticky-btn:hover { filter: brightness(0.96); }
 
 /* Mobile TOC bar — hidden on desktop, shown ≤1024px via media query */
 .cdp-mob-toc {
@@ -3767,9 +3772,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 /* outline-only frame — no fill background */
 .cdp-check-list {
   list-style: none;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--r-md);
-  padding: 20px 24px;
+  padding: 0;
 }
 
 /* no border for the materials/numbered-only variant */
@@ -3813,22 +3816,19 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 
 /* Hero section dark background */
 .cdp-hero-section {
-  background: var(--gray-100);
-  padding-bottom: 88px; /* extends dark bg 88px below hero content; infobar margin-top: -48px → bg cuts infobar at mid-point */
+  background: var(--bg-surface-primary);
+  padding-bottom: 0;
 }
 
-/* Info bar — white rectangle straddling hero/content boundary */
+/* Info bar — white bordered card (Figma: white, border, radius-16, no shadow) */
 .cdp-infobar {
   display: flex;
   align-items: stretch;
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--r-md);
-  box-shadow: 0 4px 16px rgba(0,0,0,.08);
-  margin-top: -48px;
-  margin-bottom: 0;
-  position: relative;
-  z-index: 2;
+  background: var(--bg-surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-16);
+  box-shadow: none;
+  margin: 48px 0 0;
 }
 
 .cdp-infobar-item {
@@ -3837,13 +3837,13 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 24px 12px;
+  gap: var(--spacing-8);
+  padding: 40px 12px;
 }
 
 .cdp-infobar-icon {
-  font-size: 22px;
-  color: var(--gray-500);
+  font-size: 24px;
+  color: var(--icon-default);
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
   font-style: normal;
@@ -3857,26 +3857,27 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 }
 
 .cdp-infobar-label {
-  font-size: 14px;
+  font-size: var(--font-size-14);
   font-weight: 500;
-  color: var(--gray-700);
+  color: var(--text-primary);
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .cdp-infobar-sep {
   width: 1px;
-  background: var(--gray-200);
-  margin: 16px 0;
+  background: var(--border-default);
+  margin: 46px 0;
   flex-shrink: 0;
 }
 
 /* Long-read content sections */
 .cdp-section {
-  padding: 40px 0;
-  border-bottom: 1px solid var(--gray-200);
+  padding: 72px 0;
+  border-bottom: 1px solid var(--border-default);
   scroll-margin-top: calc(var(--header-h) + 96px);
 }
+.cdp-content .cdp-section:first-child { padding-top: 0; }
 .cdp-section:last-child { border-bottom: none; padding-bottom: 0; }
 
 .cdp-section-title {
@@ -3942,7 +3943,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   grid-template-columns: 612fr 506fr; /* Figma: content 612, TOC 506 */
   gap: 130px;
   align-items: start;
-  padding: 48px 0 0;
+  padding: 72px 0 0;
 }
 
 .cdp-toc-aside {
@@ -3953,10 +3954,10 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .cdp-toc {
   position: sticky;
   top: calc(var(--header-h) + 24px);
-  background: var(--white);
+  background: var(--bg-surface-primary);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-16);
-  box-shadow: 0 4px 16px rgba(0,0,0,.07);
+  box-shadow: none;
   overflow: hidden;
   opacity: 1;
   pointer-events: auto;
@@ -3986,9 +3987,6 @@ body.cdp-cta-pinned .cdp-toc {
   user-select: none;
 }
 .cdp-toc-num { font-size: var(--font-size-14); font-weight: 500; color: var(--text-primary); flex-shrink: 0; }
-.cdp-toc-link:hover:not(.is-active) {
-  background: var(--bg-subtle);
-}
 .cdp-toc-link.is-active {
   background: var(--feedback-positive-subtle-bg);
 }
