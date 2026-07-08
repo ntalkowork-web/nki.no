@@ -4034,18 +4034,18 @@
     var scRef = spCourseById(c.id) || {};
     var courseDurMonths = scRef.months || Math.round((c.accessMonths || 12) / 2);
     var infoBarItems = [
-      { icon: 'hourglass_empty', label: courseDurMonths + ' months' },
-      { icon: 'watch',           label: (c.hoursPerWeek || 5) + 'h/week' },
-      { icon: 'key',             label: (c.accessMonths || 12) + ' months access' },
-      { icon: 'rocket_launch',   label: 'Start anytime' },
-      { icon: 'school',          label: (c.credits || 60) + ' credits' },
-      { icon: 'check_circle',    label: 'Lånekassen' },
-      { icon: 'public',          label: '100% online' }
+      { icon: 'hourglass', label: courseDurMonths + ' months' },
+      { icon: 'watch',     label: (c.hoursPerWeek || 5) + 'h/week' },
+      { icon: 'key',       label: (c.accessMonths || 12) + ' months access' },
+      { icon: 'rocket',    label: 'Start anytime' },
+      { icon: 'school',    label: (c.credits || 60) + ' credits' },
+      { icon: 'loan',      label: 'Lånekassen' },
+      { icon: 'globe',     label: '100% online' }
     ];
     var infoBarHTML = infoBarItems.map(function(item, ii) {
       var sep = ii > 0 ? '<div class="cdp-infobar-sep"></div>' : '';
       return sep + '<div class="cdp-infobar-item">' +
-        '<span class="material-symbols-outlined cdp-infobar-icon">' + item.icon + '</span>' +
+        '<img class="cdp-infobar-icon" src="images/design-system/infobar/' + item.icon + '.svg" alt="">' +
         '<span class="cdp-infobar-label">' + item.label + '</span>' +
       '</div>';
     }).join('');
@@ -4133,6 +4133,11 @@
           '<div class="cc-info">' +
             '<div class="cc-name">' + sc.name + '</div>' +
             '<div class="cc-enrolled"><span class="material-symbols-outlined cc-enrolled-icon">group</span>' + fmtNum(sc.reviews * 5) + ' students enrolled</div>' +
+            '<div class="cc-tags">' +
+              '<span class="cc-meta-pill">' + (sc.type || 'Course') + '</span>' +
+              '<span class="cc-meta-pill">' + sc.level + '</span>' +
+              '<span class="cc-meta-pill">' + sc.months + ' months</span>' +
+            '</div>' +
           '</div>' +
           '<div class="cc-footer">' +
             '<div class="cc-price-box"><div class="cc-price">kr ' + fmtNum(sc.price) + '</div>' +

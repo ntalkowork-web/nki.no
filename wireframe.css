@@ -306,9 +306,10 @@ select { font-family: inherit; }
   overflow: visible;
 }
 
-/* When a dropdown item opens an adjacent mega-panel, the two form one seamless
-   card: the dropdown only rounds/borders its left side, the mega-panel its right. */
-.nav-item:has(.has-mega) > .dropdown {
+/* When a mega-panel is actually open, the dropdown + panel form one seamless
+   card: the dropdown drops its right border/rounding only while a has-mega item
+   is hovered. Otherwise the dropdown keeps its full DS border (radius-16 all round). */
+.dropdown:has(.has-mega:hover) {
   border-radius: var(--radius-16) 0 0 var(--radius-16);
   border-right: none;
 }
@@ -3454,10 +3455,10 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   border: none;
   cursor: pointer;
   font-family: var(--font);
-  transition: filter .15s;
+  transition: background .15s;
 }
 
-.cdp-sticky-btn:hover { filter: brightness(0.96); }
+.cdp-sticky-btn:hover { background: var(--action-primary-hover); }
 
 /* Mobile TOC bar — hidden on desktop, shown ≤1024px via media query */
 .cdp-mob-toc {
@@ -3539,11 +3540,11 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 .cdp-mob-toc-top:hover { background: var(--gray-50); }
 
 /* Breadcrumb */
-.cdp-breadcrumb { font-size: 14px; color: var(--gray-500); padding-top: 24px; margin-bottom: 20px; }
-.cdp-bc-link { color: var(--gray-500); cursor: pointer; }
-.cdp-bc-link:hover { color: var(--gray-900); text-decoration: underline; }
-.cdp-bc-sep { margin: 0 6px; }
-.cdp-bc-current { color: var(--gray-900); }
+.cdp-breadcrumb { font-size: var(--font-size-14); font-weight: 500; color: var(--text-placeholder); padding-top: 24px; margin-bottom: 20px; }
+.cdp-bc-link { color: var(--text-placeholder); cursor: pointer; }
+.cdp-bc-link:hover { color: var(--text-primary); }
+.cdp-bc-sep { margin: 0 6px; color: var(--text-placeholder); }
+.cdp-bc-current { color: var(--text-primary); }
 
 /* Hero grid */
 .cdp-hero {
@@ -3724,10 +3725,10 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   font-weight: 500;
   font-family: var(--font);
   cursor: pointer;
-  transition: filter .15s;
+  transition: background .15s;
 }
 
-.cdp-btn-cart:hover { filter: brightness(0.96); }
+.cdp-btn-cart:hover { background: var(--action-primary-hover); }
 
 .cdp-learner-count {
   display: flex;
@@ -3842,18 +3843,10 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
 }
 
 .cdp-infobar-icon {
-  font-size: 24px;
-  color: var(--icon-default);
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  word-wrap: normal;
-  -webkit-font-feature-settings: 'liga';
-  font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
 }
 
 .cdp-infobar-label {
@@ -3878,7 +3871,7 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   scroll-margin-top: calc(var(--header-h) + 96px);
 }
 .cdp-content .cdp-section:first-child { padding-top: 0; }
-.cdp-section:last-child { border-bottom: none; padding-bottom: 0; }
+.cdp-section:last-child { border-bottom: none; }
 
 .cdp-section-title {
   font-size: var(--font-size-49);
