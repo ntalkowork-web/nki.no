@@ -152,7 +152,9 @@ html, body { overflow-x: clip; }
   --button-primary-text-on-green: var(--text-primary);
   --button-primary-text-on-black: var(--text-inverse);
   --badge-bg: var(--feedback-positive-subtle-bg);
-  --dropdown-bg-hover: var(--bg-subtle);
+  /* NB: the DS `dropdown/bg-hover` token was renamed/repurposed to a border
+     token (`dropdown/border`) and is no longer applied — Dropdown item hover
+     now references `bg/subtle` directly, so we do the same below. */
 
   /* Spacing (4px base unit) */
   --spacing-4: 4px;   --spacing-8: 8px;   --spacing-12: 12px; --spacing-16: 16px;
@@ -346,7 +348,7 @@ select { font-family: inherit; }
   gap: var(--spacing-8);
 }
 
-.dropdown-item:hover { background: var(--dropdown-bg-hover); }
+.dropdown-item:hover { background: var(--bg-subtle); }
 
 .dropdown-item a { display: block; width: 100%; color: inherit; }
 
@@ -412,7 +414,7 @@ select { font-family: inherit; }
   line-height: 1.4;
 }
 
-.mega-panel ul li:hover { background: var(--dropdown-bg-hover); }
+.mega-panel ul li:hover { background: var(--bg-subtle); }
 
 .mega-panel .mega-see-all {
   display: flex;
@@ -539,7 +541,7 @@ select { font-family: inherit; }
   cursor: pointer;
 }
 
-.recent-list li:hover { background: var(--dropdown-bg-hover); }
+.recent-list li:hover { background: var(--bg-subtle); }
 
 .recent-icon { font-size: 20px; color: var(--icon-default); }
 .recent-q { font-size: var(--font-size-16); font-weight: 400; color: var(--text-primary); }
