@@ -671,23 +671,17 @@
      LOGIN MODAL
 ════════════════════════════════════════════ -->
 <div class="modal-overlay" id="loginModal" role="dialog" aria-modal="true" aria-label="Log in">
-  <div class="modal">
+  <div class="modal modal--login">
     <button class="modal-close" data-closes="loginModal" aria-label="Close">×</button>
-    <h2 class="modal-title">Log in</h2>
-    <div class="login-links">
-      <div class="login-row">
-        <p class="login-desc">Login to vocational school, courses and upper secondary school for you with student email</p>
-        <a href="#" class="login-cta">Log in ›</a>
-      </div>
-      <div class="login-row">
-        <p class="login-desc">Login to the exam platform</p>
-        <a href="#" class="login-cta">Log in Wiseflow ›</a>
-      </div>
-      <div class="login-row">
-        <p class="login-desc">How do I log in to Canvas?</p>
-        <a href="#" class="login-cta">Get help logging in ›</a>
-      </div>
+    <div class="login-head">
+      <h2 class="login-title">Log in</h2>
+      <p class="login-sub">Login to vocational school, courses and upper secondary school for you with student email.</p>
     </div>
+    <div class="login-actions">
+      <button class="btn-login-primary" type="button">Log in</button>
+      <button class="btn-login-secondary" type="button">Login with Wiseflow</button>
+    </div>
+    <a href="#" class="login-help">Get help with logging in<span class="material-symbols-outlined login-help-arrow">arrow_outward</span></a>
   </div>
 </div>
 
@@ -915,64 +909,7 @@
   </section>
 
 
-  <!-- ── 5. HOW IT WORKS ── -->
-  <section class="wf-section" aria-labelledby="hiw-hd">
-    <div class="container">
-      <div class="section-hd is-eyebrow">
-        <p class="section-eyebrow"><span class="section-eyebrow-dot"></span>How it works</p>
-        <h2 class="section-title" id="hiw-hd">Your schedule. Your pace</h2>
-      </div>
-      <span class="mob-section-counter" id="hiwCounter">1 — 6</span>
-      <div class="hiw-grid" id="hiwGrid">
-
-        <div class="hiw-card">
-          <div class="hiw-icon hiw-icon-orange"><span class="material-symbols-outlined">schedule</span></div>
-          <div class="hiw-title">Study at your own pace</div>
-          <p class="hiw-desc">You decide when and where you study. NKI's online programs adapt to your schedule — not the other way around — so you can fit coursework around work, family, and everyday life.</p>
-        </div>
-
-        <div class="hiw-photo"><img src="images/design-system/how-it-works/photo-pace.jpg" alt=""></div>
-
-        <div class="hiw-card">
-          <div class="hiw-icon hiw-icon-purple"><span class="material-symbols-outlined">dashboard</span></div>
-          <div class="hiw-title">Work through your digital classroom</div>
-          <p class="hiw-desc">Everything you need lives in one digital classroom: course materials and assignments, with the flexibility to submit work and book exams whenever you're ready.</p>
-        </div>
-
-        <div class="hiw-photo"><img src="images/design-system/how-it-works/photo-support.jpg" alt=""></div>
-
-        <div class="hiw-card">
-          <div class="hiw-icon hiw-icon-blue"><span class="material-symbols-outlined">support_agent</span></div>
-          <div class="hiw-title">Get support along the way</div>
-          <p class="hiw-desc">You're never studying alone. Message your teacher or study advisor directly, get a personal study advisor from day one, and connect with fellow students working through the same material.</p>
-        </div>
-
-        <div class="hiw-card hiw-card--accent">
-          <div class="hiw-accent-text">
-            <div class="hiw-title">100% online</div>
-            <p class="hiw-desc">study from anywhere in Norway.</p>
-          </div>
-          <div class="hiw-accent-row">
-            <div class="hiw-accent-avatars">
-              <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-1.png" alt="">
-              <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-2.png" alt="">
-              <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-3.png" alt="">
-              <span class="hiw-accent-avatar hiw-accent-globe">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill="currentColor" d="M6.77083 17.6771C5.75694 17.2396 4.87153 16.6424 4.11458 15.8854C3.35764 15.1285 2.76042 14.2431 2.32292 13.2292C1.88542 12.2153 1.66667 11.1354 1.66667 9.98958C1.66667 8.84375 1.88542 7.76736 2.32292 6.76042C2.76042 5.75347 3.35764 4.87153 4.11458 4.11458C4.87153 3.35764 5.75694 2.76042 6.77083 2.32292C7.78472 1.88542 8.86458 1.66667 10.0104 1.66667C11.1562 1.66667 12.2326 1.88542 13.2396 2.32292C14.2465 2.76042 15.1285 3.35764 15.8854 4.11458C16.6424 4.87153 17.2396 5.75347 17.6771 6.76042C18.1146 7.76736 18.3333 8.84375 18.3333 9.98958C18.3333 11.1354 18.1146 12.2153 17.6771 13.2292C17.2396 14.2431 16.6424 15.1285 15.8854 15.8854C15.1285 16.6424 14.2465 17.2396 13.2396 17.6771C12.2326 18.1146 11.1562 18.3333 10.0104 18.3333C8.86458 18.3333 7.78472 18.1146 6.77083 17.6771ZM10 16.625C10.3611 16.125 10.6736 15.6042 10.9375 15.0625C11.2014 14.5208 11.4167 13.9444 11.5833 13.3333H8.41667C8.58333 13.9444 8.79861 14.5208 9.0625 15.0625C9.32639 15.6042 9.63889 16.125 10 16.625ZM7.83333 16.2917C7.58333 15.8333 7.36458 15.3576 7.17708 14.8646C6.98958 14.3715 6.83333 13.8611 6.70833 13.3333H4.25C4.65278 14.0278 5.15625 14.6319 5.76042 15.1458C6.36458 15.6597 7.05556 16.0417 7.83333 16.2917ZM12.1667 16.2917C12.9444 16.0417 13.6354 15.6597 14.2396 15.1458C14.8438 14.6319 15.3472 14.0278 15.75 13.3333H13.2917C13.1667 13.8611 13.0104 14.3715 12.8229 14.8646C12.6354 15.3576 12.4167 15.8333 12.1667 16.2917ZM3.54167 11.6667H6.375C6.33333 11.3889 6.30208 11.1146 6.28125 10.8437C6.26042 10.5729 6.25 10.2917 6.25 10C6.25 9.70833 6.26042 9.42708 6.28125 9.15625C6.30208 8.88542 6.33333 8.61111 6.375 8.33333H3.54167C3.47222 8.61111 3.42014 8.88542 3.38542 9.15625C3.35069 9.42708 3.33333 9.70833 3.33333 10C3.33333 10.2917 3.35069 10.5729 3.38542 10.8437C3.42014 11.1146 3.47222 11.3889 3.54167 11.6667ZM8.04167 11.6667H11.9583C12 11.3889 12.0313 11.1146 12.0521 10.8437C12.0729 10.5729 12.0833 10.2917 12.0833 10C12.0833 9.70833 12.0729 9.42708 12.0521 9.15625C12.0313 8.88542 12 8.61111 11.9583 8.33333H8.04167C8 8.61111 7.96875 8.88542 7.94792 9.15625C7.92708 9.42708 7.91667 9.70833 7.91667 10C7.91667 10.2917 7.92708 10.5729 7.94792 10.8437C7.96875 11.1146 8 11.3889 8.04167 11.6667ZM13.625 11.6667H16.4583C16.5278 11.3889 16.5799 11.1146 16.6146 10.8437C16.6493 10.5729 16.6667 10.2917 16.6667 10C16.6667 9.70833 16.6493 9.42708 16.6146 9.15625C16.5799 8.88542 16.5278 8.61111 16.4583 8.33333H13.625C13.6667 8.61111 13.6979 8.88542 13.7188 9.15625C13.7396 9.42708 13.75 9.70833 13.75 10C13.75 10.2917 13.7396 10.5729 13.7188 10.8437C13.6979 11.1146 13.6667 11.3889 13.625 11.6667ZM13.2917 6.66667H15.75C15.3472 5.97222 14.8438 5.36806 14.2396 4.85417C13.6354 4.34028 12.9444 3.95833 12.1667 3.70833C12.4167 4.16667 12.6354 4.64236 12.8229 5.13542C13.0104 5.62847 13.1667 6.13889 13.2917 6.66667ZM8.41667 6.66667H11.5833C11.4167 6.05556 11.2014 5.47917 10.9375 4.9375C10.6736 4.39583 10.3611 3.875 10 3.375C9.63889 3.875 9.32639 4.39583 9.0625 4.9375C8.79861 5.47917 8.58333 6.05556 8.41667 6.66667ZM4.25 6.66667H6.70833C6.83333 6.13889 6.98958 5.62847 7.17708 5.13542C7.36458 4.64236 7.58333 4.16667 7.83333 3.70833C7.05556 3.95833 6.36458 4.34028 5.76042 4.85417C5.15625 5.36806 4.65278 5.97222 4.25 6.66667Z"/>
-                </svg>
-              </span>
-            </div>
-            <p class="hiw-accent-lbl">join the community of 600k+ online students</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ── 6. PEDAGOGICAL APPROACH ── -->
+  <!-- ── 5. PEDAGOGICAL APPROACH ── -->
   <section class="wf-section bg-gray" aria-labelledby="aktiv-hd">
     <div class="container">
       <div class="aktiv-layout">
@@ -1054,6 +991,63 @@
           </div>
 
           <button class="btn-cta-green" id="aktivBrowseBtn">Browse all courses</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 6. HOW IT WORKS ── -->
+  <section class="wf-section" aria-labelledby="hiw-hd">
+    <div class="container">
+      <div class="section-hd is-eyebrow">
+        <p class="section-eyebrow"><span class="section-eyebrow-dot"></span>How it works</p>
+        <h2 class="section-title" id="hiw-hd">Your schedule. Your pace</h2>
+      </div>
+      <span class="mob-section-counter" id="hiwCounter">1 — 6</span>
+      <div class="hiw-grid" id="hiwGrid">
+
+        <div class="hiw-card">
+          <div class="hiw-icon hiw-icon-orange"><span class="material-symbols-outlined">schedule</span></div>
+          <div class="hiw-title">Study at your own pace</div>
+          <p class="hiw-desc">You decide when and where you study. NKI's online programs adapt to your schedule — not the other way around — so you can fit coursework around work, family, and everyday life.</p>
+        </div>
+
+        <div class="hiw-photo"><img src="images/design-system/how-it-works/photo-pace.jpg" alt=""></div>
+
+        <div class="hiw-card">
+          <div class="hiw-icon hiw-icon-purple"><span class="material-symbols-outlined">dashboard</span></div>
+          <div class="hiw-title">Work through your digital classroom</div>
+          <p class="hiw-desc">Everything you need lives in one digital classroom: course materials and assignments, with the flexibility to submit work and book exams whenever you're ready.</p>
+        </div>
+
+        <div class="hiw-photo"><img src="images/design-system/how-it-works/photo-support.jpg" alt=""></div>
+
+        <div class="hiw-card">
+          <div class="hiw-icon hiw-icon-blue"><span class="material-symbols-outlined">support_agent</span></div>
+          <div class="hiw-title">Get support along the way</div>
+          <p class="hiw-desc">You're never studying alone. Message your teacher or study advisor directly, get a personal study advisor from day one, and connect with fellow students working through the same material.</p>
+        </div>
+
+        <div class="hiw-card hiw-card--accent">
+          <div class="hiw-accent-text">
+            <div class="hiw-title">100% online</div>
+            <p class="hiw-desc">study from anywhere in Norway.</p>
+          </div>
+          <div class="hiw-accent-row">
+            <div class="hiw-accent-avatars">
+              <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-1.png" alt="">
+              <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-2.png" alt="">
+              <img class="hiw-accent-avatar" src="images/design-system/how-it-works/avatar-3.png" alt="">
+              <span class="hiw-accent-avatar hiw-accent-globe">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="currentColor" d="M6.77083 17.6771C5.75694 17.2396 4.87153 16.6424 4.11458 15.8854C3.35764 15.1285 2.76042 14.2431 2.32292 13.2292C1.88542 12.2153 1.66667 11.1354 1.66667 9.98958C1.66667 8.84375 1.88542 7.76736 2.32292 6.76042C2.76042 5.75347 3.35764 4.87153 4.11458 4.11458C4.87153 3.35764 5.75694 2.76042 6.77083 2.32292C7.78472 1.88542 8.86458 1.66667 10.0104 1.66667C11.1562 1.66667 12.2326 1.88542 13.2396 2.32292C14.2465 2.76042 15.1285 3.35764 15.8854 4.11458C16.6424 4.87153 17.2396 5.75347 17.6771 6.76042C18.1146 7.76736 18.3333 8.84375 18.3333 9.98958C18.3333 11.1354 18.1146 12.2153 17.6771 13.2292C17.2396 14.2431 16.6424 15.1285 15.8854 15.8854C15.1285 16.6424 14.2465 17.2396 13.2396 17.6771C12.2326 18.1146 11.1562 18.3333 10.0104 18.3333C8.86458 18.3333 7.78472 18.1146 6.77083 17.6771ZM10 16.625C10.3611 16.125 10.6736 15.6042 10.9375 15.0625C11.2014 14.5208 11.4167 13.9444 11.5833 13.3333H8.41667C8.58333 13.9444 8.79861 14.5208 9.0625 15.0625C9.32639 15.6042 9.63889 16.125 10 16.625ZM7.83333 16.2917C7.58333 15.8333 7.36458 15.3576 7.17708 14.8646C6.98958 14.3715 6.83333 13.8611 6.70833 13.3333H4.25C4.65278 14.0278 5.15625 14.6319 5.76042 15.1458C6.36458 15.6597 7.05556 16.0417 7.83333 16.2917ZM12.1667 16.2917C12.9444 16.0417 13.6354 15.6597 14.2396 15.1458C14.8438 14.6319 15.3472 14.0278 15.75 13.3333H13.2917C13.1667 13.8611 13.0104 14.3715 12.8229 14.8646C12.6354 15.3576 12.4167 15.8333 12.1667 16.2917ZM3.54167 11.6667H6.375C6.33333 11.3889 6.30208 11.1146 6.28125 10.8437C6.26042 10.5729 6.25 10.2917 6.25 10C6.25 9.70833 6.26042 9.42708 6.28125 9.15625C6.30208 8.88542 6.33333 8.61111 6.375 8.33333H3.54167C3.47222 8.61111 3.42014 8.88542 3.38542 9.15625C3.35069 9.42708 3.33333 9.70833 3.33333 10C3.33333 10.2917 3.35069 10.5729 3.38542 10.8437C3.42014 11.1146 3.47222 11.3889 3.54167 11.6667ZM8.04167 11.6667H11.9583C12 11.3889 12.0313 11.1146 12.0521 10.8437C12.0729 10.5729 12.0833 10.2917 12.0833 10C12.0833 9.70833 12.0729 9.42708 12.0521 9.15625C12.0313 8.88542 12 8.61111 11.9583 8.33333H8.04167C8 8.61111 7.96875 8.88542 7.94792 9.15625C7.92708 9.42708 7.91667 9.70833 7.91667 10C7.91667 10.2917 7.92708 10.5729 7.94792 10.8437C7.96875 11.1146 8 11.3889 8.04167 11.6667ZM13.625 11.6667H16.4583C16.5278 11.3889 16.5799 11.1146 16.6146 10.8437C16.6493 10.5729 16.6667 10.2917 16.6667 10C16.6667 9.70833 16.6493 9.42708 16.6146 9.15625C16.5799 8.88542 16.5278 8.61111 16.4583 8.33333H13.625C13.6667 8.61111 13.6979 8.88542 13.7188 9.15625C13.7396 9.42708 13.75 9.70833 13.75 10C13.75 10.2917 13.7396 10.5729 13.7188 10.8437C13.6979 11.1146 13.6667 11.3889 13.625 11.6667ZM13.2917 6.66667H15.75C15.3472 5.97222 14.8438 5.36806 14.2396 4.85417C13.6354 4.34028 12.9444 3.95833 12.1667 3.70833C12.4167 4.16667 12.6354 4.64236 12.8229 5.13542C13.0104 5.62847 13.1667 6.13889 13.2917 6.66667ZM8.41667 6.66667H11.5833C11.4167 6.05556 11.2014 5.47917 10.9375 4.9375C10.6736 4.39583 10.3611 3.875 10 3.375C9.63889 3.875 9.32639 4.39583 9.0625 4.9375C8.79861 5.47917 8.58333 6.05556 8.41667 6.66667ZM4.25 6.66667H6.70833C6.83333 6.13889 6.98958 5.62847 7.17708 5.13542C7.36458 4.64236 7.58333 4.16667 7.83333 3.70833C7.05556 3.95833 6.36458 4.34028 5.76042 4.85417C5.15625 5.36806 4.65278 5.97222 4.25 6.66667Z"/>
+                </svg>
+              </span>
+            </div>
+            <p class="hiw-accent-lbl">join the community of 600k+ online students</p>
+          </div>
         </div>
 
       </div>
@@ -1979,7 +1973,7 @@
       '<div class="nki-lk" id="nkiLkAcc">' +
         '<div class="nki-lk-hd" id="nkiLkHd" role="button" tabindex="0" aria-expanded="false">' +
           '<img src="payment-options-logos/lanekassen.jpg" alt="Lanekassen" class="nki-lk-logo">' +
-          '<div class="nki-lk-label">Student Loan Support</div>' +
+          '<div class="nki-lk-label">Lånekassen support</div>' +
           '<span class="material-symbols-outlined nki-lk-chevron">expand_more</span>' +
         '</div>' +
         '<div class="nki-lk-body" id="nkiLkBody" hidden>' +
@@ -2053,11 +2047,11 @@
       '<footer class="nki-cart-footer">' +
         '<div class="nki-cart-sep"></div>' +
         '<button class="nki-cart-cta" id="cartCheckoutBtn">' +
-          '<span class="nki-cta-label">Go to checkout</span>' +
+          '<span class="nki-cta-label">Continue to Checkout</span>' +
           '<span class="nki-cta-sep"></span>' +
           '<span class="nki-cta-price">' + total + '</span>' +
         '</button>' +
-        '<button class="nki-cart-cta-secondary" id="cartGoToCartBtn">Go to cart</button>' +
+        '<button class="nki-cart-cta-secondary" id="cartGoToCartBtn">Go to the cart</button>' +
         '<div class="nki-pay-pills">' + logoPills + '</div>' +
       '</footer>'
     );
@@ -3139,19 +3133,28 @@
     return null;
   }
 
-  function buildSearchCard(c) {
-    var imgBadge = c.badge ? '<div class="cc-badges"><span class="badge-bs">' + c.badge + '</span></div>' : '';
+  function buildSearchCard(c, idx) {
+    /* DS course-card Default (photo variant) — matches Figma search-page 285:6378 */
+    var isHs = c.level === 'High School';
+    var img = 'images/design-system/courses/' + (isHs ? 'hs' : 'pro') + '-0' + (((idx || 0) % 4) + 1) + '.jpg';
+    var badge = c.badge ? '<div class="cc-tag">' + c.badge + '</div>' : '';
     var inCmp = spState.compareIds.indexOf(c.id) !== -1;
     var cmpLbl = '<label class="cc-compare-label"><input type="checkbox" class="cc-compare-cb" data-course-id="' + c.id + '"' + (inCmp ? ' checked' : '') + '><span>Compare</span></label>';
-    var typePill = '<span class="pill-sm">' + (c.type || 'Course') + '</span>';
-    return '<div class="course-card">' +
-      '<div class="cc-img">' + imgBadge + cmpLbl + '</div>' +
-      '<div class="cc-body">' +
-        '<div class="cc-name">' + c.name + '</div>' +
-        '<div class="cc-enrolled"><span class="material-symbols-outlined cc-enrolled-icon">person</span>' + fmtNum(c.reviews * 5) + ' students enrolled</div>' +
-        '<div class="cc-pills">' + typePill + '<span class="pill-sm">' + c.level + '</span><span class="pill-sm">' + c.months + ' months</span>' + (c.lanekassen ? '<span class="pill-sm">Lånekassen</span>' : '') + '</div>' +
-        '<div class="cc-footer"><div><div class="cc-price">Kr ' + fmtNum(c.price) + '</div></div>' +
-        '<button class="cc-cart-btn" data-sp-cart="' + c.id + '" aria-label="Add to cart">' + ccCartSvg + '<span class="cc-cart-plus">+</span></button>' +
+    var disc = 9 + ((c.reviews || 0) % 13);
+    var orig = Math.round(c.price / (1 - disc / 100) / 100) * 100;
+    return '<div class="course-card course-card--photo" data-course-id="' + c.id + '">' +
+      '<img class="cc-photo" src="' + img + '" alt="">' +
+      '<div class="cc-scrim"></div>' +
+      badge + cmpLbl +
+      '<div class="cc-details">' +
+        '<div class="cc-info">' +
+          '<div class="cc-name">' + c.name + '</div>' +
+          '<div class="cc-enrolled"><span class="material-symbols-outlined cc-enrolled-icon">group</span>' + fmtNum(c.reviews * 5) + ' students enrolled</div>' +
+        '</div>' +
+        '<div class="cc-footer">' +
+          '<div class="cc-price-box"><div class="cc-price">Kr ' + fmtNum(c.price) + '</div>' +
+            '<div class="cc-price-meta"><span class="cc-orig-price">Kr ' + fmtNum(orig) + '</span><span class="cc-disc-badge">-' + disc + '%</span></div></div>' +
+          '<button class="cc-cart-btn" data-sp-cart="' + c.id + '" aria-label="Add to cart"></button>' +
         '</div>' +
       '</div></div>';
   }
@@ -3748,15 +3751,16 @@
     if (allPackages) {
       ATTRS.push({ label: 'Subjects', fn: function(c) { return (c.subjects || []).map(function(s) { return '<li>' + s + '</li>'; }).join(''); }, isList: true });
     }
-    var cols = courses.map(function(c) {
+    var cols = courses.map(function(c, idx) {
       var rows = ATTRS.map(function(attr) {
         var val = attr.fn(c);
         if (attr.isList) val = '<ul class="cp-subject-list">' + val + '</ul>';
         return '<div class="cp-row"><div class="cp-row-label">' + attr.label + '</div><div class="cp-row-val">' + val + '</div></div>';
       }).join('');
+      var cpImg = 'images/design-system/courses/' + (c.level === 'High School' ? 'hs' : 'pro') + '-0' + ((idx % 4) + 1) + '.jpg';
       return '<div class="cp-col">' +
         '<div class="cp-col-head">' +
-          '<div class="cp-img"></div>' +
+          '<div class="cp-img"><img src="' + cpImg + '" alt=""></div>' +
           '<div class="cp-col-name">' + c.name + '</div>' +
           '<div class="cp-col-actions">' +
             '<button class="cp-col-cta" data-cp-cart="' + c.id + '">Add to cart</button>' +
@@ -4669,7 +4673,7 @@
     var countrySelect = ctryOpts.map(function(o){ return '<option value="' + o[0] + '"' + ((s.coCountry||'NO')===o[0]?' selected':'') + '>' + o[1] + '</option>'; }).join('');
     return '<form class="co-form" id="coForm1" onsubmit="return false">' +
       '<div class="co-form-row">' +
-        '<div class="co-form-group"><label class="co-label" for="coFname">First name</label><input class="co-input co-req" id="coFname" type="text" placeholder="Enter your first name" value="' + (s.coFname||'') + '"></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coFname">Name</label><input class="co-input co-req" id="coFname" type="text" placeholder="Enter your name" value="' + (s.coFname||'') + '"></div>' +
         '<div class="co-form-group"><label class="co-label" for="coLname">Surname</label><input class="co-input co-req" id="coLname" type="text" placeholder="Enter your surname" value="' + (s.coLname||'') + '"></div>' +
       '</div>' +
       '<div class="co-form-group"><label class="co-label" for="coPhone">Phone number</label>' +
@@ -4686,6 +4690,7 @@
         buildCoSsnAcc() +
       '</div>' +
       '<div class="co-form-group"><label class="co-label" for="coAddr">Street address</label><input class="co-input co-req" id="coAddr" type="text" placeholder="Enter your street address" value="' + (s.coAddr||'') + '"></div>' +
+      '<div class="co-form-group"><label class="co-label" for="coAddr2">Street address</label><input class="co-input" id="coAddr2" type="text" placeholder="Enter your street address" value="' + (s.coAddr2||'') + '"></div>' +
       '<div class="co-form-row">' +
         '<div class="co-form-group"><label class="co-label" for="coCity">City</label><input class="co-input co-req" id="coCity" type="text" placeholder="Enter your city" value="' + (s.coCity||'') + '"></div>' +
         '<div class="co-form-group"><label class="co-label" for="coPostal">Postal code</label><input class="co-input co-req" id="coPostal" type="text" placeholder="0000" value="' + (s.coPostal||'') + '"></div>' +
@@ -4696,7 +4701,7 @@
       '<div class="co-terms-row"><label class="co-terms-lbl"><input type="checkbox" id="coContact"> I want customer support to contact me for guidance.</label></div>' +
       '<div class="co-terms-row"><label class="co-terms-lbl"><input type="checkbox" id="coTerms"> <span>By continuing, I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.</span></label></div>' +
       '<div class="co-cta-wrap">' +
-        '<button class="co-continue-btn" id="coContinue1" type="button" disabled>' + (CHECKOUT_STATE.isEditing ? 'Save' : 'Continue') + '</button>' +
+        '<button class="co-continue-btn" id="coContinue1" type="button" disabled>' + (CHECKOUT_STATE.isEditing ? 'Save' : 'Continue to Documentation') + '</button>' +
         '<div class="co-cant" id="coCant1"><span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnk1">Complete your personal information first.</a></div>' +
       '</div>' +
     '</form>';
@@ -4892,18 +4897,18 @@
     }).join('');
     var lkHTML = items.some(function(i){ return i.lanekassen; }) ? buildLanekassen() : '';
     return '<div class="co-sum-card" id="coSumCard">' +
-      '<div class="co-sum-hd-row"><span class="co-sum-hd">Summary</span><button class="co-sum-edit-btn" id="coSumEditBtn" type="button">Edit</button></div>' +
+      '<div class="co-sum-hd-row"><span class="co-sum-hd">Order Summary</span><button class="co-sum-edit-btn" id="coSumEditBtn" type="button">Edit</button></div>' +
       summCards + lkHTML +
       '<div class="co-promo-wrap">' +
         '<div class="co-promo-row">' +
-          '<input class="co-promo-inp" id="coPromoInp" type="text" placeholder="Do you have a promotional code?" value="' + (CHECKOUT_STATE.promoApplied ? CHECKOUT_STATE.promoCode : '') + '">' +
+          '<input class="co-promo-inp" id="coPromoInp" type="text" placeholder="I have a promocode" value="' + (CHECKOUT_STATE.promoApplied ? CHECKOUT_STATE.promoCode : '') + '">' +
           '<button class="co-promo-btn" id="coPromoBtn" type="button">Apply</button>' +
         '</div>' +
         (CHECKOUT_STATE.promoApplied ? '<div class="co-promo-ok"><span class="material-symbols-outlined" style="font-size:14px">check_circle</span>Promo code applied — ' + CHECKOUT_STATE.discountPct + '% off!</div>' : '') +
       '</div>' +
       (CHECKOUT_STATE.promoApplied ? '<div class="co-sum-row"><span>Discount (' + CHECKOUT_STATE.discountPct + '%)</span><span class="co-sum-disc">-' + coFmt(disc) + '</span></div>' : '') +
       (CHECKOUT_STATE.paymentMethod === 'partial' ? '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--gray-400);font-size:14px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' : '') +
-      '<div class="co-sum-row co-sum-total-row"><span>Total price</span><span>' + coFmt(total) + '</span></div>' +
+      '<div class="co-sum-row co-sum-total-row"><span>Total</span><span>' + coFmt(total) + '</span></div>' +
       '<div class="co-sum-excl">Excluding books</div>' +
     '</div>' +
     '<div class="co-test-card">' +
@@ -4970,7 +4975,7 @@
 
       if (continueBtn) continueBtn.addEventListener('click', function() {
         var sf = {};
-        ['coFname','coLname','coPhone','coEmail','coSsn','coAddr','coCity','coPostal'].forEach(function(id){
+        ['coFname','coLname','coPhone','coEmail','coSsn','coAddr','coAddr2','coCity','coPostal'].forEach(function(id){
           var el = document.getElementById(id); if (el) sf[id] = el.value;
         });
         var cc = document.getElementById('coCcSel'); if (cc) sf.coCcSel = cc.value;
@@ -5225,15 +5230,17 @@
         '<div class="container">' +
           '<div class="ty-hero">' +
             '<div class="ty-check-circle"><span class="material-symbols-outlined ty-check-ic">check_circle</span></div>' +
-            '<h1 class="ty-headline">Thank you for your order!</h1>' +
+            '<h1 class="ty-headline">Thank you for your order</h1>' +
             '<div class="ty-conf-num">Confirmation number: <strong>' + confNum + '</strong></div>' +
           '</div>' +
           '<div class="ty-cards">' +
             '<div class="ty-card">' +
+              '<div class="ty-card-ic hiw-icon hiw-icon-orange"><span class="material-symbols-outlined">description</span></div>' +
               '<div class="ty-card-hd">Your order</div>' +
               orderCardHTML +
             '</div>' +
             '<div class="ty-card">' +
+              '<div class="ty-card-ic hiw-icon hiw-icon-blue"><span class="material-symbols-outlined">arrow_forward</span></div>' +
               '<div class="ty-card-hd">What\'s next?</div>' +
               '<p class="ty-card-txt"><strong class="ty-emph">Within a few days</strong> you will receive confirmation of your registration, along with your username and password, via your email address.</p>' +
               '<p class="ty-card-txt">To access your course:</p>' +
@@ -5243,6 +5250,7 @@
               '<button class="ty-start-btn" id="tyStartBtn" type="button">Start learning now<span class="material-symbols-outlined ty-start-btn-ic">arrow_forward</span></button>' +
             '</div>' +
             '<div class="ty-card">' +
+              '<div class="ty-card-ic hiw-icon hiw-icon-purple"><span class="material-symbols-outlined">help</span></div>' +
               '<div class="ty-card-hd">Need help?</div>' +
               '<p class="ty-card-txt">Need assistance? Email us at <a href="mailto:veelding@nki.no">veelding@nki.no</a> or call us at:</p>' +
               '<div class="ty-contact-tel">67 58 88 00</div>' +
