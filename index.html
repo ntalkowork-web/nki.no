@@ -2042,7 +2042,8 @@
 
   function buildCartFooter() {
     var total = fmtPrice(cartTotal());
-    var logoPills = buildPaymentLogoPills();
+    /* Figma cart-drawer footer: two buttons only — no payment logos
+       (payment logos live on the Cart page, not the drawer) */
     return (
       '<footer class="nki-cart-footer">' +
         '<div class="nki-cart-sep"></div>' +
@@ -2052,7 +2053,6 @@
           '<span class="nki-cta-price">' + total + '</span>' +
         '</button>' +
         '<button class="nki-cart-cta-secondary" id="cartGoToCartBtn">Go to the cart</button>' +
-        '<div class="nki-pay-pills">' + logoPills + '</div>' +
       '</footer>'
     );
   }

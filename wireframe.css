@@ -657,8 +657,8 @@ select { font-family: inherit; }
   position: fixed;
   top: 0; right: 0;
   height: 100vh;
-  width: 536px;
-  background: var(--white);
+  width: 496px;
+  background: var(--bg-surface-primary);
   box-shadow: var(--sh-lg);
   z-index: 301;
   transform: translateX(100%);
@@ -673,23 +673,24 @@ select { font-family: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--gray-200);
+  padding: var(--spacing-20) var(--spacing-24);
+  border-bottom: 1px solid var(--border-default);
 }
 
-.drawer-title { font-size: 18px; font-weight: 600; }
+/* Figma cart-drawer header title: Desktop/H4 (31px Bold) */
+.drawer-title { font-size: var(--font-size-31); font-weight: 700; color: var(--text-primary); line-height: 1.15; }
 
 .drawer-close {
-  font-size: 20px;
-  color: var(--gray-400);
-  width: 30px; height: 30px;
+  font-size: 24px;
+  color: var(--text-primary);
+  width: 32px; height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--r-sm);
+  border-radius: var(--radius-8);
 }
 
-.drawer-close:hover { background: var(--gray-100); color: var(--gray-700); }
+.drawer-close:hover { background: var(--bg-subtle); }
 
 .drawer-back {
   display: flex;
@@ -742,15 +743,16 @@ select { font-family: inherit; }
 .nki-cart-footer {
   position: sticky;
   bottom: 0;
-  background: var(--white);
-  padding: 0 24px 16px;
+  background: var(--bg-surface-primary);
+  padding: 0 var(--spacing-24) var(--spacing-20);
   flex-shrink: 0;
 }
 
+/* footer top divider (Figma: border-default border-top) */
 .nki-cart-sep {
   height: 1px;
-  background: var(--gray-200);
-  margin: 0 -24px 16px;
+  background: var(--border-default);
+  margin: 0 calc(-1 * var(--spacing-24)) var(--spacing-20);
 }
 
 .nki-cart-cta {
