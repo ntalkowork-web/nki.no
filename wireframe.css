@@ -3926,9 +3926,10 @@ input[type="range"].sp-price-slider::-moz-range-thumb {
   flex-shrink: 0;
 }
 
-/* Long-read content sections */
+/* Long-read content sections — each divided by a 24px bottom space + border */
 .cdp-section {
-  padding: 0;
+  padding: 0 0 var(--spacing-24);
+  border-bottom: 1px solid var(--border-default);
   scroll-margin-top: calc(var(--header-h) + 96px);
 }
 .cdp-content .cdp-section + .cdp-section { margin-top: var(--spacing-32); }
