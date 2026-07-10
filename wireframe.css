@@ -1462,6 +1462,20 @@ main { margin-top: var(--header-h); }
 .hero-cat-card.h-lg { height: 376px; }
 .hero-cat-card img { width: 100%; height: 100%; object-fit: cover; }
 
+/* Noise grain overlay per Figma carousel-image (Noise layer: 25% opacity, overlay blend) */
+.hero-cat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('images/design-system/hero/noise.png');
+  background-size: cover;
+  background-position: top left;
+  border-radius: var(--radius-24);
+  mix-blend-mode: overlay;
+  opacity: .25;
+  pointer-events: none;
+}
+
 /* Hover state (Carousel Image / Hover): thick green bottom border */
 .hero-cat-card::after {
   content: '';
@@ -1705,6 +1719,9 @@ main { margin-top: var(--header-h); }
 section.wf-section { padding: 72px 0; }
 #page-home main > section:last-of-type { padding-bottom: 144px; }
 section.wf-section.bg-gray { background: var(--bg-subtle); }
+/* Figma: 168px between Professional Courses → Pedagogical → Your schedule.
+   Those two sections carry a 96px bottom pad (72 top + 96 bottom + 72 next-top). */
+section.wf-section.wf-section--pb-96 { padding-bottom: var(--spacing-96); }
 
 .section-hd {
   display: flex;
@@ -2254,7 +2271,7 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
   display: flex;
   align-items: center;
   gap: var(--spacing-16);
-  padding: 0;
+  padding: 0 var(--spacing-24);
   background: none;
   border: none;
   cursor: pointer;
@@ -2267,7 +2284,7 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 .aktiv-item-num { font-size: var(--font-size-14); font-weight: 500; color: var(--text-secondary-on-subtle); }
 .aktiv-item.is-open .aktiv-item-num { color: var(--text-primary); }
 
-.aktiv-item-title { flex: 1; font-size: var(--font-size-25); font-weight: 700; color: var(--text-primary); }
+.aktiv-item-title { flex: 1; font-size: var(--font-size-20); font-weight: 700; color: var(--text-primary); }
 
 .aktiv-item-chevron {
   font-size: 24px;
@@ -2283,7 +2300,7 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 .aktiv-item-body { display: none; padding: var(--spacing-8) var(--spacing-24) var(--spacing-24) calc(var(--spacing-24) + 16px + var(--spacing-16)); }
 .aktiv-item.is-open .aktiv-item-body { display: block; }
 
-.aktiv-item-desc { font-size: var(--font-size-16); color: var(--text-secondary-on-white); line-height: 1.4; margin: 0; }
+.aktiv-item-desc { font-size: var(--font-size-16); color: var(--text-primary); line-height: 1.5; margin: 0; }
 
 .aktiv-item-stats {
   display: flex;
