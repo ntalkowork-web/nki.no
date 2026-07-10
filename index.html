@@ -3483,7 +3483,7 @@
     var isMob = window.innerWidth <= 1024;
     page.innerHTML =
       '<div class="sp-wrap"><div class="container">' +
-        '<div class="sp-breadcrumb"><a class="sp-bc-home" id="spBcHome">Home</a><span class="sp-bc-sep"> &gt; </span><span class="sp-bc-current">' + spState.breadcrumb + '</span></div>' +
+        '<div class="sp-breadcrumb"><a class="sp-bc-home" id="spBcHome">Home</a><span class="sp-bc-sep material-symbols-outlined">chevron_right</span><span class="sp-bc-current">' + spState.breadcrumb + '</span></div>' +
         '<div class="sp-layout">' +
           '<aside class="sp-sidebar" id="spSidebar">' + (isMob ? '' : buildSidebarHTML()) + '</aside>' +
           '<div class="sp-results" id="spResultsArea">' + buildResultsAreaHTML() + '</div>' +
