@@ -1949,7 +1949,7 @@
   }
 
   function fmtMeta(item) {
-    return (item.type || 'Course') + ' · ' + item.accessMonths + ' months · ' + item.accessMonths + ' months access';
+    return (item.type || 'Course') + ' · ' + (item.duration || (item.accessMonths + ' months')) + ' · ' + item.accessMonths + ' months access';
   }
 
   function buildItemCard(item) {
@@ -4909,6 +4909,8 @@
         '<div class="co-sum-info">' +
           '<div class="co-sum-name">' + item.name + '</div>' +
           '<div class="co-sum-meta">' + fmtMeta(item) + '</div>' +
+          '<div class="co-sum-price">' + fmtPrice(item.price) + '</div>' +
+          (item.needsBooks ? '<div class="co-sum-item-excl">Excluding books</div>' : '') +
         '</div>' +
       '</div>';
     }).join('');

@@ -5060,11 +5060,14 @@ body.cdp-cta-pinned .cdp-toc {
   cursor: pointer;
 }
 .co-sum-edit-btn:hover { color: var(--text-primary); }
-.co-sum-item { display: flex; gap: 12px; margin-bottom: 12px; }
-.co-sum-thumb { width: 52px; height: 40px; background-color: var(--bg-subtle); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 6px; flex-shrink: 0; }
+.co-sum-item { display: flex; gap: var(--spacing-16); }
+.co-sum-item + .co-sum-item { border-top: 1px solid var(--border-default); padding-top: var(--spacing-24); margin-top: var(--spacing-24); }
+.co-sum-thumb { width: 64px; height: 64px; background-color: var(--bg-subtle); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: var(--radius-12); flex-shrink: 0; }
 .co-sum-info { flex: 1; min-width: 0; }
-.co-sum-name { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
-.co-sum-meta { font-size: 14px; color: var(--text-secondary-on-white); }
+.co-sum-name { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); margin-bottom: var(--spacing-8); }
+.co-sum-meta { font-size: var(--font-size-14); color: var(--text-secondary-on-white); }
+.co-sum-price { font-size: var(--font-size-16); font-weight: 500; color: var(--text-primary); margin-top: var(--spacing-8); }
+.co-sum-item-excl { font-size: var(--font-size-14); color: var(--text-secondary-on-white); margin-top: var(--spacing-4); }
 .co-sum-sep { height: 1px; background: var(--border-default); margin: 14px 0; }
 .co-sum-row { display: flex; justify-content: space-between; font-size: 16px; color: var(--text-secondary-on-white); margin-bottom: 6px; }
 .co-sum-total-row { font-weight: 700; font-size: 18px; color: var(--text-primary); margin-top: 4px; }
