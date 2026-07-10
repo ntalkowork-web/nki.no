@@ -4038,10 +4038,13 @@ body.cdp-cta-pinned .cdp-toc {
   line-height: 1.4;
   transition: background .15s;
   user-select: none;
+  border-bottom: 6px solid transparent;
 }
 .cdp-toc-num { font-size: var(--font-size-14); font-weight: 500; color: var(--text-primary); flex-shrink: 0; }
+/* vertical-tab / Active: positive-subtle bg + 6px green-500 bottom border */
 .cdp-toc-link.is-active {
   background: var(--feedback-positive-subtle-bg);
+  border-bottom-color: var(--action-primary-hover);
 }
 
 /* Content accordions */
@@ -4122,10 +4125,13 @@ body.cdp-cta-pinned .cdp-toc {
   cursor: pointer;
   font-family: var(--font);
   border-radius: var(--radius-12);
+  border-bottom: 6px solid transparent;
 }
 
+/* vertical-tab / Active: positive-subtle bg + 6px green-500 bottom border */
 .cdp-struct-tab.is-active {
   background: var(--feedback-positive-subtle-bg);
+  border-bottom-color: var(--action-primary-hover);
 }
 
 .cdp-struct-tab-num  { font-size: var(--font-size-14); font-weight: 500; color: var(--text-primary); flex-shrink: 0; }
