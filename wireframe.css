@@ -5097,7 +5097,7 @@ body.cdp-cta-pinned .cdp-toc {
   padding: 20px;
 }
 .co-test-inner { display: flex; gap: 14px; }
-.co-test-photo { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-subtle); flex-shrink: 0; }
+.co-test-photo { width: 44px; height: 44px; border-radius: 50%; background-color: var(--bg-subtle); background-size: cover; background-position: center; background-repeat: no-repeat; flex-shrink: 0; }
 .co-test-content { flex: 1; }
 .co-test-quote { font-size: 14px; color: var(--text-secondary-on-white); line-height: 1.6; margin-bottom: 8px; }
 .co-test-author { font-size: 14px; color: var(--text-secondary-on-white); font-weight: 500; }
