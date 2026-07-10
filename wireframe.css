@@ -1087,29 +1087,28 @@ select { font-family: inherit; }
 .nki-sugg-meta { font-size: 14px; color: var(--text-secondary-on-white); }
 .nki-sugg-price { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-top: 3px; }
 
+/* Figma course-card add button: 48px square, border-default, radius-12, icon only */
 .nki-sugg-add {
   flex-shrink: 0;
+  width: 48px;
+  height: 48px;
   border: 1px solid var(--border-default);
-  border-radius: var(--r-sm);
+  border-radius: var(--radius-12);
   background: transparent;
-  color: var(--text-secondary-on-white);
-  font-size: 14px;
-  font-weight: 500;
-  padding: 5px 10px;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
   cursor: pointer;
   font-family: var(--font);
   transition: background .15s, border-color .15s;
-  white-space: nowrap;
 }
 
 .nki-sugg-add:hover { background: var(--bg-subtle); border-color: var(--text-placeholder); }
 
 .nki-sugg-add-icon {
   font-family: 'Material Symbols Outlined';
-  font-size: 14px;
+  font-size: 20px;
   font-weight: normal;
   font-style: normal;
   line-height: 1;
@@ -6187,15 +6186,16 @@ body.cdp-cta-pinned .cdp-toc {
 .btn-see-all:hover { background: var(--bg-subtle); border-color: transparent; }
 
 
-/* ── Cart: instalment hint ── */
+/* ── Cart: instalment hint (Figma: yellow-100 badge, no border, primary text) ── */
 .nki-cart-install-hint {
-  font-size: 14px;
-  color: var(--text-secondary-on-white);
+  font-size: var(--font-size-14);
+  font-weight: 500;
+  color: var(--text-primary);
   margin-top: 8px;
-  padding: 6px 10px;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-default);
-  border-radius: var(--r-sm);
+  padding: var(--spacing-8) var(--spacing-12);
+  background: var(--accent-yellow-subtle);
+  border: none;
+  border-radius: var(--radius-8);
   display: inline-block;
 }
 
