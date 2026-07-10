@@ -5125,14 +5125,16 @@ body.cdp-cta-pinned .cdp-toc {
 }
 .cart-layout.is-single { align-items: stretch; }
 .cart-items-col {
-  background: #fff;
+  background: var(--bg-surface-primary);
   border: 1px solid var(--border-default);
-  border-radius: 10px;
+  border-radius: var(--radius-16);
   padding: 24px;
+  display: flex;
+  flex-direction: column;
 }
-.cart-layout.is-single .cart-items-col { height: 100%; display: flex; align-items: center; }
-.cart-page-item + .cart-page-item { padding-top: 16px; margin-top: 16px; border-top: 1px solid var(--border-default); }
-.cart-page-item + .cart-page-item .nki-item-remove { top: 16px; }
+/* divider + spacing between every child (items and the Lånekassen box) */
+.cart-items-col > * + * { padding-top: var(--spacing-24); margin-top: var(--spacing-24); border-top: 1px solid var(--border-default); }
+.cart-page-item + .cart-page-item .nki-item-remove { top: 40px; }
 .cart-page-item .nki-item-img { width: 220px; height: 220px; }
 .cart-layout.is-single .cart-page-item { width: 100%; }
 .cart-summary-col { position: sticky; top: 80px; }
