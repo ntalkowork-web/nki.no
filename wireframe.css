@@ -4680,8 +4680,9 @@ body.cdp-cta-pinned .cdp-toc {
   color: var(--text-secondary-on-white);
   flex-shrink: 0;
 }
-.co-step-badge.is-active { border-color: var(--text-primary); color: #fff; background: var(--bg-surface-inverse); }
-.co-step-badge.is-done { border-color: var(--text-primary); background: var(--bg-surface-inverse); color: #fff; }
+.co-step-badge.is-active { border-color: var(--text-primary); color: var(--text-inverse); background: var(--bg-surface-inverse); }
+/* Figma: completed step = green circle + dark check */
+.co-step-badge.is-done { border-color: var(--action-primary-default); background: var(--action-primary-default); color: var(--text-primary); }
 .co-step-title { font-size: 16px; font-weight: 600; color: var(--text-primary); flex: 1; }
 .co-step.is-disabled .co-step-title { color: var(--text-placeholder); }
 .co-step-edit-btn {
@@ -4796,21 +4797,23 @@ body.cdp-cta-pinned .cdp-toc {
 .co-terms-lbl { font-size: 14px; color: var(--text-secondary-on-white); display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }
 .co-terms-lbl a { color: var(--text-primary); }
 .co-cta-wrap { display: flex; flex-direction: column; gap: 8px; padding-top: 20px; }
+/* DS primary button: green bg, dark text, radius-12, 16px medium */
 .co-continue-btn {
   height: 48px;
   width: 100%;
-  padding: 0 24px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  background: var(--bg-surface-inverse);
+  padding: 0 var(--spacing-24);
+  font-size: var(--font-size-16);
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--action-primary-default);
   border: none;
-  border-radius: var(--r-sm);
+  border-radius: var(--radius-12);
   cursor: pointer;
   text-align: center;
-  transition: opacity .15s;
+  transition: opacity .15s, background .15s;
   font-family: inherit;
 }
+.co-continue-btn:hover:not(:disabled) { background: var(--action-primary-hover); }
 .co-continue-btn:hover:not(:disabled) { opacity: .85; }
 .co-continue-btn:disabled { opacity: .4; cursor: default; }
 .co-cant { font-size: 14px; color: var(--text-secondary-on-white); text-align: center; }
