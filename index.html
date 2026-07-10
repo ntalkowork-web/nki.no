@@ -1916,11 +1916,12 @@
     needsBooks:   true
   };
 
+  var DEFAULT_COURSE_IMG = 'images/design-system/courses/hs-02.jpg';
   var CART_SUGGESTED = [
-    { id: 'matematikk-1t', type: 'Course', name: 'Matematikk 1T',         hours: 224, accessMonths: 12, price: 4900, needsBooks: false },
-    { id: 'norsk-vg3',     type: 'Course', name: 'Norsk – Skriftlig VG3',  hours: 280, accessMonths: 12, price: 5900, needsBooks: false },
-    { id: 'engelsk-vg3',   type: 'Course', name: 'Engelsk VG2/VG3',        hours: 140, accessMonths: 12, price: 4400, needsBooks: false },
-    { id: 'naturfag-vg1',  type: 'Course', name: 'Naturfag VG1',           hours: 225, accessMonths: 12, price: 4900, needsBooks: true  }
+    { id: 'matematikk-1t', type: 'Course', name: 'Matematikk 1T',         hours: 224, accessMonths: 12, price: 4900, needsBooks: false, img: 'images/design-system/courses/hs-01.jpg' },
+    { id: 'norsk-vg3',     type: 'Course', name: 'Norsk – Skriftlig VG3',  hours: 280, accessMonths: 12, price: 5900, needsBooks: false, img: 'images/design-system/courses/hs-02.jpg' },
+    { id: 'engelsk-vg3',   type: 'Course', name: 'Engelsk VG2/VG3',        hours: 140, accessMonths: 12, price: 4400, needsBooks: false, img: 'images/design-system/courses/hs-04.jpg' },
+    { id: 'naturfag-vg1',  type: 'Course', name: 'Naturfag VG1',           hours: 225, accessMonths: 12, price: 4900, needsBooks: true,  img: 'images/design-system/courses/pro-01.jpg' }
   ];
 
   var PAYMENT_LOGOS = [
@@ -1955,7 +1956,7 @@
     var books = '<div class="nki-item-books">Excluding books</div>';
     return (
       '<div class="nki-item" data-item-id="' + item.id + '">' +
-        '<div class="nki-item-img"></div>' +
+        '<div class="nki-item-img" style="background-image:url(' + (item.img || DEFAULT_COURSE_IMG) + ')"></div>' +
         '<div class="nki-item-info">' +
           '<div class="nki-item-name">' + item.name + '</div>' +
           '<div class="nki-item-meta">' + fmtMeta(item) + '</div>' +
@@ -1992,7 +1993,7 @@
     return CART_SUGGESTED.map(function (c) {
       return (
         '<div class="nki-sugg-row">' +
-          '<div class="nki-sugg-img"></div>' +
+          '<div class="nki-sugg-img" style="background-image:url(' + (c.img || DEFAULT_COURSE_IMG) + ')"></div>' +
           '<div class="nki-sugg-info">' +
             '<div class="nki-sugg-name">' + c.name + '</div>' +
             '<div class="nki-sugg-meta">' + fmtMeta(c) + '</div>' +
@@ -2131,7 +2132,7 @@
   function buildCartPageItem(item) {
     return (
       '<div class="nki-item cart-page-item" data-item-id="' + item.id + '">' +
-        '<div class="nki-item-img"></div>' +
+        '<div class="nki-item-img" style="background-image:url(' + (item.img || DEFAULT_COURSE_IMG) + ')"></div>' +
         '<div class="nki-item-info">' +
           '<div class="nki-item-name">' + item.name + '</div>' +
           '<div class="nki-item-meta">' + fmtMeta(item) + '</div>' +
@@ -4895,7 +4896,7 @@
     var total  = sub - disc;
     var summCards = items.map(function(item) {
       return '<div class="co-sum-item">' +
-        '<div class="co-sum-thumb"></div>' +
+        '<div class="co-sum-thumb" style="background-image:url(' + (item.img || DEFAULT_COURSE_IMG) + ')"></div>' +
         '<div class="co-sum-info">' +
           '<div class="co-sum-name">' + item.name + '</div>' +
           '<div class="co-sum-meta">' + fmtMeta(item) + '</div>' +
@@ -5221,7 +5222,7 @@
     var orderCardHTML = orderItems.length > 0
       ? orderItems.map(function(item) {
           return '<div class="nki-item" style="position:relative;display:flex;gap:12px;align-items:center;padding:0;border:none;box-shadow:none;margin-bottom:8px;">' +
-            '<div class="nki-item-img" style="flex-shrink:0;width:80px;height:80px;border-radius:6px;background:var(--bg-subtle);"></div>' +
+            '<div class="nki-item-img" style="flex-shrink:0;width:80px;height:80px;border-radius:6px;background-image:url(' + (item.img || DEFAULT_COURSE_IMG) + ')"></div>' +
             '<div class="nki-item-info" style="flex:1;min-width:0;">' +
               '<div class="nki-item-name" style="font-size:14px;font-weight:600;color:var(--text-primary);line-height:1.4;margin-bottom:2px;">' + item.name + '</div>' +
               '<div class="nki-item-meta" style="font-size:14px;color:var(--text-secondary-on-white);">' + fmtMeta(item) + '</div>' +
