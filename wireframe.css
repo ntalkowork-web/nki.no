@@ -5071,6 +5071,13 @@ body.cdp-cta-pinned .cdp-toc {
 .cart-page-wrap { padding: 40px var(--margin) 80px; }
 .cart-page-title { margin-bottom: 32px; }
 
+/* Breadcrumb — DS breadcrumb component (placeholder links, primary current) */
+.cart-page-bc { display: flex; align-items: center; gap: var(--spacing-8); margin-bottom: var(--spacing-24); }
+.cart-bc-link { font-size: var(--font-size-14); font-weight: 500; color: var(--text-placeholder); cursor: pointer; }
+.cart-bc-link:hover { color: var(--text-primary); }
+.cart-bc-sep { font-size: 16px; color: var(--text-placeholder); }
+.cart-bc-current { font-size: var(--font-size-14); font-weight: 500; color: var(--text-primary); }
+
 .cart-layout {
   display: grid;
   grid-template-columns: 1fr 380px;

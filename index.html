@@ -2187,7 +2187,14 @@
     var items = NKICart.getItems();
     page.innerHTML =
       '<div class="cart-page-wrap">' +
-        '<h1 class="section-title cart-page-title">Shopping cart</h1>' +
+        '<nav class="cart-page-bc" aria-label="Breadcrumb">' +
+          '<a class="cart-bc-link">Home</a>' +
+          '<span class="cart-bc-sep material-symbols-outlined">chevron_right</span>' +
+          '<a class="cart-bc-link">HR &amp; Administration</a>' +
+          '<span class="cart-bc-sep material-symbols-outlined">chevron_right</span>' +
+          '<span class="cart-bc-current">Your cart</span>' +
+        '</nav>' +
+        '<h1 class="section-title cart-page-title">Your cart</h1>' +
         (items.length === 0
           ? '<div class="cart-page-empty-wrap">' + buildEmptyState() + '</div>'
           : '<div class="cart-layout' + (items.length === 1 ? ' is-single' : '') + '">' +
