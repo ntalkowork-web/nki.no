@@ -4702,12 +4702,6 @@
       '<div class="co-form-group"><label class="co-label" for="coPhone">Phone number</label>' +
         '<div class="co-phone-row"><select class="co-cc-sel" id="coCcSel">' + ccOpts + '</select><input class="co-input co-req co-phone-inp" id="coPhone" type="tel" placeholder="000 00 000" value="' + (s.coPhone||'') + '"></div>' +
       '</div>' +
-      '<div class="co-form-group"><label class="co-label" for="coEmail">Email</label>' +
-        '<div class="co-inp-icon-wrap">' +
-          '<span class="material-symbols-outlined co-field-icon">mail</span>' +
-          '<input class="co-input co-req co-icon-inp" id="coEmail" type="email" placeholder="Enter your email" value="' + (s.coEmail||'') + '">' +
-        '</div>' +
-      '</div>' +
       '<div class="co-form-group"><label class="co-label" for="coSsn">Social security number</label>' +
         '<input class="co-input co-req" id="coSsn" type="text" placeholder="ddmmyy-xxxxx" value="' + (s.coSsn||'') + '">' +
         buildCoSsnAcc() +
@@ -4998,7 +4992,7 @@
 
       if (continueBtn) continueBtn.addEventListener('click', function() {
         var sf = {};
-        ['coFname','coLname','coPhone','coEmail','coSsn','coAddr','coAddr2','coCity','coPostal'].forEach(function(id){
+        ['coFname','coLname','coPhone','coSsn','coAddr','coAddr2','coCity','coPostal'].forEach(function(id){
           var el = document.getElementById(id); if (el) sf[id] = el.value;
         });
         var cc = document.getElementById('coCcSel'); if (cc) sf.coCcSel = cc.value;

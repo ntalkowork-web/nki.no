@@ -4648,23 +4648,25 @@ body.cdp-cta-pinned .cdp-toc {
    CHECKOUT MAIN LAYOUT
 ══════════════════════════════════════════════ */
 .co-page-wrap { background: var(--bg-subtle); min-height: calc(100vh - 64px); padding: 40px 0 80px; }
+/* Figma checkout: form ~612px + summary 401px, gap 24, ~1036px content centered */
 .co-layout {
-  max-width: 1200px;
+  max-width: 1036px;
   margin: 0 auto;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 32px;
+  grid-template-columns: 1fr 401px;
+  gap: var(--spacing-24);
   align-items: start;
+  box-sizing: content-box;
 }
-.co-steps-col { display: flex; flex-direction: column; gap: 12px; }
-.co-sidebar-col { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 12px; }
+.co-steps-col { display: flex; flex-direction: column; gap: var(--spacing-16); }
+.co-sidebar-col { position: sticky; top: 80px; display: flex; flex-direction: column; gap: var(--spacing-16); }
 
-/* ── Accordion steps ── */
+/* ── Accordion steps (Figma: white card, border-default, radius-16) ── */
 .co-step {
-  background: #fff;
+  background: var(--bg-surface-primary);
   border: 1px solid var(--border-default);
-  border-radius: 10px;
+  border-radius: var(--radius-16);
   overflow: hidden;
 }
 .co-step.is-disabled { opacity: .5; pointer-events: none; }
@@ -4775,18 +4777,20 @@ body.cdp-cta-pinned .cdp-toc {
   line-height: 1;
 }
 .co-icon-inp { padding-left: 44px; }
-.co-ssn-acc { margin-top: 3px; background: var(--bg-subtle); border-radius: 4px; }
+/* Figma: plain chevron + underlined link, no filled box */
+.co-ssn-acc { margin-top: var(--spacing-8); background: none; border-radius: 0; }
 .co-ssn-acc-hd {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--spacing-8);
   cursor: pointer;
-  padding: 8px 10px;
-  font-size: 14px;
-  color: var(--text-secondary-on-white);
+  padding: 0;
+  font-size: var(--font-size-14);
+  color: var(--text-primary);
   user-select: none;
 }
-.co-ssn-acc-hd:hover .co-ssn-acc-label { color: var(--text-primary); }
+.co-ssn-acc-label { text-decoration: underline; }
+.co-ssn-acc-hd:hover .co-ssn-acc-label { color: var(--text-secondary-on-white); }
 .co-ssn-acc-arrow {
   font-size: 14px;
   color: var(--text-secondary-on-white);
