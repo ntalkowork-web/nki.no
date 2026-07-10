@@ -848,7 +848,6 @@ select { font-family: inherit; }
   max-height: 14px;
   object-fit: contain;
   display: block;
-  filter: grayscale(100%) brightness(0.4);
 }
 
 .nki-pay-pill--logo img[alt="Visa"],
@@ -1819,7 +1818,10 @@ section.wf-section.wf-section--pb-96 { padding-bottom: var(--spacing-96); }
 .cc-img {
   width: 100%;
   aspect-ratio: 16/9;
-  background: var(--bg-subtle);
+  background-color: var(--bg-subtle);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
 }
 

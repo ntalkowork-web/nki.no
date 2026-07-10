@@ -2169,7 +2169,7 @@
       (c.needsBooks ? '<span class="pill-sm">Books needed</span>' : '');
     return (
       '<div class="course-card" data-cart-sugg-id="' + c.id + '">' +
-        '<div class="cc-img"></div>' +
+        '<div class="cc-img" style="background-image:url(' + (c.img || DEFAULT_COURSE_IMG) + ')"></div>' +
         '<div class="cc-body">' +
           '<div class="cc-name">' + c.name + '</div>' +
           '<div class="cc-pills">' + pills + '</div>' +
@@ -2199,7 +2199,7 @@
         (items.length === 0
           ? '<div class="cart-page-empty-wrap">' + buildEmptyState() + '</div>'
           : '<div class="cart-layout' + (items.length === 1 ? ' is-single' : '') + '">' +
-              '<div class="cart-items-col">' + items.map(buildCartPageItem).join('') + '</div>' +
+              '<div class="cart-items-col">' + items.map(buildCartPageItem).join('') + buildLanekassen() + '</div>' +
               '<div class="cart-summary-col">' + buildCartPageSummary() + '</div>' +
             '</div>'
         ) +
@@ -2215,6 +2215,21 @@
   function bindCartPageEvents() {
     var page = document.getElementById('page-cart');
     if (!page) return;
+
+    var lkHd = page.querySelector('#nkiLkHd');
+    var lkBody = page.querySelector('#nkiLkBody');
+    if (lkHd && lkBody) {
+      var toggleLk = function () {
+        lkBody.hidden = !lkBody.hidden;
+        var acc = page.querySelector('#nkiLkAcc');
+        if (acc) acc.classList.toggle('is-open', !lkBody.hidden);
+        lkHd.setAttribute('aria-expanded', String(!lkBody.hidden));
+      };
+      lkHd.addEventListener('click', toggleLk);
+      lkHd.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleLk(); }
+      });
+    }
 
     page.querySelectorAll('[data-remove-id]').forEach(function (btn) {
       btn.addEventListener('click', function () {
