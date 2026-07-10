@@ -3684,7 +3684,7 @@
     if (browseLaterBtn) browseLaterBtn.addEventListener('click', function() {
       var input = page.querySelector('.sp-browse-later-input');
       var email = input ? input.value.trim() : '';
-      if (!email) { if (input) { input.focus(); input.style.borderColor = 'var(--gray-500)'; } return; }
+      if (!email) { if (input) { input.focus(); input.style.borderColor = 'var(--text-secondary-on-white)'; } return; }
       var box = page.querySelector('.sp-browse-later');
       if (box) {
         box.innerHTML =
@@ -3742,7 +3742,7 @@
     var page = document.getElementById('page-compare');
     var courses = courseIds.map(spCourseById).filter(Boolean);
     if (courses.length === 0) {
-      page.innerHTML = '<div class="cp-wrap"><p style="color:var(--gray-500)">No courses selected.</p></div>';
+      page.innerHTML = '<div class="cp-wrap"><p style="color:var(--text-secondary-on-white)">No courses selected.</p></div>';
       return;
     }
     var allPackages = courses.every(function(c) { return c.type === 'Package'; });
@@ -4623,7 +4623,7 @@
         '<div class="si-card">' +
           '<div class="si-section">' +
             '<h2 class="si-heading">Guest Checkout</h2>' +
-            '<p style="font-size:14px;color:var(--gray-600);line-height:1.5;margin-bottom:16px;">Checkout as a guest. Plus, an account will automatically be created for you once you complete checkout.</p>' +
+            '<p style="font-size:14px;color:var(--text-secondary-on-white);line-height:1.5;margin-bottom:16px;">Checkout as a guest. Plus, an account will automatically be created for you once you complete checkout.</p>' +
             '<button class="si-guest" id="siGuestBtn">Continue as guest</button>' +
           '</div>' +
           '<div class="si-sep"><span>or</span></div>' +
@@ -4914,7 +4914,7 @@
         (CHECKOUT_STATE.promoApplied ? '<div class="co-promo-ok"><span class="material-symbols-outlined" style="font-size:14px">check_circle</span>Promo code applied — ' + CHECKOUT_STATE.discountPct + '% off!</div>' : '') +
       '</div>' +
       (CHECKOUT_STATE.promoApplied ? '<div class="co-sum-row"><span>Discount (' + CHECKOUT_STATE.discountPct + '%)</span><span class="co-sum-disc">-' + coFmt(disc) + '</span></div>' : '') +
-      (CHECKOUT_STATE.paymentMethod === 'partial' ? '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--gray-400);font-size:14px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' : '') +
+      (CHECKOUT_STATE.paymentMethod === 'partial' ? '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--text-placeholder);font-size:14px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' : '') +
       '<div class="co-sum-row co-sum-total-row"><span>Total</span><span>' + coFmt(total) + '</span></div>' +
       '<div class="co-sum-excl">Excluding books</div>' +
     '</div>' +
@@ -5051,7 +5051,7 @@
       if (!file || !uploadedSlot) return;
       CHECKOUT_STATE.docUploaded = true;
       uploadedSlot.innerHTML = '<div class="co-uploaded-file">' +
-        '<span class="material-symbols-outlined" style="font-size:18px;color:var(--gray-500)">description</span>' +
+        '<span class="material-symbols-outlined" style="font-size:18px;color:var(--text-secondary-on-white)">description</span>' +
         '<span class="co-fname">' + file.name + '</span>' +
         '<button class="co-del-file" type="button" id="coDelFile" aria-label="Remove file">' +
           '<span class="material-symbols-outlined" style="font-size:16px">delete</span>' +
@@ -5221,16 +5221,16 @@
     var orderCardHTML = orderItems.length > 0
       ? orderItems.map(function(item) {
           return '<div class="nki-item" style="position:relative;display:flex;gap:12px;align-items:center;padding:0;border:none;box-shadow:none;margin-bottom:8px;">' +
-            '<div class="nki-item-img" style="flex-shrink:0;width:80px;height:80px;border-radius:6px;background:var(--gray-200);"></div>' +
+            '<div class="nki-item-img" style="flex-shrink:0;width:80px;height:80px;border-radius:6px;background:var(--bg-subtle);"></div>' +
             '<div class="nki-item-info" style="flex:1;min-width:0;">' +
-              '<div class="nki-item-name" style="font-size:14px;font-weight:600;color:var(--gray-900);line-height:1.4;margin-bottom:2px;">' + item.name + '</div>' +
-              '<div class="nki-item-meta" style="font-size:14px;color:var(--gray-500);">' + fmtMeta(item) + '</div>' +
-              '<div class="nki-item-price" style="font-size:14px;font-weight:600;color:var(--gray-900);margin-top:4px;">' + fmtPrice(item.price) + '</div>' +
+              '<div class="nki-item-name" style="font-size:14px;font-weight:600;color:var(--text-primary);line-height:1.4;margin-bottom:2px;">' + item.name + '</div>' +
+              '<div class="nki-item-meta" style="font-size:14px;color:var(--text-secondary-on-white);">' + fmtMeta(item) + '</div>' +
+              '<div class="nki-item-price" style="font-size:14px;font-weight:600;color:var(--text-primary);margin-top:4px;">' + fmtPrice(item.price) + '</div>' +
             '</div>' +
           '</div>';
         }).join('') +
-        '<div style="font-size:14px;font-weight:700;color:var(--gray-900);margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-200);">Total paid: ' + fmtPrice(orderTotal) + '</div>'
-      : '<div style="font-size:14px;color:var(--gray-500);">Order confirmed</div>';
+        '<div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-top:12px;padding-top:12px;border-top:1px solid var(--border-default);">Total paid: ' + fmtPrice(orderTotal) + '</div>'
+      : '<div style="font-size:14px;color:var(--text-secondary-on-white);">Order confirmed</div>';
     page.innerHTML =
       '<div class="ty-wrap">' +
         '<div class="ty-confetti" id="tyConfetti"></div>' +
