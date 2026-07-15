@@ -5606,18 +5606,14 @@ body.cdp-cta-pinned .cdp-toc {
   .header-search { flex: 1; }
   .header-inner { gap: 16px; }
 
-  /* Hero */
-  .hero-headline { font-size: 40px; }
-  .hero-sub { font-size: 15px; }
-  .hero-configurator {
-    flex-direction: column;
-    height: auto;
-    padding: 32px;
-    gap: 20px;
-  }
-  .config-group { width: 100%; }
-  .config-heading { font-size: 24px; }
-  .config-lbl { font-size: 18px; }
+  /* Hero (tablet) — text column gets a side gutter; the marquee stays full-bleed */
+  .hero { padding: var(--spacing-56) 0 var(--spacing-48); }
+  .hero-content { gap: var(--spacing-40); }
+  .hero-info { padding-inline: var(--margin); box-sizing: border-box; }
+  .hero-headline { font-size: var(--font-size-49); }
+  .hero-cat-card { width: 240px; }
+  .hero-cat-card.h-sm { height: 260px; }
+  .hero-cat-card.h-lg { height: 320px; }
 
   /* Section titles */
   .section-title { font-size: 32px; }
@@ -5778,14 +5774,9 @@ body.cdp-cta-pinned .cdp-toc {
   /* Header search: slightly smaller */
   .search-input { font-size: 14px; }
 
-  /* Hero */
-  .hero-headline { font-size: 36px; }
-  .hero-sub { font-size: 14px; margin-bottom: 32px; }
-  .hero-factoids { flex-wrap: wrap; gap: 20px; justify-content: center; }
-  .factoid-num { font-size: 28px; }
-
-  /* Configurator */
-  .hero-configurator { margin: 0 var(--margin); }
+  /* Hero (small tablet) */
+  .hero-info { width: 100%; }
+  .hero-headline { font-size: var(--font-size-39); }
 
   /* Section */
   .section-title { font-size: 30px; }
@@ -6015,20 +6006,16 @@ body.cdp-cta-pinned .cdp-toc {
   .header-logo img { height: 24px; }
   .btn-cart { color: var(--text-primary); }
 
-  /* Hero — left-align everything */
-  .hero { padding-top: 40px; }
-  .hero-content { padding-bottom: 48px; text-align: left; }
-  .hero-headline { font-size: 40px; letter-spacing: 0; margin: 0 0 16px; max-width: none; }
-  .hero-sub { font-size: 14px; margin: 0 0 24px; max-width: none; }
-  .hero-factoids { flex-direction: column; align-items: flex-start; gap: 24px; flex-wrap: nowrap; }
-  .factoid { text-align: left; }
-  .factoid-num { font-size: 24px; }
-  .factoid-lbl { font-size: 14px; }
-
-  /* Configurator: more compact */
-  .hero-configurator { padding: 20px; border-radius: var(--r-sm); }
-  .config-heading { font-size: 22px; }
-  .config-lbl { font-size: 14px; }
+  /* Hero (mobile) */
+  .hero { padding: var(--spacing-40) 0 var(--spacing-40); }
+  .hero-content { gap: var(--spacing-32); }
+  .hero-headline { font-size: var(--font-size-39); }
+  .hero-sub { max-width: none; }
+  .hero-avatar { width: 40px; height: 40px; margin-right: -10px; }
+  .hero-info .btn-browse-all { margin-top: var(--spacing-16); width: 100%; }
+  .hero-cat-card { width: 200px; }
+  .hero-cat-card.h-sm { height: 220px; }
+  .hero-cat-card.h-lg { height: 276px; }
 
   /* Sections */
   .section-title { font-size: 26px; }
