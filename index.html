@@ -308,6 +308,10 @@
     <!-- 2.4 Header right -->
     <div class="header-right">
       <button class="btn-login" id="loginBtn">Log in</button>
+      <!-- Mobile-only search icon (opens full-screen search overlay) -->
+      <button class="mob-search-btn" id="mobSearchBtn" aria-label="Search">
+        <span class="material-symbols-outlined">search</span>
+      </button>
       <button class="btn-cart" id="cartBtn" aria-label="Cart">
         <span class="material-symbols-outlined cart-icon">shopping_cart</span>
       </button>
@@ -1553,6 +1557,9 @@
       }
     });
   }
+
+  var mobSearchBtn = document.getElementById('mobSearchBtn');
+  if (mobSearchBtn) mobSearchBtn.addEventListener('click', openMobSearch);
 
   if (mobSearchBack) mobSearchBack.addEventListener('click', closeMobSearch);
 

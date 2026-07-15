@@ -223,7 +223,7 @@ select { font-family: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--spacing-96);
+  padding: 0 var(--margin);
 }
 
 .header-brand-nav {
@@ -240,7 +240,7 @@ select { font-family: inherit; }
   align-items: center;
 }
 
-.header-logo img { height: 30px; width: auto; }
+.header-logo img { height: 32px; width: auto; }
 
 /* ── PRIMARY NAV ──────────────────────────── */
 
@@ -599,6 +599,22 @@ select { font-family: inherit; }
   gap: 8px;
 }
 
+/* Mobile-only search icon — hidden on desktop, shown ≤1024 (Figma mobile header) */
+.mob-search-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: var(--icon-default);
+  cursor: pointer;
+}
+.mob-search-btn .material-symbols-outlined {
+  font-size: 24px;
+  line-height: 1;
+}
+
 .btn-login {
   display: inline-flex;
   align-items: center;
@@ -629,7 +645,7 @@ select { font-family: inherit; }
 }
 
 .cart-icon {
-  font-size: 20px;
+  font-size: 24px;
   line-height: 1;
   font-family: 'Material Symbols Outlined';
   font-weight: normal; font-style: normal;
@@ -5595,16 +5611,20 @@ body.cdp-cta-pinned .cdp-toc {
 @media (max-width: 1024px) {
   :root {
     --margin: 32px;
+    --header-h: 72px;   /* Figma mobile header: p-16 + 40px content */
   }
 
-  /* Header */
+  /* Header — Figma mobile variant: logo · search-icon · cart · hamburger */
   .primary-nav { display: none; }
   .header-right .btn-login { display: none; }
+  .header-search { display: none; }           /* full search pill → icon */
+  .mob-search-btn { display: inline-flex; }
   .hamburger { display: flex; }
-  .btn-cart { border: none; width: 36px; height: 36px; }
-  .cart-icon { font-size: 22px; }
-  .header-search { flex: 1; }
-  .header-inner { gap: 16px; }
+  .header-brand-nav { margin-right: auto; }    /* push icon cluster right */
+  .header-inner { gap: var(--spacing-8); }
+  .header-logo img { height: 24px; }
+  .btn-cart { border: none; width: 40px; height: 40px; }
+  .cart-icon { font-size: 24px; }
 
   /* Hero (tablet) — text column gets a side gutter; the marquee stays full-bleed */
   .hero { padding: var(--spacing-56) 0 var(--spacing-48); }
@@ -6002,8 +6022,6 @@ body.cdp-cta-pinned .cdp-toc {
   }
 
   /* Header: compress */
-  .header-inner { gap: 12px; }
-  .header-logo img { height: 24px; }
   .btn-cart { color: var(--text-primary); }
 
   /* Hero (mobile) */
