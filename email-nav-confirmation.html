@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>E-post: Bekreftelse på bestilling — NKI</title>
-  <!-- Design system: Apercu fonts + all color/spacing/radius/type tokens + button component -->
+  <title>E-post: Bekreftelse på bestilling (NAV) — NKI</title>
+  <!-- Design system: Apercu fonts + all color/spacing/radius/type tokens -->
   <link rel="stylesheet" href="wireframe.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
   <style>
-    /* Order-confirmation + welcome email — rendered mockup.
+    /* NAV order-confirmation email — no access granted yet.
        All values reference NKI design-system tokens from wireframe.css. */
 
     body {
@@ -22,34 +22,6 @@
     }
 
     .stage { width: 100%; max-width: 640px; display: flex; flex-direction: column; gap: var(--spacing-16); }
-
-    /* Prototype-only control (not part of the email) */
-    .demo-controls {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--spacing-8);
-      padding: var(--spacing-12) var(--spacing-16);
-      background: var(--bg-surface-primary);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-12);
-    }
-    .demo-label { font-size: var(--font-size-14); font-weight: 500; color: var(--text-secondary-on-white); margin-right: var(--spacing-8); }
-    .seg {
-      height: 36px;
-      padding: 0 var(--spacing-16);
-      border-radius: var(--radius-8);
-      border: 1px solid var(--border-default);
-      background: var(--bg-surface-primary);
-      font: 500 var(--font-size-14)/1 var(--font);
-      color: var(--text-primary);
-      cursor: pointer;
-    }
-    .seg[aria-pressed="true"] {
-      background: var(--bg-surface-inverse);
-      color: var(--nki-white);
-      border-color: var(--bg-surface-inverse);
-    }
 
     /* Email envelope headers */
     .mail-meta {
@@ -87,7 +59,39 @@
     .email-h { font-size: var(--font-size-25); font-weight: 700; line-height: 1.2; color: var(--text-primary); }
     /* Desktop/Body-Paragraph — font-size/16 */
     .email-p { font-size: var(--font-size-16); line-height: 1.5; color: var(--text-primary); }
-    .email-p a { color: var(--text-primary); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* "Dette skjer nå" numbered steps */
+    .steps { display: flex; flex-direction: column; gap: var(--spacing-16); }
+    .step { display: flex; gap: var(--spacing-12); align-items: flex-start; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 100px;
+      background: var(--action-primary-default);
+      color: var(--text-primary);
+      font-size: var(--font-size-14);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-text { font-size: var(--font-size-16); line-height: 1.5; color: var(--text-primary); padding-top: 3px; }
+    .step-text strong { font-weight: 700; }
+
+    /* Admission-requirement note */
+    .note {
+      display: flex;
+      gap: var(--spacing-12);
+      align-items: flex-start;
+      padding: var(--spacing-16);
+      border-radius: var(--radius-12);
+      background: var(--bg-subtle);
+      font-size: var(--font-size-16);
+      line-height: 1.4;
+      color: var(--text-primary);
+    }
+    .note .material-symbols-outlined { font-size: 20px; line-height: 1.4; flex-shrink: 0; color: var(--icon-default); }
+    .note strong { font-weight: 700; }
 
     /* Order summary */
     .order-card {
@@ -107,29 +111,7 @@
     .order-total { display: flex; align-items: baseline; justify-content: space-between; }
     .order-total-lbl { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); }
     .order-total-val { font-size: var(--font-size-20); font-weight: 700; color: var(--text-primary); }
-
-    /* Varying payment line */
-    .pay-line {
-      display: flex;
-      gap: var(--spacing-12);
-      align-items: flex-start;
-      padding: var(--spacing-16);
-      border-radius: var(--radius-12);
-      background: var(--feedback-positive-subtle-bg);
-      font-size: var(--font-size-16);
-      line-height: 1.4;
-      color: var(--text-primary);
-    }
-    .pay-line[hidden] { display: none; }
-    .pay-line .material-symbols-outlined { font-size: 20px; line-height: 1.4; flex-shrink: 0; }
-
-    /* CTA — reuses the DS primary button component, inline width */
-    .email-cta {
-      align-self: flex-start;
-      width: auto;
-      padding: 0 var(--spacing-24);
-      text-decoration: none;
-    }
+    .order-fin { font-size: var(--font-size-14); color: var(--text-secondary-on-white); }
 
     .email-support { font-size: var(--font-size-16); line-height: 1.5; color: var(--text-secondary-on-white); }
     .email-support a { color: var(--text-primary); font-weight: 500; text-decoration: none; }
@@ -147,19 +129,11 @@
 </head>
 <body>
   <div class="stage">
-    <!-- Prototype control: switch the varying payment line by method -->
-    <div class="demo-controls" role="group" aria-label="Betalingsmåte (forhåndsvisning)">
-      <span class="demo-label">Betalingsmåte</span>
-      <button class="seg" data-method="card" aria-pressed="false">Kort / Vipps</button>
-      <button class="seg" data-method="invoice" aria-pressed="true">Faktura</button>
-      <button class="seg" data-method="installments" aria-pressed="false">Delbetaling</button>
-    </div>
-
     <!-- Email envelope -->
     <dl class="mail-meta">
       <div class="mail-row"><dt>Fra</dt><dd>NKI Nettstudier &lt;student@nki.no&gt;</dd></div>
       <div class="mail-row"><dt>Til</dt><dd>deg</dd></div>
-      <div class="mail-subject">Bekreftelse på bestilling og velkommen til NKI</div>
+      <div class="mail-subject">Bekreftelse på bestilling hos NKI</div>
     </dl>
 
     <!-- The email -->
@@ -169,9 +143,23 @@
       </div>
 
       <div class="email-body">
-        <h1 class="email-h">Takk for din bestilling – og velkommen til NKI Nettstudier!</h1>
+        <h1 class="email-h">Takk for din bestilling! Du har valgt at NAV skal finansiere studiet. Dette skjer nå:</h1>
 
-        <p class="email-p">Bestillingen din er bekreftet og brukerkontoen din er klar. Du logger inn på <a href="#">innloggingslenke</a> med e-postadressen din – du får en innloggingskode tilsendt på e-post (du trenger ikke å huske noe passord).</p>
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">1</span>
+            <span class="step-text">NAV sender deg et <strong>tilsagnsbrev</strong> i Altinn når søknaden er behandlet.</span>
+          </div>
+          <div class="step">
+            <span class="step-num">2</span>
+            <span class="step-text">Så snart vi har mottatt bekreftelsen fra NAV, gir vi deg tilgang til studiet. Du får en ny e-post med innloggingsinformasjon når kontoen din er klar.</span>
+          </div>
+        </div>
+
+        <div class="note">
+          <span class="material-symbols-outlined" aria-hidden="true">info</span>
+          <span><strong>Opptakskrav:</strong> Studiet har egne opptakskrav. Vi tar kontakt dersom vi trenger dokumentasjon fra deg for å bekrefte at du oppfyller kravene.</span>
+        </div>
 
         <div class="order-card">
           <div class="order-card-title">Din bestilling</div>
@@ -187,15 +175,8 @@
             <span class="order-total-lbl">Totalt</span>
             <span class="order-total-val">Kr 8 490</span>
           </div>
+          <div class="order-fin">Finansieres av NAV</div>
         </div>
-
-        <!-- Varies by payment method; hidden for card / Vipps -->
-        <div class="pay-line" id="payLine">
-          <span class="material-symbols-outlined" aria-hidden="true">receipt_long</span>
-          <span id="payText">Faktura sendes til deg separat.</span>
-        </div>
-
-        <a class="btn-login-primary email-cta" href="#">Logg inn på NKI</a>
 
         <p class="email-support">Har du spørsmål? Ring oss på <a href="tel:+4767588800">67 58 88 00</a>.</p>
       </div>
@@ -206,27 +187,5 @@
       </div>
     </article>
   </div>
-
-  <script>
-    // Prototype-only: swap the varying payment line per method.
-    const PAY = {
-      card: null, // card / Vipps: no extra line
-      invoice: 'Faktura sendes til deg separat.',
-      installments: 'Beløpet deles i 12 månedlige fakturaer som sendes til deg separat.',
-    };
-    const payLine = document.getElementById('payLine');
-    const payText = document.getElementById('payText');
-    const segs = document.querySelectorAll('.seg');
-
-    function setMethod(method) {
-      segs.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.method === method)));
-      const line = PAY[method];
-      if (line) { payText.textContent = line; payLine.hidden = false; }
-      else { payLine.hidden = true; }
-    }
-
-    segs.forEach((b) => b.addEventListener('click', () => setMethod(b.dataset.method)));
-    setMethod('invoice');
-  </script>
 </body>
 </html>
