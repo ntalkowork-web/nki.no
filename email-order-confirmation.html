@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>E-post: Bekreftelse på bestilling — NKI</title>
+  <!-- Design system: Apercu fonts + all color/spacing/radius/type tokens + button component -->
+  <link rel="stylesheet" href="wireframe.css" />
+  <style>
+    /* Order-confirmation + welcome email — rendered mockup.
+       All values reference NKI design-system tokens from wireframe.css. */
+
+    body {
+      background: var(--bg-subtle);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-24);
+      padding: var(--spacing-40) var(--margin) var(--spacing-72);
+    }
+
+    .stage { width: 100%; max-width: 640px; display: flex; flex-direction: column; gap: var(--spacing-16); }
+
+    /* Prototype-only control (not part of the email) */
+    .demo-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--spacing-8);
+      padding: var(--spacing-12) var(--spacing-16);
+      background: var(--bg-surface-primary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-12);
+    }
+    .demo-label { font-size: var(--font-size-14); font-weight: 500; color: var(--text-secondary-on-white); margin-right: var(--spacing-8); }
+    .seg {
+      height: 36px;
+      padding: 0 var(--spacing-16);
+      border-radius: var(--radius-8);
+      border: 1px solid var(--border-default);
+      background: var(--bg-surface-primary);
+      font: 500 var(--font-size-14)/1 var(--font);
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+    .seg[aria-pressed="true"] {
+      background: var(--bg-surface-inverse);
+      color: var(--nki-white);
+      border-color: var(--bg-surface-inverse);
+    }
+
+    /* Email envelope headers */
+    .mail-meta {
+      background: var(--bg-surface-primary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-12);
+      padding: var(--spacing-16) var(--spacing-20);
+      display: grid;
+      gap: var(--spacing-4);
+    }
+    .mail-row { display: flex; gap: var(--spacing-8); font-size: var(--font-size-14); }
+    .mail-row dt { color: var(--text-placeholder); min-width: 56px; }
+    .mail-row dd { color: var(--text-primary); }
+    .mail-subject { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); margin-top: var(--spacing-4); }
+
+    /* The email itself */
+    .email {
+      background: var(--bg-surface-primary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-24);
+      overflow: hidden;
+    }
+    .email-band {
+      background: var(--feedback-positive-subtle-bg);
+      padding: var(--spacing-32) var(--spacing-40);
+      display: flex;
+      justify-content: center;
+    }
+    .email-band img { height: 32px; width: auto; }
+
+    .email-body { padding: var(--spacing-40); display: flex; flex-direction: column; gap: var(--spacing-24); }
+    @media (max-width: 480px) { .email-body { padding: var(--spacing-24); } }
+
+    /* Desktop/H5 — font-size/25, Apercu Bold */
+    .email-h { font-size: var(--font-size-25); font-weight: 700; line-height: 1.2; color: var(--text-primary); }
+    /* Desktop/Body-Paragraph — font-size/16 */
+    .email-p { font-size: var(--font-size-16); line-height: 1.5; color: var(--text-primary); }
+    .email-p a { color: var(--text-primary); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Order summary */
+    .order-card {
+      background: var(--bg-subtle);
+      border-radius: var(--radius-16);
+      padding: var(--spacing-20) var(--spacing-24);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-12);
+    }
+    .order-card-title { font-size: var(--font-size-14); font-weight: 500; color: var(--text-secondary-on-white); }
+    .order-line { display: flex; align-items: baseline; justify-content: space-between; gap: var(--spacing-16); }
+    .order-line-name { font-size: var(--font-size-16); font-weight: 500; color: var(--text-primary); }
+    .order-line-meta { font-size: var(--font-size-14); color: var(--text-secondary-on-white); }
+    .order-line-price { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+    .order-sep { height: 1px; background: var(--border-default); }
+    .order-total { display: flex; align-items: baseline; justify-content: space-between; }
+    .order-total-lbl { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); }
+    .order-total-val { font-size: var(--font-size-20); font-weight: 700; color: var(--text-primary); }
+
+    /* Varying payment line */
+    .pay-line {
+      display: flex;
+      gap: var(--spacing-12);
+      align-items: flex-start;
+      padding: var(--spacing-16);
+      border-radius: var(--radius-12);
+      background: var(--feedback-positive-subtle-bg);
+      font-size: var(--font-size-16);
+      line-height: 1.4;
+      color: var(--text-primary);
+    }
+    .pay-line[hidden] { display: none; }
+    .pay-line .material-symbols-outlined { font-size: 20px; line-height: 1.4; flex-shrink: 0; }
+
+    /* CTA — reuses the DS primary button component, inline width */
+    .email-cta {
+      align-self: flex-start;
+      width: auto;
+      padding: 0 var(--spacing-24);
+      text-decoration: none;
+    }
+
+    .email-support { font-size: var(--font-size-16); line-height: 1.5; color: var(--text-secondary-on-white); }
+    .email-support a { color: var(--text-primary); font-weight: 500; text-decoration: none; }
+
+    .email-footer {
+      border-top: 1px solid var(--border-default);
+      padding: var(--spacing-24) var(--spacing-40);
+      font-size: var(--font-size-14);
+      color: var(--text-placeholder);
+      display: grid;
+      gap: var(--spacing-4);
+    }
+    @media (max-width: 480px) { .email-footer { padding: var(--spacing-20) var(--spacing-24); } }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <!-- Prototype control: switch the varying payment line by method -->
+    <div class="demo-controls" role="group" aria-label="Betalingsmåte (forhåndsvisning)">
+      <span class="demo-label">Betalingsmåte</span>
+      <button class="seg" data-method="card" aria-pressed="false">Kort / Vipps</button>
+      <button class="seg" data-method="invoice" aria-pressed="true">Faktura</button>
+      <button class="seg" data-method="installments" aria-pressed="false">Delbetaling</button>
+    </div>
+
+    <!-- Email envelope -->
+    <dl class="mail-meta">
+      <div class="mail-row"><dt>Fra</dt><dd>NKI Nettstudier &lt;student@nki.no&gt;</dd></div>
+      <div class="mail-row"><dt>Til</dt><dd>deg</dd></div>
+      <div class="mail-subject">Bekreftelse på bestilling og velkommen til NKI</div>
+    </dl>
+
+    <!-- The email -->
+    <article class="email">
+      <div class="email-band">
+        <img src="logos/NKI_Logo_Black_L.svg" alt="NKI Nettstudier" />
+      </div>
+
+      <div class="email-body">
+        <h1 class="email-h">Takk for din bestilling – og velkommen til NKI Nettstudier!</h1>
+
+        <p class="email-p">Bestillingen din er bekreftet og brukerkontoen din er klar. Du logger inn på <a href="#">innloggingslenke</a> med e-postadressen din – du får en innloggingskode tilsendt på e-post (du trenger ikke å huske noe passord).</p>
+
+        <div class="order-card">
+          <div class="order-card-title">Din bestilling</div>
+          <div class="order-line">
+            <span>
+              <span class="order-line-name">Generell studiekompetanse (23/5-regelen)</span><br />
+              <span class="order-line-meta">Fagpakke · 6 måneder</span>
+            </span>
+            <span class="order-line-price">Kr 8 490</span>
+          </div>
+          <div class="order-sep"></div>
+          <div class="order-total">
+            <span class="order-total-lbl">Totalt</span>
+            <span class="order-total-val">Kr 8 490</span>
+          </div>
+        </div>
+
+        <!-- Varies by payment method; hidden for card / Vipps -->
+        <div class="pay-line" id="payLine">
+          <span class="material-symbols-outlined" aria-hidden="true">receipt_long</span>
+          <span id="payText">Faktura sendes til deg separat.</span>
+        </div>
+
+        <a class="btn-login-primary email-cta" href="#">Logg inn på NKI</a>
+
+        <p class="email-support">Har du spørsmål? Ring oss på <a href="tel:+4767588800">67 58 88 00</a>.</p>
+      </div>
+
+      <div class="email-footer">
+        <div>NKI Nettstudier · student@nki.no</div>
+        <div>Du mottar denne e-posten fordi du har lagt inn en bestilling hos NKI.</div>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    // Prototype-only: swap the varying payment line per method.
+    const PAY = {
+      card: null, // card / Vipps: no extra line
+      invoice: 'Faktura sendes til deg separat.',
+      installments: 'Beløpet deles i 12 månedlige fakturaer som sendes til deg separat.',
+    };
+    const payLine = document.getElementById('payLine');
+    const payText = document.getElementById('payText');
+    const segs = document.querySelectorAll('.seg');
+
+    function setMethod(method) {
+      segs.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.method === method)));
+      const line = PAY[method];
+      if (line) { payText.textContent = line; payLine.hidden = false; }
+      else { payLine.hidden = true; }
+    }
+
+    segs.forEach((b) => b.addEventListener('click', () => setMethod(b.dataset.method)));
+    setMethod('invoice');
+  </script>
+</body>
+</html>
