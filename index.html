@@ -4789,7 +4789,9 @@
     });
   }
 
-  document.addEventListener('click', closeCfgDropdowns);
+  /* closeCfgDropdowns is scoped to the course-config setup function; guard the
+     reference so this top-level line can't throw and abort the rest of the script. */
+  if (typeof closeCfgDropdowns !== 'undefined') document.addEventListener('click', closeCfgDropdowns);
 
   var btnFind = document.querySelector('.btn-find');
   if (btnFind) {
@@ -5045,23 +5047,6 @@
       '</div>';
   }
 
-  /* Representative list of publicly-known Norwegian NAV offices/departments
-     (municipality offices + Oslo district offices). Users can also add a
-     custom value via the combobox if their office isn't listed. */
-  var NAV_OFFICES = [
-    'NAV Alna', 'NAV Arendal', 'NAV Asker', 'NAV Bergen', 'NAV Bjerke',
-    'NAV Bodø', 'NAV Bærum', 'NAV Drammen', 'NAV Elverum', 'NAV Fredrikstad',
-    'NAV Frogner', 'NAV Gamle Oslo', 'NAV Gjøvik', 'NAV Grorud', 'NAV Grünerløkka',
-    'NAV Halden', 'NAV Hamar', 'NAV Harstad', 'NAV Haugesund', 'NAV Horten',
-    'NAV Kongsberg', 'NAV Kristiansand', 'NAV Larvik', 'NAV Lillehammer',
-    'NAV Lillestrøm', 'NAV Molde', 'NAV Moss', 'NAV Narvik', 'NAV Nordre Aker',
-    'NAV Nordstrand', 'NAV Porsgrunn', 'NAV Ringerike', 'NAV Sagene',
-    'NAV Sandefjord', 'NAV Sandnes', 'NAV Sarpsborg', 'NAV Skien',
-    'NAV St. Hanshaugen', 'NAV Stavanger', 'NAV Steinkjer', 'NAV Stovner',
-    'NAV Søndre Nordstrand', 'NAV Tromsø', 'NAV Trondheim', 'NAV Tønsberg',
-    'NAV Ullern', 'NAV Vestre Aker', 'NAV Ålesund', 'NAV Østensjø'
-  ];
-
   function buildNavCombobox() {
     return '<div class="co-form-group">' +
       '<label class="co-label" for="coNavOffice">NAV office or department</label>' +
@@ -5148,15 +5133,6 @@
       (CHECKOUT_STATE.paymentMethod === 'partial' ? '<div class="co-sum-row"><span>Interest and Fees <span style="color:var(--text-placeholder);font-size:14px">(Effective interest rate 3.05%)</span></span><span>' + coFmt(Math.round(total * 0.0305)) + '</span></div>' : '') +
       '<div class="co-sum-row co-sum-total-row"><span>Total</span><span>' + coFmt(total) + '</span></div>' +
       '<div class="co-sum-excl">Excluding books</div>' +
-    '</div>' +
-    '<div class="co-test-card">' +
-      '<div class="co-test-inner">' +
-        '<div class="co-test-photo" style="background-image:url(images/design-system/testimonials/avatar-1.jpg)"></div>' +
-        '<div class="co-test-content">' +
-          '<p class="co-test-quote">"Studying with NKI has been life-changing. I completed my general study competence while working full-time, and the flexibility made all the difference."</p>' +
-          '<div class="co-test-author">— Maria, 28 &nbsp;·&nbsp; Medical Secretary</div>' +
-        '</div>' +
-      '</div>' +
     '</div>';
   }
 
@@ -5424,6 +5400,24 @@
     var list  = document.getElementById('coNavOfficeList');
     var combo = document.getElementById('coNavCombo');
     if (!input || !list || !combo) return;
+
+    /* Representative list of publicly-known Norwegian NAV offices/departments
+       (municipality offices + Oslo district offices). Declared inside this
+       function so it is always available when the combobox initializes.
+       Users can also add a custom value via the combobox if theirs isn't listed. */
+    var NAV_OFFICES = [
+      'NAV Alna', 'NAV Arendal', 'NAV Asker', 'NAV Bergen', 'NAV Bjerke',
+      'NAV Bodø', 'NAV Bærum', 'NAV Drammen', 'NAV Elverum', 'NAV Fredrikstad',
+      'NAV Frogner', 'NAV Gamle Oslo', 'NAV Gjøvik', 'NAV Grorud', 'NAV Grünerløkka',
+      'NAV Halden', 'NAV Hamar', 'NAV Harstad', 'NAV Haugesund', 'NAV Horten',
+      'NAV Kongsberg', 'NAV Kristiansand', 'NAV Larvik', 'NAV Lillehammer',
+      'NAV Lillestrøm', 'NAV Molde', 'NAV Moss', 'NAV Narvik', 'NAV Nordre Aker',
+      'NAV Nordstrand', 'NAV Porsgrunn', 'NAV Ringerike', 'NAV Sagene',
+      'NAV Sandefjord', 'NAV Sandnes', 'NAV Sarpsborg', 'NAV Skien',
+      'NAV St. Hanshaugen', 'NAV Stavanger', 'NAV Steinkjer', 'NAV Stovner',
+      'NAV Søndre Nordstrand', 'NAV Tromsø', 'NAV Trondheim', 'NAV Tønsberg',
+      'NAV Ullern', 'NAV Vestre Aker', 'NAV Ålesund', 'NAV Østensjø'
+    ];
 
     var options = [];       // [{ value, isAdd }]
     var activeIndex = -1;
