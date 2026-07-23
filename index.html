@@ -1195,6 +1195,10 @@
         </div>
 
       </div>
+
+      <div class="testi-blog-cta">
+        <button class="btn-see-all" id="testiBlogBtn">See blog <span class="material-symbols-outlined t-link-arrow"></span></button>
+      </div>
     </div>
   </section>
 
@@ -1310,6 +1314,7 @@
 <div id="page-checkout" hidden></div>
 <div id="page-cart" hidden></div>
 <div id="page-thankyou" hidden></div>
+<div id="page-blog" hidden></div>
 
 <div id="cdp-sticky-cta" class="cdp-sticky-cta"></div>
 <div id="cdp-mob-toc" class="cdp-mob-toc"></div>
@@ -1356,6 +1361,7 @@
         <div class="footer-col-ttl">Student Resources</div>
         <ul>
           <li><a href="#">Login to Canvas</a></li>
+          <li><a href="#" id="footerBlogLink">Blog</a></li>
           <li><a href="#">Frequently asked questions</a></li>
           <li><a href="#">Study regulations</a></li>
           <li><a href="#">Exam</a></li>
@@ -1694,6 +1700,19 @@
     e.preventDefault();
     closeMobMenu();
     showPage('home');
+  });
+
+  /* Footer (Student Resources) → Blog page */
+  var footerBlogLink = document.getElementById('footerBlogLink');
+  if (footerBlogLink) footerBlogLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    showPage('blog');
+  });
+
+  /* Testimonials section → Blog page */
+  var testiBlogBtn = document.getElementById('testiBlogBtn');
+  if (testiBlogBtn) testiBlogBtn.addEventListener('click', function() {
+    showPage('blog');
   });
 
   /* ── Nav tab click → toggle dropdown ── */
@@ -2972,6 +2991,7 @@
     var pageCheckout = document.getElementById('page-checkout');
     var pageThankyou = document.getElementById('page-thankyou');
     var pageCart     = document.getElementById('page-cart');
+    var pageBlog     = document.getElementById('page-blog');
     pageHome.hidden     = (name !== 'home');
     pageSearch.hidden   = (name !== 'search');
     pageCompare.hidden  = (name !== 'compare');
@@ -2980,6 +3000,7 @@
     if (pageCheckout) pageCheckout.hidden = (name !== 'checkout');
     if (pageThankyou) pageThankyou.hidden = (name !== 'thankyou');
     if (pageCart)     pageCart.hidden     = (name !== 'cart');
+    if (pageBlog)     pageBlog.hidden     = (name !== 'blog');
 
     var siteHdr     = document.querySelector('.site-header');
     var coHdr       = document.getElementById('checkoutHeader');
@@ -3039,6 +3060,167 @@
     if (name === 'checkout') { renderCheckoutPage(); window.scrollTo(0, 0); }
     if (name === 'thankyou') { renderThankYouPage(); window.scrollTo(0, 0); }
     if (name === 'cart')     { renderCartPage();     window.scrollTo(0, 0); }
+    if (name === 'blog')     { renderBlogPage();     window.scrollTo(0, 0); }
+  }
+
+  /* ── BLOG PAGE ──
+     Redesign of www.nki.no/blogg. Uses the shared design-system header
+     (.site-header, Figma 138:1299) and .site-footer — both stay visible because
+     'blog' is not a checkout page. Posts, titles and the "Vis flere innlegg"
+     load-more come from the live page; the layout (featured article + category
+     chips + card grid) follows references/07-blog/. */
+
+  var BLOG_CATEGORIES = ['All posts', 'Student stories', 'Study advice', 'Career', 'News', 'Exams'];
+
+  var BLOG_POSTS = [
+    { id: 'ledige-studieplasser', cat: 'News', title: 'We have study places available',
+      excerpt: 'There is still room on this term’s intake. See which programmes you can still join, and how quickly you can get started.',
+      img: 'images/design-system/news/article-1.jpg', author: 'Ingrid Solberg', date: '12 June 2026', read: '4 min read', views: '8.1k' },
+    { id: 'medisinsk-sekretaer', cat: 'Career', title: 'Medical Secretary — retrain in just one year',
+      excerpt: 'A full year of study, one clear qualification. We break down what the Medical Secretary programme covers and where graduates end up.',
+      img: 'images/design-system/courses/pro-02.jpg', author: 'Marte Lien', date: '8 June 2026', read: '6 min read', views: '5.4k' },
+    { id: 'jobbjakten', cat: 'Career', title: 'Five tips for the job hunt',
+      excerpt: 'Practical advice from our career advisors on CVs, cover letters and how to talk about an online qualification in an interview.',
+      img: 'images/design-system/courses/pro-01.jpg', author: 'Ola Nygård', date: '2 June 2026', read: '5 min read', views: '4.1k' },
+    { id: 'smartere', cat: 'Student stories', title: '– I simply feel smarter!',
+      excerpt: 'Kristin went back to studying after fifteen years at work. She tells us what changed — and what she wishes she had known earlier.',
+      img: 'images/design-system/testimonials/story-1.jpg', author: 'Marte Lien', date: '28 May 2026', read: '7 min read', views: '3.9k' },
+    { id: 'fleksibel-eksamen', cat: 'Exams', title: 'Flexible exams — adapting to students’ needs',
+      excerpt: 'Exam dates, locations and what happens if you need to reschedule. Everything we changed this year, in one place.',
+      img: 'images/design-system/news/article-2.jpg', author: 'Ingrid Solberg', date: '21 May 2026', read: '3 min read', views: '3.3k' },
+    { id: 'renate', cat: 'Student stories', title: 'NKI Nettstudier helped Renate retrain',
+      excerpt: 'From shift work to a diploma in accounting. Renate studied evenings and weekends for eleven months.',
+      img: 'images/design-system/testimonials/story-2.jpg', author: 'Ola Nygård', date: '15 May 2026', read: '6 min read', views: '2.8k' },
+    { id: 'tiltaksbedrifter', cat: 'News', title: 'Cooperation between NKI Nettstudier and work inclusion companies',
+      excerpt: 'A new partnership brings tailored online programmes to people returning to work through NAV-funded schemes.',
+      img: 'images/design-system/news/article-3.jpg', author: 'Ingrid Solberg', date: '9 May 2026', read: '4 min read', views: '2.2k' },
+    { id: 'energimontor', cat: 'Career', title: 'From experience to trade certificate — energy fitting opens new doors',
+      excerpt: 'If you already work in the field, your hours may count. Here is how the practice candidate route works.',
+      img: 'images/design-system/courses/pro-03.jpg', author: 'Ola Nygård', date: '30 April 2026', read: '5 min read', views: '1.9k' },
+    { id: 'regnskapskonsulent', cat: 'Career', title: 'From accounting assistant to accounting consultant',
+      excerpt: 'The three subjects that most often make the difference when you want to move up in an accounting practice.',
+      img: 'images/design-system/courses/pro-04.jpg', author: 'Marte Lien', date: '22 April 2026', read: '4 min read', views: '1.7k' },
+    { id: 'jorn', cat: 'Student stories', title: 'From trade certificate to the Armed Forces: Jørn leads the depot with passion',
+      excerpt: 'Jørn took logistics subjects alongside a full-time job. Today he runs a depot for the Norwegian Armed Forces.',
+      img: 'images/design-system/courses/hs-02.jpg', author: 'Marte Lien', date: '14 April 2026', read: '6 min read', views: '1.5k' },
+    { id: 'studiekompetanse', cat: 'Study advice', title: 'How do you achieve general study competence?',
+      excerpt: 'The six required subjects, the two routes to get them, and roughly how long each one takes.',
+      img: 'images/design-system/courses/hs-01.jpg', author: 'Ingrid Solberg', date: '3 April 2026', read: '8 min read', views: '1.2k' }
+  ];
+
+  var blogState = { category: 'All posts', visible: 6 };
+
+  function blogFilteredPosts() {
+    if (blogState.category === 'All posts') return BLOG_POSTS;
+    return BLOG_POSTS.filter(function(p) { return p.cat === blogState.category; });
+  }
+
+  function buildBlogChip(cat) {
+    return '<button class="blog-chip' + (blogState.category === cat ? ' is-active' : '') +
+      '" data-blog-cat="' + cat + '">' + cat + '</button>';
+  }
+
+  function buildBlogMeta(p) {
+    return '<div class="news-meta">' +
+      '<span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">calendar_today</span>' + p.date + '</span>' +
+      '<span class="news-meta-dot"></span>' +
+      '<span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">schedule</span>' + p.read + '</span>' +
+      '<span class="news-meta-dot"></span>' +
+      '<span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">visibility</span>' + p.views + '</span>' +
+      '</div>';
+  }
+
+  function buildBlogFeatured(p) {
+    return '<article class="blog-featured" data-blog-post="' + p.id + '">' +
+      '<div class="blog-featured-img"><img src="' + p.img + '" alt=""></div>' +
+      '<div class="blog-featured-body">' +
+        '<span class="blog-badge">' + p.cat + '</span>' +
+        '<h2 class="blog-featured-ttl">' + p.title + '</h2>' +
+        '<p class="blog-featured-excerpt">' + p.excerpt + '</p>' +
+        '<div class="blog-author">' +
+          '<span class="blog-author-name">' + p.author + '</span>' +
+          '<span class="news-meta-dot"></span>' +
+          '<span class="blog-author-meta">' + p.date + '</span>' +
+          '<span class="news-meta-dot"></span>' +
+          '<span class="blog-author-meta">' + p.read + '</span>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function buildBlogCard(p) {
+    return '<article class="news-card blog-card" data-blog-post="' + p.id + '">' +
+      '<div class="news-img blog-card-img"><img src="' + p.img + '" alt="">' +
+        '<span class="blog-badge blog-badge--on-img">' + p.cat + '</span></div>' +
+      '<h3 class="news-ttl blog-card-ttl">' + p.title + '</h3>' +
+      '<p class="blog-card-excerpt">' + p.excerpt + '</p>' +
+      buildBlogMeta(p) +
+    '</article>';
+  }
+
+  function renderBlogPage() {
+    var page = document.getElementById('page-blog');
+    if (!page) return;
+
+    var posts    = blogFilteredPosts();
+    var featured = posts[0];
+    var rest     = posts.slice(1);
+    var shown    = rest.slice(0, blogState.visible);
+
+    page.innerHTML =
+      '<div class="blog-page-wrap">' +
+
+        '<nav class="cart-page-bc" aria-label="Breadcrumb">' +
+          '<a class="cart-bc-link" data-blog-home>Home</a>' +
+          '<span class="cart-bc-sep material-symbols-outlined">chevron_right</span>' +
+          '<span class="cart-bc-current">Blog</span>' +
+        '</nav>' +
+
+        '<header class="blog-hero">' +
+          '<p class="section-eyebrow"><span class="section-eyebrow-dot"></span>Blog</p>' +
+          '<h1 class="section-title blog-hero-ttl">News, student stories and study advice</h1>' +
+          '<p class="blog-hero-sub">Get to know our students and teachers, and keep up with the latest from NKI Nettstudier.</p>' +
+        '</header>' +
+
+        '<div class="blog-chips" role="tablist" aria-label="Blog categories">' +
+          BLOG_CATEGORIES.map(buildBlogChip).join('') +
+        '</div>' +
+
+        (featured ? buildBlogFeatured(featured) : '') +
+
+        (shown.length
+          ? '<div class="news-grid blog-grid">' + shown.map(buildBlogCard).join('') + '</div>'
+          : (featured ? '' : '<p class="blog-empty">No posts in this category yet.</p>')) +
+
+        (rest.length > shown.length
+          ? '<div class="blog-more-wrap"><button class="btn-see-all" id="blogMoreBtn">Show more posts</button></div>'
+          : '') +
+
+      '</div>';
+
+    bindBlogPageEvents();
+  }
+
+  function bindBlogPageEvents() {
+    var page = document.getElementById('page-blog');
+    if (!page) return;
+
+    var homeLink = page.querySelector('[data-blog-home]');
+    if (homeLink) homeLink.addEventListener('click', function() { showPage('home'); });
+
+    page.querySelectorAll('[data-blog-cat]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        blogState.category = btn.getAttribute('data-blog-cat');
+        blogState.visible = 6;
+        renderBlogPage();
+      });
+    });
+
+    var moreBtn = page.querySelector('#blogMoreBtn');
+    if (moreBtn) moreBtn.addEventListener('click', function() {
+      blogState.visible += 6;
+      renderBlogPage();
+    });
   }
 
   /* ── Search page build helpers ── */
@@ -4789,7 +4971,7 @@
 
   function buildPayConfirm() {
     return '<div class="co-pay-confirm">' +
-      '<button class="co-proceed-btn" id="coProceed" type="button" disabled>Proceed to payment</button>' +
+      '<button class="co-proceed-btn" id="coProceed" type="button" disabled><span class="material-symbols-outlined co-proceed-lock" aria-hidden="true">lock</span>Proceed to payment</button>' +
       '<div class="co-cant" id="coCantProceed"><span>Can\'t continue?</span> <a href="#" class="co-cant-lnk" id="coCantLnkProceed">Please accept the Study Regulations first.</a></div>' +
     '</div>';
   }
@@ -4807,7 +4989,8 @@
       '<div class="co-vipps-logo">vipps</div>';
   }
 
-  function buildHowItWorks(id, steps) {
+  function buildHowItWorks(id, steps, label) {
+    label = label || 'How it works?';
     var stepsHTML = steps.map(function(s, i) {
       return '<div class="co-hiw-step">' +
         '<div class="co-hiw-left">' +
@@ -4823,7 +5006,7 @@
     return '<div class="co-hiw-acc" id="coHiw-' + id + '">' +
       '<div class="co-hiw-hd" id="coHiwHd-' + id + '" role="button" tabindex="0" aria-expanded="false">' +
         '<span class="co-hiw-arrow"></span>' +
-        '<span class="co-hiw-label">How it works?</span>' +
+        '<span class="co-hiw-label">' + label + '</span>' +
       '</div>' +
       '<div class="co-hiw-body" id="coHiwBody-' + id + '" hidden>' +
         '<div class="co-hiw-steps">' + stepsHTML + '</div>' +
@@ -4862,18 +5045,47 @@
       '</div>';
   }
 
+  /* Representative list of publicly-known Norwegian NAV offices/departments
+     (municipality offices + Oslo district offices). Users can also add a
+     custom value via the combobox if their office isn't listed. */
+  var NAV_OFFICES = [
+    'NAV Alna', 'NAV Arendal', 'NAV Asker', 'NAV Bergen', 'NAV Bjerke',
+    'NAV Bodø', 'NAV Bærum', 'NAV Drammen', 'NAV Elverum', 'NAV Fredrikstad',
+    'NAV Frogner', 'NAV Gamle Oslo', 'NAV Gjøvik', 'NAV Grorud', 'NAV Grünerløkka',
+    'NAV Halden', 'NAV Hamar', 'NAV Harstad', 'NAV Haugesund', 'NAV Horten',
+    'NAV Kongsberg', 'NAV Kristiansand', 'NAV Larvik', 'NAV Lillehammer',
+    'NAV Lillestrøm', 'NAV Molde', 'NAV Moss', 'NAV Narvik', 'NAV Nordre Aker',
+    'NAV Nordstrand', 'NAV Porsgrunn', 'NAV Ringerike', 'NAV Sagene',
+    'NAV Sandefjord', 'NAV Sandnes', 'NAV Sarpsborg', 'NAV Skien',
+    'NAV St. Hanshaugen', 'NAV Stavanger', 'NAV Steinkjer', 'NAV Stovner',
+    'NAV Søndre Nordstrand', 'NAV Tromsø', 'NAV Trondheim', 'NAV Tønsberg',
+    'NAV Ullern', 'NAV Vestre Aker', 'NAV Ålesund', 'NAV Østensjø'
+  ];
+
+  function buildNavCombobox() {
+    return '<div class="co-form-group">' +
+      '<label class="co-label" for="coNavOffice">NAV office or department</label>' +
+      '<div class="co-combobox" id="coNavCombo">' +
+        '<input class="co-input co-combo-input" id="coNavOffice" type="text" ' +
+          'role="combobox" aria-expanded="false" aria-autocomplete="list" ' +
+          'aria-controls="coNavOfficeList" aria-haspopup="listbox" autocomplete="off" ' +
+          'placeholder="Search for your NAV office">' +
+        '<ul class="co-combo-list" id="coNavOfficeList" role="listbox" aria-label="NAV offices" hidden></ul>' +
+      '</div>' +
+    '</div>';
+  }
+
   function buildNavBody() {
-    return '<p class="co-pay-desc">NAV covers the cost of your course directly. Provide your local NAV office details so we can confirm the arrangement.</p>' +
+    return '<p class="co-pay-desc">NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</p>' +
       buildHowItWorks('nav', [
         ['Enter NAV details', 'Provide your NAV office and case handler so we can verify the arrangement.'],
         ['NAV confirms payment', 'NAV sends payment confirmation by email or the official commitment form.'],
         ['Course access granted', 'Once confirmed, your course access is fully activated.']
-      ]) +
-      '<hr class="co-pay-sep">' +
+      ], 'How does it work?') +
       '<div class="co-nav-expand">' +
-        '<div class="co-nav-banner"><span class="material-symbols-outlined co-nav-info-ic">info</span><span>NAV must send payment confirmation by email to <a href="mailto:post@nki.no">post@nki.no</a> (including organization number and postal address) or through the official NAV commitment form.</span></div>' +
-        '<div class="co-form-group"><label class="co-label" for="coNavOffice">NAV office</label><input class="co-input" id="coNavOffice" type="text" placeholder="NAV office name"></div>' +
-        '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler</label><input class="co-input" id="coNavHandler" type="text" placeholder="Name of case handler"></div>' +
+        buildNavCombobox() +
+        '<div class="co-form-group"><label class="co-label" for="coNavHandler">Case handler name</label><input class="co-input" id="coNavHandler" type="text" placeholder="Enter case handler name"></div>' +
+        '<div class="co-form-group"><label class="co-label" for="coNavEmail">Case handler\'s email</label><input class="co-input co-nav-email" id="coNavEmail" type="email" placeholder="name@nav.no" aria-describedby="coNavEmailErr"><span class="co-input-err" id="coNavEmailErr" role="alert" hidden>Please enter a valid email address.</span></div>' +
       '</div>';
   }
 
@@ -5199,8 +5411,126 @@
       showPage('thankyou');
     });
 
+    /* ── NAV office combobox + case-handler email validation ── */
+    initNavCombobox();
+    initNavEmailValidation();
+
     /* ── Promo code ── */
     bindSidebarPromo();
+  }
+
+  function initNavCombobox() {
+    var input = document.getElementById('coNavOffice');
+    var list  = document.getElementById('coNavOfficeList');
+    var combo = document.getElementById('coNavCombo');
+    if (!input || !list || !combo) return;
+
+    var options = [];       // [{ value, isAdd }]
+    var activeIndex = -1;
+
+    function esc(str) {
+      return String(str).replace(/[&<>"']/g, function(c) {
+        return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+      });
+    }
+
+    function close() {
+      list.hidden = true;
+      input.setAttribute('aria-expanded', 'false');
+      input.removeAttribute('aria-activedescendant');
+      activeIndex = -1;
+    }
+
+    function render(query) {
+      var q = query.trim().toLowerCase();
+      var matches = NAV_OFFICES.filter(function(o) { return o.toLowerCase().indexOf(q) !== -1; });
+      options = matches.map(function(v) { return { value: v, isAdd: false }; });
+      var hasExact = NAV_OFFICES.some(function(o) { return o.toLowerCase() === q; });
+      if (q && !hasExact) options.push({ value: query.trim(), isAdd: true });
+
+      if (!options.length) {
+        list.innerHTML = '<li class="co-combo-empty" role="presentation">No matching offices.</li>';
+      } else {
+        list.innerHTML = options.map(function(opt, i) {
+          if (opt.isAdd) {
+            return '<li class="co-combo-opt co-combo-add" id="coNavOpt-' + i + '" role="option" aria-selected="false" data-idx="' + i + '">' +
+              '<span class="material-symbols-outlined co-combo-add-ic" aria-hidden="true">add</span>' +
+              '<span>Add &ldquo;<strong>' + esc(opt.value) + '</strong>&rdquo;</span></li>';
+          }
+          return '<li class="co-combo-opt" id="coNavOpt-' + i + '" role="option" aria-selected="false" data-idx="' + i + '">' + esc(opt.value) + '</li>';
+        }).join('');
+      }
+      list.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      activeIndex = -1;
+      input.removeAttribute('aria-activedescendant');
+    }
+
+    function setActive(i) {
+      var opts = list.querySelectorAll('.co-combo-opt');
+      if (!opts.length) return;
+      if (i < 0) i = opts.length - 1;
+      if (i >= opts.length) i = 0;
+      opts.forEach(function(o) { o.classList.remove('is-active'); o.setAttribute('aria-selected', 'false'); });
+      var el = opts[i];
+      el.classList.add('is-active');
+      el.setAttribute('aria-selected', 'true');
+      el.scrollIntoView({ block: 'nearest' });
+      input.setAttribute('aria-activedescendant', el.id);
+      activeIndex = i;
+    }
+
+    function choose(i) {
+      if (i < 0 || i >= options.length) return;
+      input.value = options[i].value;
+      close();
+      input.focus();
+    }
+
+    input.addEventListener('input', function() { render(input.value); });
+    input.addEventListener('focus', function() { if (list.hidden) render(input.value); });
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (list.hidden) render(input.value);
+        setActive(activeIndex + 1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (list.hidden) render(input.value);
+        setActive(activeIndex - 1);
+      } else if (e.key === 'Enter') {
+        if (!list.hidden && activeIndex > -1) { e.preventDefault(); choose(activeIndex); }
+      } else if (e.key === 'Escape') {
+        if (!list.hidden) { e.preventDefault(); close(); }
+      }
+    });
+    /* mousedown (not click) so the option is chosen before the input blurs */
+    list.addEventListener('mousedown', function(e) {
+      var li = e.target.closest('.co-combo-opt');
+      if (!li) return;
+      e.preventDefault();
+      choose(parseInt(li.getAttribute('data-idx'), 10));
+    });
+    document.addEventListener('click', function(e) {
+      if (!document.body.contains(combo)) return;
+      if (!e.target.closest('#coNavCombo')) close();
+    });
+  }
+
+  function initNavEmailValidation() {
+    var email = document.getElementById('coNavEmail');
+    var err   = document.getElementById('coNavEmailErr');
+    if (!email || !err) return;
+    function validate() {
+      var v = email.value.trim();
+      var ok = v === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      email.classList.toggle('is-error', !ok);
+      err.hidden = ok;
+    }
+    email.addEventListener('blur', validate);
+    email.addEventListener('input', function() {
+      if (email.classList.contains('is-error')) validate();
+    });
   }
 
   function bindSidebarPromo() {
