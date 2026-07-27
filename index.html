@@ -223,7 +223,7 @@
 
         <!-- Tab 6–7: Plain links -->
         <li class="nav-item"><a href="#" class="nav-tab plain">Lånekassen</a></li>
-        <li class="nav-item"><a href="#" class="nav-tab plain">For business</a></li>
+        <li class="nav-item"><a href="#" class="nav-tab plain" id="navBusinessLink">For business</a></li>
 
       </ul>
     </nav>
@@ -359,7 +359,7 @@
           </button>
         </li>
         <li><a href="#" class="mob-nav-link">Lånekassen</a></li>
-        <li><a href="#" class="mob-nav-link">For business</a></li>
+        <li><a href="#" class="mob-nav-link" id="mobBusinessLink">For business</a></li>
       </ul>
     </nav>
     <div class="mob-menu-footer">
@@ -1315,6 +1315,7 @@
 <div id="page-cart" hidden></div>
 <div id="page-thankyou" hidden></div>
 <div id="page-blog" hidden></div>
+<div id="page-business" hidden></div>
 
 <div id="cdp-sticky-cta" class="cdp-sticky-cta"></div>
 <div id="cdp-mob-toc" class="cdp-mob-toc"></div>
@@ -1352,7 +1353,7 @@
           <li><a href="#">Lånekassen</a></li>
           <li><a href="#">Grade calculator</a></li>
           <li><a href="#">New at NKI Online Studies</a></li>
-          <li><a href="#">For businesses</a></li>
+          <li><a href="#" id="footerBusinessLink">For businesses</a></li>
         </ul>
       </div>
 
@@ -1713,6 +1714,24 @@
   var testiBlogBtn = document.getElementById('testiBlogBtn');
   if (testiBlogBtn) testiBlogBtn.addEventListener('click', function() {
     showPage('blog');
+  });
+
+  /* "For business" entry points → For Business landing page */
+  var navBusinessLink = document.getElementById('navBusinessLink');
+  if (navBusinessLink) navBusinessLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    showPage('business');
+  });
+  var mobBusinessLink = document.getElementById('mobBusinessLink');
+  if (mobBusinessLink) mobBusinessLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    closeMobMenu();
+    showPage('business');
+  });
+  var footerBusinessLink = document.getElementById('footerBusinessLink');
+  if (footerBusinessLink) footerBusinessLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    showPage('business');
   });
 
   /* ── Nav tab click → toggle dropdown ── */
@@ -2992,6 +3011,7 @@
     var pageThankyou = document.getElementById('page-thankyou');
     var pageCart     = document.getElementById('page-cart');
     var pageBlog     = document.getElementById('page-blog');
+    var pageBusiness = document.getElementById('page-business');
     pageHome.hidden     = (name !== 'home');
     pageSearch.hidden   = (name !== 'search');
     pageCompare.hidden  = (name !== 'compare');
@@ -3001,6 +3021,7 @@
     if (pageThankyou) pageThankyou.hidden = (name !== 'thankyou');
     if (pageCart)     pageCart.hidden     = (name !== 'cart');
     if (pageBlog)     pageBlog.hidden     = (name !== 'blog');
+    if (pageBusiness) pageBusiness.hidden = (name !== 'business');
 
     var siteHdr     = document.querySelector('.site-header');
     var coHdr       = document.getElementById('checkoutHeader');
@@ -3061,6 +3082,7 @@
     if (name === 'thankyou') { renderThankYouPage(); window.scrollTo(0, 0); }
     if (name === 'cart')     { renderCartPage();     window.scrollTo(0, 0); }
     if (name === 'blog')     { renderBlogPage();     window.scrollTo(0, 0); }
+    if (name === 'business') { renderBusinessPage(); window.scrollTo(0, 0); }
   }
 
   /* ── BLOG PAGE ──
@@ -3220,6 +3242,417 @@
     if (moreBtn) moreBtn.addEventListener('click', function() {
       blogState.visible += 6;
       renderBlogPage();
+    });
+  }
+
+  /* ── FOR BUSINESS PAGE ──
+     B2B landing page. Reuses shared design-system components: .site-header /
+     .site-footer stay visible (not a checkout page), plus .section-eyebrow,
+     .section-title, .btn-cta-green / .btn-see-all / .btn-browse-all, the
+     news-grid/.news-card news component, the .mentioned-in logo marquee, and the
+     .consult-inline / .consult-form contact form. New page-specific pieces —
+     the seat calculator and the employee-card grid (Figma Employee Card 592:16370,
+     "Our employees" page 589:15985) — are built strictly from design-system
+     tokens. All values reference the token custom properties in wireframe.css. */
+
+  var BIZ_PILLARS = [
+    { icon: 'trending_up', bg: 'accent-orange',
+      title: 'The working life doesn’t stand still',
+      body: 'New requirements, new technologies and faster restructuring make competence go out of date quickly. Skills development is no longer “nice to have” — it is essential for staying competitive.' },
+    { icon: 'groups', bg: 'accent-blue',
+      title: 'NKI as a competency partner',
+      body: 'We work closely with businesses across the private and public sector. Learning is flexible, fully online, scalable and designed around busy schedules — delivered without disrupting operations.' },
+    { icon: 'library_books', bg: 'accent-purple',
+      title: 'Our professional portfolio',
+      body: 'From leadership and law to AI and logistics — a broad, continuously updated portfolio built to meet the changing needs of the labour market.' },
+    { icon: 'workspace_premium', bg: 'accent-orange',
+      title: 'Proven and awarded',
+      body: 'More than 50 years of experience in flexible learning. In 2024, NKI was named “Online Educator of the Year” by Flexible Education Norway.' }
+  ];
+
+  var BIZ_SUBJECTS = ['Leadership', 'HR', 'Administration', 'Law', 'Artificial Intelligence',
+    'Project Management', 'Health', 'Logistics', 'Transport', 'Vocational education'];
+
+  var BIZ_EMPLOYEES = [
+    { img: 'images/design-system/testimonials/avatar-1.jpg', name: 'Ingrid Solberg',      role: 'Head of Business Market' },
+    { img: 'images/design-system/testimonials/avatar-2.jpg', name: 'Marte Lien',          role: 'Learning Designer' },
+    { img: 'images/design-system/testimonials/avatar-3.jpg', name: 'Ola Nygård',      role: 'Competence Advisor' },
+    { img: 'images/design-system/testimonials/avatar-4.jpg', name: 'Anne Kari Rakke',      role: 'Senior Learning Designer' },
+    { img: 'images/design-system/testimonials/avatar-5.jpg', name: 'Arnfinn Rødøe', role: 'Programme Manager' },
+    { img: 'images/design-system/testimonials/avatar-6.jpg', name: 'Kristin Haugen',       role: 'Subject Manager' },
+    { img: 'images/design-system/testimonials/avatar-7.jpg', name: 'Sigurd Moen',          role: 'Instructor' },
+    { img: 'images/design-system/testimonials/avatar-8.jpg', name: 'Marte Hovatn',         role: 'Account Manager' }
+  ];
+
+  var BIZ_NEWS = [
+    { img: 'images/design-system/news/article-3.jpg', ttl: 'NKI partners with three Norwegian municipalities for employee upskilling programmes', date: '18 June 2026', read: '4 min read', views: '3.3k' },
+    { img: 'images/design-system/news/article-1.jpg', ttl: 'More than half of Norwegian companies report a growing competence gap', date: '9 June 2026', read: '6 min read', views: '5.1k' },
+    { img: 'images/design-system/news/article-2.jpg', ttl: 'NKI named “Online Educator of the Year” 2024 by Flexible Education Norway', date: '2 June 2026', read: '3 min read', views: '7.4k' }
+  ];
+
+  /* Seat-calculator model — mirrors the reference tool at bedrift.nki.dev.
+     Base list price 4 900 kr/seat; volume discount by seat count; annual gain
+     from productivity uplift (scenario-dependent), reduced turnover and reduced
+     absence. Rebuilt with design-system tokens, no styling copied from source. */
+  var BIZ_BASE_PRICE   = 4900;
+  var BIZ_PER_SEAT_GAIN = 600000; /* avg annual value creation per employee */
+  var BIZ_TURNOVER_SEAT = 7500;
+  var BIZ_ABSENCE_SEAT  = 3100;
+  var BIZ_TIERS = [
+    { min: 1000, r: 0.30, label: '1000+' },
+    { min: 500,  r: 0.25, label: '500+'  },
+    { min: 250,  r: 0.20, label: '250+'  },
+    { min: 100,  r: 0.15, label: '100+'  },
+    { min: 50,   r: 0.10, label: '50+'   },
+    { min: 1,    r: 0.00, label: '1+'    }
+  ];
+  var BIZ_SCENARIOS = [
+    { name: 'Cautious',  pct: 0.03 },
+    { name: 'Moderate',  pct: 0.05 },
+    { name: 'Ambitious', pct: 0.08 }
+  ];
+  var bizCalc = { seats: 100, scen: 1 };
+
+  function bizFmt(n) {
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
+  function bizTierFor(seats) {
+    for (var i = 0; i < BIZ_TIERS.length; i++) { if (seats >= BIZ_TIERS[i].min) return BIZ_TIERS[i]; }
+    return BIZ_TIERS[BIZ_TIERS.length - 1];
+  }
+
+  function buildBizPillar(p) {
+    return '<article class="biz-pillar card--' + p.bg + '">' +
+        '<span class="biz-pillar-icon"><span class="material-symbols-outlined">' + p.icon + '</span></span>' +
+        '<h3 class="biz-pillar-ttl">' + p.title + '</h3>' +
+        '<p class="biz-pillar-body">' + p.body + '</p>' +
+      '</article>';
+  }
+
+  function buildBizEmployee(e) {
+    return '<article class="biz-emp-card">' +
+        '<div class="biz-emp-photo"><img src="' + e.img + '" alt="' + e.name + '"></div>' +
+        '<div class="biz-emp-tag">' +
+          '<div class="biz-emp-tag-text"><div class="biz-emp-name">' + e.name + '</div>' +
+          '<div class="biz-emp-role">' + e.role + '</div></div>' +
+          '<span class="material-symbols-outlined biz-emp-mail" aria-hidden="true">mail</span>' +
+        '</div>' +
+      '</article>';
+  }
+
+  function buildBizNews(a) {
+    return '<article class="news-card">' +
+        '<div class="news-img"><img src="' + a.img + '" alt=""></div>' +
+        '<div class="news-ttl">' + a.ttl + '</div>' +
+        '<div class="news-meta">' +
+          '<span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">calendar_today</span>' + a.date + '</span>' +
+          '<span class="news-meta-dot"></span>' +
+          '<span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">schedule</span>' + a.read + '</span>' +
+          '<span class="news-meta-dot"></span>' +
+          '<span class="news-meta-item"><span class="material-symbols-outlined news-meta-icon">visibility</span>' + a.views + '</span>' +
+        '</div>' +
+      '</article>';
+  }
+
+  var bizEmpVisible = 6;
+
+  function renderBusinessPage() {
+    var page = document.getElementById('page-business');
+    if (!page) return;
+    bizCalc = { seats: 100, scen: 1 };
+    bizEmpVisible = 6;
+
+    /* Logo marquee (reuse .mentioned-in) — the same asset list used on the homepage */
+    var logos = ['logo_2.svg', 'small-positive.svg', 'logo-ec--en.svg', 'logo-text.svg',
+      'logo.svg', 'standard_compressed_Aftenposten-removebg-preview.png', 'fun-logo.svg'];
+    function logoTrack(hidden) {
+      return '<div class="marquee-track"' + (hidden ? ' aria-hidden="true"' : '') + '>' +
+        logos.concat(logos).map(function(f) {
+          var alt = f.indexOf('Aftenposten') > -1 ? 'Aftenposten' : (f.indexOf('logo-ec') > -1 ? 'European Commission' : '');
+          return '<img src="mentioned-in-logos/' + f + '" alt="' + alt + '">';
+        }).join('') + '</div>';
+    }
+
+    page.innerHTML =
+      '<main class="biz-page">' +
+
+      /* ── 1. HERO ── */
+      '<section class="biz-hero">' +
+        '<div class="container">' +
+          '<div class="biz-hero-inner">' +
+            '<p class="section-eyebrow"><span class="section-eyebrow-dot"></span>For business</p>' +
+            '<h1 class="biz-hero-ttl">Skills development for companies</h1>' +
+            '<p class="biz-hero-sub">More than half of all Norwegian companies need competence raising among their employees. We help you meet the needs of your business.</p>' +
+            '<div class="biz-hero-actions">' +
+              '<button class="btn-cta-green" data-biz-scroll="biz-calc-anchor">Estimate your cost</button>' +
+              '<button class="btn-see-all" data-biz-scroll="biz-contact-anchor">Talk to us</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</section>' +
+
+      /* ── 2. WHY / PILLARS ── */
+      '<section class="wf-section">' +
+        '<div class="container">' +
+          '<div class="section-hd is-centered biz-why-hd">' +
+            '<div>' +
+              '<p class="section-eyebrow is-centered"><span class="section-eyebrow-dot"></span>Why NKI</p>' +
+              '<h2 class="section-title">Skills development that strengthens your business</h2>' +
+              '<p class="biz-lead">When employees develop professionally, businesses improve delivery quality, make better decisions, operate more efficiently and become more adaptable to change.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="biz-pillars">' + BIZ_PILLARS.map(buildBizPillar).join('') + '</div>' +
+          '<div class="biz-portfolio">' +
+            '<p class="biz-portfolio-lbl">A continuously updated portfolio, including:</p>' +
+            '<div class="biz-tags">' + BIZ_SUBJECTS.map(function(s) { return '<span class="biz-tag">' + s + '</span>'; }).join('') + '</div>' +
+          '</div>' +
+          '<div class="biz-contact-block" id="biz-contact-anchor">' +
+            '<div class="biz-contact-copy">' +
+              '<h3 class="biz-contact-ttl">Want to know more?</h3>' +
+              '<p class="biz-contact-sub">Get in touch to discuss your competence development strategy. Our advisors help you map needs, shortlist programmes and plan a rollout that fits your organisation.</p>' +
+            '</div>' +
+            '<div class="biz-hubspot">' +
+              '<!-- hubspot_form_will_replace_this_string_do_not_remove_click_creface_code_to_see_more -->' +
+              '<div class="biz-hubspot-ph" aria-hidden="true">' +
+                '<span class="material-symbols-outlined">mark_email_unread</span>' +
+                '<span>HubSpot form will be embedded here</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</section>' +
+
+      /* ── 3. SEAT CALCULATOR (priority) ── */
+      '<section class="wf-section bg-gray" id="biz-calc-anchor">' +
+        '<div class="container">' +
+          '<div class="section-hd is-centered">' +
+            '<div>' +
+              '<p class="section-eyebrow is-centered"><span class="section-eyebrow-dot"></span>Seat calculator</p>' +
+              '<h2 class="section-title">What does it cost for your business?</h2>' +
+              '<p class="biz-lead">Indicative pricing with volume discount. The final offer is tailored to programme, content and length.</p>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="biz-calc">' +
+            '<div class="biz-calc-panel biz-calc-input">' +
+              '<div class="biz-calc-cap">Number of employees / seats</div>' +
+              '<div class="biz-seat-display"><span id="bizSeatLabel">100</span><span class="biz-seat-unit">seats</span></div>' +
+              '<input type="range" class="biz-range" id="bizSeatRange" min="1" max="1000" step="1" value="100" aria-label="Number of seats">' +
+              '<div class="biz-range-scale"><span>1</span><span>250</span><span>500</span><span>1000+</span></div>' +
+              '<div class="biz-tiers" id="bizTiers">' +
+                BIZ_TIERS.slice().reverse().map(function(t) {
+                  return '<span class="biz-tier" data-min="' + t.min + '">' +
+                    '<span class="biz-tier-seats">' + t.label + ' seats</span>' +
+                    '<span class="biz-tier-disc">' + (t.r ? '−' + Math.round(t.r * 100) + '%' : '—') + '</span>' +
+                  '</span>';
+                }).join('') +
+              '</div>' +
+            '</div>' +
+
+            '<div class="biz-calc-panel biz-calc-estimate">' +
+              '<div class="biz-calc-cap">Estimate per year</div>' +
+              '<div class="biz-est-total"><span id="bizEstTotal">416 500</span> kr</div>' +
+              '<div class="biz-est-rows">' +
+                '<div class="biz-est-row"><span>Per seat</span><span id="bizPerSeat">4 165 kr</span></div>' +
+                '<div class="biz-est-row"><span>Volume discount</span><span id="bizDiscount">−15 %</span></div>' +
+              '</div>' +
+              '<button class="btn-cta-green biz-est-cta" data-biz-scroll="biz-contact-anchor">Get a tailored offer<span class="material-symbols-outlined">arrow_forward</span></button>' +
+              '<p class="biz-est-note">Indicative. Final price is set after a needs assessment and programme scope.</p>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="biz-roi">' +
+            '<div class="biz-roi-hd">' +
+              '<h3 class="biz-roi-ttl">What do you get back?</h3>' +
+              '<p class="biz-roi-sub" id="bizRoiSub"></p>' +
+            '</div>' +
+            '<div class="biz-scen" id="bizScen" role="tablist" aria-label="Productivity scenario">' +
+              BIZ_SCENARIOS.map(function(s, i) {
+                return '<button class="biz-scen-btn" role="tab" data-scen="' + i + '">' + s.name + ' +' + Math.round(s.pct * 100) + '%</button>';
+              }).join('') +
+            '</div>' +
+            '<div class="biz-roi-cards">' +
+              '<div class="biz-roi-card">' +
+                '<div class="biz-roi-card-lbl">Productivity boost <span id="bizProdPct">+5%</span></div>' +
+                '<div class="biz-roi-card-val" id="bizProd">3 000 000 kr/yr</div>' +
+                '<div class="biz-roi-card-desc">More value created per employee</div>' +
+              '</div>' +
+              '<div class="biz-roi-card">' +
+                '<div class="biz-roi-card-lbl">Lower turnover</div>' +
+                '<div class="biz-roi-card-val" id="bizTurnover">750 000 kr/yr</div>' +
+                '<div class="biz-roi-card-desc">Fewer costly new hires</div>' +
+              '</div>' +
+              '<div class="biz-roi-card">' +
+                '<div class="biz-roi-card-lbl">Less absence</div>' +
+                '<div class="biz-roi-card-val" id="bizAbsence">310 000 kr/yr</div>' +
+                '<div class="biz-roi-card-desc">Self-leadership and security in teams</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="biz-roi-summary">' +
+              '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Annual cost</span><span class="biz-roi-sum-val" id="bizCost">416 500 kr</span></div>' +
+              '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Annual gain</span><span class="biz-roi-sum-val" id="bizGain">4 060 000 kr</span></div>' +
+              '<div class="biz-roi-sum-item biz-roi-sum-hero"><span class="biz-roi-sum-lbl">For every krone invested</span><span class="biz-roi-sum-val" id="bizRoi">9.7 kr back</span></div>' +
+              '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Net</span><span class="biz-roi-sum-val" id="bizNet">+3 643 500 kr</span></div>' +
+              '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Paid back in</span><span class="biz-roi-sum-val" id="bizPayback">~5 weeks</span></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</section>' +
+
+      /* ── 4. EMPLOYEES ── */
+      '<section class="biz-emp-section">' +
+        '<div class="container">' +
+          '<div class="section-hd is-centered">' +
+            '<div>' +
+              '<p class="section-eyebrow is-centered"><span class="section-eyebrow-dot"></span>Our people</p>' +
+              '<h2 class="section-title">The people who build your competence program</h2>' +
+              '<p class="biz-lead">NKI Nettstudier is staffed by people who are passionate about flexible education.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="biz-emp-grid" id="bizEmpGrid"></div>' +
+          '<div class="biz-emp-more-wrap"><button class="btn-see-all" id="bizEmpMore"><span class="material-symbols-outlined">expand_more</span>Load more</button></div>' +
+        '</div>' +
+      '</section>' +
+
+      /* ── 5. LATEST NEWS ── */
+      '<section class="wf-section bg-gray">' +
+        '<div class="container">' +
+          '<div class="section-hd is-centered"><h2 class="section-title">Latest news from NKI</h2></div>' +
+          '<div class="news-grid">' + BIZ_NEWS.map(buildBizNews).join('') + '</div>' +
+        '</div>' +
+      '</section>' +
+
+      /* ── 6. CUSTOMER LOGOS ── */
+      '<div class="mentioned-in biz-logos">' +
+        '<p class="mentioned-in-lbl">Trusted by</p>' +
+        '<div class="mentioned-in-logos"><div class="marquee-inner">' + logoTrack(false) + logoTrack(true) + '</div></div>' +
+      '</div>' +
+
+      /* ── 7. CONTACT FORM (reuse .consult-inline / .consult-form) ── */
+      '<section class="wf-section">' +
+        '<div class="container">' +
+          '<div class="consult-inline">' +
+            '<div class="consult-info">' +
+              '<p class="section-eyebrow"><span class="section-eyebrow-dot"></span>Advice</p>' +
+              '<h2 class="section-title">Understand your sector and your skills gap</h2>' +
+              '<p class="consult-sub">Tell us about your business and we’ll help you map where the competence needs are — and how to close them.</p>' +
+              '<div class="hero-avatars">' +
+                '<img class="hero-avatar" src="images/design-system/consultation/avatar-1-inner.jpg" alt="">' +
+                '<img class="hero-avatar" src="images/design-system/consultation/avatar-2-inner.jpg" alt="">' +
+                '<img class="hero-avatar" src="images/design-system/consultation/avatar-3-inner.jpg" alt="">' +
+              '</div>' +
+            '</div>' +
+            '<form class="consult-form" onsubmit="return false">' +
+              '<div class="cf-row">' +
+                '<div class="cf-field"><label class="cf-label" for="b-name">Name</label><input class="cf-input" id="b-name" type="text" placeholder="Enter your name"></div>' +
+                '<div class="cf-field"><label class="cf-label" for="b-company">Company</label><input class="cf-input" id="b-company" type="text" placeholder="Enter your company"></div>' +
+              '</div>' +
+              '<div class="cf-row">' +
+                '<div class="cf-field"><label class="cf-label" for="b-email">Email</label><div class="cf-input-wrap"><span class="material-symbols-outlined cf-input-icon">mail</span><input class="cf-input cf-input--icon" id="b-email" type="email" placeholder="Enter your email"></div></div>' +
+                '<div class="cf-field"><label class="cf-label" for="b-phone">Phone number</label><input class="cf-input" id="b-phone" type="tel" placeholder="+47"></div>' +
+              '</div>' +
+              '<div class="cf-field"><label class="cf-label" for="b-msg">Message</label><textarea class="cf-textarea" id="b-msg" placeholder="Tell us about your competence needs"></textarea></div>' +
+              '<button type="submit" class="btn-submit">Send</button>' +
+            '</form>' +
+          '</div>' +
+        '</div>' +
+      '</section>' +
+
+      '</main>';
+
+    bindBusinessPageEvents();
+    renderBizEmployees();
+    updateBizCalc();
+  }
+
+  function renderBizEmployees() {
+    var grid = document.getElementById('bizEmpGrid');
+    if (!grid) return;
+    grid.innerHTML = BIZ_EMPLOYEES.slice(0, bizEmpVisible).map(buildBizEmployee).join('');
+    var more = document.getElementById('bizEmpMore');
+    if (more) more.style.display = (bizEmpVisible >= BIZ_EMPLOYEES.length) ? 'none' : '';
+  }
+
+  function updateBizCalc() {
+    var seats = bizCalc.seats;
+    var tier  = bizTierFor(seats);
+    var scen  = BIZ_SCENARIOS[bizCalc.scen];
+    var perSeat = Math.round(BIZ_BASE_PRICE * (1 - tier.r));
+    var total   = seats * perSeat;
+    var prod     = Math.round(seats * BIZ_PER_SEAT_GAIN * scen.pct);
+    var turnover = seats * BIZ_TURNOVER_SEAT;
+    var absence  = seats * BIZ_ABSENCE_SEAT;
+    var gain  = prod + turnover + absence;
+    var net   = gain - total;
+    var roi   = gain / total;
+    var payback = Math.max(1, Math.round(total / gain * 52));
+
+    function set(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
+    set('bizSeatLabel', seats >= 1000 ? '1000+' : String(seats));
+    set('bizEstTotal', bizFmt(total));
+    set('bizPerSeat', bizFmt(perSeat) + ' kr');
+    set('bizDiscount', tier.r ? '−' + Math.round(tier.r * 100) + ' %' : '0 %');
+    set('bizProdPct', '+' + Math.round(scen.pct * 100) + '%');
+    set('bizProd', bizFmt(prod) + ' kr/yr');
+    set('bizTurnover', bizFmt(turnover) + ' kr/yr');
+    set('bizAbsence', bizFmt(absence) + ' kr/yr');
+    set('bizCost', bizFmt(total) + ' kr');
+    set('bizGain', bizFmt(gain) + ' kr');
+    set('bizRoi', (Math.round(roi * 10) / 10).toFixed(1) + ' kr back');
+    set('bizNet', '+' + bizFmt(net) + ' kr');
+    set('bizPayback', '~' + payback + ' week' + (payback === 1 ? '' : 's'));
+    set('bizRoiSub', 'Estimated annual gain when ' + (seats >= 1000 ? '1000+' : seats) +
+      ' employees are in systematic, business-focused skills development.');
+
+    var tiers = document.querySelectorAll('#bizTiers .biz-tier');
+    tiers.forEach(function(el) {
+      el.classList.toggle('is-active', parseInt(el.getAttribute('data-min'), 10) === tier.min);
+    });
+    var scenBtns = document.querySelectorAll('#bizScen .biz-scen-btn');
+    scenBtns.forEach(function(el, i) {
+      var on = (i === bizCalc.scen);
+      el.classList.toggle('is-active', on);
+      el.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    var range = document.getElementById('bizSeatRange');
+    if (range && String(seats) !== range.value) range.value = seats;
+  }
+
+  function bindBusinessPageEvents() {
+    var page = document.getElementById('page-business');
+    if (!page) return;
+
+    page.querySelectorAll('[data-biz-scroll]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var t = document.getElementById(btn.getAttribute('data-biz-scroll'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    var range = document.getElementById('bizSeatRange');
+    if (range) range.addEventListener('input', function() {
+      bizCalc.seats = parseInt(range.value, 10) || 1;
+      updateBizCalc();
+    });
+
+    page.querySelectorAll('#bizScen .biz-scen-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        bizCalc.scen = parseInt(btn.getAttribute('data-scen'), 10);
+        updateBizCalc();
+      });
+    });
+
+    page.querySelectorAll('#bizTiers .biz-tier').forEach(function(el) {
+      el.addEventListener('click', function() {
+        bizCalc.seats = parseInt(el.getAttribute('data-min'), 10);
+        updateBizCalc();
+      });
+    });
+
+    var more = document.getElementById('bizEmpMore');
+    if (more) more.addEventListener('click', function() {
+      bizEmpVisible = BIZ_EMPLOYEES.length;
+      renderBizEmployees();
     });
   }
 
