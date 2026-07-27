@@ -6626,6 +6626,13 @@ body.cdp-cta-pinned .cdp-toc {
   flex: 1 1 auto;
   min-width: 280px;
 }
+/* Figma: heading + paragraph grouped with 12px gap, 24px to the button */
+.biz-hero2-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  align-items: flex-start;
+}
 .biz-hero2-ttl {
   font-size: var(--font-size-61);
   font-weight: 700;
@@ -6649,7 +6656,7 @@ body.cdp-cta-pinned .cdp-toc {
   line-height: 1.5;
   max-width: 400px;
 }
-.biz-hero2-cta { margin-top: var(--spacing-8); }
+.biz-hero2-cta { margin-top: 0; }
 
 /* Photo collage — fluid: shrinks proportionally so the row never overflows,
    and matches the Figma fixed sizes (400×425 main, 188 gallery) at 1440. */
@@ -6663,7 +6670,7 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-hero2-gallery {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: var(--spacing-24);
   flex: 0 1 188px;
   min-width: 0;
 }
@@ -6675,8 +6682,12 @@ body.cdp-cta-pinned .cdp-toc {
   background: var(--bg-subtle);
 }
 .biz-hero2-photo img { width: 100%; height: 100%; object-fit: cover; }
-.biz-hero2-photo--main { flex: 0 1 400px; min-width: 0; aspect-ratio: 400 / 425; }
-.biz-hero2-gallery .biz-hero2-photo { aspect-ratio: 188 / 200; }
+/* Figma: main image 400×534 (b-16 green); gallery images 188×255 (b-12 green) */
+.biz-hero2-photo--main { flex: 0 1 400px; min-width: 0; aspect-ratio: 400 / 534; }
+.biz-hero2-gallery .biz-hero2-photo {
+  aspect-ratio: 188 / 255;
+  border-bottom-width: 12px;
+}
 
 /* ── 2. Pillars / why ── */
 .biz-pillars {
