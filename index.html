@@ -3383,19 +3383,16 @@
         cta: '<!-- hubspot_form_will_replace_this_string_do_not_remove_click_creface_code_to_see_more -->' +
              '<div class="biz-tab-cta"><button class="btn-cta-green" data-biz-scroll="biz-contact-anchor">Get in touch</button></div>' }
     ];
-    function bizTocNum(i) { return (i + 1 < 10 ? '0' : '') + (i + 1); }
     var bizTocHTML = bizTabs.map(function(t, i) {
       return '<span class="cdp-toc-link' + (i === 0 ? ' is-active' : '') + '" data-sec="' + t.id + '" role="button" tabindex="0">' +
-        '<span class="cdp-toc-num">' + bizTocNum(i) + '</span>' + t.label + '</span>';
+        t.label + '</span>';
     }).join('');
     var bizSecHTML = bizTabs.map(function(t, i) {
       return '<div class="biz-tab-panel' + (i === 0 ? ' is-active' : '') + '" id="' + t.id + '" role="tabpanel"' + (i === 0 ? '' : ' hidden') + '>' +
-        '<div class="biz-tab-text">' +
-          '<h2 class="cdp-section-title">' + t.label + '</h2>' +
-          '<div class="biz-tab-copy">' + t.body + '</div>' +
-          (t.cta || '') +
-        '</div>' +
-        '<div class="biz-tab-figure"><img class="biz-tab-img" src="' + t.img + '" alt="" loading="lazy"></div>' +
+        '<h2 class="cdp-section-title">' + t.label + '</h2>' +
+        '<div class="biz-tab-copy">' + t.body + '</div>' +
+        (t.cta || '') +
+        '<img class="biz-tab-img" src="' + t.img + '" alt="" loading="lazy">' +
       '</div>';
     }).join('');
 
@@ -3461,7 +3458,6 @@
         '<div class="container">' +
           '<div class="section-hd is-centered">' +
             '<div>' +
-              '<p class="section-eyebrow is-centered"><span class="section-eyebrow-dot"></span>Seat calculator</p>' +
               '<h2 class="section-title">What does it cost for your business?</h2>' +
               '<p class="biz-lead">Indicative pricing with volume discount. The final offer is tailored to programme, content and length.</p>' +
             '</div>' +
@@ -3473,12 +3469,11 @@
               '<div class="biz-seat-display"><span id="bizSeatLabel">100</span><span class="biz-seat-unit">seats</span></div>' +
               '<input type="range" class="biz-range" id="bizSeatRange" min="1" max="1000" step="1" value="100" aria-label="Number of seats">' +
               '<div class="biz-range-scale"><span>1</span><span>250</span><span>500</span><span>1000+</span></div>' +
-              '<div class="biz-tiers" id="bizTiers">' +
+              '<div class="biz-scen biz-tiers" id="bizTiers">' +
                 BIZ_TIERS.slice().reverse().map(function(t) {
-                  return '<span class="biz-tier" data-min="' + t.min + '">' +
-                    '<span class="biz-tier-seats">' + t.label + ' seats</span>' +
-                    '<span class="biz-tier-disc">' + (t.r ? '−' + Math.round(t.r * 100) + '%' : '—') + '</span>' +
-                  '</span>';
+                  return '<button class="biz-scen-btn biz-tier" data-min="' + t.min + '">' +
+                    t.label + ' seats' + (t.r ? ' · −' + Math.round(t.r * 100) + '%' : '') +
+                  '</button>';
                 }).join('') +
               '</div>' +
             '</div>' +
@@ -3490,7 +3485,7 @@
                 '<div class="biz-est-row"><span>Per seat</span><span id="bizPerSeat">4 165 kr</span></div>' +
                 '<div class="biz-est-row"><span>Volume discount</span><span id="bizDiscount">−15 %</span></div>' +
               '</div>' +
-              '<button class="btn-cta-green biz-est-cta" data-biz-scroll="biz-contact-anchor">Get a tailored offer<span class="material-symbols-outlined">arrow_forward</span></button>' +
+              '<button class="btn-cta-green biz-est-cta" data-biz-scroll="biz-contact-anchor">Get a tailored offer</button>' +
               '<p class="biz-est-note">Indicative. Final price is set after a needs assessment and programme scope.</p>' +
             '</div>' +
           '</div>' +
@@ -3538,23 +3533,16 @@
         '<div class="container">' +
           '<div class="section-hd is-centered">' +
             '<div>' +
-              '<p class="section-eyebrow is-centered"><span class="section-eyebrow-dot"></span>Our people</p>' +
               '<h2 class="section-title">The people who build your competence program</h2>' +
-              '<p class="biz-lead">NKI Nettstudier is staffed by people who are passionate about flexible education.</p>' +
+              '<p class="biz-lead biz-lead--primary">NKI Nettstudier is staffed by people who are passionate about flexible education.</p>' +
             '</div>' +
           '</div>' +
           '<div class="biz-emp-grid" id="bizEmpGrid"></div>' +
-          '<div class="biz-emp-more-wrap"><button class="btn-see-all" id="bizEmpMore"><span class="material-symbols-outlined">expand_more</span>Load more</button></div>' +
         '</div>' +
       '</section>' +
 
-      /* ── 5. LATEST NEWS ── */
-      '<section class="wf-section bg-gray">' +
-        '<div class="container">' +
-          '<div class="section-hd is-centered"><h2 class="section-title">Latest news from NKI</h2></div>' +
-          '<div class="news-grid">' + BIZ_NEWS.map(buildBizNews).join('') + '</div>' +
-        '</div>' +
-      '</section>' +
+      /* ── 5. TESTIMONIALS (reuse the Home "What our students say" component) ── */
+      '<div id="bizTestiMount"></div>' +
 
       /* ── 7. CONTACT FORM (reuse .consult-inline / .consult-form) ── */
       '<section class="wf-section" id="biz-contact-anchor">' +
@@ -3590,15 +3578,47 @@
 
     bindBusinessPageEvents();
     renderBizEmployees();
+    renderBizTestimonials();
     updateBizCalc();
   }
 
   function renderBizEmployees() {
     var grid = document.getElementById('bizEmpGrid');
     if (!grid) return;
-    grid.innerHTML = BIZ_EMPLOYEES.slice(0, bizEmpVisible).map(buildBizEmployee).join('');
-    var more = document.getElementById('bizEmpMore');
-    if (more) more.style.display = (bizEmpVisible >= BIZ_EMPLOYEES.length) ? 'none' : '';
+    grid.innerHTML = BIZ_EMPLOYEES.slice(0, 6).map(buildBizEmployee).join('');
+  }
+
+  /* Reuse the Home "What our students say" component verbatim: clone the live
+     section, remap its ids to avoid collisions, drop it on a white background,
+     and re-wire its mobile counter + blog button. */
+  function renderBizTestimonials() {
+    var mount = document.getElementById('bizTestiMount');
+    var src = document.querySelector('#page-home section[aria-labelledby="testi-hd"]');
+    if (!mount || !src) return;
+    var clone = src.cloneNode(true);
+    clone.setAttribute('aria-labelledby', 'biz-testi-hd');
+    var remap = { 'testi-hd': 'biz-testi-hd', 'testiCounter': 'bizTestiCounter', 'testiCols': 'bizTestiCols', 'testiBlogBtn': 'bizTestiBlogBtn' };
+    Object.keys(remap).forEach(function(oldId) {
+      var el = clone.querySelector('#' + oldId);
+      if (el) el.id = remap[oldId];
+    });
+    mount.innerHTML = '';
+    mount.appendChild(clone);
+
+    var cols = document.getElementById('bizTestiCols');
+    var counter = document.getElementById('bizTestiCounter');
+    if (cols && counter) {
+      var total = cols.querySelectorAll('.t-card:not(.featured)').length;
+      counter.textContent = '1 — ' + total;
+      cols.addEventListener('scroll', function() {
+        var first = cols.querySelector('.t-card:not(.featured)');
+        if (!first) return;
+        var idx = Math.round(cols.scrollLeft / (first.offsetWidth + 16));
+        counter.textContent = (idx + 1) + ' — ' + total;
+      }, { passive: true });
+    }
+    var blogBtn = document.getElementById('bizTestiBlogBtn');
+    if (blogBtn) blogBtn.addEventListener('click', function() { showPage('blog'); });
   }
 
   function updateBizCalc() {
@@ -3675,12 +3695,6 @@
         bizCalc.seats = parseInt(el.getAttribute('data-min'), 10);
         updateBizCalc();
       });
-    });
-
-    var more = document.getElementById('bizEmpMore');
-    if (more) more.addEventListener('click', function() {
-      bizEmpVisible = BIZ_EMPLOYEES.length;
-      renderBizEmployees();
     });
 
     /* Tabbed content: MANUAL tab nav only — clicking a tab swaps the visible

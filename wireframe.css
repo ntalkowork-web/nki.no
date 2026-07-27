@@ -6604,6 +6604,7 @@ body.cdp-cta-pinned .cdp-toc {
   line-height: 1.4;
   margin-top: var(--spacing-16);
 }
+.biz-lead--primary { color: var(--text-primary); }
 
 /* ── 1. Hero (Figma for-business 706:10315) ── */
 .biz-hero2 {
@@ -6727,7 +6728,7 @@ body.cdp-cta-pinned .cdp-toc {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-12);
-  justify-content: center;
+  justify-content: flex-start;
 }
 .biz-tag {
   display: inline-flex;
@@ -6785,7 +6786,6 @@ body.cdp-cta-pinned .cdp-toc {
 }
 .biz-calc-panel {
   background: var(--bg-surface-primary);
-  border: 1px solid var(--border-default);
   border-radius: var(--radius-24);
   padding: var(--spacing-32);
 }
@@ -6821,7 +6821,7 @@ body.cdp-cta-pinned .cdp-toc {
   appearance: none;
   width: 24px; height: 24px;
   border-radius: 50%;
-  background: var(--action-primary-default);
+  background: var(--text-primary);
   border: 3px solid var(--bg-surface-primary);
   box-shadow: 0 0 0 1px var(--border-default);
   cursor: pointer;
@@ -6829,7 +6829,7 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-range::-moz-range-thumb {
   width: 24px; height: 24px;
   border-radius: 50%;
-  background: var(--action-primary-default);
+  background: var(--text-primary);
   border: 3px solid var(--bg-surface-primary);
   box-shadow: 0 0 0 1px var(--border-default);
   cursor: pointer;
@@ -6843,22 +6843,7 @@ body.cdp-cta-pinned .cdp-toc {
   color: var(--text-secondary-on-subtle);
   margin-bottom: var(--spacing-24);
 }
-.biz-tiers { display: flex; flex-wrap: wrap; gap: var(--spacing-8); }
-.biz-tier {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: var(--spacing-8) var(--spacing-12);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-8);
-  background: var(--bg-surface-primary);
-  cursor: pointer;
-  transition: border-color .15s, background .15s;
-}
-.biz-tier:hover { border-color: var(--pill-border-hover, var(--nki-gray-500)); }
-.biz-tier.is-active { border-color: var(--border-selected); background: var(--feedback-positive-subtle-bg); }
-.biz-tier-seats { font-size: var(--font-size-14); font-weight: 500; color: var(--text-primary); white-space: nowrap; }
-.biz-tier-disc { font-size: var(--font-size-14); color: var(--text-secondary-on-subtle); }
+/* Seat pills reuse the .biz-scen-btn tag component (see below) — no bespoke styling. */
 
 .biz-calc-estimate { display: flex; flex-direction: column; }
 .biz-est-total {
@@ -6946,11 +6931,12 @@ body.cdp-cta-pinned .cdp-toc {
 }
 .biz-roi-sum-lbl { font-size: var(--font-size-14); color: var(--text-secondary-on-subtle); }
 .biz-roi-sum-val { font-size: var(--font-size-20); font-weight: 700; color: var(--text-primary); line-height: 1.2; }
-.biz-roi-sum-hero { background: var(--feedback-positive-subtle-bg); }
+.biz-roi-sum-hero { background: transparent; }
 
 /* ── 4. Employees ── */
+/* White section with the green decorative gradient kept only at the bottom */
 .biz-emp-section {
-  background: var(--feedback-positive-subtle-bg);
+  background: linear-gradient(to bottom, var(--bg-surface-primary) 55%, var(--feedback-positive-subtle-bg));
   padding: var(--spacing-96) 0;
 }
 .biz-emp-grid {
@@ -7004,28 +6990,19 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-toc { border: none; background: transparent; }
 .biz-toc .cdp-toc-list { padding: 0; gap: var(--spacing-4); }
 
-/* Panels: only the active one shows; text + image side by side (≈60/40) */
+/* Panels: only the active one shows; text stacked above the image */
 .biz-tab-panel { display: none; }
-.biz-tab-panel.is-active {
-  display: grid;
-  grid-template-columns: 60fr 40fr;
-  gap: var(--spacing-48);
-  align-items: start; /* image top-aligns with the text */
-}
+.biz-tab-panel.is-active { display: block; }
 .biz-tab-panel .cdp-section-title { font-size: var(--font-size-31); }
 .biz-tab-cta { margin-top: var(--spacing-32); }
 
-/* Image sits inside a green container (same token as the hero decorative shapes) */
-.biz-tab-figure {
-  background: var(--action-primary-hover);
-  border-radius: var(--radius-24);
-  padding: var(--spacing-32);
-}
+/* Image displayed directly (no container), below the text */
 .biz-tab-img {
   display: block;
   width: 100%;
   height: auto; /* preserve the image's natural aspect ratio */
-  border-radius: var(--radius-16);
+  border-radius: var(--radius-24);
+  margin-top: var(--spacing-32);
 }
 #biz-contact-anchor { scroll-margin-top: calc(var(--header-h) + 24px); }
 
@@ -7046,10 +7023,6 @@ body.cdp-cta-pinned .cdp-toc {
   .biz-toc .cdp-toc-link { flex-shrink: 0; white-space: nowrap; }
 }
 
-/* Mobile: stack text above image inside the active panel */
-@media (max-width: 768px) {
-  .biz-tab-panel.is-active { grid-template-columns: 1fr; gap: var(--spacing-24); }
-}
 
 /* ── Responsive: hero stacks below its own breakpoint (the two Figma columns
    need ~1244px of content width to sit side by side comfortably) ── */
