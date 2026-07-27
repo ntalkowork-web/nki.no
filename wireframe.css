@@ -6606,6 +6606,8 @@ body.cdp-cta-pinned .cdp-toc {
 }
 .biz-lead--primary { color: var(--text-primary); }
 .biz-lead--on-subtle { color: var(--text-secondary-on-subtle); }
+/* Standard Paragraph / Body (16px) text style — use where body copy is intended */
+.biz-lead--body { font-size: var(--font-size-16); }
 
 /* ── 1. Hero (Figma for-business 706:10315) ── */
 .biz-hero2 {
@@ -6660,13 +6662,13 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-hero2-cta { margin-top: 0; }
 
 /* Factoid row under the CTA — horizontal on desktop, stacks on small screens.
-   Parent .biz-hero2-text is a flex column with a 24px gap, so 32px margin-top
-   yields the intended 56px of space between the CTA and the factoids. */
+   Parent .biz-hero2-text is a flex column with a 24px gap, so 24px margin-top
+   yields the intended 48px of space between the CTA and the factoids. */
 .biz-hero2-facts {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-32);
-  margin-top: var(--spacing-32);
+  margin-top: var(--spacing-24);
 }
 .biz-fact { display: flex; flex-direction: column; gap: var(--spacing-4); max-width: 200px; }
 .biz-fact-num {
@@ -6894,8 +6896,6 @@ body.cdp-cta-pinned .cdp-toc {
   justify-content: space-between;
   font-size: var(--font-size-16);
   color: var(--text-primary);
-  padding-bottom: var(--spacing-12);
-  border-bottom: 1px solid var(--border-default);
 }
 .biz-est-row span:last-child { font-weight: 700; }
 .biz-est-cta { width: 100%; gap: var(--spacing-8); margin-top: auto; }
@@ -6995,7 +6995,7 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-emp-tag {
   position: absolute;
   left: var(--spacing-24);
-  right: var(--spacing-24);
+  right: var(--spacing-16);
   bottom: var(--spacing-24);
   display: flex;
   align-items: center;
