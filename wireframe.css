@@ -6613,6 +6613,8 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-hero2 {
   background: var(--feedback-positive-subtle-bg);
   padding: var(--spacing-96) 0;
+  border-bottom-left-radius: var(--radius-32);
+  border-bottom-right-radius: var(--radius-32);
 }
 .biz-hero2-inner {
   display: flex;
