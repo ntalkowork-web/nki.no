@@ -3376,20 +3376,31 @@
     page.innerHTML =
       '<main class="biz-page">' +
 
-      /* ── 1. HERO ── */
-      '<section class="biz-hero">' +
+      /* ── 1. HERO (Figma for-business 706:10315) ── */
+      '<section class="biz-hero2">' +
         '<div class="container">' +
-          '<div class="biz-hero-inner">' +
-            '<p class="section-eyebrow"><span class="section-eyebrow-dot"></span>For business</p>' +
-            '<h1 class="biz-hero-ttl">Skills development for companies</h1>' +
-            '<p class="biz-hero-sub">More than half of all Norwegian companies need competence raising among their employees. We help you meet the needs of your business.</p>' +
-            '<div class="biz-hero-actions">' +
-              '<button class="btn-cta-green" data-biz-scroll="biz-calc-anchor">Estimate your cost</button>' +
-              '<button class="btn-see-all" data-biz-scroll="biz-contact-anchor">Talk to us</button>' +
+          '<div class="biz-hero2-inner">' +
+            '<div class="biz-hero2-text">' +
+              '<h1 class="biz-hero2-ttl">Skills development for <span class="biz-hero2-mark">business<img class="biz-hero2-ellipse" src="images/design-system/business/ellipse.svg" alt="" aria-hidden="true"></span></h1>' +
+              '<p class="biz-hero2-sub">More than half of all Norwegian companies need competence raising among their employees. We help you meet the needs of your business.</p>' +
+              '<button class="btn-browse-all biz-hero2-cta" data-biz-scroll="biz-calc-anchor">Estimate cost</button>' +
+            '</div>' +
+            '<div class="biz-hero2-media">' +
+              '<div class="biz-hero2-photo biz-hero2-photo--main"><img src="images/design-system/business/main.jpg" alt="Smiling employee standing in a modern office"></div>' +
+              '<div class="biz-hero2-gallery">' +
+                '<div class="biz-hero2-photo"><img src="images/design-system/business/gallery-1.jpg" alt="A team working together on laptops"></div>' +
+                '<div class="biz-hero2-photo"><img src="images/design-system/business/gallery-2.jpg" alt="An employee presenting at a whiteboard"></div>' +
+              '</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
       '</section>' +
+
+      /* ── Mentioned in (part of the Figma hero frame) ── */
+      '<div class="mentioned-in biz-logos">' +
+        '<p class="mentioned-in-lbl">Mentioned in</p>' +
+        '<div class="mentioned-in-logos"><div class="marquee-inner">' + logoTrack(false) + logoTrack(true) + '</div></div>' +
+      '</div>' +
 
       /* ── 2. WHY / PILLARS ── */
       '<section class="wf-section">' +
@@ -3521,12 +3532,6 @@
           '<div class="news-grid">' + BIZ_NEWS.map(buildBizNews).join('') + '</div>' +
         '</div>' +
       '</section>' +
-
-      /* ── 6. CUSTOMER LOGOS ── */
-      '<div class="mentioned-in biz-logos">' +
-        '<p class="mentioned-in-lbl">Trusted by</p>' +
-        '<div class="mentioned-in-logos"><div class="marquee-inner">' + logoTrack(false) + logoTrack(true) + '</div></div>' +
-      '</div>' +
 
       /* ── 7. CONTACT FORM (reuse .consult-inline / .consult-form) ── */
       '<section class="wf-section">' +
