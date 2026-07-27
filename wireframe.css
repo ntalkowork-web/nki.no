@@ -6832,7 +6832,7 @@ body.cdp-cta-pinned .cdp-toc {
   font-weight: 500;
   letter-spacing: .04em;
   text-transform: uppercase;
-  color: var(--text-secondary-on-subtle);
+  color: var(--text-secondary-on-white);
   margin-bottom: var(--spacing-16);
 }
 .biz-seat-display { display: flex; align-items: baseline; gap: var(--spacing-12); }
@@ -6878,7 +6878,7 @@ body.cdp-cta-pinned .cdp-toc {
   display: flex;
   justify-content: space-between;
   font-size: var(--font-size-14);
-  color: var(--text-secondary-on-subtle);
+  color: var(--text-secondary-on-white);
   margin-bottom: var(--spacing-24);
 }
 /* Seat pills reuse the .biz-scen-btn tag component (see below), matching the DS
@@ -6904,7 +6904,7 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-est-cta .material-symbols-outlined { font-size: 20px; }
 .biz-est-note {
   font-size: var(--font-size-14);
-  color: var(--text-secondary-on-subtle);
+  color: var(--text-secondary-on-white);
   line-height: 1.4;
   margin-top: var(--spacing-16);
   text-align: center;
@@ -6949,7 +6949,7 @@ body.cdp-cta-pinned .cdp-toc {
   border-radius: var(--radius-16);
   padding: var(--spacing-24);
 }
-.biz-roi-card-lbl { font-size: var(--font-size-14); font-weight: 500; color: var(--text-secondary-on-subtle); text-transform: uppercase; letter-spacing: .04em; margin-bottom: var(--spacing-12); }
+.biz-roi-card-lbl { font-size: var(--font-size-14); font-weight: 500; color: var(--text-secondary-on-white); text-transform: uppercase; letter-spacing: .04em; margin-bottom: var(--spacing-12); }
 .biz-roi-card-val { font-size: var(--font-size-25); font-weight: 700; color: var(--text-primary); line-height: 1.2; margin-bottom: var(--spacing-8); }
 .biz-roi-card-desc { font-size: var(--font-size-14); color: var(--text-secondary-on-white); line-height: 1.4; }
 
@@ -6967,7 +6967,7 @@ body.cdp-cta-pinned .cdp-toc {
   padding: var(--spacing-16);
   border-radius: var(--radius-12);
 }
-.biz-roi-sum-lbl { font-size: var(--font-size-14); color: var(--text-secondary-on-subtle); }
+.biz-roi-sum-lbl { font-size: var(--font-size-14); color: var(--text-secondary-on-white); }
 .biz-roi-sum-val { font-size: var(--font-size-20); font-weight: 700; color: var(--text-primary); line-height: 1.2; }
 .biz-roi-sum-hero { background: transparent; }
 
@@ -7005,7 +7005,7 @@ body.cdp-cta-pinned .cdp-toc {
   gap: var(--spacing-16);
   background: var(--bg-surface-primary);
   border-radius: var(--radius-12);
-  padding: var(--spacing-24);
+  padding: var(--spacing-12) var(--spacing-16);
 }
 .biz-emp-name { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); line-height: 1.2; }
 .biz-emp-role { font-size: var(--font-size-14); color: var(--text-secondary-on-subtle); line-height: 1.3; }
