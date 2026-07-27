@@ -6918,7 +6918,8 @@ body.cdp-cta-pinned .cdp-toc {
   margin-bottom: var(--spacing-24);
 }
 .biz-roi-card {
-  background: var(--bg-subtle);
+  background: var(--bg-surface-primary);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-16);
   padding: var(--spacing-24);
 }
@@ -6945,10 +6946,13 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-roi-sum-hero { background: transparent; }
 
 /* ── 4. Employees ── */
-/* Belongs to the Hero: same solid green background + same green photo shadows */
+/* Matches Figma our-employees (589:15973): solid green subtle container with
+   rounded bottom corners; each card carries a 16px green-500 bottom edge. */
 .biz-emp-section {
   background: var(--feedback-positive-subtle-bg);
-  padding: var(--spacing-96) 0;
+  padding: var(--spacing-72) 0 var(--spacing-96);
+  border-bottom-left-radius: var(--radius-32);
+  border-bottom-right-radius: var(--radius-32);
 }
 .biz-emp-grid {
   display: grid;
@@ -6961,7 +6965,7 @@ body.cdp-cta-pinned .cdp-toc {
   border-radius: var(--radius-24);
   overflow: hidden;
   aspect-ratio: 3 / 4;
-  box-shadow: 6px 10px 0 0 var(--action-primary-default);
+  border-bottom: 16px solid var(--action-primary-hover);
 }
 .biz-emp-photo img { width: 100%; height: 100%; object-fit: cover; }
 .biz-emp-tag {
@@ -7002,24 +7006,31 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-toc .cdp-toc-list { padding: 0; gap: var(--spacing-4); align-items: flex-start; }
 .biz-toc .cdp-toc-link { align-self: flex-start; }
 
-/* Panels: only the active one shows; text stacked above the image */
+/* Heading left-aligned, starting on the same vertical line as the tab nav */
+.biz-tabs .biz-tabs-hd { text-align: left; align-items: flex-start; max-width: none; }
+
+/* Panels: only the active one shows; Option A — text + image side by side,
+   image top-aligned with the text, ~58/42 split */
 .biz-tab-panel { display: none; }
-.biz-tab-panel.is-active { display: block; }
-.biz-tab-panel .cdp-section-title { font-size: var(--font-size-31); max-width: 480px; }
+.biz-tab-panel.is-active {
+  display: grid;
+  grid-template-columns: 58fr 42fr;
+  gap: var(--spacing-48);
+  align-items: start;
+}
+.biz-tab-panel .cdp-section-title { font-size: var(--font-size-31); }
 /* Body copy capped for readability */
 .biz-tab-copy { max-width: 480px; }
 .biz-tab-cta { margin-top: var(--spacing-32); }
 
-/* Photo displayed directly, capped at 400px tall, aspect ratio preserved */
+/* Photo fills its column, top-aligned with the text, capped at 400px tall */
 .biz-tab-img {
   display: block;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
   height: auto;
   max-height: 400px;
   object-fit: cover;
   border-radius: var(--radius-24);
-  margin-top: var(--spacing-32);
 }
 #biz-contact-anchor { scroll-margin-top: calc(var(--header-h) + 24px); }
 
@@ -7038,6 +7049,12 @@ body.cdp-cta-pinned .cdp-toc {
   }
   .biz-toc .cdp-toc-list { flex-direction: row; overflow-x: auto; gap: var(--spacing-8); }
   .biz-toc .cdp-toc-link { flex-shrink: 0; white-space: nowrap; }
+}
+
+/* Mobile: stack the panel — text above the image */
+@media (max-width: 768px) {
+  .biz-tab-panel.is-active { grid-template-columns: 1fr; gap: var(--spacing-24); }
+  .biz-tab-img { margin-top: 0; }
 }
 
 

@@ -3389,9 +3389,11 @@
     }).join('');
     var bizSecHTML = bizTabs.map(function(t, i) {
       return '<div class="biz-tab-panel' + (i === 0 ? ' is-active' : '') + '" id="' + t.id + '" role="tabpanel"' + (i === 0 ? '' : ' hidden') + '>' +
-        '<h2 class="cdp-section-title">' + t.label + '</h2>' +
-        '<div class="biz-tab-copy">' + t.body + '</div>' +
-        (t.cta || '') +
+        '<div class="biz-tab-text">' +
+          '<h2 class="cdp-section-title">' + t.label + '</h2>' +
+          '<div class="biz-tab-copy">' + t.body + '</div>' +
+          (t.cta || '') +
+        '</div>' +
         '<img class="biz-tab-img" src="' + t.img + '" alt="" loading="lazy">' +
       '</div>';
     }).join('');
@@ -3441,10 +3443,8 @@
       /* ── 2. TABBED CONTENT (reuse CDP "What's in the course" component) ── */
       '<section class="wf-section biz-tabs">' +
         '<div class="container">' +
-          '<div class="section-hd is-centered">' +
-            '<div class="biz-tabs-hd">' +
-              '<h2 class="section-title">Competence is not a content problem It’s an educational issue</h2>' +
-            '</div>' +
+          '<div class="section-hd biz-tabs-hd">' +
+            '<h2 class="section-title">Competence is not a content problem It’s an educational issue</h2>' +
           '</div>' +
           '<div class="biz-tabs-grid">' +
             '<aside class="cdp-toc-aside">' +
