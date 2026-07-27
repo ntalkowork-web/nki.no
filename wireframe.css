@@ -6644,9 +6644,9 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-hero2-mark { position: relative; display: inline-block; white-space: nowrap; z-index: 0; }
 .biz-hero2-ellipse {
   position: absolute;
-  left: 50%; top: 52%;
+  left: 50%; top: 48%;
   transform: translate(-50%, -50%);
-  width: 116%; height: 150%;
+  width: 116%; height: 138%;
   max-width: none;
   pointer-events: none;
   z-index: -1;
@@ -6659,12 +6659,14 @@ body.cdp-cta-pinned .cdp-toc {
 }
 .biz-hero2-cta { margin-top: 0; }
 
-/* Factoid row under the CTA — horizontal on desktop, stacks on small screens */
+/* Factoid row under the CTA — horizontal on desktop, stacks on small screens.
+   Parent .biz-hero2-text is a flex column with a 24px gap, so 32px margin-top
+   yields the intended 56px of space between the CTA and the factoids. */
 .biz-hero2-facts {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-32);
-  margin-top: var(--spacing-8);
+  margin-top: var(--spacing-32);
 }
 .biz-fact { display: flex; flex-direction: column; gap: var(--spacing-4); max-width: 200px; }
 .biz-fact-num {
@@ -7035,7 +7037,7 @@ body.cdp-cta-pinned .cdp-toc {
 /* Panels: only the active one shows; text stacked above a full-width image */
 .biz-tab-panel { display: none; }
 .biz-tab-panel.is-active { display: block; }
-.biz-tab-panel .cdp-section-title { font-size: var(--font-size-31); }
+.biz-tab-panel .cdp-section-title { font-size: var(--font-size-31); margin-bottom: var(--spacing-12); }
 /* Text content capped for readability */
 .biz-tab-text { max-width: 612px; }
 .biz-tab-cta { margin-top: var(--spacing-32); }
