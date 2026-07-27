@@ -6855,7 +6855,10 @@ body.cdp-cta-pinned .cdp-toc {
   color: var(--text-secondary-on-subtle);
   margin-bottom: var(--spacing-24);
 }
-/* Seat pills reuse the .biz-scen-btn tag component (see below) — no bespoke styling. */
+/* Seat pills reuse the .biz-scen-btn tag component (see below). On the white
+   calc panel, give the default (unselected) state a surface fill so its light
+   grey --border-default outline reads clearly; the selected state is unchanged. */
+.biz-tiers .biz-tier:not(.is-active) { background: var(--bg-surface-primary); }
 
 .biz-calc-estimate { display: flex; flex-direction: column; }
 .biz-est-total {
@@ -6892,7 +6895,7 @@ body.cdp-cta-pinned .cdp-toc {
 }
 .biz-roi-hd { margin-bottom: var(--spacing-24); }
 .biz-roi-ttl { font-size: var(--font-size-31); font-weight: 700; color: var(--text-primary); line-height: 1.2; }
-.biz-roi-sub { font-size: var(--font-size-16); color: var(--text-secondary-on-white); line-height: 1.4; margin-top: var(--spacing-8); }
+.biz-roi-sub { font-size: var(--font-size-16); color: var(--text-secondary-on-white); line-height: 1.4; margin-top: var(--spacing-8); max-width: 480px; }
 .biz-scen { display: flex; flex-wrap: wrap; gap: var(--spacing-8); margin-bottom: var(--spacing-24); }
 .biz-scen-btn {
   padding: var(--spacing-12) var(--spacing-16);
@@ -6979,7 +6982,7 @@ body.cdp-cta-pinned .cdp-toc {
   gap: var(--spacing-16);
   background: var(--bg-surface-primary);
   border-radius: var(--radius-12);
-  padding: var(--spacing-12) var(--spacing-16);
+  padding: var(--spacing-24);
 }
 .biz-emp-name { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); line-height: 1.2; }
 .biz-emp-role { font-size: var(--font-size-14); color: var(--text-secondary-on-subtle); line-height: 1.3; }
@@ -7009,28 +7012,21 @@ body.cdp-cta-pinned .cdp-toc {
 /* Heading left-aligned, starting on the same vertical line as the tab nav */
 .biz-tabs .biz-tabs-hd { text-align: left; align-items: flex-start; max-width: none; }
 
-/* Panels: only the active one shows; Option A — text + image side by side,
-   image top-aligned with the text, ~58/42 split */
+/* Panels: only the active one shows; text stacked above a full-width image */
 .biz-tab-panel { display: none; }
-.biz-tab-panel.is-active {
-  display: grid;
-  grid-template-columns: 58fr 42fr;
-  gap: var(--spacing-48);
-  align-items: start;
-}
+.biz-tab-panel.is-active { display: block; }
 .biz-tab-panel .cdp-section-title { font-size: var(--font-size-31); }
-/* Body copy capped for readability */
-.biz-tab-copy { max-width: 480px; }
+/* Text content capped for readability */
+.biz-tab-text { max-width: 600px; }
 .biz-tab-cta { margin-top: var(--spacing-32); }
 
-/* Photo fills its column, top-aligned with the text, capped at 400px tall */
+/* Photo below the text, spanning the full content width, aspect ratio preserved */
 .biz-tab-img {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 400px;
-  object-fit: cover;
   border-radius: var(--radius-24);
+  margin-top: var(--spacing-32);
 }
 #biz-contact-anchor { scroll-margin-top: calc(var(--header-h) + 24px); }
 
@@ -7051,11 +7047,6 @@ body.cdp-cta-pinned .cdp-toc {
   .biz-toc .cdp-toc-link { flex-shrink: 0; white-space: nowrap; }
 }
 
-/* Mobile: stack the panel — text above the image */
-@media (max-width: 768px) {
-  .biz-tab-panel.is-active { grid-template-columns: 1fr; gap: var(--spacing-24); }
-  .biz-tab-img { margin-top: 0; }
-}
 
 
 /* ── Responsive: hero stacks below its own breakpoint (the two Figma columns
