@@ -3388,13 +3388,15 @@
       return '<span class="cdp-toc-link' + (i === 0 ? ' is-active' : '') + '" data-sec="' + t.id + '" role="button" tabindex="0">' +
         '<span class="cdp-toc-num">' + bizTocNum(i) + '</span>' + t.label + '</span>';
     }).join('');
-    var bizSecHTML = bizTabs.map(function(t) {
-      return '<section class="cdp-section biz-tab-section" id="' + t.id + '">' +
-        '<h2 class="cdp-section-title">' + t.label + '</h2>' +
-        '<div class="biz-tab-copy">' + t.body + '</div>' +
-        '<img class="biz-tab-img" src="' + t.img + '" alt="" loading="lazy">' +
-        (t.cta || '') +
-      '</section>';
+    var bizSecHTML = bizTabs.map(function(t, i) {
+      return '<div class="biz-tab-panel' + (i === 0 ? ' is-active' : '') + '" id="' + t.id + '" role="tabpanel"' + (i === 0 ? '' : ' hidden') + '>' +
+        '<div class="biz-tab-text">' +
+          '<h2 class="cdp-section-title">' + t.label + '</h2>' +
+          '<div class="biz-tab-copy">' + t.body + '</div>' +
+          (t.cta || '') +
+        '</div>' +
+        '<div class="biz-tab-figure"><img class="biz-tab-img" src="' + t.img + '" alt="" loading="lazy"></div>' +
+      '</div>';
     }).join('');
 
     /* Logo marquee (reuse .mentioned-in) — the same asset list used on the homepage */
@@ -3681,32 +3683,21 @@
       renderBizEmployees();
     });
 
-    /* Tabbed content: scroll-spy + click/keyboard nav — mirrors the CDP
-       "What's in the course" behaviour (.cdp-toc-link ⇄ .cdp-section). */
+    /* Tabbed content: MANUAL tab nav only — clicking a tab swaps the visible
+       panel; the selected tab stays active until another is clicked. Reuses the
+       CDP vertical-nav component (.cdp-toc-link) for styling/states. */
     var bizTocLinks = page.querySelectorAll('#bizToc .cdp-toc-link');
-    var bizSecs = page.querySelectorAll('.biz-tab-section');
-    if (bizSecs.length && 'IntersectionObserver' in window) {
-      var bizObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            var id = e.target.id;
-            bizTocLinks.forEach(function(l) {
-              var on = l.getAttribute('data-sec') === id;
-              l.classList.toggle('is-active', on);
-              if (on && window.matchMedia('(max-width: 1024px)').matches) {
-                l.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-              }
-            });
-          }
-        });
-      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
-      bizSecs.forEach(function(s) { bizObs.observe(s); });
+    var bizPanels = page.querySelectorAll('.biz-tab-panel');
+    function bizSelectTab(id) {
+      bizTocLinks.forEach(function(l) { l.classList.toggle('is-active', l.getAttribute('data-sec') === id); });
+      bizPanels.forEach(function(p) {
+        var on = p.id === id;
+        p.classList.toggle('is-active', on);
+        p.hidden = !on;
+      });
     }
     bizTocLinks.forEach(function(link) {
-      function go() {
-        var s = document.getElementById(link.getAttribute('data-sec'));
-        if (s) s.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      function go() { bizSelectTab(link.getAttribute('data-sec')); }
       link.addEventListener('click', go);
       link.addEventListener('keydown', function(ev) {
         if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); go(); }

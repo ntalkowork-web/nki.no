@@ -6990,34 +6990,46 @@ body.cdp-cta-pinned .cdp-toc {
 /* ── 6. Logos ── */
 .biz-logos { justify-content: flex-start; }
 
-/* ── 2. Tabbed content — reuses the CDP TOC (.cdp-toc / .cdp-toc-link) and
-   section (.cdp-section) components with a nav-left / content-right layout ── */
+/* ── 2. Tabbed content — reuses the CDP vertical-nav (.cdp-toc / .cdp-toc-link)
+   as MANUAL tabs; nav hugs its content on the left, active panel on the right ── */
 .biz-tabs-grid {
   display: grid;
-  grid-template-columns: 400fr 720fr; /* nav left, content right */
+  grid-template-columns: auto minmax(0, 1fr); /* nav hugs content, panel takes the rest */
   gap: var(--spacing-64);
   align-items: start;
   margin-top: var(--spacing-48);
 }
-/* Sticky nav, border removed so it feels lighter (spec) */
+/* Sticky nav, border removed so it feels lighter (spec). The `auto` column sizes
+   the nav to the longest tab label; links share that width for even padding. */
 .biz-toc { border: none; background: transparent; }
 .biz-toc .cdp-toc-list { padding: 0; gap: var(--spacing-4); }
-/* Content sections: drop the dividers, add generous whitespace */
-.biz-tab-section.cdp-section { border-bottom: none; padding-bottom: var(--spacing-64); }
-.biz-tabs-content .cdp-section:last-child { padding-bottom: 0; }
-.biz-tabs-content .cdp-section + .cdp-section { margin-top: var(--spacing-64); }
-.biz-tab-section .cdp-section-title { font-size: var(--font-size-31); }
-.biz-tab-img {
-  width: 100%;
-  border-radius: var(--radius-24);
-  margin-top: var(--spacing-32);
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+
+/* Panels: only the active one shows; text + image side by side (≈60/40) */
+.biz-tab-panel { display: none; }
+.biz-tab-panel.is-active {
+  display: grid;
+  grid-template-columns: 60fr 40fr;
+  gap: var(--spacing-48);
+  align-items: start; /* image top-aligns with the text */
 }
+.biz-tab-panel .cdp-section-title { font-size: var(--font-size-31); }
 .biz-tab-cta { margin-top: var(--spacing-32); }
+
+/* Image sits inside a green container (same token as the hero decorative shapes) */
+.biz-tab-figure {
+  background: var(--action-primary-hover);
+  border-radius: var(--radius-24);
+  padding: var(--spacing-32);
+}
+.biz-tab-img {
+  display: block;
+  width: 100%;
+  height: auto; /* preserve the image's natural aspect ratio */
+  border-radius: var(--radius-16);
+}
 #biz-contact-anchor { scroll-margin-top: calc(var(--header-h) + 24px); }
 
-/* Tablet / mobile: stack, nav becomes a sticky horizontal scroller on top */
+/* Tablet: keep the text/image side-by-side; nav moves to a sticky top scroller */
 @media (max-width: 1024px) {
   .biz-tabs-grid { grid-template-columns: 1fr; gap: var(--spacing-24); margin-top: var(--spacing-32); }
   /* Override the CDP mobile rule that hides .cdp-toc-aside — here it becomes the top nav */
@@ -7032,6 +7044,11 @@ body.cdp-cta-pinned .cdp-toc {
   }
   .biz-toc .cdp-toc-list { flex-direction: row; overflow-x: auto; gap: var(--spacing-8); }
   .biz-toc .cdp-toc-link { flex-shrink: 0; white-space: nowrap; }
+}
+
+/* Mobile: stack text above image inside the active panel */
+@media (max-width: 768px) {
+  .biz-tab-panel.is-active { grid-template-columns: 1fr; gap: var(--spacing-24); }
 }
 
 /* ── Responsive: hero stacks below its own breakpoint (the two Figma columns
