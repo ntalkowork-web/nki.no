@@ -3366,15 +3366,15 @@
        scroll-spy component (.cdp-toc / .cdp-toc-link / .cdp-section). */
     var bizTabs = [
       { id: 'biz-tab-1', label: 'Skills development that strengthens your business',
-        img: 'images/design-system/how-it-works/photo-pace.jpg',
+        img: 'images/design-system/business/gallery-1.jpg',
         body: '<p class="cdp-sec-para">The working life doesn’t stand still. New requirements, new technologies and faster restructuring make competence go out of date quickly.</p>' +
               '<p class="cdp-sec-para">For those responsible for people, quality and results, skills development is no longer “nice to have” — it’s essential for keeping the business competitive. When employees develop professionally, businesses improve delivery quality, make better decisions, operate more efficiently and become more adaptable to change.</p>' },
       { id: 'biz-tab-2', label: 'NKI as a Competency Partner',
-        img: 'images/design-system/courses/pro-01.jpg',
+        img: 'images/design-system/business/main.jpg',
         body: '<p class="cdp-sec-para">NKI works closely with businesses across both the private and public sector. Our learning solutions are flexible, fully online, scalable, designed around busy work schedules, and implemented without disrupting operations.</p>' +
               '<p class="cdp-sec-para">With more than 50 years of experience in flexible learning, NKI has built deep expertise in online education. In 2024, NKI was named “Online Educator of the Year” by Flexible Education Norway.</p>' },
       { id: 'biz-tab-3', label: 'Our professional portfolio',
-        img: 'images/design-system/courses/pro-02.jpg',
+        img: 'images/design-system/how-it-works/photo-pace.jpg',
         body: '<p class="cdp-sec-para">Our portfolio spans the breadth of working life — continuously updated to meet the changing needs of the labour market:</p>' +
               '<div class="biz-tags">' + BIZ_SUBJECTS.map(function(s) { return '<span class="biz-tag">' + s + '</span>'; }).join('') + '</div>' },
       { id: 'biz-tab-4', label: 'Want to know more?',
@@ -3443,7 +3443,7 @@
         '<div class="container">' +
           '<div class="section-hd is-centered">' +
             '<div class="biz-tabs-hd">' +
-              '<h2 class="section-title">Competence is not a content problem. It’s an educational issue.</h2>' +
+              '<h2 class="section-title">Competence is not a content problem It’s an educational issue</h2>' +
             '</div>' +
           '</div>' +
           '<div class="biz-tabs-grid">' +
@@ -3461,7 +3461,7 @@
           '<div class="section-hd is-centered">' +
             '<div>' +
               '<h2 class="section-title">What does it cost for your business?</h2>' +
-              '<p class="biz-lead">Indicative pricing with volume discount. The final offer is tailored to programme, content and length.</p>' +
+              '<p class="biz-lead biz-lead--on-subtle">Indicative pricing with volume discount. The final offer is tailored to programme, content and length.</p>' +
             '</div>' +
           '</div>' +
 
@@ -3620,7 +3620,11 @@
       }, { passive: true });
     }
     var blogBtn = document.getElementById('bizTestiBlogBtn');
-    if (blogBtn) blogBtn.addEventListener('click', function() { showPage('blog'); });
+    if (blogBtn) {
+      var blogArrow = blogBtn.querySelector('.t-link-arrow');
+      if (blogArrow) blogArrow.remove();
+      blogBtn.addEventListener('click', function() { showPage('blog'); });
+    }
   }
 
   function updateBizCalc() {
