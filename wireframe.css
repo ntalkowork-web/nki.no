@@ -6676,8 +6676,6 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-hero2-photo img { width: 100%; height: 100%; object-fit: cover; }
 .biz-hero2-photo--main { flex: 0 1 400px; min-width: 0; aspect-ratio: 400 / 425; }
 .biz-hero2-gallery .biz-hero2-photo { aspect-ratio: 188 / 200; }
-/* Frame the presenter (she sits on the right of the source photo) */
-.biz-hero2-gallery .biz-hero2-photo:last-child img { object-position: 72% center; }
 
 /* ── 2. Pillars / why ── */
 .biz-pillars {
