@@ -3362,6 +3362,41 @@
     bizCalc = { seats: 100, scen: 1 };
     bizEmpVisible = 6;
 
+    /* Tabbed content — reuses the CDP "What's in the course" vertical-nav +
+       scroll-spy component (.cdp-toc / .cdp-toc-link / .cdp-section). */
+    var bizTabs = [
+      { id: 'biz-tab-1', label: 'Skills development that strengthens your business',
+        img: 'images/design-system/how-it-works/photo-pace.jpg',
+        body: '<p class="cdp-sec-para">The working life doesn’t stand still. New requirements, new technologies and faster restructuring make competence go out of date quickly.</p>' +
+              '<p class="cdp-sec-para">For those responsible for people, quality and results, skills development is no longer “nice to have” — it’s essential for keeping the business competitive. When employees develop professionally, businesses improve delivery quality, make better decisions, operate more efficiently and become more adaptable to change.</p>' },
+      { id: 'biz-tab-2', label: 'NKI as a Competency Partner',
+        img: 'images/design-system/courses/pro-01.jpg',
+        body: '<p class="cdp-sec-para">NKI works closely with businesses across both the private and public sector. Our learning solutions are flexible, fully online, scalable, designed around busy work schedules, and implemented without disrupting operations.</p>' +
+              '<p class="cdp-sec-para">With more than 50 years of experience in flexible learning, NKI has built deep expertise in online education. In 2024, NKI was named “Online Educator of the Year” by Flexible Education Norway.</p>' },
+      { id: 'biz-tab-3', label: 'Our professional portfolio',
+        img: 'images/design-system/courses/pro-02.jpg',
+        body: '<p class="cdp-sec-para">Our portfolio spans the breadth of working life — continuously updated to meet the changing needs of the labour market:</p>' +
+              '<div class="biz-tags">' + BIZ_SUBJECTS.map(function(s) { return '<span class="biz-tag">' + s + '</span>'; }).join('') + '</div>' },
+      { id: 'biz-tab-4', label: 'Want to know more?',
+        img: 'images/design-system/how-it-works/photo-support.jpg',
+        body: '<p class="cdp-sec-para">Contact NKI to discuss your competence development strategy. Our advisors help you map needs, shortlist programmes and plan a rollout that fits your organisation.</p>',
+        cta: '<!-- hubspot_form_will_replace_this_string_do_not_remove_click_creface_code_to_see_more -->' +
+             '<div class="biz-tab-cta"><button class="btn-cta-green" data-biz-scroll="biz-contact-anchor">Get in touch</button></div>' }
+    ];
+    function bizTocNum(i) { return (i + 1 < 10 ? '0' : '') + (i + 1); }
+    var bizTocHTML = bizTabs.map(function(t, i) {
+      return '<span class="cdp-toc-link' + (i === 0 ? ' is-active' : '') + '" data-sec="' + t.id + '" role="button" tabindex="0">' +
+        '<span class="cdp-toc-num">' + bizTocNum(i) + '</span>' + t.label + '</span>';
+    }).join('');
+    var bizSecHTML = bizTabs.map(function(t) {
+      return '<section class="cdp-section biz-tab-section" id="' + t.id + '">' +
+        '<h2 class="cdp-section-title">' + t.label + '</h2>' +
+        '<div class="biz-tab-copy">' + t.body + '</div>' +
+        '<img class="biz-tab-img" src="' + t.img + '" alt="" loading="lazy">' +
+        (t.cta || '') +
+      '</section>';
+    }).join('');
+
     /* Logo marquee (reuse .mentioned-in) — the same asset list used on the homepage */
     var logos = ['logo_2.svg', 'small-positive.svg', 'logo-ec--en.svg', 'logo-text.svg',
       'logo.svg', 'standard_compressed_Aftenposten-removebg-preview.png', 'fun-logo.svg'];
@@ -3402,33 +3437,19 @@
         '<div class="mentioned-in-logos"><div class="marquee-inner">' + logoTrack(false) + logoTrack(true) + '</div></div>' +
       '</div>' +
 
-      /* ── 2. WHY / PILLARS ── */
-      '<section class="wf-section">' +
+      /* ── 2. TABBED CONTENT (reuse CDP "What's in the course" component) ── */
+      '<section class="wf-section biz-tabs">' +
         '<div class="container">' +
-          '<div class="section-hd is-centered biz-why-hd">' +
-            '<div>' +
-              '<p class="section-eyebrow is-centered"><span class="section-eyebrow-dot"></span>Why NKI</p>' +
-              '<h2 class="section-title">Skills development that strengthens your business</h2>' +
-              '<p class="biz-lead">When employees develop professionally, businesses improve delivery quality, make better decisions, operate more efficiently and become more adaptable to change.</p>' +
+          '<div class="section-hd is-centered">' +
+            '<div class="biz-tabs-hd">' +
+              '<h2 class="section-title">Competence is not a content problem. It’s an educational issue.</h2>' +
             '</div>' +
           '</div>' +
-          '<div class="biz-pillars">' + BIZ_PILLARS.map(buildBizPillar).join('') + '</div>' +
-          '<div class="biz-portfolio">' +
-            '<p class="biz-portfolio-lbl">A continuously updated portfolio, including:</p>' +
-            '<div class="biz-tags">' + BIZ_SUBJECTS.map(function(s) { return '<span class="biz-tag">' + s + '</span>'; }).join('') + '</div>' +
-          '</div>' +
-          '<div class="biz-contact-block" id="biz-contact-anchor">' +
-            '<div class="biz-contact-copy">' +
-              '<h3 class="biz-contact-ttl">Want to know more?</h3>' +
-              '<p class="biz-contact-sub">Get in touch to discuss your competence development strategy. Our advisors help you map needs, shortlist programmes and plan a rollout that fits your organisation.</p>' +
-            '</div>' +
-            '<div class="biz-hubspot">' +
-              '<!-- hubspot_form_will_replace_this_string_do_not_remove_click_creface_code_to_see_more -->' +
-              '<div class="biz-hubspot-ph" aria-hidden="true">' +
-                '<span class="material-symbols-outlined">mark_email_unread</span>' +
-                '<span>HubSpot form will be embedded here</span>' +
-              '</div>' +
-            '</div>' +
+          '<div class="biz-tabs-grid">' +
+            '<aside class="cdp-toc-aside">' +
+              '<nav class="cdp-toc biz-toc" id="bizToc"><div class="cdp-toc-list">' + bizTocHTML + '</div></nav>' +
+            '</aside>' +
+            '<div class="cdp-content biz-tabs-content">' + bizSecHTML + '</div>' +
           '</div>' +
         '</div>' +
       '</section>' +
@@ -3534,7 +3555,7 @@
       '</section>' +
 
       /* ── 7. CONTACT FORM (reuse .consult-inline / .consult-form) ── */
-      '<section class="wf-section">' +
+      '<section class="wf-section" id="biz-contact-anchor">' +
         '<div class="container">' +
           '<div class="consult-inline">' +
             '<div class="consult-info">' +
@@ -3658,6 +3679,38 @@
     if (more) more.addEventListener('click', function() {
       bizEmpVisible = BIZ_EMPLOYEES.length;
       renderBizEmployees();
+    });
+
+    /* Tabbed content: scroll-spy + click/keyboard nav — mirrors the CDP
+       "What's in the course" behaviour (.cdp-toc-link ⇄ .cdp-section). */
+    var bizTocLinks = page.querySelectorAll('#bizToc .cdp-toc-link');
+    var bizSecs = page.querySelectorAll('.biz-tab-section');
+    if (bizSecs.length && 'IntersectionObserver' in window) {
+      var bizObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            var id = e.target.id;
+            bizTocLinks.forEach(function(l) {
+              var on = l.getAttribute('data-sec') === id;
+              l.classList.toggle('is-active', on);
+              if (on && window.matchMedia('(max-width: 1024px)').matches) {
+                l.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+              }
+            });
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+      bizSecs.forEach(function(s) { bizObs.observe(s); });
+    }
+    bizTocLinks.forEach(function(link) {
+      function go() {
+        var s = document.getElementById(link.getAttribute('data-sec'));
+        if (s) s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      link.addEventListener('click', go);
+      link.addEventListener('keydown', function(ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); go(); }
+      });
     });
   }
 

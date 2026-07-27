@@ -6990,6 +6990,50 @@ body.cdp-cta-pinned .cdp-toc {
 /* ── 6. Logos ── */
 .biz-logos { justify-content: flex-start; }
 
+/* ── 2. Tabbed content — reuses the CDP TOC (.cdp-toc / .cdp-toc-link) and
+   section (.cdp-section) components with a nav-left / content-right layout ── */
+.biz-tabs-grid {
+  display: grid;
+  grid-template-columns: 400fr 720fr; /* nav left, content right */
+  gap: var(--spacing-64);
+  align-items: start;
+  margin-top: var(--spacing-48);
+}
+/* Sticky nav, border removed so it feels lighter (spec) */
+.biz-toc { border: none; background: transparent; }
+.biz-toc .cdp-toc-list { padding: 0; gap: var(--spacing-4); }
+/* Content sections: drop the dividers, add generous whitespace */
+.biz-tab-section.cdp-section { border-bottom: none; padding-bottom: var(--spacing-64); }
+.biz-tabs-content .cdp-section:last-child { padding-bottom: 0; }
+.biz-tabs-content .cdp-section + .cdp-section { margin-top: var(--spacing-64); }
+.biz-tab-section .cdp-section-title { font-size: var(--font-size-31); }
+.biz-tab-img {
+  width: 100%;
+  border-radius: var(--radius-24);
+  margin-top: var(--spacing-32);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.biz-tab-cta { margin-top: var(--spacing-32); }
+#biz-contact-anchor { scroll-margin-top: calc(var(--header-h) + 24px); }
+
+/* Tablet / mobile: stack, nav becomes a sticky horizontal scroller on top */
+@media (max-width: 1024px) {
+  .biz-tabs-grid { grid-template-columns: 1fr; gap: var(--spacing-24); margin-top: var(--spacing-32); }
+  /* Override the CDP mobile rule that hides .cdp-toc-aside — here it becomes the top nav */
+  .biz-tabs .cdp-toc-aside { display: block; align-self: auto; }
+  .biz-toc {
+    position: sticky;
+    top: var(--header-h);
+    background: var(--bg-surface-primary);
+    margin: 0 calc(-1 * var(--margin));
+    padding: var(--spacing-8) var(--margin);
+    z-index: 5;
+  }
+  .biz-toc .cdp-toc-list { flex-direction: row; overflow-x: auto; gap: var(--spacing-8); }
+  .biz-toc .cdp-toc-link { flex-shrink: 0; white-space: nowrap; }
+}
+
 /* ── Responsive: hero stacks below its own breakpoint (the two Figma columns
    need ~1244px of content width to sit side by side comfortably) ── */
 @media (max-width: 1200px) {
