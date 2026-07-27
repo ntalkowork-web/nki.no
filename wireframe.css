@@ -6615,8 +6615,6 @@ body.cdp-cta-pinned .cdp-toc {
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-48);
-  max-width: var(--content);
-  margin: 0 auto;
 }
 .biz-hero2-text {
   display: flex;
@@ -6633,8 +6631,8 @@ body.cdp-cta-pinned .cdp-toc {
   color: var(--text-primary);
   line-height: 1.15;
 }
-/* Hand-drawn ellipse looping the highlighted word */
-.biz-hero2-mark { position: relative; display: inline-block; white-space: nowrap; }
+/* Hand-drawn ellipse looping the highlighted word — sits BEHIND the text */
+.biz-hero2-mark { position: relative; display: inline-block; white-space: nowrap; z-index: 0; }
 .biz-hero2-ellipse {
   position: absolute;
   left: 50%; top: 52%;
@@ -6642,6 +6640,7 @@ body.cdp-cta-pinned .cdp-toc {
   width: 116%; height: 150%;
   max-width: none;
   pointer-events: none;
+  z-index: -1;
 }
 .biz-hero2-sub {
   font-size: var(--font-size-16);
@@ -6677,6 +6676,8 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-hero2-photo img { width: 100%; height: 100%; object-fit: cover; }
 .biz-hero2-photo--main { flex: 0 1 400px; min-width: 0; aspect-ratio: 400 / 425; }
 .biz-hero2-gallery .biz-hero2-photo { aspect-ratio: 188 / 200; }
+/* Frame the presenter (she sits on the right of the source photo) */
+.biz-hero2-gallery .biz-hero2-photo:last-child img { object-position: 72% center; }
 
 /* ── 2. Pillars / why ── */
 .biz-pillars {
