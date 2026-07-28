@@ -7046,9 +7046,15 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-tabs .biz-tabs-hd .section-title { max-width: 612px; }
 .biz-tabs-hd-cta { flex-shrink: 0; }
 
-/* Panels: only the active one shows; text stacked above a full-width image */
+/* Panels: only the active one shows; text stacked above a full-width image,
+   inside a bordered container with 24px radius + 24px padding */
 .biz-tab-panel { display: none; }
-.biz-tab-panel.is-active { display: block; }
+.biz-tab-panel.is-active {
+  display: block;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-24);
+  padding: var(--spacing-24);
+}
 .biz-tab-panel .cdp-section-title { font-size: var(--font-size-31); margin-bottom: var(--spacing-12); }
 /* Text content capped for readability */
 .biz-tab-text { max-width: 612px; }
