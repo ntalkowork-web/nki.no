@@ -6828,7 +6828,7 @@ body.cdp-cta-pinned .cdp-toc {
 /* ── 3. Seat calculator ── */
 /* Compact calc section so the whole module fits within a standard window */
 #biz-calc-anchor { padding-top: var(--spacing-48); padding-bottom: var(--spacing-48); }
-#biz-calc-anchor .section-hd { margin-bottom: var(--spacing-24); }
+#biz-calc-anchor .section-hd { margin-bottom: var(--spacing-32); }
 .biz-calc {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -6840,6 +6840,11 @@ body.cdp-cta-pinned .cdp-toc {
   border-radius: var(--radius-24);
   padding: var(--spacing-24);
 }
+/* Input column is a flex column so the scenario block sits at the bottom of the card */
+.biz-calc-input { display: flex; flex-direction: column; }
+.biz-scen-section { margin-top: auto; }
+.biz-scen-section .biz-roi-sub { margin-bottom: var(--spacing-16); }
+.biz-scen-section .biz-scen { margin-bottom: 0; }
 .biz-calc-cap {
   font-size: var(--font-size-14);
   font-weight: 500;
@@ -7011,15 +7016,11 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-roi-sum-item:last-child { border-bottom: none; }
 .biz-roi-sum-lbl { font-size: var(--font-size-14); color: var(--text-secondary-on-white); }
 .biz-roi-sum-val { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); line-height: 1.2; white-space: nowrap; }
-/* Highlighted row — subtle fill spanning full width, text stays aligned with the other rows */
-.biz-roi-sum-hero {
+/* Highlighted value only — subtle pill around the "kr back" figure */
+.biz-roi-sum-hero .biz-roi-sum-val {
   background: var(--bg-subtle);
   border-radius: var(--radius-8);
-  border-bottom: none;
-  padding-left: var(--spacing-12);
-  padding-right: var(--spacing-12);
-  margin-left: calc(-1 * var(--spacing-12));
-  margin-right: calc(-1 * var(--spacing-12));
+  padding: var(--spacing-4) var(--spacing-8);
 }
 
 /* ── 4. Employees ── */

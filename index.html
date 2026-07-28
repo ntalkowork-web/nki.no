@@ -3502,12 +3502,14 @@
                   '</button>';
                 }).join('') +
               '</div>' +
-              '<div class="biz-calc-cap biz-calc-cap--section">What do you get back?</div>' +
-              '<p class="biz-roi-sub" id="bizRoiSub"></p>' +
-              '<div class="biz-scen" id="bizScen" role="tablist" aria-label="Productivity scenario">' +
-                BIZ_SCENARIOS.map(function(s, i) {
-                  return '<button class="biz-scen-btn" role="tab" data-scen="' + i + '">' + s.name + ' +' + Math.round(s.pct * 100) + '%</button>';
-                }).join('') +
+              '<div class="biz-scen-section">' +
+                '<div class="biz-calc-cap">What do you get back?</div>' +
+                '<p class="biz-roi-sub" id="bizRoiSub"></p>' +
+                '<div class="biz-scen" id="bizScen" role="tablist" aria-label="Productivity scenario">' +
+                  BIZ_SCENARIOS.map(function(s, i) {
+                    return '<button class="biz-scen-btn" role="tab" data-scen="' + i + '">' + s.name + ' +' + Math.round(s.pct * 100) + '%</button>';
+                  }).join('') +
+                '</div>' +
               '</div>' +
             '</div>' +
 
