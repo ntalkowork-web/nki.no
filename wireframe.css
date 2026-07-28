@@ -6610,6 +6610,8 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-lead--body { font-size: var(--font-size-16); }
 /* Calculator subtitle: cap the measure and keep it centred under the heading */
 #biz-calc-anchor .biz-lead--body { max-width: 480px; margin-left: auto; margin-right: auto; }
+/* Employees subheading: cap the measure, centred under the heading */
+.biz-emp-section .biz-lead--body { max-width: 480px; margin-left: auto; margin-right: auto; text-align: center; }
 
 /* ── 1. Hero (Figma for-business 706:10315) ── */
 .biz-hero2 {
@@ -7030,7 +7032,7 @@ body.cdp-cta-pinned .cdp-toc {
 }
 /* Sticky nav, border removed so it feels lighter (spec). Each tab's green
    background hugs its own label while keeping consistent horizontal padding. */
-.biz-toc { border: none; background: transparent; }
+.biz-toc { border: none; background: transparent; position: static; }
 .biz-toc .cdp-toc-list { padding: 0; gap: var(--spacing-4); align-items: flex-start; }
 .biz-toc .cdp-toc-link { align-self: flex-start; }
 
