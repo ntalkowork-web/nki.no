@@ -3511,6 +3511,16 @@
                 '<div class="biz-est-row"><span>Per seat</span><span id="bizPerSeat">4 165 kr</span></div>' +
                 '<div class="biz-est-row"><span>Volume discount</span><span id="bizDiscount">-15 %</span></div>' +
               '</div>' +
+            '</div>' +
+
+            '<div class="biz-calc-sec biz-scen-section">' +
+              '<h6 class="biz-calc-h6">What do you get back?</h6>' +
+              '<p class="biz-roi-sub" id="bizRoiSub"></p>' +
+              '<div class="biz-scen" id="bizScen" role="tablist" aria-label="Productivity scenario">' +
+                BIZ_SCENARIOS.map(function(s, i) {
+                  return '<button class="biz-scen-btn" role="tab" data-scen="' + i + '">' + s.name + ' +' + Math.round(s.pct * 100) + '%</button>';
+                }).join('') +
+              '</div>' +
               '<div class="biz-roi-summary">' +
                 '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Annual cost</span><span class="biz-roi-sum-val" id="bizCost">416 500 kr</span></div>' +
                 '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Annual gain</span><span class="biz-roi-sum-val" id="bizGain">4 060 000 kr</span></div>' +
@@ -3528,16 +3538,6 @@
                 '</div>' +
               '</div>' +
               '<button class="btn-cta-green biz-est-cta" data-biz-scroll="biz-contact-anchor">Get a tailored offer</button>' +
-            '</div>' +
-
-            '<div class="biz-calc-sec biz-scen-section">' +
-              '<h6 class="biz-calc-h6">What do you get back?</h6>' +
-              '<p class="biz-roi-sub" id="bizRoiSub"></p>' +
-              '<div class="biz-scen" id="bizScen" role="tablist" aria-label="Productivity scenario">' +
-                BIZ_SCENARIOS.map(function(s, i) {
-                  return '<button class="biz-scen-btn" role="tab" data-scen="' + i + '">' + s.name + ' +' + Math.round(s.pct * 100) + '%</button>';
-                }).join('') +
-              '</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
