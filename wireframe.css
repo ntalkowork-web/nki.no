@@ -7007,14 +7007,29 @@ body.cdp-cta-pinned .cdp-toc {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: var(--spacing-16);
   padding: var(--spacing-16) 0;
   border-bottom: 1px solid var(--border-default);
 }
 .biz-roi-sum-item:last-child { border-bottom: none; }
 .biz-roi-sum-lbl { display: inline-flex; align-items: center; gap: var(--spacing-8); font-size: var(--font-size-14); color: var(--text-secondary-on-white); }
-.biz-roi-sum-lbl .biz-roi-sum-ic { font-size: var(--font-size-20); color: var(--text-secondary-on-white); flex-shrink: 0; }
+/* Icon sits in a subtle-accent box (DS "Our pedagogical approach", node 187:4405) */
+.biz-roi-sum-lbl .biz-roi-sum-ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+  border-radius: var(--radius-8);
+  font-size: var(--font-size-16);
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+.biz-roi-ic--blue   { background: var(--accent-blue-subtle); }
+.biz-roi-ic--green  { background: var(--feedback-positive-subtle-bg); }
+.biz-roi-ic--purple { background: var(--accent-purple-subtle); }
+.biz-roi-ic--yellow { background: var(--accent-yellow-subtle); }
+.biz-roi-ic--orange { background: var(--accent-orange-subtle); }
 .biz-roi-sum-val { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); line-height: 1.2; white-space: nowrap; }
 /* Highlighted value only — subtle pill around the "kr back" figure */
 .biz-roi-sum-hero .biz-roi-sum-val {
