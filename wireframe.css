@@ -6619,6 +6619,11 @@ body.cdp-cta-pinned .cdp-toc {
   padding: var(--spacing-96) 0;
   border-bottom-left-radius: var(--radius-32);
   border-bottom-right-radius: var(--radius-32);
+  /* Header (var(--header-h)) + hero total to 900px; content stays centred */
+  min-height: calc(900px - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .biz-hero2-inner {
   display: flex;
