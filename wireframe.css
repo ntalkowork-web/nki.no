@@ -7035,8 +7035,9 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-toc .cdp-toc-link { align-self: flex-start; }
 
 /* Heading left-aligned, starting on the same vertical line as the tab nav */
-.biz-tabs .biz-tabs-hd { text-align: left; align-items: flex-start; max-width: none; }
+.biz-tabs .biz-tabs-hd { text-align: left; align-items: center; gap: var(--spacing-24); max-width: none; }
 .biz-tabs .biz-tabs-hd .section-title { max-width: 612px; }
+.biz-tabs-hd-cta { flex-shrink: 0; }
 
 /* Panels: only the active one shows; text stacked above a full-width image */
 .biz-tab-panel { display: none; }

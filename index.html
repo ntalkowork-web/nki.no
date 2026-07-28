@@ -3380,8 +3380,7 @@
       { id: 'biz-tab-4', label: 'Want to know more?',
         img: 'images/design-system/how-it-works/photo-support.jpg',
         body: '<p class="cdp-sec-para">Contact NKI to discuss your competence development strategy. Our advisors help you map needs, shortlist programmes and plan a rollout that fits your organisation.</p>',
-        cta: '<!-- hubspot_form_will_replace_this_string_do_not_remove_click_creface_code_to_see_more -->' +
-             '<div class="biz-tab-cta"><button class="btn-cta-green" data-biz-scroll="biz-contact-anchor">Get in touch</button></div>' }
+        cta: '<!-- hubspot_form_will_replace_this_string_do_not_remove_click_creface_code_to_see_more -->' }
     ];
     var bizTocHTML = bizTabs.map(function(t, i) {
       return '<span class="cdp-toc-link' + (i === 0 ? ' is-active' : '') + '" data-sec="' + t.id + '" role="button" tabindex="0">' +
@@ -3449,6 +3448,7 @@
         '<div class="container">' +
           '<div class="section-hd biz-tabs-hd">' +
             '<h2 class="section-title">Competence is not a content problem. It’s an educational issue.</h2>' +
+            '<button class="btn-cta-green biz-tabs-hd-cta" data-biz-scroll="biz-contact-anchor">Get Tailored Offer</button>' +
           '</div>' +
           '<div class="biz-tabs-grid">' +
             '<aside class="cdp-toc-aside">' +
