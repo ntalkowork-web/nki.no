@@ -7013,7 +7013,8 @@ body.cdp-cta-pinned .cdp-toc {
   border-bottom: 1px solid var(--border-default);
 }
 .biz-roi-sum-item:last-child { border-bottom: none; }
-.biz-roi-sum-lbl { font-size: var(--font-size-14); color: var(--text-secondary-on-white); }
+.biz-roi-sum-lbl { display: inline-flex; align-items: center; gap: var(--spacing-8); font-size: var(--font-size-14); color: var(--text-secondary-on-white); }
+.biz-roi-sum-lbl .biz-roi-sum-ic { font-size: var(--font-size-20); color: var(--text-secondary-on-white); flex-shrink: 0; }
 .biz-roi-sum-val { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); line-height: 1.2; white-space: nowrap; }
 /* Highlighted value only — subtle pill around the "kr back" figure */
 .biz-roi-sum-hero .biz-roi-sum-val {
