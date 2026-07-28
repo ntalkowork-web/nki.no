@@ -6833,7 +6833,7 @@ body.cdp-cta-pinned .cdp-toc {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--gutter);
-  align-items: start;
+  align-items: stretch;
 }
 .biz-calc-panel {
   background: var(--bg-surface-primary);
@@ -6917,12 +6917,29 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-est-row span:last-child { font-weight: 700; }
 .biz-est-cta { width: 100%; gap: var(--spacing-8); margin-top: var(--spacing-8); }
 .biz-est-cta .material-symbols-outlined { font-size: 20px; }
-/* Disclaimer accordion under the summary — DS accordion, 12px radius, sits on the white panel */
-.biz-disclaimer-acc { margin-top: var(--spacing-16); margin-bottom: 0; border-radius: var(--radius-12); }
-.biz-disclaimer-acc .cdp-acc-header { padding: var(--spacing-12) var(--spacing-16); }
-.biz-disclaimer-acc .cdp-acc-label { font-size: var(--font-size-14); font-weight: 600; }
-.biz-disclaimer-acc .cdp-acc-body { padding: 0 var(--spacing-16) var(--spacing-16); }
-.biz-disclaimer-acc .cdp-acc-para { font-size: var(--font-size-14); color: var(--text-secondary-on-white); max-width: none; }
+/* Disclaimer accordion — DS "Accordion tooltip" (node 308-16714): chevron + underlined
+   label; when open, a 2px accent rule runs alongside the 14px description */
+.biz-disc { margin-bottom: var(--spacing-16); }
+.biz-disc-hd {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: var(--text-primary);
+}
+.biz-disc-chevron { font-size: 24px; color: var(--text-primary); flex-shrink: 0; }
+.biz-disc-label { font-size: var(--font-size-14); color: var(--text-primary); text-decoration: underline; text-underline-offset: 2px; }
+.biz-disc-body {
+  margin-top: var(--spacing-8);
+  margin-left: 11px;
+  border-left: 2px solid var(--text-primary);
+  padding-left: var(--spacing-16);
+}
+.biz-disc-para { font-size: var(--font-size-14); color: var(--text-secondary-on-white); line-height: 1.4; }
 .biz-est-note {
   font-size: var(--font-size-14);
   color: var(--text-secondary-on-white);
@@ -6988,13 +7005,22 @@ body.cdp-cta-pinned .cdp-toc {
   justify-content: space-between;
   align-items: baseline;
   gap: var(--spacing-16);
-  padding: var(--spacing-8) 0;
+  padding: var(--spacing-16) 0;
   border-bottom: 1px solid var(--border-default);
 }
 .biz-roi-sum-item:last-child { border-bottom: none; }
 .biz-roi-sum-lbl { font-size: var(--font-size-14); color: var(--text-secondary-on-white); }
 .biz-roi-sum-val { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); line-height: 1.2; white-space: nowrap; }
-.biz-roi-sum-hero .biz-roi-sum-val { font-size: var(--font-size-20); color: var(--action-primary-hover); }
+/* Highlighted row — subtle fill spanning full width, text stays aligned with the other rows */
+.biz-roi-sum-hero {
+  background: var(--bg-subtle);
+  border-radius: var(--radius-8);
+  border-bottom: none;
+  padding-left: var(--spacing-12);
+  padding-right: var(--spacing-12);
+  margin-left: calc(-1 * var(--spacing-12));
+  margin-right: calc(-1 * var(--spacing-12));
+}
 
 /* ── 4. Employees ── */
 /* Matches Figma our-employees (589:15973): solid green subtle container with

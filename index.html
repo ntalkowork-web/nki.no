@@ -3525,16 +3525,16 @@
                 '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Net</span><span class="biz-roi-sum-val" id="bizNet">+3 643 500 kr</span></div>' +
                 '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Paid back in</span><span class="biz-roi-sum-val" id="bizPayback">~5 weeks</span></div>' +
               '</div>' +
-              '<button class="btn-cta-green biz-est-cta" data-biz-scroll="biz-contact-anchor">Get a tailored offer</button>' +
-              '<div class="cdp-accordion biz-disclaimer-acc" id="bizDisclaimerAcc">' +
-                '<div class="cdp-acc-header" id="bizDisclaimerHd" role="button" tabindex="0" aria-expanded="false" aria-controls="bizDisclaimerBody">' +
-                  '<span class="cdp-acc-label">Disclaimer</span>' +
-                  '<span class="material-symbols-outlined cdp-acc-chevron">expand_more</span>' +
-                '</div>' +
-                '<div class="cdp-acc-body" id="bizDisclaimerBody">' +
-                  '<p class="cdp-acc-para">These figures are indicative estimates shown for illustration only and do not constitute a binding offer. Actual pricing and returns depend on the programme, its content, duration and the number of participants, and are confirmed after a needs assessment. Productivity, turnover and absence effects are modelled assumptions, not guaranteed outcomes.</p>' +
+              '<div class="biz-disc" id="bizDisclaimerAcc">' +
+                '<button type="button" class="biz-disc-hd" id="bizDisclaimerHd" aria-expanded="false" aria-controls="bizDisclaimerBody">' +
+                  '<span class="material-symbols-outlined biz-disc-chevron">chevron_right</span>' +
+                  '<span class="biz-disc-label">Disclaimer</span>' +
+                '</button>' +
+                '<div class="biz-disc-body" id="bizDisclaimerBody" hidden>' +
+                  '<p class="biz-disc-para">These figures are indicative estimates shown for illustration only and do not constitute a binding offer. Actual pricing and returns depend on the programme, its content, duration and the number of participants, and are confirmed after a needs assessment. Productivity, turnover and absence effects are modelled assumptions, not guaranteed outcomes.</p>' +
                 '</div>' +
               '</div>' +
+              '<button class="btn-cta-green biz-est-cta" data-biz-scroll="biz-contact-anchor">Get a tailored offer</button>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -3713,17 +3713,17 @@
       });
     });
 
-    /* Disclaimer accordion (reuses the DS .cdp-accordion component) */
+    /* Disclaimer accordion (DS "Accordion tooltip", node 308-16714) */
     var discHd = document.getElementById('bizDisclaimerHd');
     if (discHd) {
       var discAcc = document.getElementById('bizDisclaimerAcc');
-      function toggleDisc() {
+      var discBody = document.getElementById('bizDisclaimerBody');
+      var discChev = discHd.querySelector('.biz-disc-chevron');
+      discHd.addEventListener('click', function() {
         var open = discAcc.classList.toggle('is-open');
         discHd.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      discHd.addEventListener('click', toggleDisc);
-      discHd.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleDisc(); }
+        if (discBody) discBody.hidden = !open;
+        if (discChev) discChev.textContent = open ? 'keyboard_arrow_down' : 'chevron_right';
       });
     }
 
