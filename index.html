@@ -3502,36 +3502,39 @@
                   '</button>';
                 }).join('') +
               '</div>' +
+              '<div class="biz-calc-cap biz-calc-cap--section">What do you get back?</div>' +
+              '<p class="biz-roi-sub" id="bizRoiSub"></p>' +
+              '<div class="biz-scen" id="bizScen" role="tablist" aria-label="Productivity scenario">' +
+                BIZ_SCENARIOS.map(function(s, i) {
+                  return '<button class="biz-scen-btn" role="tab" data-scen="' + i + '">' + s.name + ' +' + Math.round(s.pct * 100) + '%</button>';
+                }).join('') +
+              '</div>' +
             '</div>' +
 
             '<div class="biz-calc-panel biz-calc-estimate">' +
               '<div class="biz-calc-cap">Estimate per year</div>' +
-              '<div class="biz-est-total"><span id="bizEstTotal">416 500</span> kr</div>' +
+              '<div class="biz-est-total"><span id="bizEstTotal">416 500</span> kr</div>' +
               '<div class="biz-est-rows">' +
-                '<div class="biz-est-row"><span>Per seat</span><span id="bizPerSeat">4 165 kr</span></div>' +
-                '<div class="biz-est-row"><span>Volume discount</span><span id="bizDiscount">−15 %</span></div>' +
+                '<div class="biz-est-row"><span>Per seat</span><span id="bizPerSeat">4 165 kr</span></div>' +
+                '<div class="biz-est-row"><span>Volume discount</span><span id="bizDiscount">-15 %</span></div>' +
+              '</div>' +
+              '<div class="biz-roi-summary">' +
+                '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Annual cost</span><span class="biz-roi-sum-val" id="bizCost">416 500 kr</span></div>' +
+                '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Annual gain</span><span class="biz-roi-sum-val" id="bizGain">4 060 000 kr</span></div>' +
+                '<div class="biz-roi-sum-item biz-roi-sum-hero"><span class="biz-roi-sum-lbl">For every krone invested</span><span class="biz-roi-sum-val" id="bizRoi">9.7 kr back</span></div>' +
+                '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Net</span><span class="biz-roi-sum-val" id="bizNet">+3 643 500 kr</span></div>' +
+                '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Paid back in</span><span class="biz-roi-sum-val" id="bizPayback">~5 weeks</span></div>' +
               '</div>' +
               '<button class="btn-cta-green biz-est-cta" data-biz-scroll="biz-contact-anchor">Get a tailored offer</button>' +
-              '<p class="biz-est-note">Indicative. Final price is set after a needs assessment and programme scope.</p>' +
-            '</div>' +
-          '</div>' +
-
-          '<div class="biz-roi">' +
-            '<div class="biz-roi-hd">' +
-              '<h3 class="biz-roi-ttl">What do you get back?</h3>' +
-              '<p class="biz-roi-sub" id="bizRoiSub"></p>' +
-            '</div>' +
-            '<div class="biz-scen" id="bizScen" role="tablist" aria-label="Productivity scenario">' +
-              BIZ_SCENARIOS.map(function(s, i) {
-                return '<button class="biz-scen-btn" role="tab" data-scen="' + i + '">' + s.name + ' +' + Math.round(s.pct * 100) + '%</button>';
-              }).join('') +
-            '</div>' +
-            '<div class="biz-roi-summary">' +
-              '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Annual cost</span><span class="biz-roi-sum-val" id="bizCost">416 500 kr</span></div>' +
-              '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Annual gain</span><span class="biz-roi-sum-val" id="bizGain">4 060 000 kr</span></div>' +
-              '<div class="biz-roi-sum-item biz-roi-sum-hero"><span class="biz-roi-sum-lbl">For every krone invested</span><span class="biz-roi-sum-val" id="bizRoi">9.7 kr back</span></div>' +
-              '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Net</span><span class="biz-roi-sum-val" id="bizNet">+3 643 500 kr</span></div>' +
-              '<div class="biz-roi-sum-item"><span class="biz-roi-sum-lbl">Paid back in</span><span class="biz-roi-sum-val" id="bizPayback">~5 weeks</span></div>' +
+              '<div class="cdp-accordion biz-disclaimer-acc" id="bizDisclaimerAcc">' +
+                '<div class="cdp-acc-header" id="bizDisclaimerHd" role="button" tabindex="0" aria-expanded="false" aria-controls="bizDisclaimerBody">' +
+                  '<span class="cdp-acc-label">Disclaimer</span>' +
+                  '<span class="material-symbols-outlined cdp-acc-chevron">expand_more</span>' +
+                '</div>' +
+                '<div class="cdp-acc-body" id="bizDisclaimerBody">' +
+                  '<p class="cdp-acc-para">These figures are indicative estimates shown for illustration only and do not constitute a binding offer. Actual pricing and returns depend on the programme, its content, duration and the number of participants, and are confirmed after a needs assessment. Productivity, turnover and absence effects are modelled assumptions, not guaranteed outcomes.</p>' +
+                '</div>' +
+              '</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -3709,6 +3712,20 @@
         updateBizCalc();
       });
     });
+
+    /* Disclaimer accordion (reuses the DS .cdp-accordion component) */
+    var discHd = document.getElementById('bizDisclaimerHd');
+    if (discHd) {
+      var discAcc = document.getElementById('bizDisclaimerAcc');
+      function toggleDisc() {
+        var open = discAcc.classList.toggle('is-open');
+        discHd.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      discHd.addEventListener('click', toggleDisc);
+      discHd.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleDisc(); }
+      });
+    }
 
     /* Tabbed content: MANUAL tab nav only — clicking a tab swaps the visible
        panel; the selected tab stays active until another is clicked. Reuses the
