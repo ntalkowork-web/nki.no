@@ -7024,12 +7024,8 @@ body.cdp-cta-pinned .cdp-toc {
   font-size: var(--font-size-16);
   color: var(--text-primary);
   flex-shrink: 0;
+  background: var(--feedback-positive-subtle-bg);
 }
-.biz-roi-ic--blue   { background: var(--accent-blue-subtle); }
-.biz-roi-ic--green  { background: var(--feedback-positive-subtle-bg); }
-.biz-roi-ic--purple { background: var(--accent-purple-subtle); }
-.biz-roi-ic--yellow { background: var(--accent-yellow-subtle); }
-.biz-roi-ic--orange { background: var(--accent-orange-subtle); }
 .biz-roi-sum-val { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); line-height: 1.2; white-space: nowrap; }
 /* Highlighted value only — subtle pill around the "kr back" figure */
 .biz-roi-sum-hero .biz-roi-sum-val {
