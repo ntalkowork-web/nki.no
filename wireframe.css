@@ -6834,7 +6834,7 @@ body.cdp-cta-pinned .cdp-toc {
   background: var(--bg-surface-primary);
   border-radius: var(--radius-24);
   padding: var(--spacing-32);
-  max-width: 640px;
+  max-width: 824px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
