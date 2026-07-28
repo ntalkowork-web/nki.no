@@ -1734,6 +1734,18 @@
     showPage('business');
   });
 
+  /* ── Hash routing: makes the parameter-free pages shareable by URL
+     (e.g. .../#business). Deep-state pages (course, checkout, …) are not
+     mapped and simply clear the hash when shown. ── */
+  var HASH_TO_PAGE = { '#home': 'home', '#business': 'business', '#blog': 'blog', '#search': 'search', '#cart': 'cart' };
+  function routeFromHash() {
+    var p = HASH_TO_PAGE[window.location.hash];
+    if (p) showPage(p);
+  }
+  window.addEventListener('hashchange', routeFromHash);
+  /* NB: the initial routeFromHash() runs at the very end of this IIFE, once all
+     page data/state has been initialised (see bottom of the script). */
+
   /* ── Nav tab click → toggle dropdown ── */
   const navItems = Array.from(document.querySelectorAll('.nav-item.has-dropdown'));
 
@@ -3083,6 +3095,14 @@
     if (name === 'cart')     { renderCartPage();     window.scrollTo(0, 0); }
     if (name === 'blog')     { renderBlogPage();     window.scrollTo(0, 0); }
     if (name === 'business') { renderBusinessPage(); window.scrollTo(0, 0); }
+
+    /* Keep the URL hash in sync so shareable pages get a stable link;
+       deep-state pages clear the hash. replaceState avoids firing hashchange. */
+    var PAGE_TO_HASH = { home: '', business: '#business', blog: '#blog', search: '#search', cart: '#cart' };
+    var newHash = PAGE_TO_HASH.hasOwnProperty(name) ? PAGE_TO_HASH[name] : '';
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', newHash || (window.location.pathname + window.location.search));
+    }
   }
 
   /* ── BLOG PAGE ──
@@ -6191,6 +6211,9 @@
     inner.appendChild(clone);
     logos.appendChild(inner);
   })();
+
+  /* All page data/state is now initialised — safe to route from the initial hash. */
+  routeFromHash();
 
 })();
 </script>
