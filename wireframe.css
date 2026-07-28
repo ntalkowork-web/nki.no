@@ -6608,6 +6608,8 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-lead--on-subtle { color: var(--text-secondary-on-subtle); }
 /* Standard Paragraph / Body (16px) text style — use where body copy is intended */
 .biz-lead--body { font-size: var(--font-size-16); }
+/* Calculator subtitle: cap the measure and keep it centred under the heading */
+#biz-calc-anchor .biz-lead--body { max-width: 480px; margin-left: auto; margin-right: auto; }
 
 /* ── 1. Hero (Figma for-business 706:10315) ── */
 .biz-hero2 {
