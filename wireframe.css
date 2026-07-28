@@ -6829,20 +6829,19 @@ body.cdp-cta-pinned .cdp-toc {
 /* Compact calc section so the whole module fits within a standard window */
 #biz-calc-anchor { padding-top: var(--spacing-48); padding-bottom: var(--spacing-48); }
 #biz-calc-anchor .section-hd { margin-bottom: var(--spacing-32); }
+/* Single white container — sections stacked in one column */
 .biz-calc {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gutter);
-  align-items: stretch;
-}
-.biz-calc-panel {
   background: var(--bg-surface-primary);
   border-radius: var(--radius-24);
-  padding: var(--spacing-24);
+  padding: var(--spacing-32);
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
 }
-/* Input column is a flex column so the scenario block sits at the bottom of the card */
-.biz-calc-input { display: flex; flex-direction: column; }
-.biz-scen-section { margin-top: auto; }
+.biz-calc-sec > *:last-child { margin-bottom: 0; }
+.biz-calc-h6 { font-size: var(--font-size-20); font-weight: 700; color: var(--text-primary); line-height: 1.15; margin-bottom: var(--spacing-16); }
 .biz-scen-section .biz-roi-sub { margin-bottom: var(--spacing-16); }
 .biz-scen-section .biz-scen { margin-bottom: 0; }
 .biz-calc-cap {
@@ -7048,9 +7047,9 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-emp-photo img { width: 100%; height: 100%; object-fit: cover; }
 .biz-emp-tag {
   position: absolute;
-  left: var(--spacing-24);
+  left: var(--spacing-16);
   right: var(--spacing-16);
-  bottom: var(--spacing-24);
+  bottom: var(--spacing-16);
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -3490,7 +3490,7 @@
           '</div>' +
 
           '<div class="biz-calc">' +
-            '<div class="biz-calc-panel biz-calc-input">' +
+            '<div class="biz-calc-sec">' +
               '<div class="biz-calc-cap">Number of employees / seats</div>' +
               '<div class="biz-seat-display"><span id="bizSeatLabel">100</span><span class="biz-seat-unit">seats</span></div>' +
               '<input type="range" class="biz-range" id="bizSeatRange" min="1" max="1000" step="1" value="100" aria-label="Number of seats">' +
@@ -3502,18 +3502,9 @@
                   '</button>';
                 }).join('') +
               '</div>' +
-              '<div class="biz-scen-section">' +
-                '<div class="biz-calc-cap">What do you get back?</div>' +
-                '<p class="biz-roi-sub" id="bizRoiSub"></p>' +
-                '<div class="biz-scen" id="bizScen" role="tablist" aria-label="Productivity scenario">' +
-                  BIZ_SCENARIOS.map(function(s, i) {
-                    return '<button class="biz-scen-btn" role="tab" data-scen="' + i + '">' + s.name + ' +' + Math.round(s.pct * 100) + '%</button>';
-                  }).join('') +
-                '</div>' +
-              '</div>' +
             '</div>' +
 
-            '<div class="biz-calc-panel biz-calc-estimate">' +
+            '<div class="biz-calc-sec">' +
               '<div class="biz-calc-cap">Estimate per year</div>' +
               '<div class="biz-est-total"><span id="bizEstTotal">416 500</span> kr</div>' +
               '<div class="biz-est-rows">' +
@@ -3537,6 +3528,16 @@
                 '</div>' +
               '</div>' +
               '<button class="btn-cta-green biz-est-cta" data-biz-scroll="biz-contact-anchor">Get a tailored offer</button>' +
+            '</div>' +
+
+            '<div class="biz-calc-sec biz-scen-section">' +
+              '<h6 class="biz-calc-h6">What do you get back?</h6>' +
+              '<p class="biz-roi-sub" id="bizRoiSub"></p>' +
+              '<div class="biz-scen" id="bizScen" role="tablist" aria-label="Productivity scenario">' +
+                BIZ_SCENARIOS.map(function(s, i) {
+                  return '<button class="biz-scen-btn" role="tab" data-scen="' + i + '">' + s.name + ' +' + Math.round(s.pct * 100) + '%</button>';
+                }).join('') +
+              '</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
