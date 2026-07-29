@@ -7069,7 +7069,7 @@ body.cdp-cta-pinned .cdp-toc {
   border-bottom: 1px solid var(--border-default);
 }
 .biz-roi-sum-item:last-child { border-bottom: none; }
-.biz-roi-sum-lbl { display: inline-flex; align-items: center; gap: var(--spacing-8); font-size: var(--font-size-14); color: var(--text-secondary-on-white); }
+.biz-roi-sum-lbl { display: inline-flex; align-items: center; gap: var(--spacing-8); font-size: var(--font-size-14); color: var(--text-primary); }
 /* Icon sits in a subtle-accent box (DS "Our pedagogical approach", node 187:4405) */
 .biz-roi-sum-lbl .biz-roi-sum-ic {
   display: inline-flex;
