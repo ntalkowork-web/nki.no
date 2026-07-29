@@ -1198,7 +1198,7 @@
 
       <div class="testi-pager" id="testiPager" aria-hidden="true">
         <button class="testi-pager-btn" type="button" data-dir="prev" aria-label="Previous testimonials"><span class="material-symbols-outlined">arrow_back</span></button>
-        <div class="testi-pager-track"><span class="testi-pager-bar"></span></div>
+        <div class="testi-pager-dots"></div>
         <button class="testi-pager-btn" type="button" data-dir="next" aria-label="Next testimonials"><span class="material-symbols-outlined">arrow_forward</span></button>
       </div>
 
@@ -1709,19 +1709,31 @@
     if (!cols || !pager) return;
     var prev  = pager.querySelector('[data-dir="prev"]');
     var next  = pager.querySelector('[data-dir="next"]');
-    var track = pager.querySelector('.testi-pager-track');
-    var bar   = pager.querySelector('.testi-pager-bar');
+    var dotsWrap = pager.querySelector('.testi-pager-dots');
+    var cards = cols.querySelectorAll('.t-card');
+    var dots = [];
+    if (dotsWrap) {
+      dotsWrap.innerHTML = '';
+      for (var i = 0; i < cards.length; i++) {
+        var dot = document.createElement('span');
+        dot.className = 'testi-pager-dot';
+        dotsWrap.appendChild(dot);
+        dots.push(dot);
+      }
+    }
+    function step_size() {
+      var card = cols.querySelector('.t-card');
+      return (card ? card.offsetWidth : cols.clientWidth * 0.85) + 16;
+    }
     function update() {
       var max = cols.scrollWidth - cols.clientWidth;
-      var p   = max > 0 ? Math.min(1, Math.max(0, cols.scrollLeft / max)) : 0;
-      if (track && bar) bar.style.left = (p * (track.clientWidth - bar.offsetWidth)) + 'px';
+      var idx = Math.max(0, Math.min(dots.length - 1, Math.round(cols.scrollLeft / step_size())));
+      for (var i = 0; i < dots.length; i++) dots[i].classList.toggle('is-active', i === idx);
       if (prev) prev.disabled = cols.scrollLeft <= 1;
       if (next) next.disabled = cols.scrollLeft >= max - 1;
     }
     function step(dir) {
-      var card = cols.querySelector('.t-card');
-      var dist = (card ? card.offsetWidth : cols.clientWidth * 0.85) + 16;
-      cols.scrollBy({ left: dir * dist, behavior: 'smooth' });
+      cols.scrollBy({ left: dir * step_size(), behavior: 'smooth' });
     }
     if (prev) prev.addEventListener('click', function() { step(-1); });
     if (next) next.addEventListener('click', function() { step(1); });

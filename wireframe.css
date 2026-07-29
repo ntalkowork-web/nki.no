@@ -2468,20 +2468,22 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 }
 .testi-pager-btn .material-symbols-outlined { font-size: 20px; }
 .testi-pager-btn:disabled { color: var(--state-disabled-text); cursor: default; }
-.testi-pager-track {
-  position: relative;
-  width: 48px; height: 6px;
-  border-radius: var(--radius-8);
-  background: var(--border-default);
-  overflow: hidden;
+/* Progress indicator (Figma 371:809): one dark dot per card, the active one
+   elongated into a 20px pill. All segments share text/primary; only the width
+   distinguishes the active page. */
+.testi-pager-dots {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
 }
-.testi-pager-bar {
-  position: absolute;
-  top: 0; left: 0;
-  width: 20px; height: 6px;
-  border-radius: var(--radius-8);
+.testi-pager-dot {
+  flex-shrink: 0;
+  width: 6px; height: 6px;
+  border-radius: 999px;
   background: var(--text-primary);
+  transition: width .2s ease;
 }
+.testi-pager-dot.is-active { width: 20px; }
 
 /* ── NEWS ─────────────────────────────────── */
 
@@ -7188,28 +7190,39 @@ body.cdp-cta-pinned .cdp-toc {
   /* Override the CDP mobile rule that hides .cdp-toc-aside — here it becomes the top nav */
   .biz-tabs .cdp-toc-aside { display: block; align-self: auto; min-width: 0; }
   .biz-tabs-content { min-width: 0; }
-  /* Mobile: horizontal scrollable tab bar (DS scrollable-tab, node 626:20999) */
+  /* Mobile: horizontal scrollable row of DS "pill" tabs (node 152:2579) */
   .biz-toc {
     position: sticky;
     top: var(--header-h);
     background: var(--bg-surface-primary);
     margin: 0 calc(-1 * var(--margin));
-    border-bottom: 1px solid var(--border-default);
-    border-radius: 0; /* square edges for the full-bleed scrollable tab bar */
+    padding: var(--spacing-12) var(--margin);
     z-index: 5;
   }
-  .biz-toc .cdp-toc-list { flex-direction: row; overflow-x: auto; gap: 0; padding: 0; }
+  .biz-toc .cdp-toc-list { flex-direction: row; overflow-x: auto; gap: var(--spacing-8); padding: 0; }
+  /* pill — Default */
   .biz-toc .cdp-toc-link {
     flex-shrink: 0;
     white-space: nowrap;
-    height: 48px;
-    padding: var(--spacing-12) var(--spacing-16);
-    border-radius: 0;
-    border-bottom: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    padding: var(--spacing-8) var(--spacing-16);
+    border-radius: var(--radius-8);
+    border: 1px solid transparent;
+    background: var(--bg-subtle);
+    color: var(--text-primary);
   }
+  /* pill — Hover */
+  .biz-toc .cdp-toc-link:hover {
+    background: var(--bg-surface-primary);
+    border-color: var(--nki-gray-500);
+  }
+  /* pill — Active */
   .biz-toc .cdp-toc-link.is-active {
-    background: var(--feedback-positive-subtle-bg);
-    border-bottom-color: var(--action-primary-hover);
+    background: var(--bg-surface-inverse);
+    color: var(--text-inverse);
+    border-color: transparent;
   }
 }
 
@@ -7259,6 +7272,8 @@ body.cdp-cta-pinned .cdp-toc {
   .biz-page .consult-info .section-title { text-align: center; }
   .biz-page .consult-inline .consult-sub { text-align: center; }
   .biz-page .consult-info .hero-avatars { justify-content: center; }
+  /* Stack every form input on its own row */
+  .biz-page .consult-form .cf-row { grid-template-columns: 1fr; }
 }
 
 /* ── Responsive: mobile ── */
@@ -7267,6 +7282,8 @@ body.cdp-cta-pinned .cdp-toc {
   .biz-hero2-cta { width: 100%; justify-content: center; }
   .biz-hero2-facts { flex-direction: column; gap: var(--spacing-24); }
   .biz-fact { max-width: none; }
+  /* Cap the stat label width so it wraps onto 2 lines instead of one long line */
+  .biz-fact-lbl { max-width: 160px; }
   .biz-pillars { grid-template-columns: 1fr; }
   .biz-emp-grid { grid-template-columns: 1fr; }
   /* The 560px desktop crop is far too tall for a ~340px-wide column */
