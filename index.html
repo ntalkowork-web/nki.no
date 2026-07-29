@@ -1196,6 +1196,12 @@
 
       </div>
 
+      <div class="testi-pager" id="testiPager" aria-hidden="true">
+        <button class="testi-pager-btn" type="button" data-dir="prev" aria-label="Previous testimonials"><span class="material-symbols-outlined">arrow_back</span></button>
+        <div class="testi-pager-track"><span class="testi-pager-bar"></span></div>
+        <button class="testi-pager-btn" type="button" data-dir="next" aria-label="Next testimonials"><span class="material-symbols-outlined">arrow_forward</span></button>
+      </div>
+
       <div class="testi-blog-cta">
         <button class="btn-see-all" id="testiBlogBtn">See blog <span class="material-symbols-outlined t-link-arrow"></span></button>
       </div>
@@ -1694,6 +1700,36 @@
     }, { passive: true });
   }
   initTestiCounter();
+
+  /* Testimonials carousel pager: prev/next scroll one card, progress bar tracks
+     scroll position, arrows disable at each end. Shared by Home + For Business. */
+  function initTestiPager(colsId, pagerId) {
+    var cols  = document.getElementById(colsId);
+    var pager = document.getElementById(pagerId);
+    if (!cols || !pager) return;
+    var prev  = pager.querySelector('[data-dir="prev"]');
+    var next  = pager.querySelector('[data-dir="next"]');
+    var track = pager.querySelector('.testi-pager-track');
+    var bar   = pager.querySelector('.testi-pager-bar');
+    function update() {
+      var max = cols.scrollWidth - cols.clientWidth;
+      var p   = max > 0 ? Math.min(1, Math.max(0, cols.scrollLeft / max)) : 0;
+      if (track && bar) bar.style.left = (p * (track.clientWidth - bar.offsetWidth)) + 'px';
+      if (prev) prev.disabled = cols.scrollLeft <= 1;
+      if (next) next.disabled = cols.scrollLeft >= max - 1;
+    }
+    function step(dir) {
+      var card = cols.querySelector('.t-card');
+      var dist = (card ? card.offsetWidth : cols.clientWidth * 0.85) + 16;
+      cols.scrollBy({ left: dir * dist, behavior: 'smooth' });
+    }
+    if (prev) prev.addEventListener('click', function() { step(-1); });
+    if (next) next.addEventListener('click', function() { step(1); });
+    cols.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+  initTestiPager('testiCols', 'testiPager');
 
   /* Close mob menu on logo click and navigate home */
   var mobLogoLink = document.getElementById('mobLogoLink');
@@ -3612,7 +3648,7 @@
     if (!mount || !src) return;
     var clone = src.cloneNode(true);
     clone.setAttribute('aria-labelledby', 'biz-testi-hd');
-    var remap = { 'testi-hd': 'biz-testi-hd', 'testiCounter': 'bizTestiCounter', 'testiCols': 'bizTestiCols', 'testiBlogBtn': 'bizTestiBlogBtn' };
+    var remap = { 'testi-hd': 'biz-testi-hd', 'testiCounter': 'bizTestiCounter', 'testiCols': 'bizTestiCols', 'testiBlogBtn': 'bizTestiBlogBtn', 'testiPager': 'bizTestiPager' };
     Object.keys(remap).forEach(function(oldId) {
       var el = clone.querySelector('#' + oldId);
       if (el) el.id = remap[oldId];
@@ -3632,6 +3668,7 @@
         counter.textContent = (idx + 1) + ' — ' + total;
       }, { passive: true });
     }
+    initTestiPager('bizTestiCols', 'bizTestiPager');
     var blogBtn = document.getElementById('bizTestiBlogBtn');
     if (blogBtn) {
       var blogArrow = blogBtn.querySelector('.t-link-arrow');

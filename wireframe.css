@@ -2448,6 +2448,41 @@ section[aria-labelledby="popular-hd"] .section-hd { margin-bottom: 0; }
 .t-link-arrow::before { content: 'arrow_outward'; }
 .t-course-link:hover .t-link-arrow::before { content: 'arrow_forward'; }
 
+/* Testimonials carousel pagination — mobile only (matches Figma 371:807).
+   prev/next 48×48 rounded-square buttons + a sliding progress bar. */
+.testi-pager {
+  display: none; /* flipped to flex on mobile */
+  align-items: center;
+  gap: var(--spacing-16);
+  margin-top: var(--spacing-24);
+}
+.testi-pager-btn {
+  width: 48px; height: 48px;
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-12);
+  background: var(--bg-surface-primary);
+  color: var(--icon-default);
+  cursor: pointer;
+}
+.testi-pager-btn .material-symbols-outlined { font-size: 20px; }
+.testi-pager-btn:disabled { color: var(--state-disabled-text); cursor: default; }
+.testi-pager-track {
+  position: relative;
+  width: 48px; height: 6px;
+  border-radius: var(--radius-8);
+  background: var(--border-default);
+  overflow: hidden;
+}
+.testi-pager-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 20px; height: 6px;
+  border-radius: var(--radius-8);
+  background: var(--text-primary);
+}
+
 /* ── NEWS ─────────────────────────────────── */
 
 .news-grid {
@@ -6135,14 +6170,15 @@ body.cdp-cta-pinned .cdp-toc {
   .hiw-grid::-webkit-scrollbar { display: none; }
   .hiw-card { flex-shrink: 0; width: 75vw; scroll-snap-align: start; }
 
-  /* Testimonials: individual card horizontal scroll, no featured cards */
+  /* Testimonials: horizontal card carousel including the featured story cards,
+     matching Figma mobile 366:22001 (previously the featured cards were hidden) */
   .testi-cols {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    align-items: stretch;
+    align-items: flex-start;
     gap: 16px;
   }
   .testi-cols::-webkit-scrollbar { display: none; }
@@ -6152,7 +6188,15 @@ body.cdp-cta-pinned .cdp-toc {
     width: calc(85vw - 32px);
     scroll-snap-align: start;
   }
-  .t-card.featured { display: none; }
+  .t-card.featured { display: flex; height: 360px; }
+  /* Header left-aligned (Figma) instead of centered; old text counter replaced by
+     the prev/progress/next pager below the cards */
+  section[aria-labelledby="testi-hd"] .section-hd.is-centered,
+  section[aria-labelledby="biz-testi-hd"] .section-hd.is-centered { align-items: flex-start; }
+  section[aria-labelledby="testi-hd"] .section-hd.is-centered .section-title,
+  section[aria-labelledby="biz-testi-hd"] .section-hd.is-centered .section-title { text-align: left; }
+  #testiCounter, #bizTestiCounter { display: none; }
+  .testi-pager { display: flex; }
 
   /* News: stack vertically */
   .news-grid { grid-template-columns: 1fr; }
@@ -7151,6 +7195,7 @@ body.cdp-cta-pinned .cdp-toc {
     background: var(--bg-surface-primary);
     margin: 0 calc(-1 * var(--margin));
     border-bottom: 1px solid var(--border-default);
+    border-radius: 0; /* square edges for the full-bleed scrollable tab bar */
     z-index: 5;
   }
   .biz-toc .cdp-toc-list { flex-direction: row; overflow-x: auto; gap: 0; padding: 0; }
@@ -7204,6 +7249,16 @@ body.cdp-cta-pinned .cdp-toc {
   .biz-calc-h6 { font-size: var(--font-size-16); }
   .biz-seat-display > span:first-child,
   .biz-est-total { font-size: var(--font-size-31); }
+  /* Hero: 16px between all three photos on mobile */
+  .biz-hero2-media, .biz-hero2-gallery { gap: var(--spacing-16); }
+  /* Employee card: float the white name tag 16px above the green bottom border so
+     its bottom inset matches its 16px left/right insets */
+  .biz-emp-tag { bottom: var(--spacing-32); }
+  /* Advice (contact) section: center the headline, subheading and avatar row */
+  .biz-page .consult-info { align-items: center; text-align: center; }
+  .biz-page .consult-info .section-title { text-align: center; }
+  .biz-page .consult-inline .consult-sub { text-align: center; }
+  .biz-page .consult-info .hero-avatars { justify-content: center; }
 }
 
 /* ── Responsive: mobile ── */
@@ -7216,4 +7271,6 @@ body.cdp-cta-pinned .cdp-toc {
   .biz-emp-grid { grid-template-columns: 1fr; }
   /* The 560px desktop crop is far too tall for a ~340px-wide column */
   .biz-tab-img { height: 280px; margin-top: var(--spacing-24); }
+  /* Left-align the tabs-header CTA so it lines up with the heading (was centered) */
+  .biz-tabs .biz-tabs-hd { align-items: flex-start; }
 }
