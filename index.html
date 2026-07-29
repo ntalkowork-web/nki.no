@@ -1710,7 +1710,9 @@
     var prev  = pager.querySelector('[data-dir="prev"]');
     var next  = pager.querySelector('[data-dir="next"]');
     var dotsWrap = pager.querySelector('.testi-pager-dots');
-    var cards = cols.querySelectorAll('.t-card');
+    /* only count cards that are actually visible on mobile (hidden columns are
+       display:none), so the dot count matches the number of scrollable cards */
+    var cards = [].slice.call(cols.querySelectorAll('.t-card')).filter(function(c) { return c.offsetParent !== null; });
     var dots = [];
     if (dotsWrap) {
       dotsWrap.innerHTML = '';
@@ -3433,7 +3435,7 @@
     /* Tabbed content — reuses the CDP "What's in the course" vertical-nav +
        scroll-spy component (.cdp-toc / .cdp-toc-link / .cdp-section). */
     var bizTabs = [
-      { id: 'biz-tab-1', label: 'Skills development that strengthens your business',
+      { id: 'biz-tab-1', label: 'Skills development',
         img: 'images/design-system/business/gallery-1.jpg',
         body: '<p class="cdp-sec-para">Working life doesn’t stand still. New technologies and faster restructuring make skills go out of date quickly, so continuous development is no longer optional — it’s what keeps a business competitive.</p>' +
               '<p class="cdp-sec-para">When employees keep learning, businesses deliver higher quality, make better decisions and adapt more easily to change.</p>' },

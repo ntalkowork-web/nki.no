@@ -6185,6 +6185,9 @@ body.cdp-cta-pinned .cdp-toc {
   }
   .testi-cols::-webkit-scrollbar { display: none; }
   .testi-col { display: contents; }
+  /* Show only the first column (featured story + 2 quotes = 3 cards) so the mobile
+     carousel keeps 3 cards / 3 progress steps, per the Figma design */
+  .testi-cols > .testi-col:not(:first-child) { display: none; }
   .t-card {
     flex-shrink: 0;
     width: calc(85vw - 32px);
