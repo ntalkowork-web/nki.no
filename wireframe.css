@@ -7085,7 +7085,9 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-emp-more-wrap .material-symbols-outlined { font-size: 20px; }
 
 /* ── 6. Logos ── */
-.biz-logos { justify-content: flex-start; }
+/* Use the page margin token (96px desktop → 16px mobile) so the block's left edge
+   aligns with the hero heading / page left margin across breakpoints. */
+.biz-logos { justify-content: flex-start; padding-left: var(--margin); padding-right: var(--margin); }
 
 /* ── 2. Tabbed content — reuses the CDP vertical-nav (.cdp-toc / .cdp-toc-link)
    as MANUAL tabs; nav hugs its content on the left, active panel on the right ── */
@@ -7135,9 +7137,13 @@ body.cdp-cta-pinned .cdp-toc {
 
 /* Tablet: keep the text/image side-by-side; nav moves to a sticky top scroller */
 @media (max-width: 1024px) {
-  .biz-tabs-grid { grid-template-columns: 1fr; gap: var(--spacing-24); margin-top: var(--spacing-32); }
+  /* minmax(0,1fr) + min-width:0 on the children lets the single column shrink to the
+     viewport; without it the nowrap tab bar forces the track (and the page) wider than
+     the screen instead of scrolling. */
+  .biz-tabs-grid { grid-template-columns: minmax(0, 1fr); gap: var(--spacing-24); margin-top: var(--spacing-32); }
   /* Override the CDP mobile rule that hides .cdp-toc-aside — here it becomes the top nav */
-  .biz-tabs .cdp-toc-aside { display: block; align-self: auto; }
+  .biz-tabs .cdp-toc-aside { display: block; align-self: auto; min-width: 0; }
+  .biz-tabs-content { min-width: 0; }
   /* Mobile: horizontal scrollable tab bar (DS scrollable-tab, node 626:20999) */
   .biz-toc {
     position: sticky;
@@ -7208,4 +7214,6 @@ body.cdp-cta-pinned .cdp-toc {
   .biz-fact { max-width: none; }
   .biz-pillars { grid-template-columns: 1fr; }
   .biz-emp-grid { grid-template-columns: 1fr; }
+  /* The 560px desktop crop is far too tall for a ~340px-wide column */
+  .biz-tab-img { height: 280px; margin-top: var(--spacing-24); }
 }
