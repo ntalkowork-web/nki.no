@@ -7117,7 +7117,9 @@ body.cdp-cta-pinned .cdp-toc {
   position: absolute;
   left: var(--spacing-16);
   right: var(--spacing-16);
-  bottom: var(--spacing-16);
+  /* 16px (gap) + 16px (green bottom border) so the photo gap below the tag
+     matches its 16px left/right insets */
+  bottom: var(--spacing-32);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -7267,9 +7269,6 @@ body.cdp-cta-pinned .cdp-toc {
   .biz-est-total { font-size: var(--font-size-31); }
   /* Hero: 16px between all three photos on mobile */
   .biz-hero2-media, .biz-hero2-gallery { gap: var(--spacing-16); }
-  /* Employee card: float the white name tag 16px above the green bottom border so
-     its bottom inset matches its 16px left/right insets */
-  .biz-emp-tag { bottom: var(--spacing-32); }
   /* Advice (contact) section: center the headline, subheading and avatar row */
   .biz-page .consult-info { align-items: center; text-align: center; }
   .biz-page .consult-info .section-title { text-align: center; }
