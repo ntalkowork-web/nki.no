@@ -6971,7 +6971,7 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-calc-cap--section { margin-top: var(--spacing-32); }
 .biz-seat-display { display: flex; align-items: baseline; gap: var(--spacing-12); }
 .biz-seat-display > span:first-child {
-  font-size: var(--font-size-39);
+  font-size: var(--font-size-25);
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1;
@@ -7022,7 +7022,7 @@ body.cdp-cta-pinned .cdp-toc {
 
 .biz-calc-estimate { display: flex; flex-direction: column; }
 .biz-est-total {
-  font-size: var(--font-size-39);
+  font-size: var(--font-size-25);
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1;
