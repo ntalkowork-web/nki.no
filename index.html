@@ -3778,19 +3778,35 @@
       });
     });
 
-    /* ROI accordion — collapsed by default (progressive disclosure) */
+    /* ROI breakdown — progressive disclosure on mobile only. Up to 768px it is
+       a collapsed accordion; from 769px the breakdown is shown outright and the
+       header is inert (the +/- icon is hidden by CSS). */
     var roiHd = document.getElementById('bizRoiAccHd');
     if (roiHd) {
       var roiAcc = document.getElementById('bizRoiAcc');
       var roiBody = document.getElementById('bizRoiAccBody');
       var roiIcon = roiHd.querySelector('.biz-roi-acc-chev');
-      roiHd.addEventListener('click', function() {
-        var open = roiAcc.classList.toggle('is-open');
-        roiHd.setAttribute('aria-expanded', open ? 'true' : 'false');
-        if (roiBody) roiBody.hidden = !open;
+      var roiMq = window.matchMedia('(max-width: 768px)');
+      var roiOpen = false; /* only meaningful on mobile */
+
+      function syncRoi() {
+        var mobile = roiMq.matches;
+        var shown = mobile ? roiOpen : true;
+        roiAcc.classList.toggle('is-open', shown);
+        roiHd.setAttribute('aria-expanded', shown ? 'true' : 'false');
+        if (roiBody) roiBody.hidden = mobile && !roiOpen;
         /* DS icon set: add / remove (nodes 50:1914 / 50:1935) */
-        if (roiIcon) roiIcon.textContent = open ? 'remove' : 'add';
+        if (roiIcon) roiIcon.textContent = roiOpen ? 'remove' : 'add';
+      }
+
+      roiHd.addEventListener('click', function() {
+        if (!roiMq.matches) return; /* desktop: always expanded */
+        roiOpen = !roiOpen;
+        syncRoi();
       });
+      if (roiMq.addEventListener) roiMq.addEventListener('change', syncRoi);
+      else if (roiMq.addListener) roiMq.addListener(syncRoi);
+      syncRoi();
     }
 
     /* Disclaimer accordion (DS "Accordion tooltip", node 308-16714) */

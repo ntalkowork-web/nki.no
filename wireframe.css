@@ -6922,9 +6922,10 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-scen-section .biz-roi-sub { margin-bottom: var(--spacing-12); }
 .biz-scen-section .biz-scen { margin-bottom: 0; }
 
-/* ROI accordion — progressive disclosure for "What do you get back?".
-   Same interaction pattern as the DS content accordion (header row + chevron
-   that flips when open), built on the calculator's own tokens. */
+/* ROI accordion — progressive disclosure for "What do you get back?" on mobile
+   only. From 769px up there is room for the full breakdown, so the body is
+   always shown and the header is a plain heading (no +/- affordance, not
+   clickable); at <=768px it collapses behind the DS add/remove icons. */
 .biz-roi-acc {
   border-top: 1px solid var(--border-default);
   padding-top: var(--spacing-24);
@@ -6932,6 +6933,7 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-roi-acc-h6 { margin-bottom: 0; }
 .biz-roi-acc-hd {
   display: flex;
+  cursor: default;
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-16);
@@ -6939,11 +6941,14 @@ body.cdp-cta-pinned .cdp-toc {
   padding: 0;
   background: none;
   border: none;
-  cursor: pointer;
   font: inherit;
   color: inherit;
   text-align: left;
 }
+/* desktop: always expanded, no toggle affordance. Two classes deep so this beats
+   the Material Symbols stylesheet's own `display: block`, which loads later. */
+.biz-roi-acc .biz-roi-acc-chev { display: none; }
+.biz-roi-acc-body[hidden] { display: block; }
 .biz-roi-acc-hd:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 4px; border-radius: var(--radius-8); }
 .biz-roi-acc-chev {
   font-size: 24px;
@@ -7326,6 +7331,10 @@ body.cdp-cta-pinned .cdp-toc {
   .biz-calc-h6 { font-size: var(--font-size-16); }
   /* the two stacked blocks and the ROI accordion keep the 24px rhythm */
   .biz-calc-top { gap: var(--spacing-32); }
+  /* progressive disclosure only on mobile */
+  .biz-roi-acc-hd { cursor: pointer; }
+  .biz-roi-acc .biz-roi-acc-chev { display: block; }
+  .biz-roi-acc-body[hidden] { display: none; }
   .biz-seat-display > span:first-child,
   .biz-est-total { font-size: var(--font-size-31); }
   /* Hero: 16px between all three photos on mobile */
