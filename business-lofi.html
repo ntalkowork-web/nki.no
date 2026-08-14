@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NKI For Business — Lo-fi wireframe (Stage 1)</title>
+
+<!--
+  STAGE 1 — LO-FI GREYSCALE WIREFRAME.  Throwaway file.
+  Self-contained on purpose: does NOT load wireframe.css, and uses a local --l-*
+  grey ramp so the design-system token rules that govern wireframe.css are not in
+  play here.  Stage 2 adds brand colour in this same file; Stage 3 ports the result
+  into index.html / wireframe.css as proper design-system tokens.
+
+  Purpose of this stage: validate SECTION ORDER, HIERARCHY and DENSITY only.
+  No photography, no brand, no icons.
+
+  Press "G" to toggle the 1440 / 96 / 24 / 12-column grid overlay.
+-->
+
+<style>
+/* ─────────────────────────────────────────────────────────────
+   LO-FI TOKENS  (local, throwaway — not the design system)
+   ───────────────────────────────────────────────────────────── */
+:root{
+  /* grey ramp */
+  --l-0:#fff; --l-50:#f7f7f7; --l-100:#efefef; --l-200:#e4e4e4;
+  --l-300:#d2d2d2; --l-400:#b0b0b0; --l-500:#8a8a8a; --l-600:#666;
+  --l-700:#444; --l-800:#2a2a2a; --l-900:#161616;
+
+  /* grid spec from design-system/nki-design-tokens-and-text-styles.md §4 */
+  --frame:1440px; --margin:96px; --gutter:24px; --cols:12;
+  --content:1248px;                        /* 1440 − (96 × 2) */
+
+  /* spacing scale (mirrors --spacing-* so Stage 3 maps 1:1) */
+  --s-4:4px; --s-8:8px; --s-12:12px; --s-16:16px; --s-20:20px; --s-24:24px;
+  --s-32:32px; --s-40:40px; --s-48:48px; --s-56:56px; --s-64:64px; --s-80:80px;
+
+  --rad:8px; --rad-lg:12px;
+
+  /* DENSITY RULE for this rebuild: section rhythm is 64/80, never 96/128 */
+  --sec-y:var(--s-80);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--l-0); color:var(--l-900);
+  font:400 16px/1.5 "Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+h1,h2,h3,h4,p{margin:0}
+button{font:inherit;cursor:pointer}
+a{color:inherit}
+
+/* ── layout primitives ─────────────────────────────────────── */
+.wrap{max-width:var(--frame);margin:0 auto;padding:0 var(--margin)}
+.sec{padding:var(--sec-y) 0}
+.sec--tight{padding:var(--s-48) 0}
+.sec--alt{background:var(--l-50)}
+.sec--dark{background:var(--l-800);color:var(--l-0)}
+.grid{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:var(--gutter)}
+
+/* ── lo-fi type scale (maps to --font-size-* in Stage 3) ───── */
+.eyebrow{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--l-600);font-weight:600}
+.h1{font-size:49px;line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.h2{font-size:39px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+.h3{font-size:25px;line-height:1.25;font-weight:700}
+.h4{font-size:20px;line-height:1.3;font-weight:700}
+.lead{font-size:20px;line-height:1.5;color:var(--l-700)}
+.body{font-size:16px;line-height:1.6;color:var(--l-700)}
+.small{font-size:14px;line-height:1.5;color:var(--l-600)}
+
+.sec-hd{margin-bottom:var(--s-40);max-width:720px}
+.sec-hd .h2{margin-top:var(--s-12)}
+.sec-hd p{margin-top:var(--s-16)}
+
+/* ── lo-fi buttons ─────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--s-8);
+  padding:14px var(--s-24);border-radius:var(--rad-lg);border:1px solid var(--l-900);
+  background:var(--l-900);color:var(--l-0);font-weight:600;font-size:16px;
+  text-decoration:none;
+}
+.btn:hover{background:var(--l-700);border-color:var(--l-700)}
+.btn--ghost{background:transparent;color:var(--l-900)}
+.btn--ghost:hover{background:var(--l-100);border-color:var(--l-900)}
+.sec--dark .btn{background:var(--l-0);color:var(--l-900);border-color:var(--l-0)}
+.sec--dark .btn--ghost{background:transparent;color:var(--l-0);border-color:var(--l-0)}
+
+/* lo-fi placeholder for any image */
+.ph{
+  background:var(--l-200);border:1px dashed var(--l-400);border-radius:var(--rad);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--l-600);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  text-align:center;padding:var(--s-8);
+}
+/* lo-fi stand-in for a Material Symbols icon */
+.ic{
+  width:40px;height:40px;flex:none;border-radius:var(--rad);
+  background:var(--l-200);border:1px dashed var(--l-400);
+  display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--l-600);
+}
+
+/* TODO flag — every unverified claim on this page carries one */
+.todo{
+  display:inline-block;margin-top:var(--s-8);padding:2px var(--s-8);
+  border:1px dashed var(--l-500);border-radius:4px;
+  font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--l-600);
+  background:repeating-linear-gradient(45deg,transparent,transparent 4px,var(--l-100) 4px,var(--l-100) 8px);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SITE CHROME — stub only.  The real header/footer and the
+   .mob-* hamburger menu already exist in index.html and MUST
+   NOT be touched.  These are placeholders so the page reads
+   in context.
+   ═══════════════════════════════════════════════════════════ */
+.stub-header{
+  height:88px;border-bottom:1px solid var(--l-300);background:var(--l-0);
+  position:sticky;top:0;z-index:20;
+}
+.stub-header .wrap{height:100%;display:flex;align-items:center;gap:var(--s-32)}
+.stub-logo{width:96px;height:28px;background:var(--l-300);border-radius:4px}
+.stub-nav{display:flex;gap:var(--s-24);font-size:15px;color:var(--l-600)}
+.stub-nav b{color:var(--l-900)}
+.stub-header .spacer{flex:1}
+.stub-footer{background:var(--l-900);color:var(--l-400);padding:var(--s-64) 0;font-size:14px}
+
+/* ═══════════════════════════════════════════════════════════
+   1 · HERO   (priority 7 — benefit-led headline + conversion CTA)
+   Hard constraint: ≤560px tall on desktop.  No hand-drawn ellipse.
+   ═══════════════════════════════════════════════════════════ */
+/* HEIGHT BUDGET — the hero must stay under 560px at 1440 so it reads as a page,
+   not a slide. At 1440 the media column is 612px; the 2fr/1fr split gives a 392px
+   primary tile, so 4:3 puts it at 294px tall. The stack stretches to match rather
+   than driving the row height (a 4:5 primary + two 1:1 tiles put the row at 490px
+   and blew the budget). Padding 56/48 keeps the total ≈555px. */
+.hero{padding:var(--s-56) 0 var(--s-48);border-bottom:1px solid var(--l-200)}
+.hero-grid{align-items:center}
+.hero-copy{grid-column:span 6}
+.hero-media{grid-column:span 6;display:grid;grid-template-columns:2fr 1fr;
+  gap:var(--gutter);align-items:stretch;max-height:400px}
+.hero-media .ph:first-child{aspect-ratio:4/3}
+.hero-media .stack{display:grid;grid-template-rows:1fr 1fr;gap:var(--gutter)}
+.hero .h1{margin-top:var(--s-12)}
+.hero-sub{margin-top:var(--s-20);max-width:34em}
+.hero-cta{display:flex;gap:var(--s-12);margin-top:var(--s-32);flex-wrap:wrap}
+.hero-facts{
+  display:flex;gap:var(--s-32);margin-top:var(--s-32);
+  padding-top:var(--s-24);border-top:1px solid var(--l-200);flex-wrap:wrap;
+}
+.fact-n{font-size:25px;font-weight:700;line-height:1.1}
+.fact-l{font-size:13px;color:var(--l-600);margin-top:2px;max-width:14em}
+
+/* ═══════════════════════════════════════════════════════════
+   2 · TRUSTED BY   (priority 3 — customer logos, not press)
+   Replaces "Omtalt i" at this position.  Track is built from ONE
+   pass of the logo list and cloned exactly once for the loop —
+   that is the fix for the current page repeating logos in-viewport.
+   ═══════════════════════════════════════════════════════════ */
+.trusted{padding:var(--s-40) 0;border-bottom:1px solid var(--l-200)}
+.trusted .wrap{display:flex;align-items:center;gap:var(--s-40)}
+.trusted-lbl{flex:none;font-size:14px;color:var(--l-600);font-weight:600;max-width:9em}
+.marquee{flex:1;overflow:hidden;position:relative;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.marquee-inner{display:flex;width:max-content;animation:marq 32s linear infinite}
+.marquee:hover .marquee-inner{animation-play-state:paused}
+.marquee-track{display:flex;align-items:center;gap:var(--s-56);padding-right:var(--s-56)}
+.logo-ph{width:120px;height:36px;background:var(--l-200);border:1px dashed var(--l-400);
+  border-radius:4px;display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:var(--l-600);flex:none}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee-inner{animation:none}}
+
+/* ═══════════════════════════════════════════════════════════
+   3 · SELF-SEGMENTATION   (priority 9)
+   Placed early because it routes the visitor and pre-fills the form.
+   ═══════════════════════════════════════════════════════════ */
+.seg-cards{grid-column:span 12;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter)}
+.seg-card{
+  border:1px solid var(--l-300);border-radius:var(--rad-lg);padding:var(--s-24);
+  background:var(--l-0);display:flex;flex-direction:column;gap:var(--s-12);
+  text-align:left;min-height:200px;
+}
+.seg-card:hover{border-color:var(--l-900);background:var(--l-50)}
+.seg-card .h4{margin-top:var(--s-4)}
+.seg-card .body{flex:1;font-size:15px}
+.seg-link{font-size:14px;font-weight:600;text-decoration:underline}
+
+/* ═══════════════════════════════════════════════════════════
+   4 · WHAT YOU GET AS AN EMPLOYER   (priority 6)
+   Flat — no tabs.  Absorbs old tab 2.  Answers: progress,
+   completion, reporting, administration.
+   ═══════════════════════════════════════════════════════════ */
+.ben-hd{grid-column:span 4}
+.ben-list{grid-column:span 8;display:grid;grid-template-columns:1fr 1fr;gap:var(--s-32) var(--gutter)}
+.ben{display:flex;gap:var(--s-16)}
+.ben .h4{margin-bottom:var(--s-8)}
+.ben-portfolio{grid-column:span 12;margin-top:var(--s-40);padding-top:var(--s-32);
+  border-top:1px solid var(--l-200)}
+.tags{display:flex;flex-wrap:wrap;gap:var(--s-8);margin-top:var(--s-16)}
+/* static label only — DS Tag (274:4419) has no hover/active state built,
+   so these must NOT look clickable.  This is the fix for the old .biz-tag chips. */
+.tag{padding:6px var(--s-12);border-radius:var(--rad);background:var(--l-100);
+  font-size:13px;color:var(--l-700)}
+
+/* ═══════════════════════════════════════════════════════════
+   5 · HOW A COLLABORATION WORKS   (priority 5)
+   ═══════════════════════════════════════════════════════════ */
+.steps{grid-column:span 12;display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gutter)}
+.step{position:relative;padding-top:var(--s-24);border-top:2px solid var(--l-900)}
+.step-n{font-size:13px;font-weight:700;color:var(--l-500);letter-spacing:.08em}
+.step .h4{margin:var(--s-8) 0}
+
+/* ═══════════════════════════════════════════════════════════
+   6 · WHAT IT COSTS   (priority 4)
+   Rescaled to the market we actually sell to: 94% of Norwegian
+   companies with employees have <50 (SSB).  Range 1–50, default 12.
+   ═══════════════════════════════════════════════════════════ */
+.calc{grid-column:span 12;border:1px solid var(--l-300);border-radius:var(--rad-lg);
+  background:var(--l-0);display:grid;grid-template-columns:1.15fr 1fr;overflow:hidden}
+.calc-in{padding:var(--s-40)}
+.calc-out{padding:var(--s-40);background:var(--l-100);border-left:1px solid var(--l-300);
+  display:flex;flex-direction:column}
+.seat-row{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s-16)}
+.seat-n{font-size:39px;font-weight:700;line-height:1}
+input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--l-800)}
+.scale{display:flex;justify-content:space-between;font-size:12px;color:var(--l-600)}
+.tiers{display:flex;gap:var(--s-8);flex-wrap:wrap;margin-top:var(--s-24)}
+.tier{padding:8px var(--s-16);border:1px solid var(--l-300);border-radius:var(--rad);
+  background:var(--l-0);font-size:14px}
+.tier.is-on{background:var(--l-900);color:var(--l-0);border-color:var(--l-900)}
+.calc-total{font-size:39px;font-weight:700;line-height:1;margin-top:var(--s-8)}
+.calc-rows{margin-top:var(--s-20);border-top:1px solid var(--l-300)}
+.calc-row{display:flex;justify-content:space-between;padding:var(--s-12) 0;
+  border-bottom:1px solid var(--l-300);font-size:15px}
+.calc-note{margin-top:auto;padding-top:var(--s-24)}
+.btn--block{width:100%;margin-top:var(--s-16)}
+/* escape hatch for the >50 buyer — routes to the form, not to a dead end */
+.calc-over{grid-column:span 12;margin-top:var(--s-16);padding:var(--s-16) var(--s-24);
+  border:1px dashed var(--l-400);border-radius:var(--rad);display:flex;
+  align-items:center;justify-content:space-between;gap:var(--s-16);flex-wrap:wrap}
+
+/* ═══════════════════════════════════════════════════════════
+   7 · CUSTOMER PROOF   (priority 3 — the objective-2 gap)
+   Cases carry a number.  Quotes carry name + title + company.
+   Replaces the cloned B2C student testimonials.
+   ═══════════════════════════════════════════════════════════ */
+.cases{grid-column:span 12;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter)}
+.case{border:1px solid var(--l-300);border-radius:var(--rad-lg);overflow:hidden;
+  background:var(--l-0);display:flex;flex-direction:column}
+.case .ph{aspect-ratio:16/9;border:0;border-bottom:1px dashed var(--l-400);border-radius:0}
+.case-body{padding:var(--s-24);display:flex;flex-direction:column;gap:var(--s-12);flex:1}
+.case-metric{font-size:31px;font-weight:700;line-height:1}
+.case-dl{margin:0;font-size:14px;line-height:1.5}
+.case-dl dt{color:var(--l-500);font-weight:600;margin-top:var(--s-8)}
+.case-dl dd{margin:2px 0 0;color:var(--l-700)}
+.case-link{margin-top:auto;padding-top:var(--s-8);font-size:14px;font-weight:600;text-decoration:underline}
+
+.quotes{grid-column:span 12;display:grid;grid-template-columns:repeat(2,1fr);
+  gap:var(--gutter);margin-top:var(--s-32)}
+.quote{border:1px solid var(--l-300);border-radius:var(--rad-lg);padding:var(--s-32);
+  background:var(--l-50);display:flex;flex-direction:column;gap:var(--s-20)}
+.quote blockquote{margin:0;font-size:20px;line-height:1.45}
+.quote-by{display:flex;align-items:center;gap:var(--s-12);margin-top:auto}
+.quote-av{width:48px;height:48px;border-radius:50%;background:var(--l-200);
+  border:1px dashed var(--l-400);flex:none}
+.quote-name{font-weight:700;font-size:15px}
+.quote-role{font-size:13px;color:var(--l-600)}
+.quote-logo{margin-left:auto;width:88px;height:28px;background:var(--l-200);
+  border:1px dashed var(--l-400);border-radius:4px}
+
+/* ═══════════════════════════════════════════════════════════
+   8 · LEAD FORM + NAMED CONTACT   (priorities 1 and 2)
+   THE most important block on the page.  On-page, not behind a link.
+   ═══════════════════════════════════════════════════════════ */
+.lead{grid-column:span 7}
+.contact{grid-column:span 5}
+.form-card{border:1px solid var(--l-300);border-radius:var(--rad-lg);
+  padding:var(--s-32);background:var(--l-0)}
+.hs-slot{margin-bottom:var(--s-24);padding:var(--s-12);border:1px dashed var(--l-400);
+  border-radius:4px;font-size:12px;color:var(--l-600);background:var(--l-50)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-16);margin-bottom:var(--s-16)}
+.f-row--1{grid-template-columns:1fr}
+.f-field{display:flex;flex-direction:column;gap:6px}
+.f-label{font-size:14px;font-weight:600}
+.f-label .req{color:var(--l-600)}
+.f-input,.f-select,.f-textarea{
+  width:100%;padding:12px var(--s-16);border:1px solid var(--l-400);
+  border-radius:var(--rad);background:var(--l-0);font:inherit;font-size:15px;color:var(--l-900);
+}
+.f-input:focus,.f-select:focus,.f-textarea:focus{outline:2px solid var(--l-900);outline-offset:1px;border-color:var(--l-900)}
+.f-textarea{min-height:104px;resize:vertical}
+.f-err{font-size:13px;color:var(--l-900);font-weight:600;display:none}
+.f-field.is-err .f-input,.f-field.is-err .f-select{border-color:var(--l-900);border-width:2px}
+.f-field.is-err .f-err{display:block}
+/* consent checkboxes are UNBUNDLED — one purpose per box (heuristic finding) */
+.f-check{display:flex;gap:var(--s-12);align-items:flex-start;margin-bottom:var(--s-12)}
+.f-check input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--l-800)}
+.f-check label{font-size:14px;line-height:1.45;color:var(--l-700)}
+.f-submit{margin-top:var(--s-16);width:100%}
+.f-check + .btn.f-submit{margin-top:var(--s-24)}
+.f-foot{margin-top:var(--s-12);font-size:13px;color:var(--l-600)}
+.form-done{display:none;text-align:center;padding:var(--s-40) var(--s-16)}
+.form-done .h3{margin-bottom:var(--s-12)}
+.form-card.is-done .form-live{display:none}
+.form-card.is-done .form-done{display:block}
+
+.contact-card{border:1px solid var(--l-300);border-radius:var(--rad-lg);
+  padding:var(--s-32);background:var(--l-50);position:sticky;top:112px}
+.contact-top{display:flex;gap:var(--s-16);align-items:center}
+.contact-av{width:72px;height:72px;border-radius:50%;background:var(--l-200);
+  border:1px dashed var(--l-400);flex:none}
+.contact-lines{margin-top:var(--s-24);display:grid;gap:var(--s-12)}
+.contact-line{display:flex;gap:var(--s-12);align-items:center;font-size:15px}
+.contact-line a{font-weight:600}
+.contact-note{margin-top:var(--s-24);padding-top:var(--s-20);border-top:1px solid var(--l-300)}
+
+/* ═══════════════════════════════════════════════════════════
+   9 · FUNDING   (priority 10)
+   NOTHING here ships until Hege has QA'd it.
+   ═══════════════════════════════════════════════════════════ */
+.fund{grid-column:span 12;display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter)}
+.fund-card{border:1px solid var(--l-300);border-radius:var(--rad-lg);padding:var(--s-32);background:var(--l-0)}
+.fund-card .h3{margin-bottom:var(--s-12)}
+.fund-dl{margin:var(--s-16) 0 0;font-size:15px}
+.fund-dl dt{font-weight:600;margin-top:var(--s-12)}
+.fund-dl dd{margin:2px 0 0;color:var(--l-700)}
+
+/* ═══════════════════════════════════════════════════════════
+   10 · INSIGHT & CONTENT   (priority 8)
+   For the visitor who is interested but not ready to hand over details.
+   ═══════════════════════════════════════════════════════════ */
+.arts{grid-column:span 8;display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gutter)}
+.art{display:flex;flex-direction:column;gap:var(--s-12)}
+.art .ph{aspect-ratio:16/10}
+.art-ttl{font-size:18px;font-weight:700;line-height:1.35}
+.art-meta{font-size:13px;color:var(--l-600)}
+.links{grid-column:span 4}
+.link-list{margin:var(--s-16) 0 0;padding:0;list-style:none;border-top:1px solid var(--l-300)}
+.link-list li{border-bottom:1px solid var(--l-300)}
+.link-list a{display:flex;justify-content:space-between;gap:var(--s-16);
+  padding:var(--s-16) 0;font-size:15px;text-decoration:none}
+.link-list a:hover{text-decoration:underline}
+.link-list .src{color:var(--l-600);font-size:13px;flex:none}
+
+/* ═══════════════════════════════════════════════════════════
+   11 · FAQ   (priority 11) — buyer questions, not student questions
+   ═══════════════════════════════════════════════════════════ */
+.faq-hd{grid-column:span 4}
+.faq{grid-column:span 8}
+.faq-item{border-bottom:1px solid var(--l-300)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:var(--s-16);
+  padding:var(--s-20) 0;background:none;border:0;text-align:left;
+  font-size:18px;font-weight:600;color:var(--l-900)}
+.faq-chev{flex:none;width:24px;height:24px;border:1px solid var(--l-400);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform .2s}
+.faq-item.is-open .faq-chev{transform:rotate(45deg)}
+.faq-a{display:none;padding:0 0 var(--s-24);max-width:62ch}
+.faq-item.is-open .faq-a{display:block}
+
+/* ═══════════════════════════════════════════════════════════
+   12 · CLOSING CTA + PRESS (demoted)
+   Press logos belong here, not at position 2.
+   ═══════════════════════════════════════════════════════════ */
+.close-cta{grid-column:span 12;display:flex;align-items:center;justify-content:space-between;
+  gap:var(--s-40);flex-wrap:wrap}
+.close-cta .h2{max-width:16em}
+.press{padding:var(--s-40) 0}
+.press .trusted-lbl{color:var(--l-500)}
+
+/* ═══════════════════════════════════════════════════════════
+   GRID OVERLAY — press "G".  Verifies the 1440/96/24/12 spec,
+   which today exists only in the token doc and nowhere in CSS.
+   ═══════════════════════════════════════════════════════════ */
+.grid-ov{position:fixed;inset:0;z-index:999;pointer-events:none;display:none}
+.grid-ov.on{display:block}
+.grid-ov .wrap{height:100%}
+.grid-ov .grid{height:100%}
+.grid-ov .grid span{background:rgba(255,0,0,.08);border-left:1px solid rgba(255,0,0,.18);
+  border-right:1px solid rgba(255,0,0,.18)}
+.gridhint{position:fixed;right:12px;bottom:12px;z-index:1000;background:var(--l-900);
+  color:var(--l-0);font-size:11px;padding:6px 10px;border-radius:4px;letter-spacing:.04em}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — breakpoints match the prototype: 1200/1024/768/480
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width:1200px){
+  :root{--margin:48px}
+  .seg-cards{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:1024px){
+  :root{--margin:32px;--sec-y:var(--s-56)}
+  .h1{font-size:39px}.h2{font-size:31px}.h3{font-size:23px}
+  .hero-copy,.hero-media{grid-column:span 12}
+  .hero-media{margin-top:var(--s-32)}
+  .ben-hd,.ben-list,.arts,.links,.faq-hd,.faq,.lead,.contact{grid-column:span 12}
+  .contact-card{position:static;margin-top:var(--s-24)}
+  .calc{grid-template-columns:1fr}
+  .calc-out{border-left:0;border-top:1px solid var(--l-300)}
+  .cases{grid-template-columns:1fr 1fr}
+}
+@media (max-width:768px){
+  :root{--margin:20px;--sec-y:var(--s-48);--gutter:16px}
+  .h1{font-size:31px}.h2{font-size:26px}.lead{font-size:18px}
+  .trusted .wrap{flex-direction:column;align-items:flex-start;gap:var(--s-16)}
+  .marquee{width:100%}
+  .seg-cards,.cases,.quotes,.fund,.arts,.ben-list{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .f-row{grid-template-columns:1fr}
+  .calc-in,.calc-out,.form-card,.contact-card,.fund-card,.quote{padding:var(--s-24)}
+  .stub-nav{display:none}
+  .hero-facts{gap:var(--s-20)}
+}
+@media (max-width:480px){
+  :root{--margin:16px}
+  .hero-cta .btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ STUB HEADER — real one lives in index.html, do not port ══ -->
+<header class="stub-header">
+  <div class="wrap">
+    <div class="stub-logo" aria-hidden="true"></div>
+    <nav class="stub-nav"><span>Courses</span><span>Studies</span><span>About</span><b>For business</b></nav>
+    <div class="spacer"></div>
+    <span class="small">Search · Log in · Cart</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══ 1 · HERO ═══════════════════════════════════════════════
+     Benefit-led. Two CTAs, the primary one anchored to the form.
+     No hand-drawn ellipse. Capped at ~560px so it is not a slide. -->
+<section class="hero">
+  <div class="wrap">
+    <div class="grid hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">NKI for business</p>
+        <h1 class="h1">Close your skills gap without taking people off the job</h1>
+        <p class="lead hero-sub">Fully online programmes for continuing education and
+          upskilling — built around shift work and busy weeks, scaled from three
+          employees to three hundred.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#lead">Get a tailored offer</a>
+          <a class="btn btn--ghost" href="#how">See how it works</a>
+        </div>
+        <div class="hero-facts">
+          <div><div class="fact-n">50+</div><div class="fact-l">years of flexible learning</div></div>
+          <div><div class="fact-n">200+</div><div class="fact-l">courses across working life</div></div>
+          <div><div class="fact-n">2024</div><div class="fact-l">Online Educator of the Year,
+            Flexible Education Norway</div></div>
+        </div>
+        <span class="todo">TODO · verify all three hero facts, incl. award name + year</span>
+      </div>
+      <div class="hero-media">
+        <div class="ph">Hero photo<br>4:3</div>
+        <div class="stack">
+          <div class="ph">Photo</div>
+          <div class="ph">Photo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2 · TRUSTED BY ═════════════════════════════════════════
+     Customer logos, greyscale, single-pass track cloned once.
+     Assets: prototype/trusted-by-logos/ (Aider, Metier, Odontia +3). -->
+<section class="trusted" aria-label="Companies that work with NKI">
+  <div class="wrap">
+    <p class="trusted-lbl">Trusted by teams at</p>
+    <div class="marquee">
+      <div class="marquee-inner">
+        <!-- track A: one pass of the list -->
+        <div class="marquee-track">
+          <span class="logo-ph">Aider</span>
+          <span class="logo-ph">Metier</span>
+          <span class="logo-ph">Odontia</span>
+          <span class="logo-ph">Logo 4</span>
+          <span class="logo-ph">Logo 5</span>
+          <span class="logo-ph">Logo 6</span>
+        </div>
+        <!-- track B: exact clone, aria-hidden, purely for the seamless loop -->
+        <div class="marquee-track" aria-hidden="true">
+          <span class="logo-ph">Aider</span>
+          <span class="logo-ph">Metier</span>
+          <span class="logo-ph">Odontia</span>
+          <span class="logo-ph">Logo 4</span>
+          <span class="logo-ph">Logo 5</span>
+          <span class="logo-ph">Logo 6</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><span class="todo">TODO · confirm logo usage rights per customer</span></div>
+</section>
+
+<!-- ═══ 3 · SELF-SEGMENTATION ══════════════════════════════════
+     Routes the visitor and pre-fills the lead form's "need" field. -->
+<section class="sec sec--alt" id="start">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="eyebrow">Where to start</p>
+      <h2 class="h2">What do you need to solve?</h2>
+      <p class="body">Pick the closest match — we'll take it from there.</p>
+    </div>
+    <div class="grid">
+      <div class="seg-cards">
+        <a class="seg-card" href="#lead" data-need="gap">
+          <span class="ic">icon</span>
+          <h3 class="h4">Close a specific skills gap</h3>
+          <p class="body">A capability the team is missing right now — AI at work,
+            new regulations, a new system.</p>
+          <span class="seg-link">Get an offer →</span>
+        </a>
+        <a class="seg-card" href="#lead" data-need="formal">
+          <span class="ic">icon</span>
+          <h3 class="h4">Formal qualification for staff</h3>
+          <p class="body">Certificates and vocational qualifications your people can
+            earn while they keep working.</p>
+          <span class="seg-link">Get an offer →</span>
+        </a>
+        <a class="seg-card" href="#lead" data-need="onboarding">
+          <span class="ic">icon</span>
+          <h3 class="h4">Onboard at scale</h3>
+          <p class="body">A repeatable programme every new hire runs through, with
+            completion you can actually see.</p>
+          <span class="seg-link">Get an offer →</span>
+        </a>
+        <a class="seg-card" href="#funding" data-need="funded">
+          <span class="ic">icon</span>
+          <h3 class="h4">Use public funding</h3>
+          <p class="body">BIO or Kompetansepluss may cover a large share of the cost.
+            We'll tell you if you qualify.</p>
+          <span class="seg-link">See funding →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4 · WHAT YOU GET AS AN EMPLOYER ════════════════════════
+     Flat, no tabs. The current page hides 3/4 of its argument. -->
+<section class="sec" id="what-you-get">
+  <div class="wrap">
+    <div class="grid">
+      <div class="ben-hd">
+        <p class="eyebrow">For the employer</p>
+        <h2 class="h2">What you actually get</h2>
+        <p class="body" style="margin-top:var(--s-16)">Not just course access — the
+          administration and the evidence around it.</p>
+      </div>
+      <div class="ben-list">
+        <div class="ben">
+          <span class="ic">icon</span>
+          <div>
+            <h3 class="h4">Progress you can see</h3>
+            <p class="body">A live view of where every participant is, so you know
+              who needs a nudge before the deadline, not after.</p>
+          </div>
+        </div>
+        <div class="ben">
+          <span class="ic">icon</span>
+          <div>
+            <h3 class="h4">Completion rates, per cohort</h3>
+            <p class="body">Completion tracked by group and by course, comparable
+              across rounds.</p>
+          </div>
+        </div>
+        <div class="ben">
+          <span class="ic">icon</span>
+          <div>
+            <h3 class="h4">Reporting you can forward</h3>
+            <p class="body">Export-ready documentation for management, audits and
+              funding follow-up.</p>
+          </div>
+        </div>
+        <div class="ben">
+          <span class="ic">icon</span>
+          <div>
+            <h3 class="h4">Licence administration</h3>
+            <p class="body">Your admin assigns, reassigns and revokes seats. No
+              tickets to us to move one person.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ben-portfolio">
+        <p class="eyebrow">Portfolio</p>
+        <div class="tags">
+          <span class="tag">Leadership</span><span class="tag">HR</span>
+          <span class="tag">Administration</span><span class="tag">Law</span>
+          <span class="tag">Artificial intelligence</span><span class="tag">Project management</span>
+          <span class="tag">Health</span><span class="tag">Logistics</span>
+          <span class="tag">Transport</span><span class="tag">Vocational education</span>
+        </div>
+        <p class="small" style="margin-top:var(--s-12)">200+ courses, continuously
+          updated. Static labels — not filters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5 · HOW A COLLABORATION WORKS ══════════════════════════
+     The current page has nothing on process at all. -->
+<section class="sec sec--alt" id="how">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="eyebrow">Process</p>
+      <h2 class="h2">How a collaboration works</h2>
+      <p class="body">From first contact to a running programme — typically four to
+        six weeks.</p>
+    </div>
+    <div class="grid">
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">01</div>
+          <h3 class="h4">First contact</h3>
+          <p class="body">You send the form or call. We reply within one working day.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">02</div>
+          <h3 class="h4">Needs mapping</h3>
+          <p class="body">A 45-minute session: roles, gaps, timeline, budget, funding.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">03</div>
+          <h3 class="h4">Programme &amp; offer</h3>
+          <p class="body">We shortlist courses, size the cohort and send a written offer.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">04</div>
+          <h3 class="h4">Rollout</h3>
+          <p class="body">Seats assigned, participants onboarded, your admin trained.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">05</div>
+          <h3 class="h4">Follow-up</h3>
+          <p class="body">Progress reporting through the programme and a close-out review.</p>
+        </div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:var(--s-24)">Timeline is indicative.
+      <span class="todo">TODO · confirm real lead times with sales</span></p>
+  </div>
+</section>
+
+<!-- ═══ 6 · WHAT IT COSTS ══════════════════════════════════════
+     Rescaled 1–50, default 12. Old page ran 1–1000 default 100,
+     which is a market we don't sell to (SSB: 94% have <50). -->
+<section class="sec" id="cost">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="eyebrow">Price indication</p>
+      <h2 class="h2">What it costs</h2>
+      <p class="body">Move the slider for an indication. Every programme is quoted
+        individually — this is not a binding price.</p>
+    </div>
+    <div class="grid">
+      <div class="calc">
+        <div class="calc-in">
+          <div class="seat-row">
+            <label class="f-label" for="seats">Employees taking part</label>
+            <output class="seat-n" id="seatOut" for="seats">12</output>
+          </div>
+          <input type="range" id="seats" min="1" max="50" step="1" value="12"
+                 aria-describedby="seatHelp">
+          <div class="scale"><span>1</span><span>25</span><span>50</span></div>
+          <!-- This stat is the justification for the whole 1–50 rescope — it must be
+               sourced properly before it goes anywhere near a live page. -->
+          <p class="small" id="seatHelp" style="margin-top:var(--s-12)">
+            94% of Norwegian companies with employees have fewer than 50 (SSB).
+            <span class="todo">TODO · cite exact SSB table + year</span></p>
+          <div class="tiers" id="tiers" role="group" aria-label="Volume tiers"></div>
+        </div>
+        <div class="calc-out">
+          <p class="eyebrow">Indicative total</p>
+          <div class="calc-total" id="total">— kr</div>
+          <div class="calc-rows">
+            <div class="calc-row"><span>List price per seat</span><span id="listPer">4 900 kr</span></div>
+            <div class="calc-row"><span>Volume discount</span><span id="disc">—</span></div>
+            <div class="calc-row"><span>Your price per seat</span><span id="netPer">— kr</span></div>
+          </div>
+          <div class="calc-note">
+            <p class="small">Based on one standard course per participant, 12 months
+              access. <span class="todo">TODO · verify base price + tier curve</span></p>
+            <a class="btn btn--block" href="#lead">Get an exact offer</a>
+          </div>
+        </div>
+      </div>
+      <!-- escape hatch: the >50 buyer must not hit a dead end -->
+      <div class="calc-over">
+        <p class="body" style="margin:0">More than 50 employees, or several departments?</p>
+        <a class="btn btn--ghost" href="#lead">Talk to us about volume pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7 · CUSTOMER PROOF ═════════════════════════════════════
+     This is the objective-2 gap. Every item here is placeholder
+     until sales supplies real, cleared references. -->
+<section class="sec sec--alt" id="proof">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="eyebrow">Customer proof</p>
+      <h2 class="h2">What it looks like in practice</h2>
+      <p class="body">Three programmes, what they had to solve, and what changed.</p>
+    </div>
+    <div class="grid">
+      <div class="cases">
+        <article class="case">
+          <div class="ph">Case photo</div>
+          <div class="case-body">
+            <div class="case-metric">92%</div>
+            <p class="small">completion across two cohorts</p>
+            <dl class="case-dl">
+              <dt>Challenge</dt><dd>Nationwide team needed the same certification without
+                travelling to Oslo.</dd>
+              <dt>What we did</dt><dd>Fully online cohort with fixed checkpoints and a
+                dedicated programme manager.</dd>
+            </dl>
+            <a class="case-link" href="#">Read the case →</a>
+            <span class="todo">TODO · real customer + cleared quote</span>
+          </div>
+        </article>
+        <article class="case">
+          <div class="ph">Case photo</div>
+          <div class="case-body">
+            <div class="case-metric">6 weeks</div>
+            <p class="small">from first meeting to first cohort running</p>
+            <dl class="case-dl">
+              <dt>Challenge</dt><dd>New regulation gave the team a hard compliance
+                deadline.</dd>
+              <dt>What we did</dt><dd>Existing course adapted to their procedures and
+                rolled out in three weeks.</dd>
+            </dl>
+            <a class="case-link" href="#">Read the case →</a>
+            <span class="todo">TODO · real customer + cleared quote</span>
+          </div>
+        </article>
+        <article class="case">
+          <div class="ph">Case photo</div>
+          <div class="case-body">
+            <div class="case-metric">0</div>
+            <p class="small">operational hours lost to training</p>
+            <dl class="case-dl">
+              <dt>Challenge</dt><dd>Shift-based workforce; classroom training was
+                impossible to schedule.</dd>
+              <dt>What we did</dt><dd>Self-paced modules with manager-visible progress
+                and monthly check-ins.</dd>
+            </dl>
+            <a class="case-link" href="#">Read the case →</a>
+            <span class="todo">TODO · real customer + cleared quote</span>
+          </div>
+        </article>
+      </div>
+
+      <!-- Attributed quotes: name + title + company + logo. Not student voices. -->
+      <div class="quotes">
+        <figure class="quote">
+          <blockquote>"We got people qualified without losing a single shift. That was
+            the whole point, and it's the part I didn't think was possible."</blockquote>
+          <figcaption class="quote-by">
+            <span class="quote-av" aria-hidden="true"></span>
+            <span>
+              <span class="quote-name">Firstname Lastname</span><br>
+              <span class="quote-role">HR Director, Company AS</span>
+            </span>
+            <span class="quote-logo" aria-hidden="true"></span>
+          </figcaption>
+          <span class="todo">TODO · real attributed quote</span>
+        </figure>
+        <figure class="quote">
+          <blockquote>"The reporting is what sold it internally. I could show the board
+            completion per department without building a spreadsheet."</blockquote>
+          <figcaption class="quote-by">
+            <span class="quote-av" aria-hidden="true"></span>
+            <span>
+              <span class="quote-name">Firstname Lastname</span><br>
+              <span class="quote-role">Head of Competence, Company AS</span>
+            </span>
+            <span class="quote-logo" aria-hidden="true"></span>
+          </figcaption>
+          <span class="todo">TODO · real attributed quote</span>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8 · LEAD FORM + NAMED CONTACT ══════════════════════════
+     Priority 1 and 2. On the page, not behind a link. -->
+<section class="sec" id="lead">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="h2">Get a tailored offer</h2>
+      <p class="body">Tell us roughly what you need. You'll hear from a named person
+        within one working day — no call centre.</p>
+    </div>
+    <div class="grid">
+
+      <div class="lead">
+        <div class="form-card" id="formCard">
+          <!-- HUBSPOT EMBED SLOT — dev replaces the .form-live block below with the
+               HubSpot form. Field names here are the intended HubSpot properties. -->
+          <p class="hs-slot">HUBSPOT EMBED SLOT — replace <code>.form-live</code> with the
+            HubSpot form. Field names below are the intended HubSpot property names.</p>
+
+          <form class="form-live" id="leadForm" novalidate>
+            <div class="f-row">
+              <div class="f-field">
+                <label class="f-label" for="ln">Name <span class="req">*</span></label>
+                <input class="f-input" id="ln" name="firstname" required>
+                <span class="f-err">Enter your name</span>
+              </div>
+              <div class="f-field">
+                <label class="f-label" for="lc">Company <span class="req">*</span></label>
+                <input class="f-input" id="lc" name="company" required>
+                <span class="f-err">Enter your company</span>
+              </div>
+            </div>
+            <div class="f-row">
+              <div class="f-field">
+                <label class="f-label" for="le">Work email <span class="req">*</span></label>
+                <input class="f-input" id="le" name="email" type="email" required>
+                <span class="f-err">Enter a valid work email</span>
+              </div>
+              <div class="f-field">
+                <label class="f-label" for="lp">Phone</label>
+                <input class="f-input" id="lp" name="phone" type="tel">
+                <span class="f-err">Check the number</span>
+              </div>
+            </div>
+            <div class="f-row">
+              <div class="f-field">
+                <label class="f-label" for="lsize">Employees <span class="req">*</span></label>
+                <select class="f-select" id="lsize" name="num_employees" required>
+                  <option value="">Select…</option>
+                  <option>1–9</option><option>10–24</option><option>25–49</option>
+                  <option>50–99</option><option>100+</option>
+                </select>
+                <span class="f-err">Select a size</span>
+              </div>
+              <div class="f-field">
+                <!-- pre-filled by the §3 segmentation cards -->
+                <label class="f-label" for="lneed">What do you need? <span class="req">*</span></label>
+                <select class="f-select" id="lneed" name="need" required>
+                  <option value="">Select…</option>
+                  <option value="gap">Close a specific skills gap</option>
+                  <option value="formal">Formal qualification for staff</option>
+                  <option value="onboarding">Onboard at scale</option>
+                  <option value="funded">Use public funding</option>
+                  <option value="other">Something else</option>
+                </select>
+                <span class="f-err">Select what you need</span>
+              </div>
+            </div>
+            <div class="f-row f-row--1">
+              <div class="f-field">
+                <label class="f-label" for="lm">Anything we should know?</label>
+                <textarea class="f-textarea" id="lm" name="message"></textarea>
+              </div>
+            </div>
+
+            <!-- Unbundled consent — one purpose per checkbox -->
+            <div class="f-check">
+              <input type="checkbox" id="lconsent" name="consent" required>
+              <label for="lconsent">I agree that NKI may contact me about this enquiry.
+                <span class="req">*</span></label>
+            </div>
+            <div class="f-check">
+              <input type="checkbox" id="lnews" name="marketing_consent">
+              <label for="lnews">Send me occasional insight on skills development. Optional.</label>
+            </div>
+            <!-- next-version hook: NKI Atlas trial in exchange for the email address -->
+            <div class="f-check">
+              <input type="checkbox" id="latlas" name="atlas_trial">
+              <label for="latlas">Give me access to test <strong>NKI Atlas</strong> when it opens.</label>
+            </div>
+
+            <button class="btn f-submit" type="submit">Send enquiry</button>
+            <!-- SLA claim — same unverified figure as §5 step 01 and the confirmation
+                 state below. All three must move together once sales confirms it. -->
+            <p class="f-foot">Reply within one working day. We don't share your details.
+              <span class="todo">TODO · confirm the one-working-day SLA (3 places)</span></p>
+          </form>
+
+          <div class="form-done" role="status" aria-live="polite">
+            <h3 class="h3">Thanks — that's with us</h3>
+            <p class="body">Ingrid will get back to you within one working day. If it's
+              urgent, call <a href="tel:+4740000000"><strong>+47 400 00 000</strong></a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="contact-card">
+          <p class="eyebrow">Your contact</p>
+          <div class="contact-top" style="margin-top:var(--s-16)">
+            <span class="contact-av" aria-hidden="true"></span>
+            <div>
+              <div class="h4">Ingrid Solberg</div>
+              <p class="small">Head of Sales &amp; Partnerships, business market</p>
+            </div>
+          </div>
+          <div class="contact-lines">
+            <div class="contact-line"><span class="ic" style="width:28px;height:28px">tel</span>
+              <a href="tel:+4740000000">+47 400 00 000</a></div>
+            <div class="contact-line"><span class="ic" style="width:28px;height:28px">mail</span>
+              <a href="mailto:bedrift@nki.no">bedrift@nki.no</a></div>
+            <div class="contact-line"><span class="ic" style="width:28px;height:28px">cal</span>
+              <a href="#">Book a 20-minute call</a></div>
+          </div>
+          <span class="todo">TODO · real name, direct line and calendar link</span>
+          <div class="contact-note">
+            <p class="small">Prefer to talk before filling anything in? Call directly —
+              this is the business line, not the student line.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 9 · FUNDING ════════════════════════════════════════════ -->
+<section class="sec sec--alt" id="funding">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="eyebrow">Funding</p>
+      <h2 class="h2">Public funding may cover a large share</h2>
+      <p class="body">Two schemes are commonly relevant for Norwegian employers. We help
+        you work out which applies and what the application needs.</p>
+      <span class="todo">TODO · QA with Hege — nothing here ships unverified</span>
+    </div>
+    <div class="grid">
+      <div class="fund">
+        <div class="fund-card">
+          <h3 class="h3">BIO-midler</h3>
+          <p class="body">County-administered funding for competence development in
+            existing businesses facing restructuring.</p>
+          <dl class="fund-dl">
+            <dt>Typically covers</dt><dd>A share of course cost and lost working hours.</dd>
+            <dt>Who qualifies</dt><dd>Businesses in the county, subject to that county's
+              current criteria.</dd>
+            <dt>Applied for by</dt><dd>The employer. We supply programme documentation.</dd>
+          </dl>
+          <span class="todo">TODO · figures + criteria unverified</span>
+        </div>
+        <div class="fund-card">
+          <h3 class="h3">Kompetansepluss</h3>
+          <p class="body">National scheme for basic skills training in the workplace —
+            reading, writing, numeracy, digital and Norwegian.</p>
+          <dl class="fund-dl">
+            <dt>Typically covers</dt><dd>Course delivery for eligible basic-skills training.</dd>
+            <dt>Who qualifies</dt><dd>Employers with staff who need basic skills, via an
+              approved provider.</dd>
+            <dt>Applied for by</dt><dd>Employer or provider, depending on the call.</dd>
+          </dl>
+          <span class="todo">TODO · confirm NKI's approved-provider status</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 10 · INSIGHT & CONTENT ═════════════════════════════════
+     For the visitor who is interested but not ready to convert. -->
+<section class="sec" id="insight">
+  <div class="wrap">
+    <div class="sec-hd">
+      <p class="eyebrow">Insight</p>
+      <h2 class="h2">Reading, not a sales pitch</h2>
+    </div>
+    <div class="grid">
+      <div class="arts">
+        <article class="art">
+          <div class="ph">Article image</div>
+          <h3 class="art-ttl">More than half of Norwegian companies report a growing
+            competence gap</h3>
+          <p class="art-meta">9 June 2026 · 6 min read</p>
+        </article>
+        <article class="art">
+          <div class="ph">Article image</div>
+          <h3 class="art-ttl">What actually makes online training finish: four things we
+            see across cohorts</h3>
+          <p class="art-meta">18 June 2026 · 4 min read</p>
+        </article>
+        <article class="art">
+          <div class="ph">Article image</div>
+          <h3 class="art-ttl">Buying training for a team of twelve: a practical checklist</h3>
+          <p class="art-meta">2 June 2026 · 5 min read</p>
+        </article>
+        <article class="art">
+          <div class="ph">Article image</div>
+          <h3 class="art-ttl">NKI named "Online Educator of the Year" 2024 by Flexible
+            Education Norway</h3>
+          <p class="art-meta">14 Nov 2024 · 3 min read</p>
+        </article>
+      </div>
+      <aside class="links">
+        <h3 class="h4">External material</h3>
+        <p class="small" style="margin-top:var(--s-8)">Sources we use, and you can check.</p>
+        <ul class="link-list">
+          <li><a href="#">Business structures — companies by size<span class="src">SSB</span></a></li>
+          <li><a href="#">Competence needs in Norwegian working life<span class="src">NHO</span></a></li>
+          <li><a href="#">BIO-midler: county overview<span class="src">Fylkeskommunen</span></a></li>
+          <li><a href="#">Kompetansepluss — the scheme<span class="src">HK-dir</span></a></li>
+          <li><a href="#">Quality in online education<span class="src">NOKUT</span></a></li>
+        </ul>
+        <span class="todo">TODO · verify every source link</span>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 11 · FAQ ═══════════════════════════════════════════════
+     Buyer questions, not student questions. -->
+<section class="sec sec--alt" id="faq">
+  <div class="wrap">
+    <div class="grid">
+      <div class="faq-hd">
+        <p class="eyebrow">FAQ</p>
+        <h2 class="h2">Questions buyers ask</h2>
+        <p class="body" style="margin-top:var(--s-16)">Something not here?
+          <a href="#lead">Ask us directly</a>.</p>
+      </div>
+      <div class="faq" id="faqList">
+        <div class="faq-item is-open">
+          <button class="faq-q" aria-expanded="true">What's the minimum number of
+            participants?<span class="faq-chev" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p class="body">There isn't one. We run programmes from a
+            single employee upwards; volume discounts start at five.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How are we invoiced?<span
+            class="faq-chev" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p class="body">Quarterly on a running contract, or once up
+            front for a single cohort. Your choice at contract stage.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can courses be adapted to our
+            procedures?<span class="faq-chev" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p class="body">Yes. Our learning designers adapt existing
+            courses, and build new ones with your subject experts where it's worth it.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What happens if someone leaves
+            mid-programme?<span class="faq-chev" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p class="body">Your administrator reassigns the seat to
+            another employee. No contact with us needed.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How much time does it take per
+            week?<span class="faq-chev" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p class="body">Most programmes are designed around two to
+            four hours a week, self-paced, so they fit around shifts.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Do participants get a formal
+            qualification?<span class="faq-chev" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p class="body">Depends on the course — some lead to formal
+            vocational qualifications, others to a course certificate. We're explicit
+            about which in the offer.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What data do we get about our
+            employees?<span class="faq-chev" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p class="body">Progress and completion, not answers or
+            grades on individual attempts. Covered by a data processing agreement.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 12 · CLOSING CTA ═══════════════════════════════════════ -->
+<section class="sec sec--dark">
+  <div class="wrap">
+    <div class="grid">
+      <div class="close-cta">
+        <h2 class="h2">Tell us what your team needs to be able to do</h2>
+        <div class="hero-cta" style="margin:0">
+          <a class="btn" href="#lead">Get a tailored offer</a>
+          <a class="btn btn--ghost" href="tel:+4740000000">Call +47 400 00 000</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRESS — demoted from position 2 to just above the footer ══ -->
+<section class="press" aria-label="Press coverage">
+  <div class="wrap">
+    <p class="trusted-lbl">Mentioned in</p>
+    <div class="marquee">
+      <div class="marquee-inner">
+        <div class="marquee-track">
+          <span class="logo-ph">Press 1</span><span class="logo-ph">Press 2</span>
+          <span class="logo-ph">Press 3</span><span class="logo-ph">Press 4</span>
+          <span class="logo-ph">Press 5</span><span class="logo-ph">Press 6</span>
+          <span class="logo-ph">Press 7</span>
+        </div>
+        <div class="marquee-track" aria-hidden="true">
+          <span class="logo-ph">Press 1</span><span class="logo-ph">Press 2</span>
+          <span class="logo-ph">Press 3</span><span class="logo-ph">Press 4</span>
+          <span class="logo-ph">Press 5</span><span class="logo-ph">Press 6</span>
+          <span class="logo-ph">Press 7</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ STUB FOOTER — real one lives in index.html ══ -->
+<footer class="stub-footer">
+  <div class="wrap">Footer placeholder — the real <code>.site-footer</code> lives in
+    index.html and is untouched by this rebuild.</div>
+</footer>
+
+<!-- grid overlay -->
+<div class="grid-ov" id="gridOv" aria-hidden="true">
+  <div class="wrap"><div class="grid">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div></div>
+</div>
+<div class="gridhint">Press G — grid overlay</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── grid overlay ─────────────────────────────────────────── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'g' || e.key === 'G') {
+      if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) return;
+      document.getElementById('gridOv').classList.toggle('on');
+    }
+  });
+
+  /* ── §6 calculator — rescaled to companies under 50 ────────
+     Tier curve starts at 5, not 50. Base price carried over from the
+     old model pending verification. */
+  var BASE = 4900;
+  var TIERS = [
+    { min: 25, r: 0.20, label: '25+' },
+    { min: 15, r: 0.15, label: '15+' },
+    { min: 10, r: 0.10, label: '10+' },
+    { min: 5,  r: 0.05, label: '5+'  },
+    { min: 1,  r: 0.00, label: '1+'  }
+  ];
+  var fmt = function (n) {
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
+  var tierFor = function (n) {
+    for (var i = 0; i < TIERS.length; i++) { if (n >= TIERS[i].min) return TIERS[i]; }
+    return TIERS[TIERS.length - 1];
+  };
+
+  var seats  = document.getElementById('seats');
+  var tiersEl = document.getElementById('tiers');
+
+  tiersEl.innerHTML = TIERS.slice().reverse().map(function (t) {
+    return '<span class="tier" data-min="' + t.min + '">' + t.label + '</span>';
+  }).join('');
+
+  function calc() {
+    var n = parseInt(seats.value, 10);
+    var t = tierFor(n);
+    var net = BASE * (1 - t.r);
+
+    document.getElementById('seatOut').textContent = n;
+    document.getElementById('total').textContent   = fmt(net * n) + ' kr';
+    document.getElementById('listPer').textContent = fmt(BASE) + ' kr';
+    document.getElementById('disc').textContent    = t.r ? '−' + Math.round(t.r * 100) + '%' : 'None';
+    document.getElementById('netPer').textContent  = fmt(net) + ' kr';
+
+    Array.prototype.forEach.call(tiersEl.children, function (el) {
+      el.classList.toggle('is-on', parseInt(el.dataset.min, 10) === t.min);
+    });
+  }
+  seats.addEventListener('input', calc);
+  calc();
+
+  /* ── §3 → §8: segmentation cards pre-fill the form's "need" ── */
+  document.querySelectorAll('.seg-card[data-need]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var need = card.dataset.need;
+      var sel  = document.getElementById('lneed');
+      if (sel && need !== 'funded') sel.value = need;
+    });
+  });
+
+  /* ── §8 lead form: validation + fake success state ────────── */
+  var form = document.getElementById('leadForm');
+  var card = document.getElementById('formCard');
+
+  function fieldOf(el) { return el.closest('.f-field') || el.closest('.f-check'); }
+
+  function validate() {
+    var ok = true;
+    form.querySelectorAll('[required]').forEach(function (el) {
+      var bad = el.type === 'checkbox' ? !el.checked
+              : el.type === 'email'    ? !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value.trim())
+              : !el.value.trim();
+      var f = fieldOf(el);
+      if (f) f.classList.toggle('is-err', bad);
+      el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+      if (bad && ok) { el.focus(); }
+      if (bad) ok = false;
+    });
+    return ok;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    /* This is where the HubSpot submit goes. Logged so the payload —
+       including the NKI Atlas opt-in — is inspectable in the prototype. */
+    var payload = {};
+    new FormData(form).forEach(function (v, k) { payload[k] = v; });
+    payload.atlas_trial = document.getElementById('latlas').checked;
+    console.log('[NKI lead] payload for HubSpot:', payload);
+
+    card.classList.add('is-done');
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  form.addEventListener('input', function (e) {
+    var f = fieldOf(e.target);
+    if (f && f.classList.contains('is-err')) validate();
+  });
+
+  /* ── §11 FAQ accordion ────────────────────────────────────── */
+  document.getElementById('faqList').addEventListener('click', function (e) {
+    var btn = e.target.closest('.faq-q');
+    if (!btn) return;
+    var item = btn.closest('.faq-item');
+    var open = item.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+})();
+</script>
+</body>
+</html>
