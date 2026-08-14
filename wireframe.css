@@ -6882,24 +6882,78 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-hubspot-ph .material-symbols-outlined { font-size: 24px; }
 
 /* ── 3. Seat calculator ── */
-/* Compact calc section so the whole module fits within a standard window */
-#biz-calc-anchor { padding-top: var(--spacing-48); padding-bottom: var(--spacing-48); }
+/* The whole module — heading, inputs, estimate and the ROI accordion — must fit a
+   single screen without scrolling. The section claims exactly one viewport below
+   the fixed header and centres its content inside it; the pieces below are sized
+   to stay within that height in both the collapsed and the expanded state. */
+#biz-calc-anchor {
+  padding-top: var(--spacing-72);
+  padding-bottom: var(--spacing-96);
+  scroll-margin-top: var(--header-h);
+}
 #biz-calc-anchor .section-hd { margin-bottom: var(--spacing-32); }
-/* Single white container — sections stacked in one column */
+#biz-calc-anchor .section-title { font-size: var(--font-size-31); }
+#biz-calc-anchor .biz-lead--body { font-size: var(--font-size-16); }
+/* capped so the subheading breaks onto two lines */
+#biz-calc-anchor .biz-lead--body { max-width: 560px; }
+/* Single white container: seats + estimate side by side, ROI accordion below */
 .biz-calc {
   background: var(--bg-surface-primary);
   border-radius: var(--radius-24);
-  padding: var(--spacing-32);
-  max-width: 824px;
+  padding: var(--spacing-40);
+  max-width: 960px;
   margin: 0 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-32);
+  gap: var(--spacing-24);
 }
+.biz-calc-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-40);
+  align-items: stretch;
+}
+/* Estimate column: CTA pinned to the bottom so both columns end level */
+.biz-calc-top > .biz-calc-sec:last-child { display: flex; flex-direction: column; }
+.biz-calc-top > .biz-calc-sec:last-child .biz-est-rows { margin-bottom: auto; }
 .biz-calc-sec > *:last-child { margin-bottom: 0; }
 .biz-calc-h6 { font-size: var(--font-size-20); font-weight: 700; color: var(--text-primary); line-height: 1.15; margin-bottom: var(--spacing-8); }
-.biz-scen-section .biz-roi-sub { margin-bottom: var(--spacing-16); }
+.biz-scen-section .biz-roi-sub { margin-bottom: var(--spacing-12); }
 .biz-scen-section .biz-scen { margin-bottom: 0; }
+
+/* ROI accordion — progressive disclosure for "What do you get back?".
+   Same interaction pattern as the DS content accordion (header row + chevron
+   that flips when open), built on the calculator's own tokens. */
+.biz-roi-acc {
+  border-top: 1px solid var(--border-default);
+  padding-top: var(--spacing-24);
+}
+.biz-roi-acc-h6 { margin-bottom: 0; }
+.biz-roi-acc-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+.biz-roi-acc-hd:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 4px; border-radius: var(--radius-8); }
+.biz-roi-acc-chev {
+  font-size: 24px;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+.biz-roi-acc-body { margin-top: var(--spacing-12); }
+.biz-roi-acc-body > *:last-child { margin-bottom: 0; }
+/* same 560px cap as the section subheading — breaks onto two lines */
+.biz-roi-acc-body .biz-roi-sub { max-width: 560px; }
 .biz-calc-cap {
   font-size: var(--font-size-14);
   font-weight: 500;
@@ -6927,7 +6981,7 @@ body.cdp-cta-pinned .cdp-toc {
   border-radius: 100px;
   background: var(--border-default);
   outline: none;
-  margin: var(--spacing-24) 0 var(--spacing-8);
+  margin: var(--spacing-16) 0 var(--spacing-8);
 }
 .biz-range::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -6954,10 +7008,12 @@ body.cdp-cta-pinned .cdp-toc {
   justify-content: space-between;
   font-size: var(--font-size-14);
   color: var(--text-secondary-on-white);
-  margin-bottom: var(--spacing-24);
+  margin-bottom: var(--spacing-16);
 }
 /* Seat pills reuse the .biz-scen-btn tag component (see below), matching the DS
-   pill default exactly: subtle fill, no visible border. */
+   pill default exactly: subtle fill, no visible border. Tighter side padding so
+   all six tiers stay on one row inside the half-width input column. */
+.biz-tiers .biz-tier { padding-left: var(--spacing-12); padding-right: var(--spacing-12); }
 
 .biz-calc-estimate { display: flex; flex-direction: column; }
 .biz-est-total {
@@ -6975,7 +7031,7 @@ body.cdp-cta-pinned .cdp-toc {
   color: var(--text-primary);
 }
 .biz-est-row span:last-child { font-weight: 700; }
-.biz-est-cta { width: 100%; gap: var(--spacing-8); margin-top: var(--spacing-8); }
+.biz-est-cta { width: 100%; gap: var(--spacing-8); margin-top: var(--spacing-16); }
 .biz-est-cta .material-symbols-outlined { font-size: 20px; }
 /* Disclaimer accordion — DS "Accordion tooltip" (node 308-16714): chevron + underlined
    label; when open, a 2px accent rule runs alongside the 14px description */
@@ -7051,13 +7107,13 @@ body.cdp-cta-pinned .cdp-toc {
 .biz-roi-card-val { font-size: var(--font-size-25); font-weight: 700; color: var(--text-primary); line-height: 1.2; margin-bottom: var(--spacing-8); }
 .biz-roi-card-desc { font-size: var(--font-size-14); color: var(--text-secondary-on-white); line-height: 1.4; }
 
-/* Compact vertical list (label … value per row) so it fits the results column */
+/* Compact vertical list (label … value per row) */
 .biz-roi-summary {
   display: flex;
   flex-direction: column;
   border-top: 1px solid var(--border-default);
-  margin-top: var(--spacing-16);
-  margin-bottom: var(--spacing-16);
+  margin-top: var(--spacing-24);
+  margin-bottom: var(--spacing-24);
 }
 .biz-roi-sum-item {
   display: flex;
@@ -7065,7 +7121,8 @@ body.cdp-cta-pinned .cdp-toc {
   justify-content: space-between;
   align-items: center;
   gap: var(--spacing-16);
-  padding: var(--spacing-16) 0;
+  /* 12px above + 12px below → 24px of space between adjacent rows */
+  padding: var(--spacing-12) 0;
   border-bottom: 1px solid var(--border-default);
 }
 .biz-roi-sum-item:last-child { border-bottom: none; }
@@ -7075,7 +7132,7 @@ body.cdp-cta-pinned .cdp-toc {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-8);
+  padding: var(--spacing-4);
   border-radius: var(--radius-8);
   font-size: var(--font-size-16);
   color: var(--text-primary);
@@ -7083,11 +7140,12 @@ body.cdp-cta-pinned .cdp-toc {
   background: var(--feedback-positive-subtle-bg);
 }
 .biz-roi-sum-val { font-size: var(--font-size-16); font-weight: 700; color: var(--text-primary); line-height: 1.2; white-space: nowrap; }
-/* Highlighted value only — subtle pill around the "kr back" figure */
+/* Highlighted value only — subtle pill around the "kr back" figure.
+   No vertical padding so this row keeps the same 24px rhythm as the others. */
 .biz-roi-sum-hero .biz-roi-sum-val {
   background: var(--bg-subtle);
   border-radius: var(--radius-8);
-  padding: var(--spacing-4) var(--spacing-8);
+  padding: 0 var(--spacing-8);
 }
 
 /* ── 4. Employees ── */
@@ -7248,8 +7306,8 @@ body.cdp-cta-pinned .cdp-toc {
 @media (max-width: 1024px) {
   .biz-hero2-ttl { font-size: var(--font-size-49); }
   .biz-pillars { grid-template-columns: repeat(2, 1fr); }
-  .biz-roi-summary { grid-template-columns: repeat(2, 1fr); }
-  .biz-roi-sum-hero { grid-column: span 2; }
+  /* Calculator columns stack once there isn't room for two */
+  .biz-calc-top { grid-template-columns: 1fr; gap: var(--spacing-24); }
 }
 
 /* ── Responsive: tablet / small ── */
@@ -7260,11 +7318,14 @@ body.cdp-cta-pinned .cdp-toc {
   .biz-contact-block { grid-template-columns: 1fr; gap: var(--spacing-24); padding: var(--spacing-24); }
   .biz-emp-grid { grid-template-columns: repeat(2, 1fr); }
   .biz-emp-section { padding: var(--spacing-72) 0; }
-  /* Calculator: mobile text tokens (Mobile H2 / H6) + tighter padding */
-  #biz-calc-anchor { padding-top: var(--spacing-32); padding-bottom: var(--spacing-32); }
+  /* Calculator: mobile text tokens (Mobile H2 / H6) + tighter padding.
+     Section padding scales down from the desktop 72/96 pair. */
+  #biz-calc-anchor { padding-top: var(--spacing-48); padding-bottom: var(--spacing-64); }
   #biz-calc-anchor .section-title { font-size: var(--font-size-31); }
   .biz-calc { padding: var(--spacing-24); }
   .biz-calc-h6 { font-size: var(--font-size-16); }
+  /* the two stacked blocks and the ROI accordion keep the 24px rhythm */
+  .biz-calc-top { gap: var(--spacing-32); }
   .biz-seat-display > span:first-child,
   .biz-est-total { font-size: var(--font-size-31); }
   /* Hero: 16px between all three photos on mobile */

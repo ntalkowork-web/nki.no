@@ -3540,6 +3540,7 @@
           '</div>' +
 
           '<div class="biz-calc">' +
+            '<div class="biz-calc-top">' +
             '<div class="biz-calc-sec">' +
               '<div class="biz-calc-cap">Number of employees / seats</div>' +
               '<div class="biz-seat-display"><span id="bizSeatLabel">100</span><span class="biz-seat-unit">seats</span></div>' +
@@ -3561,10 +3562,20 @@
                 '<div class="biz-est-row"><span>Per seat</span><span id="bizPerSeat">4 165 kr</span></div>' +
                 '<div class="biz-est-row"><span>Volume discount</span><span id="bizDiscount">-15 %</span></div>' +
               '</div>' +
+              '<button class="btn-cta-green biz-est-cta" data-biz-scroll="biz-contact-anchor">Get a tailored offer</button>' +
+            '</div>' +
             '</div>' +
 
-            '<div class="biz-calc-sec biz-scen-section">' +
-              '<h6 class="biz-calc-h6">What do you get back?</h6>' +
+            /* Progressive disclosure: the ROI breakdown is collapsed by default so
+               the calculator itself fits one screen; opening it keeps every value. */
+            '<div class="biz-calc-sec biz-scen-section biz-roi-acc" id="bizRoiAcc">' +
+              '<h6 class="biz-calc-h6 biz-roi-acc-h6">' +
+                '<button type="button" class="biz-roi-acc-hd" id="bizRoiAccHd" aria-expanded="false" aria-controls="bizRoiAccBody">' +
+                  '<span class="biz-roi-acc-ttl">What do you get back?</span>' +
+                  '<span class="material-symbols-outlined biz-roi-acc-chev" aria-hidden="true">add</span>' +
+                '</button>' +
+              '</h6>' +
+              '<div class="biz-roi-acc-body" id="bizRoiAccBody" hidden>' +
               '<p class="biz-roi-sub" id="bizRoiSub"></p>' +
               '<div class="biz-scen" id="bizScen" role="tablist" aria-label="Productivity scenario">' +
                 BIZ_SCENARIOS.map(function(s, i) {
@@ -3587,7 +3598,7 @@
                   '<p class="biz-disc-para">These figures are indicative estimates shown for illustration only and do not constitute a binding offer. Actual pricing and returns depend on the programme, its content, duration and the number of participants, and are confirmed after a needs assessment. Productivity, turnover and absence effects are modelled assumptions, not guaranteed outcomes.</p>' +
                 '</div>' +
               '</div>' +
-              '<button class="btn-cta-green biz-est-cta" data-biz-scroll="biz-contact-anchor">Get a tailored offer</button>' +
+              '</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -3766,6 +3777,21 @@
         updateBizCalc();
       });
     });
+
+    /* ROI accordion — collapsed by default (progressive disclosure) */
+    var roiHd = document.getElementById('bizRoiAccHd');
+    if (roiHd) {
+      var roiAcc = document.getElementById('bizRoiAcc');
+      var roiBody = document.getElementById('bizRoiAccBody');
+      var roiIcon = roiHd.querySelector('.biz-roi-acc-chev');
+      roiHd.addEventListener('click', function() {
+        var open = roiAcc.classList.toggle('is-open');
+        roiHd.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (roiBody) roiBody.hidden = !open;
+        /* DS icon set: add / remove (nodes 50:1914 / 50:1935) */
+        if (roiIcon) roiIcon.textContent = open ? 'remove' : 'add';
+      });
+    }
 
     /* Disclaimer accordion (DS "Accordion tooltip", node 308-16714) */
     var discHd = document.getElementById('bizDisclaimerHd');
