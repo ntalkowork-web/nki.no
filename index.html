@@ -1766,29 +1766,30 @@
     showPage('blog');
   });
 
-  /* "For business" entry points → For Business landing page */
+  /* "For business" entry points → the For Business rebuild.
+     TEMPORARY: while the page is being rebuilt from scratch these point at the
+     standalone lo-fi wireframe (business-lofi.html) instead of the in-SPA
+     #page-business. Relative path, so it works locally and on GitHub Pages.
+     Revert to showPage('business') once the rebuild lands in the SPA (Stage 3). */
+  var BUSINESS_URL = 'business-lofi.html';
+
   var navBusinessLink = document.getElementById('navBusinessLink');
-  if (navBusinessLink) navBusinessLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    showPage('business');
-  });
+  if (navBusinessLink) navBusinessLink.href = BUSINESS_URL;
+
   var mobBusinessLink = document.getElementById('mobBusinessLink');
-  if (mobBusinessLink) mobBusinessLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    closeMobMenu();
-    showPage('business');
-  });
+  if (mobBusinessLink) mobBusinessLink.href = BUSINESS_URL;
+
   var footerBusinessLink = document.getElementById('footerBusinessLink');
-  if (footerBusinessLink) footerBusinessLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    showPage('business');
-  });
+  if (footerBusinessLink) footerBusinessLink.href = BUSINESS_URL;
 
   /* ── Hash routing: makes the parameter-free pages shareable by URL
      (e.g. .../#business). Deep-state pages (course, checkout, …) are not
      mapped and simply clear the hash when shown. ── */
   var HASH_TO_PAGE = { '#home': 'home', '#business': 'business', '#blog': 'blog', '#search': 'search', '#cart': 'cart' };
   function routeFromHash() {
+    /* TEMPORARY, pairs with BUSINESS_URL above: old #business links land on the
+       rebuild rather than the page it replaces. Remove with the redirect at Stage 3. */
+    if (window.location.hash === '#business') { window.location.replace(BUSINESS_URL); return; }
     var p = HASH_TO_PAGE[window.location.hash];
     if (p) showPage(p);
   }

@@ -122,8 +122,10 @@ a{color:inherit}
   position:sticky;top:0;z-index:20;
 }
 .stub-header .wrap{height:100%;display:flex;align-items:center;gap:var(--s-32)}
-.stub-logo{width:96px;height:28px;background:var(--l-300);border-radius:4px}
+.stub-logo{width:96px;height:28px;background:var(--l-300);border-radius:4px;flex:none}
 .stub-nav{display:flex;gap:var(--s-24);font-size:15px;color:var(--l-600)}
+.stub-nav a{text-decoration:none}
+.stub-nav a:hover{text-decoration:underline}
 .stub-nav b{color:var(--l-900)}
 .stub-header .spacer{flex:1}
 .stub-footer{background:var(--l-900);color:var(--l-400);padding:var(--s-64) 0;font-size:14px}
@@ -239,6 +241,46 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   border-bottom:1px solid var(--l-300);font-size:15px}
 .calc-note{margin-top:auto;padding-top:var(--s-24)}
 .btn--block{width:100%;margin-top:var(--s-16)}
+
+/* ── ROI block, carried over from the old page ──────────────
+   Progressive disclosure: collapsed by default so the price
+   indication itself stays the primary read and the calculator
+   still fits one screen. Every value from the old model is kept. */
+.roi{grid-column:span 12;border:1px solid var(--l-300);border-top:0;
+  border-radius:0 0 var(--rad-lg) var(--rad-lg);background:var(--l-0)}
+.calc{border-radius:var(--rad-lg) var(--rad-lg) 0 0}
+.roi-hd{width:100%;display:flex;align-items:center;justify-content:space-between;
+  gap:var(--s-16);padding:var(--s-20) var(--s-40);background:none;border:0;
+  text-align:left;font-size:18px;font-weight:700;color:var(--l-900)}
+.roi-chev{flex:none;width:24px;height:24px;border:1px solid var(--l-400);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform .2s}
+.roi.is-open .roi-chev{transform:rotate(45deg)}
+.roi-body{padding:0 var(--s-40) var(--s-32)}
+.roi-sub{max-width:60ch}
+.scen{display:flex;gap:var(--s-8);flex-wrap:wrap;margin:var(--s-20) 0 var(--s-24)}
+.scen-btn{padding:8px var(--s-16);border:1px solid var(--l-300);border-radius:var(--rad);
+  background:var(--l-0);font-size:14px}
+.scen-btn.is-on{background:var(--l-900);color:var(--l-0);border-color:var(--l-900)}
+.roi-sum{border-top:1px solid var(--l-300)}
+.roi-row{display:flex;justify-content:space-between;align-items:center;gap:var(--s-16);
+  padding:var(--s-16) 0;border-bottom:1px solid var(--l-300);font-size:15px}
+.roi-row-lbl{display:flex;align-items:center;gap:var(--s-12)}
+.roi-ic{width:28px;height:28px;flex:none;border-radius:var(--rad);background:var(--l-200);
+  border:1px dashed var(--l-400);display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:var(--l-600)}
+.roi-val{font-weight:600;text-align:right}
+/* the headline number of the block */
+.roi-row--hero{background:var(--l-100);margin:0 calc(var(--s-16) * -1);
+  padding-left:var(--s-16);padding-right:var(--s-16);border-radius:var(--rad)}
+.roi-row--hero .roi-val{font-size:20px;font-weight:700}
+/* nested disclaimer — DS accordion-tooltip (308:16714) */
+.disc{margin-top:var(--s-20)}
+.disc-hd{display:flex;align-items:center;gap:var(--s-8);background:none;border:0;padding:0;
+  font-size:14px;font-weight:600;color:var(--l-700)}
+.disc-chev{transition:transform .2s;display:inline-block}
+.disc.is-open .disc-chev{transform:rotate(90deg)}
+.disc-body{display:none;margin-top:var(--s-12);max-width:70ch}
+.disc.is-open .disc-body{display:block}
 /* escape hatch for the >50 buyer — routes to the form, not to a dead end */
 .calc-over{grid-column:span 12;margin-top:var(--s-16);padding:var(--s-16) var(--s-24);
   border:1px dashed var(--l-400);border-radius:var(--rad);display:flex;
@@ -427,10 +469,13 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 <!-- ══ STUB HEADER — real one lives in index.html, do not port ══ -->
 <header class="stub-header">
   <div class="wrap">
-    <div class="stub-logo" aria-hidden="true"></div>
-    <nav class="stub-nav"><span>Courses</span><span>Studies</span><span>About</span><b>For business</b></nav>
+    <a class="stub-logo" href="index.html" aria-label="Back to the main prototype"></a>
+    <nav class="stub-nav">
+      <a href="index.html">Courses</a><a href="index.html">Studies</a>
+      <a href="index.html">About</a><b>For business</b>
+    </nav>
     <div class="spacer"></div>
-    <span class="small">Search · Log in · Cart</span>
+    <a class="small" href="index.html">← Back to main prototype</a>
   </div>
 </header>
 
@@ -685,7 +730,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           <div class="calc-total" id="total">— kr</div>
           <div class="calc-rows">
             <div class="calc-row"><span>List price per seat</span><span id="listPer">4 900 kr</span></div>
-            <div class="calc-row"><span>Volume discount</span><span id="disc">—</span></div>
+            <div class="calc-row"><span>Volume discount</span><span id="discount">—</span></div>
             <div class="calc-row"><span>Your price per seat</span><span id="netPer">— kr</span></div>
           </div>
           <div class="calc-note">
@@ -695,6 +740,63 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           </div>
         </div>
       </div>
+      <!-- ROI block, kept from the old page. Collapsed by default so the price
+           indication stays the primary read. All five metrics and the scenario
+           tabs are preserved; only the seat scale changed. -->
+      <div class="roi" id="roi">
+        <button class="roi-hd" id="roiHd" aria-expanded="false" aria-controls="roiBody">
+          What do you get back?
+          <span class="roi-chev" aria-hidden="true">+</span>
+        </button>
+        <div class="roi-body" id="roiBody" hidden>
+          <p class="body roi-sub" id="roiSub"></p>
+
+          <div class="scen" id="scen" role="tablist" aria-label="Productivity scenario">
+            <button class="scen-btn" role="tab" data-scen="0">Cautious +3%</button>
+            <button class="scen-btn is-on" role="tab" data-scen="1" aria-selected="true">Moderate +5%</button>
+            <button class="scen-btn" role="tab" data-scen="2">Ambitious +8%</button>
+          </div>
+
+          <div class="roi-sum">
+            <div class="roi-row">
+              <span class="roi-row-lbl"><span class="roi-ic">cost</span>Annual cost</span>
+              <span class="roi-val" id="roiCost">—</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-lbl"><span class="roi-ic">gain</span>Annual gain</span>
+              <span class="roi-val" id="roiGain">—</span>
+            </div>
+            <div class="roi-row roi-row--hero">
+              <span class="roi-row-lbl"><span class="roi-ic">roi</span>For every krone invested</span>
+              <span class="roi-val" id="roiRatio">—</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-lbl"><span class="roi-ic">net</span>Net</span>
+              <span class="roi-val" id="roiNet">—</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-lbl"><span class="roi-ic">time</span>Paid back in</span>
+              <span class="roi-val" id="roiPayback">—</span>
+            </div>
+          </div>
+
+          <div class="disc" id="disc">
+            <button class="disc-hd" id="discHd" aria-expanded="false" aria-controls="discBody">
+              <span class="disc-chev" aria-hidden="true">›</span> Disclaimer
+            </button>
+            <div class="disc-body" id="discBody" hidden>
+              <p class="small">These figures are indicative estimates shown for
+                illustration only and do not constitute a binding offer. Actual pricing
+                and returns depend on the programme, its content, duration and the number
+                of participants, and are confirmed after a needs assessment. Productivity,
+                turnover and absence effects are modelled assumptions, not guaranteed
+                outcomes.</p>
+              <span class="todo">TODO · legal to review the ROI model + wording</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- escape hatch: the >50 buyer must not hit a dead end -->
       <div class="calc-over">
         <p class="body" style="margin:0">More than 50 employees, or several departments?</p>
@@ -1154,6 +1256,18 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
      Tier curve starts at 5, not 50. Base price carried over from the
      old model pending verification. */
   var BASE = 4900;
+  /* ROI model carried over unchanged from the old page (index.html BIZ_* constants).
+     Only the seat scale was rescoped — the return model itself is untouched. */
+  var PER_SEAT_GAIN = 600000;   /* avg annual value creation per employee */
+  var TURNOVER_SEAT = 7500;     /* saving from reduced turnover, per seat  */
+  var ABSENCE_SEAT  = 3100;     /* saving from reduced absence, per seat   */
+  var SCENARIOS = [
+    { name: 'Cautious',  pct: 0.03 },
+    { name: 'Moderate',  pct: 0.05 },
+    { name: 'Ambitious', pct: 0.08 }
+  ];
+  var scenIdx = 1;
+
   var TIERS = [
     { min: 25, r: 0.20, label: '25+' },
     { min: 15, r: 0.15, label: '15+' },
@@ -1176,22 +1290,75 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
     return '<span class="tier" data-min="' + t.min + '">' + t.label + '</span>';
   }).join('');
 
-  function calc() {
-    var n = parseInt(seats.value, 10);
-    var t = tierFor(n);
-    var net = BASE * (1 - t.r);
+  var set = function (id, v) {
+    var el = document.getElementById(id); if (el) el.textContent = v;
+  };
 
-    document.getElementById('seatOut').textContent = n;
-    document.getElementById('total').textContent   = fmt(net * n) + ' kr';
-    document.getElementById('listPer').textContent = fmt(BASE) + ' kr';
-    document.getElementById('disc').textContent    = t.r ? '−' + Math.round(t.r * 100) + '%' : 'None';
-    document.getElementById('netPer').textContent  = fmt(net) + ' kr';
+  function calc() {
+    var n    = parseInt(seats.value, 10);
+    var t    = tierFor(n);
+    var scen = SCENARIOS[scenIdx];
+
+    var perSeat = Math.round(BASE * (1 - t.r));
+    var total   = perSeat * n;
+
+    /* same three components as the old model: productivity uplift,
+       reduced turnover, reduced absence */
+    var prod    = Math.round(n * PER_SEAT_GAIN * scen.pct);
+    var gain    = prod + (n * TURNOVER_SEAT) + (n * ABSENCE_SEAT);
+    var netGain = gain - total;
+    var ratio   = gain / total;
+    var payback = Math.max(1, Math.round(total / gain * 52));
+
+    /* price indication */
+    set('seatOut', n);
+    set('total',   fmt(total) + ' kr');
+    set('listPer', fmt(BASE) + ' kr');
+    set('discount', t.r ? '−' + Math.round(t.r * 100) + '%' : 'None');
+    set('netPer',  fmt(perSeat) + ' kr');
+
+    /* ROI block */
+    set('roiCost',    fmt(total) + ' kr');
+    set('roiGain',    fmt(gain) + ' kr');
+    set('roiRatio',   (Math.round(ratio * 10) / 10).toFixed(1) + ' kr back');
+    set('roiNet',     '+' + fmt(netGain) + ' kr');
+    set('roiPayback', '~' + payback + ' week' + (payback === 1 ? '' : 's'));
+    set('roiSub', 'Estimated annual gain when ' + n + ' employee' +
+      (n === 1 ? ' is' : 's are') + ' in systematic, business-focused skills development.');
 
     Array.prototype.forEach.call(tiersEl.children, function (el) {
       el.classList.toggle('is-on', parseInt(el.dataset.min, 10) === t.min);
     });
   }
   seats.addEventListener('input', calc);
+
+  /* scenario tabs */
+  document.getElementById('scen').addEventListener('click', function (e) {
+    var btn = e.target.closest('.scen-btn');
+    if (!btn) return;
+    scenIdx = parseInt(btn.dataset.scen, 10);
+    Array.prototype.forEach.call(this.children, function (el, i) {
+      var on = i === scenIdx;
+      el.classList.toggle('is-on', on);
+      el.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    calc();
+  });
+
+  /* ROI disclosure + nested disclaimer */
+  function toggle(wrapId, btnId, bodyId) {
+    var wrap = document.getElementById(wrapId);
+    var btn  = document.getElementById(btnId);
+    var body = document.getElementById(bodyId);
+    btn.addEventListener('click', function () {
+      var open = wrap.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      body.hidden = !open;
+    });
+  }
+  toggle('roi', 'roiHd', 'roiBody');
+  toggle('disc', 'discHd', 'discBody');
+
   calc();
 
   /* ── §3 → §8: segmentation cards pre-fill the form's "need" ── */
