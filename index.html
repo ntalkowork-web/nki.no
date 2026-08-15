@@ -223,7 +223,10 @@
 
         <!-- Tab 6–7: Plain links -->
         <li class="nav-item"><a href="#" class="nav-tab plain">Lånekassen</a></li>
-        <li class="nav-item"><a href="#" class="nav-tab plain" id="navBusinessLink">For business</a></li>
+        <!-- TEMPORARY: points at the standalone lo-fi rebuild rather than the in-SPA
+             #page-business. Hardcoded in the markup (not set from JS) so the link works
+             even if the page script fails. Reverts at Stage 3. -->
+        <li class="nav-item"><a href="business-lofi.html" class="nav-tab plain" id="navBusinessLink">For business</a></li>
 
       </ul>
     </nav>
@@ -359,7 +362,7 @@
           </button>
         </li>
         <li><a href="#" class="mob-nav-link">Lånekassen</a></li>
-        <li><a href="#" class="mob-nav-link" id="mobBusinessLink">For business</a></li>
+        <li><a href="business-lofi.html" class="mob-nav-link" id="mobBusinessLink">For business</a></li>
       </ul>
     </nav>
     <div class="mob-menu-footer">
@@ -1359,7 +1362,7 @@
           <li><a href="#">Lånekassen</a></li>
           <li><a href="#">Grade calculator</a></li>
           <li><a href="#">New at NKI Online Studies</a></li>
-          <li><a href="#" id="footerBusinessLink">For businesses</a></li>
+          <li><a href="business-lofi.html" id="footerBusinessLink">For businesses</a></li>
         </ul>
       </div>
 
@@ -1767,20 +1770,12 @@
   });
 
   /* "For business" entry points → the For Business rebuild.
-     TEMPORARY: while the page is being rebuilt from scratch these point at the
-     standalone lo-fi wireframe (business-lofi.html) instead of the in-SPA
-     #page-business. Relative path, so it works locally and on GitHub Pages.
-     Revert to showPage('business') once the rebuild lands in the SPA (Stage 3). */
+     TEMPORARY: while the page is rebuilt from scratch, the three entry points
+     (header nav, mobile menu, footer) point at the standalone lo-fi wireframe
+     instead of the in-SPA #page-business. Those hrefs are hardcoded in the markup
+     so they work as plain links with no JS involved — search for business-lofi.html.
+     Nothing to wire up here. Revert to showPage('business') at Stage 3. */
   var BUSINESS_URL = 'business-lofi.html';
-
-  var navBusinessLink = document.getElementById('navBusinessLink');
-  if (navBusinessLink) navBusinessLink.href = BUSINESS_URL;
-
-  var mobBusinessLink = document.getElementById('mobBusinessLink');
-  if (mobBusinessLink) mobBusinessLink.href = BUSINESS_URL;
-
-  var footerBusinessLink = document.getElementById('footerBusinessLink');
-  if (footerBusinessLink) footerBusinessLink.href = BUSINESS_URL;
 
   /* ── Hash routing: makes the parameter-free pages shareable by URL
      (e.g. .../#business). Deep-state pages (course, checkout, …) are not
