@@ -196,15 +196,18 @@ a{color:inherit}
    Placed early because it routes the visitor and pre-fills the form.
    ═══════════════════════════════════════════════════════════ */
 .seg-cards{grid-column:span 12;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter)}
+/* No CTA label on these cards. The whole card is still the target — it routes
+   and pre-fills the lead form's "need" field — so the hover state has to carry
+   the affordance on its own. min-height dropped now that nothing anchors the
+   bottom of the card. */
 .seg-card{
   border:1px solid var(--l-300);border-radius:var(--rad-lg);padding:var(--s-24);
   background:var(--l-0);display:flex;flex-direction:column;gap:var(--s-12);
-  text-align:left;min-height:200px;
+  text-align:left;transition:border-color .15s,background .15s;
 }
-.seg-card:hover{border-color:var(--l-900);background:var(--l-50)}
+.seg-card:hover,.seg-card:focus-visible{border-color:var(--l-900);background:var(--l-50)}
 .seg-card .h4{margin-top:var(--s-4)}
-.seg-card .body{flex:1;font-size:15px}
-.seg-link{font-size:14px;font-weight:600;text-decoration:underline}
+.seg-card .body{font-size:15px}
 
 /* ═══════════════════════════════════════════════════════════
    4 · WHAT YOU GET AS AN EMPLOYER   (priority 6)
@@ -301,7 +304,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   align-items:center;justify-content:space-between;gap:var(--s-16);flex-wrap:wrap}
 
 /* ═══════════════════════════════════════════════════════════
-   7 · CUSTOMER PROOF   (priority 3 — the objective-2 gap)
+   7 · CUSTOMER PROOF & INSIGHT   (priorities 3 and 8 — the objective-2 gap)
    Cases carry a number.  Quotes carry name + title + company.
    Replaces the cloned B2C student testimonials.
    ═══════════════════════════════════════════════════════════ */
@@ -389,15 +392,22 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .fund-dl dd{margin:2px 0 0;color:var(--l-700)}
 
 /* ═══════════════════════════════════════════════════════════
-   10 · INSIGHT & CONTENT   (priority 8)
-   For the visitor who is interested but not ready to hand over details.
+   7b · INSIGHT — merged into the Customer Proof section above
+   (priority 8). For the visitor who is interested but not ready to
+   hand over details.
    ═══════════════════════════════════════════════════════════ */
-.arts{grid-column:span 8;display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gutter)}
+/* sub-heading that separates the insight half from the cases/quotes half
+   without starting a new section */
+.proof-insight{grid-column:span 12;margin-top:var(--s-56);padding-top:var(--s-40);
+  border-top:1px solid var(--l-300)}
+.sec-hd--sub{margin-bottom:0}
+.arts{grid-column:span 8;display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gutter);
+  margin-top:var(--s-32)}
 .art{display:flex;flex-direction:column;gap:var(--s-12)}
 .art .ph{aspect-ratio:16/10}
 .art-ttl{font-size:18px;font-weight:700;line-height:1.35}
 .art-meta{font-size:13px;color:var(--l-600)}
-.links{grid-column:span 4}
+.links{grid-column:span 4;margin-top:var(--s-32)}
 .link-list{margin:var(--s-16) 0 0;padding:0;list-style:none;border-top:1px solid var(--l-300)}
 .link-list li{border-bottom:1px solid var(--l-300)}
 .link-list a{display:flex;justify-content:space-between;gap:var(--s-16);
@@ -406,7 +416,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .link-list .src{color:var(--l-600);font-size:13px;flex:none}
 
 /* ═══════════════════════════════════════════════════════════
-   11 · FAQ   (priority 11) — buyer questions, not student questions
+   10 · FAQ   (priority 11) — buyer questions, not student questions
    ═══════════════════════════════════════════════════════════ */
 .faq-hd{grid-column:span 4}
 .faq{grid-column:span 8}
@@ -421,8 +431,8 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .faq-item.is-open .faq-a{display:block}
 
 /* ═══════════════════════════════════════════════════════════
-   12 · CLOSING CTA + PRESS (demoted)
-   Press logos belong here, not at position 2.
+   11 · CLOSING FORM   (priority 1 again)
+   The closing band is the form itself, not a CTA pointing back at one.
    ═══════════════════════════════════════════════════════════ */
 .close-grid{align-items:center}
 .close-copy{grid-column:span 6}
@@ -683,28 +693,24 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           <h3 class="h4">Close a specific skills gap</h3>
           <p class="body">A capability the team is missing right now — AI at work,
             new regulations, a new system.</p>
-          <span class="seg-link">Get an offer →</span>
         </a>
         <a class="seg-card" href="#lead" data-need="formal">
           <span class="ic">icon</span>
           <h3 class="h4">Formal qualification for staff</h3>
           <p class="body">Certificates and vocational qualifications your people can
             earn while they keep working.</p>
-          <span class="seg-link">Get an offer →</span>
         </a>
         <a class="seg-card" href="#lead" data-need="onboarding">
           <span class="ic">icon</span>
           <h3 class="h4">Onboard at scale</h3>
           <p class="body">A repeatable programme every new hire runs through, with
             completion you can actually see.</p>
-          <span class="seg-link">Get an offer →</span>
         </a>
         <a class="seg-card" href="#funding" data-need="funded">
           <span class="ic">icon</span>
           <h3 class="h4">Use public funding</h3>
           <p class="body">BIO or Kompetansepluss may cover a large share of the cost.
             We'll tell you if you qualify.</p>
-          <span class="seg-link">See funding →</span>
         </a>
       </div>
     </div>
@@ -925,15 +931,17 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 7 · CUSTOMER PROOF ═════════════════════════════════════
-     This is the objective-2 gap. Every item here is placeholder
-     until sales supplies real, cleared references. -->
+<!-- ═══ 7 · CUSTOMER PROOF & INSIGHT ═══════════════════════════
+     This is the objective-2 gap: cases, attributed quotes, articles
+     and external sources in one place. Every customer item here is
+     placeholder until sales supplies real, cleared references. -->
 <section class="sec sec--alt" id="proof">
   <div class="wrap">
     <div class="sec-hd">
-      <p class="eyebrow">Customer proof</p>
+      <p class="eyebrow">Proof &amp; insight</p>
       <h2 class="h2">What it looks like in practice</h2>
-      <p class="body">Three programmes, what they had to solve, and what changed.</p>
+      <p class="body">Three programmes, what they had to solve, and what changed —
+        then the reading behind it.</p>
     </div>
     <div class="grid">
       <div class="cases">
@@ -1013,6 +1021,57 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           <span class="todo">TODO · real attributed quote</span>
         </figure>
       </div>
+
+      <!-- ── Insight, merged in from the old standalone section ──
+           Same job as the cases and quotes above: evidence for the
+           visitor who isn't ready to hand over details yet. Splitting
+           it into its own section put reading material three screens
+           away from the proof it backs up. -->
+      <div class="proof-insight">
+        <div class="sec-hd sec-hd--sub">
+          <p class="eyebrow">Insight</p>
+          <h3 class="h3">Reading, not a sales pitch</h3>
+        </div>
+      </div>
+
+      <div class="arts">
+        <article class="art">
+          <div class="ph">Article image</div>
+          <h4 class="art-ttl">More than half of Norwegian companies report a growing
+            competence gap</h4>
+          <p class="art-meta">9 June 2026 · 6 min read</p>
+        </article>
+        <article class="art">
+          <div class="ph">Article image</div>
+          <h4 class="art-ttl">What actually makes online training finish: four things we
+            see across cohorts</h4>
+          <p class="art-meta">18 June 2026 · 4 min read</p>
+        </article>
+        <article class="art">
+          <div class="ph">Article image</div>
+          <h4 class="art-ttl">Buying training for a team of twelve: a practical checklist</h4>
+          <p class="art-meta">2 June 2026 · 5 min read</p>
+        </article>
+        <article class="art">
+          <div class="ph">Article image</div>
+          <h4 class="art-ttl">NKI named "Online Educator of the Year" 2024 by Flexible
+            Education Norway</h4>
+          <p class="art-meta">14 Nov 2024 · 3 min read</p>
+        </article>
+      </div>
+
+      <aside class="links">
+        <h4 class="h4">External material</h4>
+        <p class="small" style="margin-top:var(--s-8)">Sources we use, and you can check.</p>
+        <ul class="link-list">
+          <li><a href="#">Business structures — companies by size<span class="src">SSB</span></a></li>
+          <li><a href="#">Competence needs in Norwegian working life<span class="src">NHO</span></a></li>
+          <li><a href="#">BIO-midler: county overview<span class="src">Fylkeskommunen</span></a></li>
+          <li><a href="#">Kompetansepluss — the scheme<span class="src">HK-dir</span></a></li>
+          <li><a href="#">Quality in online education<span class="src">NOKUT</span></a></li>
+        </ul>
+        <span class="todo">TODO · verify every source link</span>
+      </aside>
     </div>
   </div>
 </section>
@@ -1194,57 +1253,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 10 · INSIGHT & CONTENT ═════════════════════════════════
-     For the visitor who is interested but not ready to convert. -->
-<section class="sec" id="insight">
-  <div class="wrap">
-    <div class="sec-hd">
-      <p class="eyebrow">Insight</p>
-      <h2 class="h2">Reading, not a sales pitch</h2>
-    </div>
-    <div class="grid">
-      <div class="arts">
-        <article class="art">
-          <div class="ph">Article image</div>
-          <h3 class="art-ttl">More than half of Norwegian companies report a growing
-            competence gap</h3>
-          <p class="art-meta">9 June 2026 · 6 min read</p>
-        </article>
-        <article class="art">
-          <div class="ph">Article image</div>
-          <h3 class="art-ttl">What actually makes online training finish: four things we
-            see across cohorts</h3>
-          <p class="art-meta">18 June 2026 · 4 min read</p>
-        </article>
-        <article class="art">
-          <div class="ph">Article image</div>
-          <h3 class="art-ttl">Buying training for a team of twelve: a practical checklist</h3>
-          <p class="art-meta">2 June 2026 · 5 min read</p>
-        </article>
-        <article class="art">
-          <div class="ph">Article image</div>
-          <h3 class="art-ttl">NKI named "Online Educator of the Year" 2024 by Flexible
-            Education Norway</h3>
-          <p class="art-meta">14 Nov 2024 · 3 min read</p>
-        </article>
-      </div>
-      <aside class="links">
-        <h3 class="h4">External material</h3>
-        <p class="small" style="margin-top:var(--s-8)">Sources we use, and you can check.</p>
-        <ul class="link-list">
-          <li><a href="#">Business structures — companies by size<span class="src">SSB</span></a></li>
-          <li><a href="#">Competence needs in Norwegian working life<span class="src">NHO</span></a></li>
-          <li><a href="#">BIO-midler: county overview<span class="src">Fylkeskommunen</span></a></li>
-          <li><a href="#">Kompetansepluss — the scheme<span class="src">HK-dir</span></a></li>
-          <li><a href="#">Quality in online education<span class="src">NOKUT</span></a></li>
-        </ul>
-        <span class="todo">TODO · verify every source link</span>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 11 · FAQ ═══════════════════════════════════════════════
+<!-- ═══ 10 · FAQ ═══════════════════════════════════════════════
      Buyer questions, not student questions. -->
 <section class="sec sec--alt" id="faq">
   <div class="wrap">
@@ -1304,7 +1313,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 12 · CLOSING FORM ══════════════════════════════════════
+<!-- ═══ 11 · CLOSING FORM ══════════════════════════════════════
      The closing band is the same short form as the hero, not a CTA
      pointing back up at one. A visitor who has read the whole page
      converts here without scrolling anywhere. -->
@@ -1414,7 +1423,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           <h3 class="footer-hd">Proof</h3>
           <ul>
             <li><a href="#proof">Customer cases</a></li>
-            <li><a href="#insight">Insight &amp; articles</a></li>
+            <li><a href="#proof">Insight &amp; articles</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="index.html">Course catalogue</a></li>
           </ul>
