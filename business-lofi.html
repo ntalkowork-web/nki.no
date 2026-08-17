@@ -243,7 +243,34 @@ a{color:inherit}
   color:var(--l-600);margin-bottom:var(--s-8)}
 .route .h4{margin-bottom:var(--s-8)}
 .route .body{font-size:15px}
-.steps{grid-column:span 12;display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gutter)}
+/* ── process carousel ──────────────────────────────────────
+   Scroll-snap track: swipeable on touch, scrollable by keyboard,
+   works with no JS. Arrows and dots enhance it. */
+.steps-carousel{grid-column:span 12}
+.steps{
+  list-style:none;margin:0;padding:0 0 var(--s-8);
+  display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - (var(--gutter) * 2)) / 3);
+  gap:var(--gutter);
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scrollbar-width:none;
+}
+.steps::-webkit-scrollbar{display:none}
+.steps:focus-visible{outline:2px solid var(--l-900);outline-offset:4px}
+.steps .step{scroll-snap-align:start}
+.steps-nav{display:flex;align-items:center;justify-content:space-between;
+  gap:var(--s-24);margin-top:var(--s-24)}
+.steps-dots{display:flex;gap:var(--s-8)}
+.steps-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;
+  background:var(--l-300);cursor:pointer;transition:width .2s,background .2s}
+.steps-dot.is-on{width:24px;border-radius:4px;background:var(--l-900)}
+.steps-dot:focus-visible{outline:2px solid var(--l-900);outline-offset:3px}
+.steps-arrows{display:flex;gap:var(--s-8)}
+.steps-arrow{width:40px;height:40px;border-radius:50%;border:1px solid var(--l-400);
+  background:var(--l-0);font-size:16px;line-height:1;color:var(--l-900);
+  display:flex;align-items:center;justify-content:center}
+.steps-arrow:hover:not(:disabled){border-color:var(--l-900);background:var(--l-100)}
+.steps-arrow:disabled{opacity:.35;cursor:default}
+@media (prefers-reduced-motion:reduce){.steps{scroll-behavior:auto}}
 /* worked example — the same steps as they actually played out */
 .worked{grid-column:span 12;margin-top:var(--s-48);border:1px solid var(--l-300);
   border-radius:var(--rad-lg);background:var(--l-0);padding:var(--s-32)}
@@ -500,7 +527,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 @media (max-width:1200px){
   :root{--margin:48px}
   .seg-cards{grid-template-columns:repeat(3,1fr)}
-  .steps{grid-template-columns:repeat(3,1fr)}
   .cat-grid{grid-template-columns:repeat(4,1fr)}
   .footer-top{grid-template-columns:1fr}
 }
@@ -517,6 +543,8 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   .calc-out{border-left:0;border-top:1px solid var(--l-300)}
   .proof-main,.proof-side{grid-column:span 12}
   .cat-grid{grid-template-columns:repeat(3,1fr)}
+  /* two steps per view instead of three */
+  .steps{grid-auto-columns:calc((100% - var(--gutter)) / 2)}
   .footer-cols{grid-template-columns:repeat(2,1fr);gap:var(--s-40) var(--gutter)}
 }
 @media (max-width:768px){
@@ -533,7 +561,8 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   .pcase-fig{border-right:0;border-bottom:1px solid var(--l-300);flex-direction:row;align-items:center;gap:var(--s-16)}
   .pcase-logo{margin-top:0;margin-left:auto}
   .worked{padding:var(--s-24)}
-  .steps{grid-template-columns:1fr}
+  /* one step per view */
+  .steps{grid-auto-columns:100%}
   .f-row{grid-template-columns:1fr}
   .calc-in,.calc-out,.form-card,.contact-card,.quote{padding:var(--s-24)}
   .stub-nav{display:none}
@@ -899,31 +928,50 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
         </div>
       </div>
 
-      <div class="steps">
-        <div class="step">
-          <div class="step-n">01</div>
-          <h3 class="h4">First contact</h3>
-          <p class="body">You send the form or call. We reply within one working day.</p>
-        </div>
-        <div class="step">
-          <div class="step-n">02</div>
-          <h3 class="h4">Needs mapping</h3>
-          <p class="body">A 45-minute session: roles, gaps, timeline and budget.</p>
-        </div>
-        <div class="step">
-          <div class="step-n">03</div>
-          <h3 class="h4">Programme &amp; offer</h3>
-          <p class="body">We shortlist or scope, size the cohort and send a written offer.</p>
-        </div>
-        <div class="step">
-          <div class="step-n">04</div>
-          <h3 class="h4">Rollout</h3>
-          <p class="body">Seats assigned, participants onboarded, your admin trained.</p>
-        </div>
-        <div class="step">
-          <div class="step-n">05</div>
-          <h3 class="h4">Follow-up</h3>
-          <p class="body">Progress reporting through the programme and a close-out review.</p>
+      <!-- ── PROCESS CAROUSEL ────────────────────────────────
+           Native scroll-snap track, not a JS-positioned slider:
+           it stays swipeable on touch and keyboard-scrollable
+           with no script, and the arrows/dots are progressive
+           enhancement on top. Steps are a numbered list, so the
+           order survives even if the carousel styling doesn't. -->
+      <div class="steps-carousel" id="stepsCarousel">
+        <ol class="steps" id="stepsTrack" tabindex="0"
+            aria-label="Process steps, scrollable">
+          <li class="step">
+            <div class="step-n">01</div>
+            <h3 class="h4">First contact</h3>
+            <p class="body">You send the form or call. We reply within one working day.</p>
+          </li>
+          <li class="step">
+            <div class="step-n">02</div>
+            <h3 class="h4">Needs mapping</h3>
+            <p class="body">A 45-minute session: roles, gaps, timeline and budget.</p>
+          </li>
+          <li class="step">
+            <div class="step-n">03</div>
+            <h3 class="h4">Programme &amp; offer</h3>
+            <p class="body">We shortlist or scope, size the cohort and send a written offer.</p>
+          </li>
+          <li class="step">
+            <div class="step-n">04</div>
+            <h3 class="h4">Rollout</h3>
+            <p class="body">Seats assigned, participants onboarded, your admin trained.</p>
+          </li>
+          <li class="step">
+            <div class="step-n">05</div>
+            <h3 class="h4">Follow-up</h3>
+            <p class="body">Progress reporting through the programme and a close-out review.</p>
+          </li>
+        </ol>
+
+        <div class="steps-nav">
+          <div class="steps-dots" id="stepsDots" role="tablist" aria-label="Go to step"></div>
+          <div class="steps-arrows">
+            <button class="steps-arrow" id="stepsPrev" type="button" aria-label="Previous step"
+                    aria-controls="stepsTrack">←</button>
+            <button class="steps-arrow" id="stepsNext" type="button" aria-label="Next step"
+                    aria-controls="stepsTrack">→</button>
+          </div>
         </div>
       </div>
 
@@ -1753,7 +1801,87 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
     document.querySelector('.footer-nl-done').hidden = false;
   });
 
-  /* ── §11 FAQ accordion ────────────────────────────────────── */
+  /* ── §5 process carousel ──────────────────────────────────
+     The track is a native scroll-snap container, so all this does is
+     drive it and mirror its state. Scroll position is the single source
+     of truth — swipe, keyboard scroll, arrows and dots all end up in
+     the same place. */
+  (function () {
+    var track = document.getElementById('stepsTrack');
+    var dots  = document.getElementById('stepsDots');
+    var prev  = document.getElementById('stepsPrev');
+    var next  = document.getElementById('stepsNext');
+    if (!track) return;
+
+    var steps = Array.prototype.slice.call(track.children);
+
+    /* how far one step is, including the gap */
+    function stepWidth() {
+      if (steps.length < 2) return track.clientWidth;
+      return steps[1].offsetLeft - steps[0].offsetLeft;
+    }
+    function maxScroll() { return track.scrollWidth - track.clientWidth; }
+    function current() {
+      var w = stepWidth();
+      return w ? Math.round(track.scrollLeft / w) : 0;
+    }
+
+    /* One dot per REACHABLE scroll position, not per step. With five steps
+       three-up there are only three positions, so five dots would leave two
+       permanently unreachable. Recomputed on resize because how many fit
+       changes with the breakpoint. */
+    function pageCount() {
+      var w = stepWidth();
+      return w ? Math.round(maxScroll() / w) + 1 : 1;
+    }
+
+    function buildDots() {
+      var n = pageCount();
+      if (dots.children.length === n) return;
+      dots.innerHTML = '';
+      for (var i = 0; i < n; i++) {
+        (function (idx) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'steps-dot';
+          b.setAttribute('role', 'tab');
+          b.setAttribute('aria-label', 'Show step ' + (idx + 1));
+          b.addEventListener('click', function () { goTo(idx); });
+          dots.appendChild(b);
+        })(i);
+      }
+    }
+
+    function goTo(i) {
+      track.scrollTo({ left: i * stepWidth(), behavior: 'smooth' });
+    }
+
+    function sync() {
+      buildDots();
+      var i = Math.min(current(), dots.children.length - 1);
+      Array.prototype.forEach.call(dots.children, function (d, n) {
+        var on = n === i;
+        d.classList.toggle('is-on', on);
+        d.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      /* 1px tolerance — scrollLeft is fractional at some zoom levels */
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft >= maxScroll() - 1;
+    }
+
+    prev.addEventListener('click', function () { goTo(Math.max(0, current() - 1)); });
+    next.addEventListener('click', function () { goTo(Math.min(pageCount() - 1, current() + 1)); });
+
+    var raf;
+    track.addEventListener('scroll', function () {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(sync);
+    });
+    window.addEventListener('resize', sync);
+    sync();
+  })();
+
+  /* ── §9 FAQ accordion ─────────────────────────────────────── */
   document.getElementById('faqList').addEventListener('click', function (e) {
     var btn = e.target.closest('.faq-q');
     if (!btn) return;
