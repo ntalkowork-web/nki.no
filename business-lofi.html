@@ -134,25 +134,34 @@ a{color:inherit}
    1 · HERO   (priority 7 — benefit-led headline + conversion CTA)
    Hard constraint: ≤560px tall on desktop.  No hand-drawn ellipse.
    ═══════════════════════════════════════════════════════════ */
-/* HEIGHT BUDGET — the hero must stay under 560px at 1440 so it reads as a page,
-   not a slide. At 1440 the media column is 612px; the 2fr/1fr split gives a 392px
-   primary tile, so 4:3 puts it at 294px tall. The stack stretches to match rather
-   than driving the row height (a 4:5 primary + two 1:1 tiles put the row at 490px
-   and blew the budget). Padding 56/48 keeps the total ≈555px. */
-.hero{padding:var(--s-56) 0 var(--s-48);border-bottom:1px solid var(--l-200)}
+/* HEIGHT BUDGET — the hero now carries the primary lead form (objective 1), so
+   it gets a larger budget than the copy-only version did: roughly 650-670px at
+   1440, driven by the form column. That is deliberately above the old 560 cap
+   but still short of a full viewport, which was the actual density complaint —
+   the trusted-by row stays visible below the fold on a normal laptop screen.
+   NB: estimated from the box model, not yet measured in a browser. */
+.hero{padding:var(--s-48) 0;border-bottom:1px solid var(--l-200)}
 .hero-grid{align-items:center}
 .hero-copy{grid-column:span 6}
-.hero-media{grid-column:span 6;display:grid;grid-template-columns:2fr 1fr;
-  gap:var(--gutter);align-items:stretch;max-height:400px}
-.hero-media .ph:first-child{aspect-ratio:4/3}
-.hero-media .stack{display:grid;grid-template-rows:1fr 1fr;gap:var(--gutter)}
+.hero-form-col{grid-column:span 6}
 .hero .h1{margin-top:var(--s-12)}
 .hero-sub{margin-top:var(--s-20);max-width:34em}
-.hero-cta{display:flex;gap:var(--s-12);margin-top:var(--s-32);flex-wrap:wrap}
 .hero-facts{
   display:flex;gap:var(--s-32);margin-top:var(--s-32);
   padding-top:var(--s-24);border-top:1px solid var(--l-200);flex-wrap:wrap;
 }
+
+/* ── HERO LEAD FORM — objective 1, above the fold ───────────
+   Deliberately short: four fields is the most a cold visitor will
+   fill in. The long qualifying form lives in §8 for people who
+   scroll. Both post to the same HubSpot slot. */
+.hero-form{border:1px solid var(--l-400);border-radius:var(--rad-lg);
+  padding:var(--s-24);background:var(--l-50)}
+.hero-form-hd{margin-bottom:var(--s-16)}
+.hero-form-hd .h4{margin-bottom:var(--s-4)}
+.hero-form .f-row{margin-bottom:var(--s-12)}
+.hero-form .f-textarea{min-height:72px}
+.hero-form .hs-slot{margin-bottom:var(--s-16)}
 .fact-n{font-size:25px;font-weight:700;line-height:1.1}
 .fact-l{font-size:13px;color:var(--l-600);margin-top:2px;max-width:14em}
 
@@ -171,6 +180,21 @@ a{color:inherit}
 .marquee-inner{display:flex;width:max-content;animation:marq 32s linear infinite}
 .marquee:hover .marquee-inner{animation-play-state:paused}
 .marquee-track{display:flex;align-items:center;gap:var(--s-56);padding-right:var(--s-56)}
+/* static customer-logo row — see the markup comment for why this is not a marquee */
+.logo-row{flex:1;display:flex;align-items:center;justify-content:space-between;
+  gap:var(--s-40);flex-wrap:wrap}
+/* Real customer logo, forced to black and white so no single brand colour
+   dominates. Sized by HEIGHT, not a fixed box: these assets range from 4.2:1
+   (metier) to 1.5:1 (odontia), so a single fixed box left the squarer ones
+   rendering at half width inside it. */
+.logo{height:38px;width:auto;max-width:170px;object-fit:contain;flex:none;
+  filter:grayscale(1) contrast(1.1);opacity:.7}
+/* odontia.png and kristiania.png carry a lot of internal whitespace in the
+   source file, so the visible mark reads much smaller at the same height.
+   Scaling them up compensates. TODO · re-export both tight-cropped. */
+.logo--pad{height:64px}
+.logo-row:hover .logo{opacity:.9}
+/* placeholder, still used by the press row further down the page */
 .logo-ph{width:120px;height:36px;background:var(--l-200);border:1px dashed var(--l-400);
   border-radius:4px;display:flex;align-items:center;justify-content:center;
   font-size:10px;color:var(--l-600);flex:none}
@@ -348,8 +372,10 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .f-foot{margin-top:var(--s-12);font-size:13px;color:var(--l-600)}
 .form-done{display:none;text-align:center;padding:var(--s-40) var(--s-16)}
 .form-done .h3{margin-bottom:var(--s-12)}
-.form-card.is-done .form-live{display:none}
-.form-card.is-done .form-done{display:block}
+/* success state — applies to both the hero card and the §8 card */
+.is-done .form-live,
+.is-done .hs-slot{display:none}
+.is-done .form-done{display:block}
 
 .contact-card{border:1px solid var(--l-300);border-radius:var(--rad-lg);
   padding:var(--s-32);background:var(--l-50);position:sticky;top:112px}
@@ -438,8 +464,8 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 @media (max-width:1024px){
   :root{--margin:32px;--sec-y:var(--s-56)}
   .h1{font-size:39px}.h2{font-size:31px}.h3{font-size:23px}
-  .hero-copy,.hero-media{grid-column:span 12}
-  .hero-media{margin-top:var(--s-32)}
+  .hero-copy,.hero-form-col{grid-column:span 12}
+  .hero-form-col{margin-top:var(--s-32)}
   .ben-hd,.ben-list,.arts,.links,.faq-hd,.faq,.lead,.contact{grid-column:span 12}
   .contact-card{position:static;margin-top:var(--s-24)}
   .calc{grid-template-columns:1fr}
@@ -451,6 +477,11 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   .h1{font-size:31px}.h2{font-size:26px}.lead{font-size:18px}
   .trusted .wrap{flex-direction:column;align-items:flex-start;gap:var(--s-16)}
   .marquee{width:100%}
+  /* stacked under the label: wrap and left-align rather than stretching
+     four logos across the full width with huge gaps between them */
+  .logo-row{width:100%;justify-content:flex-start;gap:var(--s-32) var(--s-24)}
+  .logo{height:30px;max-width:120px}
+  .logo--pad{height:52px}
   .seg-cards,.cases,.quotes,.fund,.arts,.ben-list{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
   .f-row{grid-template-columns:1fr}
@@ -482,8 +513,11 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 <main>
 
 <!-- ═══ 1 · HERO ═══════════════════════════════════════════════
-     Benefit-led. Two CTAs, the primary one anchored to the form.
-     No hand-drawn ellipse. Capped at ~560px so it is not a slide. -->
+     Benefit-led headline (priority 7) plus the lead form itself
+     (priority 1). The form IS the hero's conversion mechanism —
+     there is no separate CTA button, because the thing the button
+     would scroll to is already sitting next to it.
+     No hand-drawn ellipse. -->
 <section class="hero">
   <div class="wrap">
     <div class="grid hero-grid">
@@ -493,10 +527,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
         <p class="lead hero-sub">Fully online programmes for continuing education and
           upskilling — built around shift work and busy weeks, scaled from three
           employees to three hundred.</p>
-        <div class="hero-cta">
-          <a class="btn" href="#lead">Get a tailored offer</a>
-          <a class="btn btn--ghost" href="#how">See how it works</a>
-        </div>
         <div class="hero-facts">
           <div><div class="fact-n">50+</div><div class="fact-l">years of flexible learning</div></div>
           <div><div class="fact-n">200+</div><div class="fact-l">courses across working life</div></div>
@@ -505,11 +535,59 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
         </div>
         <span class="todo">TODO · verify all three hero facts, incl. award name + year</span>
       </div>
-      <div class="hero-media">
-        <div class="ph">Hero photo<br>4:3</div>
-        <div class="stack">
-          <div class="ph">Photo</div>
-          <div class="ph">Photo</div>
+
+      <div class="hero-form-col">
+        <div class="hero-form" id="heroFormCard">
+          <!-- HUBSPOT EMBED SLOT — same destination as the §8 form. -->
+          <p class="hs-slot">HUBSPOT EMBED SLOT — hero lead form.</p>
+
+          <form class="form-live" id="heroForm" novalidate>
+            <div class="hero-form-hd">
+              <h2 class="h4">Get a tailored offer</h2>
+              <p class="small">Four fields. A named advisor replies within one working day.</p>
+            </div>
+
+            <div class="f-row f-row--1">
+              <div class="f-field">
+                <label class="f-label" for="hc">Company name <span class="req">*</span></label>
+                <input class="f-input" id="hc" name="company" required>
+                <span class="f-err">Enter your company name</span>
+              </div>
+            </div>
+            <div class="f-row">
+              <div class="f-field">
+                <label class="f-label" for="he">Work email <span class="req">*</span></label>
+                <input class="f-input" id="he" name="email" type="email" required>
+                <span class="f-err">Enter a valid work email</span>
+              </div>
+              <div class="f-field">
+                <label class="f-label" for="hp">Phone <span class="req">*</span></label>
+                <input class="f-input" id="hp" name="phone" type="tel" required>
+                <span class="f-err">Enter a phone number</span>
+              </div>
+            </div>
+            <div class="f-row f-row--1">
+              <div class="f-field">
+                <label class="f-label" for="hm">What do you need?</label>
+                <textarea class="f-textarea" id="hm" name="message"
+                  placeholder="e.g. 12 people need HSE certification before November"></textarea>
+              </div>
+            </div>
+
+            <div class="f-check">
+              <input type="checkbox" id="hconsent" name="consent" required>
+              <label for="hconsent">I agree that NKI may contact me about this enquiry.
+                <span class="req">*</span></label>
+            </div>
+
+            <button class="btn f-submit" type="submit">Get a tailored offer</button>
+          </form>
+
+          <div class="form-done" role="status" aria-live="polite">
+            <h3 class="h3">Thanks — that's with us</h3>
+            <p class="body">Ingrid will get back to you within one working day. If it's
+              urgent, call <a href="tel:+4740000000"><strong>+47 400 00 000</strong></a>.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -517,32 +595,25 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 </section>
 
 <!-- ═══ 2 · TRUSTED BY ═════════════════════════════════════════
-     Customer logos, greyscale, single-pass track cloned once.
-     Assets: prototype/trusted-by-logos/ (Aider, Metier, Odontia +3). -->
+     Real customer logos from prototype/trusted-by-logos/, rendered
+     black and white via filter: grayscale(1) so one brand's colour
+     can't dominate the row.
+
+     STATIC ROW, NOT A MARQUEE — and that is deliberate. Four logos at
+     150px with 56px gaps make an 824px track inside a ~1068px viewport
+     at 1440, so a looping track cannot fill the width and the clone
+     becomes visible alongside the original. That is precisely the
+     "three of them appear twice in one viewport" bug this section
+     exists to fix. A static row cannot have that bug. Switch to the
+     marquee once there are enough logos to fill the width (~7). -->
 <section class="trusted" aria-label="Companies that work with NKI">
   <div class="wrap">
     <p class="trusted-lbl">Trusted by teams at</p>
-    <div class="marquee">
-      <div class="marquee-inner">
-        <!-- track A: one pass of the list -->
-        <div class="marquee-track">
-          <span class="logo-ph">Aider</span>
-          <span class="logo-ph">Metier</span>
-          <span class="logo-ph">Odontia</span>
-          <span class="logo-ph">Logo 4</span>
-          <span class="logo-ph">Logo 5</span>
-          <span class="logo-ph">Logo 6</span>
-        </div>
-        <!-- track B: exact clone, aria-hidden, purely for the seamless loop -->
-        <div class="marquee-track" aria-hidden="true">
-          <span class="logo-ph">Aider</span>
-          <span class="logo-ph">Metier</span>
-          <span class="logo-ph">Odontia</span>
-          <span class="logo-ph">Logo 4</span>
-          <span class="logo-ph">Logo 5</span>
-          <span class="logo-ph">Logo 6</span>
-        </div>
-      </div>
+    <div class="logo-row">
+      <img class="logo" src="trusted-by-logos/aider.png" alt="Aider">
+      <img class="logo" src="trusted-by-logos/metier.png" alt="Metier">
+      <img class="logo logo--pad" src="trusted-by-logos/odontia.png" alt="Odontia Tannlegene">
+      <img class="logo logo--pad" src="trusted-by-logos/kristiania.png" alt="Høyskolen Kristiania">
     </div>
   </div>
   <div class="wrap"><span class="todo">TODO · confirm logo usage rights per customer</span></div>
@@ -1370,46 +1441,56 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
     });
   });
 
-  /* ── §8 lead form: validation + fake success state ────────── */
-  var form = document.getElementById('leadForm');
-  var card = document.getElementById('formCard');
-
+  /* ── Lead forms: validation + fake success state ───────────
+     Drives both the hero form (§1, short) and the full qualifying
+     form (§8). Same validation, same payload shape, same HubSpot
+     destination — only the field set differs. */
   function fieldOf(el) { return el.closest('.f-field') || el.closest('.f-check'); }
 
-  function validate() {
-    var ok = true;
-    form.querySelectorAll('[required]').forEach(function (el) {
-      var bad = el.type === 'checkbox' ? !el.checked
-              : el.type === 'email'    ? !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value.trim())
-              : !el.value.trim();
-      var f = fieldOf(el);
-      if (f) f.classList.toggle('is-err', bad);
-      el.setAttribute('aria-invalid', bad ? 'true' : 'false');
-      if (bad && ok) { el.focus(); }
-      if (bad) ok = false;
+  function wireLeadForm(formId, cardId, source) {
+    var form = document.getElementById(formId);
+    var card = document.getElementById(cardId);
+    if (!form || !card) return;
+
+    function validate() {
+      var ok = true;
+      form.querySelectorAll('[required]').forEach(function (el) {
+        var bad = el.type === 'checkbox' ? !el.checked
+                : el.type === 'email'    ? !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value.trim())
+                : !el.value.trim();
+        var f = fieldOf(el);
+        if (f) f.classList.toggle('is-err', bad);
+        el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+        if (bad && ok) { el.focus(); }
+        if (bad) ok = false;
+      });
+      return ok;
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!validate()) return;
+
+      /* This is where the HubSpot submit goes. Logged so the payload —
+         including the NKI Atlas opt-in — is inspectable in the prototype. */
+      var payload = { form_source: source };
+      new FormData(form).forEach(function (v, k) { payload[k] = v; });
+      var atlas = document.getElementById('latlas');
+      if (form.contains(atlas)) payload.atlas_trial = atlas.checked;
+      console.log('[NKI lead] payload for HubSpot:', payload);
+
+      card.classList.add('is-done');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
-    return ok;
+
+    form.addEventListener('input', function (e) {
+      var f = fieldOf(e.target);
+      if (f && f.classList.contains('is-err')) validate();
+    });
   }
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (!validate()) return;
-
-    /* This is where the HubSpot submit goes. Logged so the payload —
-       including the NKI Atlas opt-in — is inspectable in the prototype. */
-    var payload = {};
-    new FormData(form).forEach(function (v, k) { payload[k] = v; });
-    payload.atlas_trial = document.getElementById('latlas').checked;
-    console.log('[NKI lead] payload for HubSpot:', payload);
-
-    card.classList.add('is-done');
-    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
-
-  form.addEventListener('input', function (e) {
-    var f = fieldOf(e.target);
-    if (f && f.classList.contains('is-err')) validate();
-  });
+  wireLeadForm('heroForm', 'heroFormCard', 'hero');
+  wireLeadForm('leadForm', 'formCard', 'full');
 
   /* ── §11 FAQ accordion ────────────────────────────────────── */
   document.getElementById('faqList').addEventListener('click', function (e) {
