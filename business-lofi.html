@@ -184,15 +184,12 @@ a{color:inherit}
 .logo-row{flex:1;display:flex;align-items:center;justify-content:space-between;
   gap:var(--s-40);flex-wrap:wrap}
 /* Real customer logo, forced to black and white so no single brand colour
-   dominates. Sized by HEIGHT, not a fixed box: these assets range from 4.2:1
-   (metier) to 1.5:1 (odontia), so a single fixed box left the squarer ones
-   rendering at half width inside it. */
-.logo{height:38px;width:auto;max-width:170px;object-fit:contain;flex:none;
+   dominates. Sized by HEIGHT so each mark reads at the same optical weight.
+   The source files were auto-cropped to their visible mark, which brought the
+   aspect ratios into a 1.8:1-4.1:1 band — close enough that one height works
+   for all of them and no per-logo compensation is needed. */
+.logo{height:36px;width:auto;max-width:150px;object-fit:contain;flex:none;
   filter:grayscale(1) contrast(1.1);opacity:.7}
-/* odontia.png and kristiania.png carry a lot of internal whitespace in the
-   source file, so the visible mark reads much smaller at the same height.
-   Scaling them up compensates. TODO · re-export both tight-cropped. */
-.logo--pad{height:64px}
 .logo-row:hover .logo{opacity:.9}
 /* placeholder, still used by the press row further down the page */
 .logo-ph{width:120px;height:36px;background:var(--l-200);border:1px dashed var(--l-400);
@@ -481,7 +478,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
      four logos across the full width with huge gaps between them */
   .logo-row{width:100%;justify-content:flex-start;gap:var(--s-32) var(--s-24)}
   .logo{height:30px;max-width:120px}
-  .logo--pad{height:52px}
   .seg-cards,.cases,.quotes,.fund,.arts,.ben-list{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
   .f-row{grid-template-columns:1fr}
@@ -599,21 +595,22 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
      black and white via filter: grayscale(1) so one brand's colour
      can't dominate the row.
 
-     STATIC ROW, NOT A MARQUEE — and that is deliberate. Four logos at
-     150px with 56px gaps make an 824px track inside a ~1068px viewport
-     at 1440, so a looping track cannot fill the width and the clone
-     becomes visible alongside the original. That is precisely the
-     "three of them appear twice in one viewport" bug this section
-     exists to fix. A static row cannot have that bug. Switch to the
-     marquee once there are enough logos to fill the width (~7). -->
+     STATIC ROW, NOT A MARQUEE — and that is deliberate. Five logos
+     still make a track narrower than the ~1068px visible width at 1440,
+     so a looping track cannot fill it and the clone becomes visible
+     alongside the original. That is precisely the "three of them appear
+     twice in one viewport" bug this section exists to fix. A static row
+     cannot have that bug. Switch to the marquee once there are enough
+     logos to overflow the width (~8). -->
 <section class="trusted" aria-label="Companies that work with NKI">
   <div class="wrap">
     <p class="trusted-lbl">Trusted by teams at</p>
     <div class="logo-row">
       <img class="logo" src="trusted-by-logos/aider.png" alt="Aider">
       <img class="logo" src="trusted-by-logos/metier.png" alt="Metier">
-      <img class="logo logo--pad" src="trusted-by-logos/odontia.png" alt="Odontia Tannlegene">
-      <img class="logo logo--pad" src="trusted-by-logos/kristiania.png" alt="Høyskolen Kristiania">
+      <img class="logo" src="trusted-by-logos/odontia.png" alt="Odontia Tannlegene">
+      <img class="logo" src="trusted-by-logos/kristiania.png" alt="Høyskolen Kristiania">
+      <img class="logo" src="trusted-by-logos/involved.png" alt="Involved">
     </div>
   </div>
   <div class="wrap"><span class="todo">TODO · confirm logo usage rights per customer</span></div>
