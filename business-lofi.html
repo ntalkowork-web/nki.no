@@ -233,7 +233,40 @@ a{color:inherit}
 .cat-foot .small{max-width:42ch}
 
 /* ═══════════════════════════════════════════════════════════
-   5 · HOW A COLLABORATION WORKS   (priority 5)
+   5 · WHY NKI   (objectives 3 and 4 — quality and brand trust)
+   Bento grid: a big number set against a block of copy, tile by
+   tile, so the claims are scannable instead of a paragraph.
+   Tonal greys stand in for what will be brand colour at Stage 2.
+   ═══════════════════════════════════════════════════════════ */
+.sec-hd.is-centered{margin-left:auto;margin-right:auto;text-align:center;max-width:64ch}
+/* Three columns, with tiles spanning 1 or 2. A fixed 1fr/2fr pair can't work:
+   the wide tile leads in row 2 and trails in row 3, so the wide column would
+   have to swap sides between rows. Spans handle that; a two-column template
+   would drop row 2's copy into the narrow column. */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter)}
+.bt{border-radius:var(--rad-lg);padding:var(--s-32);display:flex;
+  flex-direction:column;justify-content:center;gap:var(--s-12);min-height:260px}
+.bt--narrow{grid-column:span 1}
+.bt--wide{grid-column:span 2}
+.bt--fill1{background:var(--l-200)}
+.bt--fill2{background:var(--l-100)}
+.bt--fill3{background:var(--l-800);color:var(--l-0)}
+.bt--fill4{background:var(--l-900);color:var(--l-0)}
+.bt--fill5{background:var(--l-100)}
+.bt-big{font-size:39px;font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.bt-body{font-size:15px;line-height:1.6}
+.bt .h3{margin-bottom:var(--s-4)}
+/* the number tiles: one enormous figure, one caption, nothing else */
+.bt--num{align-items:center;text-align:center}
+.bt-num{font-size:80px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.bt-cap{font-size:14px;opacity:.75;max-width:16ch}
+/* photo tile */
+.bt--photo{padding:0;background:var(--l-200);border:1px dashed var(--l-400);
+  align-items:center;justify-content:center}
+.bt-ph{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--l-600)}
+
+/* ═══════════════════════════════════════════════════════════
+   6 · HOW A PROCESS CAN LOOK   (priority 5)
    ═══════════════════════════════════════════════════════════ */
 /* ── process carousel ──────────────────────────────────────
    Scroll-snap track: swipeable on touch, scrollable by keyboard,
@@ -291,7 +324,7 @@ a{color:inherit}
 .step .body{max-width:52ch}
 
 /* ═══════════════════════════════════════════════════════════
-   6 · WHAT IT COSTS   (priority 4)
+   7 · WHAT IT COSTS   (priority 4)
    Rescaled to the market we actually sell to: 94% of Norwegian
    companies with employees have <50 (SSB).  Range 1–50, default 12.
    ═══════════════════════════════════════════════════════════ */
@@ -360,7 +393,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   align-items:center;justify-content:space-between;gap:var(--s-16);flex-wrap:wrap}
 
 /* ═══════════════════════════════════════════════════════════
-   7 · PROOF   (priorities 3 and 8 — the objective-2 gap)
+   8 · PROOF   (priorities 3 and 8 — the objective-2 gap)
    Case + its own quote in ONE unit; reading list beside them.
    ═══════════════════════════════════════════════════════════ */
 .proof-main{grid-column:span 8;display:grid;gap:var(--gutter)}
@@ -394,7 +427,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .read-hd2{margin-top:var(--s-32)}
 
 /* ═══════════════════════════════════════════════════════════
-   8 · LEAD FORM + NAMED CONTACT   (priorities 1 and 2)
+   9 · LEAD FORM + NAMED CONTACT   (priorities 1 and 2)
    THE most important block on the page.  On-page, not behind a link.
    ═══════════════════════════════════════════════════════════ */
 .lead{grid-column:span 7}
@@ -442,14 +475,14 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .contact-note{margin-top:var(--s-24);padding-top:var(--s-20);border-top:1px solid var(--l-300)}
 
 /* ═══════════════════════════════════════════════════════════
-   7b · INSIGHT — merged into the Customer Proof section above
+   8b · INSIGHT — merged into the Proof section above
    (priority 8). For the visitor who is interested but not ready to
    hand over details.
    ═══════════════════════════════════════════════════════════ */
 .sec-hd--sub{margin-bottom:0}
 
 /* ═══════════════════════════════════════════════════════════
-   9 · FAQ   (priority 11) — buyer questions, not student questions
+   10 · FAQ   (priority 11) — buyer questions, not student questions
    ═══════════════════════════════════════════════════════════ */
 .faq-hd{grid-column:span 4}
 .faq{grid-column:span 8}
@@ -464,7 +497,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .faq-item.is-open .faq-a{display:block}
 
 /* ═══════════════════════════════════════════════════════════
-   10 · CLOSING FORM   (priority 1 again)
+   11 · CLOSING FORM   (priority 1 again)
    The closing band is the form itself, not a CTA pointing back at one.
    ═══════════════════════════════════════════════════════════ */
 .close-grid{align-items:center}
@@ -546,6 +579,11 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   .proof-main,.proof-side{grid-column:span 12}
   .cat-grid{grid-template-columns:repeat(3,1fr)}
   .steps{--peek:18%}
+  /* two columns: wide tiles take the full row, narrow ones pair up */
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .bt--wide{grid-column:span 2}
+  .bt{min-height:220px;padding:var(--s-24)}
+  .bt-num{font-size:64px}
   .footer-cols{grid-template-columns:repeat(2,1fr);gap:var(--s-40) var(--gutter)}
 }
 @media (max-width:768px){
@@ -557,6 +595,10 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   .logo-row{width:100%;justify-content:flex-start;gap:var(--s-24) var(--s-16)}
   .logo{width:112px;height:32px}
   .seg-cards,.ben-list{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr}
+  .bt--wide,.bt--narrow{grid-column:span 1}
+  .bt{min-height:0}
+  .bt--photo{min-height:200px}
   .cat-grid{grid-template-columns:repeat(2,1fr)}
   .pcase{grid-template-columns:1fr}
   .pcase-fig{border-right:0;border-bottom:1px solid var(--l-300);flex-direction:row;align-items:center;gap:var(--s-16)}
@@ -903,7 +945,66 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 5 · HOW A PROCESS CAN LOOK ═════════════════════════════
+<!-- ═══ 5 · WHY NKI ════════════════════════════════════════════
+     Bento grid: asymmetric tiles alternating a big number against a
+     block of copy, with one photo tile. Serves objectives 3 and 4 —
+     demonstrate quality, strengthen trust — by making the claims
+     scannable as numbers rather than a paragraph nobody reads. -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="sec-hd is-centered">
+      <p class="eyebrow">Why NKI</p>
+      <h2 class="h2">Why work with us?</h2>
+      <p class="body">What separates us is not the catalogue — it's that the courses are
+        built in-house, by people who do this full time, for learners who have a job.</p>
+    </div>
+
+    <div class="bento">
+      <!-- row 1: stat card + photo -->
+      <div class="bt bt--narrow bt--fill1">
+        <p class="bt-big">200+ courses</p>
+        <p class="bt-body">Across ten areas of working life, continuously updated
+          against what employers are actually asking for. If it isn't there, we build
+          it with your subject experts.</p>
+      </div>
+      <div class="bt bt--wide bt--photo" aria-hidden="true">
+        <span class="bt-ph">Team photo</span>
+      </div>
+
+      <!-- row 2: copy + number -->
+      <div class="bt bt--wide bt--fill2">
+        <h3 class="h3">Built in-house, not licensed in</h3>
+        <p class="bt-body">Our learning designers build the courses themselves, often
+          alongside external subject-matter experts. That's why a course can be adapted
+          to your procedures instead of taken as-is — and why the teaching holds up
+          when the regulation changes.</p>
+      </div>
+      <div class="bt bt--narrow bt--num bt--fill3">
+        <p class="bt-num">6</p>
+        <p class="bt-cap">in-house learning designers</p>
+      </div>
+
+      <!-- row 3: number + copy -->
+      <div class="bt bt--narrow bt--num bt--fill4">
+        <p class="bt-num">50+</p>
+        <p class="bt-cap">years of flexible learning</p>
+      </div>
+      <div class="bt bt--wide bt--fill5">
+        <h3 class="h3">This isn't our first cohort</h3>
+        <p class="bt-body">NKI has been teaching at a distance since long before it was
+          called online — through correspondence, then hybrid, now fully digital. In
+          2024 we were named <strong>Online Educator of the Year</strong> by Flexible
+          Education Norway. Whatever your shift pattern looks like, we've almost
+          certainly taught around it before.</p>
+      </div>
+    </div>
+    <span class="todo">TODO · verify every figure here — course count, designer count,
+      founding year and the award</span>
+  </div>
+</section>
+
+
+<!-- ═══ 6 · HOW A PROCESS CAN LOOK ═════════════════════════════
      Deliberately NOT "how it works" — there is no single process.
      Some companies buy seats on courses that already exist; others
      need a course built around their case. That variation is stated
@@ -1011,7 +1112,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 6 · WHAT IT COSTS ══════════════════════════════════════
+<!-- ═══ 7 · WHAT IT COSTS ══════════════════════════════════════
      Rescaled 1–50, default 12. Old page ran 1–1000 default 100,
      which is a market we don't sell to (SSB: 94% have <50). -->
 <section class="sec" id="cost">
@@ -1120,7 +1221,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 7 · PROOF ═════════════════════════════════════════════
+<!-- ═══ 8 · PROOF ═════════════════════════════════════════════
      Cases, testimonials and reading compressed into ONE block.
      Previously these were three stacked sub-blocks saying the same
      thing three ways. Now each case carries its own quote inline —
@@ -1241,7 +1342,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 8 · LEAD FORM + NAMED CONTACT ══════════════════════════
+<!-- ═══ 9 · LEAD FORM + NAMED CONTACT ══════════════════════════
      Priority 1 and 2. On the page, not behind a link. -->
 <section class="sec" id="lead">
   <div class="wrap">
@@ -1376,7 +1477,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 9 · FAQ ═══════════════════════════════════════════════
+<!-- ═══ 10 · FAQ ═══════════════════════════════════════════════
      Buyer questions, not student questions. -->
 <section class="sec sec--alt" id="faq">
   <div class="wrap">
@@ -1436,7 +1537,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 10 · CLOSING FORM ══════════════════════════════════════
+<!-- ═══ 11 · CLOSING FORM ══════════════════════════════════════
      The closing band is the same short form as the hero, not a CTA
      pointing back up at one. A visitor who has read the whole page
      converts here without scrolling anywhere. -->
@@ -1537,6 +1638,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           <ul>
             <li><a href="#start">Choose a starting point</a></li>
             <li><a href="#what-you-get">What you get</a></li>
+            <li><a href="#why">Why NKI</a></li>
             <li><a href="#how">How it works</a></li>
             <li><a href="#cost">What it costs</a></li>
           </ul>
