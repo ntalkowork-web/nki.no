@@ -234,22 +234,19 @@ a{color:inherit}
 /* ═══════════════════════════════════════════════════════════
    5 · HOW A COLLABORATION WORKS   (priority 5)
    ═══════════════════════════════════════════════════════════ */
-/* the two routes, stated before the steps — there is no single process */
-.route-pair{grid-column:span 12;display:grid;grid-template-columns:1fr 1fr;
-  gap:var(--gutter);margin-bottom:var(--s-48)}
-.route{border:1px solid var(--l-300);border-radius:var(--rad-lg);padding:var(--s-24);
-  background:var(--l-0)}
-.route-tag{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--l-600);margin-bottom:var(--s-8)}
-.route .h4{margin-bottom:var(--s-8)}
-.route .body{font-size:15px}
 /* ── process carousel ──────────────────────────────────────
    Scroll-snap track: swipeable on touch, scrollable by keyboard,
    works with no JS. Arrows and dots enhance it. */
 .steps-carousel{grid-column:span 12}
+/* ONE step per view, with the next one peeking in so it's obvious there's
+   more to scroll. --peek is the sliver of the next card that stays visible.
+   The trailing padding must equal --peek: without it the last card can never
+   be start-aligned, because the track runs out of scroll before reaching it,
+   and the final position becomes unreachable. */
 .steps{
-  list-style:none;margin:0;padding:0 0 var(--s-8);
-  display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - (var(--gutter) * 2)) / 3);
+  --peek:22%;
+  list-style:none;margin:0;padding:0 var(--peek) var(--s-8) 0;
+  display:grid;grid-auto-flow:column;grid-auto-columns:calc(100% - var(--peek));
   gap:var(--gutter);
   overflow-x:auto;overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;scrollbar-width:none;
@@ -284,9 +281,13 @@ a{color:inherit}
 .worked-n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--l-100);
   border:1px solid var(--l-300);display:flex;align-items:center;justify-content:center;
   font-size:12px;font-weight:700;color:var(--l-700)}
-.step{position:relative;padding-top:var(--s-24);border-top:2px solid var(--l-900)}
-.step-n{font-size:13px;font-weight:700;color:var(--l-500);letter-spacing:.08em}
-.step .h4{margin:var(--s-8) 0}
+/* one step fills most of the row now, so it needs to read as a card rather
+   than a thin column with a rule on top */
+.step{border:1px solid var(--l-300);border-radius:var(--rad-lg);background:var(--l-0);
+  padding:var(--s-32);display:flex;flex-direction:column;gap:var(--s-8)}
+.step-n{font-size:39px;font-weight:700;line-height:1;color:var(--l-300);letter-spacing:-.02em}
+.step .h4{font-size:25px;margin:var(--s-4) 0 0}
+.step .body{max-width:52ch}
 
 /* ═══════════════════════════════════════════════════════════
    6 · WHAT IT COSTS   (priority 4)
@@ -543,8 +544,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   .calc-out{border-left:0;border-top:1px solid var(--l-300)}
   .proof-main,.proof-side{grid-column:span 12}
   .cat-grid{grid-template-columns:repeat(3,1fr)}
-  /* two steps per view instead of three */
-  .steps{grid-auto-columns:calc((100% - var(--gutter)) / 2)}
+  .steps{--peek:18%}
   .footer-cols{grid-template-columns:repeat(2,1fr);gap:var(--s-40) var(--gutter)}
 }
 @media (max-width:768px){
@@ -555,14 +555,15 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
      five logos across the full width with huge gaps between them */
   .logo-row{width:100%;justify-content:flex-start;gap:var(--s-24) var(--s-16)}
   .logo{width:112px;height:32px}
-  .seg-cards,.ben-list,.route-pair{grid-template-columns:1fr}
+  .seg-cards,.ben-list{grid-template-columns:1fr}
   .cat-grid{grid-template-columns:repeat(2,1fr)}
   .pcase{grid-template-columns:1fr}
   .pcase-fig{border-right:0;border-bottom:1px solid var(--l-300);flex-direction:row;align-items:center;gap:var(--s-16)}
   .pcase-logo{margin-top:0;margin-left:auto}
   .worked{padding:var(--s-24)}
-  /* one step per view */
-  .steps{grid-auto-columns:100%}
+  /* smaller peek on narrow screens so the card keeps enough room */
+  .steps{--peek:12%}
+  .step{padding:var(--s-24)}
   .f-row{grid-template-columns:1fr}
   .calc-in,.calc-out,.form-card,.contact-card,.quote{padding:var(--s-24)}
   .stub-nav{display:none}
@@ -899,35 +900,22 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 <!-- ═══ 5 · HOW A PROCESS CAN LOOK ═════════════════════════════
      Deliberately NOT "how it works" — there is no single process.
      Some companies buy seats on courses that already exist; others
-     need a course built around their case. The two routes are stated
-     up front, then one real example is threaded through the steps so
-     the abstraction is anchored to something concrete. -->
+     need a course built around their case. That variation is stated
+     in the intro rather than as separate boxes, then one example is
+     threaded through the steps so the abstraction is anchored to
+     something concrete. -->
 <section class="sec sec--alt" id="how">
   <div class="wrap">
     <div class="sec-hd">
       <p class="eyebrow">Process</p>
       <h2 class="h2">How a process can look</h2>
-      <p class="body">There isn't one fixed process — it depends on whether what you
-        need already exists. Two common routes:</p>
+      <p class="body">There isn't one fixed process. Some companies take seats on
+        courses that already exist and are running inside two weeks; others need
+        something built around their case, which takes longer. The steps below are
+        the shape it usually follows.</p>
     </div>
 
     <div class="grid">
-      <div class="route-pair">
-        <div class="route">
-          <p class="route-tag">Route A · most common</p>
-          <h3 class="h4">Seats on existing courses</h3>
-          <p class="body">What you need is already in the catalogue. We size the cohort,
-            assign seats and you're running — often inside two weeks.</p>
-        </div>
-        <div class="route">
-          <p class="route-tag">Route B</p>
-          <h3 class="h4">A course built around your case</h3>
-          <p class="body">Nothing off the shelf fits. Our learning designers build with
-            your subject experts, or adapt an existing course to your procedures.
-            Longer — think two to three months.</p>
-        </div>
-      </div>
-
       <!-- ── PROCESS CAROUSEL ────────────────────────────────
            Native scroll-snap track, not a JS-positioned slider:
            it stays swipeable on touch and keyboard-scrollable
