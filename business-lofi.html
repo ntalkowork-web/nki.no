@@ -596,6 +596,13 @@ input[type=range]{width:100%;margin:var(--spacing-24) 0 var(--spacing-8);
 .pcase-fig img{width:100%;height:100%;object-fit:cover}
 .pcase-body{padding:var(--spacing-24);display:flex;flex-direction:column;
   gap:var(--spacing-8)}
+/* customer logo heads the case — same grayscale treatment as the partner row,
+   so no single brand colour pulls focus inside the card. Fixed height with a
+   left-aligned contain, so both cases' logos share one optical size whatever
+   their source ratio. */
+.pcase-logo{height:28px;width:auto;max-width:150px;object-fit:contain;
+  object-position:left center;filter:grayscale(1) contrast(1.1);opacity:.8;
+  margin-bottom:var(--spacing-4)}
 .pcase-body .body{font-size:var(--font-size-14);line-height:1.55}
 /* metric and its caption on one line — it labels the case, it isn't a headline */
 .pcase-metric{font-size:var(--font-size-23);font-weight:700;line-height:1.2}
@@ -1281,6 +1288,7 @@ input[type=range]{width:100%;margin:var(--spacing-24) 0 var(--spacing-8);
             <img src="images/design-system/business/gallery-2.jpg" alt="A team member who completed the certification on site">
           </div>
           <div class="pcase-body">
+            <img class="pcase-logo" src="trusted-by-logos/metier.png" alt="Metier">
             <p class="pcase-metric">92% <span>completion, two cohorts</span></p>
             <h3 class="h4">Certification for a nationwide team, without the travel</h3>
             <p class="body">The same certification needed across every site, with nobody
@@ -1288,7 +1296,7 @@ input[type=range]{width:100%;margin:var(--spacing-24) 0 var(--spacing-8);
             <blockquote class="pcase-quote">"We got people qualified without losing a
               single shift."</blockquote>
             <p class="pcase-by"><strong>Firstname Lastname</strong> · HR Director,
-              Company AS</p>
+              Metier</p>
             <a class="case-link" href="#">Read the full case →</a>
           </div>
         </article>
@@ -1298,6 +1306,7 @@ input[type=range]{width:100%;margin:var(--spacing-24) 0 var(--spacing-8);
             <img src="images/design-system/testimonials/story-2.jpg" alt="A competence lead reviewing completion figures">
           </div>
           <div class="pcase-body">
+            <img class="pcase-logo" src="trusted-by-logos/odontia.png" alt="Odontia Tannlegene">
             <p class="pcase-metric">6 weeks <span>first meeting to first cohort</span></p>
             <h3 class="h4">A compliance deadline met with three weeks to spare</h3>
             <p class="body">New regulation, a hard deadline, and no room in the calendar
@@ -1305,7 +1314,7 @@ input[type=range]{width:100%;margin:var(--spacing-24) 0 var(--spacing-8);
             <blockquote class="pcase-quote">"I could show the board completion per
               department without building a spreadsheet."</blockquote>
             <p class="pcase-by"><strong>Firstname Lastname</strong> · Head of Competence,
-              Company AS</p>
+              Odontia Tannlegene</p>
             <a class="case-link" href="#">Read the full case →</a>
           </div>
         </article>
