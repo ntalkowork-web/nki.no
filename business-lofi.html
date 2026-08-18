@@ -122,6 +122,45 @@ a{color:inherit}
 .stub-header .spacer{flex:1}
 
 /* ═══════════════════════════════════════════════════════════
+   FORM ELEMENTS — SHARED
+   Used by the hero form, the closing form and the footer
+   newsletter. Kept as its own block, not nested under any one
+   section, because deleting that section takes these with it.
+   ═══════════════════════════════════════════════════════════ */
+.hs-slot{margin-bottom:var(--s-24);padding:var(--s-12);border:1px dashed var(--l-400);
+  border-radius:4px;font-size:12px;color:var(--l-600);background:var(--l-50)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-16);margin-bottom:var(--s-16)}
+.f-row--1{grid-template-columns:1fr}
+.f-field{display:flex;flex-direction:column;gap:6px}
+.f-label{font-size:14px;font-weight:600}
+.f-label .req{color:var(--l-600)}
+.f-input,.f-select,.f-textarea{
+  width:100%;padding:12px var(--s-16);border:1px solid var(--l-400);
+  border-radius:var(--rad);background:var(--l-0);font:inherit;font-size:15px;color:var(--l-900);
+}
+.f-input:focus,.f-select:focus,.f-textarea:focus{outline:2px solid var(--l-900);outline-offset:1px;border-color:var(--l-900)}
+.f-textarea{min-height:104px;resize:vertical}
+.f-err{font-size:13px;color:var(--l-900);font-weight:600;display:none}
+.f-field.is-err .f-input,.f-field.is-err .f-select{border-color:var(--l-900);border-width:2px}
+.f-field.is-err .f-err{display:block}
+/* consent checkboxes are UNBUNDLED — one purpose per box (heuristic finding) */
+.f-check{display:flex;gap:var(--s-12);align-items:flex-start;margin-bottom:var(--s-12)}
+.f-check input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--l-800)}
+.f-check label{font-size:14px;line-height:1.45;color:var(--l-700)}
+.f-submit{margin-top:var(--s-16);width:100%}
+.f-check + .btn.f-submit{margin-top:var(--s-24)}
+.f-foot{margin-top:var(--s-12);font-size:13px;color:var(--l-600)}
+.form-done{display:none;text-align:center;padding:var(--s-40) var(--s-16)}
+.form-done .h3{margin-bottom:var(--s-12)}
+/* success state — applies to the hero card and the closing card */
+.is-done .form-live,
+.is-done .hs-slot{display:none}
+.is-done .form-done{display:block}
+/* avatar, used by the contact block under each form */
+.contact-av{width:72px;height:72px;border-radius:50%;background:var(--l-200);
+  border:1px dashed var(--l-400);flex:none}
+
+/* ═══════════════════════════════════════════════════════════
    1 · HERO   (priority 7 — benefit-led headline + conversion CTA)
    Hard constraint: ≤560px tall on desktop.  No hand-drawn ellipse.
    ═══════════════════════════════════════════════════════════ */
@@ -524,7 +563,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   .hero-form-col{margin-top:var(--s-32)}
   .close-copy,.close-form-col{grid-column:span 12}
   .close-form-col{margin-top:var(--s-32)}
-  .ben-hd,.ben-list,.faq-hd,.faq,.lead,.contact{grid-column:span 12}
+  .ben-hd,.ben-list,.faq-hd,.faq{grid-column:span 12}
   .contact-card{position:static;margin-top:var(--s-24)}
   .calc{grid-template-columns:1fr}
   .calc-out{border-left:0;border-top:1px solid var(--l-300)}
