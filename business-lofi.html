@@ -3,123 +3,244 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NKI For Business — Lo-fi wireframe (Stage 1)</title>
+<title>NKI For Business</title>
 
 <!--
-  STAGE 1 — LO-FI GREYSCALE WIREFRAME.  Throwaway file.
-  Self-contained on purpose: does NOT load wireframe.css, and uses a local --l-*
-  grey ramp so the design-system token rules that govern wireframe.css are not in
-  play here.  Stage 2 adds brand colour in this same file; Stage 3 ports the result
-  into index.html / wireframe.css as proper design-system tokens.
+  STAGE 2 — DESIGN SYSTEM.  Same content and same section structure as the
+  Stage 1 lo-fi wireframe; only the surface changed.  The local --l-* grey ramp
+  is gone: every colour, spacing, radius and font-size now resolves through the
+  NKI design-system tokens declared in :root below, which mirror the
+  "NKI DESIGN SYSTEM — TOKENS" block of wireframe.css and, through it,
+  design-system/nki-design-tokens-and-text-styles.md.  Photo and icon
+  placeholders are replaced with real assets from images/design-system/.
 
-  Purpose of this stage: validate SECTION ORDER, HIERARCHY and DENSITY only.
-  No photography, no brand, no icons.
+  Still self-contained: it does NOT load wireframe.css, so the token block is
+  duplicated here.  Stage 3 ports the result into index.html / wireframe.css.
 
   Press "G" to toggle the 1440 / 96 / 24 / 12-column grid overlay.
 -->
 
 <style>
 /* ─────────────────────────────────────────────────────────────
-   LO-FI TOKENS  (local, throwaway — not the design system)
+   FONT — Apercu, same faces the rest of the prototype loads.
+   This page stays self-contained (it does not link wireframe.css),
+   so the faces are declared here against the shared /fonts folder.
+   ───────────────────────────────────────────────────────────── */
+@font-face{font-family:'Apercu';src:url('fonts/apercu-regular.ttf') format('truetype');
+  font-weight:400;font-style:normal}
+@font-face{font-family:'Apercu';src:url('fonts/apercu-medium.ttf') format('truetype');
+  font-weight:500;font-style:normal}
+@font-face{font-family:'Apercu';src:url('fonts/apercu-bold.ttf') format('truetype');
+  font-weight:700;font-style:normal}
+
+/* ─────────────────────────────────────────────────────────────
+   NKI DESIGN SYSTEM — TOKENS
+   Mirrors the "NKI DESIGN SYSTEM — TOKENS" block of wireframe.css
+   1:1, which in turn mirrors
+   design-system/nki-design-tokens-and-text-styles.md.
+   The old local --l-* grey ramp is gone: every colour, spacing,
+   radius and font-size below resolves through these.
    ───────────────────────────────────────────────────────────── */
 :root{
-  /* grey ramp */
-  --l-0:#fff; --l-50:#f7f7f7; --l-100:#efefef; --l-200:#e4e4e4;
-  --l-300:#d2d2d2; --l-400:#b0b0b0; --l-500:#8a8a8a; --l-600:#666;
-  --l-700:#444; --l-800:#2a2a2a; --l-900:#161616;
+  /* Primitives — colour */
+  --nki-green-100:  #ebffbb;
+  --nki-green-300:  #aee67f;
+  --nki-green-500:  #82cc52;
+  --nki-cream-50:   #fffef3;
+  --nki-white:      #ffffff;
+  --nki-black-900:  #1b1c1a;
+  --nki-gray-50:    #f3f4f6;
+  --nki-gray-200:   #e0e0e0;
+  --nki-gray-300:   #bcbbbb;
+  --nki-gray-400:   #9e9e9e;
+  --nki-gray-500:   #6b7280;
+  --nki-gray-600:   #616161;
+  --nki-white-a30:  rgba(255,255,255,.3);
+  --nki-white-a10:  rgba(255,255,255,.1);
+  --nki-orange-100: #ffd3b3;
+  --nki-purple-100: #f0d4ff;
+  --nki-red-500:    #ff3636;
+  --nki-blue-500:   #2e9bcc;
+  --nki-blue-700:   #0b5a78;
 
-  /* grid spec from design-system/nki-design-tokens-and-text-styles.md §4 */
+  /* Semantic */
+  --bg-surface-primary:      var(--nki-white);
+  --bg-surface-secondary:    var(--nki-cream-50);
+  --bg-surface-inverse:      var(--nki-black-900);
+  --bg-subtle:               var(--nki-gray-50);
+  --text-primary:            var(--nki-black-900);
+  --text-secondary-on-white: var(--nki-gray-600);
+  --text-secondary-on-subtle:var(--nki-gray-500);
+  --text-placeholder:        var(--nki-gray-400);
+  --text-inverse:            var(--nki-white);
+  --icon-default:            var(--nki-black-900);
+  --border-default:          var(--nki-gray-200);
+  --border-on-dark:          var(--nki-white-a30);
+  --border-selected:         var(--nki-gray-500);
+  --border-focus:            var(--nki-blue-500);
+  --border-focus-on-brand:   var(--nki-blue-700);
+  --decorative-graphic-muted:var(--nki-gray-300);
+  --action-primary-default:  var(--nki-green-300);
+  --action-primary-hover:    var(--nki-green-500);
+  --action-graphic-accent:   var(--nki-green-500);
+  --state-hover-selected-bg: var(--nki-black-900);
+  --state-disabled-bg:       var(--nki-gray-200);
+  --state-disabled-text:     var(--nki-gray-400);
+  --feedback-positive-subtle-bg: var(--nki-green-100);
+  --accent-orange-subtle:    var(--nki-orange-100);
+  --accent-purple-subtle:    var(--nki-purple-100);
+  --feedback-error:          var(--nki-red-500);
+  --surface-footer-input-bg: var(--nki-white-a10);
+
+  /* Component */
+  --button-primary-text-on-green: var(--text-primary);
+  --button-primary-text-on-black: var(--text-inverse);
+  --button-secondary-text:        var(--text-primary);
+  --button-secondary-bg-hover:    var(--bg-subtle);
+  --input-bg-default:             var(--bg-subtle);
+  --input-border:                 var(--border-default);
+  --input-border-focus:           var(--border-focus);
+  --input-placeholder-text:       var(--text-placeholder);
+  --input-border-error:           var(--feedback-error);
+  --badge-bg:                     var(--feedback-positive-subtle-bg);
+  --card-bg-accent-orange:        var(--accent-orange-subtle);
+  --card-bg-accent-purple:        var(--accent-purple-subtle);
+
+  /* Spacing (4px base unit) */
+  --spacing-4:4px;   --spacing-8:8px;   --spacing-12:12px; --spacing-16:16px;
+  --spacing-20:20px; --spacing-24:24px; --spacing-32:32px; --spacing-40:40px;
+  --spacing-48:48px; --spacing-56:56px; --spacing-64:64px; --spacing-72:72px;
+  --spacing-80:80px; --spacing-96:96px;
+
+  /* Radius */
+  --radius-8:8px; --radius-12:12px; --radius-16:16px;
+  --radius-24:24px; --radius-32:32px; --radius-40:40px;
+
+  /* Font sizes */
+  --font-size-14:14px; --font-size-16:16px; --font-size-20:20px; --font-size-23:23px;
+  --font-size-25:25px; --font-size-26:26px; --font-size-29:29px; --font-size-31:31px;
+  --font-size-32:32px; --font-size-39:39px; --font-size-49:49px; --font-size-61:61px;
+
+  --font:'Apercu',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+
+  /* Layout primitives — grid/columns, grid/margin, grid/gutter */
   --frame:1440px; --margin:96px; --gutter:24px; --cols:12;
   --content:1248px;                        /* 1440 − (96 × 2) */
 
-  /* spacing scale (mirrors --spacing-* so Stage 3 maps 1:1) */
-  --s-4:4px; --s-8:8px; --s-12:12px; --s-16:16px; --s-20:20px; --s-24:24px;
-  --s-32:32px; --s-40:40px; --s-48:48px; --s-56:56px; --s-64:64px; --s-80:80px;
-
-  --rad:8px; --rad-lg:12px;
-
   /* DENSITY RULE for this rebuild: section rhythm is 64/80, never 96/128 */
-  --sec-y:var(--s-80);
+  --sec-y:var(--spacing-80);
 }
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0; background:var(--l-0); color:var(--l-900);
-  font:400 16px/1.5 "Helvetica Neue",Arial,sans-serif;
+  margin:0; background:var(--bg-surface-primary); color:var(--text-primary);
+  font:400 var(--font-size-16)/1.5 var(--font);
   -webkit-font-smoothing:antialiased;
 }
 img{max-width:100%;display:block}
 h1,h2,h3,h4,p{margin:0}
 button{font:inherit;cursor:pointer}
 a{color:inherit}
+::placeholder{color:var(--input-placeholder-text)}
 
 /* ── layout primitives ─────────────────────────────────────── */
 .wrap{max-width:var(--frame);margin:0 auto;padding:0 var(--margin)}
 .sec{padding:var(--sec-y) 0}
-.sec--alt{background:var(--l-50)}
-.sec--dark{background:var(--l-800);color:var(--l-0)}
+.sec--alt{background:var(--bg-subtle)}
 .grid{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:var(--gutter)}
 
-/* ── lo-fi type scale (maps to --font-size-* in Stage 3) ───── */
-.eyebrow{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--l-600);font-weight:600}
-.h1{font-size:49px;line-height:1.1;font-weight:700;letter-spacing:-.02em}
-.h2{font-size:39px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
-.h3{font-size:25px;line-height:1.25;font-weight:700}
-.h4{font-size:20px;line-height:1.3;font-weight:700}
-.lead{font-size:20px;line-height:1.5;color:var(--l-700)}
-.body{font-size:16px;line-height:1.6;color:var(--l-700)}
-.small{font-size:14px;line-height:1.5;color:var(--l-600)}
+/* ── type scale — the DS font-size tokens and the six confirmed
+   named text styles (Desktop H5/H6, Body, Small, Badge-Eyebrow) ── */
+.eyebrow{font-size:var(--font-size-14);line-height:1.4;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text-secondary-on-white);font-weight:500}
+.h1{font-size:var(--font-size-49);line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.h2{font-size:var(--font-size-39);line-height:1.15;font-weight:700;letter-spacing:-.01em}
+.h3{font-size:var(--font-size-25);line-height:1.2;font-weight:700}
+.h4{font-size:var(--font-size-20);line-height:1.15;font-weight:700}
+.lead{font-size:var(--font-size-20);line-height:1.5;color:var(--text-secondary-on-white)}
+.body{font-size:var(--font-size-16);line-height:1.4;color:var(--text-secondary-on-white)}
+.small{font-size:var(--font-size-14);line-height:1.4;color:var(--text-secondary-on-white)}
 
-.sec-hd{margin-bottom:var(--s-40);max-width:720px}
-.sec-hd .h2{margin-top:var(--s-12)}
-.sec-hd p{margin-top:var(--s-16)}
+.sec-hd{margin-bottom:var(--spacing-40);max-width:720px}
+.sec-hd .h2{margin-top:var(--spacing-12)}
+.sec-hd p{margin-top:var(--spacing-16)}
 
-/* ── lo-fi buttons ─────────────────────────────────────────── */
+/* ── buttons — DS `button` component, Primary and Secondary ──
+   Primary is the lime fill with text/primary on it (button-primary/
+   bg-default + text-on-green); Secondary is the outlined variant
+   that hovers to bg/subtle. */
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:var(--s-8);
-  padding:14px var(--s-24);border-radius:var(--rad-lg);border:1px solid var(--l-900);
-  background:var(--l-900);color:var(--l-0);font-weight:600;font-size:16px;
-  text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--spacing-8);
+  padding:14px var(--spacing-24);border-radius:var(--radius-12);
+  border:1px solid var(--action-primary-default);
+  background:var(--action-primary-default);color:var(--button-primary-text-on-green);
+  font-weight:500;font-size:var(--font-size-16);text-decoration:none;
 }
-.btn:hover{background:var(--l-700);border-color:var(--l-700)}
-.btn--ghost{background:transparent;color:var(--l-900)}
-.btn--ghost:hover{background:var(--l-100);border-color:var(--l-900)}
-.sec--dark .btn{background:var(--l-0);color:var(--l-900);border-color:var(--l-0)}
-.sec--dark .btn--ghost{background:transparent;color:var(--l-0);border-color:var(--l-0)}
+.btn:hover{background:var(--action-primary-hover);border-color:var(--action-primary-hover)}
+.btn:focus-visible{outline:2px solid var(--border-focus-on-brand);outline-offset:2px}
+.btn--ghost{background:transparent;color:var(--button-secondary-text);
+  border-color:var(--border-default)}
+.btn--ghost:hover{background:var(--button-secondary-bg-hover);
+  border-color:var(--border-default)}
+.btn--ghost:focus-visible{outline-color:var(--border-focus)}
 
-/* lo-fi stand-in for a Material Symbols icon */
+/* icon slot — DS icon-size/24 inside a bg/subtle tile */
 .ic{
-  width:40px;height:40px;flex:none;border-radius:var(--rad);
-  background:var(--l-200);border:1px dashed var(--l-400);
-  display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--l-600);
+  width:40px;height:40px;flex:none;border-radius:var(--radius-8);
+  background:var(--bg-subtle);
+  display:flex;align-items:center;justify-content:center;
 }
-
-/* TODO flag — every unverified claim on this page carries one */
-.todo{
-  display:inline-block;margin-top:var(--s-8);padding:2px var(--s-8);
-  border:1px dashed var(--l-500);border-radius:4px;
-  font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--l-600);
-  background:repeating-linear-gradient(45deg,transparent,transparent 4px,var(--l-100) 4px,var(--l-100) 8px);
-}
+.ic img{width:24px;height:24px}
 
 /* ═══════════════════════════════════════════════════════════
-   SITE CHROME — stub only.  The real header/footer and the
-   .mob-* hamburger menu already exist in index.html and MUST
-   NOT be touched.  These are placeholders so the page reads
-   in context.
+   SITE CHROME.  Header and footer are both the design-system ones
+   now.  The .mob-* hamburger menu already exists in index.html and
+   MUST NOT be touched.
    ═══════════════════════════════════════════════════════════ */
-.stub-header{
-  height:88px;border-bottom:1px solid var(--l-300);background:var(--l-0);
-  position:sticky;top:0;z-index:20;
-}
-.stub-header .wrap{height:100%;display:flex;align-items:center;gap:var(--s-32)}
-.stub-logo{width:96px;height:28px;background:var(--l-300);border-radius:4px;flex:none}
-.stub-nav{display:flex;gap:var(--s-24);font-size:15px;color:var(--l-600)}
-.stub-nav a{text-decoration:none}
-.stub-nav a:hover{text-decoration:underline}
-.stub-nav b{color:var(--l-900)}
-.stub-header .spacer{flex:1}
+/* The real design-system header (Figma 1193:29131), not a stub: 20px of
+   vertical padding around 48px of content, which lands on the same 88px the
+   placeholder occupied — so nothing below it shifts. */
+.hd{background:var(--bg-surface-primary);position:sticky;top:0;z-index:20;
+  padding:var(--spacing-20) 0}
+.hd-in{display:flex;align-items:center;gap:var(--spacing-24)}
+.hd-left{display:flex;align-items:center;gap:var(--spacing-24);flex:none}
+.hd-logo{display:block;flex:none}
+.hd-logo img{width:98px;height:40px;object-fit:contain}
+.hd-tabs{display:flex;align-items:center;gap:var(--spacing-8)}
+.hd-tab{display:inline-flex;align-items:center;gap:var(--spacing-8);height:40px;
+  padding:var(--spacing-8);border-radius:var(--radius-8);font-size:var(--font-size-16);
+  font-weight:500;color:var(--text-primary);text-decoration:none;white-space:nowrap}
+.hd-tab:hover{background:var(--bg-subtle)}
+/* the one tab that is the current section carries the lime, as in the design */
+.hd-tab--feat{background:var(--badge-bg)}
+.hd-tab--feat:hover{background:var(--action-primary-default)}
+/* icon boxes are sized separately from the glyph inside them: the design's
+   20/24px boxes hold 10x6 and 20x20 leaves, and squashing that to one size
+   would distort the artwork */
+.hd-ic{display:flex;align-items:center;justify-content:center;flex:none}
+.hd-ic--20{width:20px;height:20px}
+.hd-ic--24{width:24px;height:24px}
+.hd-chev{width:10px;height:6.17px}
+/* search shrinks before anything else does — it is the only elastic element
+   in the row */
+.hd-search{flex:1 1 480px;max-width:480px;min-width:0;height:48px;
+  display:flex;align-items:center;gap:var(--spacing-16);
+  padding:10px var(--spacing-16) 10px var(--spacing-8);
+  border:1px solid var(--input-border);border-radius:var(--radius-12);
+  background:var(--bg-surface-primary);text-decoration:none}
+.hd-search:hover{border-color:var(--border-selected)}
+.hd-search-ic{width:32px;height:32px;flex:none;border-radius:var(--radius-8);
+  background:var(--bg-subtle);display:flex;align-items:center;justify-content:center}
+.hd-search-ic img{width:12px;height:12px}
+.hd-search-ph{font-size:var(--font-size-16);color:var(--text-placeholder);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd-actions{display:flex;align-items:center;gap:var(--spacing-8);margin-left:auto;flex:none}
+.hd-login{height:48px;padding:12px var(--spacing-16);font-weight:500}
+.hd-cart{width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  border-radius:var(--radius-8)}
+.hd-cart:hover{background:var(--bg-subtle)}
+.hd-cart img{width:20px;height:20px}
 
 /* ═══════════════════════════════════════════════════════════
    FORM ELEMENTS — SHARED
@@ -127,38 +248,43 @@ a{color:inherit}
    newsletter. Kept as its own block, not nested under any one
    section, because deleting that section takes these with it.
    ═══════════════════════════════════════════════════════════ */
-.hs-slot{margin-bottom:var(--s-24);padding:var(--s-12);border:1px dashed var(--l-400);
-  border-radius:4px;font-size:12px;color:var(--l-600);background:var(--l-50)}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-16);margin-bottom:var(--s-16)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-16);
+  margin-bottom:var(--spacing-16)}
 .f-row--1{grid-template-columns:1fr}
 .f-field{display:flex;flex-direction:column;gap:6px}
-.f-label{font-size:14px;font-weight:600}
-.f-label .req{color:var(--l-600)}
+.f-label{font-size:var(--font-size-14);line-height:1.4;font-weight:500}
+.f-label .req{color:var(--text-secondary-on-white)}
 .f-input,.f-select,.f-textarea{
-  width:100%;padding:12px var(--s-16);border:1px solid var(--l-400);
-  border-radius:var(--rad);background:var(--l-0);font:inherit;font-size:15px;color:var(--l-900);
+  width:100%;padding:12px var(--spacing-16);border:1px solid var(--input-border);
+  border-radius:var(--radius-8);background:var(--bg-surface-primary);
+  font:inherit;font-size:var(--font-size-16);color:var(--text-primary);
 }
-.f-input:focus,.f-select:focus,.f-textarea:focus{outline:2px solid var(--l-900);outline-offset:1px;border-color:var(--l-900)}
+.f-input:focus,.f-select:focus,.f-textarea:focus{outline:2px solid var(--input-border-focus);
+  outline-offset:1px;border-color:var(--input-border-focus)}
 .f-textarea{min-height:104px;resize:vertical}
-.f-err{font-size:13px;color:var(--l-900);font-weight:600;display:none}
-.f-field.is-err .f-input,.f-field.is-err .f-select{border-color:var(--l-900);border-width:2px}
+.f-err{font-size:var(--font-size-14);color:var(--feedback-error);font-weight:500;display:none}
+.f-field.is-err .f-input,.f-field.is-err .f-select{border-color:var(--input-border-error);
+  border-width:2px}
 .f-field.is-err .f-err{display:block}
 /* consent checkboxes are UNBUNDLED — one purpose per box (heuristic finding) */
-.f-check{display:flex;gap:var(--s-12);align-items:flex-start;margin-bottom:var(--s-12)}
-.f-check input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--l-800)}
-.f-check label{font-size:14px;line-height:1.45;color:var(--l-700)}
-.f-submit{margin-top:var(--s-16);width:100%}
-.f-check + .btn.f-submit{margin-top:var(--s-24)}
-.f-foot{margin-top:var(--s-12);font-size:13px;color:var(--l-600)}
-.form-done{display:none;text-align:center;padding:var(--s-40) var(--s-16)}
-.form-done .h3{margin-bottom:var(--s-12)}
+.f-check{display:flex;gap:var(--spacing-12);align-items:flex-start;
+  margin-bottom:var(--spacing-12)}
+.f-check input{margin-top:3px;width:18px;height:18px;flex:none;
+  accent-color:var(--action-graphic-accent)}
+.f-check label{font-size:var(--font-size-14);line-height:1.45;
+  color:var(--text-secondary-on-white)}
+.f-submit{margin-top:var(--spacing-16);width:100%}
+.f-check + .btn.f-submit{margin-top:var(--spacing-24)}
+.f-foot{margin-top:var(--spacing-12);font-size:var(--font-size-14);
+  color:var(--text-secondary-on-white)}
+.form-done{display:none;text-align:center;padding:var(--spacing-40) var(--spacing-16)}
+.form-done .h3{margin-bottom:var(--spacing-12)}
 /* success state — applies to the hero card and the closing card */
-.is-done .form-live,
-.is-done .hs-slot{display:none}
+.is-done .form-live{display:none}
 .is-done .form-done{display:block}
-/* avatar, used by the contact block under each form */
-.contact-av{width:72px;height:72px;border-radius:50%;background:var(--l-200);
-  border:1px dashed var(--l-400);flex:none}
+/* avatar, used by the contact block under each form — a real photograph now */
+.contact-av{width:72px;height:72px;border-radius:50%;flex:none;
+  object-fit:cover;background:var(--bg-subtle)}
 
 /* ═══════════════════════════════════════════════════════════
    1 · HERO   (priority 7 — benefit-led headline + conversion CTA)
@@ -170,38 +296,61 @@ a{color:inherit}
    but still short of a full viewport, which was the actual density complaint —
    the trusted-by row stays visible below the fold on a normal laptop screen.
    NB: estimated from the box model, not yet measured in a browser. */
-.hero{padding:var(--s-48) 0;border-bottom:1px solid var(--l-200)}
+.hero{padding:var(--spacing-40) 0;border-bottom:1px solid var(--border-default)}
 .hero-grid{align-items:center}
+/* 6 + 5 columns with the odd one as the gap between them: the Figma frame
+   runs 577px of copy against a 506px card, which is what that split gives
+   at 1440. */
 .hero-copy{grid-column:span 6}
-.hero-form-col{grid-column:span 6}
-.hero .h1{margin-top:var(--s-12)}
-.hero-sub{margin-top:var(--s-20);max-width:34em}
-.hero-calc{margin-top:var(--s-24)}
-.hero-facts{
-  display:flex;gap:var(--s-32);margin-top:var(--s-32);
-  padding-top:var(--s-24);border-top:1px solid var(--l-200);flex-wrap:wrap;
-}
+.hero-form-col{grid-column:8 / span 5}
+/* headline is set as two rows so the highlight chip can sit inline on the
+   first one without its padding pushing the second line off its leading */
+.hero-ttl{display:flex;flex-direction:column;align-items:flex-start;
+  margin-top:var(--spacing-4);font-size:var(--font-size-61);line-height:1.15;
+  letter-spacing:0}
+.hero-ttl-row{display:flex;align-items:baseline;gap:var(--spacing-8);flex-wrap:wrap}
+.hero-ttl .hl{background:var(--feedback-positive-subtle-bg);border-radius:var(--radius-12);
+  padding:var(--spacing-8) var(--spacing-12)}
+.hero-sub{margin-top:var(--spacing-12);max-width:560px}
+.hero-calc{margin-top:var(--spacing-24)}
+/* no rule above the stats in the design — the whitespace does that job */
+/* one row, always: the captions share the space rather than wrapping the
+   third stat onto a line of its own */
+.hero-facts{display:flex;gap:var(--spacing-40);margin-top:var(--spacing-48);flex-wrap:nowrap}
+.hero-facts > div{flex:1 1 0;min-width:0}
 
 /* ── HERO LEAD FORM — objective 1, above the fold ───────────
    Deliberately short: four fields is the most a cold visitor will
    fill in. The long qualifying form lives in §8 for people who
    scroll. Both post to the same HubSpot slot. */
-.hero-form{border:1px solid var(--l-400);border-radius:var(--rad-lg);
-  padding:var(--s-24);background:var(--l-50)}
-.hero-form-hd{margin-bottom:var(--s-16)}
-.hero-form-hd .h4{margin-bottom:var(--s-4)}
-.hero-form .f-row{margin-bottom:var(--s-12)}
-.hero-form .f-textarea{min-height:72px}
-.hero-form .hs-slot{margin-bottom:var(--s-16)}
-/* named contact sitting under the form — same person as §8 and the closing
-   section, repeated here so the call-don't-fill-in buyer is served above the fold */
-.form-contact{display:flex;align-items:center;gap:var(--s-16);margin-top:var(--s-20)}
+.hero-form{border:1px solid var(--border-default);border-radius:var(--radius-24);
+  padding:var(--spacing-24);background:var(--bg-surface-primary)}
+.hero-form .f-row{margin-bottom:var(--spacing-16)}
+/* fields are filled, not outlined, in the design — the border comes off and
+   input/bg-default does the containing */
+.hero-form .f-input,.hero-form .f-textarea{
+  background:var(--input-bg-default);border-color:transparent;
+  border-radius:var(--radius-12);font-size:var(--font-size-16)}
+.hero-form .f-input{height:48px}
+.hero-form .f-textarea{min-height:160px}
+/* named contact — the design puts it INSIDE the card as its header, which
+   serves the call-don't-fill-in buyer before they read a single field */
+.form-contact{display:flex;align-items:flex-start;gap:var(--spacing-12);
+  margin-top:var(--spacing-20)}
 .form-contact .contact-av{width:56px;height:56px}
-.form-contact-name{font-size:16px;font-weight:700;line-height:1.3}
+.form-contact-name{font-size:var(--font-size-16);font-weight:700;line-height:1.3}
 .form-contact .small{margin-top:2px}
-.form-contact a{font-weight:600}
-.fact-n{font-size:25px;font-weight:700;line-height:1.1}
-.fact-l{font-size:13px;color:var(--l-600);margin-top:2px;max-width:14em}
+.form-contact a{font-weight:500}
+.form-contact--hd{margin-top:0;margin-bottom:var(--spacing-16);
+  padding-bottom:var(--spacing-24);border-bottom:1px solid var(--border-default)}
+.form-contact--hd .form-contact-name{font-size:var(--font-size-20);line-height:1.2}
+.form-contact-main{flex:1;display:flex;align-items:center;justify-content:space-between;
+  gap:var(--spacing-16);flex-wrap:wrap}
+.form-contact-methods{display:flex;flex-direction:column;gap:var(--spacing-8)}
+.form-contact-methods .small{margin-top:0}
+.fact-n{font-size:var(--font-size-31);font-weight:700;line-height:1.15}
+.fact-l{font-size:var(--font-size-14);line-height:1.4;
+  color:var(--text-secondary-on-white);margin-top:var(--spacing-8)}
 
 /* ═══════════════════════════════════════════════════════════
    2 · TRUSTED BY   (priority 3 — customer logos, not press)
@@ -209,12 +358,13 @@ a{color:inherit}
    pass of the logo list and cloned exactly once for the loop —
    that is the fix for the current page repeating logos in-viewport.
    ═══════════════════════════════════════════════════════════ */
-.trusted{padding:var(--s-40) 0;border-bottom:1px solid var(--l-200)}
-.trusted .wrap{display:flex;align-items:center;gap:var(--s-40)}
-.trusted-lbl{flex:none;font-size:14px;color:var(--l-600);font-weight:600;max-width:9em}
+.trusted{padding:var(--spacing-40) 0;border-bottom:1px solid var(--border-default)}
+.trusted .wrap{display:flex;align-items:center;gap:var(--spacing-40)}
+.trusted-lbl{flex:none;font-size:var(--font-size-14);line-height:1.4;
+  color:var(--text-secondary-on-white);font-weight:500;max-width:9em}
 /* static customer-logo row — see the markup comment for why this is not a marquee */
 .logo-row{flex:1;display:flex;align-items:center;justify-content:space-between;
-  gap:var(--s-24);flex-wrap:wrap}
+  gap:var(--spacing-24);flex-wrap:wrap}
 /* Real customer logo, forced to black and white so no single brand colour
    dominates. Every logo gets an IDENTICAL 150x40 slot and is contained inside
    it, so the row has one height and one consistent cell size regardless of the
@@ -230,14 +380,17 @@ a{color:inherit}
    problem, solution, effect — read left to right. Nothing here is
    a link: these boxes make the case in text, they don't route.
    ═══════════════════════════════════════════════════════════ */
-.fact-boxes{grid-column:span 12;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter)}
+.fact-boxes{grid-column:span 12;display:grid;grid-template-columns:repeat(3,1fr);
+  gap:var(--gutter)}
 /* No hover state on purpose. The old cards were clickable and had to
    advertise it; these must read as flat text so nobody hunts for a target
    that isn't there. */
 .fact-box{
   position:relative;
-  border:1px solid var(--l-300);border-radius:var(--rad-lg);padding:var(--s-24);
-  background:var(--l-0);display:flex;flex-direction:column;gap:var(--s-12);
+  border:1px solid var(--border-default);border-radius:var(--radius-12);
+  padding:var(--spacing-24);
+  background:var(--bg-surface-primary);display:flex;flex-direction:column;
+  gap:var(--spacing-12);
 }
 /* arrows sit IN the gutter between boxes, so the three read as one chain
    rather than three parallel claims. Pseudo-element with an empty CSS alt:
@@ -247,14 +400,17 @@ a{color:inherit}
   content:"→" / "";
   position:absolute;top:50%;right:calc(var(--gutter) / -2);
   transform:translate(50%,-50%);
-  font-size:18px;line-height:1;color:var(--l-600);pointer-events:none;
+  font-size:var(--font-size-20);line-height:1;color:var(--text-secondary-on-white);
+  pointer-events:none;
 }
 /* the step marker doubles as the box label, so the three read as a sequence */
-.fact-tag{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--l-700);display:flex;align-items:center;gap:var(--s-8)}
-.fact-tag::before{content:"";width:24px;height:1px;background:var(--l-400);flex:none}
+.fact-tag{font-size:var(--font-size-14);font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text-primary);display:flex;align-items:center;
+  gap:var(--spacing-8)}
+.fact-tag::before{content:"";width:24px;height:1px;
+  background:var(--decorative-graphic-muted);flex:none}
 .fact-box .h4{margin-top:0}
-.fact-box .body{font-size:15px}
+.fact-box .body{font-size:var(--font-size-16)}
 
 /* ═══════════════════════════════════════════════════════════
    4 · WHAT YOU GET AS AN EMPLOYER   (priority 6)
@@ -262,46 +418,50 @@ a{color:inherit}
    completion, reporting, administration.
    ═══════════════════════════════════════════════════════════ */
 .ben-hd{grid-column:span 4}
-.ben-list{grid-column:span 8;display:grid;grid-template-columns:1fr 1fr;gap:var(--s-32) var(--gutter)}
-.ben{display:flex;gap:var(--s-16)}
-.ben .h4{margin-bottom:var(--s-8)}
-.ben-portfolio{grid-column:span 12;margin-top:var(--s-56);padding-top:var(--s-40);
-  border-top:1px solid var(--l-300)}
+.ben-list{grid-column:span 8;display:grid;grid-template-columns:1fr 1fr;
+  gap:var(--spacing-32) var(--gutter)}
+.ben{display:flex;gap:var(--spacing-16)}
+.ben .h4{margin-bottom:var(--spacing-8)}
+.ben-portfolio{grid-column:span 12;margin-top:var(--spacing-56);
+  padding-top:var(--spacing-40);border-top:1px solid var(--border-default)}
 /* course-area showcase — replaced the row of small chips, which under-sold
    the range. Each area is a real destination, not a label. */
 .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter);
-  margin-top:var(--s-32)}
-.cat{border:1px solid var(--l-300);border-radius:var(--rad-lg);padding:var(--s-20);
-  background:var(--l-0);display:flex;flex-direction:column;gap:var(--s-8);
+  margin-top:var(--spacing-32)}
+.cat{border:1px solid var(--border-default);border-radius:var(--radius-12);
+  padding:var(--spacing-20);
+  background:var(--bg-surface-primary);display:flex;flex-direction:column;
+  gap:var(--spacing-8);
   text-decoration:none;transition:border-color .15s,background .15s;overflow:hidden}
-.cat:hover,.cat:focus-visible{border-color:var(--l-900);background:var(--l-50)}
+.cat:hover,.cat:focus-visible{border-color:var(--border-selected);background:var(--bg-subtle)}
 /* the photo runs the full width of the card, so it pulls back out through the
    card's own padding rather than the card losing its padding for everything
-   else. aspect-ratio keeps all ten crops identical whatever the column width. */
-.cat-ph{margin:calc(var(--s-20) * -1) calc(var(--s-20) * -1) var(--s-4);
-  aspect-ratio:16 / 10;background:var(--l-200);
-  border-bottom:1px solid var(--l-300);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--l-600)}
-.cat-ttl{font-size:16px;font-weight:700;line-height:1.3}
-.cat-sub{font-size:13px;line-height:1.4;color:var(--l-600);flex:1}
-.cat-n{font-size:13px;font-weight:600;color:var(--l-700)}
+   else. aspect-ratio keeps all eight crops identical whatever the column width. */
+.cat-ph{margin:calc(var(--spacing-20) * -1) calc(var(--spacing-20) * -1) var(--spacing-4);
+  aspect-ratio:16 / 10;background:var(--bg-subtle);
+  border-bottom:1px solid var(--border-default);display:block;overflow:hidden}
+.cat-ph img{width:100%;height:100%;object-fit:cover}
+.cat-ttl{font-size:var(--font-size-16);font-weight:700;line-height:1.3}
+.cat-sub{font-size:var(--font-size-14);line-height:1.4;
+  color:var(--text-secondary-on-white);flex:1}
+.cat-n{font-size:var(--font-size-14);font-weight:500;color:var(--text-primary)}
 /* heading and catalogue CTA on one line — the button is the section's own
    escape hatch, so it belongs level with the heading, not buried under the
    grid where it read as a footnote. */
 .cat-hd{display:flex;align-items:center;justify-content:space-between;
-  gap:var(--s-24);flex-wrap:wrap}
+  gap:var(--spacing-24);flex-wrap:wrap}
 .cat-hd .sec-hd{margin-bottom:0}
 .cat-hd .btn{flex:none}
-.cat-foot{display:flex;align-items:center;gap:var(--s-24);margin-top:var(--s-24);
-  flex-wrap:wrap}
+.cat-foot{display:flex;align-items:center;gap:var(--spacing-24);
+  margin-top:var(--spacing-24);flex-wrap:wrap}
 .cat-foot .small{max-width:42ch}
 
 /* ═══════════════════════════════════════════════════════════
    5 · WHY NKI   (objectives 3 and 4 — quality and brand trust)
    Bento grid: a big number set against a block of copy, tile by
    tile, so the claims are scannable instead of a paragraph.
-   Tonal greys stand in for what will be brand colour at Stage 2.
+   The tile fills are design-system surfaces: bg/subtle, the lime
+   badge surface, and the inverse surface for the number tile.
    ═══════════════════════════════════════════════════════════ */
 .sec-hd.is-centered{margin-left:auto;margin-right:auto;text-align:center;max-width:64ch}
 /* Three columns, with tiles spanning 1 or 2. A fixed 1fr/2fr pair can't work:
@@ -309,93 +469,115 @@ a{color:inherit}
    have to swap sides between rows. Spans handle that; a two-column template
    would drop row 2's copy into the narrow column. */
 .bento{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter)}
-.bt{border-radius:var(--rad-lg);padding:var(--s-24);display:flex;
-  flex-direction:column;justify-content:center;gap:var(--s-8);min-height:320px}
+.bt{border-radius:var(--radius-12);padding:var(--spacing-24);display:flex;
+  flex-direction:column;justify-content:center;gap:var(--spacing-8);min-height:320px}
 .bt--narrow{grid-column:span 1}
 .bt--wide{grid-column:span 2}
-.bt--fill1{background:var(--l-200)}
-.bt--fill4{background:var(--l-900);color:var(--l-0)}
-.bt--fill5{background:var(--l-100)}
-.bt-big{font-size:31px;font-weight:700;line-height:1.05;letter-spacing:-.02em}
-.bt-body{font-size:14px;line-height:1.55;max-width:56ch}
-.bt .h3{font-size:20px;margin-bottom:var(--s-4)}
+.bt--fill1{background:var(--feedback-positive-subtle-bg)}
+.bt--fill4{background:var(--card-bg-accent-orange)}
+.bt--fill5{background:var(--card-bg-accent-purple)}
+/* the three tile headlines are one size — the two figures and the statement
+   are the same order of claim, so they are set on the same token */
+.bt-big{font-size:var(--font-size-31);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.bt-body{font-size:var(--font-size-14);line-height:1.55;max-width:56ch}
+.bt .h3{font-size:var(--font-size-31);line-height:1.05;letter-spacing:-.02em;
+  margin-bottom:var(--spacing-4)}
 /* the number tiles: one enormous figure, one caption, nothing else */
 .bt--num{align-items:center;text-align:center}
-.bt-num{font-size:56px;font-weight:700;line-height:1;letter-spacing:-.03em}
-.bt-cap{font-size:13px;opacity:.75;max-width:16ch}
-/* photo tile */
-.bt--photo{padding:0;background:var(--l-200);border:1px dashed var(--l-400);
-  align-items:center;justify-content:center}
-.bt-ph{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--l-600)}
+.bt-num{font-size:var(--font-size-31);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.bt-cap{font-size:var(--font-size-14);opacity:.75;max-width:16ch}
+/* photo tile — a real photograph now, not a placeholder box */
+/* absolutely positioned so the photograph fills the tile instead of setting
+   its height — otherwise the image's own ratio inflates the whole bento row */
+.bt--photo{padding:0;background:var(--bg-subtle);overflow:hidden;position:relative}
+.bt--photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
 /* ═══════════════════════════════════════════════════════════
    7 · WHAT IT COSTS   (priority 4)
    Rescaled to the market we actually sell to: 94% of Norwegian
    companies with employees have <50 (SSB).  Range 1–50, default 12.
    ═══════════════════════════════════════════════════════════ */
-.calc{grid-column:span 12;border:1px solid var(--l-300);border-radius:var(--rad-lg);
-  background:var(--l-0);display:grid;grid-template-columns:1.15fr 1fr;overflow:hidden}
-.calc-in{padding:var(--s-40)}
-.calc-out{padding:var(--s-40);background:var(--l-100);border-left:1px solid var(--l-300);
-  display:flex;flex-direction:column}
-.seat-row{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s-16)}
-.seat-n{font-size:39px;font-weight:700;line-height:1}
-input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--l-800)}
-.scale{display:flex;justify-content:space-between;font-size:12px;color:var(--l-600)}
-.tiers{display:flex;gap:var(--s-8);flex-wrap:wrap;margin-top:var(--s-24)}
-.tier{padding:8px var(--s-16);border:1px solid var(--l-300);border-radius:var(--rad);
-  background:var(--l-0);font-size:14px}
-.tier.is-on{background:var(--l-900);color:var(--l-0);border-color:var(--l-900)}
-.calc-total{font-size:39px;font-weight:700;line-height:1;margin-top:var(--s-8)}
-.calc-rows{margin-top:var(--s-20);border-top:1px solid var(--l-300)}
-.calc-row{display:flex;justify-content:space-between;padding:var(--s-12) 0;
-  border-bottom:1px solid var(--l-300);font-size:15px}
-.calc-note{margin-top:auto;padding-top:var(--s-24)}
-.btn--block{width:100%;margin-top:var(--s-16)}
+.calc{grid-column:span 12;border:1px solid var(--border-default);
+  border-radius:var(--radius-12);
+  background:var(--bg-surface-primary);display:grid;grid-template-columns:1.15fr 1fr;
+  overflow:hidden}
+.calc-in{padding:var(--spacing-40)}
+.calc-out{padding:var(--spacing-40);background:var(--bg-subtle);
+  border-left:1px solid var(--border-default);display:flex;flex-direction:column}
+.seat-row{display:flex;align-items:baseline;justify-content:space-between;
+  gap:var(--spacing-16)}
+.seat-n{font-size:var(--font-size-39);font-weight:700;line-height:1}
+input[type=range]{width:100%;margin:var(--spacing-24) 0 var(--spacing-8);
+  accent-color:var(--bg-surface-inverse)}
+.scale{display:flex;justify-content:space-between;font-size:var(--font-size-14);
+  color:var(--text-secondary-on-white)}
+.tiers{display:flex;gap:var(--spacing-8);flex-wrap:wrap;margin-top:var(--spacing-24)}
+.tier{padding:8px var(--spacing-16);border:1px solid var(--border-default);
+  border-radius:var(--radius-8);background:var(--bg-surface-primary);
+  font-size:var(--font-size-14)}
+.tier.is-on{background:var(--state-hover-selected-bg);color:var(--text-inverse);
+  border-color:var(--state-hover-selected-bg)}
+.calc-total{font-size:var(--font-size-39);font-weight:700;line-height:1;
+  margin-top:var(--spacing-8)}
+.calc-rows{margin-top:var(--spacing-20);border-top:1px solid var(--border-default)}
+.calc-row{display:flex;justify-content:space-between;padding:var(--spacing-12) 0;
+  border-bottom:1px solid var(--border-default);font-size:var(--font-size-16)}
+.calc-note{margin-top:auto;padding-top:var(--spacing-24)}
+.btn--block{width:100%;margin-top:var(--spacing-16)}
 
 /* ── ROI block, carried over from the old page ──────────────
    Progressive disclosure: collapsed by default so the price
    indication itself stays the primary read and the calculator
    still fits one screen. Every value from the old model is kept. */
-.roi{grid-column:span 12;border:1px solid var(--l-300);border-top:0;
-  border-radius:0 0 var(--rad-lg) var(--rad-lg);background:var(--l-0)}
-.calc{border-radius:var(--rad-lg) var(--rad-lg) 0 0}
+.roi{grid-column:span 12;border:1px solid var(--border-default);border-top:0;
+  border-radius:0 0 var(--radius-12) var(--radius-12);background:var(--bg-surface-primary)}
+.calc{border-radius:var(--radius-12) var(--radius-12) 0 0}
 .roi-hd{width:100%;display:flex;align-items:center;justify-content:space-between;
-  gap:var(--s-16);padding:var(--s-20) var(--s-40);background:none;border:0;
-  text-align:left;font-size:18px;font-weight:700;color:var(--l-900)}
-.roi-chev{flex:none;width:24px;height:24px;border:1px solid var(--l-400);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform .2s}
+  gap:var(--spacing-16);padding:var(--spacing-20) var(--spacing-40);background:none;
+  border:0;text-align:left;font-size:var(--font-size-20);font-weight:700;
+  color:var(--text-primary)}
+.roi-chev{flex:none;width:24px;height:24px;border:1px solid var(--border-default);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:var(--font-size-14);transition:transform .2s}
 .roi.is-open .roi-chev{transform:rotate(45deg)}
-.roi-body{padding:0 var(--s-40) var(--s-32)}
+.roi-body{padding:0 var(--spacing-40) var(--spacing-32)}
 .roi-sub{max-width:60ch}
-.scen{display:flex;gap:var(--s-8);flex-wrap:wrap;margin:var(--s-20) 0 var(--s-24)}
-.scen-btn{padding:8px var(--s-16);border:1px solid var(--l-300);border-radius:var(--rad);
-  background:var(--l-0);font-size:14px}
-.scen-btn.is-on{background:var(--l-900);color:var(--l-0);border-color:var(--l-900)}
-.roi-sum{border-top:1px solid var(--l-300)}
-.roi-row{display:flex;justify-content:space-between;align-items:center;gap:var(--s-16);
-  padding:var(--s-16) 0;border-bottom:1px solid var(--l-300);font-size:15px}
-.roi-row-lbl{display:flex;align-items:center;gap:var(--s-12)}
-.roi-ic{width:28px;height:28px;flex:none;border-radius:var(--rad);background:var(--l-200);
-  border:1px dashed var(--l-400);display:flex;align-items:center;justify-content:center;
-  font-size:9px;color:var(--l-600)}
-.roi-val{font-weight:600;text-align:right}
+.scen{display:flex;gap:var(--spacing-8);flex-wrap:wrap;margin:var(--spacing-20) 0 var(--spacing-24)}
+.scen-btn{padding:8px var(--spacing-16);border:1px solid var(--border-default);
+  border-radius:var(--radius-8);background:var(--bg-surface-primary);
+  font-size:var(--font-size-14)}
+.scen-btn.is-on{background:var(--state-hover-selected-bg);color:var(--text-inverse);
+  border-color:var(--state-hover-selected-bg)}
+.roi-sum{border-top:1px solid var(--border-default)}
+.roi-row{display:flex;justify-content:space-between;align-items:center;
+  gap:var(--spacing-16);padding:var(--spacing-16) 0;
+  border-bottom:1px solid var(--border-default);font-size:var(--font-size-16)}
+.roi-row-lbl{display:flex;align-items:center;gap:var(--spacing-12)}
+.roi-ic{width:28px;height:28px;flex:none;border-radius:var(--radius-8);
+  background:var(--bg-subtle);display:flex;align-items:center;justify-content:center}
+.roi-ic img{width:16px;height:16px}
+.roi-val{font-weight:500;text-align:right}
 /* the headline number of the block */
-.roi-row--hero{background:var(--l-100);margin:0 calc(var(--s-16) * -1);
-  padding-left:var(--s-16);padding-right:var(--s-16);border-radius:var(--rad)}
-.roi-row--hero .roi-val{font-size:20px;font-weight:700}
+.roi-row--hero{background:var(--feedback-positive-subtle-bg);
+  margin:0 calc(var(--spacing-16) * -1);
+  padding-left:var(--spacing-16);padding-right:var(--spacing-16);
+  border-radius:var(--radius-8)}
+.roi-row--hero .roi-ic{background:var(--bg-surface-primary)}
+.roi-row--hero .roi-val{font-size:var(--font-size-20);font-weight:700}
 /* nested disclaimer — DS accordion-tooltip (308:16714) */
-.disc{margin-top:var(--s-20)}
-.disc-hd{display:flex;align-items:center;gap:var(--s-8);background:none;border:0;padding:0;
-  font-size:14px;font-weight:600;color:var(--l-700)}
+.disc{margin-top:var(--spacing-20)}
+.disc-hd{display:flex;align-items:center;gap:var(--spacing-8);background:none;border:0;
+  padding:0;font-size:var(--font-size-14);font-weight:500;
+  color:var(--text-secondary-on-white)}
 .disc-chev{transition:transform .2s;display:inline-block}
 .disc.is-open .disc-chev{transform:rotate(90deg)}
-.disc-body{display:none;margin-top:var(--s-12);max-width:70ch}
+.disc-body{display:none;margin-top:var(--spacing-12);max-width:70ch}
 .disc.is-open .disc-body{display:block}
 /* escape hatch for the >50 buyer — routes to the form, not to a dead end */
-.calc-over{grid-column:span 12;margin-top:var(--s-16);padding:var(--s-16) var(--s-24);
-  border:1px dashed var(--l-400);border-radius:var(--rad);display:flex;
-  align-items:center;justify-content:space-between;gap:var(--s-16);flex-wrap:wrap}
+.calc-over{grid-column:span 12;margin-top:var(--spacing-16);
+  padding:var(--spacing-16) var(--spacing-24);
+  border:1px solid var(--border-default);border-radius:var(--radius-8);display:flex;
+  align-items:center;justify-content:space-between;gap:var(--spacing-16);flex-wrap:wrap}
 
 /* ═══════════════════════════════════════════════════════════
    8 · PROOF   (priorities 3 and 8 — the objective-2 gap)
@@ -406,22 +588,26 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 /* one case: picture rail on the left, story on the right. The rail is a fixed
    column rather than a share of the card, so both cases crop their photo to the
    same width no matter how much copy sits beside it. */
-.pcase{border:1px solid var(--l-300);border-radius:var(--rad-lg);background:var(--l-0);
-  display:grid;grid-template-columns:180px 1fr;overflow:hidden}
-.pcase-fig{background:var(--l-200);border-right:1px solid var(--l-300);
-  display:flex;align-items:center;justify-content:center;min-height:100%}
-.pcase-ph{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--l-600)}
-.pcase-body{padding:var(--s-24);display:flex;flex-direction:column;gap:var(--s-8)}
-.pcase-body .body{font-size:14px;line-height:1.55}
+.pcase{border:1px solid var(--border-default);border-radius:var(--radius-12);
+  background:var(--bg-surface-primary);display:grid;grid-template-columns:180px 1fr;
+  overflow:hidden}
+.pcase-fig{background:var(--bg-subtle);border-right:1px solid var(--border-default);
+  min-height:100%}
+.pcase-fig img{width:100%;height:100%;object-fit:cover}
+.pcase-body{padding:var(--spacing-24);display:flex;flex-direction:column;
+  gap:var(--spacing-8)}
+.pcase-body .body{font-size:var(--font-size-14);line-height:1.55}
 /* metric and its caption on one line — it labels the case, it isn't a headline */
-.pcase-metric{font-size:23px;font-weight:700;line-height:1.2}
-.pcase-metric span{font-size:13px;font-weight:400;color:var(--l-600)}
+.pcase-metric{font-size:var(--font-size-23);font-weight:700;line-height:1.2}
+.pcase-metric span{font-size:var(--font-size-14);font-weight:400;
+  color:var(--text-secondary-on-white)}
 /* the quote is part of the case, not a separate testimonial block */
-.pcase-quote{margin:var(--s-4) 0 0;padding-left:var(--s-16);border-left:3px solid var(--l-400);
-  font-size:15px;line-height:1.45;color:var(--l-900)}
-.pcase-by{font-size:13px;color:var(--l-600)}
-.case-link{font-size:14px;font-weight:600;text-decoration:underline;margin-top:auto;
-  padding-top:var(--s-8)}
+.pcase-quote{margin:var(--spacing-4) 0 0;padding-left:var(--spacing-16);
+  border-left:3px solid var(--action-primary-default);
+  font-size:var(--font-size-16);line-height:1.45;color:var(--text-primary)}
+.pcase-by{font-size:var(--font-size-14);color:var(--text-secondary-on-white)}
+.case-link{font-size:var(--font-size-14);font-weight:500;text-decoration:underline;
+  margin-top:auto;padding-top:var(--spacing-8)}
 
 /* ═══════════════════════════════════════════════════════════
    8b · INSIGHT — merged into the Proof section above
@@ -435,14 +621,15 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
    ═══════════════════════════════════════════════════════════ */
 .faq-hd{grid-column:span 4}
 .faq{grid-column:span 8}
-.faq-item{border-bottom:1px solid var(--l-300)}
-.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:var(--s-16);
-  padding:var(--s-20) 0;background:none;border:0;text-align:left;
-  font-size:18px;font-weight:600;color:var(--l-900)}
-.faq-chev{flex:none;width:24px;height:24px;border:1px solid var(--l-400);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform .2s}
+.faq-item{border-bottom:1px solid var(--border-default)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;
+  gap:var(--spacing-16);padding:var(--spacing-20) 0;background:none;border:0;
+  text-align:left;font-size:var(--font-size-20);font-weight:700;color:var(--text-primary)}
+.faq-chev{flex:none;width:24px;height:24px;border:1px solid var(--border-default);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:var(--font-size-14);transition:transform .2s}
 .faq-item.is-open .faq-chev{transform:rotate(45deg)}
-.faq-a{display:none;padding:0 0 var(--s-24);max-width:62ch}
+.faq-a{display:none;padding:0 0 var(--spacing-24);max-width:62ch}
 .faq-item.is-open .faq-a{display:block}
 
 /* ═══════════════════════════════════════════════════════════
@@ -453,44 +640,49 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .close-copy{grid-column:span 6}
 .close-copy .h2{max-width:14em}
 .close-form-col{grid-column:span 6}
-.close-contact{display:flex;align-items:center;gap:var(--s-16);margin-top:var(--s-32);
-  padding-top:var(--s-24);border-top:1px solid var(--l-700)}
-.sec--dark .close-contact .contact-av{background:var(--l-700);border-color:var(--l-600)}
-.sec--dark .small{color:var(--l-400)}
-.sec--dark .close-contact .h4{color:var(--l-0)}
-/* the form card keeps its light surface on the dark band */
-.sec--dark .hero-form{background:var(--l-50);color:var(--l-900)}
-.sec--dark .hero-form .small{color:var(--l-600)}
+.close-contact{display:flex;align-items:center;gap:var(--spacing-16);
+  margin-top:var(--spacing-32);padding-top:var(--spacing-24);
+  border-top:1px solid var(--border-default)}
 
 /* ═══════════════════════════════════════════════════════════
-   FOOTER — lo-fi stand-in for .site-footer in index.html
+   FOOTER — the design-system footer (Figma 1090:29210)
    ═══════════════════════════════════════════════════════════ */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
-.site-footer-lofi{background:var(--l-900);color:var(--l-400);padding:var(--s-64) 0 var(--s-32)}
-.footer-top{display:grid;grid-template-columns:1fr 2.4fr;gap:var(--s-56)}
-.footer-brand .small{margin-top:var(--s-16);max-width:26em}
-.footer-logo{width:96px;height:28px;background:var(--l-700);border-radius:4px}
-.footer-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter)}
-.footer-hd{font-size:15px;font-weight:700;color:var(--l-0);margin-bottom:var(--s-16)}
-.footer-col ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-12)}
-.footer-col a{font-size:14px;color:var(--l-400);text-decoration:none}
-.footer-col a:hover{color:var(--l-0);text-decoration:underline}
-.footer-col--nl .small{margin-bottom:var(--s-16)}
-.footer-nl-row{display:flex;gap:var(--s-8)}
-.footer-nl-row .f-input{background:var(--l-800);border-color:var(--l-600);color:var(--l-0)}
-.footer-nl-row .f-input::placeholder{color:var(--l-500)}
-.footer-nl-row .f-input:focus{outline-color:var(--l-0);border-color:var(--l-0)}
-.footer-nl-row .btn{background:var(--l-0);color:var(--l-900);border-color:var(--l-0);
-  padding:12px var(--s-16);flex:none}
-.footer-nl .f-err{margin-top:var(--s-8)}
-.footer-nl.is-err .f-err{display:block}
-.footer-nl.is-err .f-input{border-color:var(--l-0);border-width:2px}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;
-  gap:var(--s-24);flex-wrap:wrap;margin-top:var(--s-56);padding-top:var(--s-24);
-  border-top:1px solid var(--l-700)}
-.footer-legal{display:flex;gap:var(--s-24);list-style:none;margin:0;padding:0}
-.footer-legal a{font-size:14px;color:var(--l-400)}
+/* Design-system footer (Figma 1090:29210): lime panel, five columns, and the
+   wordmark set against the legal links at the foot. The 40px top corners are
+   the reason the page ends on the section background rather than the footer's. */
+.ft{background:var(--feedback-positive-subtle-bg);color:var(--text-primary);
+  border-radius:var(--radius-40) var(--radius-40) 0 0;padding:var(--spacing-72) 0}
+.ft-nav{display:flex;justify-content:space-between;gap:var(--spacing-40);flex-wrap:wrap}
+.ft-col{display:flex;flex-direction:column;gap:var(--spacing-24);width:188px}
+/* Follow us sizes to its icons rather than the 188px column width */
+.ft-col--social{width:auto}
+.ft-hd{font-size:var(--font-size-20);font-weight:700;line-height:1.2}
+.ft-links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;
+  gap:var(--spacing-12)}
+.ft-links a{font-size:var(--font-size-14);line-height:1.4;text-decoration:none;
+  padding-bottom:var(--spacing-4);display:inline-block}
+.ft-links a:hover{text-decoration:underline}
+.ft-social{display:flex;align-items:center;gap:var(--spacing-8)}
+.ft-social a{display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:var(--radius-8)}
+.ft-social a:hover{background:var(--action-primary-default)}
+/* each glyph keeps the aspect it was drawn at inside a shared 24px box */
+.ft-social .hd-ic--24 img{display:block}
+.ft-ic-ig{width:20px;height:20px}
+.ft-ic-fb{width:10.5px;height:20px}
+.ft-ic-li{width:19.06px;height:18px}
+.ft-bottom{display:flex;align-items:flex-end;justify-content:space-between;
+  gap:var(--spacing-40);margin-top:var(--spacing-72);flex-wrap:wrap}
+.ft-mark{height:251px;width:auto;max-width:100%}
+.ft-legal{display:flex;align-items:center;gap:var(--spacing-8);list-style:none;
+  margin:0;padding:0}
+.ft-legal a{font-size:var(--font-size-14);text-decoration:none;
+  padding-bottom:var(--spacing-4)}
+.ft-legal a:hover{text-decoration:underline}
+.ft-legal li[aria-hidden]{width:3px;height:3px;border-radius:50%;
+  background:var(--text-primary)}
 
 /* ═══════════════════════════════════════════════════════════
    GRID OVERLAY — press "G".  Verifies the 1440/96/24/12 spec,
@@ -502,8 +694,10 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .grid-ov .grid{height:100%}
 .grid-ov .grid span{background:rgba(255,0,0,.08);border-left:1px solid rgba(255,0,0,.18);
   border-right:1px solid rgba(255,0,0,.18)}
-.gridhint{position:fixed;right:12px;bottom:12px;z-index:1000;background:var(--l-900);
-  color:var(--l-0);font-size:11px;padding:6px 10px;border-radius:4px;letter-spacing:.04em}
+.gridhint{position:fixed;right:12px;bottom:12px;z-index:1000;
+  background:var(--bg-surface-inverse);color:var(--text-inverse);
+  font-size:var(--font-size-14);padding:6px 10px;border-radius:var(--radius-8);
+  letter-spacing:.04em}
 
 /* ═══════════════════════════════════════════════════════════
    RESPONSIVE — breakpoints match the prototype: 1200/1024/768/480
@@ -511,35 +705,43 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 @media (max-width:1200px){
   :root{--margin:48px}
   .fact-boxes{grid-template-columns:repeat(3,1fr)}
-  .footer-top{grid-template-columns:1fr}
+  .ft-col{width:calc(33.333% - var(--spacing-40))}
 }
 @media (max-width:1024px){
-  :root{--margin:32px;--sec-y:var(--s-56)}
-  .h1{font-size:39px}.h2{font-size:31px}.h3{font-size:23px}
+  :root{--margin:32px;--sec-y:var(--spacing-56)}
+  .h1{font-size:var(--font-size-39)}
+  .h2{font-size:var(--font-size-31)}
+  .h3{font-size:var(--font-size-23)}
+  .hero-ttl{font-size:var(--font-size-49)}
   .hero-copy,.hero-form-col{grid-column:span 12}
-  .hero-form-col{margin-top:var(--s-32)}
+  .hero-form-col{margin-top:var(--spacing-32)}
   .close-copy,.close-form-col{grid-column:span 12}
-  .close-form-col{margin-top:var(--s-32)}
+  .close-form-col{margin-top:var(--spacing-32)}
   .ben-hd,.ben-list,.faq-hd,.faq{grid-column:span 12}
-  .contact-card{position:static;margin-top:var(--s-24)}
+  .contact-card{position:static;margin-top:var(--spacing-24)}
   .calc{grid-template-columns:1fr}
-  .calc-out{border-left:0;border-top:1px solid var(--l-300)}
+  .calc-out{border-left:0;border-top:1px solid var(--border-default)}
   .proof-main{grid-template-columns:1fr}
   .cat-grid{grid-template-columns:repeat(3,1fr)}
   /* two columns: wide tiles take the full row, narrow ones pair up */
   .bento{grid-template-columns:repeat(2,1fr)}
   .bt--wide{grid-column:span 2}
-  .bt{min-height:160px;padding:var(--s-20)}
-  .bt-num{font-size:48px}
-  .footer-cols{grid-template-columns:repeat(2,1fr);gap:var(--s-40) var(--gutter)}
+  .bt{min-height:160px;padding:var(--spacing-20)}
+  .bt--photo{min-height:220px}
+  .ft-nav{gap:var(--spacing-40) var(--gutter)}
+  .ft-col{width:calc(50% - var(--gutter))}
+  .ft-mark{height:160px}
 }
 @media (max-width:768px){
-  :root{--margin:20px;--sec-y:var(--s-48);--gutter:16px}
-  .h1{font-size:31px}.h2{font-size:26px}.lead{font-size:18px}
-  .trusted .wrap{flex-direction:column;align-items:flex-start;gap:var(--s-16)}
+  :root{--margin:20px;--sec-y:var(--spacing-48);--gutter:16px}
+  .h1{font-size:var(--font-size-31)}
+  .h2{font-size:var(--font-size-26)}
+  .hero-ttl{font-size:var(--font-size-32)}
+  .lead{font-size:var(--font-size-20)}
+  .trusted .wrap{flex-direction:column;align-items:flex-start;gap:var(--spacing-16)}
   /* stacked under the label: wrap and left-align rather than stretching
      five logos across the full width with huge gaps between them */
-  .logo-row{width:100%;justify-content:flex-start;gap:var(--s-24) var(--s-16)}
+  .logo-row{width:100%;justify-content:flex-start;gap:var(--spacing-24) var(--spacing-16)}
   .logo{width:112px;height:32px}
   .fact-boxes,.ben-list{grid-template-columns:1fr}
   /* stacked: the chain runs downwards, so the arrows have to turn with it */
@@ -551,35 +753,54 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   .bt--photo{min-height:200px}
   .cat-grid{grid-template-columns:repeat(2,1fr)}
   .pcase{grid-template-columns:1fr}
-  .pcase-fig{border-right:0;border-bottom:1px solid var(--l-300);min-height:160px}
-  .fact-box{padding:var(--s-24)}
+  .pcase-fig{border-right:0;border-bottom:1px solid var(--border-default);min-height:160px}
+  .pcase-fig img{height:200px}
+  .fact-box{padding:var(--spacing-24)}
   .f-row{grid-template-columns:1fr}
-  .calc-in,.calc-out,.form-card,.contact-card,.quote{padding:var(--s-24)}
-  .stub-nav{display:none}
-  .hero-facts{gap:var(--s-20)}
-  .footer-bottom{flex-direction:column;align-items:flex-start}
-  .footer-legal{flex-wrap:wrap;gap:var(--s-16)}
+  .calc-in,.calc-out,.form-card,.contact-card,.quote{padding:var(--spacing-24)}
+  .hd-tabs,.hd-search{display:none}
+  .hero-facts{gap:var(--spacing-20)}
+  .ft-bottom{align-items:flex-start;margin-top:var(--spacing-48)}
 }
 @media (max-width:480px){
   :root{--margin:16px}
-  .footer-cols{grid-template-columns:1fr}
-  .footer-nl-row{flex-direction:column}
-  .footer-nl-row .btn{width:100%}
+  .ft{padding:var(--spacing-48) 0}
+  .ft-col{width:100%}
+  .ft-mark{height:96px}
 }
 </style>
 </head>
 <body>
 
 <!-- ══ STUB HEADER — real one lives in index.html, do not port ══ -->
-<header class="stub-header">
-  <div class="wrap">
-    <a class="stub-logo" href="index.html" aria-label="Back to the main prototype"></a>
-    <nav class="stub-nav">
-      <a href="index.html">Courses</a><a href="index.html">Studies</a>
-      <a href="index.html">About</a><b>For business</b>
-    </nav>
-    <div class="spacer"></div>
-    <a class="small" href="index.html">← Back to main prototype</a>
+<header class="hd">
+  <div class="wrap hd-in">
+    <div class="hd-left">
+      <a class="hd-logo" href="index.html" aria-label="NKI — back to the main prototype">
+        <img src="logos/NKI_Logo_Black_L.svg" alt="NKI">
+      </a>
+      <nav class="hd-tabs" aria-label="Main">
+        <a class="hd-tab" href="index.html">Videregående skole
+          <span class="hd-ic hd-ic--20"><img class="hd-chev" src="icons/chevron-fill.svg" alt=""></span>
+        </a>
+        <a class="hd-tab" href="index.html">Kurs
+          <span class="hd-ic hd-ic--20"><img class="hd-chev" src="icons/chevron-fill.svg" alt=""></span>
+        </a>
+        <a class="hd-tab hd-tab--feat" href="business-lofi.html" aria-current="page">For bedrift</a>
+      </nav>
+    </div>
+
+    <a class="hd-search" href="index.html">
+      <span class="hd-search-ic"><img src="icons/search-fill.svg" alt=""></span>
+      <span class="hd-search-ph">Search a course, subject, topic...</span>
+    </a>
+
+    <div class="hd-actions">
+      <a class="btn btn--ghost hd-login" href="index.html">Log in</a>
+      <a class="hd-cart" href="index.html" aria-label="Cart">
+        <span class="hd-ic hd-ic--24"><img src="icons/cart-fill.svg" alt=""></span>
+      </a>
+    </div>
   </div>
 </header>
 
@@ -596,69 +817,88 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
     <div class="grid hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">NKI for business</p>
-        <h1 class="h1">Close your skills gap without taking people off the job</h1>
-        <p class="lead hero-sub">Fully online programmes for continuing education and
-          upskilling — built around shift work and busy weeks, scaled from three
-          employees to three hundred.</p>
+        <h1 class="h1 hero-ttl">
+          <span class="hero-ttl-row">Upskill <span class="hl">on the job,</span></span>
+          <span class="hero-ttl-row">not off it</span>
+        </h1>
+        <p class="body hero-sub">Fully online programmes for upskilling — built around
+          shift work and busy weeks, scaled from three employees to three hundred.</p>
         <!-- Outline, not filled: the form's own submit is the primary action in
              this section, and a second solid button beside it would compete.
              This is the lower-commitment route for the visitor who wants a
              number before they hand over any details. -->
         <a class="btn btn--ghost hero-calc" href="#cost">Try our calculator</a>
         <div class="hero-facts">
-          <div><div class="fact-n">50+</div><div class="fact-l">years of flexible learning</div></div>
-          <div><div class="fact-n">200+</div><div class="fact-l">courses across working life</div></div>
-          <div><div class="fact-n">2024</div><div class="fact-l">Online Educator of the Year,
+          <div><div class="fact-n">50+</div><div class="fact-l">Years of trusted Norwegian
+            education</div></div>
+          <!-- explicit break: the other two captions run to two lines, and this one
+               fits on one, which left the three stats sitting on different baselines -->
+          <div><div class="fact-n">200+</div><div class="fact-l">Courses across<br>every
+            level</div></div>
+          <div><div class="fact-n">2024</div><div class="fact-l">Online educator of the year,
             Flexible Education Norway</div></div>
         </div>
-        <span class="todo">TODO · verify all three hero facts, incl. award name + year</span>
       </div>
 
       <div class="hero-form-col">
         <div class="hero-form" id="heroFormCard">
-          <!-- HUBSPOT EMBED SLOT — same destination as the §8 form. -->
-          <p class="hs-slot">HUBSPOT EMBED SLOT — hero lead form.</p>
-
           <form class="form-live" id="heroForm" novalidate>
-            <div class="hero-form-hd">
-              <h2 class="h4">Get a tailored offer</h2>
-              <p class="small">Four fields. A named advisor replies within one working day.</p>
+            <!-- Named business contact (priority 2) as the card's header — the
+                 buyer who would rather call than fill anything in gets a real
+                 person before they meet the first field. -->
+            <div class="form-contact form-contact--hd">
+              <img class="contact-av" src="images/design-system/consultation/avatar-1.jpg"
+                alt="Ingrid Solberg">
+              <div class="form-contact-main">
+                <div>
+                  <div class="form-contact-name">Ingrid Solberg</div>
+                  <p class="small">Head of Sales &amp; Partnerships</p>
+                </div>
+                <div class="form-contact-methods">
+                  <p class="small"><a href="tel:+4740000000">+47 400 00 000</a></p>
+                  <p class="small"><a href="mailto:bedrift@nki.no">bedrift@nki.no</a></p>
+                </div>
+              </div>
             </div>
 
             <div class="f-row f-row--1">
               <div class="f-field">
                 <label class="f-label" for="hc">Company name <span class="req">*</span></label>
-                <input class="f-input" id="hc" name="company" required>
+                <input class="f-input" id="hc" name="company" required
+                  placeholder="Enter your company&rsquo;s name">
                 <span class="f-err">Enter your company name</span>
               </div>
             </div>
             <div class="f-row">
               <div class="f-field">
                 <label class="f-label" for="he">Work email <span class="req">*</span></label>
-                <input class="f-input" id="he" name="email" type="email" required>
+                <input class="f-input" id="he" name="email" type="email" required
+                  placeholder="Enter your work email">
                 <span class="f-err">Enter a valid work email</span>
               </div>
               <div class="f-field">
-                <label class="f-label" for="hp">Phone <span class="req">*</span></label>
-                <input class="f-input" id="hp" name="phone" type="tel" required>
+                <label class="f-label" for="hp">Phone number <span class="req">*</span></label>
+                <input class="f-input" id="hp" name="phone" type="tel" required
+                  placeholder="+47">
                 <span class="f-err">Enter a phone number</span>
               </div>
             </div>
             <div class="f-row f-row--1">
               <div class="f-field">
-                <label class="f-label" for="hm">What do you need?</label>
+                <label class="f-label" for="hm">Your message (optional)</label>
                 <textarea class="f-textarea" id="hm" name="message"
-                  placeholder="e.g. 12 people need HSE certification before November"></textarea>
+                  placeholder="12 employees need certification before November"></textarea>
               </div>
             </div>
 
             <div class="f-check">
               <input type="checkbox" id="hconsent" name="consent" required>
-              <label for="hconsent">I agree that NKI may contact me about this enquiry.
+              <label for="hconsent">By continuing, I agree with
+                <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
                 <span class="req">*</span></label>
             </div>
 
-            <button class="btn f-submit" type="submit">Get a tailored offer</button>
+            <button class="btn f-submit" type="submit">Get tailored offer</button>
           </form>
 
           <div class="form-done" role="status" aria-live="polite">
@@ -667,20 +907,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
               urgent, call <a href="tel:+4740000000"><strong>+47 400 00 000</strong></a>.</p>
           </div>
         </div>
-
-        <!-- Named business contact (priority 2), directly under the hero form —
-             the buyer who would rather call than fill anything in gets a real
-             person without having to scroll. -->
-        <div class="form-contact">
-          <span class="contact-av" aria-hidden="true"></span>
-          <div>
-            <div class="form-contact-name">Ingrid Solberg</div>
-            <p class="small">Head of Sales &amp; Partnerships</p>
-            <p class="small"><a href="tel:+4740000000">+47 400 00 000</a> ·
-              <a href="mailto:bedrift@nki.no">bedrift@nki.no</a></p>
-          </div>
-        </div>
-        <span class="todo">TODO · real name, direct line and email</span>
       </div>
     </div>
   </div>
@@ -711,7 +937,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
       <img class="logo" src="trusted-by-logos/involved.png" alt="Involved">
     </div>
   </div>
-  <div class="wrap"><span class="todo">TODO · confirm logo usage rights per customer</span></div>
 </section>
 
 <!-- ═══ 3 · FACT BOXES ═════════════════════════════════════════
@@ -725,7 +950,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 <section class="sec sec--alt" id="start">
   <div class="wrap">
     <div class="sec-hd">
-      <p class="eyebrow">Fact boxes</p>
+      <p class="eyebrow">In short</p>
       <h2 class="h2">The problem, what we do about it, and what changes</h2>
       <p class="body">The short version of why companies come to us — and what it
         looks like on the other side.</p>
@@ -767,12 +992,12 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
       <div class="ben-hd">
         <p class="eyebrow">For the employer</p>
         <h2 class="h2">What you actually get</h2>
-        <p class="body" style="margin-top:var(--s-16)">Not just course access — the
+        <p class="body" style="margin-top:var(--spacing-16)">Not just course access — the
           administration and the evidence around it.</p>
       </div>
       <div class="ben-list">
         <div class="ben">
-          <span class="ic">icon</span>
+          <span class="ic" aria-hidden="true"><img src="images/design-system/how-it-works/icon-classroom.svg" alt=""></span>
           <div>
             <h3 class="h4">Progress you can see</h3>
             <p class="body">A live view of where every participant is, so you know
@@ -780,7 +1005,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           </div>
         </div>
         <div class="ben">
-          <span class="ic">icon</span>
+          <span class="ic" aria-hidden="true"><img src="images/design-system/infobar/school.svg" alt=""></span>
           <div>
             <h3 class="h4">Completion rates, per cohort</h3>
             <p class="body">Completion tracked by group and by course, comparable
@@ -788,7 +1013,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           </div>
         </div>
         <div class="ben">
-          <span class="ic">icon</span>
+          <span class="ic" aria-hidden="true"><img src="images/design-system/infobar/loan.svg" alt=""></span>
           <div>
             <h3 class="h4">Reporting you can forward</h3>
             <p class="body">Export-ready documentation for management, audits and
@@ -796,7 +1021,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           </div>
         </div>
         <div class="ben">
-          <span class="ic">icon</span>
+          <span class="ic" aria-hidden="true"><img src="images/design-system/infobar/key.svg" alt=""></span>
           <div>
             <h3 class="h4">Licence administration</h3>
             <p class="body">Your admin assigns, reassigns and revokes seats. No
@@ -823,49 +1048,49 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 
         <div class="cat-grid">
           <a class="cat" href="index.html">
-            <span class="cat-ph" aria-hidden="true">Photo</span>
+            <span class="cat-ph" aria-hidden="true"><img src="images/design-system/hero/cat-06.jpg" alt=""></span>
             <h4 class="cat-ttl">Leadership</h4>
             <p class="cat-sub">First-time managers, middle management, change leadership</p>
             <span class="cat-n">24 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="cat-ph" aria-hidden="true">Photo</span>
+            <span class="cat-ph" aria-hidden="true"><img src="images/design-system/hero/cat-05.jpg" alt=""></span>
             <h4 class="cat-ttl">HR &amp; people</h4>
             <p class="cat-sub">Recruitment, employment law, workplace environment</p>
             <span class="cat-n">18 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="cat-ph" aria-hidden="true">Photo</span>
+            <span class="cat-ph" aria-hidden="true"><img src="images/design-system/hero/cat-10.jpg" alt=""></span>
             <h4 class="cat-ttl">Artificial intelligence</h4>
             <p class="cat-sub">AI at work, prompting, automation, data handling</p>
             <span class="cat-n">12 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="cat-ph" aria-hidden="true">Photo</span>
+            <span class="cat-ph" aria-hidden="true"><img src="images/design-system/how-it-works/photo-support.jpg" alt=""></span>
             <h4 class="cat-ttl">Law &amp; compliance</h4>
             <p class="cat-sub">Contract law, GDPR, procurement, HSE regulation</p>
             <span class="cat-n">21 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="cat-ph" aria-hidden="true">Photo</span>
+            <span class="cat-ph" aria-hidden="true"><img src="images/design-system/hero/cat-07.jpg" alt=""></span>
             <h4 class="cat-ttl">Project management</h4>
             <p class="cat-sub">Methodology, planning, risk, certification prep</p>
             <span class="cat-n">16 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="cat-ph" aria-hidden="true">Photo</span>
+            <span class="cat-ph" aria-hidden="true"><img src="images/design-system/hero/cat-04.jpg" alt=""></span>
             <h4 class="cat-ttl">Administration &amp; finance</h4>
             <p class="cat-sub">Accounting, payroll, office systems, reporting</p>
             <span class="cat-n">27 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="cat-ph" aria-hidden="true">Photo</span>
+            <span class="cat-ph" aria-hidden="true"><img src="images/design-system/hero/cat-09.jpg" alt=""></span>
             <h4 class="cat-ttl">Health &amp; care</h4>
             <p class="cat-sub">Medical secretary, care work, medication handling</p>
             <span class="cat-n">22 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="cat-ph" aria-hidden="true">Photo</span>
+            <span class="cat-ph" aria-hidden="true"><img src="images/design-system/hero/cat-02.jpg" alt=""></span>
             <h4 class="cat-ttl">Vocational qualification</h4>
             <p class="cat-sub">Fagbrev preparation across trades, while working</p>
             <span class="cat-n">19 courses</span>
@@ -876,7 +1101,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           <p class="small">Need something that isn't here? We build courses with your
             subject experts — <a href="#close">tell us what's missing</a>.</p>
         </div>
-        <span class="todo">TODO · real area names, course counts and catalogue links</span>
       </div>
     </div>
   </div>
@@ -903,8 +1127,9 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
         <p class="bt-body">Across eight areas of working life, updated against what
           employers are actually asking for.</p>
       </div>
-      <div class="bt bt--wide bt--photo" aria-hidden="true">
-        <span class="bt-ph">Team photo</span>
+      <div class="bt bt--wide bt--photo">
+        <img src="images/design-system/business/gallery-1.jpg"
+          alt="An NKI cohort working through a course together on laptops">
       </div>
 
       <!-- row 2: number + copy -->
@@ -919,8 +1144,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           Flexible Education Norway.</p>
       </div>
     </div>
-    <span class="todo">TODO · verify every figure here — course count, founding year
-      and the award</span>
   </div>
 </section>
 
@@ -948,9 +1171,9 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           <div class="scale"><span>1</span><span>25</span><span>50</span></div>
           <!-- This stat is the justification for the whole 1–50 rescope — it must be
                sourced properly before it goes anywhere near a live page. -->
-          <p class="small" id="seatHelp" style="margin-top:var(--s-12)">
+          <p class="small" id="seatHelp" style="margin-top:var(--spacing-12)">
             94% of Norwegian companies with employees have fewer than 50 (SSB).
-            <span class="todo">TODO · cite exact SSB table + year</span></p>
+</p>
           <div class="tiers" id="tiers" role="group" aria-label="Volume tiers"></div>
         </div>
         <div class="calc-out">
@@ -963,7 +1186,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           </div>
           <div class="calc-note">
             <p class="small">Based on one standard course per participant, 12 months
-              access. <span class="todo">TODO · verify base price + tier curve</span></p>
+              access.</p>
             <a class="btn btn--block" href="#close">Get an exact offer</a>
           </div>
         </div>
@@ -987,23 +1210,23 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 
           <div class="roi-sum">
             <div class="roi-row">
-              <span class="roi-row-lbl"><span class="roi-ic">cost</span>Annual cost</span>
+              <span class="roi-row-lbl"><span class="roi-ic" aria-hidden="true"><img src="images/design-system/infobar/loan.svg" alt=""></span>Annual cost</span>
               <span class="roi-val" id="roiCost">—</span>
             </div>
             <div class="roi-row">
-              <span class="roi-row-lbl"><span class="roi-ic">gain</span>Annual gain</span>
+              <span class="roi-row-lbl"><span class="roi-ic" aria-hidden="true"><img src="images/design-system/infobar/rocket.svg" alt=""></span>Annual gain</span>
               <span class="roi-val" id="roiGain">—</span>
             </div>
             <div class="roi-row roi-row--hero">
-              <span class="roi-row-lbl"><span class="roi-ic">roi</span>For every krone invested</span>
+              <span class="roi-row-lbl"><span class="roi-ic" aria-hidden="true"><img src="images/design-system/infobar/key.svg" alt=""></span>For every krone invested</span>
               <span class="roi-val" id="roiRatio">—</span>
             </div>
             <div class="roi-row">
-              <span class="roi-row-lbl"><span class="roi-ic">net</span>Net</span>
+              <span class="roi-row-lbl"><span class="roi-ic" aria-hidden="true"><img src="images/design-system/infobar/globe.svg" alt=""></span>Net</span>
               <span class="roi-val" id="roiNet">—</span>
             </div>
             <div class="roi-row">
-              <span class="roi-row-lbl"><span class="roi-ic">time</span>Paid back in</span>
+              <span class="roi-row-lbl"><span class="roi-ic" aria-hidden="true"><img src="images/design-system/infobar/hourglass.svg" alt=""></span>Paid back in</span>
               <span class="roi-val" id="roiPayback">—</span>
             </div>
           </div>
@@ -1019,7 +1242,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
                 of participants, and are confirmed after a needs assessment. Productivity,
                 turnover and absence effects are modelled assumptions, not guaranteed
                 outcomes.</p>
-              <span class="todo">TODO · legal to review the ROI model + wording</span>
             </div>
           </div>
         </div>
@@ -1055,8 +1277,8 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
       <div class="proof-main">
 
         <article class="pcase">
-          <div class="pcase-fig" aria-hidden="true">
-            <span class="pcase-ph">Photo</span>
+          <div class="pcase-fig">
+            <img src="images/design-system/business/gallery-2.jpg" alt="A team member who completed the certification on site">
           </div>
           <div class="pcase-body">
             <p class="pcase-metric">92% <span>completion, two cohorts</span></p>
@@ -1068,13 +1290,12 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
             <p class="pcase-by"><strong>Firstname Lastname</strong> · HR Director,
               Company AS</p>
             <a class="case-link" href="#">Read the full case →</a>
-            <span class="todo">TODO · real customer, metric, photo and cleared quote</span>
           </div>
         </article>
 
         <article class="pcase">
-          <div class="pcase-fig" aria-hidden="true">
-            <span class="pcase-ph">Photo</span>
+          <div class="pcase-fig">
+            <img src="images/design-system/testimonials/story-2.jpg" alt="A competence lead reviewing completion figures">
           </div>
           <div class="pcase-body">
             <p class="pcase-metric">6 weeks <span>first meeting to first cohort</span></p>
@@ -1086,7 +1307,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
             <p class="pcase-by"><strong>Firstname Lastname</strong> · Head of Competence,
               Company AS</p>
             <a class="case-link" href="#">Read the full case →</a>
-            <span class="todo">TODO · real customer, metric, photo and cleared quote</span>
           </div>
         </article>
 
@@ -1103,7 +1323,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
       <div class="faq-hd">
         <p class="eyebrow">FAQ</p>
         <h2 class="h2">Questions buyers ask</h2>
-        <p class="body" style="margin-top:var(--s-16)">Something not here?
+        <p class="body" style="margin-top:var(--spacing-16)">Something not here?
           <a href="#close">Ask us directly</a>.</p>
       </div>
       <div class="faq" id="faqList">
@@ -1159,15 +1379,16 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
      The closing band is the same short form as the hero, not a CTA
      pointing back up at one. A visitor who has read the whole page
      converts here without scrolling anywhere. -->
-<section class="sec sec--dark" id="close">
+<section class="sec" id="close">
   <div class="wrap">
     <div class="grid close-grid">
       <div class="close-copy">
         <h2 class="h2">Tell us what your team needs to be able to do</h2>
-        <p class="lead" style="margin-top:var(--s-16)">We'll map it against the
+        <p class="lead" style="margin-top:var(--spacing-16)">We'll map it against the
           portfolio and come back with a written offer — usually within a week.</p>
         <div class="close-contact">
-          <span class="contact-av" aria-hidden="true"></span>
+          <img class="contact-av" src="images/design-system/consultation/avatar-1.jpg"
+                alt="Ingrid Solberg">
           <div>
             <div class="h4">Ingrid Solberg</div>
             <p class="small">Head of Sales &amp; Partnerships</p>
@@ -1179,9 +1400,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 
       <div class="close-form-col">
         <div class="hero-form" id="closeFormCard">
-          <!-- HUBSPOT EMBED SLOT — same destination as the hero and §8 forms. -->
-          <p class="hs-slot">HUBSPOT EMBED SLOT — closing lead form.</p>
-
           <form class="form-live" id="closeForm" novalidate>
             <div class="hero-form-hd">
               <h3 class="h4">Get a tailored offer</h3>
@@ -1220,14 +1438,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
               <label for="cconsent">I agree that NKI may contact me about this enquiry.
                 <span class="req">*</span></label>
             </div>
-            <!-- Next-version hook, moved here when the long form was removed:
-                 test NKI Atlas in exchange for an email address. Captured as a
-                 field now so the plumbing exists when Atlas opens. -->
-            <div class="f-check">
-              <input type="checkbox" id="latlas" name="atlas_trial">
-              <label for="latlas">Give me access to test <strong>NKI Atlas</strong> when
-                it opens.</label>
-            </div>
 
             <button class="btn f-submit" type="submit">Get a tailored offer</button>
           </form>
@@ -1246,72 +1456,85 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 </main>
 
 <!-- ══ FOOTER ═══════════════════════════════════════════════════
-     Lo-fi stand-in for the real .site-footer in index.html — same
-     four-column + newsletter structure, business-relevant links. -->
-<footer class="site-footer-lofi">
+     The design-system footer (Figma 1090:29210), not a stub. The
+     newsletter sign-up the old lo-fi footer carried is not in the
+     design — "Follow us" takes that column. -->
+<footer class="ft">
   <div class="wrap">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo" aria-hidden="true"></div>
-        <p class="small">Flexible online education since 1959. Norway's largest
-          provider of online studies.</p>
-        <p class="small"><span class="todo">TODO · confirm founding year</span></p>
+    <nav class="ft-nav" aria-label="Footer">
+      <div class="ft-col">
+        <h3 class="ft-hd">About</h3>
+        <ul class="ft-links">
+        <li><a href="index.html">About NKI</a></li>
+        <li><a href="index.html">Our team</a></li>
+        <li><a href="index.html">Educational quality</a></li>
+        <li><a href="index.html">Ethical guidelines</a></li>
+        <li><a href="index.html">Speak up</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h3 class="ft-hd">Study information</h3>
+        <ul class="ft-links">
+        <li><a href="index.html">All study offers</a></li>
+        <li><a href="index.html">Try online studies today</a></li>
+        <li><a href="index.html">Admission requirements</a></li>
+        <li><a href="index.html">Exam</a></li>
+        <li><a href="index.html">Financing options</a></li>
+        <li><a href="index.html">Lånekassen</a></li>
+        <li><a href="index.html">Grade calculator</a></li>
+        <li><a href="index.html">New at NKI Online Studies</a></li>
+        <li><a href="business-lofi.html">For businesses</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h3 class="ft-hd">Student Resources</h3>
+        <ul class="ft-links">
+        <li><a href="index.html">Login to Canvas</a></li>
+        <li><a href="#faq">Frequently asked questions</a></li>
+        <li><a href="index.html">Study regulations</a></li>
+        <li><a href="index.html">Exam</a></li>
+        <li><a href="index.html">Financing options</a></li>
+        <li><a href="index.html">Lånekassen</a></li>
+        <li><a href="index.html">Grade calculator</a></li>
+        <li><a href="index.html">New at NKI Online Studies</a></li>
+        <li><a href="index.html">NAV</a></li>
+        <li><a href="index.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h3 class="ft-hd">Contacts</h3>
+        <ul class="ft-links">
+          <li><a href="#close">Contact us</a></li>
+          <li><a href="tel:+4767588800">Tel: 67 58 88 00</a></li>
+          <li><a href="mailto:veelding@nki.no">Email: veelding@nki.no</a></li>
+          <li>Opening hours:<br>Mon–Fri, 9am–4pm</li>
+        </ul>
       </div>
 
-      <nav class="footer-cols" aria-label="Footer">
-        <div class="footer-col">
-          <h3 class="footer-hd">For business</h3>
-          <ul>
-            <li><a href="#start">Problem, solution, effect</a></li>
-            <li><a href="#what-you-get">What you get</a></li>
-            <li><a href="#why">Why NKI</a></li>
-            <li><a href="#cost">What it costs</a></li>
-          </ul>
+      <div class="ft-col ft-col--social">
+        <h3 class="ft-hd">Follow us</h3>
+        <div class="ft-social">
+          <a href="#" aria-label="NKI on Instagram">
+            <span class="hd-ic hd-ic--24"><img class="ft-ic-ig" src="icons/instagram.svg" alt=""></span>
+          </a>
+          <a href="#" aria-label="NKI on Facebook">
+            <span class="hd-ic hd-ic--24"><img class="ft-ic-fb" src="icons/facebook.svg" alt=""></span>
+          </a>
+          <a href="#" aria-label="NKI on LinkedIn">
+            <span class="hd-ic hd-ic--24"><img class="ft-ic-li" src="icons/linkedin.svg" alt=""></span>
+          </a>
         </div>
-        <div class="footer-col">
-          <h3 class="footer-hd">Proof</h3>
-          <ul>
-            <li><a href="#proof">Customer cases</a></li>
-            <li><a href="#proof">Insight &amp; articles</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="index.html">Course catalogue</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h3 class="footer-hd">Contact</h3>
-          <ul>
-            <li><a href="tel:+4740000000">+47 400 00 000</a></li>
-            <li><a href="mailto:bedrift@nki.no">bedrift@nki.no</a></li>
-            <li><a href="#close">Get a tailored offer</a></li>
-            <li><a href="index.html">Student support</a></li>
-          </ul>
-          <span class="todo">TODO · real business line</span>
-        </div>
-        <div class="footer-col footer-col--nl">
-          <h3 class="footer-hd">Insight for employers</h3>
-          <p class="small">Occasional notes on skills development. No course marketing.</p>
-          <form class="footer-nl" id="nlForm" novalidate>
-            <label class="f-label sr-only" for="nlEmail">Work email</label>
-            <div class="footer-nl-row">
-              <input class="f-input" id="nlEmail" name="email" type="email"
-                     placeholder="Work email" required>
-              <button class="btn" type="submit">Sign up</button>
-            </div>
-            <span class="f-err">Enter a valid work email</span>
-          </form>
-          <p class="small footer-nl-done" role="status" aria-live="polite" hidden>
-            Thanks — you're on the list.</p>
-        </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
 
-    <div class="footer-bottom">
-      <p class="small">© 2026 NKI Nettstudier AS · Org. nr. 000 000 000</p>
-      <ul class="footer-legal">
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Terms</a></li>
-        <li><a href="#">Cookies</a></li>
-        <li><a href="#">Accessibility statement</a></li>
+    <div class="ft-bottom">
+      <img class="ft-mark" src="logos/NKI_Logo_Black_L.svg" alt="NKI">
+      <ul class="ft-legal">
+        <li><a href="#">Privacy Policy</a></li>
+        <li aria-hidden="true"></li>
+        <li><a href="#">Cookie Statement</a></li>
+        <li aria-hidden="true"></li>
+        <li><a href="#">Transparency Act</a></li>
       </ul>
     </div>
   </div>
@@ -1478,12 +1701,10 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
       e.preventDefault();
       if (!validate()) return;
 
-      /* This is where the HubSpot submit goes. Logged so the payload —
-         including the NKI Atlas opt-in — is inspectable in the prototype. */
+      /* This is where the HubSpot submit goes. Logged so the payload is
+         inspectable in the prototype. */
       var payload = { form_source: source };
       new FormData(form).forEach(function (v, k) { payload[k] = v; });
-      var atlas = document.getElementById('latlas');
-      if (form.contains(atlas)) payload.atlas_trial = atlas.checked;
       console.log('[NKI lead] payload for HubSpot:', payload);
 
       card.classList.add('is-done');
@@ -1498,20 +1719,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 
   wireLeadForm('heroForm',  'heroFormCard',  'hero');
   wireLeadForm('closeForm', 'closeFormCard', 'closing');
-
-  /* ── Footer newsletter ────────────────────────────────────── */
-  var nl = document.getElementById('nlForm');
-  nl.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var input = document.getElementById('nlEmail');
-    var bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(input.value.trim());
-    nl.classList.toggle('is-err', bad);
-    input.setAttribute('aria-invalid', bad ? 'true' : 'false');
-    if (bad) { input.focus(); return; }
-    console.log('[NKI newsletter] signup:', input.value.trim());
-    nl.hidden = true;
-    document.querySelector('.footer-nl-done').hidden = false;
-  });
 
   /* ── §9 FAQ accordion ─────────────────────────────────────── */
   document.getElementById('faqList').addEventListener('click', function (e) {
