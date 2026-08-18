@@ -225,24 +225,36 @@ a{color:inherit}
 .logo-row:hover .logo{opacity:.9}
 
 /* ═══════════════════════════════════════════════════════════
-   3 · SELF-SEGMENTATION   (priority 9)
-   Placed early because it routes the visitor and pre-fills the form.
+   3 · FACT BOXES   (priority 9)
+   Was self-segmentation. Now a stated argument in three parts —
+   problem, solution, effect — read left to right. Nothing here is
+   a link: these boxes make the case in text, they don't route.
    ═══════════════════════════════════════════════════════════ */
-.seg-cards{grid-column:span 12;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter)}
-/* No CTA label on these cards. The whole card is still the target — it routes
-   and pre-fills the lead form's "need" field — so the hover state has to carry
-   the affordance on its own. min-height dropped now that nothing anchors the
-   bottom of the card. */
-.seg-card{
+.fact-boxes{grid-column:span 12;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter)}
+/* No hover state on purpose. The old cards were clickable and had to
+   advertise it; these must read as flat text so nobody hunts for a target
+   that isn't there. */
+.fact-box{
+  position:relative;
   border:1px solid var(--l-300);border-radius:var(--rad-lg);padding:var(--s-24);
   background:var(--l-0);display:flex;flex-direction:column;gap:var(--s-12);
-  text-align:left;transition:border-color .15s,background .15s;
 }
-.seg-card:hover,.seg-card:focus-visible{border-color:var(--l-900);background:var(--l-50)}
-.seg-card .h4{margin-top:var(--s-4)}
-.seg-card .body{font-size:15px;flex:1}
-.seg-more{font-size:14px;font-weight:600;text-decoration:underline;color:var(--l-700)}
-.seg-card:hover .seg-more{color:var(--l-900)}
+/* arrows sit IN the gutter between boxes, so the three read as one chain
+   rather than three parallel claims. Pseudo-element with an empty CSS alt:
+   it's punctuation, not content, and shouldn't be announced. */
+.fact-box:not(:last-child)::after{
+  content:"→";            /* fallback where CSS alt text isn't supported */
+  content:"→" / "";
+  position:absolute;top:50%;right:calc(var(--gutter) / -2);
+  transform:translate(50%,-50%);
+  font-size:18px;line-height:1;color:var(--l-600);pointer-events:none;
+}
+/* the step marker doubles as the box label, so the three read as a sequence */
+.fact-tag{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--l-700);display:flex;align-items:center;gap:var(--s-8)}
+.fact-tag::before{content:"";width:24px;height:1px;background:var(--l-400);flex:none}
+.fact-box .h4{margin-top:0}
+.fact-box .body{font-size:15px}
 
 /* ═══════════════════════════════════════════════════════════
    4 · WHAT YOU GET AS AN EMPLOYER   (priority 6)
@@ -257,17 +269,31 @@ a{color:inherit}
   border-top:1px solid var(--l-300)}
 /* course-area showcase — replaced the row of small chips, which under-sold
    the range. Each area is a real destination, not a label. */
-.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gutter);
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter);
   margin-top:var(--s-32)}
 .cat{border:1px solid var(--l-300);border-radius:var(--rad-lg);padding:var(--s-20);
   background:var(--l-0);display:flex;flex-direction:column;gap:var(--s-8);
-  text-decoration:none;transition:border-color .15s,background .15s}
+  text-decoration:none;transition:border-color .15s,background .15s;overflow:hidden}
 .cat:hover,.cat:focus-visible{border-color:var(--l-900);background:var(--l-50)}
-.cat .ic{width:32px;height:32px}
+/* the photo runs the full width of the card, so it pulls back out through the
+   card's own padding rather than the card losing its padding for everything
+   else. aspect-ratio keeps all ten crops identical whatever the column width. */
+.cat-ph{margin:calc(var(--s-20) * -1) calc(var(--s-20) * -1) var(--s-4);
+  aspect-ratio:16 / 10;background:var(--l-200);
+  border-bottom:1px solid var(--l-300);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--l-600)}
 .cat-ttl{font-size:16px;font-weight:700;line-height:1.3}
 .cat-sub{font-size:13px;line-height:1.4;color:var(--l-600);flex:1}
 .cat-n{font-size:13px;font-weight:600;color:var(--l-700)}
-.cat-foot{display:flex;align-items:center;gap:var(--s-24);margin-top:var(--s-32);
+/* heading and catalogue CTA on one line — the button is the section's own
+   escape hatch, so it belongs level with the heading, not buried under the
+   grid where it read as a footnote. */
+.cat-hd{display:flex;align-items:center;justify-content:space-between;
+  gap:var(--s-24);flex-wrap:wrap}
+.cat-hd .sec-hd{margin-bottom:0}
+.cat-hd .btn{flex:none}
+.cat-foot{display:flex;align-items:center;gap:var(--s-24);margin-top:var(--s-24);
   flex-wrap:wrap}
 .cat-foot .small{max-width:42ch}
 
@@ -283,84 +309,24 @@ a{color:inherit}
    have to swap sides between rows. Spans handle that; a two-column template
    would drop row 2's copy into the narrow column. */
 .bento{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter)}
-.bt{border-radius:var(--rad-lg);padding:var(--s-32);display:flex;
-  flex-direction:column;justify-content:center;gap:var(--s-12);min-height:260px}
+.bt{border-radius:var(--rad-lg);padding:var(--s-24);display:flex;
+  flex-direction:column;justify-content:center;gap:var(--s-8);min-height:320px}
 .bt--narrow{grid-column:span 1}
 .bt--wide{grid-column:span 2}
 .bt--fill1{background:var(--l-200)}
-.bt--fill2{background:var(--l-100)}
-.bt--fill3{background:var(--l-800);color:var(--l-0)}
 .bt--fill4{background:var(--l-900);color:var(--l-0)}
 .bt--fill5{background:var(--l-100)}
-.bt-big{font-size:39px;font-weight:700;line-height:1.05;letter-spacing:-.02em}
-.bt-body{font-size:15px;line-height:1.6}
-.bt .h3{margin-bottom:var(--s-4)}
+.bt-big{font-size:31px;font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.bt-body{font-size:14px;line-height:1.55;max-width:56ch}
+.bt .h3{font-size:20px;margin-bottom:var(--s-4)}
 /* the number tiles: one enormous figure, one caption, nothing else */
 .bt--num{align-items:center;text-align:center}
-.bt-num{font-size:80px;font-weight:700;line-height:1;letter-spacing:-.03em}
-.bt-cap{font-size:14px;opacity:.75;max-width:16ch}
+.bt-num{font-size:56px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.bt-cap{font-size:13px;opacity:.75;max-width:16ch}
 /* photo tile */
 .bt--photo{padding:0;background:var(--l-200);border:1px dashed var(--l-400);
   align-items:center;justify-content:center}
 .bt-ph{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--l-600)}
-
-/* ═══════════════════════════════════════════════════════════
-   6 · HOW A PROCESS CAN LOOK   (priority 5)
-   ═══════════════════════════════════════════════════════════ */
-/* ── process carousel ──────────────────────────────────────
-   Scroll-snap track: swipeable on touch, scrollable by keyboard,
-   works with no JS. Arrows and dots enhance it. */
-.steps-carousel{grid-column:span 12}
-/* ONE step per view, with the next one peeking in so it's obvious there's
-   more to scroll. --peek is the sliver of the next card that stays visible.
-   The trailing padding must equal --peek: without it the last card can never
-   be start-aligned, because the track runs out of scroll before reaching it,
-   and the final position becomes unreachable. */
-.steps{
-  --peek:22%;
-  list-style:none;margin:0;padding:0 var(--peek) var(--s-8) 0;
-  display:grid;grid-auto-flow:column;grid-auto-columns:calc(100% - var(--peek));
-  gap:var(--gutter);
-  overflow-x:auto;overscroll-behavior-x:contain;
-  scroll-snap-type:x mandatory;scrollbar-width:none;
-}
-.steps::-webkit-scrollbar{display:none}
-.steps:focus-visible{outline:2px solid var(--l-900);outline-offset:4px}
-.steps .step{scroll-snap-align:start}
-.steps-nav{display:flex;align-items:center;justify-content:space-between;
-  gap:var(--s-24);margin-top:var(--s-24)}
-.steps-dots{display:flex;gap:var(--s-8)}
-.steps-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;
-  background:var(--l-300);cursor:pointer;transition:width .2s,background .2s}
-.steps-dot.is-on{width:24px;border-radius:4px;background:var(--l-900)}
-.steps-dot:focus-visible{outline:2px solid var(--l-900);outline-offset:3px}
-.steps-arrows{display:flex;gap:var(--s-8)}
-.steps-arrow{width:40px;height:40px;border-radius:50%;border:1px solid var(--l-400);
-  background:var(--l-0);font-size:16px;line-height:1;color:var(--l-900);
-  display:flex;align-items:center;justify-content:center}
-.steps-arrow:hover:not(:disabled){border-color:var(--l-900);background:var(--l-100)}
-.steps-arrow:disabled{opacity:.35;cursor:default}
-@media (prefers-reduced-motion:reduce){.steps{scroll-behavior:auto}}
-/* worked example — the same steps as they actually played out */
-.worked{grid-column:span 12;margin-top:var(--s-48);border:1px solid var(--l-300);
-  border-radius:var(--rad-lg);background:var(--l-0);padding:var(--s-32)}
-.worked-hd{display:flex;align-items:center;gap:var(--s-24);flex-wrap:wrap;
-  padding-bottom:var(--s-24);border-bottom:1px solid var(--l-300)}
-.worked-logo{flex:none}
-.worked-hd .h3{margin-bottom:var(--s-4)}
-.worked-hd .body{font-size:15px;max-width:52ch}
-.worked-list{list-style:none;margin:var(--s-24) 0 0;padding:0;display:grid;gap:var(--s-16)}
-.worked-list li{display:flex;gap:var(--s-16);font-size:15px;line-height:1.55}
-.worked-n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--l-100);
-  border:1px solid var(--l-300);display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;color:var(--l-700)}
-/* one step fills most of the row now, so it needs to read as a card rather
-   than a thin column with a rule on top */
-.step{border:1px solid var(--l-300);border-radius:var(--rad-lg);background:var(--l-0);
-  padding:var(--s-32);display:flex;flex-direction:column;gap:var(--s-8)}
-.step-n{font-size:39px;font-weight:700;line-height:1;color:var(--l-300);letter-spacing:-.02em}
-.step .h4{font-size:25px;margin:var(--s-4) 0 0}
-.step .body{max-width:52ch}
 
 /* ═══════════════════════════════════════════════════════════
    7 · WHAT IT COSTS   (priority 4)
@@ -435,35 +401,27 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
    8 · PROOF   (priorities 3 and 8 — the objective-2 gap)
    Case + its own quote in ONE unit; reading list beside them.
    ═══════════════════════════════════════════════════════════ */
-.proof-main{grid-column:span 8;display:grid;gap:var(--gutter)}
-.proof-side{grid-column:span 4}
-/* one case: figure rail on the left, story + quote on the right */
+.proof-main{grid-column:span 12;display:grid;grid-template-columns:repeat(2,1fr);
+  gap:var(--gutter)}
+/* one case: picture rail on the left, story on the right. The rail is a fixed
+   column rather than a share of the card, so both cases crop their photo to the
+   same width no matter how much copy sits beside it. */
 .pcase{border:1px solid var(--l-300);border-radius:var(--rad-lg);background:var(--l-0);
-  display:grid;grid-template-columns:200px 1fr;overflow:hidden}
-.pcase-fig{padding:var(--s-24);background:var(--l-100);border-right:1px solid var(--l-300);
-  display:flex;flex-direction:column;gap:var(--s-4)}
-.pcase-metric{font-size:31px;font-weight:700;line-height:1}
-.pcase-logo{margin-top:auto;width:88px;height:28px;background:var(--l-200);
-  border:1px dashed var(--l-400);border-radius:4px}
-.pcase-body{padding:var(--s-24);display:flex;flex-direction:column;gap:var(--s-12)}
-.pcase-body .body{font-size:15px}
+  display:grid;grid-template-columns:180px 1fr;overflow:hidden}
+.pcase-fig{background:var(--l-200);border-right:1px solid var(--l-300);
+  display:flex;align-items:center;justify-content:center;min-height:100%}
+.pcase-ph{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--l-600)}
+.pcase-body{padding:var(--s-24);display:flex;flex-direction:column;gap:var(--s-8)}
+.pcase-body .body{font-size:14px;line-height:1.55}
+/* metric and its caption on one line — it labels the case, it isn't a headline */
+.pcase-metric{font-size:23px;font-weight:700;line-height:1.2}
+.pcase-metric span{font-size:13px;font-weight:400;color:var(--l-600)}
 /* the quote is part of the case, not a separate testimonial block */
-.pcase-quote{margin:0;padding-left:var(--s-16);border-left:3px solid var(--l-400);
-  font-size:17px;line-height:1.45;color:var(--l-900)}
+.pcase-quote{margin:var(--s-4) 0 0;padding-left:var(--s-16);border-left:3px solid var(--l-400);
+  font-size:15px;line-height:1.45;color:var(--l-900)}
 .pcase-by{font-size:13px;color:var(--l-600)}
 .case-link{font-size:14px;font-weight:600;text-decoration:underline;margin-top:auto;
-  padding-top:var(--s-4)}
-
-/* reading column */
-.read-list{list-style:none;margin:var(--s-16) 0 0;padding:0;
-  border-top:1px solid var(--l-300)}
-.read-list li{border-bottom:1px solid var(--l-300)}
-.read-list a{display:block;padding:var(--s-12) 0;text-decoration:none}
-.read-list a:hover .read-ttl{text-decoration:underline}
-.read-ttl{display:block;font-size:15px;font-weight:600;line-height:1.35}
-.read-meta{display:block;margin-top:2px;font-size:13px;color:var(--l-600)}
-.read-list--src .read-ttl{font-weight:400}
-.read-hd2{margin-top:var(--s-32)}
+  padding-top:var(--s-8)}
 
 /* ═══════════════════════════════════════════════════════════
    8b · INSIGHT — merged into the Proof section above
@@ -552,8 +510,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
    ═══════════════════════════════════════════════════════════ */
 @media (max-width:1200px){
   :root{--margin:48px}
-  .seg-cards{grid-template-columns:repeat(3,1fr)}
-  .cat-grid{grid-template-columns:repeat(4,1fr)}
+  .fact-boxes{grid-template-columns:repeat(3,1fr)}
   .footer-top{grid-template-columns:1fr}
 }
 @media (max-width:1024px){
@@ -567,14 +524,13 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   .contact-card{position:static;margin-top:var(--s-24)}
   .calc{grid-template-columns:1fr}
   .calc-out{border-left:0;border-top:1px solid var(--l-300)}
-  .proof-main,.proof-side{grid-column:span 12}
+  .proof-main{grid-template-columns:1fr}
   .cat-grid{grid-template-columns:repeat(3,1fr)}
-  .steps{--peek:18%}
   /* two columns: wide tiles take the full row, narrow ones pair up */
   .bento{grid-template-columns:repeat(2,1fr)}
   .bt--wide{grid-column:span 2}
-  .bt{min-height:220px;padding:var(--s-24)}
-  .bt-num{font-size:64px}
+  .bt{min-height:160px;padding:var(--s-20)}
+  .bt-num{font-size:48px}
   .footer-cols{grid-template-columns:repeat(2,1fr);gap:var(--s-40) var(--gutter)}
 }
 @media (max-width:768px){
@@ -585,19 +541,18 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
      five logos across the full width with huge gaps between them */
   .logo-row{width:100%;justify-content:flex-start;gap:var(--s-24) var(--s-16)}
   .logo{width:112px;height:32px}
-  .seg-cards,.ben-list{grid-template-columns:1fr}
+  .fact-boxes,.ben-list{grid-template-columns:1fr}
+  /* stacked: the chain runs downwards, so the arrows have to turn with it */
+  .fact-box:not(:last-child)::after{top:auto;right:50%;bottom:calc(var(--gutter) / -2);
+    transform:translate(50%,50%) rotate(90deg)}
   .bento{grid-template-columns:1fr}
   .bt--wide,.bt--narrow{grid-column:span 1}
   .bt{min-height:0}
   .bt--photo{min-height:200px}
   .cat-grid{grid-template-columns:repeat(2,1fr)}
   .pcase{grid-template-columns:1fr}
-  .pcase-fig{border-right:0;border-bottom:1px solid var(--l-300);flex-direction:row;align-items:center;gap:var(--s-16)}
-  .pcase-logo{margin-top:0;margin-left:auto}
-  .worked{padding:var(--s-24)}
-  /* smaller peek on narrow screens so the card keeps enough room */
-  .steps{--peek:12%}
-  .step{padding:var(--s-24)}
+  .pcase-fig{border-right:0;border-bottom:1px solid var(--l-300);min-height:160px}
+  .fact-box{padding:var(--s-24)}
   .f-row{grid-template-columns:1fr}
   .calc-in,.calc-out,.form-card,.contact-card,.quote{padding:var(--s-24)}
   .stub-nav{display:none}
@@ -759,45 +714,46 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   <div class="wrap"><span class="todo">TODO · confirm logo usage rights per customer</span></div>
 </section>
 
-<!-- ═══ 3 · SELF-SEGMENTATION ══════════════════════════════════
-     Routes the visitor and pre-fills the lead form's "need" field.
+<!-- ═══ 3 · FACT BOXES ═════════════════════════════════════════
+     Was the self-segmentation router. Now it states the case in text:
+     problem → solution → effect, in that reading order.
 
-     Every card must ANSWER the problem it raises, not just name it —
-     so each one carries a route to real information (courses in that
-     area, or the relevant section of this page), separate from the
-     card's own click target. Raising a problem with no route to an
-     answer is the trap the old page fell into. -->
+     Nothing in here is clickable. The old cards made the visitor
+     choose a lane before they'd been told what the offer is; these
+     three boxes just make the argument, and the page's own CTAs
+     handle the routing further down. -->
 <section class="sec sec--alt" id="start">
   <div class="wrap">
     <div class="sec-hd">
-      <p class="eyebrow">Where to start</p>
-      <h2 class="h2">What do you need to solve?</h2>
-      <p class="body">Pick the closest match — each one links through to what we
-        actually offer in that area.</p>
+      <p class="eyebrow">Fact boxes</p>
+      <h2 class="h2">The problem, what we do about it, and what changes</h2>
+      <p class="body">The short version of why companies come to us — and what it
+        looks like on the other side.</p>
     </div>
     <div class="grid">
-      <div class="seg-cards">
-        <a class="seg-card" href="#categories" data-need="gap">
-          <span class="ic">icon</span>
-          <h3 class="h4">Close a specific skills gap</h3>
-          <p class="body">A capability the team is missing right now — AI at work,
-            new regulations, a new system.</p>
-          <span class="seg-more">Browse course areas →</span>
-        </a>
-        <a class="seg-card" href="#categories" data-need="formal">
-          <span class="ic">icon</span>
-          <h3 class="h4">Formal qualification for staff</h3>
-          <p class="body">Certificates and vocational qualifications your people can
-            earn while they keep working.</p>
-          <span class="seg-more">Learn more →</span>
-        </a>
-        <a class="seg-card" href="#how" data-need="onboarding">
-          <span class="ic">icon</span>
-          <h3 class="h4">Onboard at scale</h3>
-          <p class="body">A repeatable programme every new hire runs through, with
-            completion you can actually see.</p>
-          <span class="seg-more">Learn more →</span>
-        </a>
+      <div class="fact-boxes">
+
+        <div class="fact-box">
+          <p class="fact-tag">Problem</p>
+          <h3 class="h4">Skills go out of date faster than you can hire for them</h3>
+          <p class="body">Training gets booked ad hoc, one person at a time, and nobody
+            can say who has actually completed what.</p>
+        </div>
+
+        <div class="fact-box">
+          <p class="fact-tag">Solution</p>
+          <h3 class="h4">Courses your people take alongside the job</h3>
+          <p class="body">200+ online courses at each participant's own pace, on one
+            agreement your own admin manages.</p>
+        </div>
+
+        <div class="fact-box">
+          <p class="fact-tag">Effect</p>
+          <h3 class="h4">Certification stays current, and you can see it</h3>
+          <p class="body">Nobody comes off the rota, and completion is visible per team
+            before the deadline instead of after.</p>
+        </div>
+
       </div>
     </div>
   </div>
@@ -855,78 +811,68 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
            the catalogue. This is also where the segmentation cards in
            §3 land, so the problems raised there get answered here. -->
       <div class="ben-portfolio" id="categories">
-        <div class="sec-hd sec-hd--sub">
-          <p class="eyebrow">Course areas</p>
-          <h3 class="h3">Where we work</h3>
-          <p class="body">200+ courses across ten areas, continuously updated against
-            what the labour market is actually asking for.</p>
+        <div class="cat-hd">
+          <div class="sec-hd sec-hd--sub">
+            <p class="eyebrow">Course areas</p>
+            <h3 class="h3">Where we work</h3>
+            <p class="body">200+ courses across eight areas, continuously updated against
+              what the labour market is actually asking for.</p>
+          </div>
+          <a class="btn btn--ghost" href="index.html">Browse all courses</a>
         </div>
 
         <div class="cat-grid">
           <a class="cat" href="index.html">
-            <span class="ic">icon</span>
+            <span class="cat-ph" aria-hidden="true">Photo</span>
             <h4 class="cat-ttl">Leadership</h4>
             <p class="cat-sub">First-time managers, middle management, change leadership</p>
             <span class="cat-n">24 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="ic">icon</span>
+            <span class="cat-ph" aria-hidden="true">Photo</span>
             <h4 class="cat-ttl">HR &amp; people</h4>
             <p class="cat-sub">Recruitment, employment law, workplace environment</p>
             <span class="cat-n">18 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="ic">icon</span>
+            <span class="cat-ph" aria-hidden="true">Photo</span>
             <h4 class="cat-ttl">Artificial intelligence</h4>
             <p class="cat-sub">AI at work, prompting, automation, data handling</p>
             <span class="cat-n">12 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="ic">icon</span>
+            <span class="cat-ph" aria-hidden="true">Photo</span>
             <h4 class="cat-ttl">Law &amp; compliance</h4>
             <p class="cat-sub">Contract law, GDPR, procurement, HSE regulation</p>
             <span class="cat-n">21 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="ic">icon</span>
+            <span class="cat-ph" aria-hidden="true">Photo</span>
             <h4 class="cat-ttl">Project management</h4>
             <p class="cat-sub">Methodology, planning, risk, certification prep</p>
             <span class="cat-n">16 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="ic">icon</span>
+            <span class="cat-ph" aria-hidden="true">Photo</span>
             <h4 class="cat-ttl">Administration &amp; finance</h4>
             <p class="cat-sub">Accounting, payroll, office systems, reporting</p>
             <span class="cat-n">27 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="ic">icon</span>
+            <span class="cat-ph" aria-hidden="true">Photo</span>
             <h4 class="cat-ttl">Health &amp; care</h4>
             <p class="cat-sub">Medical secretary, care work, medication handling</p>
             <span class="cat-n">22 courses</span>
           </a>
           <a class="cat" href="index.html">
-            <span class="ic">icon</span>
-            <h4 class="cat-ttl">Logistics &amp; transport</h4>
-            <p class="cat-sub">Supply chain, warehousing, transport regulation</p>
-            <span class="cat-n">14 courses</span>
-          </a>
-          <a class="cat" href="index.html">
-            <span class="ic">icon</span>
+            <span class="cat-ph" aria-hidden="true">Photo</span>
             <h4 class="cat-ttl">Vocational qualification</h4>
             <p class="cat-sub">Fagbrev preparation across trades, while working</p>
             <span class="cat-n">19 courses</span>
           </a>
-          <a class="cat" href="index.html">
-            <span class="ic">icon</span>
-            <h4 class="cat-ttl">Sales &amp; service</h4>
-            <p class="cat-sub">Customer handling, negotiation, key account work</p>
-            <span class="cat-n">11 courses</span>
-          </a>
         </div>
 
         <div class="cat-foot">
-          <a class="btn btn--ghost" href="index.html">See the full catalogue</a>
           <p class="small">Need something that isn't here? We build courses with your
             subject experts — <a href="#close">tell us what's missing</a>.</p>
         </div>
@@ -954,154 +900,30 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
       <!-- row 1: stat card + photo -->
       <div class="bt bt--narrow bt--fill1">
         <p class="bt-big">200+ courses</p>
-        <p class="bt-body">Across ten areas of working life, continuously updated
-          against what employers are actually asking for. If it isn't there, we build
-          it with your subject experts.</p>
+        <p class="bt-body">Across eight areas of working life, updated against what
+          employers are actually asking for.</p>
       </div>
       <div class="bt bt--wide bt--photo" aria-hidden="true">
         <span class="bt-ph">Team photo</span>
       </div>
 
-      <!-- row 2: copy + number -->
-      <div class="bt bt--wide bt--fill2">
-        <h3 class="h3">Built in-house, not licensed in</h3>
-        <p class="bt-body">Our learning designers build the courses themselves, often
-          alongside external subject-matter experts. That's why a course can be adapted
-          to your procedures instead of taken as-is — and why the teaching holds up
-          when the regulation changes.</p>
-      </div>
-      <div class="bt bt--narrow bt--num bt--fill3">
-        <p class="bt-num">6</p>
-        <p class="bt-cap">in-house learning designers</p>
-      </div>
-
-      <!-- row 3: number + copy -->
+      <!-- row 2: number + copy -->
       <div class="bt bt--narrow bt--num bt--fill4">
         <p class="bt-num">50+</p>
         <p class="bt-cap">years of flexible learning</p>
       </div>
       <div class="bt bt--wide bt--fill5">
         <h3 class="h3">This isn't our first cohort</h3>
-        <p class="bt-body">NKI has been teaching at a distance since long before it was
-          called online — through correspondence, then hybrid, now fully digital. In
-          2024 we were named <strong>Online Educator of the Year</strong> by Flexible
-          Education Norway. Whatever your shift pattern looks like, we've almost
-          certainly taught around it before.</p>
+        <p class="bt-body">Teaching at a distance since long before it was called
+          online — and named <strong>Online Educator of the Year</strong> in 2024 by
+          Flexible Education Norway.</p>
       </div>
     </div>
-    <span class="todo">TODO · verify every figure here — course count, designer count,
-      founding year and the award</span>
+    <span class="todo">TODO · verify every figure here — course count, founding year
+      and the award</span>
   </div>
 </section>
 
-
-<!-- ═══ 6 · HOW A PROCESS CAN LOOK ═════════════════════════════
-     Deliberately NOT "how it works" — there is no single process.
-     Some companies buy seats on courses that already exist; others
-     need a course built around their case. That variation is stated
-     in the intro rather than as separate boxes, then one example is
-     threaded through the steps so the abstraction is anchored to
-     something concrete. -->
-<section class="sec sec--alt" id="how">
-  <div class="wrap">
-    <div class="sec-hd">
-      <p class="eyebrow">Process</p>
-      <h2 class="h2">How a process can look</h2>
-      <p class="body">There isn't one fixed process. Some companies take seats on
-        courses that already exist and are running inside two weeks; others need
-        something built around their case, which takes longer. The steps below are
-        the shape it usually follows.</p>
-    </div>
-
-    <div class="grid">
-      <!-- ── PROCESS CAROUSEL ────────────────────────────────
-           Native scroll-snap track, not a JS-positioned slider:
-           it stays swipeable on touch and keyboard-scrollable
-           with no script, and the arrows/dots are progressive
-           enhancement on top. Steps are a numbered list, so the
-           order survives even if the carousel styling doesn't. -->
-      <div class="steps-carousel" id="stepsCarousel">
-        <ol class="steps" id="stepsTrack" tabindex="0"
-            aria-label="Process steps, scrollable">
-          <li class="step">
-            <div class="step-n">01</div>
-            <h3 class="h4">First contact</h3>
-            <p class="body">You send the form or call. We reply within one working day.</p>
-          </li>
-          <li class="step">
-            <div class="step-n">02</div>
-            <h3 class="h4">Needs mapping</h3>
-            <p class="body">A 45-minute session: roles, gaps, timeline and budget.</p>
-          </li>
-          <li class="step">
-            <div class="step-n">03</div>
-            <h3 class="h4">Programme &amp; offer</h3>
-            <p class="body">We shortlist or scope, size the cohort and send a written offer.</p>
-          </li>
-          <li class="step">
-            <div class="step-n">04</div>
-            <h3 class="h4">Rollout</h3>
-            <p class="body">Seats assigned, participants onboarded, your admin trained.</p>
-          </li>
-          <li class="step">
-            <div class="step-n">05</div>
-            <h3 class="h4">Follow-up</h3>
-            <p class="body">Progress reporting through the programme and a close-out review.</p>
-          </li>
-        </ol>
-
-        <div class="steps-nav">
-          <div class="steps-dots" id="stepsDots" role="tablist" aria-label="Go to step"></div>
-          <div class="steps-arrows">
-            <button class="steps-arrow" id="stepsPrev" type="button" aria-label="Previous step"
-                    aria-controls="stepsTrack">←</button>
-            <button class="steps-arrow" id="stepsNext" type="button" aria-label="Next step"
-                    aria-controls="stepsTrack">→</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── WORKED EXAMPLE ──────────────────────────────────
-           The same five steps, but as they actually played out for
-           one customer. Abstract process + one concrete case beats
-           either on its own. -->
-      <div class="worked">
-        <div class="worked-hd">
-          <span class="worked-logo">
-            <img class="logo" src="trusted-by-logos/odontia.png" alt="Odontia Tannlegene">
-          </span>
-          <div>
-            <h3 class="h3">How we went forward with Odontia</h3>
-            <p class="body">A dental group with clinics across the country, all needing
-              the same updated certification.</p>
-          </div>
-        </div>
-        <ol class="worked-list">
-          <li><span class="worked-n">01</span>
-            <div><strong>They called in March.</strong> Their clinic managers had flagged
-              that certification was drifting out of date across sites.</div></li>
-          <li><span class="worked-n">02</span>
-            <div><strong>We mapped it in one session.</strong> 38 people, four job roles,
-              a hard deadline before the autumn inspection round.</div></li>
-          <li><span class="worked-n">03</span>
-            <div><strong>Route A, mostly.</strong> Three existing courses covered it; one
-              module was adapted to their own procedures. Offer out in nine days.</div></li>
-          <li><span class="worked-n">04</span>
-            <div><strong>Rolled out per clinic,</strong> not all at once, so no site lost
-              coverage. Their operations lead ran licence assignment herself.</div></li>
-          <li><span class="worked-n">05</span>
-            <div><strong>Completion reported monthly</strong> to the clinic managers.
-              All 38 finished before the deadline.</div></li>
-        </ol>
-        <span class="todo">TODO · this is placeholder — needs the real Odontia story,
-          checked and cleared with them before it goes anywhere public</span>
-      </div>
-    </div>
-
-    <p class="small" style="margin-top:var(--s-24)">Timelines are indicative and vary a
-      lot by route. <span class="todo">TODO · confirm real lead times with sales</span></p>
-  </div>
-</section>
 
 <!-- ═══ 7 · WHAT IT COSTS ══════════════════════════════════════
      Rescaled 1–50, default 12. Old page ran 1–1000 default 100,
@@ -1217,118 +1039,58 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
      Previously these were three stacked sub-blocks saying the same
      thing three ways. Now each case carries its own quote inline —
      the customer's number and the customer's words in one unit,
-     which is how a buyer reads them anyway — and the reading list
-     is a compact column beside them rather than a row of big cards.
-     Every customer item is placeholder until sales supplies real,
-     cleared references. -->
+     which is how a buyer reads them anyway. Two cases, not three:
+     a third said the same thing a third way. Every item here is
+     placeholder until sales supplies real, cleared references. -->
 <section class="sec sec--alt" id="proof">
   <div class="wrap">
     <div class="sec-hd">
       <p class="eyebrow">Proof</p>
       <h2 class="h2">What it looks like in practice</h2>
-      <p class="body">Three programmes — what they had to solve, what changed, and what
-        they said about it.</p>
+      <p class="body">Two programmes — what they had to solve, and what they said
+        about it afterwards.</p>
     </div>
 
     <div class="grid proof-grid">
       <div class="proof-main">
 
         <article class="pcase">
-          <div class="pcase-fig">
-            <div class="pcase-metric">92%</div>
-            <p class="small">completion across two cohorts</p>
-            <span class="pcase-logo" aria-hidden="true"></span>
+          <div class="pcase-fig" aria-hidden="true">
+            <span class="pcase-ph">Photo</span>
           </div>
           <div class="pcase-body">
+            <p class="pcase-metric">92% <span>completion, two cohorts</span></p>
             <h3 class="h4">Certification for a nationwide team, without the travel</h3>
-            <p class="body"><strong>Challenge —</strong> the same certification needed
-              across sites, with nobody able to spend two days in Oslo.
-              <strong>What we did —</strong> a fully online cohort with fixed checkpoints
-              and a dedicated programme manager.</p>
+            <p class="body">The same certification needed across every site, with nobody
+              able to spend two days in Oslo.</p>
             <blockquote class="pcase-quote">"We got people qualified without losing a
-              single shift. That was the whole point, and it's the part I didn't think
-              was possible."</blockquote>
+              single shift."</blockquote>
             <p class="pcase-by"><strong>Firstname Lastname</strong> · HR Director,
               Company AS</p>
             <a class="case-link" href="#">Read the full case →</a>
-            <span class="todo">TODO · real customer, metric and cleared quote</span>
+            <span class="todo">TODO · real customer, metric, photo and cleared quote</span>
           </div>
         </article>
 
         <article class="pcase">
-          <div class="pcase-fig">
-            <div class="pcase-metric">6 weeks</div>
-            <p class="small">from first meeting to first cohort</p>
-            <span class="pcase-logo" aria-hidden="true"></span>
+          <div class="pcase-fig" aria-hidden="true">
+            <span class="pcase-ph">Photo</span>
           </div>
           <div class="pcase-body">
+            <p class="pcase-metric">6 weeks <span>first meeting to first cohort</span></p>
             <h3 class="h4">A compliance deadline met with three weeks to spare</h3>
-            <p class="body"><strong>Challenge —</strong> new regulation gave the team a
-              hard deadline and no room to schedule classroom days.
-              <strong>What we did —</strong> adapted an existing course to their
-              procedures and rolled it out in three weeks.</p>
-            <blockquote class="pcase-quote">"The reporting is what sold it internally.
-              I could show the board completion per department without building a
-              spreadsheet."</blockquote>
+            <p class="body">New regulation, a hard deadline, and no room in the calendar
+              for classroom days.</p>
+            <blockquote class="pcase-quote">"I could show the board completion per
+              department without building a spreadsheet."</blockquote>
             <p class="pcase-by"><strong>Firstname Lastname</strong> · Head of Competence,
               Company AS</p>
             <a class="case-link" href="#">Read the full case →</a>
-            <span class="todo">TODO · real customer, metric and cleared quote</span>
-          </div>
-        </article>
-
-        <article class="pcase">
-          <div class="pcase-fig">
-            <div class="pcase-metric">0</div>
-            <p class="small">operational hours lost to training</p>
-            <span class="pcase-logo" aria-hidden="true"></span>
-          </div>
-          <div class="pcase-body">
-            <h3 class="h4">Shift work and training, at the same time</h3>
-            <p class="body"><strong>Challenge —</strong> a shift-based workforce where
-              classroom training was impossible to schedule at all.
-              <strong>What we did —</strong> self-paced modules with manager-visible
-              progress and a monthly check-in.</p>
-            <blockquote class="pcase-quote">"Nobody had to choose between the rota and
-              the course. That is the only reason it finished."</blockquote>
-            <p class="pcase-by"><strong>Firstname Lastname</strong> · Operations Manager,
-              Company AS</p>
-            <a class="case-link" href="#">Read the full case →</a>
-            <span class="todo">TODO · real customer, metric and cleared quote</span>
+            <span class="todo">TODO · real customer, metric, photo and cleared quote</span>
           </div>
         </article>
 
       </div>
-
-      <!-- reading, compressed to a sidebar column beside the cases -->
-      <aside class="proof-side">
-        <h3 class="h4">Reading, not a sales pitch</h3>
-        <ul class="read-list">
-          <li><a href="#"><span class="read-ttl">More than half of Norwegian companies
-            report a growing competence gap</span>
-            <span class="read-meta">6 min read</span></a></li>
-          <li><a href="#"><span class="read-ttl">What actually makes online training
-            finish: four things we see across cohorts</span>
-            <span class="read-meta">4 min read</span></a></li>
-          <li><a href="#"><span class="read-ttl">Buying training for a team of twelve:
-            a practical checklist</span>
-            <span class="read-meta">5 min read</span></a></li>
-          <li><a href="#"><span class="read-ttl">NKI named "Online Educator of the Year"
-            2024 by Flexible Education Norway</span>
-            <span class="read-meta">3 min read</span></a></li>
-        </ul>
-
-        <h3 class="h4 read-hd2">External material</h3>
-        <ul class="read-list read-list--src">
-          <li><a href="#"><span class="read-ttl">Business structures — companies by
-            size</span><span class="read-meta">SSB</span></a></li>
-          <li><a href="#"><span class="read-ttl">Competence needs in Norwegian working
-            life</span><span class="read-meta">NHO</span></a></li>
-          <li><a href="#"><span class="read-ttl">Quality in online education</span>
-            <span class="read-meta">NOKUT</span></a></li>
-        </ul>
-        <span class="todo">TODO · verify every source link</span>
-      </aside>
     </div>
   </div>
 </section>
@@ -1500,10 +1262,9 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
         <div class="footer-col">
           <h3 class="footer-hd">For business</h3>
           <ul>
-            <li><a href="#start">Choose a starting point</a></li>
+            <li><a href="#start">Problem, solution, effect</a></li>
             <li><a href="#what-you-get">What you get</a></li>
             <li><a href="#why">Why NKI</a></li>
-            <li><a href="#how">How it works</a></li>
             <li><a href="#cost">What it costs</a></li>
           </ul>
         </div>
@@ -1751,86 +1512,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
     nl.hidden = true;
     document.querySelector('.footer-nl-done').hidden = false;
   });
-
-  /* ── §5 process carousel ──────────────────────────────────
-     The track is a native scroll-snap container, so all this does is
-     drive it and mirror its state. Scroll position is the single source
-     of truth — swipe, keyboard scroll, arrows and dots all end up in
-     the same place. */
-  (function () {
-    var track = document.getElementById('stepsTrack');
-    var dots  = document.getElementById('stepsDots');
-    var prev  = document.getElementById('stepsPrev');
-    var next  = document.getElementById('stepsNext');
-    if (!track) return;
-
-    var steps = Array.prototype.slice.call(track.children);
-
-    /* how far one step is, including the gap */
-    function stepWidth() {
-      if (steps.length < 2) return track.clientWidth;
-      return steps[1].offsetLeft - steps[0].offsetLeft;
-    }
-    function maxScroll() { return track.scrollWidth - track.clientWidth; }
-    function current() {
-      var w = stepWidth();
-      return w ? Math.round(track.scrollLeft / w) : 0;
-    }
-
-    /* One dot per REACHABLE scroll position, not per step. With five steps
-       three-up there are only three positions, so five dots would leave two
-       permanently unreachable. Recomputed on resize because how many fit
-       changes with the breakpoint. */
-    function pageCount() {
-      var w = stepWidth();
-      return w ? Math.round(maxScroll() / w) + 1 : 1;
-    }
-
-    function buildDots() {
-      var n = pageCount();
-      if (dots.children.length === n) return;
-      dots.innerHTML = '';
-      for (var i = 0; i < n; i++) {
-        (function (idx) {
-          var b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'steps-dot';
-          b.setAttribute('role', 'tab');
-          b.setAttribute('aria-label', 'Show step ' + (idx + 1));
-          b.addEventListener('click', function () { goTo(idx); });
-          dots.appendChild(b);
-        })(i);
-      }
-    }
-
-    function goTo(i) {
-      track.scrollTo({ left: i * stepWidth(), behavior: 'smooth' });
-    }
-
-    function sync() {
-      buildDots();
-      var i = Math.min(current(), dots.children.length - 1);
-      Array.prototype.forEach.call(dots.children, function (d, n) {
-        var on = n === i;
-        d.classList.toggle('is-on', on);
-        d.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
-      /* 1px tolerance — scrollLeft is fractional at some zoom levels */
-      prev.disabled = track.scrollLeft <= 1;
-      next.disabled = track.scrollLeft >= maxScroll() - 1;
-    }
-
-    prev.addEventListener('click', function () { goTo(Math.max(0, current() - 1)); });
-    next.addEventListener('click', function () { goTo(Math.min(pageCount() - 1, current() + 1)); });
-
-    var raf;
-    track.addEventListener('scroll', function () {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(sync);
-    });
-    window.addEventListener('resize', sync);
-    sync();
-  })();
 
   /* ── §9 FAQ accordion ─────────────────────────────────────── */
   document.getElementById('faqList').addEventListener('click', function (e) {
