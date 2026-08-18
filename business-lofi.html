@@ -483,7 +483,9 @@ a{color:inherit}
 .bt .h3{font-size:var(--font-size-31);line-height:1.05;letter-spacing:-.02em;
   margin-bottom:var(--spacing-4)}
 /* the number tiles: one enormous figure, one caption, nothing else */
-.bt--num{align-items:center;text-align:center}
+/* left-aligned like every other tile — the centred variant was the only thing
+   in the bento not hanging off the same edge */
+.bt--num{align-items:flex-start;text-align:left}
 .bt-num{font-size:var(--font-size-31);font-weight:700;line-height:1.05;letter-spacing:-.02em}
 .bt-cap{font-size:var(--font-size-14);opacity:.75;max-width:16ch}
 /* photo tile — a real photograph now, not a placeholder box */
@@ -583,8 +585,8 @@ input[type=range]{width:100%;margin:var(--spacing-24) 0 var(--spacing-8);
    8 · PROOF   (priorities 3 and 8 — the objective-2 gap)
    Case + its own quote in ONE unit; reading list beside them.
    ═══════════════════════════════════════════════════════════ */
-.proof-main{grid-column:span 12;display:grid;grid-template-columns:repeat(2,1fr);
-  gap:var(--gutter)}
+.proof-main{grid-column:span 8;display:grid;gap:var(--gutter)}
+.proof-side{grid-column:span 4}
 /* one case: picture rail on the left, story on the right. The rail is a fixed
    column rather than a share of the card, so both cases crop their photo to the
    same width no matter how much copy sits beside it. */
@@ -615,6 +617,20 @@ input[type=range]{width:100%;margin:var(--spacing-24) 0 var(--spacing-8);
 .pcase-by{font-size:var(--font-size-14);color:var(--text-secondary-on-white)}
 .case-link{font-size:var(--font-size-14);font-weight:500;text-decoration:underline;
   margin-top:auto;padding-top:var(--spacing-8)}
+
+/* reading column — for the visitor who is interested but not ready to hand
+   over details. Two lists: NKI's own articles, then outside sources, which
+   are set lighter so they don't compete with our own writing. */
+.read-list{list-style:none;margin:var(--spacing-16) 0 0;padding:0;
+  border-top:1px solid var(--border-default)}
+.read-list li{border-bottom:1px solid var(--border-default)}
+.read-list a{display:block;padding:var(--spacing-12) 0;text-decoration:none}
+.read-list a:hover .read-ttl{text-decoration:underline}
+.read-ttl{display:block;font-size:var(--font-size-16);font-weight:500;line-height:1.35}
+.read-meta{display:block;margin-top:2px;font-size:var(--font-size-14);
+  color:var(--text-secondary-on-white)}
+.read-list--src .read-ttl{font-weight:400}
+.read-hd2{margin-top:var(--spacing-32)}
 
 /* ═══════════════════════════════════════════════════════════
    8b · INSIGHT — merged into the Proof section above
@@ -728,7 +744,8 @@ input[type=range]{width:100%;margin:var(--spacing-24) 0 var(--spacing-8);
   .contact-card{position:static;margin-top:var(--spacing-24)}
   .calc{grid-template-columns:1fr}
   .calc-out{border-left:0;border-top:1px solid var(--border-default)}
-  .proof-main{grid-template-columns:1fr}
+  .proof-main,.proof-side{grid-column:span 12}
+  .proof-side{margin-top:var(--spacing-40)}
   .cat-grid{grid-template-columns:repeat(3,1fr)}
   /* two columns: wide tiles take the full row, narrow ones pair up */
   .bento{grid-template-columns:repeat(2,1fr)}
@@ -1320,6 +1337,36 @@ input[type=range]{width:100%;margin:var(--spacing-24) 0 var(--spacing-8);
         </article>
 
       </div>
+
+      <!-- reading, compressed to a sidebar column beside the cases.
+           TODO · verify every source link -->
+      <aside class="proof-side">
+        <h3 class="h4">Reading, not a sales pitch</h3>
+        <ul class="read-list">
+          <li><a href="#"><span class="read-ttl">More than half of Norwegian companies
+            report a growing competence gap</span>
+            <span class="read-meta">6 min read</span></a></li>
+          <li><a href="#"><span class="read-ttl">What actually makes online training
+            finish: four things we see across cohorts</span>
+            <span class="read-meta">4 min read</span></a></li>
+          <li><a href="#"><span class="read-ttl">Buying training for a team of twelve:
+            a practical checklist</span>
+            <span class="read-meta">5 min read</span></a></li>
+          <li><a href="#"><span class="read-ttl">NKI named "Online Educator of the Year"
+            2024 by Flexible Education Norway</span>
+            <span class="read-meta">3 min read</span></a></li>
+        </ul>
+
+        <h3 class="h4 read-hd2">External material</h3>
+        <ul class="read-list read-list--src">
+          <li><a href="#"><span class="read-ttl">Business structures — companies by
+            size</span><span class="read-meta">SSB</span></a></li>
+          <li><a href="#"><span class="read-ttl">Competence needs in Norwegian working
+            life</span><span class="read-meta">NHO</span></a></li>
+          <li><a href="#"><span class="read-ttl">Quality in online education</span>
+            <span class="read-meta">NOKUT</span></a></li>
+        </ul>
+      </aside>
     </div>
   </div>
 </section>
