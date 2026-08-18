@@ -427,54 +427,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .read-hd2{margin-top:var(--s-32)}
 
 /* ═══════════════════════════════════════════════════════════
-   9 · LEAD FORM + NAMED CONTACT   (priorities 1 and 2)
-   THE most important block on the page.  On-page, not behind a link.
-   ═══════════════════════════════════════════════════════════ */
-.lead{grid-column:span 7}
-.contact{grid-column:span 5}
-.form-card{border:1px solid var(--l-300);border-radius:var(--rad-lg);
-  padding:var(--s-32);background:var(--l-0)}
-.hs-slot{margin-bottom:var(--s-24);padding:var(--s-12);border:1px dashed var(--l-400);
-  border-radius:4px;font-size:12px;color:var(--l-600);background:var(--l-50)}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-16);margin-bottom:var(--s-16)}
-.f-row--1{grid-template-columns:1fr}
-.f-field{display:flex;flex-direction:column;gap:6px}
-.f-label{font-size:14px;font-weight:600}
-.f-label .req{color:var(--l-600)}
-.f-input,.f-select,.f-textarea{
-  width:100%;padding:12px var(--s-16);border:1px solid var(--l-400);
-  border-radius:var(--rad);background:var(--l-0);font:inherit;font-size:15px;color:var(--l-900);
-}
-.f-input:focus,.f-select:focus,.f-textarea:focus{outline:2px solid var(--l-900);outline-offset:1px;border-color:var(--l-900)}
-.f-textarea{min-height:104px;resize:vertical}
-.f-err{font-size:13px;color:var(--l-900);font-weight:600;display:none}
-.f-field.is-err .f-input,.f-field.is-err .f-select{border-color:var(--l-900);border-width:2px}
-.f-field.is-err .f-err{display:block}
-/* consent checkboxes are UNBUNDLED — one purpose per box (heuristic finding) */
-.f-check{display:flex;gap:var(--s-12);align-items:flex-start;margin-bottom:var(--s-12)}
-.f-check input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--l-800)}
-.f-check label{font-size:14px;line-height:1.45;color:var(--l-700)}
-.f-submit{margin-top:var(--s-16);width:100%}
-.f-check + .btn.f-submit{margin-top:var(--s-24)}
-.f-foot{margin-top:var(--s-12);font-size:13px;color:var(--l-600)}
-.form-done{display:none;text-align:center;padding:var(--s-40) var(--s-16)}
-.form-done .h3{margin-bottom:var(--s-12)}
-/* success state — applies to both the hero card and the §8 card */
-.is-done .form-live,
-.is-done .hs-slot{display:none}
-.is-done .form-done{display:block}
-
-.contact-card{border:1px solid var(--l-300);border-radius:var(--rad-lg);
-  padding:var(--s-32);background:var(--l-50);position:sticky;top:112px}
-.contact-top{display:flex;gap:var(--s-16);align-items:center}
-.contact-av{width:72px;height:72px;border-radius:50%;background:var(--l-200);
-  border:1px dashed var(--l-400);flex:none}
-.contact-lines{margin-top:var(--s-24);display:grid;gap:var(--s-12)}
-.contact-line{display:flex;gap:var(--s-12);align-items:center;font-size:15px}
-.contact-line a{font-weight:600}
-.contact-note{margin-top:var(--s-24);padding-top:var(--s-20);border-top:1px solid var(--l-300)}
-
-/* ═══════════════════════════════════════════════════════════
    8b · INSIGHT — merged into the Proof section above
    (priority 8). For the visitor who is interested but not ready to
    hand over details.
@@ -482,7 +434,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .sec-hd--sub{margin-bottom:0}
 
 /* ═══════════════════════════════════════════════════════════
-   10 · FAQ   (priority 11) — buyer questions, not student questions
+   9 · FAQ   (priority 11) — buyer questions, not student questions
    ═══════════════════════════════════════════════════════════ */
 .faq-hd{grid-column:span 4}
 .faq{grid-column:span 8}
@@ -497,7 +449,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 .faq-item.is-open .faq-a{display:block}
 
 /* ═══════════════════════════════════════════════════════════
-   11 · CLOSING FORM   (priority 1 again)
+   10 · CLOSING FORM   (priority 1 again)
    The closing band is the form itself, not a CTA pointing back at one.
    ═══════════════════════════════════════════════════════════ */
 .close-grid{align-items:center}
@@ -937,7 +889,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
         <div class="cat-foot">
           <a class="btn btn--ghost" href="index.html">See the full catalogue</a>
           <p class="small">Need something that isn't here? We build courses with your
-            subject experts — <a href="#lead">tell us what's missing</a>.</p>
+            subject experts — <a href="#close">tell us what's missing</a>.</p>
         </div>
         <span class="todo">TODO · real area names, course counts and catalogue links</span>
       </div>
@@ -1151,7 +1103,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
           <div class="calc-note">
             <p class="small">Based on one standard course per participant, 12 months
               access. <span class="todo">TODO · verify base price + tier curve</span></p>
-            <a class="btn btn--block" href="#lead">Get an exact offer</a>
+            <a class="btn btn--block" href="#close">Get an exact offer</a>
           </div>
         </div>
       </div>
@@ -1215,7 +1167,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
       <!-- escape hatch: the >50 buyer must not hit a dead end -->
       <div class="calc-over">
         <p class="body" style="margin:0">More than 50 employees, or several departments?</p>
-        <a class="btn btn--ghost" href="#lead">Talk to us about volume pricing</a>
+        <a class="btn btn--ghost" href="#close">Talk to us about volume pricing</a>
       </div>
     </div>
   </div>
@@ -1342,142 +1294,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 9 · LEAD FORM + NAMED CONTACT ══════════════════════════
-     Priority 1 and 2. On the page, not behind a link. -->
-<section class="sec" id="lead">
-  <div class="wrap">
-    <div class="sec-hd">
-      <p class="eyebrow">Get in touch</p>
-      <h2 class="h2">Get a tailored offer</h2>
-      <p class="body">Tell us roughly what you need. You'll hear from a named person
-        within one working day — no call centre.</p>
-    </div>
-    <div class="grid">
-
-      <div class="lead">
-        <div class="form-card" id="formCard">
-          <!-- HUBSPOT EMBED SLOT — dev replaces the .form-live block below with the
-               HubSpot form. Field names here are the intended HubSpot properties. -->
-          <p class="hs-slot">HUBSPOT EMBED SLOT — replace <code>.form-live</code> with the
-            HubSpot form. Field names below are the intended HubSpot property names.</p>
-
-          <form class="form-live" id="leadForm" novalidate>
-            <div class="f-row">
-              <div class="f-field">
-                <label class="f-label" for="ln">Name <span class="req">*</span></label>
-                <input class="f-input" id="ln" name="firstname" required>
-                <span class="f-err">Enter your name</span>
-              </div>
-              <div class="f-field">
-                <label class="f-label" for="lc">Company <span class="req">*</span></label>
-                <input class="f-input" id="lc" name="company" required>
-                <span class="f-err">Enter your company</span>
-              </div>
-            </div>
-            <div class="f-row">
-              <div class="f-field">
-                <label class="f-label" for="le">Work email <span class="req">*</span></label>
-                <input class="f-input" id="le" name="email" type="email" required>
-                <span class="f-err">Enter a valid work email</span>
-              </div>
-              <div class="f-field">
-                <label class="f-label" for="lp">Phone</label>
-                <input class="f-input" id="lp" name="phone" type="tel">
-                <span class="f-err">Check the number</span>
-              </div>
-            </div>
-            <div class="f-row">
-              <div class="f-field">
-                <label class="f-label" for="lsize">Employees <span class="req">*</span></label>
-                <select class="f-select" id="lsize" name="num_employees" required>
-                  <option value="">Select…</option>
-                  <option>1–9</option><option>10–24</option><option>25–49</option>
-                  <option>50–99</option><option>100+</option>
-                </select>
-                <span class="f-err">Select a size</span>
-              </div>
-              <div class="f-field">
-                <!-- pre-filled by the §3 segmentation cards -->
-                <label class="f-label" for="lneed">What do you need? <span class="req">*</span></label>
-                <select class="f-select" id="lneed" name="need" required>
-                  <option value="">Select…</option>
-                  <option value="gap">Close a specific skills gap</option>
-                  <option value="formal">Formal qualification for staff</option>
-                  <option value="onboarding">Onboard at scale</option>
-                  <option value="other">Something else</option>
-                </select>
-                <span class="f-err">Select what you need</span>
-              </div>
-            </div>
-            <div class="f-row f-row--1">
-              <div class="f-field">
-                <label class="f-label" for="lm">Anything we should know?</label>
-                <textarea class="f-textarea" id="lm" name="message"></textarea>
-              </div>
-            </div>
-
-            <!-- Unbundled consent — one purpose per checkbox -->
-            <div class="f-check">
-              <input type="checkbox" id="lconsent" name="consent" required>
-              <label for="lconsent">I agree that NKI may contact me about this enquiry.
-                <span class="req">*</span></label>
-            </div>
-            <div class="f-check">
-              <input type="checkbox" id="lnews" name="marketing_consent">
-              <label for="lnews">Send me occasional insight on skills development. Optional.</label>
-            </div>
-            <!-- next-version hook: NKI Atlas trial in exchange for the email address -->
-            <div class="f-check">
-              <input type="checkbox" id="latlas" name="atlas_trial">
-              <label for="latlas">Give me access to test <strong>NKI Atlas</strong> when it opens.</label>
-            </div>
-
-            <button class="btn f-submit" type="submit">Send enquiry</button>
-            <!-- SLA claim — same unverified figure as §5 step 01 and the confirmation
-                 state below. All three must move together once sales confirms it. -->
-            <p class="f-foot">Reply within one working day. We don't share your details.
-              <span class="todo">TODO · confirm the one-working-day SLA (3 places)</span></p>
-          </form>
-
-          <div class="form-done" role="status" aria-live="polite">
-            <h3 class="h3">Thanks — that's with us</h3>
-            <p class="body">Ingrid will get back to you within one working day. If it's
-              urgent, call <a href="tel:+4740000000"><strong>+47 400 00 000</strong></a>.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact">
-        <div class="contact-card">
-          <p class="eyebrow">Your contact</p>
-          <div class="contact-top" style="margin-top:var(--s-16)">
-            <span class="contact-av" aria-hidden="true"></span>
-            <div>
-              <div class="h4">Ingrid Solberg</div>
-              <p class="small">Head of Sales &amp; Partnerships, business market</p>
-            </div>
-          </div>
-          <div class="contact-lines">
-            <div class="contact-line"><span class="ic" style="width:28px;height:28px">tel</span>
-              <a href="tel:+4740000000">+47 400 00 000</a></div>
-            <div class="contact-line"><span class="ic" style="width:28px;height:28px">mail</span>
-              <a href="mailto:bedrift@nki.no">bedrift@nki.no</a></div>
-            <div class="contact-line"><span class="ic" style="width:28px;height:28px">cal</span>
-              <a href="#">Book a 20-minute call</a></div>
-          </div>
-          <span class="todo">TODO · real name, direct line and calendar link</span>
-          <div class="contact-note">
-            <p class="small">Prefer to talk before filling anything in? Call directly —
-              this is the business line, not the student line.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 10 · FAQ ═══════════════════════════════════════════════
+<!-- ═══ 9 · FAQ ═══════════════════════════════════════════════
      Buyer questions, not student questions. -->
 <section class="sec sec--alt" id="faq">
   <div class="wrap">
@@ -1486,7 +1303,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
         <p class="eyebrow">FAQ</p>
         <h2 class="h2">Questions buyers ask</h2>
         <p class="body" style="margin-top:var(--s-16)">Something not here?
-          <a href="#lead">Ask us directly</a>.</p>
+          <a href="#close">Ask us directly</a>.</p>
       </div>
       <div class="faq" id="faqList">
         <div class="faq-item is-open">
@@ -1537,7 +1354,7 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   </div>
 </section>
 
-<!-- ═══ 11 · CLOSING FORM ══════════════════════════════════════
+<!-- ═══ 10 · CLOSING FORM ══════════════════════════════════════
      The closing band is the same short form as the hero, not a CTA
      pointing back up at one. A visitor who has read the whole page
      converts here without scrolling anywhere. -->
@@ -1601,6 +1418,14 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
               <input type="checkbox" id="cconsent" name="consent" required>
               <label for="cconsent">I agree that NKI may contact me about this enquiry.
                 <span class="req">*</span></label>
+            </div>
+            <!-- Next-version hook, moved here when the long form was removed:
+                 test NKI Atlas in exchange for an email address. Captured as a
+                 field now so the plumbing exists when Atlas opens. -->
+            <div class="f-check">
+              <input type="checkbox" id="latlas" name="atlas_trial">
+              <label for="latlas">Give me access to test <strong>NKI Atlas</strong> when
+                it opens.</label>
             </div>
 
             <button class="btn f-submit" type="submit">Get a tailored offer</button>
@@ -1822,14 +1647,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
 
   calc();
 
-  /* ── §3 → §8: segmentation cards pre-fill the form's "need" ── */
-  document.querySelectorAll('.seg-card[data-need]').forEach(function (card) {
-    card.addEventListener('click', function () {
-      var need = card.dataset.need;
-      var sel  = document.getElementById('lneed');
-      if (sel) sel.value = need;
-    });
-  });
 
   /* ── Lead forms: validation + fake success state ───────────
      Drives both the hero form (§1, short) and the full qualifying
@@ -1880,7 +1697,6 @@ input[type=range]{width:100%;margin:var(--s-24) 0 var(--s-8);accent-color:var(--
   }
 
   wireLeadForm('heroForm',  'heroFormCard',  'hero');
-  wireLeadForm('leadForm',  'formCard',      'full');
   wireLeadForm('closeForm', 'closeFormCard', 'closing');
 
   /* ── Footer newsletter ────────────────────────────────────── */
